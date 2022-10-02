@@ -1,0 +1,351 @@
+{
+  "app": {
+    "snackbar": {
+      "close": "Fermer"
+    },
+    "progressbar": {
+      "label": "Progression"
+    },
+    "cookies": {
+      "title": "Ce site utilise des cookies pour fonctionner.",
+      "read": "Lire",
+      "accept": "Accepter",
+      "refuse": "Refuser"
+    },
+    "header": {
+      "bar": {
+        "title": "Maps"
+      },
+      "settings": {
+        "title": "Paramètres",
+        "languages": {
+          "title": "Langues",
+          "english": "English",
+          "french": "Français"
+        },
+        "display": {
+          "title": "Affichage",
+          "darkMode": "Mode sombre"
+        }
+      },
+      "offline": {
+        "title": "Vous avez perdu votre connexion Internet..."
+      },
+      "profile": {
+        "title": "Profil",
+        "edit": "Gérer votre compte",
+        "logout": "Déconnexion"
+      },
+      "login": {
+        "title": "Connexion"
+      }
+    },
+    "navigation": {
+      "home": "Accueil",
+      "privacy": "Confidentialité",
+      "lastMaps": "Cartes récentes"
+    },
+    "errors": {
+      "notAuthorized": "Non autorisé",
+      "notFound": "Inconnu",
+      "serverError": "Erreur interne",
+      "networkError": "Erreur réseau : vérifiez votre connexion"
+    }
+  },
+  "meta": {
+    "Home": { "title": "", "description": "Page de cartes" },
+    "Map": { "title": "{mapName}", "description": "{mapDesc}" },
+    "AnonymousMap": { "title": "{mapName}", "description": "{mapDesc}" },
+    "Accesses": { "title": "{mapName}", "description": "{mapDesc}", "suffix": " — Accès" },
+    "AnonymousAccesses": { "title": "{mapName}", "description": "{mapDesc}", "suffix": " — Accès" },
+    "Invitation": { "title": "{mapName}", "description": "{mapDesc}", "suffix": " — Invitation" },
+    "Privacy": { "title": "Confidentialité", "description": "Page de confidentialité" },
+    "Forbidden": { "title": "Interdit", "description": "Page pour accès à des ressources interdites" },
+    "NotFound": { "title": "Non trouvé", "description": "Page pour accès à des ressources non trouvées" }
+  },
+  "cards": {
+    "cancel": "Annuler",
+    "save": "Sauvegarder"
+  },
+  "chips": {
+    "field": "{label} : {value}",
+    "tag": "#{label}"
+  },
+  "enums": {
+    "unknown": "Inconnu...",
+    "cultureTypes": {
+      "english": "Anglais",
+      "french": "Français"
+    },
+    "accessLevels": {
+      "none": "Aucun accès",
+      "read": "Lecture possible",
+      "change": "Modification possible",
+      "manage": "Administration possible"
+    },
+    "fieldTypes": {
+      "text": "Texte",
+      "textarea": "Zone de texte",
+      "date": "Date"
+    },
+    "layerTypes": {
+      "roadmap": "Routes",
+      "satellite": "Satellite",
+      "hybrid": "Hybride",
+      "terrain": "Terrain"
+    },
+    "fieldValidationRuleTypes": {
+      "required": "Requis",
+      "minLength": "Longueur minimale",
+      "maxLength": "Longueur maximale",
+      "emailAddress": "Adresse email"
+    }
+  },
+  "validation": {
+    "required": "Ce champ est requis.",
+    "minLength": "Ce champ doit faire plus de {min} caractères.",
+    "maxLength": "Ce champ doit faire moins de {max} caractères.",
+    "emailAddress": "Ce champ doit correspondre à une adresse email valide.",
+    "minValue": "Ce champ doit être supérieur à {min}.",
+    "maxValue": "Ce champ doit être inférieur à {max}."
+  },
+  "pages": {
+    "forbidden": {
+      "title": "Oups, erreur 403",
+      "description": "Vous n'avez pas suffisamment de droits pour accéder à cette page.",
+      "buttonText": "Sortez-moi de là !"
+    },
+    "notFound": {
+      "title": "Oups, erreur 404",
+      "description": "La page que vous cherchez n'existe pas.",
+      "buttonText": "Sortez-moi de là !"
+    },
+    "privacy": {
+      "title": "Confidentialité",
+      "header11": "Stockage et suppression",
+      "text11": "Des données personnelles sont stockées dans une base de données, sur le serveur d'installation de {name}. La localisation physique du serveur détermine le cadre réglementatire applicable à ces données personnelles. Les informations enregistrées dans la base de données sont liées par des clés uniques : la modification de ces informations, y compris le nom du compte, ne compromet pas l'intégrité des données ni leur confidentialité.",
+      "header21": "Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés",
+      "text21": "La loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés est applicable aux données personnelles traitées par {name}. Le texte en application est consultable sur le site legifrance.gouv.fr.",
+      "header22": "Traitement général des données",
+      "text22": "La collecte de vos données personnelles est justifiée par le fonctionnement de l'application {name}. {name} vous apporte un certain nombre de services, tels que proposés dès la page d'accueil de l'application. La plupart des données collectées sont directement liées au traitement des fonctionnalités associées à ces besoins. Ces données sont stockées dès que vous commencez à utiliser l'application. Les informations de connexion, de navigation et d'erreur nous fournissent des moyens d'effectuer une analyse statistique de l'utilisation et du fonctionnement de {name}.",
+      "header23": "Public visé",
+      "text23": "Seuls les utilisateurs enregistrés dans {name} sont concernés par la collecte de données personnelles : toutes les données collectées sont associées à un compte d'utilisateur enregistré.",
+      "header24": "Destinataire des données",
+      "text24": "Aucune donnée personnelle n'est transmise à, ni utilisée par un tiers. Chaque utilisateur enregistré (disposant d'un compte utilisateur personnel) peut également accéder à ses propres informations. Un utilisateur anonyme ne peut pas accéder aux informations des autres utilisateurs.",
+      "header25": "Supervision du traitement des données",
+      "text25": "Vos données personnelles sont traitées par {name} sous la supervision de {contact}. Le stockage et le transfert de vos données personnelles se font sous la supervision du site fournissant le serveur sur lequel {name} est installé et le moyen de transfert de données.",
+      "header26": "Durée de conservation",
+      "text26": "Vos données personnelles sont conservées tant que votre compte utilisateur existe sur {name}. Vos données personnelles sont effacées lorsque votre compte d'utilisateur est supprimé ou lorsque {name} est désinstallé du serveur. Certaines données personnelles peuvent être supprimées manuellement par l'action de l'utilisateur.",
+      "header27": "Accès aux données",
+      "text27": "Chaque utilisateur de {name} a le droit d’accéder, de modifier, de corriger ou de supprimer ses données personnelles.",
+      "header28": "Opposition au traitement des données",
+      "text28": "La suppression de votre compte utilisateur vous donne la pleine capacité de vous opposer au traitement par {name} de vos données personnelles. Vous pouvez également demander à la personne qui supervise le traitement des données par {name} de procéder à la suppression de votre compte utilisateur. Vous pouvez vous opposer à certains traitements spécifiques de vos données via les options de configuration disponibles dans vos paramètres utilisateur.",
+      "cookiesAccepted": "Consentement aux cookies : {accepted}"
+    },
+    "home": {
+      "welcome": {
+        "title": "Bienvenue !"
+      },
+      "login": {
+        "title": "Connectez-vous pour utiliser les services.",
+        "button": "Se connecter"
+      },
+      "maps": {
+        "title": "Retrouvez ici vos cartes, ou créez-en une nouvelle.",
+        "search": "Rechercher une carte...",
+        "add": "Ajouter une nouvelle carte",
+        "accesses": "Gérer les accès",
+        "delete": "Supprimer la carte"
+      }
+    },
+    "map": {
+      "loading": {
+        "title": "Chargement...",
+        "description": "Votre carte sera bientôt prête !"
+      },
+      "controls": {
+        "move": "Mode : déplacement",
+        "search": "Mode : recherche",
+        "marker": "Mode : ajout de point",
+        "line": "Mode : ajout de ligne",
+        "searchInput": "Chercher un lieu...",
+        "validateLine": "Ajouter la ligne",
+        "general": "Informations générales",
+        "edit": "Modifier la carte",
+        "share": "Partager la carte",
+        "delete": "Supprimer la carte",
+        "snapshot": "Enregistrer la position actuelle",
+        "download": "Exporter la carte",
+        "markersCount": "{count} points",
+        "linesCount": "{count} lignes",
+        "maxMarkersLines": "Vous avez atteint le nombre maximal de points et lignes pour cette carte."
+      }
+    },
+    "accesses": {
+      "title": "Accès nominatifs",
+      "back": "Retourner à la carte",
+      "loading": {
+        "title": "Chargement...",
+        "description": "Les accès de votre carte seront bientôt prêts !"
+      },
+      "accesses": {
+        "header": "Accès attribués",
+        "delete": "Supprimer l'accès"
+      },
+      "invitations": {
+        "header": "Invitations en attente",
+        "sendNew": "Envoyer une invitation",
+        "delete": "Supprimer l'invitation"
+      }
+    },
+    "invitation": {
+      "loading": {
+        "title": "Chargement...",
+        "description": "Votre invitation sera bientôt prête !"
+      },
+      "title": "Invitation",
+      "description": "Vous avez été invité à participer à une carte. Vous pouvez vérifier les informations suivantes avant d'accepter.",
+      "verify": "Accepter l'invitation",
+      "successfullyVerified": "L'invitation a bien été acceptée, la carte a été ajoutée à votre compte !"
+    }
+  },
+  "dialogs": {
+    "maps": {
+      "newTitle": "Nouvelle carte",
+      "editTitle": "Paramètres de carte",
+      "deleteTitle": "Suppression de carte",
+      "deleteDescription": "Cette action va supprimer la carte définitivement.",
+      "shareTitle": "Partage et sécurité de carte",
+      "name": "Titre",
+      "desc": "Description",
+      "settings": {
+        "general": {
+          "title": "Paramètres généraux"
+        },
+        "layer": {
+          "title": "Paramètres du fond de carte",
+          "layerType": "Type de carte",
+          "disableRoads": "Désactiver les marqueurs de routes",
+          "disablePois": "Désactiver les points d'intérêt"
+        },
+        "markers": {
+          "title": "Paramètres des points",
+          "defaultSize": "Taille par défaut"
+        },
+        "lines": {
+          "title": "Paramètres des lignes",
+          "defaultSize": "Taille par défaut"
+        },
+        "defaultFields": {
+          "title": "Champs supplémentaires",
+          "editTitle": "Champ supplémentaire",
+          "add": "Ajouter un champ",
+          "remove": "Supprimer le champ",
+          "type": "Type de champ",
+          "label": "Label du champ",
+          "desc": "Description du champ",
+          "save": "Sauvegarder",
+          "rules": {
+            "title": "Règles de validation",
+            "add": {
+              "required": "Ajouter : Requis",
+              "minLength": "Ajouter : Longueur minimale",
+              "maxLength": "Ajouter : Longueur maximale",
+              "emailAddress": "Ajouter : Adresse email"
+            },
+            "editTitle": "Règle de validation",
+            "type": "Type de règle de validation",
+            "minLengthArg": "Longueur minimale à définir",
+            "maxLengthArg": "Longueur maximale à définir",
+            "save": "Sauvegarder"
+          }
+        },
+        "defaultTags": {
+          "title": "Tags supplémentaires",
+          "editTitle": "Tags supplémentaire",
+          "add": "Ajouter un tag",
+          "remove": "Supprimer le tag",
+          "label": "Label du tag",
+          "desc": "Description du tag",
+          "save": "Sauvegarder"
+        }
+      },
+      "color": {
+        "label": "Couleur par défaut",
+        "reset": "Supprimer",
+        "save": "Sauvegarder"
+      },
+      "security": {
+        "accessPolicy": {
+          "anonymousAccessLevel": "Niveau d'accès aux utilisateurs anonymes",
+          "warnings": {
+            "change": "Attention ! Avec ce niveau d'accès, votre carte pourra être modifiée par n'importe qui connaissant le lien ci-dessous !",
+            "manage": "Attention ! Avec ce niveau d'accès, votre carte pourra être modifiée, partagée ou supprimée, par n'importe qui connaissant le lien ci-dessous !"
+          }
+        },
+        "anonymousLink": "Lien vers la page anonyme de la carte"
+      },
+      "seeAccesses": "Voir les accès nominatifs",
+      "create": "Créer",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "successfullyCreated": "La carte a bien été créée !",
+      "successfullyEdited": "La carte a bien été modifiée !",
+      "successfullyDeleted": "La carte a bien été supprimée !",
+      "anonymousLinkCopied": "Le lien vers la carte a été copié dans le presse-papier !",
+      "maxMarkersLinesReached": "Vous avez déjà atteint le nombre maximal de points et lignes pour cette carte. Vous devriez créer une nouvelle carte !"
+    },
+    "accesses": {
+      "deleteTitle": "Suppression d'accès",
+      "deleteDescription": "Cette action va supprimer l'accès définitivement.",
+      "delete": "Supprimer",
+      "successfullyDeleted": "L'accès a bien été supprimé !"
+    },
+    "invitations": {
+      "newTitle": "Envoyer une invitation",
+      "deleteTitle": "Suppression d'invitation",
+      "deleteDescription": "Cette action va supprimer l'invitation définitivement.",
+      "userName": "Nom de l'utilisateur",
+      "userEmail": "Adresse email de l'utilisateur",
+      "accessLevel": "Niveau d'accès",
+      "durationMessage": "L'invitation sera valable 30 jours.",
+      "send": "Envoyer",
+      "delete": "Supprimer",
+      "successfullyDeleted": "L'invitation a bien été supprimée !"
+    },
+    "markers": {
+      "newTitle": "Nouveau point",
+      "editTitle": "Modification de point",
+      "name": "Titre",
+      "desc": "Description",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "color": {
+        "label": "Couleur",
+        "reset": "Supprimer",
+        "save": "Sauvegarder"
+      },
+      "size": "Taille",
+      "tags": "Tags",
+      "add": "Ajouter",
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    },
+    "lines": {
+      "newTitle": "Nouvelle ligne",
+      "editTitle": "Modification de ligne",
+      "name": "Titre",
+      "desc": "Description",
+      "color": {
+        "label": "Couleur",
+        "reset": "Supprimer",
+        "save": "Sauvegarder"
+      },
+      "size": "Taille",
+      "tags": "Tags",
+      "add": "Ajouter",
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    }
+  }
+}

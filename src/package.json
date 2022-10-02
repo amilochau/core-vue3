@@ -1,0 +1,32 @@
+{
+  "name": "@amilochau/core-vue3",
+  "version": "0.1.0",
+  "description": "Core plugin for vue.js (v3) projects",
+  "author": "Antoine Milochau",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amilochau/core-vue3",
+    "directory": "src"
+  },
+  "keywords": [
+    "vuejs",
+    "plugin"
+  ],
+  "homepage": "https://github.com/amilochau/core-vue3#readme",
+  "bugs": {
+    "url": "https://github.com/amilochau/core-vue3/issues"
+  },
+  "funding": "https://github.com/sponsors/amilochau",
+  "company": "Milochau",
+  "copyright": "Copyright © Milochau",
+  "main": "src/index.ts",
+  "scripts": {
+  },
+  "files": [
+    "src/"
+  ]
+}
