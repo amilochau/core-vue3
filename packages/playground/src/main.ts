@@ -1,10 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import head from './plugins/head'
-import i18n from './plugins/i18n'
+import milochauCore from './plugins/milochau-core'
 import router from './plugins/router'
 import pinia from './plugins/pinia'
-import vuetify from './plugins/vuetify'
 import msal from './plugins/msal'
 import { loadFonts } from './plugins/webfontloader'
 import { msalInstance } from './plugins/msal/config'
@@ -32,11 +30,10 @@ msalInstance.addEventCallback((event) => {
 
 const app = createApp(App);
 
-app.use(head);
-app.use(i18n);
+app.use(milochauCore);
+
 app.use(router);
 app.use(pinia);
-app.use(vuetify);
 app.use(msal, msalInstance);
 
 msalInstance.handleRedirectPromise();

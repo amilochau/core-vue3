@@ -26,16 +26,16 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n';
 import { useAppStore, useLanguageStore } from '../stores'
-// @todo add this line when it works! import { useLocale as useVuetifyLocale } from 'vuetify/lib/composables/locale'
 import axios from 'axios';
 import moment from 'moment';
 import numeral from 'numeral';
+import { useLocale } from 'vuetify'
 
 const i18n = useI18n({ useScope: 'global' })
 const route = useRoute()
 const languageStore = useLanguageStore()
 const appStore = useAppStore()
-// @todo add this line when it works! const vuetifyLocale = useVuetifyLocale()
+const { current } = useLocale()
 
 setLanguage(route.params.lang?.toString())
 
@@ -59,7 +59,7 @@ function setLanguage(lang: string) {
     languageStore.setLanguage(lang)
     document.querySelector('html')?.setAttribute('lang', lang)
     i18n.locale.value = lang
-    // @todo add this line when it works! vuetifyLocale.current = lang
+    current.value = lang
     axios.defaults.headers.common['Accept-Language'] = lang
     moment.locale(lang)
     numeral.locale(lang)

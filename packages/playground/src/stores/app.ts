@@ -2,7 +2,6 @@ import { mdiAlert, mdiAlertOctagon, mdiCheckboxMarkedCircle, mdiInformation } fr
 import { defineStore } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
-import { useMapsStore } from '.'
 import { ApplicationMessage, IHomeMessage } from '../models/definitions'
 
 export const useStore = defineStore('app', {
@@ -65,8 +64,6 @@ export const useStore = defineStore('app', {
     },
     clean() {
       // Clean storages with personal data
-      const mapsStore = useMapsStore()
-      mapsStore.clean()
     }
   }
 })
