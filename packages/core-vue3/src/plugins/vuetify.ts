@@ -1,3 +1,6 @@
+import { App } from 'vue'
+import { MilochauCoreOptions } from '../types/options'
+
 // Styles
 import 'vuetify/styles'
 
@@ -5,12 +8,10 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import { en, fr } from 'vuetify/locale'
 import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
-import { App } from 'vue'
-import { MilochauCoreOptions } from '../types/options'
 
 const coreCreateVuetifyPlugin = {
-  install(app: App, options: MilochauCoreOptions) {
-    
+  install: (app: App, options: MilochauCoreOptions) => {
+
     const vuetify = createVuetify({
       icons: {
         defaultSet: 'mdi',
@@ -28,7 +29,7 @@ const coreCreateVuetifyPlugin = {
     })
 
     app.use(vuetify)
-  
+
     return vuetify
   }
 }

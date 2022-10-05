@@ -7,7 +7,7 @@ import en from '../data/en.json'
 import fr from '../data/fr.json'
 
 const coreCreateI18nPlugin = {
-  install(app: App, options: MilochauCoreOptions) {
+  install: (app: App, options: MilochauCoreOptions) => {
 
     const i18n = createI18n({
       locale: 'en',

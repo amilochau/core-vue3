@@ -22,22 +22,11 @@ export function registerGuards(router: Router) {
 }
 
 export async function isAuthenticated(instance: PublicClientApplication, interactionType: InteractionType, loginRequest: PopupRequest|RedirectRequest): Promise<boolean> {
-  return instance.handleRedirectPromise().then(() => {
+  try {
+    await instance.handleRedirectPromise()
     const accounts = instance.getAllAccounts();
-    if (accounts.length > 0) {
-      return true;
-    }
-
-    if (interactionType === InteractionType.Popup) {
-      return instance.loginPopup(loginRequest).then(() => {
-        return true;
-      }).catch(() => {
-        return false;
-      })
-    }
-
+    return accounts.length > 0;
+  } catch (error) {
     return false;
-  }).catch(() => {
-    return false;
-  })
+  }
 }
