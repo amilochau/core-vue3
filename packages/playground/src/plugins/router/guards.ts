@@ -1,6 +1,7 @@
+import { msalInstance } from "@amilochau/core-vue3";
 import { InteractionType, PopupRequest, PublicClientApplication, RedirectRequest } from "@azure/msal-browser";
 import { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-router";
-import { loginRequest, msalInstance } from "../msal/config";
+import { loginRequest } from "../../data/config";
 
 export function registerGuards(router: Router) {
   router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
@@ -9,7 +10,13 @@ export function registerGuards(router: Router) {
         ...loginRequest,
         redirectStartPage: to.fullPath
       }
+
+      console.log('playground - registerguard - before isAuthenticated (using msalInstance')
+
       const authenticated = await isAuthenticated(msalInstance, InteractionType.Redirect, request);
+      
+      console.log('playground - registerguard - after isAuthenticated (using msalInstance')
+      
       if (!authenticated) {
         msalInstance.loginRedirect(request);
         next(false)

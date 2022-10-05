@@ -5,7 +5,7 @@ import { Store } from "pinia"
 import { Router } from "vue-router"
 import { ApplicationMessage } from "../models/definitions"
 import { IHttpSettings, IProblemDetails } from "../models/http"
-import { loginRequest } from "../plugins/msal/config"
+import { loginRequest } from "../data/config"
 import { useAppStore } from "../stores"
 import { getConfig } from "../utils/config";
 

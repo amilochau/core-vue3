@@ -1,6 +1,6 @@
 import { AccountInfo, AuthenticationResult, AuthError, InteractionStatus, InteractionType, PopupRequest, PublicClientApplication, RedirectRequest, SilentRequest } from "@azure/msal-browser"
 import { computed, ComputedRef, getCurrentInstance, ref, Ref, ToRefs, toRefs, watch } from "vue"
-import { authorities, loginRequest } from "../plugins/msal/config"
+import { authorities, loginRequest } from "../data/config"
 import { useAppStore } from "../stores"
 
 export type MsalContext = {
@@ -83,7 +83,7 @@ export function useMsal(): MsalContext {
   }
 }
 
-export function useMsalAuthentication(interactionType: InteractionType, request: PopupRequest | RedirectRequest | SilentRequest): MsalAuthenticationResult {
+export function useMsalAuthentication(request: RedirectRequest | SilentRequest): MsalAuthenticationResult {
   const { instance, inProgress } = useMsal();
 
   const localInProgress = ref<boolean>(false);
@@ -119,20 +119,10 @@ export function useMsalAuthentication(interactionType: InteractionType, request:
           return;
         }
 
-        if (interactionType === InteractionType.Popup) {
-          instance.loginPopup(tokenRequest).then((response) => {
-            result.value = response;
-            error.value = null;
-          }).catch((e) => {
-            error.value = e;
-            result.value = null;
-          });
-        } else if (interactionType === InteractionType.Redirect) {
-          await instance.loginRedirect(tokenRequest).catch((e) => {
-            error.value = e;
-            result.value = null;
-          });
-        }
+        await instance.loginRedirect(tokenRequest).catch((e) => {
+          error.value = e;
+          result.value = null;
+        });
       };
       localInProgress.value = false;
     }

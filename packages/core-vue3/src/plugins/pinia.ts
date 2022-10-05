@@ -1,9 +1,6 @@
-import { PublicClientApplication } from '@azure/msal-browser';
 import { createPinia, PiniaPluginContext } from 'pinia'
-import { markRaw, nextTick } from 'vue';
-import { Router } from 'vue-router';
-import { msalInstance } from './msal/config';
-import router from './router';
+import { App, nextTick } from 'vue';
+import { MilochauCoreOptions } from '../types/options';
 
 export interface PersistOptions {
   storage?: Storage;
@@ -12,11 +9,6 @@ export interface PersistOptions {
 declare module 'pinia' {
   export interface DefineStoreOptionsBase<S, Store> {
     persist?: PersistOptions;
-  }
-
-  export interface PiniaCustomProperties {
-    router: Router;
-    msalInstance: PublicClientApplication;
   }
 }
 
@@ -38,15 +30,16 @@ const piniaPersist = ({ options, store }: PiniaPluginContext) => {
   }
 }
 
-const piniaRouter = ({ store }: PiniaPluginContext) => {
-  store.router = markRaw(router)
+const corePiniaPlugin = {
+  install: (app: App, options: MilochauCoreOptions) => {
+
+    const pinia = createPinia()
+      .use(piniaPersist)
+
+    app.use(pinia);
+
+    return pinia
+  }
 }
 
-const piniaMsal = ({ store }: PiniaPluginContext) => {
-  store.msalInstance = markRaw(msalInstance);
-}
-
-export default createPinia()
-  .use(piniaPersist)
-  .use(piniaRouter)
-  .use(piniaMsal)
+export default corePiniaPlugin

@@ -1,8 +1,28 @@
-import { ConfigValues } from "../models/definitions/Configuration"
+import { MilochauCoreOptions } from "@amilochau/core-vue3/src/types/options"
+import { getConfig } from "../utils/config"
 
-const config: ConfigValues = {
+import en from '../data/lang/en.json'
+import fr from '../data/lang/fr.json'
+
+export enum Environment {
+  Default = 'default',
+  Local = 'local',
+  Development = 'dev',
+  Production = 'prd'
+}
+
+export type EnvConfigValues = {
+  [key in Environment]: Record<string, string>
+}
+
+export const defaultEnv: Environment = Environment.Default
+
+export const envConfig: EnvConfigValues = {
   default: {
-    VITE_GOOGLE_MAPS_API_KEY: "AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg"
+    VITE_GOOGLE_MAPS_API_KEY: "AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg",
+    VITE_API_AUTHORITY: "milochau.b2clogin.com",
+    VITE_API_AUTHORITY_LOGIN: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1_register_login",
+    VITE_API_AUTHORITY_PROFILE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1_profile_editing"
   },
   local: {
     VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
@@ -24,4 +44,47 @@ const config: ConfigValues = {
   }
 }
 
-export default config
+export const getCurrentEnv = (host: string, subdomain: string): Environment => {
+  if (host.includes('localhost')) {
+    return Environment.Local
+  } else if (subdomain.includes('dev')) {
+    return Environment.Development
+  } else {
+    return Environment.Production
+  }
+}
+
+export const authorities = {
+  register_login: getConfig('VITE_API_AUTHORITY_LOGIN'),
+  profile_editing: getConfig('VITE_API_AUTHORITY_PROFILE'),
+}
+
+export const scopes = {
+  use: getConfig('VITE_API_SCOPE_USE'),
+}
+
+export const loginRequest = {
+  scopes: [
+    scopes.use
+  ],
+}
+
+export const coreOptions: MilochauCoreOptions = {
+  messages: {
+    en,
+    fr
+  },
+  identity: {
+    authorities: authorities,
+    scopes: {
+      use: getConfig('VITE_API_SCOPE_USE'),
+    },
+    auth: {
+      clientId: getConfig('VITE_API_CLIENT_ID'),
+      authority: authorities.register_login,
+      knownAuthorities: [getConfig('VITE_API_AUTHORITY')],
+      redirectUri: getConfig('VITE_REDIRECT_URI'),
+      postLogoutRedirectUri: getConfig('VITE_REDIRECT_URI')
+    }
+  }
+}

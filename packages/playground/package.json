@@ -15,12 +15,10 @@
     "@amilochau/core-vue3": "file:packages/core-vue3",
     "@vueuse/core": "^9.3.0",
     "@vueuse/head": "^0.7.12",
-    "axios": "^0.27.2",
     "moment": "^2.29.4",
     "numeral": "^2.0.6",
     "roboto-fontface": "^0.10.0",
     "vite-plugin-vuetify": "^1.0.0-alpha.17",
-    "vue-i18n": "^9.2.2",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

@@ -1,14 +1,11 @@
 // This page must use the published package in real applications
 import { createMilochauCore } from '@amilochau/core-vue3'
+import { coreOptions } from '../data/config'
 
-import en from '../data/lang/en.json'
-import fr from '../data/lang/fr.json'
+console.log('playground - milochaucoreplugin - start')
 
-const milochauCore = createMilochauCore({
-  messages: {
-    en,
-    fr
-  }
-})
+const milochauCore = createMilochauCore(coreOptions)
 
 export default milochauCore
+
+console.log('playground - milochaucoreplugin - end')

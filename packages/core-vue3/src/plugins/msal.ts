@@ -1,5 +1,5 @@
 import { App, reactive } from 'vue'
-import { EventMessage, EventMessageUtils, EventType, InteractionStatus, PublicClientApplication, AccountInfo } from "@azure/msal-browser";
+import { EventMessage, EventMessageUtils, EventType, InteractionStatus, PublicClientApplication, AccountInfo, Configuration, LogLevel, AuthenticationResult } from "@azure/msal-browser";
 import { MilochauCoreOptions } from '../types/options'
 
 type AccountIdentifiers = Partial<Pick<AccountInfo, "homeAccountId" | "localAccountId" | "username">>;
@@ -24,6 +24,63 @@ function accountArraysAreEqual(arrayA: Array<AccountIdentifiers>, arrayB: Array<
 }
 
 const coreMsalPlugin = {
+
+  createInstance: (options: MilochauCoreOptions) => {
+
+    const msalConfig: Configuration = {
+      auth: options.identity.auth,
+      cache: {
+        cacheLocation: 'localStorage'
+      },
+      system: {
+        loggerOptions: {
+          loggerCallback: (level: LogLevel, message: string, containsPii: boolean) => {
+            if (containsPii) {
+              return;
+            }
+            switch (level) {
+              case LogLevel.Error:
+                console.error(message);
+                return;
+              case LogLevel.Info:
+                console.info(message);
+                return;
+              case LogLevel.Verbose:
+                console.debug(message);
+                return;
+              case LogLevel.Warning:
+                console.warn(message);
+                return;
+              default:
+                return;
+            }
+          },
+          logLevel: LogLevel.Warning
+        }
+      }
+    }
+    
+    console.log('core - msal - before new msalInstance')
+
+    var msalInstance = new PublicClientApplication(msalConfig)
+
+    console.log('core - index - after new msalInstance')
+
+    const accounts = msalInstance.getAllAccounts();
+    if (accounts.length > 0) {
+      msalInstance.setActiveAccount(accounts[0]);
+    }
+    msalInstance.addEventCallback((event) => {
+      if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
+        const payload = event.payload as AuthenticationResult;
+        const account = payload.account;
+        msalInstance.setActiveAccount(account);
+      }
+    });
+    
+    return msalInstance
+  },
+
   install: (app: App, msalInstance: PublicClientApplication, options: MilochauCoreOptions) => {
 
     const inProgress = InteractionStatus.Startup;
