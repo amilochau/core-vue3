@@ -4,7 +4,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, AxiosRespon
 import { Store } from "pinia"
 import { Router } from "vue-router"
 import { ApplicationMessage } from "../models/definitions"
-import { IHttpSettings, IProblemDetails } from "../models/http"
+import { IHttpSettings, IProblemDetails } from "@amilochau/core-vue3"
 import { loginRequest } from "../data/config"
 import { useAppStore } from "../stores"
 import { getConfig } from "../utils/config";

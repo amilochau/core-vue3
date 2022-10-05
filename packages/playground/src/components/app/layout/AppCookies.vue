@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { mdiCookie } from '@mdi/js'
-import { useCookiesStore } from '../../../stores'
+import { useCookiesStore } from '@amilochau/core-vue3'
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n()

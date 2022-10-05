@@ -54,4 +54,8 @@ export { createMilochauCore,
   useApi
 }
 
+export * from './composition'
+export * from './models'
+export * from './stores'
+
 console.log('core - index - 7 - end file')

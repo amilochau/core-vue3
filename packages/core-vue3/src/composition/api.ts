@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
-import { IHttpSettings } from "../../../playground/src/models/http"
+import { IHttpSettings } from "../models/http"
 
 export function useApi() {
 

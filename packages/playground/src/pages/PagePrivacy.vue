@@ -53,8 +53,9 @@ import { storeToRefs } from 'pinia';
 import AppSectionHeader from '../components/app/section/AppSectionHeader.vue'
 import AppSectionSubHeader from '../components/app/section/AppSectionSubHeader.vue'
 import AppSectionText from '../components/app/section/AppSectionText.vue'
-import { useAppStore, useCookiesStore } from '../stores'
+import { useCookiesStore } from '@amilochau/core-vue3'
 import { useI18n } from 'vue-i18n';
+import { useAppStore } from '../stores';
 
 const { t } = useI18n()
 const appStore = useAppStore()
