@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { getCurrentInstance, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
-import { ApplicationMessage, IHomeMessage } from '../models/application'
+import { ApplicationMessage, IHomeMessage } from '../types/application'
 import { MilochauCoreOptions } from '../types'
 
 export const useStore = defineStore('app', {
@@ -55,14 +55,6 @@ export const useStore = defineStore('app', {
     },
     setDrawer(value: boolean) {
       this.drawer = value
-    },
-    clean() {
-      // Clean storages with personal data
-      console.log('----- APP STORE - CLEAN -----')
-      //const coreOptions = inject('core-options') as MilochauCoreOptions
-      //coreOptions.application.clean()
-      //const mapsStore = useMapsStore()
-      //mapsStore.clean()
     }
   }
 })

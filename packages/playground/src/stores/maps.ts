@@ -1,8 +1,5 @@
 import { defineStore } from 'pinia'
-import { getCurrentInstance } from 'vue'
-import { MapsListResponse, MapsOrderTypes } from '../models/maps'
-
-const internalInstance = getCurrentInstance();
+import { MapsListResponse, MapsOrderTypes } from '../types/maps'
 
 function getDefaultState() {
   return {
@@ -20,11 +17,7 @@ export const useStore = defineStore('maps', {
   getters: {},
   actions: {
     clean() {
-      // TEST NOW
-      console.log('===== CLEAN MAPS STORE =====')
-      console.log(internalInstance)
-      
-      //this.$patch(getDefaultState())
+      this.$patch(getDefaultState())
     }
   },
   persist: {

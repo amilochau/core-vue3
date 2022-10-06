@@ -2,14 +2,11 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import milochauCore from './plugins/milochau-core'
 import router from './plugins/router'
-import { loadFonts } from './plugins/webfontloader'
 import { CustomNavigationClient } from './plugins/router/navigation-client'
 import { msalInstance } from '@amilochau/core-vue3'
 
 // Styles
 import './styles/main.scss'
-loadFonts()
-
 
 const navigationClient = new CustomNavigationClient(router);
 msalInstance.setNavigationClient(navigationClient);

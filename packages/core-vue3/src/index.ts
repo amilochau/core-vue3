@@ -8,13 +8,18 @@ import head from './plugins/head'
 import vuetify from './plugins/vuetify'
 import msal from './plugins/msal'
 import pinia from './plugins/pinia'
+import { loadFonts } from './plugins/webfontloader'
+
+loadFonts()
 
 let msalInstance: PublicClientApplication
+let coreOptions: MilochauCoreOptions
 
 const createMilochauCore = (options: MilochauCoreOptions) => {
 
-  // Create msalInstance
+  // Instantiate static values
   msalInstance = msal.createInstance(options)
+  coreOptions = options
 
   // Define plugin to install
   const milochauCorePlugin = {
@@ -36,9 +41,8 @@ const createMilochauCore = (options: MilochauCoreOptions) => {
   return milochauCorePlugin
 }
 
-export { createMilochauCore, msalInstance }
+export { createMilochauCore, msalInstance, coreOptions }
 
 export * from './composition'
-export * from './models'
 export * from './stores'
 export * from './types'

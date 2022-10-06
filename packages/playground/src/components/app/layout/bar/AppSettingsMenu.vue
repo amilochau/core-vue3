@@ -45,7 +45,7 @@ import { mdiCog } from '@mdi/js'
 import { mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useThemeStore } from '../../../../stores';
+import { useThemeStore } from '@amilochau/core-vue3';
 
 const { t } = useI18n()
 const router = useRouter()

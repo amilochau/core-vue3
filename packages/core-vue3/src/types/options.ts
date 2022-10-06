@@ -1,8 +1,7 @@
 export type MilochauCoreOptions = {
   application: {
     name: string,
-    contact: string,
-    clean: () => void
+    contact: string
   },
   messages: {}
   identity: {
@@ -19,6 +18,9 @@ export type MilochauCoreOptions = {
       knownAuthorities: string[],
       redirectUri: string,
       postLogoutRedirectUri: string,
+    },
+    loginRequest: {
+      scopes: string[]
     }
   }
 }

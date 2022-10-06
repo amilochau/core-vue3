@@ -1,10 +1,9 @@
 import { InteractionRequiredAuthError, PublicClientApplication } from "@azure/msal-browser"
 import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
-import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from "axios"
+import axios, { AxiosError, AxiosRequestConfig, RawAxiosRequestHeaders, AxiosResponse } from "axios"
 import { Store } from "pinia"
 import { Router } from "vue-router"
-import { ApplicationMessage, IHttpSettings, IProblemDetails, useAppStore } from "@amilochau/core-vue3"
-import { loginRequest } from "../data/config"
+import { ApplicationMessage, IHttpSettings, IProblemDetails, useAppStore, coreOptions } from "@amilochau/core-vue3"
 import { getConfig } from "../utils/config";
 
 abstract class baseService {
@@ -52,10 +51,10 @@ abstract class baseService {
         // The user is not logged in but we don't mind
       } else {
         const authResponse = await this.msalInstance.acquireTokenSilent({
-          ...loginRequest
+          ...coreOptions.identity.loginRequest
         }).catch(async (e) => {
           if (e instanceof InteractionRequiredAuthError) {
-            await this.msalInstance.acquireTokenRedirect(loginRequest)
+            await this.msalInstance.acquireTokenRedirect(coreOptions.identity.loginRequest)
           }
           throw e
         })
@@ -135,7 +134,7 @@ abstract class baseService {
   }
 
   private getAxiosSettings(accessToken: string): AxiosRequestConfig {
-    const headers: AxiosRequestHeaders = {};
+    const headers: RawAxiosRequestHeaders = {};
     if (accessToken) {
       headers.Authorization = `Bearer ${accessToken}`
     }

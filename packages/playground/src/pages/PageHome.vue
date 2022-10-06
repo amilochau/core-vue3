@@ -23,8 +23,7 @@ import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useIsAuthenticated } from '../composition/msal';
 import { useMapsStore } from '../stores';
-import { useMapsApi } from '../composition/api/maps.api';
-import { useAttrs } from 'vue';
+import { useMapsApi } from '../composition/maps.api';
 
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()

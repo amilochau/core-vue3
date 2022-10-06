@@ -65,22 +65,10 @@ export const scopes = {
   use: getConfig('VITE_API_SCOPE_USE'),
 }
 
-export const loginRequest = {
-  scopes: [
-    scopes.use
-  ],
-}
-
 export const coreOptions: MilochauCoreOptions = {
   application: {
     name: 'Maps',
-    contact: 'Antoine Milochau',
-    clean: () => {
-      console.log('||||| config - clean |||||')
-      const mapsStore = useMapsStore()
-
-      mapsStore.clean()
-    }
+    contact: 'Antoine Milochau'
   },
   messages: {
     en,
@@ -97,6 +85,11 @@ export const coreOptions: MilochauCoreOptions = {
       knownAuthorities: [getConfig('VITE_API_AUTHORITY')],
       redirectUri: getConfig('VITE_REDIRECT_URI'),
       postLogoutRedirectUri: getConfig('VITE_REDIRECT_URI')
+    },
+    loginRequest: {
+      scopes: [
+        scopes.use
+      ],
     }
   }
 }

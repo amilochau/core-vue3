@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
-import { IHttpSettings } from "../models/http"
+import { IHttpSettings } from "../types/http"
 
 export function useApi() {
 
@@ -7,7 +7,7 @@ export function useApi() {
     settings: IHttpSettings,
     request: (axiosUrl: string, axiosSettings: AxiosRequestConfig<any>)
       => Promise<AxiosResponse<TResponse, any>>) => {
-    
+
   }
 
   const getHttp = async <TResponse>(url: string, settings: IHttpSettings) => {

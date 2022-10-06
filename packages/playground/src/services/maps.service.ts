@@ -1,7 +1,7 @@
 import { IHttpSettings, IListRequest, IListResult } from "@amilochau/core-vue3";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { Router } from "vue-router";
-import { MapsListResponse, MapsOrderTypes } from "../models/maps";
+import { MapsListResponse, MapsOrderTypes } from "../types/maps";
 import baseService from "./base.service";
 
 class mapsService extends baseService {

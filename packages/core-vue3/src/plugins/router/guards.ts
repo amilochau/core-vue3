@@ -1,4 +1,4 @@
-import { coreOptions, msalInstance } from "@amilochau/core-vue3";
+import { coreOptions, msalInstance } from "../../index"; // @todo does it work? we may not want to import everything from the main package endpoint
 import { PublicClientApplication, RedirectRequest } from "@azure/msal-browser";
 import { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-router";
 

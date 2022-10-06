@@ -21,7 +21,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
-  ],
+, "../core-vue3/src/plugins/theme.ts", "../core-vue3/src/plugins/webfontloader.ts"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

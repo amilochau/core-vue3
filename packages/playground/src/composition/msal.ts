@@ -1,7 +1,8 @@
 import { AccountInfo, AuthenticationResult, AuthError, InteractionStatus, PublicClientApplication, RedirectRequest, SilentRequest } from "@azure/msal-browser"
 import { computed, ComputedRef, getCurrentInstance, ref, Ref, ToRefs, toRefs, watch } from "vue"
-import { authorities, loginRequest } from "../data/config"
-import { useAppStore } from '@amilochau/core-vue3';
+import { authorities } from "../data/config"
+import { coreOptions } from "@amilochau/core-vue3"
+
 export type MsalContext = {
   instance: PublicClientApplication,
   accounts: Ref<AccountInfo[]>,
@@ -35,8 +36,6 @@ export function useMsal(): MsalContext {
     throw "Please install the msalPlugin";
   }
 
-  const appStore = useAppStore();
-
   const accountInfo = computed(() => {
     if (accounts.value.length > 0) {
       const account = accounts.value[0]
@@ -55,20 +54,19 @@ export function useMsal(): MsalContext {
 
   const editProfile = () => {
     instance.value.loginRedirect({
-      ...loginRequest,
+      ...coreOptions.identity.loginRequest,
       authority: authorities.profile_editing
     })
   }
 
   const login = () => {
     instance.value.loginRedirect({
-      ...loginRequest
+      ...coreOptions.identity.loginRequest
     })
   }
 
   const logout = () => {
-    appStore.clean();
-    //instance.value.logoutRedirect()
+    instance.value.logoutRedirect()
   }
 
   return {

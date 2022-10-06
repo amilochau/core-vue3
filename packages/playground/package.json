@@ -12,19 +12,10 @@
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore --fix"
   },
   "dependencies": {
-    "@amilochau/core-vue3": "file:packages/core-vue3",
-    "@vueuse/core": "^9.3.0",
-    "@vueuse/head": "^0.7.12",
-    "moment": "^2.29.4",
-    "numeral": "^2.0.6",
-    "roboto-fontface": "^0.10.0",
-    "vite-plugin-vuetify": "^1.0.0-alpha.17",
-    "webfontloader": "^1.6.28"
+    "@amilochau/core-vue3": "file:packages/core-vue3"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^6.0.3",
-    "@types/numeral": "^2.0.2",
-    "@types/webfontloader": "^1.6.35",
     "@typescript-eslint/parser": "^5.38.1",
     "@vitejs/plugin-vue": "^3.1.0",
     "eslint": "^8.24.0",

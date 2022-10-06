@@ -1,8 +1,8 @@
-import { MapsListResponse, MapsOrderTypes, MapsSearchKeys } from "../../models/maps"
-import { useMapsStore } from "../../stores"
+import { MapsListResponse, MapsOrderTypes, MapsSearchKeys } from "../types/maps"
+import { useMapsStore } from "../stores"
 import { useRouter } from 'vue-router';
 import { msalInstance, useApi, ListRequest } from "@amilochau/core-vue3";
-import { mapsService } from "../../services";
+import { mapsService } from "../services";
 
 export function useMapsApi() {
 
@@ -14,7 +14,7 @@ export function useMapsApi() {
   const get = async () => {
     const request = new ListRequest<string, MapsOrderTypes>(mapsStore.rows, { [MapsSearchKeys.Default]: mapsStore.search }, mapsStore.orderType)
     const query = request.getQuery();
-    
+
     //const apiResult = api.getHttp<IListResult<MapsListResponse>>(`/down?${query}`, { load: true, errors: true, redirect404: false })
 
 

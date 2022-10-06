@@ -2,7 +2,7 @@
   "app": {
     "header": {
       "bar": {
-        "title": "core-vue3 sample"
+        "title": "core-vue3 playground"
       }
     },
     "navigation": {
