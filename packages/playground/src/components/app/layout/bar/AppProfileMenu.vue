@@ -18,22 +18,27 @@
         item-props
         nav />
     </v-card>
+    <v-btn @click="appStore.clean">CLEAN</v-btn>
   </v-menu>
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@amilochau/core-vue3';
 import { mdiAccountCircle, mdiCardAccountMail, mdiFaceMan, mdiPower } from '@mdi/js'
-import { mergeProps } from 'vue'
+import { getCurrentInstance, mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useMsal } from '../../../../composition/msal';
+import { useMapsStore } from '../../../../stores';
 
 const { t } = useI18n()
 const { accountInfo, editProfile, logout } = useMsal()
+const appStore = useAppStore()
+const mapsStore = useMapsStore()
 
 const menuItems = [
   { title: accountInfo.value.name, subtitle: accountInfo.value.email, prependIcon: mdiFaceMan },
   { type: 'divider' },
   { title: t('app.header.profile.edit'), prependIcon: mdiCardAccountMail, onClick: editProfile },
-  { title: t('app.header.profile.logout'), prependIcon: mdiPower, onClick: logout }
+  { title: t('app.header.profile.logout'), prependIcon: mdiPower, onClick: appStore.clean }
 ]
 </script>

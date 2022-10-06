@@ -1,8 +1,7 @@
-import { MapsListResponse, MapsOrderTypes, MapsSearchKeys } from "../../models/business/maps"
-import { IListResult, ListRequest } from "../../models/http/ListPayload"
+import { MapsListResponse, MapsOrderTypes, MapsSearchKeys } from "../../models/maps"
 import { useMapsStore } from "../../stores"
 import { useRouter } from 'vue-router';
-import { msalInstance, useApi } from "@amilochau/core-vue3";
+import { msalInstance, useApi, ListRequest } from "@amilochau/core-vue3";
 import { mapsService } from "../../services";
 
 export function useMapsApi() {

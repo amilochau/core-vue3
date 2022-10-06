@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
-import { useAppStore } from '../../../stores'
+import { useAppStore } from '@amilochau/core-vue3';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n()

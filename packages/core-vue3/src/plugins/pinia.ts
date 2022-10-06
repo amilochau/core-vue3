@@ -30,7 +30,7 @@ const piniaPersist = ({ options, store }: PiniaPluginContext) => {
   }
 }
 
-const corePiniaPlugin = {
+export default {
   install: (app: App, options: MilochauCoreOptions) => {
 
     const pinia = createPinia()
@@ -41,5 +41,3 @@ const corePiniaPlugin = {
     return pinia
   }
 }
-
-export default corePiniaPlugin

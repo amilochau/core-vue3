@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { mdiClose } from '@mdi/js'
 import { storeToRefs } from 'pinia';
-import { useAppStore } from '../../stores/index.js';
+import { useAppStore } from '@amilochau/core-vue3';
 
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)

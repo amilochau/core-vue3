@@ -11,11 +11,7 @@ export function registerGuards(router: Router) {
         redirectStartPage: to.fullPath
       }
 
-      console.log('playground - registerguard - before isAuthenticated (using msalInstance')
-
       const authenticated = await isAuthenticated(msalInstance, InteractionType.Redirect, request);
-      
-      console.log('playground - registerguard - after isAuthenticated (using msalInstance')
       
       if (!authenticated) {
         msalInstance.loginRedirect(request);

@@ -6,7 +6,7 @@ import { MilochauCoreOptions } from "../types/options";
 import en from '../data/en.json'
 import fr from '../data/fr.json'
 
-const coreCreateI18nPlugin = {
+export default {
   install: (app: App, options: MilochauCoreOptions) => {
 
     const i18n = createI18n({
@@ -26,5 +26,3 @@ const coreCreateI18nPlugin = {
 
   }
 }
-
-export default coreCreateI18nPlugin

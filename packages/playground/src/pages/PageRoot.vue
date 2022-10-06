@@ -25,7 +25,8 @@ import { computed } from 'vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n';
-import { useAppStore, useLanguageStore } from '../stores'
+import { useAppStore } from '@amilochau/core-vue3';
+import { useLanguageStore } from '../stores'
 import axios from 'axios';
 import moment from 'moment';
 import numeral from 'numeral';

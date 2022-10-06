@@ -1,4 +1,4 @@
-import { FieldType, LayerType, AccessLevel, FieldValidationRuleType } from "../models/business/maps";
+import { FieldType, LayerType, AccessLevel, FieldValidationRuleType } from "../models/maps";
 
 import { useI18n } from 'vue-i18n';
 import { mdiAccountCancel, mdiAccountCog, mdiAccountEdit, mdiAccountEye, mdiAsterisk, mdiAt, mdiCalendar, mdiCircleOffOutline, mdiFormatFontSizeDecrease, mdiFormatFontSizeIncrease, mdiFormTextarea, mdiFormTextbox } from "@mdi/js";

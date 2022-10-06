@@ -9,7 +9,7 @@ import { createVuetify } from 'vuetify'
 import { en, fr } from 'vuetify/locale'
 import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 
-const coreCreateVuetifyPlugin = {
+export default {
   install: (app: App, options: MilochauCoreOptions) => {
 
     const vuetify = createVuetify({
@@ -33,5 +33,3 @@ const coreCreateVuetifyPlugin = {
     return vuetify
   }
 }
-
-export default coreCreateVuetifyPlugin

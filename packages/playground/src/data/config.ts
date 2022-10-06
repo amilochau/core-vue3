@@ -1,8 +1,10 @@
-import { MilochauCoreOptions } from "@amilochau/core-vue3/src/types/options"
+import { MilochauCoreOptions } from "@amilochau/core-vue3"
 import { getConfig } from "../utils/config"
 
 import en from '../data/lang/en.json'
 import fr from '../data/lang/fr.json'
+import { useMapsStore } from "../stores"
+import { getCurrentInstance } from "vue"
 
 export enum Environment {
   Default = 'default',
@@ -70,6 +72,16 @@ export const loginRequest = {
 }
 
 export const coreOptions: MilochauCoreOptions = {
+  application: {
+    name: 'Maps',
+    contact: 'Antoine Milochau',
+    clean: () => {
+      console.log('||||| config - clean |||||')
+      const mapsStore = useMapsStore()
+
+      mapsStore.clean()
+    }
+  },
   messages: {
     en,
     fr

@@ -21,7 +21,7 @@ import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProfileMenu from './AppProfileMenu.vue';
-import { useAppStore } from '../../../../stores';
+import { useAppStore } from '@amilochau/core-vue3';
 import { useI18n } from 'vue-i18n';
 import { useIsAuthenticated } from '../../../../composition/msal';
 

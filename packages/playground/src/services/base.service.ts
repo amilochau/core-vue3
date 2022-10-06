@@ -3,10 +3,8 @@ import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from "axios"
 import { Store } from "pinia"
 import { Router } from "vue-router"
-import { ApplicationMessage } from "../models/definitions"
-import { IHttpSettings, IProblemDetails } from "@amilochau/core-vue3"
+import { ApplicationMessage, IHttpSettings, IProblemDetails, useAppStore } from "@amilochau/core-vue3"
 import { loginRequest } from "../data/config"
-import { useAppStore } from "../stores"
 import { getConfig } from "../utils/config";
 
 abstract class baseService {

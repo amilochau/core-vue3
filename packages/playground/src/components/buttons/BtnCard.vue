@@ -17,7 +17,7 @@
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '../../stores';
+import { useAppStore } from '@amilochau/core-vue3';
 
 defineProps<{
   icon: string,

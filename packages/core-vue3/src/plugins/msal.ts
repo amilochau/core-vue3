@@ -23,7 +23,7 @@ function accountArraysAreEqual(arrayA: Array<AccountIdentifiers>, arrayB: Array<
   });
 }
 
-const coreMsalPlugin = {
+export default {
 
   createInstance: (options: MilochauCoreOptions) => {
 
@@ -60,11 +60,7 @@ const coreMsalPlugin = {
       }
     }
     
-    console.log('core - msal - before new msalInstance')
-
     var msalInstance = new PublicClientApplication(msalConfig)
-
-    console.log('core - index - after new msalInstance')
 
     const accounts = msalInstance.getAllAccounts();
     if (accounts.length > 0) {
@@ -121,5 +117,3 @@ const coreMsalPlugin = {
 
   }
 }
-
-export default coreMsalPlugin

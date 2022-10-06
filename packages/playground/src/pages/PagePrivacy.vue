@@ -4,25 +4,25 @@
       <v-col>
         <section>
           <app-section-header>{{ t('pages.privacy.header11') }}</app-section-header>
-          <app-section-text>{{ t('pages.privacy.text11', { name }) }}</app-section-text>
+          <app-section-text>{{ t('pages.privacy.text11', { name: coreOptions.application.name }) }}</app-section-text>
         </section>
         <section>
           <app-section-header>{{ t('pages.privacy.header21') }}</app-section-header>
-          <app-section-text>{{ t('pages.privacy.text21', { name }) }}</app-section-text>
+          <app-section-text>{{ t('pages.privacy.text21', { name: coreOptions.application.name }) }}</app-section-text>
           <app-section-sub-header>{{ t('pages.privacy.header22') }}</app-section-sub-header>
-          <app-section-text>{{ t('pages.privacy.text22', { name }) }}</app-section-text>
+          <app-section-text>{{ t('pages.privacy.text22', { name: coreOptions.application.name }) }}</app-section-text>
           <app-section-sub-header>{{ t('pages.privacy.header23') }}</app-section-sub-header>
-          <app-section-text>{{ t('pages.privacy.text23', { name }) }}</app-section-text>
+          <app-section-text>{{ t('pages.privacy.text23', { name: coreOptions.application.name }) }}</app-section-text>
           <app-section-sub-header>{{ t('pages.privacy.header24') }}</app-section-sub-header>
           <app-section-text>{{ t('pages.privacy.text24') }}</app-section-text>
           <app-section-sub-header>{{ t('pages.privacy.header25') }}</app-section-sub-header>
-          <app-section-text>{{ t('pages.privacy.text25', { name, contact }) }}</app-section-text>
+          <app-section-text>{{ t('pages.privacy.text25', { name: coreOptions.application.name, contact: coreOptions.application.contact }) }}</app-section-text>
           <app-section-sub-header>{{ t('pages.privacy.header26') }}</app-section-sub-header>
-          <app-section-text>{{ t('pages.privacy.text26', { name }) }}</app-section-text>
+          <app-section-text>{{ t('pages.privacy.text26', { name: coreOptions.application.name }) }}</app-section-text>
           <app-section-sub-header>{{ t('pages.privacy.header27') }}</app-section-sub-header>
-          <app-section-text>{{ t('pages.privacy.text27', { name }) }}</app-section-text>
+          <app-section-text>{{ t('pages.privacy.text27', { name: coreOptions.application.name }) }}</app-section-text>
           <app-section-sub-header>{{ t('pages.privacy.header28') }}</app-section-sub-header>
-          <app-section-text>{{ t('pages.privacy.text28', { name }) }}</app-section-text>
+          <app-section-text>{{ t('pages.privacy.text28', { name: coreOptions.application.name }) }}</app-section-text>
         </section>
       </v-col>
     </v-row>
@@ -49,17 +49,16 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import AppSectionHeader from '../components/app/section/AppSectionHeader.vue'
 import AppSectionSubHeader from '../components/app/section/AppSectionSubHeader.vue'
 import AppSectionText from '../components/app/section/AppSectionText.vue'
-import { useCookiesStore } from '@amilochau/core-vue3'
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '../stores';
+import { inject } from 'vue';
+import { MilochauCoreOptions, useCookiesStore } from '@amilochau/core-vue3';
 
 const { t } = useI18n()
-const appStore = useAppStore()
-const { name, contact } = storeToRefs(appStore)
+
+const coreOptions = inject('core-options') as MilochauCoreOptions
 
 const cookiesStore = useCookiesStore()
 </script>

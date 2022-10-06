@@ -1,8 +1,7 @@
-import { AccountInfo, AuthenticationResult, AuthError, InteractionStatus, InteractionType, PopupRequest, PublicClientApplication, RedirectRequest, SilentRequest } from "@azure/msal-browser"
+import { AccountInfo, AuthenticationResult, AuthError, InteractionStatus, PublicClientApplication, RedirectRequest, SilentRequest } from "@azure/msal-browser"
 import { computed, ComputedRef, getCurrentInstance, ref, Ref, ToRefs, toRefs, watch } from "vue"
 import { authorities, loginRequest } from "../data/config"
-import { useAppStore } from "../stores"
-
+import { useAppStore } from '@amilochau/core-vue3';
 export type MsalContext = {
   instance: PublicClientApplication,
   accounts: Ref<AccountInfo[]>,
@@ -69,7 +68,7 @@ export function useMsal(): MsalContext {
 
   const logout = () => {
     appStore.clean();
-    instance.value.logoutRedirect()
+    //instance.value.logoutRedirect()
   }
 
   return {
@@ -90,7 +89,7 @@ export function useMsalAuthentication(request: RedirectRequest | SilentRequest):
   const result = ref<AuthenticationResult | null>(null);
   const error = ref<AuthError | null>(null);
 
-  const acquireToken = async (requestOverride?: PopupRequest | RedirectRequest | SilentRequest) => {
+  const acquireToken = async (requestOverride?: RedirectRequest | SilentRequest) => {
     if (!localInProgress.value) {
       localInProgress.value = true;
       const tokenRequest = requestOverride || request;

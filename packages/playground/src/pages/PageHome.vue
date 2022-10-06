@@ -24,18 +24,14 @@ import HomeMessages from '../components/home/HomeMessages.vue'
 import { useIsAuthenticated } from '../composition/msal';
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/api/maps.api';
+import { useAttrs } from 'vue';
 
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
 
-console.log('playground - pagehome - before useIsAuthenticated')
-
 const isAuthenticated = useIsAuthenticated();
-
-console.log('playground - pagehome - after useIsAuthenticated')
 
 const fetchMaps = () => {
   mapsApi.get()
 }
-
 </script>

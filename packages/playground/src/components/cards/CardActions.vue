@@ -27,7 +27,7 @@ import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '../../stores/index.js';
+import { useAppStore } from '@amilochau/core-vue3';
 
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
