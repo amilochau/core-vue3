@@ -2,17 +2,17 @@ import { mdiAlert, mdiAlertOctagon, mdiCheckboxMarkedCircle, mdiInformation } fr
 import { defineStore } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
+import { useMapsStore } from '.'
 import { ApplicationMessage, IHomeMessage } from '../models/definitions'
 
 export const useStore = defineStore('app', {
   state: () => ({
     name: 'Maps',
-    contact: 'Antoine Milochau',
     drawer: false,
     loading: false,
     message: new ApplicationMessage('', 'info', mdiInformation),
     homeMessages: new Array<IHomeMessage>(),
-    currentMap: { title: '', desc: '' }
+    metaArgs: {} as Record<string, string>
   }),
   getters: {
     snackbarMessage: (state) => state.message,
@@ -21,11 +21,7 @@ export const useStore = defineStore('app', {
 
       return (route: RouteLocationNormalizedLoaded) => {
         const routeName = route.name?.toString()
-        const hasSuffix = i18n.te(`meta.${routeName}.suffix`)
-        const title = routeName ? i18n.t(`meta.${routeName}.title`, {
-          mapName: hasSuffix && state.currentMap.title ? `${state.currentMap.title}${i18n.t(`meta.${routeName}.suffix`)}` : state.currentMap.title,
-          mapDesc: hasSuffix && state.currentMap.desc ? `${state.currentMap.desc}${i18n.t(`meta.${routeName}.suffix`)}` : state.currentMap.desc
-        }) : undefined
+        const title = routeName ? i18n.t(`meta.${routeName}.title`, state.metaArgs) : undefined
         return title ? `${title} — ${state.name}` : state.name
       }
     },
@@ -34,17 +30,13 @@ export const useStore = defineStore('app', {
 
       return (route: RouteLocationNormalizedLoaded) => {
         const routeName = route.name?.toString()
-        const description = routeName ? i18n.t(`meta.${routeName}.description`, {
-          mapName: state.currentMap.title,
-          mapDesc: state.currentMap.desc
-        }) : undefined
+        const description = routeName ? i18n.t(`meta.${routeName}.description`, state.metaArgs) : undefined
         return description ? `${description} — ${state.name}` : state.name
       }
     }
   },
   actions: {
     displayMessage(message: ApplicationMessage) {
-      this.router
       this.message = message
     },
     displayInfoMessage(title: string, details?: string) {
@@ -64,6 +56,8 @@ export const useStore = defineStore('app', {
     },
     clean() {
       // Clean storages with personal data
+      const mapsStore = useMapsStore()
+      mapsStore.clean()
     }
   }
 })
