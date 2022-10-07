@@ -1,0 +1,52 @@
+{
+  "name": "@amilochau/core-vue3-playground",
+  "version": "0.0.0",
+  "author": "Antoine Milochau",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "serve": "vite serve --port 3000",
+    "preview": "vite preview",
+    "build": "vue-tsc --noEmit && vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore --fix"
+  },
+  "dependencies": {
+    "@amilochau/core-vue3": "file:packages/core-vue3"
+  },
+  "devDependencies": {
+    "@intlify/vite-plugin-vue-i18n": "^6.0.3",
+    "@typescript-eslint/parser": "^5.38.1",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "eslint": "^8.24.0",
+    "eslint-plugin-vue": "^9.5.1",
+    "sass": "^1.55.0",
+    "sass-loader": "^10.3.1",
+    "vite": "^3.1.4",
+    "vue-cli-plugin-vuetify": "^2.5.8",
+    "vue-tsc": "^0.40.13"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "vue/setup-compiler-macros": true
+    },
+    "extends": [
+      "plugin:vue/vue3-recommended"
+    ],
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser",
+      "sourceType": "module"
+    },
+    "rules": {
+      "vue/html-closing-bracket-newline": [
+        "error",
+        {
+          "singleline": "never",
+          "multiline": "never"
+        }
+      ]
+    }
+  }
+}

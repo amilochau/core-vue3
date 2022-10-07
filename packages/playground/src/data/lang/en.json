@@ -1,0 +1,26 @@
+{
+  "app": {
+    "header": {
+      "bar": {
+        "title": "core-vue3 playground"
+      }
+    },
+    "navigation": {
+      "home": "Home"
+    }
+  },
+  "meta": {
+    "Home": { "title": "Playground", "description": "Playground page" }
+  },
+  "pages": {
+    "home": {
+      "welcome": {
+        "title": "Welcome!"
+      },
+      "login": {
+        "title": "Login in to use services.",
+        "button": "Login"
+      }
+    }
+  }
+}

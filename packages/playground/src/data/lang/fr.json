@@ -1,0 +1,26 @@
+{
+  "app": {
+    "header": {
+      "bar": {
+        "title": "Example core-vue3"
+      }
+    },
+    "navigation": {
+      "home": "Accueil"
+    }
+  },
+  "meta": {
+    "Home": { "title": "Test", "description": "Page de test" }
+  },
+  "pages": {
+    "home": {
+      "welcome": {
+        "title": "Bienvenue !"
+      },
+      "login": {
+        "title": "Connectez-vous pour utiliser les services.",
+        "button": "Se connecter"
+      }
+    }
+  }
+}

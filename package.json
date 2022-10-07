@@ -1,0 +1,14 @@
+{
+  "name": "@amilochau/core-vue3-root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "serve": "npm run serve --workspace=packages/playground"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4",
+    "vue": "^3.2.40"
+  }
+}

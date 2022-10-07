@@ -1,0 +1,51 @@
+{
+  "name": "@amilochau/core-vue3",
+  "version": "0.1.0",
+  "description": "Core plugin for vue.js (v3) projects",
+  "author": "Antoine Milochau",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amilochau/core-vue3",
+    "directory": "package"
+  },
+  "keywords": [
+    "vuejs",
+    "plugin"
+  ],
+  "homepage": "https://github.com/amilochau/core-vue3#readme",
+  "bugs": {
+    "url": "https://github.com/amilochau/core-vue3/issues"
+  },
+  "funding": "https://github.com/sponsors/amilochau",
+  "company": "Milochau",
+  "copyright": "Copyright © Milochau",
+  "main": "src/index.ts",
+  "scripts": {},
+  "files": [
+    "src/"
+  ],
+  "dependencies": {
+    "@azure/msal-browser": "^2.28.3",
+    "@mdi/js": "^7.0.96",
+    "@types/numeral": "^2.0.2",
+    "@types/webfontloader": "^1.6.35",
+    "@vueuse/core": "^9.3.0",
+    "@vueuse/head": "^0.9.6",
+    "axios": "^1.0.0",
+    "deepmerge": "^4.2.2",
+    "moment": "^2.29.4",
+    "numeral": "^2.0.6",
+    "pinia": "^2.0.22",
+    "roboto-fontface": "^0.10.0",
+    "vite-plugin-vuetify": "^1.0.0-alpha.17",
+    "vue": "^3.2.40",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.1.5",
+    "vuetify": "^3.0.0-beta.11",
+    "webfontloader": "^1.6.28"
+  }
+}
