@@ -1,6 +1,6 @@
 import { mdiAlert, mdiAlertOctagon, mdiCheckboxMarkedCircle, mdiInformation } from '@mdi/js'
 import { defineStore } from 'pinia'
-import { getCurrentInstance, inject } from 'vue'
+import { inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 import { ApplicationMessage, IHomeMessage } from '../types/application'
