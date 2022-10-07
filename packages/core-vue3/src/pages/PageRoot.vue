@@ -25,12 +25,11 @@ import { computed } from 'vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '@amilochau/core-vue3';
-import { useLanguageStore } from '../stores'
 import axios from 'axios';
 import moment from 'moment';
 import numeral from 'numeral';
 import { useLocale } from 'vuetify'
+import { useAppStore, useLanguageStore } from '../stores';
 
 const i18n = useI18n({ useScope: 'global' })
 const route = useRoute()

@@ -17,12 +17,12 @@
 </template>
 
 <script setup lang="ts">
+  import { useI18n } from 'vue-i18n';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProfileMenu from './AppProfileMenu.vue';
-import { useAppStore } from '@amilochau/core-vue3';
-import { useI18n } from 'vue-i18n';
+import { useAppStore } from '../../../../stores';
 import { useIsAuthenticated } from '../../../../composition/msal';
 
 const { t } = useI18n()

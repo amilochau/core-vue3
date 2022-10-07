@@ -54,7 +54,8 @@ import AppSectionSubHeader from '../components/app/section/AppSectionSubHeader.v
 import AppSectionText from '../components/app/section/AppSectionText.vue'
 import { useI18n } from 'vue-i18n';
 import { inject } from 'vue';
-import { MilochauCoreOptions, useCookiesStore } from '@amilochau/core-vue3';
+import { MilochauCoreOptions } from '../types';
+import { useCookiesStore } from '../stores';
 
 const { t } = useI18n()
 

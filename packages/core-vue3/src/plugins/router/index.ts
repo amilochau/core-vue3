@@ -1,56 +1,48 @@
-import { createRouter, createWebHistory, RouteMeta, RouteRecordName, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import PageRoot from '../../pages/PageRoot.vue'
 import PageLang from '../../pages/PageLang.vue'
-import Routes from '../../data/routes'
+import routes from '../../data/routes'
 import { registerGuards } from './guards'
+import { App } from 'vue'
+import { MilochauCoreOptions } from '../../types'
+import { PublicClientApplication } from '@azure/msal-browser'
+import { CustomNavigationClient } from './navigation-client'
+import merge from 'deepmerge'
 
-const route: (path: string, name: RouteRecordName | undefined, component: any, meta: RouteMeta | undefined, children: any) => RouteRecordRaw = (path, name, component, meta, children) => {
-  const hasChildren = Array.isArray(children)
+export default {
+  install: (app: App, msalInstance: PublicClientApplication, options: MilochauCoreOptions) => {
+    const routesWithRedirection: Array<RouteRecordRaw> = [
+      {
+        path: '/:lang([a-z]{2})',
+        component: PageRoot,
+        children: merge(routes, options.routes)
+      },
+      {
+        path: '/:pathMatch(.*)*',
+        component: PageLang
+      }
+    ]
 
-  return {
-    path,
-    meta,
-    name: hasChildren ? undefined : name,
-    component,
-    children: hasChildren
-      ? children.map((r: any) => route(
-        r.path,
-        r.name,
-        r.component,
-        r.meta,
-        r.children,
-      ))
-      : [],
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: routesWithRedirection,
+      // @todo Add scrollBehavior
+    })
+
+    // Register guards
+    registerGuards(router);
+
+    // Use router for MSAL redirections
+    const navigationClient = new CustomNavigationClient(router);
+    msalInstance.setNavigationClient(navigationClient);
+
+    app.use(router)
+
+    // Mount app when ready
+    router.isReady().then(() => {
+      app.mount('#app');
+    })
+
+    return router
   }
 }
-
-const routes : Array<RouteRecordRaw> = Routes
-  .map((r: RouteRecordRaw) => route(
-    r.path,
-    r.name,
-    r.component,
-    r.meta,
-    r.children,
-  ))
-
-const routesWithRedirection: Array<RouteRecordRaw> = [
-  {
-    path: '/:lang([a-z]{2})',
-    component: PageRoot,
-    children: routes
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    component: PageLang
-  }
-]
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: routesWithRedirection,
-  // @todo Add scrollBehavior
-})
-
-registerGuards(router);
-
-export default router

@@ -9,6 +9,7 @@ import vuetify from './plugins/vuetify'
 import msal from './plugins/msal'
 import pinia from './plugins/pinia'
 import { loadFonts } from './plugins/webfontloader'
+import router from './plugins/router'
 
 loadFonts()
 
@@ -32,9 +33,9 @@ const createMilochauCore = (options: MilochauCoreOptions) => {
       app.use(i18n, options);
       app.use(head, options);
       app.use(vuetify, options);
-      app.use(msal, msalInstance);
-      app.use(pinia);
-
+      app.use(msal, msalInstance, options);
+      app.use(pinia, options);
+      app.use(router, msalInstance, options); // Mount app, so should be the last one
     }
   }
 

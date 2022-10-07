@@ -12,11 +12,11 @@ export default {
     const i18n = createI18n({
       locale: 'en',
       fallbackLocale: 'en',
-      messages: merge(options.messages,
-        {
+      messages: merge({
           en,
           fr
-        }),
+        },
+        options.messages),
       legacy: false
     })
 

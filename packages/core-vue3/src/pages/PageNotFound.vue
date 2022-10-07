@@ -5,17 +5,17 @@
       class="h-100">
       <v-col class="text-center">
         <h1 class="text-h3 text-primary mb-4">
-          {{ t('pages.forbidden.title') }}
+          {{ t('pages.notFound.title') }}
         </h1>
         <p class="mb-4">
-          {{ t('pages.forbidden.description') }}
+          {{ t('pages.notFound.description') }}
         </p>
         <v-btn
           :disabled="loading"
           :to="{ name: 'Home' }"
           variant="outlined"
           color="primary">
-          {{ t('pages.forbidden.buttonText') }}
+          {{ t('pages.notFound.buttonText') }}
         </v-btn>
       </v-col>
     </v-row>
@@ -24,8 +24,8 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useAppStore } from '@amilochau/core-vue3';
 import { useI18n } from 'vue-i18n';
+import { useAppStore } from '../stores';
 
 const { t } = useI18n()
 const appStore = useAppStore()

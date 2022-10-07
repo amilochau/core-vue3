@@ -21,9 +21,9 @@
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
-import { useIsAuthenticated } from '../composition/msal';
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
+import { useIsAuthenticated } from '@amilochau/core-vue3';
 
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()

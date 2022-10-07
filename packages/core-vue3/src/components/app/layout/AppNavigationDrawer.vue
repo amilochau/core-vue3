@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import { mdiGavel, mdiHome } from '@mdi/js'
-import { useAppStore } from '@amilochau/core-vue3';
 import { useI18n } from 'vue-i18n';
+import { useAppStore } from '../../../stores'
 
 const { t } = useI18n()
 var appStore = useAppStore()

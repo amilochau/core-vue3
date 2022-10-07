@@ -1,7 +1,12 @@
+import { RouteRecordRaw } from "vue-router"
+
 export type MilochauCoreOptions = {
   application: {
     name: string,
     contact: string
+  },
+  api: {
+    gatewayUri: string
   },
   messages: {}
   identity: {
@@ -22,5 +27,7 @@ export type MilochauCoreOptions = {
     loginRequest: {
       scopes: string[]
     }
-  }
+  },
+  routes: Array<RouteRecordRaw>,
+  clean: () => () => void
 }

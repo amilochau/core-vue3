@@ -15,8 +15,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useMsal } from '../../composition/msal';
-import { useAppStore } from '@amilochau/core-vue3';
+import { useAppStore, useMsal } from '@amilochau/core-vue3';
 
 const { t } = useI18n()
 const { login } = useMsal()

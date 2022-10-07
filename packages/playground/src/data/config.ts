@@ -3,8 +3,8 @@ import { getConfig } from "../utils/config"
 
 import en from '../data/lang/en.json'
 import fr from '../data/lang/fr.json'
+import routes from "./routes"
 import { useMapsStore } from "../stores"
-import { getCurrentInstance } from "vue"
 
 export enum Environment {
   Default = 'default',
@@ -70,6 +70,9 @@ export const coreOptions: MilochauCoreOptions = {
     name: 'Maps',
     contact: 'Antoine Milochau'
   },
+  api: {
+    gatewayUri: getConfig('VITE_API_URL')
+  },
   messages: {
     en,
     fr
@@ -90,6 +93,14 @@ export const coreOptions: MilochauCoreOptions = {
       scopes: [
         scopes.use
       ],
+    }
+  },
+  routes: routes,
+  clean: () => {
+    const mapsStore = useMapsStore()
+
+    return () => {
+      mapsStore.clean();
     }
   }
 }
