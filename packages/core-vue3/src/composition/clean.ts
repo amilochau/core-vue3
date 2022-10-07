@@ -1,9 +1,8 @@
-import { inject } from "vue"
-import { MilochauCoreOptions } from "../types"
+import { useCoreOptions } from "./options";
 
 export function useClean() {
 
-  const coreOptions = inject('core-options') as MilochauCoreOptions
+  const coreOptions = useCoreOptions()
   const cleanFromCoreOptions = coreOptions.clean();
 
   const clean = () => {

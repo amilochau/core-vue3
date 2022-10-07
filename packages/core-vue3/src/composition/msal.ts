@@ -1,6 +1,6 @@
 import { AccountInfo, AuthenticationResult, AuthError, InteractionStatus, InteractionType, PublicClientApplication, RedirectRequest, SilentRequest } from "@azure/msal-browser";
-import { computed, ComputedRef, getCurrentInstance, inject, ref, Ref, ToRefs, toRefs, watch } from "vue";
-import { MilochauCoreOptions } from "../types/options";
+import { computed, ComputedRef, getCurrentInstance, ref, Ref, ToRefs, toRefs, watch } from "vue";
+import { useCoreOptions } from "./options";
 
 export type MsalContext = {
   instance: PublicClientApplication,
@@ -30,7 +30,7 @@ export function useMsal(): MsalContext {
     accounts: AccountInfo[]
   }> = toRefs(internalInstance.appContext.config.globalProperties.$msal)
 
-  const coreOptions = inject('core-options') as MilochauCoreOptions
+  const coreOptions = useCoreOptions()
 
   if (!instance || !accounts || !inProgress) {
       throw "Please install the msalPlugin";

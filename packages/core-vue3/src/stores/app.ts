@@ -1,10 +1,9 @@
 import { mdiAlert, mdiAlertOctagon, mdiCheckboxMarkedCircle, mdiInformation } from '@mdi/js'
 import { defineStore } from 'pinia'
-import { inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 import { ApplicationMessage, IHomeMessage } from '../types/application'
-import { MilochauCoreOptions } from '../types'
+import { useCoreOptions } from '../composition/options'
 
 export const useStore = defineStore('app', {
   state: () => ({
@@ -18,7 +17,7 @@ export const useStore = defineStore('app', {
     snackbarMessage: (state) => state.message,
     applicationTitle: (state) => {
       const i18n = useI18n()
-      const coreOptions = inject('core-options') as MilochauCoreOptions
+      const coreOptions = useCoreOptions()
 
       return (route: RouteLocationNormalizedLoaded) => {
         const routeName = route.name?.toString()
@@ -28,7 +27,7 @@ export const useStore = defineStore('app', {
     },
     applicationDescription: (state) => {
       const i18n = useI18n()
-      const coreOptions = inject('core-options') as MilochauCoreOptions
+      const coreOptions = useCoreOptions()
 
       return (route: RouteLocationNormalizedLoaded) => {
         const routeName = route.name?.toString()

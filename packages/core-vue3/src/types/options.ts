@@ -3,7 +3,8 @@ import { RouteRecordRaw } from "vue-router"
 export type MilochauCoreOptions = {
   application: {
     name: string,
-    contact: string
+    contact: string,
+    navigation: (t: any) => any[],
   },
   api: {
     gatewayUri: string

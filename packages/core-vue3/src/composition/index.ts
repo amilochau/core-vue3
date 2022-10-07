@@ -1,11 +1,13 @@
 import { useApi } from "./api";
 import { useMsal, useIsAuthenticated, useMsalAuthentication } from "./msal";
+import { useCoreOptions } from "./options";
 import { useValidationRules } from './validation'
 
 export {
   useApi,
-  useMsal,
+  useCoreOptions,
   useIsAuthenticated,
+  useMsal,
   useMsalAuthentication,
   useValidationRules  
 }

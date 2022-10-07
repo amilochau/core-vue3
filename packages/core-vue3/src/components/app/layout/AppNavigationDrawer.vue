@@ -13,16 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { mdiGavel, mdiHome } from '@mdi/js'
 import { useI18n } from 'vue-i18n';
+import { useCoreOptions } from '../../../composition';
 import { useAppStore } from '../../../stores'
 
 const { t } = useI18n()
 var appStore = useAppStore()
+const coreOptions = useCoreOptions()
 
-const menuItems = [
-  { title: t('app.navigation.home'), prependIcon: mdiHome, to: { name: 'Home' } },
-  { type: 'divider' },
-  { title: t('app.navigation.privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
-]
+const menuItems = coreOptions.application.navigation(t)
 </script>

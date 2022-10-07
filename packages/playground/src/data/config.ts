@@ -5,6 +5,7 @@ import en from '../data/lang/en.json'
 import fr from '../data/lang/fr.json'
 import routes from "./routes"
 import { useMapsStore } from "../stores"
+import navigation from "./navigation"
 
 export enum Environment {
   Default = 'default',
@@ -68,7 +69,8 @@ export const scopes = {
 export const coreOptions: MilochauCoreOptions = {
   application: {
     name: 'Maps',
-    contact: 'Antoine Milochau'
+    contact: 'Antoine Milochau',
+    navigation
   },
   api: {
     gatewayUri: getConfig('VITE_API_URL')

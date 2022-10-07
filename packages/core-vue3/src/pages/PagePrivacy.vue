@@ -53,14 +53,12 @@ import AppSectionHeader from '../components/app/section/AppSectionHeader.vue'
 import AppSectionSubHeader from '../components/app/section/AppSectionSubHeader.vue'
 import AppSectionText from '../components/app/section/AppSectionText.vue'
 import { useI18n } from 'vue-i18n';
-import { inject } from 'vue';
-import { MilochauCoreOptions } from '../types';
 import { useCookiesStore } from '../stores';
+import { useCoreOptions } from '../composition';
 
 const { t } = useI18n()
 
-const coreOptions = inject('core-options') as MilochauCoreOptions
-
+const coreOptions = useCoreOptions()
 const cookiesStore = useCookiesStore()
 </script>
 

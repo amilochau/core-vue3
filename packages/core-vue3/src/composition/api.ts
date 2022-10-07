@@ -1,19 +1,19 @@
 import { InteractionRequiredAuthError } from "@azure/msal-browser"
 import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from "axios"
-import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { useAppStore } from "../stores"
-import { ApplicationMessage, MilochauCoreOptions } from "../types"
+import { ApplicationMessage } from "../types"
 import { IHttpSettings, IProblemDetails } from "../types/http"
 import { useMsal } from "./msal"
+import { useCoreOptions } from "./options"
 
 export function useApi(relativeBaseUri: string) {
 
   const appStore = useAppStore()
   const msal = useMsal()
   const router = useRouter();
-  const coreOptions = inject('core-options') as MilochauCoreOptions
+  const coreOptions = useCoreOptions()
   const baseUri = `${coreOptions.api.gatewayUri}${relativeBaseUri}`
   
   const analyzeError = async (error: any, settings: IHttpSettings): Promise<ApplicationMessage> => {
