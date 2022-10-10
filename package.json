@@ -5,7 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "serve": "npm run serve --workspace=packages/playground"
+    "serve": "npm run serve --workspace=packages/playground",
+    "build": ""
   },
   "devDependencies": {
     "typescript": "^4.8.4",

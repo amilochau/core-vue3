@@ -1,0 +1,22 @@
+name: Build
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - packages/**
+  pull_request:
+    branches:
+    - main
+    paths:
+    - packages/**
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build project
+        uses: amilochau/github-actions/build/node@v3
