@@ -24,7 +24,10 @@
   "company": "Milochau",
   "copyright": "Copyright © Milochau",
   "main": "src/index.ts",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore --fix"
+  },
   "files": [
     "src/"
   ],
@@ -47,5 +50,32 @@
     "vue-router": "^4.1.5",
     "vuetify": "^3.0.0-beta.11",
     "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-plugin-vue": "^9.5.1"
+  },
+  "eslintConfig": {
+    "env": {
+      "vue/setup-compiler-macros": true
+    },
+    "extends": [
+      "plugin:vue/vue3-recommended"
+    ],
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser",
+      "sourceType": "module"
+    },
+    "rules": {
+      "vue/html-closing-bracket-newline": [
+        "error",
+        {
+          "singleline": "never",
+          "multiline": "never"
+        }
+      ]
+    }
   }
 }

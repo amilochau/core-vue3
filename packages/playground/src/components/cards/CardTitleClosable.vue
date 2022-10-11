@@ -1,6 +1,8 @@
 <template>
   <v-card-item class="bg-primary py-1">
-    <v-card-title class="multi-line">{{ title }}</v-card-title>
+    <v-card-title class="multi-line">
+      {{ title }}
+    </v-card-title>
     <template #append>
       <v-btn
         :disabled="loading"

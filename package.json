@@ -6,6 +6,8 @@
   ],
   "scripts": {
     "serve": "npm run serve --workspace=packages/playground",
+    "lint": "npm run lint --workspace=packages/core-vue3",
+    "lint:fix": "npm run lint:fix --workspace=packages/core-vue3",
     "build": ""
   },
   "devDependencies": {

@@ -32,7 +32,7 @@ export function useMsal(): MsalContext {
 
   const coreOptions = useCoreOptions()
 
-  if (!instance || !accounts || !inProgress) {
+  if (!instance.value || !accounts.value || !inProgress.value) {
       throw "Please install the msalPlugin";
   }
 
@@ -144,7 +144,7 @@ export function useMsalAuthentication(interactionType: InteractionType, request:
   }
 
   const stopWatcher = watch(inProgress, () => {
-      if (!result && !error) {
+      if (!result.value && !error.value) {
           acquireToken();
       } else {
           stopWatcher();
