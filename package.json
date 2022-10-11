@@ -8,7 +8,8 @@
     "serve": "npm run serve --workspace=packages/playground",
     "lint": "npm run lint --workspace=packages/core-vue3",
     "lint:fix": "npm run lint:fix --workspace=packages/core-vue3",
-    "build": ""
+    "build": "",
+    "publish": "npm publish --workspace=packages/core-vue3"
   },
   "devDependencies": {
     "typescript": "^4.8.4",

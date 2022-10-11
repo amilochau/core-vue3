@@ -11,6 +11,9 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore --fix"
   },
+  "files": [
+    "packages/core-vue3"
+  ],
   "dependencies": {
     "@amilochau/core-vue3": "file:packages/core-vue3"
   },
