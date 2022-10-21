@@ -13,8 +13,9 @@ on:
     - packages/**
 
 env:
-  PROJECT_UI_WORKSPACE: '.'
   PROJECT_UI_OUTPUT: '/packages/core-vue3'
+  PROJECT_UI_BUILD: 'build --workspaces --if-present'
+  PROJECT_UI_LINT: 'lint --workspaces --if-present'
 
 jobs:
   build:
@@ -25,5 +26,6 @@ jobs:
       - name: Build project
         uses: amilochau/github-actions/build/node@v3
         with:
-          projectWorkspace: ${{ env.PROJECT_UI_WORKSPACE }}
           relativeOutputPath: ${{ env.PROJECT_UI_OUTPUT }}
+          npmBuildScript: ${{ env.PROJECT_UI_BUILD }}
+          npmLintScript: ${{ env.PROJECT_UI_LINT }}
