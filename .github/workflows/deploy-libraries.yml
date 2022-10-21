@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy libraries
-        uses: amilochau/github-actions/release/npm@main
+        uses: amilochau/github-actions/release/npm@v3
         with:
           npmPublishCommand: ${{ env.PROJECT_UI_PUBLISH }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
