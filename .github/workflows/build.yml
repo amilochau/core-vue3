@@ -13,8 +13,8 @@ on:
     - packages/**
 
 env:
-  PROJECT_UI_WORKSPACE: './packages/core-vue3'
-  PROJECT_UI_OUTPUT: '/'
+  PROJECT_UI_WORKSPACE: '.'
+  PROJECT_UI_OUTPUT: '/packages/core-vue3'
 
 jobs:
   build:
