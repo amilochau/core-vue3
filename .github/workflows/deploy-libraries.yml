@@ -16,8 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Copy readme file
-          shell: pwsh
-          run: Copy-Item "./README.md" -Destination "./packages/core-vue3"
+        shell: pwsh
+        run: Copy-Item "./README.md" -Destination "./packages/core-vue3"
       - name: Deploy libraries
         uses: amilochau/github-actions/release/npm@v3
         with:
