@@ -5,6 +5,9 @@ on:
 
 concurrency: deploy_libraries
 
+env:
+  PROJECT_UI_PUBLISH: 'publish --workspace=packages/core-vue3'
+
 jobs:
   deploy:
     name: Deploy libraries
@@ -15,5 +18,6 @@ jobs:
       - name: Deploy libraries
         uses: amilochau/github-actions/release/npm@v3
         with:
+          npmPublishCommand: ${{ env.PROJECT_UI_PUBLISH }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           npmjsComToken: ${{ secrets.NPMJSCOM_TOKEN }}

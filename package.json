@@ -1,5 +1,6 @@
 {
   "name": "@amilochau/core-vue3-root",
+  "version": "0.1.0-beta.1",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -7,8 +8,7 @@
   "scripts": {
     "serve": "npm run serve --workspace=packages/playground",
     "lint": "npm run lint --workspace=packages/core-vue3",
-    "lint:fix": "npm run lint:fix --workspace=packages/core-vue3",
-    "build": ""
+    "lint:fix": "npm run lint:fix --workspace=packages/core-vue3"
   },
   "devDependencies": {
     "typescript": "^4.8.4",
