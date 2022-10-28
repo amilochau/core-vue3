@@ -34,7 +34,6 @@
   "dependencies": {
     "@azure/msal-browser": "^2.30.0",
     "@mdi/js": "^7.0.96",
-    "@types/webfontloader": "^1.6.35",
     "@vueuse/core": "^9.4.0",
     "@vueuse/head": "^0.9.8",
     "deepmerge": "^4.2.2",
@@ -50,7 +49,8 @@
   "devDependencies": {
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "^8.26.0",
-    "eslint-plugin-vue": "^9.6.0"
+    "eslint-plugin-vue": "^9.6.0",
+    "vite-plugin-fonts": "^0.6.0"
   },
   "eslintConfig": {
     "root": true,
