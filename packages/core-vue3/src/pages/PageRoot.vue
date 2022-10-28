@@ -26,7 +26,6 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n';
 import moment from 'moment';
-import numeral from 'numeral';
 import { useLocale } from 'vuetify'
 import { useAppStore, useLanguageStore } from '../stores';
 
@@ -60,7 +59,6 @@ function setLanguage(lang: string) {
     i18n.locale.value = lang
     current.value = lang
     moment.locale(lang)
-    numeral.locale(lang)
   }
 }
 </script>
