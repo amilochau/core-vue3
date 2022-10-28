@@ -1,9 +1,6 @@
 import { App } from 'vue'
 import { MilochauCoreOptions } from '../types/options'
 
-// Styles
-import 'vuetify/styles'
-
 // Vuetify
 import { createVuetify } from 'vuetify'
 import { en, fr } from 'vuetify/locale'
