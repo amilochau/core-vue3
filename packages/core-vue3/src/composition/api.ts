@@ -1,8 +1,7 @@
 import { InteractionRequiredAuthError } from "@azure/msal-browser"
 import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from "axios"
 import { useRouter } from "vue-router"
-import { useAppStore } from "../stores"
+import { useAppStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
 import { IHttpSettings, IProblemDetails } from "../types/http"
 import { useMsal } from "./msal"
@@ -11,33 +10,35 @@ import { useCoreOptions } from "./options"
 export function useApi(relativeBaseUri: string) {
 
   const appStore = useAppStore()
+  const languageStore = useLanguageStore()
   const msal = useMsal()
   const router = useRouter();
   const coreOptions = useCoreOptions()
   const baseUri = `${coreOptions.api.gatewayUri}${relativeBaseUri}`
   
-  const analyzeError = async (error: any, settings: IHttpSettings): Promise<ApplicationMessage> => {
-    if (isAxiosError<any>(error)) {
-      if (error.response.status === 401) {
+  const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
+    switch (response.status) {
+      case 401:
         router.push({ name: 'Home' })
         return new ApplicationMessage('app.errors.notAuthorized', 'error', mdiAlert)
-      } else if (error.response.status === 403) {
+      case 403:
         router.push({ name: 'Forbidden' })
         return new ApplicationMessage('app.errors.notAuthorized', 'error', mdiAlert)
-      } else if (error.response.status === 404) {
+      case 404:
         if (settings.redirect404) {
           router.push({ name: 'NotFound' })
         }
         return new ApplicationMessage('app.errors.notFound', 'error', mdiAlert)
-      } else if (error.response.status === 400) {
-        if (isAxiosError<IProblemDetails>(error)) {
+      case 400:
+        const responseBody = await response.json() as IProblemDetails
+        if (responseBody) {
           const errorMessage = new ApplicationMessage('', 'error', mdiAlert, undefined, undefined, true)
-          if (error.response.data && error.response.data.title) {
-            errorMessage.title = error.response.data.title
+          if (responseBody.title) {
+            errorMessage.title = responseBody.title
           }
-          if (error.response.data && error.response.data.errors) {
+          if (responseBody.errors) {
             errorMessage.details = ''
-            for (const [key, values] of Object.entries(error.response.data.errors)) {
+            for (const [key, values] of Object.entries(responseBody.errors)) {
               for (const value of values) {
                 if (value) {
                   if (key) {
@@ -54,39 +55,42 @@ export function useApi(relativeBaseUri: string) {
             return errorMessage
           }
         }
-      } else if (error.response.status === 500) {
+      case 500:
         return new ApplicationMessage('app.errors.serverError', 'error', mdiAlert)
-      } else if (error.response.headers && error.response.headers['Application-Error']) {
-        return new ApplicationMessage(error.response.headers['Application-Error'], 'error', mdiAlert, undefined, undefined, true)
-      }
-    } else if (error.request) {
-      return new ApplicationMessage('app.errors.networkError', 'warning', mdiAccessPointNetworkOff)
-    } else {
-      // Something happened in setting up the request that triggered an Error
     }
+
+    if (response.headers.has('Application-Error')) {
+      const applicationError = response.headers.get('Application-Error')
+      if (applicationError) {
+        return new ApplicationMessage(applicationError, 'error', mdiAlert, undefined, undefined, true)
+      }
+    }
+    
     return new ApplicationMessage('app.errors.serverError', 'error', mdiAlert)
   }
 
-  const isAxiosError = <TResponse>(error: any): error is AxiosError<TResponse> & { response: AxiosResponse<TResponse> } => {
-    return (error as AxiosError<TResponse>).response !== undefined
-  }
-
-  const getAxiosUrl = (url: string) => {
+  const getAbsoluteUrl = (url: string) => {
     return `${baseUri}${url}`
   }
 
-  const getAxiosSettings = (accessToken: string): AxiosRequestConfig => {
-    const headers: RawAxiosRequestHeaders = {};
+  const getRequestInit = (accessToken: string): RequestInit => {
+    const headers: HeadersInit = {
+      'Accept-Language': languageStore.language,
+      'Content-Type': 'application/json;charset=utf-8'
+    };
+
     if (accessToken) {
       headers.Authorization = `Bearer ${accessToken}`
     }
+
     return { headers }
   }
 
   const processRequest = async <TResponse>(url: string,
     settings: IHttpSettings,
-    request: (axiosUrl: string, axiosSettings: AxiosRequestConfig<any>)
-      => Promise<AxiosResponse<TResponse, any>>) => {
+    request: (absoluteUrl: string, requestInit: RequestInit) => Promise<Response>) => {
+
+    var response: Response;
 
     try {
       // Start loading
@@ -109,33 +113,52 @@ export function useApi(relativeBaseUri: string) {
         accessToken = authResponse.accessToken
       }
 
-      const axiosSettings = getAxiosSettings(accessToken);
-      const axiosUrl = getAxiosUrl(url);
-      const result = await request(axiosUrl, axiosSettings);
-      return result.data
+      const requestInit = getRequestInit(accessToken);
+      const absoluteUrl = getAbsoluteUrl(url);
+      response = await request(absoluteUrl, requestInit);
     } catch (error) {
-      const errorMessage = await analyzeError(error, settings)
+      const errorMessage = new ApplicationMessage('app.errors.networkError', 'warning', mdiAccessPointNetworkOff)
       if (settings.errors) { appStore.displayMessage(errorMessage) }
       throw errorMessage;
     } finally {
       if (settings.load) { appStore.loading = false }
     }
+
+    if (!response.ok) {
+      const errorMessage = await analyzeResponse(response, settings)
+      if (settings.errors) { appStore.displayMessage(errorMessage) }
+      throw errorMessage; 
+    }
+    return response.json() as TResponse
   }
 
   const getHttp = async <TResponse>(url: string, settings: IHttpSettings) => {
-    return processRequest(url, settings, (axiosUrl, axiosSettings) => axios.get<TResponse, AxiosResponse<TResponse>>(axiosUrl, axiosSettings))
+    return processRequest<TResponse>(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit
+    }))
   }
 
   const postHttp = async <TRequest, TResponse>(url: string, data: TRequest, settings: IHttpSettings) => {
-    return processRequest(url, settings, (axiosUrl, axiosSettings) => axios.post<TResponse, AxiosResponse<TResponse>>(axiosUrl, data, axiosSettings))
+    return processRequest<TResponse>(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'post',
+      body: JSON.stringify(data)
+    }))
   }
 
   const patchHttp = async <TRequest, TResponse>(url: string, data: TRequest, settings: IHttpSettings) => {
-    return processRequest(url, settings, (axiosUrl, axiosSettings) => axios.patch<TResponse, AxiosResponse<TResponse>>(axiosUrl, data, axiosSettings))
+    return processRequest<TResponse>(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'patch',
+      body: JSON.stringify(data)
+    }))
   }
 
   const deleteHttp = async <TResponse>(url: string, settings: IHttpSettings) => {
-    return processRequest(url, settings, (axiosUrl, axiosSettings) => axios.delete<TResponse, AxiosResponse<TResponse>>(axiosUrl, axiosSettings))
+    return processRequest<TResponse>(url, settings, (absoluteUrl, requestInit) =>fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'delete'
+    }))
   }
 
   return {
