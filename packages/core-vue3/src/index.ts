@@ -8,10 +8,7 @@ import head from './plugins/head'
 import vuetify from './plugins/vuetify'
 import msal from './plugins/msal'
 import pinia from './plugins/pinia'
-import { loadFonts } from './plugins/webfontloader'
 import router from './plugins/router'
-
-loadFonts()
 
 let msalInstance: PublicClientApplication
 let coreOptions: MilochauCoreOptions
