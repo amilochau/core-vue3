@@ -25,7 +25,6 @@ import { computed } from 'vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head'
 import { useI18n } from 'vue-i18n';
-import axios from 'axios';
 import moment from 'moment';
 import numeral from 'numeral';
 import { useLocale } from 'vuetify'
@@ -60,7 +59,6 @@ function setLanguage(lang: string) {
     document.querySelector('html')?.setAttribute('lang', lang)
     i18n.locale.value = lang
     current.value = lang
-    axios.defaults.headers.common['Accept-Language'] = lang
     moment.locale(lang)
     numeral.locale(lang)
   }
