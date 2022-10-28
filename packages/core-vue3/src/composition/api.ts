@@ -86,7 +86,7 @@ export function useApi(relativeBaseUri: string) {
     return { headers }
   }
 
-  const processRequest = async <TResponse>(url: string,
+  const processRequest = async (url: string,
     settings: IHttpSettings,
     request: (absoluteUrl: string, requestInit: RequestInit) => Promise<Response>) => {
 
@@ -129,33 +129,34 @@ export function useApi(relativeBaseUri: string) {
       if (settings.errors) { appStore.displayMessage(errorMessage) }
       throw errorMessage; 
     }
-    return response.json() as TResponse
+
+    return response
   }
 
-  const getHttp = async <TResponse>(url: string, settings: IHttpSettings) => {
-    return processRequest<TResponse>(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+  const getHttp = async (url: string, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit
     }))
   }
 
-  const postHttp = async <TRequest, TResponse>(url: string, data: TRequest, settings: IHttpSettings) => {
-    return processRequest<TResponse>(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+  const postHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
       method: 'post',
       body: JSON.stringify(data)
     }))
   }
 
-  const patchHttp = async <TRequest, TResponse>(url: string, data: TRequest, settings: IHttpSettings) => {
-    return processRequest<TResponse>(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+  const patchHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
       method: 'patch',
       body: JSON.stringify(data)
     }))
   }
 
-  const deleteHttp = async <TResponse>(url: string, settings: IHttpSettings) => {
-    return processRequest<TResponse>(url, settings, (absoluteUrl, requestInit) =>fetch(absoluteUrl, {
+  const deleteHttp = async (url: string, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
       method: 'delete'
     }))
