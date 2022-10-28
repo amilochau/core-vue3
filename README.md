@@ -13,9 +13,7 @@ The following plugins are installed by `@amilochau/core-vue3`:
 
 The following libraries are used, and are defined as dependencies:
 - `@mdi/js` for icons
-- `axios` for HTTP requests
 - `moment` for dates
-- `numeral` for numerals
 - `webfontloader` with Roboto fontface
 - `@vueuse/core` and `@vueuse/head` as vue helpers
 
