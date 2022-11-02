@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 import { ApplicationMessage, IHomeMessage } from '../types/application'
-import { useCoreOptions } from '../composition/options'
+import { useCoreOptions } from '../composition'
 
 export const useStore = defineStore('app', {
   state: () => ({
