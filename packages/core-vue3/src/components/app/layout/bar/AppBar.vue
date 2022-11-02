@@ -5,10 +5,14 @@
     class="border-b"
     flat>
     <v-app-bar-nav-icon @click="toggleDrawer" />
-    <v-app-bar-title class="ml-4">
+    <v-app-bar-title
+      :class="{
+        'ml-4': true,
+        'clickable-title': coreOptions.application.onAppBarTitleClick
+      }"
+      @click="onTitleClick">
       {{ t('app.header.bar.title') }}
     </v-app-bar-title>
-    <v-spacer />
     <app-offline />
     <app-settings-menu />
     <app-profile-menu v-if="isAuthenticated" />
@@ -23,13 +27,28 @@ import AppOffline from './AppOffline.vue';
 import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProfileMenu from './AppProfileMenu.vue';
 import { useAppStore } from '../../../../stores';
-import { useIsAuthenticated } from '../../../../composition/msal';
+import { useCoreOptions, useIsAuthenticated } from '../../../../composition';
+import { useRouter } from 'vue-router';
 
 const { t } = useI18n()
 const appStore = useAppStore()
 const isAuthenticated = useIsAuthenticated();
+const coreOptions = useCoreOptions()
+const router = useRouter()
 
 function toggleDrawer() {
   appStore.setDrawer(!appStore.drawer)
 }
+
+function onTitleClick() {
+  if (coreOptions.application.onAppBarTitleClick) {
+    coreOptions.application.onAppBarTitleClick(router)
+  }
+}
 </script>
+
+<style scoped>
+.clickable-title {
+  cursor: pointer;
+}
+</style>

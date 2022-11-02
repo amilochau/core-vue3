@@ -1,10 +1,11 @@
-import { RouteRecordRaw } from "vue-router"
+import { Router, RouteRecordRaw } from "vue-router"
 
 export type MilochauCoreOptions = {
   application: {
     name: string,
     contact: string,
     navigation: (t: any) => any[],
+    onAppBarTitleClick?: (router: Router) => void
   },
   api: {
     gatewayUri: string

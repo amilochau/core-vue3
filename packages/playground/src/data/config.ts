@@ -70,7 +70,8 @@ export const coreOptions: MilochauCoreOptions = {
   application: {
     name: 'Maps',
     contact: 'Antoine Milochau',
-    navigation
+    navigation,
+    onAppBarTitleClick: (router) => router.push({ name: 'Home' })
   },
   api: {
     gatewayUri: getConfig('VITE_API_URL')
