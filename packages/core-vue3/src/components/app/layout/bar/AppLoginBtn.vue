@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { mdiPower } from '@mdi/js'
 import { useI18n } from 'vue-i18n';
-import { useMsal } from '../../../../composition/msal';
+import { useMsal } from '../../../../composition';
 
 const { t } = useI18n()
 const { login } = useMsal()
