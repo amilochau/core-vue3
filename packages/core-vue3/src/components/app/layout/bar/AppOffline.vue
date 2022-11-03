@@ -7,7 +7,7 @@
         :icon="mdiWifiStrengthAlertOutline"
         color="warning" />
     </template>
-    <span>{{ t('app.header.offline.title') }}</span>
+    <span>{{ t('title') }}</span>
   </v-tooltip>
 </template>
 
@@ -19,3 +19,14 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n()
 const online = useOnline()
 </script>
+
+<i18n>
+  {
+    "en": {
+      "title": "You lost your Internet connection..."
+    },
+    "fr": {
+      "title": "Vous avez perdu votre connexion Internet..."
+    }
+  }
+</i18n>

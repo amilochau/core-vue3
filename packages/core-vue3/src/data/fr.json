@@ -1,42 +1,5 @@
 {
   "app": {
-    "snackbar": {
-      "close": "Fermer"
-    },
-    "progressbar": {
-      "label": "Progression"
-    },
-    "cookies": {
-      "title": "Ce site utilise des cookies pour fonctionner.",
-      "read": "Lire",
-      "accept": "Accepter",
-      "refuse": "Refuser"
-    },
-    "header": {
-      "settings": {
-        "title": "Paramètres",
-        "languages": {
-          "title": "Langues",
-          "english": "English",
-          "french": "Français"
-        },
-        "display": {
-          "title": "Affichage",
-          "darkMode": "Mode sombre"
-        }
-      },
-      "offline": {
-        "title": "Vous avez perdu votre connexion Internet..."
-      },
-      "profile": {
-        "title": "Profil",
-        "edit": "Gérer votre compte",
-        "logout": "Déconnexion"
-      },
-      "login": {
-        "title": "Connexion"
-      }
-    },
     "errors": {
       "notAuthorized": "Non autorisé",
       "notFound": "Inconnu",
@@ -48,10 +11,6 @@
     "Privacy": { "title": "Confidentialité", "description": "Page de confidentialité" },
     "Forbidden": { "title": "Interdit", "description": "Page pour accès à des ressources interdites" },
     "NotFound": { "title": "Non trouvé", "description": "Page pour accès à des ressources non trouvées" }
-  },
-  "cards": {
-    "cancel": "Annuler",
-    "save": "Sauvegarder"
   },
   "enums": {
     "unknown": "Inconnu...",
@@ -67,39 +26,5 @@
     "emailAddress": "Ce champ doit correspondre à une adresse email valide.",
     "minValue": "Ce champ doit être supérieur à {min}.",
     "maxValue": "Ce champ doit être inférieur à {max}."
-  },
-  "pages": {
-    "forbidden": {
-      "title": "Oups, erreur 403",
-      "description": "Vous n'avez pas suffisamment de droits pour accéder à cette page.",
-      "buttonText": "Sortez-moi de là !"
-    },
-    "notFound": {
-      "title": "Oups, erreur 404",
-      "description": "La page que vous cherchez n'existe pas.",
-      "buttonText": "Sortez-moi de là !"
-    },
-    "privacy": {
-      "title": "Confidentialité",
-      "header11": "Stockage et suppression",
-      "text11": "Des données personnelles sont stockées dans une base de données, sur le serveur d'installation de {name}. La localisation physique du serveur détermine le cadre réglementatire applicable à ces données personnelles. Les informations enregistrées dans la base de données sont liées par des clés uniques : la modification de ces informations, y compris le nom du compte, ne compromet pas l'intégrité des données ni leur confidentialité.",
-      "header21": "Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés",
-      "text21": "La loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés est applicable aux données personnelles traitées par {name}. Le texte en application est consultable sur le site legifrance.gouv.fr.",
-      "header22": "Traitement général des données",
-      "text22": "La collecte de vos données personnelles est justifiée par le fonctionnement de l'application {name}. {name} vous apporte un certain nombre de services, tels que proposés dès la page d'accueil de l'application. La plupart des données collectées sont directement liées au traitement des fonctionnalités associées à ces besoins. Ces données sont stockées dès que vous commencez à utiliser l'application. Les informations de connexion, de navigation et d'erreur nous fournissent des moyens d'effectuer une analyse statistique de l'utilisation et du fonctionnement de {name}.",
-      "header23": "Public visé",
-      "text23": "Seuls les utilisateurs enregistrés dans {name} sont concernés par la collecte de données personnelles : toutes les données collectées sont associées à un compte d'utilisateur enregistré.",
-      "header24": "Destinataire des données",
-      "text24": "Aucune donnée personnelle n'est transmise à, ni utilisée par un tiers. Chaque utilisateur enregistré (disposant d'un compte utilisateur personnel) peut également accéder à ses propres informations. Un utilisateur anonyme ne peut pas accéder aux informations des autres utilisateurs.",
-      "header25": "Supervision du traitement des données",
-      "text25": "Vos données personnelles sont traitées par {name} sous la supervision de {contact}. Le stockage et le transfert de vos données personnelles se font sous la supervision du site fournissant le serveur sur lequel {name} est installé et le moyen de transfert de données.",
-      "header26": "Durée de conservation",
-      "text26": "Vos données personnelles sont conservées tant que votre compte utilisateur existe sur {name}. Vos données personnelles sont effacées lorsque votre compte d'utilisateur est supprimé ou lorsque {name} est désinstallé du serveur. Certaines données personnelles peuvent être supprimées manuellement par l'action de l'utilisateur.",
-      "header27": "Accès aux données",
-      "text27": "Chaque utilisateur de {name} a le droit d’accéder, de modifier, de corriger ou de supprimer ses données personnelles.",
-      "header28": "Opposition au traitement des données",
-      "text28": "La suppression de votre compte utilisateur vous donne la pleine capacité de vous opposer au traitement par {name} de vos données personnelles. Vous pouvez également demander à la personne qui supervise le traitement des données par {name} de procéder à la suppression de votre compte utilisateur. Vous pouvez vous opposer à certains traitements spécifiques de vos données via les options de configuration disponibles dans vos paramètres utilisateur.",
-      "cookiesAccepted": "Consentement aux cookies : {accepted}"
-    }
   }
 }

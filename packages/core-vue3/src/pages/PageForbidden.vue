@@ -5,17 +5,17 @@
       class="h-100">
       <v-col class="text-center">
         <h1 class="text-h3 text-primary mb-4">
-          {{ t('pages.forbidden.title') }}
+          {{ t('title') }}
         </h1>
         <p class="mb-4">
-          {{ t('pages.forbidden.description') }}
+          {{ t('description') }}
         </p>
         <v-btn
           :disabled="loading"
           :to="{ name: 'Home' }"
           variant="outlined"
           color="primary">
-          {{ t('pages.forbidden.buttonText') }}
+          {{ t('buttonText') }}
         </v-btn>
       </v-col>
     </v-row>
@@ -31,3 +31,18 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>
+
+<i18n>
+  {
+    "en": {
+      "title": "Whoops, 403",
+      "description": "You don't have enough privileges to access this page.",
+      "buttonText": "Get me out of here!"
+    },
+    "fr": {
+      "title": "Oups, erreur 403",
+      "description": "Vous n'avez pas suffisamment de droits pour accéder à cette page.",
+      "buttonText": "Sortez-moi de là !"
+    }
+  }
+</i18n>

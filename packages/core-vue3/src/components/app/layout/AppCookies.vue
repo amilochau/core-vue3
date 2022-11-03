@@ -7,26 +7,26 @@
     <v-icon
       color="white"
       :icon="mdiCookie" />
-    <span class="mx-4 nowrap cookies-title">{{ t('app.cookies.title') }}</span>
+    <span class="mx-4 nowrap cookies-title">{{ t('title') }}</span>
     <template #extension>
       <v-spacer />
       <v-btn
         class="bg-info mr-1"
         variant="text"
         :to="{ name: 'Privacy' }">
-        {{ t('app.cookies.read') }}
+        {{ t('read') }}
       </v-btn>
       <v-btn
         class="bg-success mr-1"
         variant="text"
         @click="cookiesStore.acceptCookies">
-        {{ t('app.cookies.accept') }}
+        {{ t('accept') }}
       </v-btn>
       <v-btn
         class="bg-error mr-1"
         variant="text"
         @click="cookiesStore.refuseCookies">
-        {{ t('app.cookies.refuse') }}
+        {{ t('refuse') }}
       </v-btn>
     </template>
   </v-toolbar>
@@ -51,3 +51,20 @@ const cookiesStore = useCookiesStore()
 .cookies-title
   line-height: 1.2
 </style>
+
+<i18n>
+  {
+    "en": {
+      "title": "This website uses cookies to work.",
+      "read": "Read",
+      "accept": "Accept",
+      "refuse": "Refuse"
+    },
+    "fr": {
+      "title": "Ce site utilise des cookies pour fonctionner.",
+      "read": "Lire",
+      "accept": "Accepter",
+      "refuse": "Refuser"
+    }
+  }
+</i18n>

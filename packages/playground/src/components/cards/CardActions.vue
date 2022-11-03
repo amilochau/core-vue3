@@ -46,8 +46,21 @@ const emits = defineEmits<{
   (eventName: 'save'): void
 }>()
 
-const cancelTitleOrDefault = computed(() => props.cancelTitle ?? t('cards.cancel'))
+const cancelTitleOrDefault = computed(() => props.cancelTitle ?? t('cancel'))
 const cancelIconOrDefault = computed(() => props.cancelIcon ?? undefined)
-const saveTitleOrDefault = computed(() => props.saveTitle ?? t('cards.save'))
+const saveTitleOrDefault = computed(() => props.saveTitle ?? t('save'))
 const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil)
 </script>
+
+<i18n>
+  {
+    "en": {
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "fr": {
+      "cancel": "Annuler",
+      "save": "Sauvegarder"
+    }
+  }
+</i18n>
