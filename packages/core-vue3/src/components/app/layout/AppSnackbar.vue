@@ -29,7 +29,7 @@
             variant="text"
             class="h-100"
             @click="display = false">
-            {{ t('app.snackbar.close') }}
+            {{ t('close') }}
           </v-btn>
         </div>
       </v-col>
@@ -61,3 +61,14 @@ watch(message, () => {
   display.value = true
 }, { deep: true })
 </script>
+
+<i18n>
+  {
+    "en": {
+      "close": "Close"
+    },
+    "fr": {
+      "close": "Fermer"
+    }
+  }
+</i18n>

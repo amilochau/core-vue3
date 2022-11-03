@@ -9,7 +9,7 @@
             v-bind="mergeProps(menu, tooltip)"
             :icon="mdiCog" />
         </template>
-        <span>{{ t('app.header.settings.title') }}</span>
+        <span>{{ t('title') }}</span>
       </v-tooltip>
     </template>
     <v-card min-width="240px">
@@ -17,7 +17,7 @@
         density="comfortable"
         item-props
         nav>
-        <v-list-subheader :title="t('app.header.settings.languages.title')" />
+        <v-list-subheader :title="t('languages.title')" />
         <v-list-item
           v-for="(item, i) in languageItems"
           :key="i"
@@ -25,9 +25,9 @@
           :prepend-avatar="item.prependAvatar"
           @click="item.onClick" />
         <v-divider />
-        <v-list-subheader :title="t('app.header.settings.display.title')" />
+        <v-list-subheader :title="t('display.title')" />
         <v-list-item
-          :title="t('app.header.settings.display.darkMode')"
+          :title="t('display.darkMode')"
           @click="themeStore.darkMode = !themeStore.darkMode">
           <template #prepend>
             <v-list-item-action start>
@@ -52,11 +52,40 @@ const router = useRouter()
 const themeStore = useThemeStore()
 
 const languageItems = [
-  { title: t('app.header.settings.languages.english'), onClick: () => onClick('en'), prependAvatar: '/img/us/24.png', lang: 'en' },
-  { title: t('app.header.settings.languages.french'), onClick: () => onClick('fr'), prependAvatar: '/img/fr/24.png', lang: 'fr' }
+  { title: t('languages.english'), onClick: () => onClick('en'), prependAvatar: '/img/us/24.png', lang: 'en' },
+  { title: t('languages.french'), onClick: () => onClick('fr'), prependAvatar: '/img/fr/24.png', lang: 'fr' }
 ]
 
 function onClick(lang: string) {
   router.replace({ params: { lang }})
 }
 </script>
+
+<i18n>
+  {
+    "en": {
+      "title": "Settings",
+      "languages": {
+        "title": "Languages",
+        "english": "English",
+        "french": "French"
+      },
+      "display": {
+        "title": "Display",
+        "darkMode": "Dark mode"
+      }
+    },
+    "fr": {
+      "title": "Paramètres",
+      "languages": {
+        "title": "Langues",
+        "english": "English",
+        "french": "Français"
+      },
+      "display": {
+        "title": "Affichage",
+        "darkMode": "Mode sombre"
+      }
+    }
+  }
+</i18n>

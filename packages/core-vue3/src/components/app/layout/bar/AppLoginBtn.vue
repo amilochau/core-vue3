@@ -6,7 +6,7 @@
         :icon="mdiPower"
         @click="login" />
     </template>
-    <span>{{ t('app.header.login.title') }}</span>
+    <span>{{ t('title') }}</span>
   </v-tooltip>
 </template>
 
@@ -18,3 +18,14 @@ import { useMsal } from '../../../../composition';
 const { t } = useI18n()
 const { login } = useMsal()
 </script>
+
+<i18n>
+  {
+    "en": {
+      "title": "Login"
+    },
+    "fr": {
+      "title": "Connexion"
+    }
+  }
+</i18n>

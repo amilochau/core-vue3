@@ -5,17 +5,17 @@
       class="h-100">
       <v-col class="text-center">
         <h1 class="text-h3 text-primary mb-4">
-          {{ t('pages.notFound.title') }}
+          {{ t('title') }}
         </h1>
         <p class="mb-4">
-          {{ t('pages.notFound.description') }}
+          {{ t('description') }}
         </p>
         <v-btn
           :disabled="loading"
           :to="{ name: 'Home' }"
           variant="outlined"
           color="primary">
-          {{ t('pages.notFound.buttonText') }}
+          {{ t('buttonText') }}
         </v-btn>
       </v-col>
     </v-row>
@@ -31,3 +31,18 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>
+
+<i18n>
+  {
+    "en": {
+      "title": "Whoops, 404",
+      "description": "The page you were looking for does not exist.",
+      "buttonText": "Get me out of here!"
+    },
+    "fr": {
+      "title": "Oups, erreur 404",
+      "description": "La page que vous cherchez n'existe pas.",
+      "buttonText": "Sortez-moi de là !"
+    }
+  }
+</i18n>

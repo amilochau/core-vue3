@@ -8,7 +8,7 @@
             v-bind="mergeProps(menu, tooltip)"
             :icon="mdiAccountCircle" />
         </template>
-        <span>{{ t('app.header.profile.title') }}</span>
+        <span>{{ t('title') }}</span>
       </v-tooltip>
     </template>
     <v-card min-width="240px">
@@ -39,7 +39,22 @@ const cleanAndLogout = () => {
 const menuItems = [
   { title: accountInfo.value.name, subtitle: accountInfo.value.email, prependIcon: mdiFaceMan },
   { type: 'divider' },
-  { title: t('app.header.profile.edit'), prependIcon: mdiCardAccountMail, onClick: editProfile },
-  { title: t('app.header.profile.logout'), prependIcon: mdiPower, onClick: cleanAndLogout }
+  { title: t('edit'), prependIcon: mdiCardAccountMail, onClick: editProfile },
+  { title: t('logout'), prependIcon: mdiPower, onClick: cleanAndLogout }
 ]
 </script>
+
+<i18n>
+  {
+    "en": {
+      "title": "Profile",
+      "edit": "Manage your account",
+      "logout": "Logout"
+    },
+    "fr": {
+      "title": "Profil",
+      "edit": "Gérer votre compte",
+      "logout": "Déconnexion"
+    }
+  }
+</i18n>

@@ -2,7 +2,7 @@
   <v-progress-linear
     :active="display"
     indeterminate
-    :aria-label="t('app.progressbar.label')"
+    :aria-label="t('label')"
     class="progress-bar mt-0 mb-0 d-print-none" />
 </template>
 
@@ -41,3 +41,14 @@ watch(loading, () => {
   position: absolute !important
   z-index: 9
 </style>
+
+<i18n>
+  {
+    "en": {
+      "label": "Progress"
+    },
+    "fr": {
+      "label": "Progression"
+    }
+  }
+</i18n>
