@@ -54,10 +54,10 @@ import AppSectionSubHeader from '../components/app/section/AppSectionSubHeader.v
 import AppSectionText from '../components/app/section/AppSectionText.vue'
 import { useI18n } from 'vue-i18n';
 import { useCookiesStore } from '../stores';
-import { useCoreOptions } from '../composition';
+import { useCoreOptions, usePage } from '../composition';
 
+usePage()
 const { t } = useI18n()
-
 const coreOptions = useCoreOptions()
 const cookiesStore = useCookiesStore()
 </script>
@@ -67,7 +67,19 @@ const cookiesStore = useCookiesStore()
   margin-bottom: 120px
 </style>
 
-<i18n>
+<i18n lang="json">
+  {
+    "en": {
+      "pageTitle": "Privacy",
+      "pageDescription": "Privacy page"
+    },
+    "fr": {
+      "pageTitle": "Confidentialité",
+      "pageDescription": "Page de confidentialité"
+    }
+  }
+</i18n>
+<i18n lang="json">
   {
     "en": {
       "title": "Privacy",

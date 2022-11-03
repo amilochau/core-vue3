@@ -20,7 +20,7 @@ const { t } = useI18n()
 const online = useOnline()
 </script>
 
-<i18n>
+<i18n lang="json">
   {
     "en": {
       "title": "You lost your Internet connection..."

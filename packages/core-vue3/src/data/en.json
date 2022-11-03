@@ -7,11 +7,6 @@
       "networkError": "Network error: check your connection"
     }
   },
-  "meta": {
-    "Privacy": { "title": "Privacy", "description": "Privacy page" },
-    "Forbidden": { "title": "Forbidden", "description": "Page for access to forbidden resources" },
-    "NotFound": { "title": "Not found", "description": "Page for access to not found resources" }
-  },
   "enums": {
     "unknown": "Unknown...",
     "cultureTypes": {

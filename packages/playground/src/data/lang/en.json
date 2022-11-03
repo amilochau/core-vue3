@@ -9,19 +9,5 @@
       "home": "Home",
       "privacy": "Privacy"
     }
-  },
-  "meta": {
-    "Home": { "title": "Playground", "description": "Playground page" }
-  },
-  "pages": {
-    "home": {
-      "welcome": {
-        "title": "Welcome!"
-      },
-      "login": {
-        "title": "Login in to use services.",
-        "button": "Login"
-      }
-    }
   }
 }

@@ -25,14 +25,28 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
+import { usePage } from '../composition';
 import { useAppStore } from '../stores';
 
+usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>
 
-<i18n>
+<i18n lang="json">
+  {
+    "en": {
+      "pageTitle": "Not found",
+      "pageDescription": "Page for access to not found resources"
+    },
+    "fr": {
+      "pageTitle": "Non trouvé",
+      "pageDescription": "Page pour accès à des ressources non trouvées"
+    }
+  }
+</i18n>
+<i18n lang="json">
   {
     "en": {
       "title": "Whoops, 403",

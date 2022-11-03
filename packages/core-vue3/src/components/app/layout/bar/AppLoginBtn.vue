@@ -19,7 +19,7 @@ const { t } = useI18n()
 const { login } = useMsal()
 </script>
 
-<i18n>
+<i18n lang="json">
   {
     "en": {
       "title": "Login"
