@@ -18,6 +18,14 @@
         </v-btn>
 
         <v-select />
+        <v-btn
+          :disabled="loading || !online"
+          color="primary"
+          @click="openDialog">
+          Open dialog
+        </v-btn>
+
+        <dialog-test v-model="dialog" />
       </v-col>
     </v-row>
   </v-container>
@@ -29,12 +37,21 @@ import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useIsAuthenticated } from '@amilochau/core-vue3';
+import { useAppStore, useIsAuthenticated } from '@amilochau/core-vue3';
+import DialogTest from '../components/dialogs/DialogTest.vue';
+import { ref } from 'vue';
+import { useOnline } from '@vueuse/core';
+import { storeToRefs } from 'pinia';
 
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
-
 const isAuthenticated = useIsAuthenticated();
+const appStore = useAppStore()
+const online = useOnline()
+
+const { loading } = storeToRefs(appStore)
+
+const dialog = ref(false)
 
 const fetchMaps = () => {
   mapsApi.get()
@@ -46,5 +63,9 @@ const createMarker = () => {
 
 const editMarker = () => {
   mapsApi.editMarker("8a3f6eabfcc3400aba1adeabe071b8e2", "f3b9c83d0bf94cc098bfe92007add022")
+}
+
+function openDialog() {
+  dialog.value = true
 }
 </script>
