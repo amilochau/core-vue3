@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Core plugin for vue.js (v3) projects",
   "author": "Antoine Milochau",
   "license": "MIT",
@@ -39,7 +39,6 @@
     "@vueuse/core": "^9.4.0",
     "@vueuse/head": "^0.9.8",
     "deepmerge": "^4.2.2",
-    "moment": "^2.29.4",
     "pinia": "^2.0.23",
     "roboto-fontface": "^0.10.0",
     "sass": "^1.55.0",
