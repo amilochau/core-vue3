@@ -12,7 +12,9 @@ export default defineConfig({
   plugins: [
     vue(),
     vuetify(),
-    vueI18n(),
+    vueI18n({
+      fullInstall: false
+    }),
     ViteFonts({
       google: {
         families: [{

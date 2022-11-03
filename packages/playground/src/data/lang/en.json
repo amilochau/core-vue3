@@ -6,7 +6,8 @@
       }
     },
     "navigation": {
-      "home": "Home"
+      "home": "Home",
+      "privacy": "Privacy"
     }
   },
   "meta": {

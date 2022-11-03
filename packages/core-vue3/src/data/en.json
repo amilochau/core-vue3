@@ -37,9 +37,6 @@
         "title": "Login"
       }
     },
-    "navigation": {
-      "privacy": "Privacy"
-    },
     "errors": {
       "notAuthorized": "Not authorized",
       "notFound": "Not found",

@@ -37,9 +37,6 @@
         "title": "Connexion"
       }
     },
-    "navigation": {
-      "privacy": "Confidentialité"
-    },
     "errors": {
       "notAuthorized": "Non autorisé",
       "notFound": "Inconnu",
