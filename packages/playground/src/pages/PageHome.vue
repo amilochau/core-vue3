@@ -16,6 +16,7 @@
         <v-btn @click="editMarker">
           Edit marker
         </v-btn>
+        <p>Date: {{ d(stringDate) }}</p>
 
         <v-select />
         <v-btn
@@ -42,7 +43,9 @@ import DialogTest from '../components/dialogs/DialogTest.vue';
 import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
+import { useI18n } from 'vue-i18n';
 
+const { d } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
 const isAuthenticated = useIsAuthenticated();
@@ -52,6 +55,8 @@ const online = useOnline()
 const { loading } = storeToRefs(appStore)
 
 const dialog = ref(false)
+
+const stringDate = '2022-09-01'
 
 const fetchMaps = () => {
   mapsApi.get()

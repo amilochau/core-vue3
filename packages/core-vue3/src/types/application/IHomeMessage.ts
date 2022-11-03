@@ -3,7 +3,7 @@ export type IHomeMessage = {
   message?: string;
   icon?: string;
   color?: string;
-  border?: string;
+  border?: "top" | "bottom" | "start" | "end";
   prominent: boolean;
   variant?: "text" | "outlined" | "plain" | "elevated" | "flat" | "tonal" | undefined
 }
