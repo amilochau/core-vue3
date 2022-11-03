@@ -42,7 +42,7 @@ watch(loading, () => {
   z-index: 9
 </style>
 
-<i18n>
+<i18n lang="json">
   {
     "en": {
       "label": "Progress"

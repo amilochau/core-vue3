@@ -25,14 +25,28 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
+import { usePage } from '../composition';
 import { useAppStore } from '../stores';
 
+usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>
 
-<i18n>
+<i18n lang="json">
+  {
+    "en": {
+      "pageTitle": "Forbidden",
+      "pageDescription": "Page for access to forbidden resources"
+    },
+    "fr": {
+      "pageTitle": "Interdit",
+      "pageDescription": "Page pour accès à des ressources interdites"
+    }
+  }
+</i18n>
+<i18n lang="json">
   {
     "en": {
       "title": "Whoops, 404",

@@ -7,11 +7,6 @@
       "networkError": "Erreur réseau : vérifiez votre connexion"
     }
   },
-  "meta": {
-    "Privacy": { "title": "Confidentialité", "description": "Page de confidentialité" },
-    "Forbidden": { "title": "Interdit", "description": "Page pour accès à des ressources interdites" },
-    "NotFound": { "title": "Non trouvé", "description": "Page pour accès à des ressources non trouvées" }
-  },
   "enums": {
     "unknown": "Inconnu...",
     "cultureTypes": {

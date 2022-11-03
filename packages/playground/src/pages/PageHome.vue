@@ -38,13 +38,14 @@ import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useAppStore, useIsAuthenticated } from '@amilochau/core-vue3';
+import { useAppStore, useIsAuthenticated, usePage } from '@amilochau/core-vue3';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 
+usePage()
 const { d } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
@@ -74,3 +75,16 @@ function openDialog() {
   dialog.value = true
 }
 </script>
+
+<i18n lang="json">
+  {
+    "en": {
+      "pageTitle": "Playground",
+      "pageDescription": "Playground page"
+    },
+    "fr": {
+      "pageTitle": "Test",
+      "pageDescription": "Page de test"
+    }
+  }
+</i18n>

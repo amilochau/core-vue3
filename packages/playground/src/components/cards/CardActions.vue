@@ -52,7 +52,7 @@ const saveTitleOrDefault = computed(() => props.saveTitle ?? t('save'))
 const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil)
 </script>
 
-<i18n>
+<i18n lang="json">
   {
     "en": {
       "cancel": "Cancel",

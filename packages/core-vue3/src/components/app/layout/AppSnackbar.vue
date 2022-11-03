@@ -62,7 +62,7 @@ watch(message, () => {
 }, { deep: true })
 </script>
 
-<i18n>
+<i18n lang="json">
   {
     "en": {
       "close": "Close"

@@ -52,7 +52,7 @@ const cookiesStore = useCookiesStore()
   line-height: 1.2
 </style>
 
-<i18n>
+<i18n lang="json">
   {
     "en": {
       "title": "This website uses cookies to work.",

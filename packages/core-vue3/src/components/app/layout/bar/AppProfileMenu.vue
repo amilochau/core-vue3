@@ -44,7 +44,7 @@ const menuItems = [
 ]
 </script>
 
-<i18n>
+<i18n lang="json">
   {
     "en": {
       "title": "Profile",

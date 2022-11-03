@@ -1,6 +1,6 @@
 <template>
   <h2 class="mb-2 text-h6">
-    {{ t("pages.home.login.title") }}
+    {{ t("title") }}
   </h2>
   <v-btn
     :disabled="loading"
@@ -8,7 +8,7 @@
     color="primary"
     large
     @click="login">
-    {{ t("pages.home.login.button") }}
+    {{ t("button") }}
   </v-btn>
 </template>
 
@@ -22,3 +22,16 @@ const { login } = useMsal()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>
+
+<i18n lang="json">
+  {
+    "en": {
+      "title": "Login in to use services.",
+      "button": "Login"
+    },
+    "fr": {
+      "title": "Connectez-vous pour utiliser les services.",
+      "button": "Se connecter"
+    }
+  }
+</i18n>

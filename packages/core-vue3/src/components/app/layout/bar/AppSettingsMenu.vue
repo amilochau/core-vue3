@@ -61,7 +61,7 @@ function onClick(lang: string) {
 }
 </script>
 
-<i18n>
+<i18n lang="json">
   {
     "en": {
       "title": "Settings",
