@@ -9,6 +9,12 @@ import { CustomNavigationClient } from './navigation-client'
 import merge from 'deepmerge'
 import { useLanguageStore } from '../../stores'
 
+declare module 'vue-router' {
+  interface RouteMeta {
+    requiresAuth?: boolean
+  }
+}
+
 export default {
   install: (app: App, msalInstance: PublicClientApplication, options: MilochauCoreOptions) => {
     const languageStore = useLanguageStore()
