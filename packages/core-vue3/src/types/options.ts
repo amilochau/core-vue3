@@ -1,10 +1,11 @@
+import { Ref } from "vue"
 import { Router, RouteRecordRaw } from "vue-router"
 
 export type MilochauCoreOptions = {
   application: {
     name: string,
     contact: string,
-    navigation: (t: any) => any[],
+    navigation: Ref<any[]>,
     onAppBarTitleClick?: (router: Router) => void
   },
   api: {
