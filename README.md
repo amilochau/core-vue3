@@ -13,7 +13,6 @@ The following plugins are installed by `@amilochau/core-vue3`:
 
 The following libraries are used, and are defined as dependencies:
 - `@mdi/js` for icons
-- `moment` for dates
 - `webfontloader` with Roboto fontface
 - `@vueuse/core` and `@vueuse/head` as vue helpers
 
@@ -37,15 +36,17 @@ Create a dedicated file (typically `milochau-core.ts` in your `src/plugins` fold
 
 ```typescript
 import { createMilochauCore } from '@amilochau/core-vue3'
+import { ref } from 'vue'
 
 // Create and export options
 export const coreOptions: MilochauCoreOptions = {
   application: {
     name: 'YOU APPLICATION NAME',
     contact: 'YOUR APPLICATION OWNER',
-    navigation: (t) => [
+    navigation: ref([
       // YOUR APPLICATION NAVIGATION LINKS
-    ]
+    ]),
+    onAppBarTitleClick: router => router.push({ name: 'YOUR HOME PAGE NAME' })
   },
   api: {
     gatewayUri: 'YOUR API BASE URI'
@@ -116,16 +117,17 @@ Here are the helpers you can use from your code.
 | `useApi` | Sends HTTP requests to the API gateway configured via `api.gatewayUri` ; manages HTTP errors |
 | `useClean` | Cleans data from storage, typically on logout, as configured via `clean` |
 | `useCoreOptions` | Lets you get the core options defined on plugin registration |
-| `useMsal` | Gets MSAL current instance, user account info, and user account functions |
 | `useIsAuthenticated` | Lets you know if the current user is authenticated via MSAL |
-| `useMsalAuthenticated` | Lets you acquire token from MSAL to send requests |
+| `useMsal` | Gets MSAL current instance, user account info, and user account functions |
+| `useMsalAuthentication` | Lets you acquire token from MSAL to send requests |
+| `usePage` | Lets you define page metadata |
 | `useValidationRules` | Lets you use pre-defined validation rules on plain data |
 
 Here are the `pinia` stores you can use from your code.
 
 | Store name | Helper | Description |
 | ---------- | ------ | ----------- |
-| `app` | `useAppStore` | Lets you display messages in a snackbar, and add meta args to be used in page title and description |
+| `app` | `useAppStore` | Lets you display messages in a snackbar |
 | `cookies` | `useCookiesStore` | Lets you known if the current user has accepted cookies |
 | `language` | `useLanguageStore` | Lets you know the current language configured for the UI |
 | `theme` | `useThemeStore` | Lets you know the current theme configured for the UI |
@@ -139,6 +141,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `application.name` | Name of the application, as used in the page title, page description, and policy page |
 | `application.contact` | Application owner, as used in the policy page |
 | `application.navigation` | Navigation links, as `vuetify` list items, used in the navigation drawer |
+| `application.onAppBarTitleClick` | Action to run when the user clicks on the title from the app bar |
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
 | `messages` | Messages used by `vue-i18n` |
 | `identity.authorities.register_login` | Authority URI used to authenticate users and get tokens for API requests |
