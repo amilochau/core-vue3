@@ -13,11 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
 import { useCoreOptions } from '../../../composition';
 import { useAppStore } from '../../../stores'
 
-const { t } = useI18n()
 var appStore = useAppStore()
 const coreOptions = useCoreOptions()
 
