@@ -21,5 +21,5 @@ const { t } = useI18n()
 var appStore = useAppStore()
 const coreOptions = useCoreOptions()
 
-const menuItems = coreOptions.application.navigation(t)
+const menuItems = coreOptions.application.navigation
 </script>
