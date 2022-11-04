@@ -13,7 +13,8 @@ export default defineConfig({
     vue(),
     vuetify(),
     vueI18n({
-      fullInstall: false
+      fullInstall: false,
+      globalSFCScope: true
     }),
     ViteFonts({
       google: {
