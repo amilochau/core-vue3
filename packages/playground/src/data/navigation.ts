@@ -7,7 +7,7 @@ export default computed(() => {
   const { t } = useI18n()
 
   return [
-    { title: t('app.navigation.home'), prependIcon: mdiHome, to: { name: 'Home' } },
+    { title: t('app.navigation.home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
     { type: 'divider' },
     { title: t('app.navigation.privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
   ]
