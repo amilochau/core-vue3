@@ -151,8 +151,6 @@ export function useMsalAuthentication(interactionType: InteractionType, request:
       }
   });
 
-  acquireToken();
-  
   return {
       acquireToken,
       result,
