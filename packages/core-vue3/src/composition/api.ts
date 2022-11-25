@@ -4,7 +4,8 @@ import { useRouter } from "vue-router"
 import { useAppStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
 import { IHttpSettings, IProblemDetails } from "../types/http"
-import { useMsal } from "./msal"
+import { AuthPolicy } from "../types/http/IHttpSettings"
+import { useIsAuthenticated, useMsal } from "./msal"
 import { useCoreOptions } from "./options"
 
 export function useApi(relativeBaseUri: string) {
@@ -12,10 +13,11 @@ export function useApi(relativeBaseUri: string) {
   const appStore = useAppStore()
   const languageStore = useLanguageStore()
   const msal = useMsal()
+  const isAuthenticated = useIsAuthenticated()
   const router = useRouter();
   const coreOptions = useCoreOptions()
   const baseUri = `${coreOptions.api.gatewayUri}${relativeBaseUri}`
-  
+
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
     switch (response.status) {
       case 401:
@@ -65,7 +67,7 @@ export function useApi(relativeBaseUri: string) {
         return new ApplicationMessage(applicationError, 'error', mdiAlert, undefined, undefined, true)
       }
     }
-    
+
     return new ApplicationMessage('app.errors.serverError', 'error', mdiAlert)
   }
 
@@ -99,7 +101,9 @@ export function useApi(relativeBaseUri: string) {
       // Get bearer token for API
       var accessToken = '';
 
-      if (router.currentRoute.value.meta.anonymousRequests) {
+      if (router.currentRoute.value.meta.anonymousRequests
+        || settings.authPolicy === AuthPolicy.SendRequestsAsAnonymous
+        || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated) {
         // The user is not logged in but we don't mind
       } else {
         const authResponse = await msal.instance.acquireTokenSilent({
@@ -127,7 +131,7 @@ export function useApi(relativeBaseUri: string) {
     if (!response.ok) {
       const errorMessage = await analyzeResponse(response, settings)
       if (settings.errors) { appStore.displayMessage(errorMessage) }
-      throw errorMessage; 
+      throw errorMessage;
     }
 
     return response
