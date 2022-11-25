@@ -18,14 +18,8 @@ declare module 'vue-router' {
 export default {
   install: (app: App, msalInstance: PublicClientApplication, options: MilochauCoreOptions) => {
     const languageStore = useLanguageStore()
-    
+
     const routesWithRedirection: Array<RouteRecordRaw> = [
-      {
-        path: '/',
-        redirect: () => {
-          return { path: `/${languageStore.language}` }
-        }
-      },
       {
         path: '/:lang([a-z]{2})',
         component: PageRoot,
