@@ -23,6 +23,5 @@ export default {
     app.use(i18n)
 
     return i18n
-
   }
 }
