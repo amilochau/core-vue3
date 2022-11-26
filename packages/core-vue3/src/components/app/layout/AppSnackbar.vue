@@ -15,7 +15,7 @@
         <v-icon>{{ message.icon }}</v-icon>
       </v-col>
       <v-col class="py-0 flex-grow-1">
-        <span style="white-space: pre-wrap">{{ message.disableTranslation ? message.title : t(message.title) }}</span>
+        <span style="white-space: pre-wrap">{{ message.title }}</span>
       </v-col>
       <v-col class="py-0 d-flex flex-grow-0">
         <v-btn
@@ -36,7 +36,7 @@
       <v-col
         v-if="expanded && message.details"
         cols="12">
-        <span style="white-space: pre-wrap">{{ message.disableTranslation ? message.details : t(message.details) }}</span>
+        <span style="white-space: pre-wrap">{{ message.details }}</span>
       </v-col>
     </v-row>
   </v-snackbar>

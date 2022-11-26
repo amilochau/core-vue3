@@ -50,9 +50,11 @@ import { Ref, ref, watch } from "vue";
 import { MapsCreateRequest } from "../../types/maps";
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
 import CardActions from '../cards/CardActions.vue';
-import { ApplicationMessage, useAppStore, useValidationRules } from "@amilochau/core-vue3";
+import { useAppStore, useValidationRules } from "@amilochau/core-vue3";
 import { useDisplay } from "vuetify";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const appStore = useAppStore()
 const { required, minLength } = useValidationRules()
 const { xs } = useDisplay()
@@ -76,7 +78,7 @@ async function save() {
     return;
   }
 
-  appStore.displayMessage( new ApplicationMessage('Test message', 'info', mdiAbacus, undefined, undefined, true))
+  appStore.displayInfoMessage(t('testMessage'))
 }
 
 watch(() => props.modelValue, () => props.modelValue ? open() : close())
@@ -93,3 +95,16 @@ function initMap() {
   request.value = new MapsCreateRequest();
 }
 </script>
+
+<i18n lang="json">
+  {
+    "en": {
+      "close": "Close",
+      "testMessage": "Test message"
+    },
+    "fr": {
+      "close": "Fermer",
+      "testMessage": "Test message"
+    }
+  }
+</i18n>
