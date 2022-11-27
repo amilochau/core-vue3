@@ -26,6 +26,8 @@
           Open dialog
         </v-btn>
 
+        <p>{{ formatContactStatus(ContactStatus.InProgress).text }}</p>
+
         <dialog-test v-model="dialog" />
       </v-col>
     </v-row>
@@ -44,6 +46,8 @@ import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
+import { useFormat } from '../composition/format';
+import { ContactStatus } from '../types/contacts'
 
 usePage()
 const { d } = useI18n()
@@ -52,6 +56,7 @@ const mapsApi = useMapsApi()
 const isAuthenticated = useIsAuthenticated();
 const appStore = useAppStore()
 const online = useOnline()
+const { formatContactStatus } = useFormat()
 
 const { loading } = storeToRefs(appStore)
 

@@ -1,4 +1,5 @@
 import { Ref } from "vue"
+import { I18nOptions } from "vue-i18n"
 import { Router, RouteRecordRaw } from "vue-router"
 
 export type MilochauCoreOptions = {
@@ -11,7 +12,7 @@ export type MilochauCoreOptions = {
   api: {
     gatewayUri: string
   },
-  messages: {}
+  i18n: I18nOptions,
   identity: {
     authorities: {
       register_login: string,

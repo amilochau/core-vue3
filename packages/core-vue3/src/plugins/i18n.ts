@@ -3,22 +3,21 @@ import { createI18n } from "vue-i18n";
 import merge from 'deepmerge'
 
 import { MilochauCoreOptions } from "../types/options";
-import en from '../data/en.json'
-import fr from '../data/fr.json'
 
 export default {
   install: (app: App, options: MilochauCoreOptions) => {
 
-    const i18n = createI18n({
-      locale: 'en',
-      fallbackLocale: 'en',
-      messages: merge({
-          en,
-          fr
+    const i18n = createI18n(
+      merge({
+        locale: 'en',
+        fallbackLocale: 'en',
+        messages: {
+          en: {},
+          fr: {}
         },
-        options.messages),
-      legacy: false
-    })
+        legacy: false,
+
+      }, options.i18n))
 
     app.use(i18n)
 
