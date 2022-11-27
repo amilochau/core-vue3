@@ -1,6 +1,7 @@
 import { App, reactive } from 'vue'
 import { EventMessage, EventMessageUtils, EventType, InteractionStatus, PublicClientApplication, AccountInfo, Configuration, LogLevel, AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
 import { MilochauCoreOptions } from '../types/options'
+import merge from 'deepmerge'
 
 type AccountIdentifiers = Partial<Pick<AccountInfo, "homeAccountId" | "localAccountId" | "username">>;
 
