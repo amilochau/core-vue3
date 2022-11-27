@@ -4,10 +4,6 @@
       "bar": {
         "title": "Example core-vue3"
       }
-    },
-    "navigation": {
-      "home": "Accueil",
-      "privacy": "Confidentialité"
     }
   }
 }

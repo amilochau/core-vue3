@@ -4,10 +4,6 @@
       "bar": {
         "title": "core-vue3 playground"
       }
-    },
-    "navigation": {
-      "home": "Home",
-      "privacy": "Privacy"
     }
   }
 }
