@@ -14,18 +14,18 @@ export function useFormat() {
   mergeLocaleMessage('en', {
     format: {
       contactStatuses: {
-        new: "NewLL",
-        inProgress: "InProgressLL",
-        closed: "ClosedLL"
+        new: "New",
+        inProgress: "In progress",
+        closed: "Closed"
       }
     }
   })
   mergeLocaleMessage('fr', {
     format: {
       contactStatuses: {
-        new: "NewFR",
-        inProgress: "InProgressFR",
-        closed: "ClosedFR"
+        new: "Nouveau",
+        inProgress: "En cours",
+        closed: "Fermé"
       }
     }
   })
