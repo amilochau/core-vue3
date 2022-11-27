@@ -26,7 +26,7 @@
           Open dialog
         </v-btn>
 
-        <p>{{ formatContactStatus(ContactStatus.InProgress).text }}</p>
+        <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
 
         <dialog-test v-model="dialog" />
       </v-col>

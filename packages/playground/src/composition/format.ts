@@ -2,8 +2,9 @@ import { mdiAccountClock, mdiAlertCircle, mdiArchive } from '@mdi/js'
 import { useI18n } from 'vue-i18n'
 import { ContactStatus } from '../types/contacts'
 
-export class FormatData {
-  text?: string
+export type FormattedData<TData> = {
+  value: TData
+  title: string
   icon?: string
   color?: string
 }
@@ -31,25 +32,28 @@ export function useFormat() {
   })
 
   return {
-    formatContactStatus: (status: ContactStatus): FormatData => {
+    formatContactStatus: (status: ContactStatus): FormattedData<ContactStatus> => {
       switch (status) {
         case ContactStatus.New: {
           return {
-            text: t('format.contactStatuses.new'),
+            value: ContactStatus.New,
+            title: t('format.contactStatuses.new'),
             icon: mdiAlertCircle,
             color: 'info'
           }
         }
         case ContactStatus.InProgress: {
           return {
-            text: t('format.contactStatuses.inProgress'),
+            value: ContactStatus.InProgress,
+            title: t('format.contactStatuses.inProgress'),
             icon: mdiAccountClock,
             color: 'warning'
           }
         }
         case ContactStatus.Closed: {
           return {
-            text: t('format.contactStatuses.closed'),
+            value: ContactStatus.Closed,
+            title: t('format.contactStatuses.closed'),
             icon: mdiArchive,
             color: 'success'
           }
