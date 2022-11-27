@@ -1,3 +1,4 @@
+import { BrowserAuthOptions } from "@azure/msal-browser"
 import { Ref } from "vue"
 import { I18nOptions } from "vue-i18n"
 import { Router, RouteRecordRaw } from "vue-router"
@@ -21,13 +22,7 @@ export type MilochauCoreOptions = {
     scopes: {
       use: string,
     },
-    auth: {
-      clientId: string,
-      authority: string,
-      knownAuthorities: string[],
-      redirectUri: string,
-      postLogoutRedirectUri: string,
-    },
+    auth: BrowserAuthOptions,
     loginRequest: {
       scopes: string[]
     }

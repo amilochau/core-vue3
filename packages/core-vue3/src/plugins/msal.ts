@@ -1,6 +1,7 @@
 import { App, reactive } from 'vue'
-import { EventMessage, EventMessageUtils, EventType, InteractionStatus, PublicClientApplication, AccountInfo, Configuration, LogLevel, AuthenticationResult } from "@azure/msal-browser";
+import { EventMessage, EventMessageUtils, EventType, InteractionStatus, PublicClientApplication, AccountInfo, Configuration, LogLevel, AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
 import { MilochauCoreOptions } from '../types/options'
+import merge from 'deepmerge'
 
 type AccountIdentifiers = Partial<Pick<AccountInfo, "homeAccountId" | "localAccountId" | "username">>;
 
@@ -28,7 +29,9 @@ export default {
   createInstance: (options: MilochauCoreOptions) => {
 
     const msalConfig: Configuration = {
-      auth: options.identity.auth,
+      auth: merge({
+        navigateToLoginRequestUrl: true
+      }, options.identity.auth) as BrowserAuthOptions,
       cache: {
         cacheLocation: 'localStorage'
       },
@@ -59,7 +62,7 @@ export default {
         }
       }
     }
-    
+
     var msalInstance = new PublicClientApplication(msalConfig)
 
     const accounts = msalInstance.getAllAccounts();
@@ -114,6 +117,5 @@ export default {
         state.inProgress = status;
       }
     });
-
   }
 }
