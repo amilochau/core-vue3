@@ -8,13 +8,13 @@ export function registerGuards(router: Router) {
     if (to.meta.requiresAuth) {
       const request: RedirectRequest = {
         ...coreOptions.identity.loginRequest,
-        redirectStartPage: to.fullPath
+        redirectStartPage: to.fullPath,
       }
 
-      const authenticated = await isAuthenticated(msalInstance, request);
+      const authenticated = await isAuthenticated(msalInstance);
 
       if (!authenticated) {
-        msalInstance.loginRedirect(request);
+        await msalInstance.loginRedirect(request);
         next(false)
         return;
       }
@@ -24,16 +24,11 @@ export function registerGuards(router: Router) {
   });
 }
 
-export async function isAuthenticated(instance: PublicClientApplication, loginRequest: RedirectRequest): Promise<boolean> {
+export async function isAuthenticated(msalInstance: PublicClientApplication): Promise<boolean> {
   try {
-    await instance.handleRedirectPromise()
-    const accounts = instance.getAllAccounts();
-    if (accounts.length > 0) {
-      return true;
-    }
-
-    await instance.loginRedirect(loginRequest)
-    return true
+    await msalInstance.handleRedirectPromise()
+    const accounts = msalInstance.getAllAccounts();
+    return accounts.length > 0
   } catch (error) {
     return false;
   }
