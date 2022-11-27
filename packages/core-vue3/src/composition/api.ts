@@ -11,7 +11,25 @@ import { useI18n } from 'vue-i18n'
 
 export function useApi(relativeBaseUri: string) {
 
-  const { t } = useI18n()
+  const { t, mergeLocaleMessage } = useI18n()
+
+  mergeLocaleMessage('en', {
+    errors: {
+      notAuthorized: "Not authorized",
+      notFound: "Not found",
+      serverError: "Server error",
+      networkError: "Network error: check your connection"
+    }
+  })
+  mergeLocaleMessage('fr', {
+    errors: {
+      notAuthorized: "Non autorisé",
+      notFound: "Inconnu",
+      serverError: "Erreur interne",
+      networkError: "Erreur réseau : vérifiez votre connexion"
+    }
+  })
+
   const appStore = useAppStore()
   const languageStore = useLanguageStore()
   const msal = useMsal()
@@ -24,15 +42,15 @@ export function useApi(relativeBaseUri: string) {
     switch (response.status) {
       case 401:
         router.push({ name: 'Home' })
-        return new ApplicationMessage(t('app.errors.notAuthorized'), 'error', mdiAlert)
+        return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
       case 403:
         router.push({ name: 'Forbidden' })
-        return new ApplicationMessage(t('app.errors.notAuthorized'), 'error', mdiAlert)
+        return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
       case 404:
         if (settings.redirect404) {
           router.push({ name: 'NotFound' })
         }
-        return new ApplicationMessage(t('app.errors.notFound'), 'error', mdiAlert)
+        return new ApplicationMessage(t('errors.notFound'), 'error', mdiAlert)
       case 400:
         const responseBody = await response.json() as IProblemDetails
         if (responseBody) {
@@ -60,17 +78,17 @@ export function useApi(relativeBaseUri: string) {
           }
         }
       case 500:
-        return new ApplicationMessage(t('app.errors.serverError'), 'error', mdiAlert)
+        return new ApplicationMessage(t('errors.serverError'), 'error', mdiAlert)
     }
 
     if (response.headers.has('Application-Error')) {
-      const applicationError = response.headers.get('Application-Error')
+      const applicationError = response.headers.get('errors.Application-Error')
       if (applicationError) {
         return new ApplicationMessage(applicationError, 'error', mdiAlert)
       }
     }
 
-    return new ApplicationMessage(t('app.errors.serverError'), 'error', mdiAlert)
+    return new ApplicationMessage(t('errors.serverError'), 'error', mdiAlert)
   }
 
   const getAbsoluteUrl = (url: string) => {
@@ -123,7 +141,7 @@ export function useApi(relativeBaseUri: string) {
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
     } catch (error) {
-      const errorMessage = new ApplicationMessage(t('app.errors.networkError'), 'warning', mdiAccessPointNetworkOff)
+      const errorMessage = new ApplicationMessage(t('errors.networkError'), 'warning', mdiAccessPointNetworkOff)
       if (settings.errors) { appStore.displayMessage(errorMessage) }
       throw errorMessage;
     } finally {

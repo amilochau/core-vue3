@@ -1,7 +1,28 @@
 import { useI18n } from "vue-i18n"
 
 export function useValidationRules() {
-  const { t } = useI18n()
+  const { t, mergeLocaleMessage } = useI18n()
+
+  mergeLocaleMessage('en', {
+    validation: {
+      required: "This field is required.",
+      minLength: "This field must be more than {min} characters.",
+      maxLength: "This field must be less than {max} characters.",
+      emailAddress: "This field must be a valid email address.",
+      minValue: "This field must be upper than {min}.",
+      maxValue: "This field must be lower than {max}."
+    }
+  })
+  mergeLocaleMessage('fr', {
+    validation: {
+      required: "Ce champ est requis.",
+      minLength: "Ce champ doit faire plus de {min} caractères.",
+      maxLength: "Ce champ doit faire moins de {max} caractères.",
+      emailAddress: "Ce champ doit correspondre à une adresse email valide.",
+      minValue: "Ce champ doit être supérieur à {min}.",
+      maxValue: "Ce champ doit être inférieur à {max}."
+    }
+  })
 
   const required = () => (v: any) => {
     if (typeof v === 'string') {

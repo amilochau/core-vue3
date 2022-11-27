@@ -76,9 +76,12 @@ export const coreOptions: MilochauCoreOptions = {
   api: {
     gatewayUri: getConfig('VITE_API_URL')
   },
-  messages: {
-    en,
-    fr
+  i18n: {
+    messages: {
+      en,
+      fr
+    },
+    //fallbackWarn: false
   },
   identity: {
     authorities: authorities,
