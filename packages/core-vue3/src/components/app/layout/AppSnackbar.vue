@@ -6,9 +6,7 @@
     top
     right
     class="d-print-none">
-    <v-row
-      align="center"
-      class="pa-1">
+    <v-row class="pa-1 align-center">
       <v-col
         v-if="message.icon"
         class="py-0 flex-grow-0">
@@ -27,7 +25,7 @@
         <div>
           <v-btn
             variant="text"
-            class="h-100"
+            class="fill-height"
             @click="display = false">
             {{ t('close') }}
           </v-btn>

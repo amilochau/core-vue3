@@ -1,8 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <v-row
-      align="center"
-      class="h-100">
+    <v-row class="fill-height align-center">
       <v-col class="text-center">
         <h1 class="text-h3 text-primary mb-4">
           {{ t('title') }}

@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAbacus, mdiPlus } from "@mdi/js"
+import { mdiPlus } from "@mdi/js"
 import { storeToRefs } from 'pinia';
 import { Ref, ref, watch } from "vue";
 import { MapsCreateRequest } from "../../types/maps";
@@ -78,7 +78,7 @@ async function save() {
     return;
   }
 
-  appStore.displayInfoMessage(t('testMessage'))
+  appStore.displayInfoMessage(t('testMessage'), 'Important details to display in the snackbar',)
 }
 
 watch(() => props.modelValue, () => props.modelValue ? open() : close())
