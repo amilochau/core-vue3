@@ -13,7 +13,7 @@ export type MilochauCoreOptions = {
   api: {
     gatewayUri: string
   },
-  i18n: I18nOptions,
+  i18n: I18nOptions & { messages: { [lang: string]: { appTitle: string }}},
   identity: {
     authorities: {
       register_login: string,

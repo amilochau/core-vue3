@@ -1,8 +1,5 @@
 import { MilochauCoreOptions } from "@amilochau/core-vue3"
 import { getConfig } from "../utils/config"
-
-import en from '../data/lang/en.json'
-import fr from '../data/lang/fr.json'
 import routes from "./routes"
 import { useMapsStore } from "../stores"
 import navigation from "./navigation"
@@ -78,8 +75,12 @@ export const coreOptions: MilochauCoreOptions = {
   },
   i18n: {
     messages: {
-      en,
-      fr
+      en: {
+        appTitle: 'core-vue3 playground'
+      },
+      fr: {
+        appTitle: 'Example core-vue3'
+      }
     },
     //fallbackWarn: false
   },
