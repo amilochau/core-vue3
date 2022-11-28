@@ -11,7 +11,7 @@
         'clickable-title': coreOptions.application.onAppBarTitleClick
       }"
       @click="onTitleClick">
-      {{ t('app.header.bar.title') }}
+      {{ t('appTitle') }}
     </v-app-bar-title>
     <app-offline />
     <app-settings-menu />
