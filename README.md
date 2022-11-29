@@ -5,10 +5,10 @@
 `@amilochau/core-vue3` is a opinionated package used to initialize vue 3 applications.
 
 The following plugins are installed by `@amilochau/core-vue3`:
-- `vue-router`
-- `pinia`
 - `msal`
+- `pinia`
 - `vue-i18n`
+- `vue-router`
 - `vuetify`
 
 The following libraries are used, and are defined as dependencies:
@@ -51,9 +51,11 @@ export const coreOptions: MilochauCoreOptions = {
   api: {
     gatewayUri: 'YOUR API BASE URI'
   },
-  messages: {
-    en: {}, // <== USE THIS SECTION TO ADD ENGLISH TRANSLATIONS
-    fr: {}  // <== USE THIS SECTION TO ADD FRENCH TRANSLATIONS
+  i18: {
+    messages: {
+      en: {}, // <== USE THIS SECTION TO ADD GLOBAL ENGLISH TRANSLATIONS
+      fr: {}  // <== USE THIS SECTION TO ADD GLOBAL FRENCH TRANSLATIONS
+    },
   },
   identity: {
     authorities: authorities,
@@ -143,7 +145,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `application.navigation` | Navigation links, as `vuetify` list items, used in the navigation drawer |
 | `application.onAppBarTitleClick` | Action to run when the user clicks on the title from the app bar |
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
-| `messages` | Messages used by `vue-i18n` |
+| `i18n` | Options used by `vue-i18n` |
 | `identity.authorities.register_login` | Authority URI used to authenticate users and get tokens for API requests |
 | `identity.authorities.profile_editing` | Authority URI used to let users edit their profile information |
 | `identity.scopes.use` | URI of the scope used to let user make API requests |
