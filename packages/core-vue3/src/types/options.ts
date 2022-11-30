@@ -2,6 +2,7 @@ import { BrowserAuthOptions } from "@azure/msal-browser"
 import { Ref } from "vue"
 import { I18nOptions } from "vue-i18n"
 import { Router, RouteRecordRaw } from "vue-router"
+import { VuetifyOptions } from "vuetify/framework"
 
 export type MilochauCoreOptions = {
   application: {
@@ -14,6 +15,7 @@ export type MilochauCoreOptions = {
     gatewayUri: string
   },
   i18n: I18nOptions & { messages: { [lang: string]: { appTitle: string }}},
+  vuetify?: VuetifyOptions,
   identity: {
     authorities: {
       register_login: string,
