@@ -123,7 +123,7 @@ export function useApi(relativeBaseUri: string) {
 
       if (router.currentRoute.value.meta.anonymousRequests
         || settings.authPolicy === AuthPolicy.SendRequestsAsAnonymous
-        || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated) {
+        || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
         // The user is not logged in but we don't mind
       } else {
         const authResponse = await msal.instance.acquireTokenSilent({
