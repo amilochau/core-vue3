@@ -148,6 +148,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `i18n` | Options used by `vue-i18n` |
 | `identity.authorities.register_login` | Authority URI used to authenticate users and get tokens for API requests |
 | `identity.authorities.profile_editing` | Authority URI used to let users edit their profile information |
+| `identity.authorities.password_reset` | Authority URI used to let users reset their password |
 | `identity.scopes.use` | URI of the scope used to let user make API requests |
 | `identity.auth.clientId` | ClientID of the current application, as defined in the identity provider |
 | `identity.auth.authority` | Authority used to perform API requets; typically set to `identity.authorities.register_login` |

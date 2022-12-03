@@ -8,6 +8,7 @@ export type MsalContext = {
   inProgress: Ref<InteractionStatus>,
   accountInfo: ComputedRef<{ id: string, name: string, email: string }>,
   editProfile: () => void,
+  resetPassword: () => void,
   login: () => void,
   logout: () => void
 }
@@ -66,6 +67,13 @@ export function useMsal(): MsalContext {
     })
   }
 
+  const resetPassword = () => {
+    instance.value.loginRedirect({
+      ...coreOptions.identity.loginRequest,
+      authority: coreOptions.identity.authorities.password_reset
+    })
+  }
+
   const login = () => {
     instance.value.loginRedirect(coreOptions.identity.loginRequest)
   }
@@ -80,6 +88,7 @@ export function useMsal(): MsalContext {
       inProgress,
       accountInfo,
       editProfile,
+      resetPassword,
       login,
       logout
   }

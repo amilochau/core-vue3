@@ -20,6 +20,7 @@ export type MilochauCoreOptions = {
     authorities: {
       register_login: string,
       profile_editing: string,
+      password_reset: string,
     },
     scopes: {
       use: string,

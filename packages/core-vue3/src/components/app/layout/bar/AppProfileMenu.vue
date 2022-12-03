@@ -22,13 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountCircle, mdiCardAccountMail, mdiFaceMan, mdiPower } from '@mdi/js'
+import { mdiAccountCircle, mdiCardAccountMail, mdiFaceMan, mdiLockReset, mdiPower } from '@mdi/js'
 import { mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useClean, useMsal } from '../../../../composition';
 
 const { t } = useI18n()
-const { accountInfo, editProfile, logout } = useMsal()
+const { accountInfo, editProfile, resetPassword, logout } = useMsal()
 const { clean } = useClean()
 
 const cleanAndLogout = () => {
@@ -40,6 +40,7 @@ const menuItems = [
   { title: accountInfo.value.name, subtitle: accountInfo.value.email, prependIcon: mdiFaceMan },
   { type: 'divider' },
   { title: t('edit'), prependIcon: mdiCardAccountMail, onClick: editProfile },
+  { title: t('resetPassword'), prependIcon: mdiLockReset, onClick: resetPassword },
   { title: t('logout'), prependIcon: mdiPower, onClick: cleanAndLogout }
 ]
 </script>

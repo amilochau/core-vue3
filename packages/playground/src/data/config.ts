@@ -21,8 +21,9 @@ export const envConfig: EnvConfigValues = {
   default: {
     VITE_GOOGLE_MAPS_API_KEY: "AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg",
     VITE_API_AUTHORITY: "milochau.b2clogin.com",
-    VITE_API_AUTHORITY_LOGIN: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1_register_login",
-    VITE_API_AUTHORITY_PROFILE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1_profile_editing"
+    VITE_API_AUTHORITY_LOGIN: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_SIGNUP_SIGNIN",
+    VITE_API_AUTHORITY_PROFILE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDIT",
+    VITE_API_AUTHORITY_PASSWORDRESET: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDITPASSWORDCHANGE"
   },
   local: {
     VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
@@ -57,6 +58,7 @@ export const getCurrentEnv = (host: string, subdomain: string): Environment => {
 export const authorities = {
   register_login: getConfig('VITE_API_AUTHORITY_LOGIN'),
   profile_editing: getConfig('VITE_API_AUTHORITY_PROFILE'),
+  password_reset: getConfig('VITE_API_AUTHORITY_PASSWORDRESET'),
 }
 
 export const scopes = {
