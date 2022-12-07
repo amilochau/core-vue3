@@ -22,13 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountCircle, mdiCardAccountMail, mdiFaceMan, mdiLockReset, mdiPower } from '@mdi/js'
+import { mdiAccountCircle, mdiAccountOff, mdiCardAccountMail, mdiFaceMan, mdiLockReset, mdiPower } from '@mdi/js'
 import { mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useClean, useMsal } from '../../../../composition';
 
 const { t } = useI18n()
-const { accountInfo, editProfile, resetPassword, logout } = useMsal()
+const { accountInfo, editProfile, resetPassword, deleteAccount, logout } = useMsal()
 const { clean } = useClean()
 
 const cleanAndLogout = () => {
@@ -41,6 +41,7 @@ const menuItems = [
   { type: 'divider' },
   { title: t('edit'), prependIcon: mdiCardAccountMail, onClick: editProfile },
   { title: t('resetPassword'), prependIcon: mdiLockReset, onClick: resetPassword },
+  { title: t('deleteAccount'), prependIcon: mdiAccountOff, onClick: deleteAccount },
   { title: t('logout'), prependIcon: mdiPower, onClick: cleanAndLogout }
 ]
 </script>
@@ -50,11 +51,15 @@ const menuItems = [
     "en": {
       "title": "Profile",
       "edit": "Manage your account",
+      "resetPassword": "Reset password",
+      "deleteAccount": "Delete account",
       "logout": "Logout"
     },
     "fr": {
       "title": "Profil",
       "edit": "Gérer votre compte",
+      "resetPassword": "Réinitialiser votre mot de passe",
+      "deleteAccount": "Supprimer votre compte",
       "logout": "Déconnexion"
     }
   }

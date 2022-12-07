@@ -23,7 +23,8 @@ export const envConfig: EnvConfigValues = {
     VITE_API_AUTHORITY: "milochau.b2clogin.com",
     VITE_API_AUTHORITY_LOGIN: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_SIGNUP_SIGNIN",
     VITE_API_AUTHORITY_PROFILE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDIT",
-    VITE_API_AUTHORITY_PASSWORDRESET: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDITPASSWORDCHANGE"
+    VITE_API_AUTHORITY_PASSWORDRESET: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDITPASSWORDCHANGE",
+    VITE_API_AUTHORITY_ACCOUNTDELETE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_ACCOUNTDELETE",
   },
   local: {
     VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
@@ -59,6 +60,7 @@ export const authorities = {
   register_login: getConfig('VITE_API_AUTHORITY_LOGIN'),
   profile_editing: getConfig('VITE_API_AUTHORITY_PROFILE'),
   password_reset: getConfig('VITE_API_AUTHORITY_PASSWORDRESET'),
+  account_delete: getConfig('VITE_API_AUTHORITY_ACCOUNTDELETE'),
 }
 
 export const scopes = {

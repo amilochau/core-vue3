@@ -21,6 +21,7 @@ export type MilochauCoreOptions = {
       register_login: string,
       profile_editing: string,
       password_reset: string,
+      account_delete: string,
     },
     scopes: {
       use: string,

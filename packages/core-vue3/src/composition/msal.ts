@@ -9,21 +9,22 @@ export type MsalContext = {
   accountInfo: ComputedRef<{ id: string, name: string, email: string }>,
   editProfile: () => void,
   resetPassword: () => void,
+  deleteAccount: () => void,
   login: () => void,
   logout: () => void
 }
 
 export type MsalAuthenticationResult = {
   acquireToken: Function;
-  result: Ref<AuthenticationResult|null>;
-  error: Ref<AuthError|null>;
+  result: Ref<AuthenticationResult | null>;
+  error: Ref<AuthError | null>;
   inProgress: Ref<boolean>;
 }
 
 export function useMsal(): MsalContext {
   const internalInstance = getCurrentInstance();
   if (!internalInstance) {
-      throw "useMsal() cannot be called outside the setup() function of a component";
+    throw "useMsal() cannot be called outside the setup() function of a component";
   }
   const { instance, accounts, inProgress }: ToRefs<{
     instance: PublicClientApplication,
@@ -34,14 +35,14 @@ export function useMsal(): MsalContext {
   const coreOptions = useCoreOptions()
 
   if (!instance.value || !accounts.value || !inProgress.value) {
-      throw "Please install the msalPlugin";
+    throw "Please install the msalPlugin";
   }
 
   if (inProgress.value === InteractionStatus.Startup) {
-      instance.value.handleRedirectPromise().catch(() => {
-          // Errors should be handled by listening to the LOGIN_FAILURE event
-          return;
-      });
+    instance.value.handleRedirectPromise().catch(() => {
+      // Errors should be handled by listening to the LOGIN_FAILURE event
+      return;
+    });
   }
 
   const accountInfo = computed(() => {
@@ -61,36 +62,44 @@ export function useMsal(): MsalContext {
   })
 
   const editProfile = () => {
-    instance.value.loginRedirect({
+    return instance.value.loginRedirect({
       ...coreOptions.identity.loginRequest,
       authority: coreOptions.identity.authorities.profile_editing
     })
   }
 
   const resetPassword = () => {
-    instance.value.loginRedirect({
+    return instance.value.loginRedirect({
       ...coreOptions.identity.loginRequest,
       authority: coreOptions.identity.authorities.password_reset
     })
   }
 
+  const deleteAccount = () => {
+    return instance.value.loginRedirect({
+      ...coreOptions.identity.loginRequest,
+      authority: coreOptions.identity.authorities.account_delete
+    })
+  }
+
   const login = () => {
-    instance.value.loginRedirect(coreOptions.identity.loginRequest)
+    return instance.value.loginRedirect(coreOptions.identity.loginRequest)
   }
 
   const logout = () => {
-    instance.value.logoutRedirect()
+    return instance.value.logoutRedirect()
   }
 
   return {
-      instance: instance.value,
-      accounts,
-      inProgress,
-      accountInfo,
-      editProfile,
-      resetPassword,
-      login,
-      logout
+    instance: instance.value,
+    accounts,
+    inProgress,
+    accountInfo,
+    editProfile,
+    resetPassword,
+    deleteAccount,
+    login,
+    logout
   }
 }
 
@@ -99,71 +108,71 @@ export function useIsAuthenticated(): Ref<boolean> {
   const isAuthenticated = ref(accounts.value.length > 0);
 
   watch(accounts, () => {
-      isAuthenticated.value = accounts.value.length > 0;
+    isAuthenticated.value = accounts.value.length > 0;
   });
 
   return isAuthenticated;
 }
 
-export function useMsalAuthentication(interactionType: InteractionType, request: RedirectRequest|SilentRequest): MsalAuthenticationResult {
+export function useMsalAuthentication(interactionType: InteractionType, request: RedirectRequest | SilentRequest): MsalAuthenticationResult {
   const { instance, inProgress } = useMsal();
 
   const localInProgress = ref<boolean>(false);
-  const result = ref<AuthenticationResult|null>(null);
-  const error = ref<AuthError|null>(null);
+  const result = ref<AuthenticationResult | null>(null);
+  const error = ref<AuthError | null>(null);
 
-  const acquireToken = async (requestOverride?: RedirectRequest|SilentRequest) => {
-      if (!localInProgress.value) {
-          localInProgress.value = true;
-          const tokenRequest = requestOverride || request;
+  const acquireToken = async (requestOverride?: RedirectRequest | SilentRequest) => {
+    if (!localInProgress.value) {
+      localInProgress.value = true;
+      const tokenRequest = requestOverride || request;
 
-          if (inProgress.value === InteractionStatus.Startup || inProgress.value === InteractionStatus.HandleRedirect) {
-              try {
-                  const response = await instance.handleRedirectPromise()
-                  if (response) {
-                      result.value = response;
-                      error.value = null;
-                      return;
-                  }
-              } catch (e) {
-                  result.value = null;
-                  error.value = e as AuthError;
-                  return;
-              };
+      if (inProgress.value === InteractionStatus.Startup || inProgress.value === InteractionStatus.HandleRedirect) {
+        try {
+          const response = await instance.handleRedirectPromise()
+          if (response) {
+            result.value = response;
+            error.value = null;
+            return;
           }
-
-          try {
-              const response = await instance.acquireTokenSilent(tokenRequest);
-              result.value = response;
-              error.value = null;
-          } catch(e) {
-              if (inProgress.value !== InteractionStatus.None) {
-                  return;
-              }
-
-              if (interactionType === InteractionType.Redirect) {
-                  await instance.loginRedirect(tokenRequest).catch((e) => {
-                      error.value = e;
-                      result.value = null;
-                  });
-              }
-          };
-          localInProgress.value = false;
+        } catch (e) {
+          result.value = null;
+          error.value = e as AuthError;
+          return;
+        };
       }
+
+      try {
+        const response = await instance.acquireTokenSilent(tokenRequest);
+        result.value = response;
+        error.value = null;
+      } catch (e) {
+        if (inProgress.value !== InteractionStatus.None) {
+          return;
+        }
+
+        if (interactionType === InteractionType.Redirect) {
+          await instance.loginRedirect(tokenRequest).catch((e) => {
+            error.value = e;
+            result.value = null;
+          });
+        }
+      };
+      localInProgress.value = false;
+    }
   }
 
   const stopWatcher = watch(inProgress, () => {
-      if (!result.value && !error.value) {
-          acquireToken();
-      } else {
-          stopWatcher();
-      }
+    if (!result.value && !error.value) {
+      acquireToken();
+    } else {
+      stopWatcher();
+    }
   });
 
   return {
-      acquireToken,
-      result,
-      error,
-      inProgress: localInProgress
+    acquireToken,
+    result,
+    error,
+    inProgress: localInProgress
   }
 }
