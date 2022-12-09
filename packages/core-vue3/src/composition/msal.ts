@@ -51,7 +51,7 @@ export function useMsal(): MsalContext {
       return {
         id: account.localAccountId,
         name: account.name ?? '',
-        email: account.username
+        email: (account.idTokenClaims?.email ?? '') as string
       }
     }
     return {

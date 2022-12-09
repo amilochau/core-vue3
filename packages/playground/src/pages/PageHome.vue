@@ -27,6 +27,18 @@
         </v-btn>
 
         <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
+        <p>
+          MSAL data (account info)
+        </p>
+        <p>
+          {{ accountInfo }}
+        </p>
+        <p>
+          MSAL data (accounts)
+        </p>
+        <p>
+          {{ accounts }}
+        </p>
 
         <dialog-test v-model="dialog" />
       </v-col>
@@ -40,7 +52,7 @@ import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useAppStore, useIsAuthenticated, usePage } from '@amilochau/core-vue3';
+import { useAppStore, useIsAuthenticated, useMsal, usePage } from '@amilochau/core-vue3';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
@@ -53,7 +65,8 @@ usePage()
 const { d } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
-const isAuthenticated = useIsAuthenticated();
+const isAuthenticated = useIsAuthenticated()
+const { accountInfo, accounts } = useMsal()
 const appStore = useAppStore()
 const online = useOnline()
 const { formatContactStatus } = useFormat()
