@@ -21,9 +21,9 @@ export const envConfig: EnvConfigValues = {
   default: {
     VITE_GOOGLE_MAPS_API_KEY: "AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg",
     VITE_API_AUTHORITY: "milochau.b2clogin.com",
-    VITE_API_AUTHORITY_LOGIN: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_SIGNUP_SIGNIN",
-    VITE_API_AUTHORITY_PROFILE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDIT",
-    VITE_API_AUTHORITY_PASSWORDRESET: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDITPASSWORDCHANGE",
+    VITE_API_AUTHORITY_LOGIN: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_LOGIN",
+    VITE_API_AUTHORITY_PROFILEEDIT: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDIT",
+    VITE_API_AUTHORITY_PASSWORDEDIT: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PASSWORDEDIT",
     VITE_API_AUTHORITY_ACCOUNTDELETE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_ACCOUNTDELETE",
   },
   local: {
@@ -57,9 +57,9 @@ export const getCurrentEnv = (host: string, subdomain: string): Environment => {
 }
 
 export const authorities = {
-  register_login: getConfig('VITE_API_AUTHORITY_LOGIN'),
-  profile_editing: getConfig('VITE_API_AUTHORITY_PROFILE'),
-  password_reset: getConfig('VITE_API_AUTHORITY_PASSWORDRESET'),
+  login: getConfig('VITE_API_AUTHORITY_LOGIN'),
+  profile_edit: getConfig('VITE_API_AUTHORITY_PROFILEEDIT'),
+  password_edit: getConfig('VITE_API_AUTHORITY_PASSWORDEDIT'),
   account_delete: getConfig('VITE_API_AUTHORITY_ACCOUNTDELETE'),
 }
 
@@ -95,7 +95,7 @@ export const coreOptions: MilochauCoreOptions = {
     },
     auth: {
       clientId: getConfig('VITE_API_CLIENT_ID'),
-      authority: authorities.register_login,
+      authority: authorities.login,
       knownAuthorities: [getConfig('VITE_API_AUTHORITY')],
       redirectUri: getConfig('VITE_REDIRECT_URI'),
       postLogoutRedirectUri: getConfig('VITE_REDIRECT_URI')

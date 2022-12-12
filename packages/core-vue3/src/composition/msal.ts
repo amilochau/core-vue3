@@ -6,9 +6,13 @@ export type MsalContext = {
   instance: PublicClientApplication,
   accounts: Ref<AccountInfo[]>,
   inProgress: Ref<InteractionStatus>,
-  accountInfo: ComputedRef<{ id: string, name: string, email: string }>,
+  accountInfo: ComputedRef<{
+    id: string,
+    name: string,
+    email: string
+  }>,
   editProfile: () => void,
-  resetPassword: () => void,
+  editPassword: () => void,
   deleteAccount: () => void,
   login: () => void,
   logout: () => void
@@ -57,28 +61,37 @@ export function useMsal(): MsalContext {
     return {
       id: '',
       name: '',
-      email: ''
+      email: '',
     };
   })
 
   const editProfile = () => {
     return instance.value.loginRedirect({
       ...coreOptions.identity.loginRequest,
-      authority: coreOptions.identity.authorities.profile_editing
+      authority: coreOptions.identity.authorities.profile_edit,
+      extraQueryParameters: {
+        login_hint: accountInfo.value.email
+      }
     })
   }
 
-  const resetPassword = () => {
+  const editPassword = () => {
     return instance.value.loginRedirect({
       ...coreOptions.identity.loginRequest,
-      authority: coreOptions.identity.authorities.password_reset
+      authority: coreOptions.identity.authorities.password_edit,
+      extraQueryParameters: {
+        login_hint: accountInfo.value.email
+      }
     })
   }
 
   const deleteAccount = () => {
     return instance.value.loginRedirect({
       ...coreOptions.identity.loginRequest,
-      authority: coreOptions.identity.authorities.account_delete
+      authority: coreOptions.identity.authorities.account_delete,
+      extraQueryParameters: {
+        login_hint: accountInfo.value.email
+      }
     })
   }
 
@@ -96,7 +109,7 @@ export function useMsal(): MsalContext {
     inProgress,
     accountInfo,
     editProfile,
-    resetPassword,
+    editPassword,
     deleteAccount,
     login,
     logout
