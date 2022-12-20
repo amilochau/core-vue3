@@ -64,7 +64,7 @@ export const coreOptions: MilochauCoreOptions = {
     },
     auth: {
       clientId: 'THE CLIENT ID OF YOUR APPLICATION',
-      authority: authorities.register_login,
+      authority: authorities.login,
       knownAuthorities: ['THE AUTHORITY OF YOUR IDENTITY PROVIDER'],
       redirectUri: 'THE REDIRECT URI TO CALL AFTER AUTHENTICATION',
       postLogoutRedirectUri: 'THE REDIRECT URI TO CALL AFTER LOGOUT'
@@ -104,7 +104,7 @@ app.use(milochauCore); // <== This line registers the plugin
 
 ## Result
 
-When the plugin is registred, you can focus to create business code in your application.
+When the plugin is registered, you can focus to create business code in your application.
 
 The plugin presents your pages (defined with the `routes` configuration) in a pre-defined template, with a navigation drawer, an application bar, menus for user settings and user account, a cookie bar and privacy page.
 
@@ -146,11 +146,13 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `application.onAppBarTitleClick` | Action to run when the user clicks on the title from the app bar |
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
 | `i18n` | Options used by `vue-i18n` |
-| `identity.authorities.register_login` | Authority URI used to authenticate users and get tokens for API requests |
-| `identity.authorities.profile_editing` | Authority URI used to let users edit their profile information |
+| `identity.authorities.login` | Authority URI used to authenticate users and get tokens for API requests |
+| `identity.authorities.profile_edit` | Authority URI used to let users edit their profile |
+| `identity.authorities.password_edit` | Authority URI used to let users edit their password |
+| `identity.authorities.account_delete` | Authority URI used to let users delete their profile |
 | `identity.scopes.use` | URI of the scope used to let user make API requests |
 | `identity.auth.clientId` | ClientID of the current application, as defined in the identity provider |
-| `identity.auth.authority` | Authority used to perform API requets; typically set to `identity.authorities.register_login` |
+| `identity.auth.authority` | Authority used to perform API requests; typically set to `identity.authorities.login` |
 | `identity.auth.knownAuthorities` | List of know authorities for authentication |
 | `identity.auth.redirectUri` | Redirect URI to call after authentication |
 | `identity.auth.postLogoutRedirectUri` | Redirect URI to call after logout |

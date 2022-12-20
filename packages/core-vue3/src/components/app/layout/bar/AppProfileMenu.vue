@@ -28,7 +28,7 @@ import { useI18n } from 'vue-i18n';
 import { useClean, useMsal } from '../../../../composition';
 
 const { t } = useI18n()
-const { accountInfo, editProfile, logout } = useMsal()
+const { accountInfo, logout } = useMsal()
 const { clean } = useClean()
 
 const cleanAndLogout = () => {
@@ -39,7 +39,7 @@ const cleanAndLogout = () => {
 const menuItems = [
   { title: accountInfo.value.name, subtitle: accountInfo.value.email, prependIcon: mdiFaceMan },
   { type: 'divider' },
-  { title: t('edit'), prependIcon: mdiCardAccountMail, onClick: editProfile },
+  { title: t('manageProfile'), prependIcon: mdiCardAccountMail, to: { name: 'Profile' } },
   { title: t('logout'), prependIcon: mdiPower, onClick: cleanAndLogout }
 ]
 </script>
@@ -48,12 +48,12 @@ const menuItems = [
   {
     "en": {
       "title": "Profile",
-      "edit": "Manage your account",
+      "manageProfile": "Manage your profile",
       "logout": "Logout"
     },
     "fr": {
       "title": "Profil",
-      "edit": "Gérer votre compte",
+      "manageProfile": "Gérer your profil",
       "logout": "Déconnexion"
     }
   }

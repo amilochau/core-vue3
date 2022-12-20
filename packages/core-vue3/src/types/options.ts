@@ -18,8 +18,10 @@ export type MilochauCoreOptions = {
   vuetify?: VuetifyOptions,
   identity: {
     authorities: {
-      register_login: string,
-      profile_editing: string,
+      login: string,
+      profile_edit: string,
+      password_edit: string,
+      account_delete: string,
     },
     scopes: {
       use: string,
