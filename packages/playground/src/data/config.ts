@@ -33,8 +33,8 @@ export const envConfig: EnvConfigValues = {
     VITE_API_CLIENT_ID: "5ea3d7ac-f358-4a7b-9702-6b4672faf89a",
     VITE_REDIRECT_URI: "http://localhost:3000",
     VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-development/Use",
-    VITE_COGNITO_USERPOOL_ID: "eu-west-3_Sc9uWBdTf",
-    VITE_COGNITO_CLIENT_ID: '2uqp1qljkjh7941gl3487rralv',
+    VITE_COGNITO_USERPOOL_ID: "eu-west-3_QwBo27M3S",
+    VITE_COGNITO_CLIENT_ID: '7god4371rupcqh89ectg2ivcg5',
   },
   dev: {
     VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
