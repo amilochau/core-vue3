@@ -1,4 +1,7 @@
 import { App } from 'vue'
+
+import './polyfills'
+
 import { PublicClientApplication } from '@azure/msal-browser'
 
 import { MilochauCoreOptions } from './types/options'

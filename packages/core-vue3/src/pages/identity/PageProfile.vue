@@ -64,25 +64,25 @@ import { mdiAccountOff, mdiCardAccountMail, mdiEmail, mdiLockReset, mdiPencil } 
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useMsal, usePage } from '../composition';
-import { useAppStore } from '../stores';
+import { useCognito, usePage } from '../../composition';
+import { useAppStore } from '../../stores';
 import { useOnline } from '@vueuse/core';
 
 usePage()
 const { t } = useI18n()
-const { accountInfo, editProfile, editPassword, deleteAccount } = useMsal()
+const { attributes, editProfile, editPassword, deleteAccount } = useCognito()
 const online = useOnline()
 const appStore = useAppStore()
 
 const { loading } = storeToRefs(appStore)
 
 const contactItems = computed(() => ([{
-  title: accountInfo.value.name,
+  title: attributes.value.name,
   props: {
     prependIcon: mdiCardAccountMail,
   },
 }, {
-  title: accountInfo.value.email,
+  title: attributes.value.email,
   props: {
     prependIcon: mdiEmail,
   },
@@ -106,14 +106,14 @@ const contactItems = computed(() => ([{
     "en": {
       "title": "Profile",
       "profileDetails": "Profile details",
-      "editProfile": "Manage your profile",
+      "editProfile": "Edit your profile",
       "editPassword": "Edit password",
       "deleteAccount": "Delete account"
     },
     "fr": {
       "title": "Profil",
       "profileDetails": "Détails de profil",
-      "editProfile": "Gérer votre profil",
+      "editProfile": "Modifier votre profil",
       "editPassword": "Modifier votre mot de passe",
       "deleteAccount": "Supprimer votre compte"
     }

@@ -23,25 +23,28 @@
 
 <script setup lang="ts">
 import { mdiAccountCircle, mdiCardAccountMail, mdiFaceMan, mdiPower } from '@mdi/js'
-import { mergeProps } from 'vue'
+import { computed, mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
-import { useClean, useMsal } from '../../../../composition';
+import { useRouter } from 'vue-router';
+import { useClean, useCognitoClient } from '../../../../composition';
 
 const { t } = useI18n()
-const { accountInfo, logout } = useMsal()
+const { attributes, silentlyLogout } = useCognitoClient()
 const { clean } = useClean()
+const router = useRouter()
 
 const cleanAndLogout = () => {
   clean();
-  logout();
+  silentlyLogout();
+  router.push({ name: 'Home' })
 }
 
-const menuItems = [
-  { title: accountInfo.value.name, subtitle: accountInfo.value.email, prependIcon: mdiFaceMan },
+const menuItems = computed(() => [
+  { title: attributes.value.name, subtitle: attributes.value.email, prependIcon: mdiFaceMan },
   { type: 'divider' },
   { title: t('manageProfile'), prependIcon: mdiCardAccountMail, to: { name: 'Profile' } },
   { title: t('logout'), prependIcon: mdiPower, onClick: cleanAndLogout }
-]
+])
 </script>
 
 <i18n lang="json">

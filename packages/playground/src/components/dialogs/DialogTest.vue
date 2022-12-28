@@ -78,7 +78,7 @@ async function save() {
     return;
   }
 
-  appStore.displayInfoMessage(t('testMessage'), 'Important details to display in the snackbar',)
+  appStore.displayInfoMessage(t('testMessage'), 'Important details to display in the snackbar')
 }
 
 watch(() => props.modelValue, () => props.modelValue ? open() : close())

@@ -118,6 +118,7 @@ Here are the helpers you can use from your code.
 | ------ | ----------- |
 | `useApi` | Sends HTTP requests to the API gateway configured via `api.gatewayUri` ; manages HTTP errors |
 | `useClean` | Cleans data from storage, typically on logout, as configured via `clean` |
+| `useCognito` | Gets Cognito functions |
 | `useCoreOptions` | Lets you get the core options defined on plugin registration |
 | `useIsAuthenticated` | Lets you know if the current user is authenticated via MSAL |
 | `useMsal` | Gets MSAL current instance, user account info, and user account functions |
@@ -150,6 +151,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `identity.authorities.profile_edit` | Authority URI used to let users edit their profile |
 | `identity.authorities.password_edit` | Authority URI used to let users edit their password |
 | `identity.authorities.account_delete` | Authority URI used to let users delete their profile |
+| `identity.cognito` | Cognito settings for authentication |
 | `identity.scopes.use` | URI of the scope used to let user make API requests |
 | `identity.auth.clientId` | ClientID of the current application, as defined in the identity provider |
 | `identity.auth.authority` | Authority used to perform API requests; typically set to `identity.authorities.login` |

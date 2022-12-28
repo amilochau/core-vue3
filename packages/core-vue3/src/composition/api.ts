@@ -1,11 +1,10 @@
-import { InteractionRequiredAuthError } from "@azure/msal-browser"
 import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import { useRouter } from "vue-router"
 import { useAppStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
 import { IHttpSettings, IProblemDetails } from "../types/http"
 import { AuthPolicy } from "../types/http/IHttpSettings"
-import { useIsAuthenticated, useMsal } from "./msal"
+import { useCognitoClient } from './cognito'
 import { useCoreOptions } from "./options"
 import { useI18n } from 'vue-i18n'
 
@@ -32,8 +31,7 @@ export function useApi(relativeBaseUri: string) {
 
   const appStore = useAppStore()
   const languageStore = useLanguageStore()
-  const msal = useMsal()
-  const isAuthenticated = useIsAuthenticated()
+  const { isAuthenticated, getToken } = useCognitoClient()
   const router = useRouter();
   const coreOptions = useCoreOptions()
   const baseUri = `${coreOptions.api.gatewayUri}${relativeBaseUri}`
@@ -121,22 +119,16 @@ export function useApi(relativeBaseUri: string) {
       // Get bearer token for API
       var accessToken = '';
 
+      console.log('1')
       if (router.currentRoute.value.meta.anonymousRequests
         || settings.authPolicy === AuthPolicy.SendRequestsAsAnonymous
         || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
         // The user is not logged in but we don't mind
       } else {
-        const authResponse = await msal.instance.acquireTokenSilent({
-          ...coreOptions.identity.loginRequest
-        }).catch(async (e) => {
-          if (e instanceof InteractionRequiredAuthError) {
-            await msal.instance.acquireTokenRedirect(coreOptions.identity.loginRequest)
-          }
-          throw e
-        })
-        accessToken = authResponse.accessToken
+        accessToken = await getToken()
       }
 
+      console.log('7')
       const requestInit = getRequestInit(accessToken);
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);

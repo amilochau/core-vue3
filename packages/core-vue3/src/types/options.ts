@@ -17,6 +17,10 @@ export type MilochauCoreOptions = {
   i18n: I18nOptions & { messages: { [lang: string]: { appTitle: string }}},
   vuetify?: VuetifyOptions,
   identity: {
+    cognito: {
+      userPoolId: string,
+      clientId: string,
+    },
     authorities: {
       login: string,
       profile_edit: string,

@@ -27,12 +27,12 @@ import AppOffline from './AppOffline.vue';
 import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProfileMenu from './AppProfileMenu.vue';
 import { useAppStore } from '../../../../stores';
-import { useCoreOptions, useIsAuthenticated } from '../../../../composition';
+import { useCognito, useCoreOptions } from '../../../../composition';
 import { useRouter } from 'vue-router';
 
 const { t } = useI18n()
 const appStore = useAppStore()
-const isAuthenticated = useIsAuthenticated();
+const { isAuthenticated } = useCognito();
 const coreOptions = useCoreOptions()
 const router = useRouter()
 

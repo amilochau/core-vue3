@@ -15,10 +15,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useAppStore, useMsal } from '@amilochau/core-vue3';
+import { useAppStore, useCognito } from '@amilochau/core-vue3';
 
 const { t } = useI18n()
-const { login } = useMsal()
+const { login } = useCognito()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>

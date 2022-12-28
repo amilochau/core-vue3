@@ -13,10 +13,10 @@
 <script setup lang="ts">
 import { mdiPower } from '@mdi/js'
 import { useI18n } from 'vue-i18n';
-import { useMsal } from '../../../../composition';
+import { useCognito } from '../../../../composition';
 
 const { t } = useI18n()
-const { login } = useMsal()
+const { login } = useCognito()
 </script>
 
 <i18n lang="json">

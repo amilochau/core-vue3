@@ -25,24 +25,32 @@ export const envConfig: EnvConfigValues = {
     VITE_API_AUTHORITY_PROFILEEDIT: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDIT",
     VITE_API_AUTHORITY_PASSWORDEDIT: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PASSWORDEDIT",
     VITE_API_AUTHORITY_ACCOUNTDELETE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_ACCOUNTDELETE",
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   },
   local: {
-    VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
+    VITE_API_URL: "https://d37652aw4wwcmu.cloudfront.net/api/dev/a",
     VITE_API_CLIENT_ID: "5ea3d7ac-f358-4a7b-9702-6b4672faf89a",
     VITE_REDIRECT_URI: "http://localhost:3000",
-    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-development/Use"
+    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-development/Use",
+    VITE_COGNITO_USERPOOL_ID: "eu-west-3_Sc9uWBdTf",
+    VITE_COGNITO_CLIENT_ID: '2uqp1qljkjh7941gl3487rralv',
   },
   dev: {
     VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
     VITE_API_CLIENT_ID: "5ea3d7ac-f358-4a7b-9702-6b4672faf89a",
     VITE_REDIRECT_URI: "https://maps-dev.milochau.com",
-    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-development/Use"
+    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-development/Use",
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   },
   prd: {
     VITE_API_URL: "https://api.milochau.com/maps/v1",
     VITE_API_CLIENT_ID: "2aa180f1-f100-4f05-b378-ff01f2610a9e",
     VITE_REDIRECT_URI: "https://maps.milochau.com",
-    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-production/Use"
+    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-production/Use",
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   }
 }
 
@@ -89,6 +97,10 @@ export const coreOptions: MilochauCoreOptions = {
     //fallbackWarn: false
   },
   identity: {
+    cognito: {
+      userPoolId: getConfig('VITE_COGNITO_USERPOOL_ID'),
+      clientId: getConfig('VITE_COGNITO_CLIENT_ID'),
+    },
     authorities: authorities,
     scopes: {
       use: getConfig('VITE_API_SCOPE_USE'),
