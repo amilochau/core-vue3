@@ -5,7 +5,7 @@ import { useIdentityStore } from '../stores'
 import { storeToRefs } from "pinia"
 
 export function useCognito() {
-  
+
   const identityStore = useIdentityStore()
   const router = useRouter()
 
@@ -18,7 +18,7 @@ export function useCognito() {
   const register = () => {
     router.push({ name: 'Register' })
   }
-  
+
   const editProfile = () => {
     router.push({ name: 'EditProfile' })
   }
@@ -43,7 +43,7 @@ export function useCognito() {
 }
 
 export function useCognitoClient() {
-  
+
   const { isAuthenticated, attributes } = useCognito()
   const coreOptions = useCoreOptions()
   const identityStore = useIdentityStore()
@@ -64,8 +64,8 @@ export function useCognitoClient() {
       if (error) {
         return reject(error)
       }
-      
-      const accessToken = (session as CognitoUserSession).getAccessToken().getJwtToken()
+
+      const accessToken = (session as CognitoUserSession).getIdToken().getJwtToken()
 
       resolve(accessToken)
     })

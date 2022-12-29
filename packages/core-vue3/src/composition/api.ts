@@ -119,7 +119,6 @@ export function useApi(relativeBaseUri: string) {
       // Get bearer token for API
       var accessToken = '';
 
-      console.log('1')
       if (router.currentRoute.value.meta.anonymousRequests
         || settings.authPolicy === AuthPolicy.SendRequestsAsAnonymous
         || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
@@ -128,7 +127,6 @@ export function useApi(relativeBaseUri: string) {
         accessToken = await getToken()
       }
 
-      console.log('7')
       const requestInit = getRequestInit(accessToken);
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
