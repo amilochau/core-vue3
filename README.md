@@ -5,7 +5,6 @@
 `@amilochau/core-vue3` is a opinionated package used to initialize vue 3 applications.
 
 The following plugins are installed by `@amilochau/core-vue3`:
-- `msal`
 - `amazon-cognito-identity-js`
 - `pinia`
 - `vue-i18n`
@@ -59,21 +58,9 @@ export const coreOptions: MilochauCoreOptions = {
     },
   },
   identity: {
-    authorities: authorities,
-    scopes: {
-      use: 'THE SCOPE TO USE FOR API AUTHORIZATION',
-    },
-    auth: {
-      clientId: 'THE CLIENT ID OF YOUR APPLICATION',
-      authority: authorities.login,
-      knownAuthorities: ['THE AUTHORITY OF YOUR IDENTITY PROVIDER'],
-      redirectUri: 'THE REDIRECT URI TO CALL AFTER AUTHENTICATION',
-      postLogoutRedirectUri: 'THE REDIRECT URI TO CALL AFTER LOGOUT'
-    },
-    loginRequest: {
-      scopes: [
-        scopes.use
-      ],
+    cognito: {
+      userPoolId: 'YOUR COGNITO USER POOL ID',
+      clientId: 'YOUR COGNITO CLIENT ID',
     }
   },
   routes: [], // <== USE THIS SECTION TO ADD ROUTES
