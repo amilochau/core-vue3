@@ -121,9 +121,6 @@ Here are the helpers you can use from your code.
 | `useClean` | Cleans data from storage, typically on logout, as configured via `clean` |
 | `useCognito` | Gets Cognito functions |
 | `useCoreOptions` | Lets you get the core options defined on plugin registration |
-| `useIsAuthenticated` | Lets you know if the current user is authenticated via MSAL |
-| `useMsal` | Gets MSAL current instance, user account info, and user account functions |
-| `useMsalAuthentication` | Lets you acquire token from MSAL to send requests |
 | `usePage` | Lets you define page metadata |
 | `useValidationRules` | Lets you use pre-defined validation rules on plain data |
 
@@ -133,6 +130,7 @@ Here are the `pinia` stores you can use from your code.
 | ---------- | ------ | ----------- |
 | `app` | `useAppStore` | Lets you display messages in a snackbar |
 | `cookies` | `useCookiesStore` | Lets you known if the current user has accepted cookies |
+| `identity` | `useIdentityStore` | Lets you display data from the current user |
 | `language` | `useLanguageStore` | Lets you know the current language configured for the UI |
 | `theme` | `useThemeStore` | Lets you know the current theme configured for the UI |
 

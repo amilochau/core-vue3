@@ -17,9 +17,9 @@ export const useStore = defineStore('identity', {
   actions: {
     setAttributes(attributes?: CognitoUserAttribute[]) {
       this.attributes = {
-        id: attributes?.find((x) => x.Name === 'sub')?.Value,
-        name: attributes?.find((x) => x.Name === 'name')?.Value,
-        email: attributes?.find((x) => x.Name === 'email')?.Value,
+        id: attributes?.find((x) => x.Name === 'sub')?.Value || '',
+        name: attributes?.find((x) => x.Name === 'name')?.Value || '',
+        email: attributes?.find((x) => x.Name === 'email')?.Value || '',
       }
     },
 
