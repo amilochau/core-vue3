@@ -14,7 +14,7 @@ declare module 'vue-router' {
 }
 
 export default {
-  install: (app: App, msalInstance: PublicClientApplication, options: MilochauCoreOptions) => {
+  install: (app: App, options: MilochauCoreOptions) => {
     const languageStore = useLanguageStore()
     const identityStore = useIdentityStore()
 
