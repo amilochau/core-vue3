@@ -90,8 +90,8 @@ watch(() => route.query.email, () => {
 })
 
 async function verifyCode() {
-  var validationResult = await form.value!.validate()
-  if (!validationResult.valid) {
+  const { valid } = await form.value!.validate()
+  if (!valid) {
     return;
   }
 

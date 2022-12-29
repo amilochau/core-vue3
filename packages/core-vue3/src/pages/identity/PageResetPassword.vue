@@ -109,8 +109,8 @@ watch(() => route.query.email, () => {
 })
 
 async function reset() {
-  var validationResult = await form.value!.validate()
-  if (!validationResult.valid) {
+  const { valid } = await form.value!.validate()
+  if (!valid) {
     return;
   }
 

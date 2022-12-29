@@ -68,8 +68,8 @@ const form: Ref<any> = ref(null)
 const request: Ref<any> = ref({})
 
 async function reset() {
-  var validationResult = await form.value!.validate()
-  if (!validationResult.valid) {
+  const { valid } = await form.value!.validate()
+  if (!valid) {
     return;
   }
 

@@ -69,8 +69,8 @@ const request: Ref<any> = ref({})
 request.value.name = attributes.value.name
 
 async function editProfile() {
-  var validationResult = await form.value!.validate()
-  if (!validationResult.valid) {
+  const { valid } = await form.value!.validate()
+  if (!valid) {
     return;
   }
 
