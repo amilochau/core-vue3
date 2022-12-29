@@ -9,7 +9,8 @@
         </h2>
         <v-form
           ref="form"
-          :readonly="loading">
+          :readonly="loading"
+          class="mb-4">
           <v-card
             elevation="0">
             <v-card-text>
@@ -66,6 +67,16 @@
             </v-card-text>
           </v-card>
         </v-form>
+        <h4 class="mb-4 text-body-2 font-italic text-center">
+          {{ t('loginTitle') }}
+          <v-btn
+            :to="{ name: 'Login' }"
+            density="compact"
+            variant="text"
+            class="ml-1">
+            {{ t('loginLink') }}
+          </v-btn>
+        </h4>
       </v-col>
     </v-row>
   </v-container>
@@ -143,7 +154,9 @@ async function register() {
       "register": "Create account",
       "errorMessage": "An error occured.",
       "successMessage": "Your account has now been created!",
-      "successDetails": "You must confirm your email address - a code has been sent to you. Check your spams if you don't find it!"
+      "successDetails": "You must confirm your email address - a code has been sent to you. Check your spams if you don't find it!",
+      "loginTitle": "You already have an account?",
+      "loginLink": "Login"
     },
     "fr": {
       "title": "Création de compte",
@@ -154,7 +167,9 @@ async function register() {
       "register": "Créer le compte",
       "errorMessage": "Une erreur est survenue.",
       "successMessage": "Votre compte a bien été créé !",
-      "successDetails": "Vous devez désormais confirmer votre addresse email - un code vous a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !"
+      "successDetails": "Vous devez désormais confirmer votre addresse email - un code vous a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !",
+      "loginTitle": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter"
     }
   }
 </i18n>
