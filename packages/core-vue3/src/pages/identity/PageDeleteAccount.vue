@@ -62,8 +62,8 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { Ref, ref } from 'vue';
-import { CognitoUserPool, CognitoUser, AuthenticationDetails, IAuthenticationCallback } from 'amazon-cognito-identity-js'
 import { useRouter } from 'vue-router';
+import { Login } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -72,13 +72,16 @@ const online = useOnline()
 const { clean } = useClean()
 const router = useRouter()
 const identityStore = useIdentityStore()
-const { userPoolData } = useCognito()
+const { authenticateUser, deleteUser } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<any> = ref({})
+const request: Ref<Login> = ref({
+  email: '',
+  password: '',
+})
 
 async function deleteAccount() {
   const { valid } = await form.value!.validate()
@@ -86,30 +89,16 @@ async function deleteAccount() {
     return;
   }
 
-  const userPool = new CognitoUserPool(userPoolData)
-  const user = new CognitoUser({ Username: request.value.email, Pool: userPool })
-  const authenticationDetails = new AuthenticationDetails({ Username: request.value.email, Password: request.value.password })
-
-  user.authenticateUser(authenticationDetails, {
-    onFailure: (error) => {
-      appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-    },
-    onSuccess: () => {
-      clean();
-      user.deleteUser((error, result) => {
-        if (error) {
-          appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-          return
-        }
-
-        console.log(result)
-
-        identityStore.isAuthenticated = false
-        appStore.displayInfoMessage(t('successMessage'))
-        router.push({ name: 'Home' })
-      })
-    }
-  })
+  try {
+    await authenticateUser(request.value)
+    await deleteUser()
+  } catch (error) {
+    appStore.displayErrorMessage(t('errorMessage'), error)
+    identityStore.isAuthenticated = false
+    clean();
+    appStore.displayInfoMessage(t('successMessage'))
+    router.push({ name: 'Home' })
+  }
 }
 </script>
 

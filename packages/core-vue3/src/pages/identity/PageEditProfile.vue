@@ -45,28 +45,30 @@
 <script setup lang="ts">
 import { mdiAccountEdit, mdiAccount } from '@mdi/js';
 import { useCognito, usePage, useValidationRules } from '../../composition';
-import { useAppStore } from '../../stores';
+import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { Ref, ref } from 'vue';
-import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js'
 import { useRouter } from 'vue-router';
+import { EditProfile } from '../../types';
 
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
-const { userPoolData, attributes, silentlyFetchAttributes } = useCognito()
+const identityStore = useIdentityStore()
+const { updateAttributes, fetchUserAttributes } = useCognito()
 const { required, maxLength } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
+const { attributes } = storeToRefs(identityStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<any> = ref({})
-
-request.value.name = attributes.value.name
+const request: Ref<EditProfile> = ref({
+  name: attributes.value.name
+})
 
 async function editProfile() {
   const { valid } = await form.value!.validate()
@@ -74,31 +76,15 @@ async function editProfile() {
     return;
   }
 
-  var attributes = [
-    new CognitoUserAttribute({ Name: 'name', Value: request.value.name }),
-  ]
-
-  const userPool = new CognitoUserPool(userPoolData);
-  const currentUser = userPool.getCurrentUser()
-  currentUser?.getSession((error) => {
-    if (error) {
-      appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-      return
-    }
-
-    currentUser?.updateAttributes(attributes, (error, result) => {
-      if (error) {
-        appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-        return
-      }
-
-      appStore.displayInfoMessage(t('successMessage'))
-      router.push({ name: 'Profile' })
-      silentlyFetchAttributes()
-    })
-  })
+  try {
+    await updateAttributes(request.value)
+    appStore.displayInfoMessage(t('successMessage'))
+    router.push({ name: 'Profile' })
+    fetchUserAttributes()
+  } catch (error) {
+    appStore.displayErrorMessage(t('errorMessage'), error)
+  }
 }
-
 </script>
 
 <i18n lang="json">

@@ -94,21 +94,26 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { Ref, ref } from 'vue';
-import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js'
 import { useRouter } from 'vue-router';
+import { Register } from '../../types';
 
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
-const { userPoolData } = useCognito()
+const { signUp } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<any> = ref({})
+const request: Ref<Register> = ref({
+  name: '',
+  email: '',
+  password: '',
+  confirmationPassword: ''
+})
 
 async function register() {
   const { valid } = await form.value!.validate()
@@ -116,23 +121,14 @@ async function register() {
     return;
   }
 
-  var attributes = [
-    new CognitoUserAttribute({ Name: 'email', Value: request.value.email }),
-    new CognitoUserAttribute({ Name: 'name', Value: request.value.name }),
-  ]
-
-  const userPool = new CognitoUserPool(userPoolData);
-  userPool.signUp(request.value.email, request.value.password, attributes, [], (error, result) => {
-    if (error) {
-      appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-      return
-    }
-
+  try {
+    const result = await signUp(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
     router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
-  })
+  } catch (error) {
+    appStore.displayErrorMessage(t('errorMessage'), error)
+  }
 }
-
 </script>
 
 <i18n lang="json">

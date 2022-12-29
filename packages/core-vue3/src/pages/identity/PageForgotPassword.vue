@@ -47,11 +47,11 @@
 import { mdiLockReset, mdiAt } from '@mdi/js';
 import { useCognito, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
+import { ForgotPassword } from "../../types"
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { Ref, ref } from 'vue';
-import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js'
 import { useRouter } from 'vue-router';
 
 usePage()
@@ -59,13 +59,15 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
-const { userPoolData } = useCognito()
+const { forgotPassword } = useCognito()
 const { required, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<any> = ref({})
+const request: Ref<ForgotPassword> = ref({
+  email: ''
+})
 
 async function reset() {
   const { valid } = await form.value!.validate()
@@ -73,19 +75,14 @@ async function reset() {
     return;
   }
 
-  const userPool = new CognitoUserPool(userPoolData);
-  const user = new CognitoUser({ Username: request.value.email, Pool: userPool })
-  user.forgotPassword({
-    onFailure: (error) => {
-      appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-    },
-    onSuccess: (result) => {
-      appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
-      router.push({ name: 'ResetPassword', query: { email: request.value.email } })
-    }
-  })
+  try {
+    await forgotPassword(request.value)
+    appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
+    router.push({ name: 'ResetPassword', query: { email: request.value.email } })
+  } catch (error) {
+    appStore.displayErrorMessage(t('errorMessage'), error)
+  }
 }
-
 </script>
 
 <i18n lang="json">

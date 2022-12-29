@@ -82,9 +82,9 @@ import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref, watch } from 'vue';
-import { CognitoUserPool, CognitoUser, AuthenticationDetails, IAuthenticationCallback } from 'amazon-cognito-identity-js'
+import { Ref, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { Login } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -93,20 +93,15 @@ const online = useOnline()
 const route = useRoute()
 const router = useRouter()
 const identityStore = useIdentityStore()
-const { userPoolData, silentlyFetchAttributes } = useCognito()
+const { authenticateUser, fetchUserAttributes } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<any> = ref({})
-
-// INIT & RELOAD PAGE (navigation)
-request.value.email = route.query.email
-watch(() => route.query.email, () => {
-  if (route.query.email) {
-    request.value.email = route.query.email
-  }
+const request: Ref<Login> = ref({
+  email: route.query.email?.toString() || '',
+  password: '',
 })
 
 async function login() {
@@ -115,55 +110,16 @@ async function login() {
     return;
   }
 
-  const userPool = new CognitoUserPool(userPoolData)
-  const user = new CognitoUser({ Username: request.value.email, Pool: userPool })
-  const authenticationDetails = new AuthenticationDetails({ Username: request.value.email, Password: request.value.password })
-  const callbacks: IAuthenticationCallback = {
-    onFailure: (error) => {
-      appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-    },
-    onSuccess: () => {
-      identityStore.isAuthenticated = true
-      silentlyFetchAttributes()
-      appStore.displayInfoMessage(t('successMessage'))
-      router.push({ name: 'Home' })
-    },
-    mfaSetup: () => {
-      // @todo Here, manage TOTP MFA with a dedicated QR Code to scan
-      user.associateSoftwareToken({
-        onFailure: (error) => {
-          appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-        },
-        associateSecretCode: (secretCode) => {
-		      // user.verifySoftwareToken(challengeAnswer, 'My TOTP device', callbacks);
-        }
-      })
-    },
-    customChallenge: () => {
-      // @todo See what it means
-      console.log('customChallenge')
-    },
-    mfaRequired: () => {
-      // @todo Here, send MFA code via user.sendMFACode(verificationCode, callbacks);
-      console.log('mfaRequired')
-    },
-    newPasswordRequired: () => {
-      // @todo Here, manage password setup after a user creation from the administration panel
-      console.log('newPasswordRequired')
-    },
-    selectMFAType: () => {
-      // @todo See what it means
-      console.log('selectMFAType')
-    },
-    totpRequired: () => {
-      // @todo See what it means
-      console.log('totpRequired')
-    }
+  try {
+    await authenticateUser(request.value)
+    identityStore.isAuthenticated = true
+    fetchUserAttributes()
+    appStore.displayInfoMessage(t('successMessage'))
+    router.push({ name: 'Home' })
+  } catch (error) {
+    appStore.displayErrorMessage(t('errorMessage'), error)
   }
-
-  user.authenticateUser(authenticationDetails, callbacks)
 }
-
 </script>
 
 <i18n lang="json">

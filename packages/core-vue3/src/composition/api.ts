@@ -1,12 +1,13 @@
 import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import { useRouter } from "vue-router"
-import { useAppStore, useLanguageStore } from "../stores"
+import { useAppStore, useIdentityStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
 import { IHttpSettings, IProblemDetails } from "../types/http"
 import { AuthPolicy } from "../types/http/IHttpSettings"
 import { useCognito } from './cognito'
 import { useCoreOptions } from "./options"
 import { useI18n } from 'vue-i18n'
+import { storeToRefs } from "pinia"
 
 export function useApi(relativeBaseUri: string) {
 
@@ -31,9 +32,12 @@ export function useApi(relativeBaseUri: string) {
 
   const appStore = useAppStore()
   const languageStore = useLanguageStore()
-  const { isAuthenticated, getToken } = useCognito()
+  const identityStore = useIdentityStore()
+  const { getToken } = useCognito()
   const router = useRouter();
   const coreOptions = useCoreOptions()
+
+  const { isAuthenticated } = storeToRefs(identityStore)
   const baseUri = `${coreOptions.api.gatewayUri}${relativeBaseUri}`
 
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {

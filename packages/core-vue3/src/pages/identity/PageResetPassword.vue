@@ -82,9 +82,9 @@ import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref, watch } from 'vue';
-import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js'
+import { Ref, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { ResetPassword } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -92,20 +92,17 @@ const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
 const route = useRoute()
-const { userPoolData } = useCognito()
+const { confirmPassword } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<any> = ref({})
-
-// INIT & RELOAD PAGE (navigation)
-request.value.email = route.query.email
-watch(() => route.query.email, () => {
-  if (route.query.email) {
-    request.value.email = route.query.email
-  }
+const request: Ref<ResetPassword> = ref({
+  email: route.query.email?.toString() || '',
+  password: '',
+  confirmationPassword: '',
+  code: '',
 })
 
 async function reset() {
@@ -114,19 +111,14 @@ async function reset() {
     return;
   }
 
-  const userPool = new CognitoUserPool(userPoolData);
-  const user = new CognitoUser({ Username: request.value.email, Pool: userPool })
-  user.confirmPassword(request.value.code, request.value.password, {
-    onFailure: (error) => {
-      appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-    },
-    onSuccess: (result) => {
-      appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
-      router.push({ name: 'Login', query: { email: request.value.email } })
-    }
-  })
+  try {
+    await confirmPassword(request.value);
+    appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
+    router.push({ name: 'Login', query: { email: request.value.email } })
+  } catch (error) {
+    appStore.displayErrorMessage(t('errorMessage'), error)
+  }
 }
-
 </script>
 
 <i18n lang="json">

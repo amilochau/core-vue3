@@ -23,19 +23,24 @@
 
 <script setup lang="ts">
 import { mdiAccountCircle, mdiCardAccountMail, mdiFaceMan, mdiPower } from '@mdi/js'
+import { storeToRefs } from 'pinia';
 import { computed, mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useClean, useCognito } from '../../../../composition';
+import { useIdentityStore } from '../../../../stores';
 
 const { t } = useI18n()
-const { attributes, silentlyLogout } = useCognito()
+const { signOut } = useCognito()
 const { clean } = useClean()
 const router = useRouter()
+const identityStore = useIdentityStore()
 
-const cleanAndLogout = () => {
+const { attributes } = storeToRefs(identityStore)
+
+const cleanAndLogout = async () => {
+  await signOut();
   clean();
-  silentlyLogout();
   router.push({ name: 'Home' })
 }
 

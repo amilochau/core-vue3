@@ -18,7 +18,6 @@
                 :label="t('email')"
                 :prepend-icon="mdiAt"
                 :rules="[ required(), maxLength(200), emailAddress() ]"
-                :readonly="emailReadonly"
                 variant="underlined"
                 density="comfortable"
                 hide-details="auto"
@@ -61,9 +60,9 @@ import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref, watch } from 'vue';
-import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js'
+import { Ref, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { ConfirmEmail } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -71,22 +70,15 @@ const appStore = useAppStore()
 const online = useOnline()
 const route = useRoute()
 const router = useRouter()
-const { userPoolData } = useCognito()
+const { confirmRegistration } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<any> = ref({})
-
-// INIT & RELOAD PAGE (navigation)
-request.value.email = route.query.email
-const emailReadonly = ref(!!route.query.email)
-watch(() => route.query.email, () => {
-  if (route.query.email) {
-    request.value.email = route.query.email
-  }
-  emailReadonly.value = !!route.query.email
+const request: Ref<ConfirmEmail> = ref({
+  email: route.query.email?.toString() || '',
+  code: '',
 })
 
 async function verifyCode() {
@@ -95,17 +87,13 @@ async function verifyCode() {
     return;
   }
 
-  const userPool = new CognitoUserPool(userPoolData)
-  const user = new CognitoUser({ Username: request.value.email, Pool: userPool })
-  user.confirmRegistration(request.value.code, true, (error, result) => {
-    if (error) {
-      appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
-      return
-    }
-
+  try {
+    await confirmRegistration(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
     router.push({ name: 'Login', query: { email: request.value.email } })
-  })
+  } catch (error) {
+    appStore.displayErrorMessage(t('errorMessage'), error)
+  }
 }
 </script>
 
