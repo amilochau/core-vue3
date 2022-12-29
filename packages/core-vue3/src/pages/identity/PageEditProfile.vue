@@ -16,6 +16,7 @@
               <v-text-field
                 v-model="request.name"
                 :label="t('name')"
+                :prepend-icon="mdiAccount"
                 :rules="[ required(), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -42,8 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountEdit } from '@mdi/js';
-import { useCognitoClient, usePage, useValidationRules } from '../../composition';
+import { mdiAccountEdit, mdiAccount } from '@mdi/js';
+import { useCognito, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -57,7 +58,7 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
-const { userPoolData, attributes, silentlyFetchAttributes } = useCognitoClient()
+const { userPoolData, attributes, silentlyFetchAttributes } = useCognito()
 const { required, maxLength } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
@@ -90,7 +91,7 @@ async function editProfile() {
         appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
         return
       }
-      
+
       appStore.displayInfoMessage(t('successMessage'))
       router.push({ name: 'Profile' })
       silentlyFetchAttributes()

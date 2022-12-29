@@ -4,7 +4,7 @@ import { useAppStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
 import { IHttpSettings, IProblemDetails } from "../types/http"
 import { AuthPolicy } from "../types/http/IHttpSettings"
-import { useCognitoClient } from './cognito'
+import { useCognito } from './cognito'
 import { useCoreOptions } from "./options"
 import { useI18n } from 'vue-i18n'
 
@@ -31,7 +31,7 @@ export function useApi(relativeBaseUri: string) {
 
   const appStore = useAppStore()
   const languageStore = useLanguageStore()
-  const { isAuthenticated, getToken } = useCognitoClient()
+  const { isAuthenticated, getToken } = useCognito()
   const router = useRouter();
   const coreOptions = useCoreOptions()
   const baseUri = `${coreOptions.api.gatewayUri}${relativeBaseUri}`

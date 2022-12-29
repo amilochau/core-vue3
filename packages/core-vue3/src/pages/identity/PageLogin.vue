@@ -17,6 +17,7 @@
               <v-text-field
                 v-model="request.email"
                 :label="t('email')"
+                :prepend-icon="mdiAt"
                 :rules="[ required(), maxLength(200), emailAddress() ]"
                 variant="underlined"
                 density="comfortable"
@@ -27,6 +28,7 @@
               <v-text-field
                 v-model="request.password"
                 :label="t('password')"
+                :prepend-icon="mdiLock"
                 :rules="[ required(), minLength(6), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -74,8 +76,8 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountLockOpen } from '@mdi/js';
-import { useCognitoClient, usePage, useValidationRules } from '../../composition';
+import { mdiAccountLockOpen, mdiAt, mdiLock } from '@mdi/js';
+import { useCognito, usePage, useValidationRules } from '../../composition';
 import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -91,7 +93,7 @@ const online = useOnline()
 const route = useRoute()
 const router = useRouter()
 const identityStore = useIdentityStore()
-const { userPoolData, silentlyFetchAttributes } = useCognitoClient()
+const { userPoolData, silentlyFetchAttributes } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)

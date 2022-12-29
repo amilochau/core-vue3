@@ -16,6 +16,7 @@
               <v-text-field
                 v-model="request.email"
                 :label="t('email')"
+                :prepend-icon="mdiAt"
                 :rules="[ required(), maxLength(200), emailAddress() ]"
                 variant="underlined"
                 density="comfortable"
@@ -26,6 +27,7 @@
               <v-text-field
                 v-model="request.password"
                 :label="t('password')"
+                :prepend-icon="mdiLock"
                 :rules="[ required(), minLength(6), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -38,8 +40,8 @@
               <v-btn
                 :disabled="loading || !online"
                 :loading="loading"
-                :prepend-icon="mdiAccountRemove"
-                color="primary"
+                :prepend-icon="mdiAccountOff"
+                color="error"
                 variant="text"
                 @click="deleteAccount">
                 {{ t('deleteAccount') }}
@@ -53,8 +55,8 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountRemove } from '@mdi/js';
-import { useClean, useCognitoClient, usePage, useValidationRules } from '../../composition';
+import { mdiAccountOff, mdiAt, mdiLock } from '@mdi/js';
+import { useClean, useCognito, usePage, useValidationRules } from '../../composition';
 import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -70,7 +72,7 @@ const online = useOnline()
 const { clean } = useClean()
 const router = useRouter()
 const identityStore = useIdentityStore()
-const { userPoolData } = useCognitoClient()
+const { userPoolData } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)

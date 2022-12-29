@@ -26,10 +26,10 @@ import { mdiAccountCircle, mdiCardAccountMail, mdiFaceMan, mdiPower } from '@mdi
 import { computed, mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useClean, useCognitoClient } from '../../../../composition';
+import { useClean, useCognito } from '../../../../composition';
 
 const { t } = useI18n()
-const { attributes, silentlyLogout } = useCognitoClient()
+const { attributes, silentlyLogout } = useCognito()
 const { clean } = useClean()
 const router = useRouter()
 

@@ -26,15 +26,18 @@ import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProfileMenu from './AppProfileMenu.vue';
-import { useAppStore } from '../../../../stores';
-import { useCognito, useCoreOptions } from '../../../../composition';
+import { useAppStore, useIdentityStore } from '../../../../stores';
+import { useCoreOptions } from '../../../../composition';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
 
 const { t } = useI18n()
 const appStore = useAppStore()
-const { isAuthenticated } = useCognito();
+const identityStore = useIdentityStore()
 const coreOptions = useCoreOptions()
 const router = useRouter()
+
+const { isAuthenticated } = storeToRefs(identityStore)
 
 function toggleDrawer() {
   appStore.setDrawer(!appStore.drawer)

@@ -1,5 +1,4 @@
 import { CognitoUserPool, CognitoUserSession, ICognitoUserPoolData } from "amazon-cognito-identity-js"
-import { useRouter } from "vue-router"
 import { useCoreOptions } from "./options"
 import { useIdentityStore } from '../stores'
 import { storeToRefs } from "pinia"
@@ -7,46 +6,8 @@ import { storeToRefs } from "pinia"
 export function useCognito() {
 
   const identityStore = useIdentityStore()
-  const router = useRouter()
-
   const { isAuthenticated, attributes } = storeToRefs(identityStore)
-
-  const login = () => {
-    router.push({ name: 'Login' })
-  }
-
-  const register = () => {
-    router.push({ name: 'Register' })
-  }
-
-  const editProfile = () => {
-    router.push({ name: 'EditProfile' })
-  }
-
-  const editPassword = () => {
-    router.push({ name: 'EditPassword' })
-  }
-
-  const deleteAccount = () => {
-    router.push({ name: 'DeleteAccount' })
-  }
-
-  return {
-    isAuthenticated,
-    attributes,
-    login,
-    register,
-    editProfile,
-    editPassword,
-    deleteAccount,
-  }
-}
-
-export function useCognitoClient() {
-
-  const { isAuthenticated, attributes } = useCognito()
   const coreOptions = useCoreOptions()
-  const identityStore = useIdentityStore()
 
   const userPoolData: ICognitoUserPoolData = {
     UserPoolId: coreOptions.identity.cognito.userPoolId,

@@ -16,6 +16,7 @@
               <v-text-field
                 v-model="request.oldPassword"
                 :label="t('oldPassword')"
+                :prepend-icon="mdiLockClock"
                 :rules="[ required(), minLength(6), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -26,6 +27,7 @@
               <v-text-field
                 v-model="request.password"
                 :label="t('password')"
+                :prepend-icon="mdiLock"
                 :rules="[ required(), minLength(6), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -36,6 +38,7 @@
               <v-text-field
                 v-model="request.confirmationPassword"
                 :label="t('confirmationPassword')"
+                :prepend-icon="mdiLock"
                 :rules="[ required(), minLength(6), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -48,8 +51,8 @@
               <v-btn
                 :disabled="loading || !online"
                 :loading="loading"
-                :prepend-icon="mdiAccountEdit"
-                color="primary"
+                :prepend-icon="mdiLockReset"
+                color="warning"
                 variant="text"
                 @click="editPassword">
                 {{ t('editPassword') }}
@@ -63,8 +66,8 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountEdit } from '@mdi/js';
-import { useCognitoClient, usePage, useValidationRules } from '../../composition';
+import { mdiLockReset, mdiLockClock, mdiLock } from '@mdi/js';
+import { useCognito, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -78,7 +81,7 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
-const { userPoolData } = useCognitoClient()
+const { userPoolData } = useCognito()
 const { required, minLength, maxLength } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
@@ -105,7 +108,7 @@ async function editPassword() {
         appStore.displayErrorMessage(t('errorMessage'), error.message || JSON.stringify(error))
         return
       }
-      
+
       appStore.displayInfoMessage(t('successMessage'))
       router.push({ name: 'Profile' })
     })

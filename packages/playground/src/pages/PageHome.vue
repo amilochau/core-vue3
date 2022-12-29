@@ -46,7 +46,7 @@ import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useAppStore, useCognito, usePage } from '@amilochau/core-vue3';
+import { useAppStore, useIdentityStore, usePage } from '@amilochau/core-vue3';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
@@ -59,12 +59,13 @@ usePage()
 const { d } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
-const { attributes, isAuthenticated } = useCognito()
 const appStore = useAppStore()
+const identityStore = useIdentityStore()
 const online = useOnline()
 const { formatContactStatus } = useFormat()
 
 const { loading } = storeToRefs(appStore)
+const { attributes, isAuthenticated } = storeToRefs(identityStore)
 
 const dialog = ref(false)
 

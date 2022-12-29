@@ -17,6 +17,7 @@
               <v-text-field
                 v-model="request.name"
                 :label="t('name')"
+                :prepend-icon="mdiAccount"
                 :rules="[ required(), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -26,6 +27,7 @@
               <v-text-field
                 v-model="request.email"
                 :label="t('email')"
+                :prepend-icon="mdiAt"
                 :rules="[ required(), maxLength(200), emailAddress() ]"
                 variant="underlined"
                 density="comfortable"
@@ -36,6 +38,7 @@
               <v-text-field
                 v-model="request.password"
                 :label="t('password')"
+                :prepend-icon="mdiLock"
                 :rules="[ required(), minLength(6), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -46,6 +49,7 @@
               <v-text-field
                 v-model="request.confirmationPassword"
                 :label="t('confirmationPassword')"
+                :prepend-icon="mdiLock"
                 :rules="[ required(), minLength(6), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
@@ -83,8 +87,8 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountPlus } from '@mdi/js';
-import { useCognitoClient, usePage, useValidationRules } from '../../composition';
+import { mdiAccountPlus, mdiAccount, mdiAt, mdiLock } from '@mdi/js';
+import { useCognito, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -98,7 +102,7 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
-const { userPoolData } = useCognitoClient()
+const { userPoolData } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)

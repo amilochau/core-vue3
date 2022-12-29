@@ -73,7 +73,7 @@ export const coreOptions: MilochauCoreOptions = {
   }
 }
 
-// Create the plugin to be registred
+// Create the plugin to be registered
 export default createMilochauCore(coreOptions)
 ```
 
@@ -106,7 +106,7 @@ Here are the helpers you can use from your code.
 | ------ | ----------- |
 | `useApi` | Sends HTTP requests to the API gateway configured via `api.gatewayUri` ; manages HTTP errors |
 | `useClean` | Cleans data from storage, typically on logout, as configured via `clean` |
-| `useCognito` | Gets Cognito functions |
+| `useCognito` | Gets Cognito helpers |
 | `useCoreOptions` | Lets you get the core options defined on plugin registration |
 | `usePage` | Lets you define page metadata |
 | `useValidationRules` | Lets you use pre-defined validation rules on plain data |
@@ -133,18 +133,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `application.onAppBarTitleClick` | Action to run when the user clicks on the title from the app bar |
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
 | `i18n` | Options used by `vue-i18n` |
-| `identity.authorities.login` | Authority URI used to authenticate users and get tokens for API requests |
-| `identity.authorities.profile_edit` | Authority URI used to let users edit their profile |
-| `identity.authorities.password_edit` | Authority URI used to let users edit their password |
-| `identity.authorities.account_delete` | Authority URI used to let users delete their profile |
 | `identity.cognito` | Cognito settings for authentication |
-| `identity.scopes.use` | URI of the scope used to let user make API requests |
-| `identity.auth.clientId` | ClientID of the current application, as defined in the identity provider |
-| `identity.auth.authority` | Authority used to perform API requests; typically set to `identity.authorities.login` |
-| `identity.auth.knownAuthorities` | List of know authorities for authentication |
-| `identity.auth.redirectUri` | Redirect URI to call after authentication |
-| `identity.auth.postLogoutRedirectUri` | Redirect URI to call after logout |
-| `identity.loginRequest.scopes` | Scopes to include in the login request |
 | `routes` | List of `vue-router` routes, to register application pages |
 | `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
 

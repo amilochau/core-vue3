@@ -4,10 +4,10 @@
   </h2>
   <v-btn
     :disabled="loading"
+    :to="{ name: 'Login' }"
     class="mt-12"
     color="primary"
-    large
-    @click="login">
+    large>
     {{ t("button") }}
   </v-btn>
 </template>
@@ -15,10 +15,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useAppStore, useCognito } from '@amilochau/core-vue3';
+import { useAppStore } from '@amilochau/core-vue3';
 
 const { t } = useI18n()
-const { login } = useCognito()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>

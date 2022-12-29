@@ -16,6 +16,7 @@
               <v-text-field
                 v-model="request.email"
                 :label="t('email')"
+                :prepend-icon="mdiAt"
                 :rules="[ required(), maxLength(200), emailAddress() ]"
                 variant="underlined"
                 density="comfortable"
@@ -43,8 +44,8 @@
 </template>
 
 <script setup lang="ts">
-import { mdiLockReset } from '@mdi/js';
-import { useCognitoClient, usePage, useValidationRules } from '../../composition';
+import { mdiLockReset, mdiAt } from '@mdi/js';
+import { useCognito, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -58,7 +59,7 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
-const { userPoolData } = useCognitoClient()
+const { userPoolData } = useCognito()
 const { required, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
