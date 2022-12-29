@@ -6,6 +6,7 @@
 
 The following plugins are installed by `@amilochau/core-vue3`:
 - `msal`
+- `amazon-cognito-identity-js`
 - `pinia`
 - `vue-i18n`
 - `vue-router`

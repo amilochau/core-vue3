@@ -9,7 +9,8 @@
         </h2>
         <v-form
           ref="form"
-          :readonly="loading">
+          :readonly="loading"
+          class="mb-4">
           <v-card
             elevation="0">
             <v-card-text>
@@ -47,6 +48,26 @@
             </v-card-text>
           </v-card>
         </v-form>
+        <h4 class="mb-4 text-body-2 font-italic text-center">
+          {{ t('registerTitle') }}
+          <v-btn
+            :to="{ name: 'Register' }"
+            density="compact"
+            variant="text"
+            class="ml-1">
+            {{ t('registerLink') }}
+          </v-btn>
+        </h4>
+        <h4 class="mb-4 text-body-2 font-italic text-center">
+          {{ t('forgotPasswordTitle') }}
+          <v-btn
+            :to="{ name: 'ForgotPassword' }"
+            density="compact"
+            variant="text"
+            class="ml-1">
+            {{ t('forgotPasswordLink') }}
+          </v-btn>
+        </h4>
       </v-col>
     </v-row>
   </v-container>
@@ -137,7 +158,7 @@ async function login() {
       console.log('totpRequired')
     }
   }
-  
+
   user.authenticateUser(authenticationDetails, callbacks)
 }
 
@@ -163,7 +184,11 @@ async function login() {
       "password": "Your password",
       "login": "Login",
       "errorMessage": "An error occured.",
-      "successMessage": "Welcome!"
+      "successMessage": "Welcome!",
+      "registerTitle": "You don't have any account yet?",
+      "registerLink": "Register",
+      "forgotPasswordTitle": "You can't remember your password?",
+      "forgotPasswordLink": "Reset"
     },
     "fr": {
       "title": "Connexion",
@@ -171,7 +196,11 @@ async function login() {
       "password": "Votre mot de passe",
       "login": "Se connecter",
       "errorMessage": "Une erreur est survenue.",
-      "successMessage": "Bienvenue !"
+      "successMessage": "Bienvenue !",
+      "registerTitle": "Vous n'avez pas encore de compte ?",
+      "registerLink": "S'inscrire",
+      "forgotPasswordTitle": "Vous avez oublié votre mot de passe ?",
+      "forgotPasswordLink": "Réinitialiser"
     }
   }
 </i18n>
