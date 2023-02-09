@@ -17,6 +17,7 @@
     <app-settings-menu />
     <app-profile-menu v-if="isAuthenticated" />
     <app-login-btn v-else />
+    <app-progress-bar :lazy-delay="200" />
   </v-app-bar>
 </template>
 
@@ -26,6 +27,7 @@ import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProfileMenu from './AppProfileMenu.vue';
+import AppProgressBar from '../AppProgressBar.vue'
 import { useAppStore, useIdentityStore } from '../../../../stores';
 import { useCoreOptions } from '../../../../composition';
 import { useRouter } from 'vue-router';
