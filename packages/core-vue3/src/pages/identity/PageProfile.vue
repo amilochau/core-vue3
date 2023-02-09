@@ -29,28 +29,28 @@
           <v-btn
             :disabled="loading || !online"
             :loading="loading"
-            :prepend-icon="mdiPencil"
+            :prepend-icon="mdiAccountEdit"
+            :to="{ name: 'EditProfile' }"
             color="primary"
-            variant="text"
-            @click="editProfile">
+            variant="text">
             {{ t('editProfile') }}
           </v-btn>
           <v-btn
             :disabled="loading || !online"
             :loading="loading"
             :prepend-icon="mdiLockReset"
+            :to="{ name: 'EditPassword' }"
             color="warning"
-            variant="text"
-            @click="editPassword">
+            variant="text">
             {{ t('editPassword') }}
           </v-btn>
           <v-btn
             :disabled="loading || !online"
             :loading="loading"
             :prepend-icon="mdiAccountOff"
+            :to="{ name: 'DeleteAccount' }"
             color="error"
-            variant="text"
-            @click="deleteAccount">
+            variant="text">
             {{ t('deleteAccount') }}
           </v-btn>
         </v-card-text>
@@ -60,31 +60,32 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountOff, mdiCardAccountMail, mdiEmail, mdiLockReset, mdiPencil } from '@mdi/js';
+import { mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useMsal, usePage } from '../composition';
-import { useAppStore } from '../stores';
+import { usePage } from '../../composition';
+import { useAppStore, useIdentityStore } from '../../stores';
 import { useOnline } from '@vueuse/core';
 
 usePage()
 const { t } = useI18n()
-const { accountInfo, editProfile, editPassword, deleteAccount } = useMsal()
 const online = useOnline()
 const appStore = useAppStore()
+const identityStore = useIdentityStore()
 
 const { loading } = storeToRefs(appStore)
+const { attributes } = storeToRefs(identityStore)
 
 const contactItems = computed(() => ([{
-  title: accountInfo.value.name,
+  title: attributes.value.email,
   props: {
-    prependIcon: mdiCardAccountMail,
+    prependIcon: mdiAt,
   },
 }, {
-  title: accountInfo.value.email,
+  title: attributes.value.name,
   props: {
-    prependIcon: mdiEmail,
+    prependIcon: mdiAccount,
   },
 }]))
 </script>
@@ -106,14 +107,14 @@ const contactItems = computed(() => ([{
     "en": {
       "title": "Profile",
       "profileDetails": "Profile details",
-      "editProfile": "Manage your profile",
+      "editProfile": "Edit your profile",
       "editPassword": "Edit password",
       "deleteAccount": "Delete account"
     },
     "fr": {
       "title": "Profil",
       "profileDetails": "Détails de profil",
-      "editProfile": "Gérer votre profil",
+      "editProfile": "Modifier votre profil",
       "editPassword": "Modifier votre mot de passe",
       "deleteAccount": "Supprimer votre compte"
     }

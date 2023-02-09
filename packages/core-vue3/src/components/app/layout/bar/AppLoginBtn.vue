@@ -4,7 +4,7 @@
       <v-btn
         v-bind="tooltip"
         :icon="mdiPower"
-        @click="login" />
+        :to="{ name: 'Login' }" />
     </template>
     <span>{{ t('title') }}</span>
   </v-tooltip>
@@ -13,10 +13,8 @@
 <script setup lang="ts">
 import { mdiPower } from '@mdi/js'
 import { useI18n } from 'vue-i18n';
-import { useMsal } from '../../../../composition';
 
 const { t } = useI18n()
-const { login } = useMsal()
 </script>
 
 <i18n lang="json">

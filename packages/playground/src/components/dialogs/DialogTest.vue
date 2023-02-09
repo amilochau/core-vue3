@@ -73,12 +73,12 @@ const form: Ref<any> = ref(null)
 const request: Ref<MapsCreateRequest> = ref(new MapsCreateRequest())
 
 async function save() {
-  var validationResult = await form.value!.validate()
-  if (!validationResult.valid) {
+  const { valid } = await form.value!.validate()
+  if (!valid) {
     return;
   }
 
-  appStore.displayInfoMessage(t('testMessage'), 'Important details to display in the snackbar',)
+  appStore.displayInfoMessage(t('testMessage'), 'Important details to display in the snackbar')
 }
 
 watch(() => props.modelValue, () => props.modelValue ? open() : close())

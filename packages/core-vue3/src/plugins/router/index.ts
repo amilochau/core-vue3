@@ -4,10 +4,8 @@ import routes from '../../data/routes'
 import { registerGuards } from './guards'
 import { App } from 'vue'
 import { MilochauCoreOptions } from '../../types'
-import { PublicClientApplication } from '@azure/msal-browser'
-import { CustomNavigationClient } from './navigation-client'
 import merge from 'deepmerge'
-import { useLanguageStore } from '../../stores'
+import { useIdentityStore, useLanguageStore } from '../../stores'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -16,8 +14,9 @@ declare module 'vue-router' {
 }
 
 export default {
-  install: (app: App, msalInstance: PublicClientApplication, options: MilochauCoreOptions) => {
+  install: (app: App, options: MilochauCoreOptions) => {
     const languageStore = useLanguageStore()
+    const identityStore = useIdentityStore()
 
     const routesWithRedirection: Array<RouteRecordRaw> = [
       {
@@ -42,11 +41,7 @@ export default {
     })
 
     // Register guards
-    registerGuards(router);
-
-    // Use router for MSAL redirections
-    const navigationClient = new CustomNavigationClient(router);
-    msalInstance.setNavigationClient(navigationClient);
+    registerGuards(router, identityStore);
 
     app.use(router)
 

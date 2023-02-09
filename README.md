@@ -5,7 +5,7 @@
 `@amilochau/core-vue3` is a opinionated package used to initialize vue 3 applications.
 
 The following plugins are installed by `@amilochau/core-vue3`:
-- `msal`
+- `amazon-cognito-identity-js`
 - `pinia`
 - `vue-i18n`
 - `vue-router`
@@ -58,21 +58,9 @@ export const coreOptions: MilochauCoreOptions = {
     },
   },
   identity: {
-    authorities: authorities,
-    scopes: {
-      use: 'THE SCOPE TO USE FOR API AUTHORIZATION',
-    },
-    auth: {
-      clientId: 'THE CLIENT ID OF YOUR APPLICATION',
-      authority: authorities.login,
-      knownAuthorities: ['THE AUTHORITY OF YOUR IDENTITY PROVIDER'],
-      redirectUri: 'THE REDIRECT URI TO CALL AFTER AUTHENTICATION',
-      postLogoutRedirectUri: 'THE REDIRECT URI TO CALL AFTER LOGOUT'
-    },
-    loginRequest: {
-      scopes: [
-        scopes.use
-      ],
+    cognito: {
+      userPoolId: 'YOUR COGNITO USER POOL ID',
+      clientId: 'YOUR COGNITO CLIENT ID',
     }
   },
   routes: [], // <== USE THIS SECTION TO ADD ROUTES
@@ -85,7 +73,7 @@ export const coreOptions: MilochauCoreOptions = {
   }
 }
 
-// Create the plugin to be registred
+// Create the plugin to be registered
 export default createMilochauCore(coreOptions)
 ```
 
@@ -118,10 +106,8 @@ Here are the helpers you can use from your code.
 | ------ | ----------- |
 | `useApi` | Sends HTTP requests to the API gateway configured via `api.gatewayUri` ; manages HTTP errors |
 | `useClean` | Cleans data from storage, typically on logout, as configured via `clean` |
+| `useCognito` | Gets Cognito helpers |
 | `useCoreOptions` | Lets you get the core options defined on plugin registration |
-| `useIsAuthenticated` | Lets you know if the current user is authenticated via MSAL |
-| `useMsal` | Gets MSAL current instance, user account info, and user account functions |
-| `useMsalAuthentication` | Lets you acquire token from MSAL to send requests |
 | `usePage` | Lets you define page metadata |
 | `useValidationRules` | Lets you use pre-defined validation rules on plain data |
 
@@ -131,6 +117,7 @@ Here are the `pinia` stores you can use from your code.
 | ---------- | ------ | ----------- |
 | `app` | `useAppStore` | Lets you display messages in a snackbar |
 | `cookies` | `useCookiesStore` | Lets you known if the current user has accepted cookies |
+| `identity` | `useIdentityStore` | Lets you display data from the current user |
 | `language` | `useLanguageStore` | Lets you know the current language configured for the UI |
 | `theme` | `useThemeStore` | Lets you know the current theme configured for the UI |
 
@@ -146,17 +133,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `application.onAppBarTitleClick` | Action to run when the user clicks on the title from the app bar |
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
 | `i18n` | Options used by `vue-i18n` |
-| `identity.authorities.login` | Authority URI used to authenticate users and get tokens for API requests |
-| `identity.authorities.profile_edit` | Authority URI used to let users edit their profile |
-| `identity.authorities.password_edit` | Authority URI used to let users edit their password |
-| `identity.authorities.account_delete` | Authority URI used to let users delete their profile |
-| `identity.scopes.use` | URI of the scope used to let user make API requests |
-| `identity.auth.clientId` | ClientID of the current application, as defined in the identity provider |
-| `identity.auth.authority` | Authority used to perform API requests; typically set to `identity.authorities.login` |
-| `identity.auth.knownAuthorities` | List of know authorities for authentication |
-| `identity.auth.redirectUri` | Redirect URI to call after authentication |
-| `identity.auth.postLogoutRedirectUri` | Redirect URI to call after logout |
-| `identity.loginRequest.scopes` | Scopes to include in the login request |
+| `identity.cognito` | Cognito settings for authentication |
 | `routes` | List of `vue-router` routes, to register application pages |
 | `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
 

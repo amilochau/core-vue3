@@ -20,29 +20,23 @@ export const defaultEnv: Environment = Environment.Default
 export const envConfig: EnvConfigValues = {
   default: {
     VITE_GOOGLE_MAPS_API_KEY: "AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg",
-    VITE_API_AUTHORITY: "milochau.b2clogin.com",
-    VITE_API_AUTHORITY_LOGIN: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_LOGIN",
-    VITE_API_AUTHORITY_PROFILEEDIT: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PROFILEEDIT",
-    VITE_API_AUTHORITY_PASSWORDEDIT: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_PASSWORDEDIT",
-    VITE_API_AUTHORITY_ACCOUNTDELETE: "https://milochau.b2clogin.com/tfp/milochau.onmicrosoft.com/B2C_1A_ACCOUNTDELETE",
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   },
   local: {
-    VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
-    VITE_API_CLIENT_ID: "5ea3d7ac-f358-4a7b-9702-6b4672faf89a",
-    VITE_REDIRECT_URI: "http://localhost:3000",
-    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-development/Use"
+    VITE_API_URL: "https://d37652aw4wwcmu.cloudfront.net/api/dev/a",
+    VITE_COGNITO_USERPOOL_ID: "eu-west-3_QwBo27M3S",
+    VITE_COGNITO_CLIENT_ID: '7god4371rupcqh89ectg2ivcg5',
   },
   dev: {
     VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
-    VITE_API_CLIENT_ID: "5ea3d7ac-f358-4a7b-9702-6b4672faf89a",
-    VITE_REDIRECT_URI: "https://maps-dev.milochau.com",
-    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-development/Use"
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   },
   prd: {
     VITE_API_URL: "https://api.milochau.com/maps/v1",
-    VITE_API_CLIENT_ID: "2aa180f1-f100-4f05-b378-ff01f2610a9e",
-    VITE_REDIRECT_URI: "https://maps.milochau.com",
-    VITE_API_SCOPE_USE: "https://milochau.onmicrosoft.com/maps-api-production/Use"
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   }
 }
 
@@ -54,17 +48,6 @@ export const getCurrentEnv = (host: string, subdomain: string): Environment => {
   } else {
     return Environment.Production
   }
-}
-
-export const authorities = {
-  login: getConfig('VITE_API_AUTHORITY_LOGIN'),
-  profile_edit: getConfig('VITE_API_AUTHORITY_PROFILEEDIT'),
-  password_edit: getConfig('VITE_API_AUTHORITY_PASSWORDEDIT'),
-  account_delete: getConfig('VITE_API_AUTHORITY_ACCOUNTDELETE'),
-}
-
-export const scopes = {
-  use: getConfig('VITE_API_SCOPE_USE'),
 }
 
 export const coreOptions: MilochauCoreOptions = {
@@ -89,22 +72,10 @@ export const coreOptions: MilochauCoreOptions = {
     //fallbackWarn: false
   },
   identity: {
-    authorities: authorities,
-    scopes: {
-      use: getConfig('VITE_API_SCOPE_USE'),
+    cognito: {
+      userPoolId: getConfig('VITE_COGNITO_USERPOOL_ID'),
+      clientId: getConfig('VITE_COGNITO_CLIENT_ID'),
     },
-    auth: {
-      clientId: getConfig('VITE_API_CLIENT_ID'),
-      authority: authorities.login,
-      knownAuthorities: [getConfig('VITE_API_AUTHORITY')],
-      redirectUri: getConfig('VITE_REDIRECT_URI'),
-      postLogoutRedirectUri: getConfig('VITE_REDIRECT_URI')
-    },
-    loginRequest: {
-      scopes: [
-        scopes.use
-      ],
-    }
   },
   routes: routes,
   clean: () => {
@@ -113,5 +84,5 @@ export const coreOptions: MilochauCoreOptions = {
     return () => {
       mapsStore.clean();
     }
-  }
+  },
 }

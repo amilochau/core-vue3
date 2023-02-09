@@ -28,16 +28,10 @@
 
         <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
         <p>
-          MSAL data (account info)
+          Cognito user attributes
         </p>
         <p>
-          {{ accountInfo }}
-        </p>
-        <p>
-          MSAL data (accounts)
-        </p>
-        <p>
-          {{ accounts }}
+          {{ attributes }}
         </p>
 
         <dialog-test v-model="dialog" />
@@ -52,7 +46,7 @@ import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useAppStore, useIsAuthenticated, useMsal, usePage } from '@amilochau/core-vue3';
+import { useAppStore, useIdentityStore, usePage } from '@amilochau/core-vue3';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
@@ -65,13 +59,13 @@ usePage()
 const { d } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
-const isAuthenticated = useIsAuthenticated()
-const { accountInfo, accounts } = useMsal()
 const appStore = useAppStore()
+const identityStore = useIdentityStore()
 const online = useOnline()
 const { formatContactStatus } = useFormat()
 
 const { loading } = storeToRefs(appStore)
+const { attributes, isAuthenticated } = storeToRefs(identityStore)
 
 const dialog = ref(false)
 

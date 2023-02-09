@@ -23,25 +23,33 @@
 
 <script setup lang="ts">
 import { mdiAccountCircle, mdiCardAccountMail, mdiFaceMan, mdiPower } from '@mdi/js'
-import { mergeProps } from 'vue'
+import { storeToRefs } from 'pinia';
+import { computed, mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
-import { useClean, useMsal } from '../../../../composition';
+import { useRouter } from 'vue-router';
+import { useClean, useCognito } from '../../../../composition';
+import { useIdentityStore } from '../../../../stores';
 
 const { t } = useI18n()
-const { accountInfo, logout } = useMsal()
+const { signOut } = useCognito()
 const { clean } = useClean()
+const router = useRouter()
+const identityStore = useIdentityStore()
 
-const cleanAndLogout = () => {
+const { attributes } = storeToRefs(identityStore)
+
+const cleanAndLogout = async () => {
+  await signOut();
   clean();
-  logout();
+  router.push({ name: 'Home' })
 }
 
-const menuItems = [
-  { title: accountInfo.value.name, subtitle: accountInfo.value.email, prependIcon: mdiFaceMan },
+const menuItems = computed(() => [
+  { title: attributes.value.name, subtitle: attributes.value.email, prependIcon: mdiFaceMan },
   { type: 'divider' },
   { title: t('manageProfile'), prependIcon: mdiCardAccountMail, to: { name: 'Profile' } },
   { title: t('logout'), prependIcon: mdiPower, onClick: cleanAndLogout }
-]
+])
 </script>
 
 <i18n lang="json">

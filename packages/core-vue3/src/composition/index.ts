@@ -1,6 +1,6 @@
 import { useApi } from "./api";
 import { useClean } from './clean';
-import { useMsal, useIsAuthenticated, useMsalAuthentication } from "./msal";
+import { useCognito } from './cognito';
 import { useCoreOptions } from "./options";
 import { usePage } from "./page";
 import { useValidationRules } from './validation'
@@ -8,10 +8,8 @@ import { useValidationRules } from './validation'
 export {
   useApi,
   useClean,
+  useCognito,
   useCoreOptions,
-  useIsAuthenticated,
-  useMsal,
-  useMsalAuthentication,
   usePage,
-  useValidationRules  
+  useValidationRules
 }

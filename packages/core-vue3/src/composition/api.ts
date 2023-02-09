@@ -1,13 +1,13 @@
-import { InteractionRequiredAuthError } from "@azure/msal-browser"
 import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import { useRouter } from "vue-router"
-import { useAppStore, useLanguageStore } from "../stores"
+import { useAppStore, useIdentityStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
 import { IHttpSettings, IProblemDetails } from "../types/http"
 import { AuthPolicy } from "../types/http/IHttpSettings"
-import { useIsAuthenticated, useMsal } from "./msal"
+import { useCognito } from './cognito'
 import { useCoreOptions } from "./options"
 import { useI18n } from 'vue-i18n'
+import { storeToRefs } from "pinia"
 
 export function useApi(relativeBaseUri: string) {
 
@@ -32,10 +32,12 @@ export function useApi(relativeBaseUri: string) {
 
   const appStore = useAppStore()
   const languageStore = useLanguageStore()
-  const msal = useMsal()
-  const isAuthenticated = useIsAuthenticated()
+  const identityStore = useIdentityStore()
+  const { getToken } = useCognito()
   const router = useRouter();
   const coreOptions = useCoreOptions()
+
+  const { isAuthenticated } = storeToRefs(identityStore)
   const baseUri = `${coreOptions.api.gatewayUri}${relativeBaseUri}`
 
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
@@ -126,15 +128,7 @@ export function useApi(relativeBaseUri: string) {
         || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
         // The user is not logged in but we don't mind
       } else {
-        const authResponse = await msal.instance.acquireTokenSilent({
-          ...coreOptions.identity.loginRequest
-        }).catch(async (e) => {
-          if (e instanceof InteractionRequiredAuthError) {
-            await msal.instance.acquireTokenRedirect(coreOptions.identity.loginRequest)
-          }
-          throw e
-        })
-        accessToken = authResponse.accessToken
+        accessToken = await getToken()
       }
 
       const requestInit = getRequestInit(accessToken);
