@@ -1,12 +1,12 @@
-export type IListResult<TListModel> = {
+export type IListResult<TListModel, TKey> = {
   items: TListModel[];
   endReached: boolean;
-  lastKey?: string;
+  lastKey?: TKey;
 }
 
-export type IListRequest = {
+export type IListRequest<TKey> = {
   search: string;
-  lastKey?: string;
+  lastKey?: TKey;
 
   getQuery(): string
 }
@@ -15,17 +15,17 @@ export type IDefaultCreateResponse = {
   id: string;
 }
 
-export class ListResult<TListModel> implements IListResult<TListModel> {
+export class ListResult<TListModel, TKey> implements IListResult<TListModel, TKey> {
   items: TListModel[] = [];
   endReached: boolean = false;
-  lastKey?: string;
+  lastKey?: TKey;
 }
 
-export class ListRequest implements IListRequest {
+export class ListRequest<TKey> implements IListRequest<TKey> {
   search: string
-  lastKey?: string
+  lastKey?: TKey
 
-  constructor(search: string, lastKey?: string) {
+  constructor(search: string, lastKey?: TKey) {
     this.search = search
     this.lastKey = lastKey
   }
@@ -41,7 +41,7 @@ export class ListRequest implements IListRequest {
       args.search = this.search;
     }
     if (this.lastKey) {
-      args.lastKey = this.lastKey
+      args.lastKey = `${this.lastKey}`
     }
     return args;
   }
