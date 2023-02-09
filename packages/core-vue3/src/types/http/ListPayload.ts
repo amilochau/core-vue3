@@ -1,15 +1,12 @@
 export type IListResult<TListModel> = {
-  rows: number;
   items: TListModel[];
   endReached: boolean;
+  lastKey?: string;
 }
 
-export type IListRequest<TKey, TOrderType> = {
-  rows: number;
-  search: Record<string, string>;
-  orderType: TOrderType;
-  firstId?: TKey;
-  lastId?: TKey;
+export type IListRequest = {
+  search: string;
+  lastKey?: string;
 
   getQuery(): string
 }
@@ -19,46 +16,38 @@ export type IDefaultCreateResponse = {
 }
 
 export class ListResult<TListModel> implements IListResult<TListModel> {
-  rows: number = 10;
   items: TListModel[] = [];
   endReached: boolean = false;
+  lastKey?: string;
 }
 
-export class ListRequest<TKey, TOrderType> implements IListRequest<TKey, TOrderType> {
-  rows: number
-  search: Record<string, string>
-  orderType: TOrderType;
-  firstId?: TKey;
-  lastId?: TKey;
+export class ListRequest implements IListRequest {
+  search: string
+  lastKey?: string
 
-  constructor(rows: number, search: Record<string, string>, orderType: TOrderType, firstId?: TKey, lastId?: TKey) {
-    this.rows = rows
+  constructor(search: string, lastKey?: string) {
     this.search = search
-    this.orderType = orderType
-    this.firstId = firstId
-    this.lastId = lastId
+    this.lastKey = lastKey
   }
 
-  private createQueryArguments() {
+  protected createQueryArguments(): Record<string, string> {
     const args: Record<string, string> = { };
-    if (this.rows) {
-      args.rows = `${this.rows}`;
+    return args;
+  }
+
+  private createQueryArgumentsInteral() {
+    const args = this.createQueryArguments()
+    if (this.search) {
+      args.search = this.search;
     }
-    Object.entries(this.search).filter(([, value]) => !!value).forEach(([key, value]) => {
-      args[`search[${key}]`] = value;
-    });
-    args.orderType = `${this.orderType}`;
-    if (this.firstId !== undefined) {
-      args.firstId = `${this.firstId}`;
-    }
-    if (this.lastId !== undefined) {
-      args.lastId = `${this.lastId}`;
+    if (this.lastKey) {
+      args.lastKey = this.lastKey
     }
     return args;
   }
 
   public getQuery(): string {
-    const args = this.createQueryArguments();
+    const args = this.createQueryArgumentsInteral();
     let queryString = '';
     for (const [key, value] of Object.entries(args)) {
       const encodedKey = encodeURIComponent(key);
