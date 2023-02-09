@@ -165,6 +165,14 @@ export function useApi(relativeBaseUri: string) {
     }))
   }
 
+  const putHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'put',
+      body: JSON.stringify(data)
+    }))
+  }
+
   const patchHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
@@ -183,6 +191,7 @@ export function useApi(relativeBaseUri: string) {
   return {
     getHttp,
     postHttp,
+    putHttp,
     patchHttp,
     deleteHttp
   }
