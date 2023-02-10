@@ -1,14 +1,13 @@
 import { defineStore } from 'pinia'
-import { MapsListResponse, MapsOrderTypes } from '../types/maps'
+import type { MapsListResponse } from '../types/maps'
 
 function getDefaultState() {
   return {
     search: '',
     items: new Array<MapsListResponse>(),
     lastItems: new Array<MapsListResponse>(),
-    orderType: MapsOrderTypes.Default,
-    rows: 100,
-    endReached: false
+    endReached: false,
+    lastKey: '' as string | undefined,
   }
 }
 

@@ -5,7 +5,7 @@
 `@amilochau/core-vue3` is a opinionated package used to initialize vue 3 applications.
 
 The following plugins are installed by `@amilochau/core-vue3`:
-- `amazon-cognito-identity-js`
+- `aws-amplify`
 - `pinia`
 - `vue-i18n`
 - `vue-router`

@@ -1,4 +1,4 @@
-import { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-router";
+import type { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-router";
 
 export function registerGuards(router: Router, identityStore: any) {
   router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {

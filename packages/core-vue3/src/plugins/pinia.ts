@@ -1,6 +1,8 @@
-import { createPinia, PiniaPluginContext } from 'pinia'
-import { App, nextTick } from 'vue';
-import { MilochauCoreOptions } from '../types/options';
+import { createPinia } from 'pinia'
+import type { PiniaPluginContext } from 'pinia'
+import { nextTick } from 'vue';
+import type { App } from 'vue';
+import type { MilochauCoreOptions } from '../types/options';
 
 export interface PersistOptions {
   storage?: Storage;

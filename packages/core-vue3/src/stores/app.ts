@@ -1,6 +1,7 @@
 import { mdiAlert, mdiAlertOctagon, mdiCheckboxMarkedCircle, mdiInformation } from '@mdi/js'
 import { defineStore } from 'pinia'
-import { ApplicationMessage, IHomeMessage } from '../types/application'
+import { ApplicationMessage } from '../types/application'
+import type { IHomeMessage } from '../types/application'
 
 export const useStore = defineStore('app', {
   state: () => ({

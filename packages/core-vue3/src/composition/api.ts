@@ -2,7 +2,7 @@ import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import { useRouter } from "vue-router"
 import { useAppStore, useIdentityStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
-import { IHttpSettings, IProblemDetails } from "../types/http"
+import type { IHttpSettings, IProblemDetails } from "../types/http"
 import { AuthPolicy } from "../types/http/IHttpSettings"
 import { useCognito } from './cognito'
 import { useCoreOptions } from "./options"

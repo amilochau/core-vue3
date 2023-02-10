@@ -1,7 +1,7 @@
-import { Ref } from "vue"
-import { I18nOptions } from "vue-i18n"
-import { Router, RouteRecordRaw } from "vue-router"
-import { VuetifyOptions } from "vuetify/framework"
+import type { Ref } from "vue"
+import type { I18nOptions } from "vue-i18n"
+import type { Router, RouteRecordRaw } from "vue-router"
+import type { VuetifyOptions } from "vuetify/framework"
 
 export type MilochauCoreOptions = {
   application: {

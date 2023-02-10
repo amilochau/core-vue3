@@ -1,8 +1,7 @@
-import { App } from "vue";
+import type { App } from "vue";
 import { createI18n } from "vue-i18n";
 import merge from 'deepmerge'
-
-import { MilochauCoreOptions } from "../types/options";
+import type { MilochauCoreOptions } from "../types/options";
 
 export default {
   install: (app: App, options: MilochauCoreOptions) => {

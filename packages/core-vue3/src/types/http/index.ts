@@ -1,5 +1,6 @@
-import { AuthPolicy, IHttpSettings } from "./IHttpSettings";
-import { IProblemDetails } from "./IProblemDetails";
+import { AuthPolicy } from "./IHttpSettings";
+import type { IHttpSettings } from "./IHttpSettings";
+import type { IProblemDetails } from "./IProblemDetails";
 
 export type {
   IHttpSettings,

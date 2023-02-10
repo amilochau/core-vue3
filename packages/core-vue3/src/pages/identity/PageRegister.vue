@@ -93,9 +93,10 @@ import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref } from 'vue';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { Register } from '../../types';
+import type { Register } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -126,7 +127,7 @@ async function register() {
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
     router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
   } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error)
+    appStore.displayErrorMessage(t('errorMessage'), error as string)
   }
 }
 </script>

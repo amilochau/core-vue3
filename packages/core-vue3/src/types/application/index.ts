@@ -1,6 +1,6 @@
 import { ApplicationMessage } from './ApplicationMessage'
-import { IHomeMessage } from './IHomeMessage'
-import { ISelectOption } from './ISelectOption'
+import type { IHomeMessage } from './IHomeMessage'
+import type { ISelectOption } from './ISelectOption'
 
 export type {
   IHomeMessage,

@@ -47,12 +47,13 @@
 import { mdiLockReset, mdiAt } from '@mdi/js';
 import { useCognito, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
-import { ForgotPassword } from "../../types"
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref } from 'vue';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 import { useRouter } from 'vue-router';
+import type { ForgotPassword } from "../../types"
 
 usePage()
 const { t } = useI18n()
@@ -80,7 +81,7 @@ async function reset() {
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
     router.push({ name: 'ResetPassword', query: { email: request.value.email } })
   } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error)
+    appStore.displayErrorMessage(t('errorMessage'), error as string)
   }
 }
 </script>

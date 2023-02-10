@@ -1,7 +1,8 @@
 import { useI18n } from "vue-i18n";
 import { useHead } from '@vueuse/head';
 import { useCoreOptions } from './options';
-import { computed, Ref } from "vue";
+import { computed } from "vue";
+import type { Ref } from "vue";
 
 export function usePage(args?: Ref<any>) {
 

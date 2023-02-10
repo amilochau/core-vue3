@@ -1,6 +1,7 @@
-import { MapsListResponse, MapsOrderTypes, MapsSearchKeys } from "../types/maps"
+import type { MapsListResponse } from "../types/maps"
 import { useMapsStore } from "../stores"
-import { useApi, ListRequest, IListResult, IDefaultCreateResponse } from "@amilochau/core-vue3";
+import { useApi, ListRequest } from "@amilochau/core-vue3";
+import type { IListResult, IDefaultCreateResponse } from "@amilochau/core-vue3";
 
 export function useMapsApi() {
 
@@ -9,14 +10,15 @@ export function useMapsApi() {
   const mapsStore = useMapsStore()
 
   const get = async () => {
-    const request = new ListRequest<string, MapsOrderTypes>(mapsStore.rows, { [MapsSearchKeys.Default]: mapsStore.search }, mapsStore.orderType)
+    const request = new ListRequest<string>(mapsStore.search, mapsStore.lastKey)
     const query = request.getQuery();
 
     const response = await api.getHttp(`/down?${query}`, { load: true, errors: true, redirect404: false })
-    const apiResult = await response.json() as IListResult<MapsListResponse>
+    const apiResult = await response.json() as IListResult<MapsListResponse, string>
 
     mapsStore.items = apiResult.items
     mapsStore.endReached = apiResult.endReached
+    mapsStore.lastKey = apiResult.lastKey
   }
 
   type MapsMarkersAddRequest = {

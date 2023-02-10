@@ -46,7 +46,8 @@
 <script setup lang="ts">
 import { mdiPlus } from "@mdi/js"
 import { storeToRefs } from 'pinia';
-import { Ref, ref, watch } from "vue";
+import { ref, watch } from "vue";
+import type { Ref } from "vue";
 import { MapsCreateRequest } from "../../types/maps";
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
 import CardActions from '../cards/CardActions.vue';

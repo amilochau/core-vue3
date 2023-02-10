@@ -35,19 +35,3 @@ export type Login = {
   email: string
   password: string
 }
-
-export type LoginError = {
-  type: LoginErrorType
-  message: string
-  args: any
-}
-
-export enum LoginErrorType {
-  Unknown = 0,
-  MfaSetup = 1,
-  CustomChallenge = 2,
-  MfaRequired = 3,
-  NewPasswordRequired = 4,
-  SelectMFAType = 5,
-  TotpRequired = 6
-}

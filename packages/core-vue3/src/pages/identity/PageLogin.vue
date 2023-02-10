@@ -82,9 +82,10 @@ import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref } from 'vue';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { Login } from '../../types';
+import type { Login } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -117,7 +118,7 @@ async function login() {
     appStore.displayInfoMessage(t('successMessage'))
     router.push({ name: 'Home' })
   } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error)
+    appStore.displayErrorMessage(t('errorMessage'), error as string)
   }
 }
 </script>

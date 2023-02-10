@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Security-Policy" content="
       script-src 'self' 'unsafe-inline' 'unsafe-eval';
       img-src 'self';
-      frame-src 'self' https://*.milochau.com https://milochau.b2clogin.com;
-      connect-src 'self' https://*.milochau.com https://milochau.b2clogin.com https://*.amazonaws.com https://*.cloudfront.net;
+      frame-src 'self' https://*.milochau.com;
+      connect-src 'self' https://*.milochau.com https://*.amazonaws.com https://*.cloudfront.net;
       font-src https://fonts.gstatic.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     ">
@@ -24,5 +24,10 @@
     </noscript>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <script>
+      // Required by amazon-cognito-identity-js
+      window.global = window;
+      var exports = {};
+  </script>
   </body>
 </html>

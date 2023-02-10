@@ -1,4 +1,3 @@
-import { CognitoUserAttribute } from 'amazon-cognito-identity-js'
 import { defineStore } from 'pinia'
 
 function getDefaultState() {
@@ -15,12 +14,8 @@ function getDefaultState() {
 export const useStore = defineStore('identity', {
   state: getDefaultState,
   actions: {
-    setAttributes(attributes?: CognitoUserAttribute[]) {
-      this.attributes = {
-        id: attributes?.find((x) => x.Name === 'sub')?.Value || '',
-        name: attributes?.find((x) => x.Name === 'name')?.Value || '',
-        email: attributes?.find((x) => x.Name === 'email')?.Value || '',
-      }
+    setAttributes(attributes: {id: string, name: string, email: string}) {
+      this.attributes = attributes
     },
 
     clean() {

@@ -49,9 +49,10 @@ import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref } from 'vue';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { EditProfile } from '../../types';
+import type { EditProfile } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -82,7 +83,7 @@ async function editProfile() {
     router.push({ name: 'Profile' })
     fetchUserAttributes()
   } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error)
+    appStore.displayErrorMessage(t('errorMessage'), error as string)
   }
 }
 </script>

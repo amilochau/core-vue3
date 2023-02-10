@@ -61,9 +61,10 @@ import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref } from 'vue';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { Login } from '../../types';
+import type { Login } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -93,7 +94,7 @@ async function deleteAccount() {
     await authenticateUser(request.value)
     await deleteUser()
   } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error)
+    appStore.displayErrorMessage(t('errorMessage'), error as string)
     identityStore.isAuthenticated = false
     clean();
     appStore.displayInfoMessage(t('successMessage'))

@@ -104,14 +104,6 @@ export class FieldValidationRule {
   args?: string[] = []
 }
 
-export enum MapsSearchKeys {
-  Default = 'v'
-}
-
-export enum MapsOrderTypes {
-  Default = 0
-}
-
 export enum AccessLevel {
   None = 0,
   Read = 1,
