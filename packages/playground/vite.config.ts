@@ -27,11 +27,6 @@ export default defineConfig({
       },
     }),
     analyze({ summaryOnly: true }),
-    /*json({
-      compact: true,
-      include: 'node_modules/**',
-    }),*/
-    //resolve(),
   ],
   resolve: {
     alias: [
