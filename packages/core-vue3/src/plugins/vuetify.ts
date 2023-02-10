@@ -1,11 +1,11 @@
-import { App } from 'vue'
-import { MilochauCoreOptions } from '../types/options'
+import type { App } from 'vue'
+import type { MilochauCoreOptions } from '../types/options'
 
 // Vuetify
 import { createVuetify } from 'vuetify'
 import { en, fr } from 'vuetify/locale'
 import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
-import { VuetifyOptions } from 'vuetify/framework'
+import type { VuetifyOptions } from 'vuetify/framework'
 import merge from 'deepmerge'
 
 export default {

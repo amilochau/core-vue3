@@ -1,9 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import PageRoot from '../../pages/PageRoot.vue'
 import routes from '../../data/routes'
 import { registerGuards } from './guards'
-import { App } from 'vue'
-import { MilochauCoreOptions } from '../../types'
+import type { App } from 'vue'
+import type { MilochauCoreOptions } from '../../types'
 import merge from 'deepmerge'
 import { useIdentityStore, useLanguageStore } from '../../stores'
 

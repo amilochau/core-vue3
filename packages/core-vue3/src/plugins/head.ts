@@ -1,6 +1,6 @@
 import { createHead } from '@vueuse/head'
-import { App } from 'vue'
-import { MilochauCoreOptions } from '../types/options'
+import type { App } from 'vue'
+import type { MilochauCoreOptions } from '../types/options'
 
 export default {
   install: (app: App, options: MilochauCoreOptions) => {
@@ -10,6 +10,5 @@ export default {
     app.use(head)
 
     return head
-
   }
 }

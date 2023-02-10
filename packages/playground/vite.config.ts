@@ -1,7 +1,8 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
-import vueI18n from '@intlify/vite-plugin-vue-i18n'
+import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import ViteFonts from 'vite-plugin-fonts'
 import { setDefaultResultOrder } from 'dns'
 import analyze from 'rollup-plugin-analyzer'
@@ -12,9 +13,10 @@ export default defineConfig({
   plugins: [
     vue(),
     vuetify(),
-    vueI18n({
+    VueI18n({
       fullInstall: false,
-      globalSFCScope: true
+      globalSFCScope: true,
+      compositionOnly: true
     }),
     ViteFonts({
       google: {
@@ -24,6 +26,23 @@ export default defineConfig({
         }],
       },
     }),
-    analyze({ summaryOnly: true })
-  ]
+    analyze({ summaryOnly: true }),
+    /*json({
+      compact: true,
+      include: 'node_modules/**',
+    }),*/
+    //resolve(),
+  ],
+  resolve: {
+    alias: [
+      {
+        find: '@',
+        replacement: fileURLToPath(new URL('./src', import.meta.url))
+      },
+      {
+        find: './runtimeConfig',
+        replacement: './runtimeConfig.browser',
+      },
+    ]
+  }
 })

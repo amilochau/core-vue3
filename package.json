@@ -1,12 +1,13 @@
 {
   "name": "@amilochau/core-vue3-root",
-  "version": "0.5.0-beta.1",
+  "version": "0.5.0-beta.2",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "serve": "npm run serve --workspace=packages/playground",
+    "build": "npm run build --workspace=packages/playground",
     "lint": "npm run lint --workspace=packages/core-vue3",
     "lint:fix": "npm run lint:fix --workspace=packages/core-vue3"
   }

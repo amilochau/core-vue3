@@ -1,4 +1,4 @@
-import { MilochauCoreOptions } from "@amilochau/core-vue3"
+import type { MilochauCoreOptions } from "@amilochau/core-vue3"
 import { getConfig } from "../utils/config"
 import routes from "./routes"
 import { useMapsStore } from "../stores"
@@ -25,8 +25,8 @@ export const envConfig: EnvConfigValues = {
   },
   local: {
     VITE_API_URL: "https://d37652aw4wwcmu.cloudfront.net/api/dev/a",
-    VITE_COGNITO_USERPOOL_ID: "eu-west-3_QwBo27M3S",
-    VITE_COGNITO_CLIENT_ID: '7god4371rupcqh89ectg2ivcg5',
+    VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
+    VITE_COGNITO_CLIENT_ID: '1oed2va2em6r9lkfvqbd3tspiu',
   },
   dev: {
     VITE_API_URL: "https://api-dev.milochau.com/maps/v1",

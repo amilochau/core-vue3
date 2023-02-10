@@ -60,9 +60,10 @@ import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { Ref, ref } from 'vue';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { ConfirmEmail } from '../../types';
+import type { ConfirmEmail } from '../../types';
 
 usePage()
 const { t } = useI18n()
@@ -92,7 +93,7 @@ async function verifyCode() {
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
     router.push({ name: 'Login', query: { email: request.value.email } })
   } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error)
+    appStore.displayErrorMessage(t('errorMessage'), error as string)
   }
 }
 </script>
