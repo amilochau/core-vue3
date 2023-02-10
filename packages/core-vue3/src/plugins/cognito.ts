@@ -1,4 +1,4 @@
-import { Auth } from "aws-amplify"
+import { Auth } from "@aws-amplify/auth"
 import type { App } from "vue"
 import type { MilochauCoreOptions } from "../types/options"
 

@@ -1,6 +1,6 @@
 import { useIdentityStore } from '../stores'
 import type { EditPassword, ConfirmEmail, ForgotPassword, Login, Register, ResetPassword, EditProfile } from "../types"
-import { Auth } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
 
 export function useCognito() {
 
