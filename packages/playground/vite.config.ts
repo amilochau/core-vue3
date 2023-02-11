@@ -3,7 +3,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
-import ViteFonts from 'vite-plugin-fonts'
 import { VitePluginFonts } from 'vite-plugin-fonts'
 import { setDefaultResultOrder } from 'dns'
 import analyze from 'rollup-plugin-analyzer'
@@ -39,6 +38,11 @@ export default defineConfig({
         find: './runtimeConfig',
         replacement: './runtimeConfig.browser',
       },
+    ]
+  },
+  optimizeDeps: {
+    include: [
+      "@aws-amplify/auth"
     ]
   }
 })
