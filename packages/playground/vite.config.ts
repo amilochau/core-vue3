@@ -15,7 +15,6 @@ export default defineConfig({
     vuetify(),
     VueI18n({
       fullInstall: false,
-      globalSFCScope: true,
       compositionOnly: true
     }),
     VitePluginFonts({
