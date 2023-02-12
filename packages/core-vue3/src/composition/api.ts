@@ -100,7 +100,7 @@ export function useApi(relativeBaseUri: string) {
   const getRequestInit = (accessToken: string): RequestInit => {
     const headers: HeadersInit = {
       'Accept-Language': languageStore.language,
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8' // @todo use "application/json-patch+json" for patch
     };
 
     if (accessToken) {
