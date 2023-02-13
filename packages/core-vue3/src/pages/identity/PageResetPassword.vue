@@ -3,10 +3,17 @@
     <v-row justify="center">
       <v-col
         cols="12"
-        sm="6">
-        <h2 class="mb-4 text-h6 text-center">
+        sm="6"
+        class="text-center">
+        <h1 class="my-4 text-h5 text-primary">
           {{ t('title') }}
-        </h2>
+        </h1>
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col
+        cols="12"
+        sm="6">
         <v-form
           ref="form"
           :readonly="loading">

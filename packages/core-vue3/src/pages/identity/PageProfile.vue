@@ -1,10 +1,13 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col>
-        <h2 class="text-h6 text-center">
+    <v-row justify="center">
+      <v-col
+        cols="12"
+        sm="6"
+        class="text-center">
+        <h1 class="my-4 text-h5 text-primary">
           {{ t("title") }}
-        </h2>
+        </h1>
       </v-col>
     </v-row>
     <v-row justify="center">

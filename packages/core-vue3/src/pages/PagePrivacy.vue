@@ -1,11 +1,22 @@
 <template>
-  <v-container class="fill-height">
-    <v-row>
-      <v-col>
-        <section>
-          <app-section-header>{{ t('header11') }}</app-section-header>
-          <app-section-text>{{ t('text11', { name: coreOptions.application.name }) }}</app-section-text>
-        </section>
+  <v-container>
+    <v-row justify="center">
+      <v-col
+        cols="12"
+        sm="6"
+        class="text-center">
+        <h1 class="mt-4 text-h5 text-primary">
+          {{ t('header11') }}
+        </h1>
+        <p class="mb-4">
+          {{ t('text11', { name: coreOptions.application.name }) }}
+        </p>
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col
+        cols="12"
+        sm="6">
         <section>
           <app-section-header>{{ t('header21') }}</app-section-header>
           <app-section-text>{{ t('text21', { name: coreOptions.application.name }) }}</app-section-text>
@@ -26,8 +37,13 @@
         </section>
       </v-col>
     </v-row>
-    <v-row class="cookies-bar-margin">
-      <v-col>
+    <v-row
+      justify="center"
+      class="cookies-bar-margin">
+      <v-col
+        cols="12"
+        sm="6"
+        class="text-center">
         <p>
           {{ t('cookiesAccepted', { accepted: cookiesStore.cookiesAccepted }) }}
         </p>
