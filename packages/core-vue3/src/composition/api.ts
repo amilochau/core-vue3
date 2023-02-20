@@ -43,53 +43,70 @@ export function useApi(relativeBaseUri: string) {
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
     switch (response.status) {
       case 401:
-        router.push({ name: 'Home' })
-        return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
+        return buildApplicationMessage401()
       case 403:
-        router.push({ name: 'Forbidden' })
-        return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
+        return buildApplicationMessage403()
       case 404:
-        if (settings.redirect404) {
-          router.push({ name: 'NotFound' })
-        }
-        return new ApplicationMessage(t('errors.notFound'), 'error', mdiAlert)
+        return buildApplicationMessage404(settings)
       case 400:
         const responseBody = await response.json() as IProblemDetails
         if (responseBody) {
-          const errorMessage = new ApplicationMessage('', 'error', mdiAlert)
-          if (responseBody.title) {
-            errorMessage.title = responseBody.title
+          switch (responseBody.status) {
+            case 401:
+              return buildApplicationMessage401()
+            case 403:
+              return buildApplicationMessage403()
+            case 404:
+              return buildApplicationMessage404(settings)
           }
-          if (responseBody.errors) {
-            errorMessage.details = ''
-            for (const [key, values] of Object.entries(responseBody.errors)) {
-              for (const value of values) {
-                if (value) {
-                  if (key) {
-                    errorMessage.details += `${key} - ${value}\n`
-                  } else {
-                    errorMessage.details += `${value}\n`
-                  }
-                }
-              }
+
+          return buildApplicationMessage400(responseBody)
+        }
+    }
+
+    return buildApplicationMessage500()
+  }
+
+  const buildApplicationMessage400 = (problemDetails: IProblemDetails) => {
+    const errorMessage = new ApplicationMessage('', 'error', mdiAlert)
+    if (problemDetails.title) {
+      errorMessage.title = problemDetails.title
+    }
+    if (problemDetails.errors) {
+      errorMessage.details = ''
+      for (const [key, values] of Object.entries(problemDetails.errors)) {
+        for (const value of values) {
+          if (value) {
+            if (key) {
+              errorMessage.details += `${key} - ${value}\n`
+            } else {
+              errorMessage.details += `${value}\n`
             }
           }
-          // Format
-          if (errorMessage.title.length) {
-            return errorMessage
-          }
         }
-      case 500:
-        return new ApplicationMessage(t('errors.serverError'), 'error', mdiAlert)
-    }
-
-    if (response.headers.has('Application-Error')) {
-      const applicationError = response.headers.get('errors.Application-Error')
-      if (applicationError) {
-        return new ApplicationMessage(applicationError, 'error', mdiAlert)
       }
     }
-
+    // Format
+    if (errorMessage.title.length) {
+      return errorMessage
+    }
+    return buildApplicationMessage500()
+  }
+  const buildApplicationMessage401 = () => {
+    router.push({ name: 'Home' })
+    return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
+  }
+  const buildApplicationMessage403 = () => {
+    router.push({ name: 'Forbidden' })
+    return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
+  }
+  const buildApplicationMessage404 = (settings: IHttpSettings) => {
+    if (settings.redirect404) {
+      router.push({ name: 'NotFound' })
+    }
+    return new ApplicationMessage(t('errors.notFound'), 'error', mdiAlert)
+  }
+  const buildApplicationMessage500 = () => {
     return new ApplicationMessage(t('errors.serverError'), 'error', mdiAlert)
   }
 

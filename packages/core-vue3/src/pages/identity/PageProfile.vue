@@ -80,7 +80,7 @@ const identityStore = useIdentityStore()
 const { loading } = storeToRefs(appStore)
 const { attributes } = storeToRefs(identityStore)
 
-const contactItems = computed(() => ([{
+const contactItems = computed(() => [{
   title: attributes.value.email,
   props: {
     prependIcon: mdiAt,
@@ -90,7 +90,7 @@ const contactItems = computed(() => ([{
   props: {
     prependIcon: mdiAccount,
   },
-}]))
+}])
 </script>
 
 <i18n lang="json">
@@ -116,7 +116,7 @@ const contactItems = computed(() => ([{
     },
     "fr": {
       "title": "Profil",
-      "profileDetails": "Détails de profil",
+      "profileDetails": "Détails du profil",
       "editProfile": "Modifier votre profil",
       "editPassword": "Modifier votre mot de passe",
       "deleteAccount": "Supprimer votre compte"
