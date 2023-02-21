@@ -170,14 +170,15 @@ export function useApi(relativeBaseUri: string) {
 
   const getHttp = async (url: string, settings: IHttpSettings) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
-      ...requestInit
+      ...requestInit,
+      method: 'GET'
     }))
   }
 
   const postHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
-      method: 'post',
+      method: 'POST',
       body: JSON.stringify(data)
     }))
   }
@@ -185,7 +186,7 @@ export function useApi(relativeBaseUri: string) {
   const putHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
-      method: 'put',
+      method: 'PUT',
       body: JSON.stringify(data)
     }))
   }
@@ -193,7 +194,7 @@ export function useApi(relativeBaseUri: string) {
   const patchHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
-      method: 'patch',
+      method: 'PATCH',
       body: JSON.stringify(data)
     }))
   }
@@ -201,7 +202,7 @@ export function useApi(relativeBaseUri: string) {
   const deleteHttp = async (url: string, settings: IHttpSettings) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
-      method: 'delete'
+      method: 'DELETE'
     }))
   }
 
