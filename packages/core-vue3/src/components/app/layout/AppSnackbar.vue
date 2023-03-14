@@ -1,23 +1,23 @@
 <template>
   <v-snackbar
     v-model="display"
-    :timeout="message.timeout"
-    :color="message.color"
+    :timeout="snackbarMessage.timeout"
+    :color="snackbarMessage.color"
     top
     right
     class="d-print-none">
     <v-row class="pa-1 align-center">
       <v-col
-        v-if="message.icon"
+        v-if="snackbarMessage.icon"
         class="py-0 flex-grow-0">
-        <v-icon>{{ message.icon }}</v-icon>
+        <v-icon>{{ snackbarMessage.icon }}</v-icon>
       </v-col>
       <v-col class="py-0 flex-grow-1">
-        <span style="white-space: pre-wrap">{{ message.title }}</span>
+        <span style="white-space: pre-wrap">{{ snackbarMessage.title }}</span>
       </v-col>
       <v-col class="py-0 d-flex flex-grow-0">
         <v-btn
-          v-if="message.details"
+          v-if="snackbarMessage.details"
           variant="text"
           :icon="expanded ? mdiChevronUp : mdiChevronDown"
           size="small"
@@ -32,9 +32,9 @@
         </div>
       </v-col>
       <v-col
-        v-if="expanded && message.details"
+        v-if="expanded && snackbarMessage.details"
         cols="12">
-        <span style="white-space: pre-wrap">{{ message.details }}</span>
+        <span style="white-space: pre-wrap">{{ snackbarMessage.details }}</span>
       </v-col>
     </v-row>
   </v-snackbar>
@@ -49,12 +49,12 @@ import { useAppStore } from '../../../stores'
 
 const { t } = useI18n()
 const appStore = useAppStore()
-const { message } = storeToRefs(appStore)
+const { snackbarMessage } = storeToRefs(appStore)
 
 const expanded = ref(false);
 const display = ref(false);
 
-watch(message, () => {
+watch(snackbarMessage, () => {
   expanded.value = false
   display.value = true
 }, { deep: true })
