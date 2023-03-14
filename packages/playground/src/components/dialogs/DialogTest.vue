@@ -35,6 +35,7 @@
             class="mb-3"
             rows="3" />
         </v-card-text>
+        <card-messages />
         <card-actions
           :save-icon="mdiPlus"
           save-title="Validate & display snackbar"
@@ -50,7 +51,7 @@ import { mdiPlus } from "@mdi/js"
 import { storeToRefs } from 'pinia';
 import { ref, watch } from "vue";
 import type { Ref } from "vue";
-import { CardActions, CardTitleClosable } from "@amilochau/core-vue3/src/components"
+import { CardActions, CardMessages, CardTitleClosable } from "@amilochau/core-vue3/src/components"
 import { MapsCreateRequest } from "../../types/maps";
 import { useAppStore, useValidationRules } from "@amilochau/core-vue3";
 import { useDisplay } from "vuetify";

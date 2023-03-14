@@ -1,43 +1,43 @@
 <template>
-  <v-container class="fill-height">
-    <v-row>
-      <v-col class="text-center">
-        <home-welcome />
-        <home-messages />
-        <home-login v-if="!isAuthenticated" />
+  <v-row
+    class="h-100"
+    no-gutters>
+    <v-col class="text-center">
+      <home-welcome />
+      <home-messages />
+      <home-login v-if="!isAuthenticated" />
 
-        <p>{{ mapsStore.items }}</p>
-        <v-btn @click="fetchMaps">
-          Fetch maps
-        </v-btn>
-        <v-btn @click="createMarker">
-          Create marker
-        </v-btn>
-        <v-btn @click="editMarker">
-          Edit marker
-        </v-btn>
-        <p>Date: {{ d(stringDate) }}</p>
+      <p>{{ mapsStore.items }}</p>
+      <v-btn @click="fetchMaps">
+        Fetch maps
+      </v-btn>
+      <v-btn @click="createMarker">
+        Create marker
+      </v-btn>
+      <v-btn @click="editMarker">
+        Edit marker
+      </v-btn>
+      <p>Date: {{ d(stringDate) }}</p>
 
-        <v-select />
-        <v-btn
-          :disabled="loading || !online"
-          color="primary"
-          @click="openDialog">
-          Open dialog
-        </v-btn>
+      <v-select />
+      <v-btn
+        :disabled="loading || !online"
+        color="primary"
+        @click="openDialog">
+        Open dialog
+      </v-btn>
 
-        <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
-        <p>
-          Cognito user attributes
-        </p>
-        <p>
-          {{ attributes }}
-        </p>
+      <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
+      <p>
+        Cognito user attributes
+      </p>
+      <p>
+        {{ attributes }}
+      </p>
 
-        <dialog-test v-model="dialog" />
-      </v-col>
-    </v-row>
-  </v-container>
+      <dialog-test v-model="dialog" />
+    </v-col>
+  </v-row>
 </template>
 
 <script setup lang="ts">
