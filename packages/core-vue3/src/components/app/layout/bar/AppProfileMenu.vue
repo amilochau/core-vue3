@@ -28,20 +28,26 @@ import { computed, mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useClean, useCognito } from '../../../../composition';
-import { useIdentityStore } from '../../../../stores';
+import { useAppStore, useIdentityStore } from '../../../../stores';
 
 const { t } = useI18n()
 const { signOut } = useCognito()
 const { clean } = useClean()
 const router = useRouter()
 const identityStore = useIdentityStore()
+const appStore = useAppStore()
 
 const { attributes } = storeToRefs(identityStore)
 
 const cleanAndLogout = async () => {
-  await signOut();
-  clean();
-  router.push({ name: 'Home' })
+  try {
+    appStore.loading = true
+    await signOut();
+    clean();
+    router.push({ name: 'Home' })
+  } finally {
+    appStore.loading = false
+  }
 }
 
 const menuItems = computed(() => [

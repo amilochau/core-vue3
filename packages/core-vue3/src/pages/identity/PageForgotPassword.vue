@@ -84,11 +84,14 @@ async function reset() {
   }
 
   try {
+    appStore.loading = true
     await forgotPassword(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
     router.push({ name: 'ResetPassword', query: { email: request.value.email } })
   } catch (error) {
     appStore.displayErrorMessage(t('errorMessage'), error as string)
+  } finally {
+    appStore.loading = false
   }
 }
 </script>
