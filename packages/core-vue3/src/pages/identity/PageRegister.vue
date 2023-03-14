@@ -130,11 +130,14 @@ async function register() {
   }
 
   try {
+    appStore.loading = true
     const result = await signUp(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
     router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
   } catch (error) {
     appStore.displayErrorMessage(t('errorMessage'), error as string)
+  } finally {
+    appStore.loading = false
   }
 }
 </script>

@@ -119,6 +119,7 @@ async function login() {
   }
 
   try {
+    appStore.loading = true
     await authenticateUser(request.value)
     identityStore.isAuthenticated = true
     fetchUserAttributes()
@@ -126,6 +127,8 @@ async function login() {
     router.push({ name: 'Home' })
   } catch (error) {
     appStore.displayErrorMessage(t('errorMessage'), error as string)
+  } finally {
+    appStore.loading = false
   }
 }
 </script>

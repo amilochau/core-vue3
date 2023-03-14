@@ -85,12 +85,15 @@ async function editProfile() {
   }
 
   try {
+    appStore.loading = true
     await updateAttributes(request.value)
     appStore.displayInfoMessage(t('successMessage'))
     router.push({ name: 'Profile' })
     fetchUserAttributes()
   } catch (error) {
     appStore.displayErrorMessage(t('errorMessage'), error as string)
+  } finally {
+    appStore.loading = false
   }
 }
 </script>

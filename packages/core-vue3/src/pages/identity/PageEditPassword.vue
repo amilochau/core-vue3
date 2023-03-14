@@ -108,11 +108,14 @@ async function editPassword() {
   }
 
   try {
+    appStore.loading = true
     await changePassword(request.value)
     appStore.displayInfoMessage(t('successMessage'))
     router.push({ name: 'Profile' })
   } catch (error) {
     appStore.displayErrorMessage(t('errorMessage'), error as string)
+  } finally {
+    appStore.loading = false
   }
 }
 </script>

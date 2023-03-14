@@ -96,11 +96,14 @@ async function verifyCode() {
   }
 
   try {
+    appStore.loading = true
     await confirmRegistration(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
     router.push({ name: 'Login', query: { email: request.value.email } })
   } catch (error) {
     appStore.displayErrorMessage(t('errorMessage'), error as string)
+  } finally {
+    appStore.loading = false
   }
 }
 </script>

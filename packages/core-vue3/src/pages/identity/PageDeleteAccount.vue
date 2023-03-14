@@ -98,6 +98,7 @@ async function deleteAccount() {
   }
 
   try {
+    appStore.loading = true
     await authenticateUser(request.value)
     await deleteUser()
   } catch (error) {
@@ -106,6 +107,8 @@ async function deleteAccount() {
     clean();
     appStore.displayInfoMessage(t('successMessage'))
     router.push({ name: 'Home' })
+  } finally {
+    appStore.loading = false
   }
 }
 </script>
