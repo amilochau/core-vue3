@@ -25,12 +25,12 @@ const props = defineProps<{
 const display = ref(false);
 
 watch(loading, () => {
+  clearTimeout(displayTimeout)
   if (loading.value) {
     displayTimeout = setTimeout(() => {
       display.value = true
     }, props.lazyDelay ?? 0)
   } else {
-    clearTimeout(displayTimeout)
     display.value = false
   }
 })
