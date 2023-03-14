@@ -15,6 +15,7 @@ export function useApi(relativeBaseUri: string) {
 
   mergeLocaleMessage('en', {
     errors: {
+      validation: "Validation error",
       notAuthorized: "Not authorized",
       notFound: "Not found",
       serverError: "Server error",
@@ -23,6 +24,7 @@ export function useApi(relativeBaseUri: string) {
   })
   mergeLocaleMessage('fr', {
     errors: {
+      validation: "Erreur de validation",
       notAuthorized: "Non autorisé",
       notFound: "Inconnu",
       serverError: "Erreur interne",
@@ -87,10 +89,10 @@ export function useApi(relativeBaseUri: string) {
       }
     }
     // Format
-    if (errorMessage.title.length) {
-      return errorMessage
+    if (!errorMessage.title.length) {
+      errorMessage.title = t('errors.validation')
     }
-    return buildApplicationMessage500()
+    return errorMessage
   }
   const buildApplicationMessage401 = () => {
     router.push({ name: 'Home' })
