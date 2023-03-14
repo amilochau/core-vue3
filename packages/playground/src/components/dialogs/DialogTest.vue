@@ -1,19 +1,21 @@
 <template>
-  <v-form
-    ref="form"
-    :readonly="loading">
-    <v-dialog
-      :model-value="modelValue"
-      :fullscreen="xs"
-      max-width="600px"
-      persistent
-      scrollable
-      @update:model-value="emits('update:modelValue', $event)">
+  <v-dialog
+    :model-value="modelValue"
+    :fullscreen="xs"
+    persistent
+    scrollable
+    max-width="600px"
+    @update:model-value="emits('update:modelValue', $event)">
+    <v-form
+      ref="form"
+      :readonly="loading"
+      class="fill-height"
+      @submit.prevent="save">
       <v-card>
         <card-title-closable
           title="Test dialog"
           @close="close" />
-        <v-card-text>
+        <v-card-text class="pt-2">
           <v-text-field
             v-model="request.name"
             label="Required text"
@@ -39,8 +41,8 @@
           @close="close"
           @save="save" />
       </v-card>
-    </v-dialog>
-  </v-form>
+    </v-form>
+  </v-dialog>
 </template>
 
 <script setup lang="ts">
@@ -48,9 +50,8 @@ import { mdiPlus } from "@mdi/js"
 import { storeToRefs } from 'pinia';
 import { ref, watch } from "vue";
 import type { Ref } from "vue";
+import { CardActions, CardTitleClosable } from "@amilochau/core-vue3/src/components"
 import { MapsCreateRequest } from "../../types/maps";
-import CardTitleClosable from '../cards/CardTitleClosable.vue';
-import CardActions from '../cards/CardActions.vue';
 import { useAppStore, useValidationRules } from "@amilochau/core-vue3";
 import { useDisplay } from "vuetify";
 import { useI18n } from "vue-i18n";

@@ -1,3 +1,15 @@
 .multi-line {
-  white-space: pre-line;
+  white-space: pre-line !important;
+
+  .v-list-item-title {
+    white-space: pre-line !important;
+  }
+}
+
+.v-timeline-item__body {
+  min-width: 100%;
+}
+
+.v-dialog--fullscreen .v-overlay__content .v-card {
+  border-radius: 0;
 }

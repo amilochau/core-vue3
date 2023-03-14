@@ -1,5 +1,15 @@
 <template>
   <v-card-item class="bg-primary py-1">
+    <v-tooltip location="start">
+      <template #activator="{ props: tooltip }">
+        <v-icon
+          v-if="!online"
+          v-bind="tooltip"
+          :icon="mdiWifiStrengthAlertOutline"
+          color="warning" />
+      </template>
+      <span>{{ t('offlineTitle') }}</span>
+    </v-tooltip>
     <template #append>
       <v-btn
         :disabled="loading"
@@ -22,12 +32,12 @@
 </template>
 
 <script setup lang="ts">
-import { mdiPencil } from '@mdi/js';
+import { useAppStore } from '../../stores'
+import { mdiPencil, mdiWifiStrengthAlertOutline } from '@mdi/js';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '@amilochau/core-vue3';
 
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
@@ -55,10 +65,12 @@ const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil)
 <i18n lang="json">
   {
     "en": {
+      "offlineTitle": "You lost your Internet connection...",
       "cancel": "Cancel",
       "save": "Save"
     },
     "fr": {
+      "offlineTitle": "Vous avez perdu votre connexion Internet...",
       "cancel": "Annuler",
       "save": "Sauvegarder"
     }
