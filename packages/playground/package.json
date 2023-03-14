@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3-playground",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": "Antoine Milochau",
   "license": "MIT",
   "private": true,
@@ -18,8 +18,8 @@
     "@amilochau/core-vue3": "file:packages/core-vue3"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^5.54.1",
-    "eslint": "^8.35.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.36.0",
     "eslint-plugin-vue": "^9.9.0",
     "rollup-plugin-analyzer": "^4.0.0"
   },
