@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-  import { useI18n } from 'vue-i18n';
+import { useI18n } from 'vue-i18n';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppSettingsMenu from './AppSettingsMenu.vue';
