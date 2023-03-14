@@ -8,26 +8,28 @@ export const useStore = defineStore('app', {
     drawer: false,
     loading: false,
     message: new ApplicationMessage('', 'info', mdiInformation),
+    snackbarMessage: new ApplicationMessage('', 'info', mdiInformation),
     homeMessages: new Array<IHomeMessage>()
   }),
-  getters: {
-    snackbarMessage: (state) => state.message
-  },
   actions: {
-    displayMessage(message: ApplicationMessage) {
+    displayMessage(message: ApplicationMessage, displaySnackbar: boolean = true) {
       this.message = message
+      if (displaySnackbar) {
+        console.log('display snackbar')
+        this.snackbarMessage = message
+      }
     },
-    displayInfoMessage(title: string, details?: string) {
-      this.message = new ApplicationMessage(title, 'info', mdiInformation, details)
+    displayInfoMessage(title: string, details?: string, displaySnackbar: boolean = true) {
+      this.displayMessage(new ApplicationMessage(title, 'info', mdiInformation, details), displaySnackbar)
     },
-    displaySuccessMessage(title: string, details?: string) {
-      this.message = new ApplicationMessage(title, 'success', mdiCheckboxMarkedCircle, details)
+    displaySuccessMessage(title: string, details?: string, displaySnackbar: boolean = true) {
+      this.displayMessage(new ApplicationMessage(title, 'success', mdiCheckboxMarkedCircle, details), displaySnackbar)
     },
-    displayWarningMessage(title: string, details?: string) {
-      this.message = new ApplicationMessage(title, 'warning', mdiAlertOctagon, details)
+    displayWarningMessage(title: string, details?: string, displaySnackbar: boolean = true) {
+      this.displayMessage(new ApplicationMessage(title, 'warning', mdiAlertOctagon, details), displaySnackbar)
     },
-    displayErrorMessage(title: string, details?: string) {
-      this.message = new ApplicationMessage(title, 'error', mdiAlert, details)
+    displayErrorMessage(title: string, details?: string, displaySnackbar: boolean = true) {
+      this.displayMessage(new ApplicationMessage(title, 'error', mdiAlert, details), displaySnackbar)
     },
     setDrawer(value: boolean) {
       this.drawer = value
