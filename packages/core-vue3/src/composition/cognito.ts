@@ -1,76 +1,102 @@
 import { useIdentityStore } from '../stores'
-import type { EditPassword, ConfirmEmail, ForgotPassword, Login, Register, ResetPassword, EditProfile } from "../types"
+import { type EditPassword, type ConfirmEmail, type ForgotPassword, type Login, type Register, type ResetPassword, type EditProfile, ApplicationMessage } from "../types"
 import { Auth } from '@aws-amplify/auth';
+import { useI18n } from 'vue-i18n';
+import { mdiAlert } from '@mdi/js';
 
 export function useCognito() {
 
   const identityStore = useIdentityStore()
+  const { t, mergeLocaleMessage } = useI18n()
+
+  mergeLocaleMessage('en', {
+    errorMessage: "An error occured."
+  })
+  mergeLocaleMessage('fr', {
+    errorMessage: "Une erreur est survenue."
+  })
+
+  const processRequest = async <TResponse>(request: () => Promise<TResponse>) => {
+    try {
+      return await request()
+    } catch (error) {
+      throw new ApplicationMessage(t('errorMessage'), 'error', mdiAlert, error as string)
+    }
+  }
 
   const signUp = (model: Register) => {
-    return Auth.signUp({
+    return processRequest(() => Auth.signUp({
       username: model.email,
       password: model.password,
       attributes: {
           email: model.email,
           name: model.name,
       },
-    })
+    }))
   }
 
   const authenticateUser = (model: Login) => {
-    return Auth.signIn({
+    return processRequest(() => Auth.signIn({
       username: model.email,
       password: model.password,
-    })
+    }))
   }
 
   const forgotPassword = (model: ForgotPassword) => {
-    return Auth.forgotPassword(model.email)
+    return processRequest(() => Auth.forgotPassword(model.email))
   }
 
   const confirmPassword = (model: ResetPassword) => {
-    return Auth.forgotPasswordSubmit(model.email, model.code, model.password)
+    return processRequest(() => Auth.forgotPasswordSubmit(model.email, model.code, model.password))
   }
 
   const confirmRegistration = (model: ConfirmEmail) => {
-    return Auth.confirmSignUp(model.email, model.code)
+    return processRequest(() => Auth.confirmSignUp(model.email, model.code))
   }
 
   const changePassword = async (model: EditPassword) => {
-    const user = await Auth.currentAuthenticatedUser()
-    return await Auth.changePassword(user, model.oldPassword, model.password)
+    return processRequest(async () => {
+      const user = await Auth.currentAuthenticatedUser()
+      return await Auth.changePassword(user, model.oldPassword, model.password)
+    })
   }
 
   const updateAttributes = async (model: EditProfile) => {
-    const user = await Auth.currentAuthenticatedUser()
-    return await Auth.updateUserAttributes(user, {
-      name: model.name,
+    return processRequest(async () => {
+      const user = await Auth.currentAuthenticatedUser()
+      return await Auth.updateUserAttributes(user, {
+        name: model.name,
+      })
     })
   }
 
   const deleteUser = () => {
-    return Auth.deleteUser()
+    return processRequest(() => Auth.deleteUser())
   }
 
   const getToken = async () => {
-    const session = await Auth.currentSession()
-    return session.getIdToken().getJwtToken()
+    return processRequest(async () => {
+      const session = await Auth.currentSession()
+      return session.getIdToken().getJwtToken()
+    })
   }
 
   const fetchUserAttributes = async () => {
-    const user = await Auth.currentAuthenticatedUser()
-    const attributes = await Auth.userAttributes(user)
-    identityStore.setAttributes({
-      id: attributes?.find((x) => x.Name === 'sub')?.Value || '',
-      name: attributes?.find((x) => x.Name === 'name')?.Value || '',
-      email: attributes?.find((x) => x.Name === 'email')?.Value || '',
+    return processRequest(async () => {
+      const user = await Auth.currentAuthenticatedUser()
+      const attributes = await Auth.userAttributes(user)
+      identityStore.setAttributes({
+        id: attributes?.find((x) => x.Name === 'sub')?.Value || '',
+        name: attributes?.find((x) => x.Name === 'name')?.Value || '',
+        email: attributes?.find((x) => x.Name === 'email')?.Value || '',
+      })
     })
   }
 
   const signOut = () => {
-    return Auth.signOut({
+    return processRequest(() => Auth.signOut({
       global: false
-    })
+    }))
   }
 
   return {

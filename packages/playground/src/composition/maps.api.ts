@@ -13,7 +13,7 @@ export function useMapsApi() {
     const request = new ListRequest<string>(mapsStore.search, mapsStore.lastKey)
     const query = request.getQuery();
 
-    const response = await api.getHttp(`/down?${query}`, { load: true, errors: true, redirect404: false })
+    const response = await api.getHttp(`/down?${query}`, { errors: true, redirect404: false })
     const apiResult = await response.json() as IListResult<MapsListResponse, string>
 
     mapsStore.items = apiResult.items
@@ -33,7 +33,7 @@ export function useMapsApi() {
     const request = {
       name: 'test'
     }
-    const reponse = await api.postHttp<MapsMarkersAddRequest>(`/${mapId}/markers`, request, { load: true, errors: true, redirect404: false })
+    const reponse = await api.postHttp<MapsMarkersAddRequest>(`/${mapId}/markers`, request, { errors: true, redirect404: false })
     await reponse.json() as IDefaultCreateResponse
   }
 
@@ -41,7 +41,7 @@ export function useMapsApi() {
     const request = {
       name: 'test 2'
     }
-    await api.postHttp<MapsMarkersChangeRequest>(`/${mapId}/markers/${markerId}`, request, { load: true, errors: true, redirect404: false })
+    await api.postHttp<MapsMarkersChangeRequest>(`/${mapId}/markers/${markerId}`, request, { errors: true, redirect404: false })
   }
 
   return {

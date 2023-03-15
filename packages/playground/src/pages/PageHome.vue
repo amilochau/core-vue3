@@ -46,7 +46,7 @@ import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useAppStore, useIdentityStore, usePage } from '@amilochau/core-vue3';
+import { useAppStore, useHandle, useIdentityStore, usePage } from '@amilochau/core-vue3';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
@@ -60,6 +60,7 @@ const { d } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
 const appStore = useAppStore()
+const { handleLoadAndError } = useHandle()
 const identityStore = useIdentityStore()
 const online = useOnline()
 const { formatContactStatus } = useFormat()
@@ -72,15 +73,21 @@ const dialog = ref(false)
 const stringDate = '2022-09-01'
 
 const fetchMaps = () => {
-  mapsApi.get()
+  handleLoadAndError(() => {
+    return mapsApi.get()
+  }, 'snackbar')
 }
 
 const createMarker = () => {
-  mapsApi.createMarker("8a3f6eabfcc3400aba1adeabe071b8e2")
+  handleLoadAndError(() => {
+    return mapsApi.createMarker("8a3f6eabfcc3400aba1adeabe071b8e2")
+  }, 'snackbar')
 }
 
 const editMarker = () => {
-  mapsApi.editMarker("8a3f6eabfcc3400aba1adeabe071b8e2", "f3b9c83d0bf94cc098bfe92007add022")
+  handleLoadAndError(() => {
+    return mapsApi.editMarker("8a3f6eabfcc3400aba1adeabe071b8e2", "f3b9c83d0bf94cc098bfe92007add022")
+  }, 'snackbar')
 }
 
 function openDialog() {

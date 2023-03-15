@@ -47,18 +47,19 @@
 </template>
 
 <script setup lang="ts">
-import { mdiPlus } from "@mdi/js"
+import { mdiAlert, mdiPlus } from "@mdi/js"
 import { storeToRefs } from 'pinia';
 import { ref, watch } from "vue";
 import type { Ref } from "vue";
 import { CardActions, CardMessages, CardTitleClosable } from "@amilochau/core-vue3/src/components"
 import { MapsCreateRequest } from "../../types/maps";
-import { useAppStore, useValidationRules } from "@amilochau/core-vue3";
+import { ApplicationMessage, useAppStore, useHandle, useValidationRules } from "@amilochau/core-vue3";
 import { useDisplay } from "vuetify";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n()
 const appStore = useAppStore()
+const { handleLoadAndError, handleFormValidation } = useHandle()
 const { required, minLength } = useValidationRules()
 const { xs } = useDisplay()
 
@@ -76,12 +77,13 @@ const form: Ref<any> = ref(null)
 const request: Ref<MapsCreateRequest> = ref(new MapsCreateRequest())
 
 async function save() {
-  const { valid } = await form.value!.validate()
-  if (!valid) {
-    return;
+  if (!await handleFormValidation(form)) {
+    return
   }
 
-  appStore.displayInfoMessage(t('testMessage'), 'Important details to display in the snackbar', false)
+  await handleLoadAndError(() => {
+    throw new ApplicationMessage(t('testMessage'), 'error', mdiAlert, 'Important details to display in the snackbar')
+  }, 'internal')
 }
 
 watch(() => props.modelValue, () => props.modelValue ? open() : close())

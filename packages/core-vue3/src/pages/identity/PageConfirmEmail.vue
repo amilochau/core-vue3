@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import { mdiAccountCheck, mdiAt, mdiNumeric } from '@mdi/js';
-import { useCognito, usePage, useValidationRules } from '../../composition';
+import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -78,6 +78,7 @@ const appStore = useAppStore()
 const online = useOnline()
 const route = useRoute()
 const router = useRouter()
+const { handleLoadAndError, handleFormValidation } = useHandle()
 const { confirmRegistration } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
@@ -90,21 +91,15 @@ const request: Ref<ConfirmEmail> = ref({
 })
 
 async function verifyCode() {
-  const { valid } = await form.value!.validate()
-  if (!valid) {
-    return;
+  if (!await handleFormValidation(form)) {
+    return
   }
 
-  try {
-    appStore.loading = true
+  await handleLoadAndError(async () => {
     await confirmRegistration(request.value)
-    appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
+    appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
     router.push({ name: 'Login', query: { email: request.value.email } })
-  } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error as string)
-  } finally {
-    appStore.loading = false
-  }
+  }, 'snackbar')
 }
 </script>
 
@@ -127,7 +122,6 @@ async function verifyCode() {
       "email": "Your email address",
       "code": "Your verification code",
       "verifyCode": "Verify email address",
-      "errorMessage": "An error occured.",
       "successMessage": "Your email address has now been verified!",
       "successDetails": "You can now sign in."
     },
@@ -136,7 +130,6 @@ async function verifyCode() {
       "email": "Votre adresse email",
       "code": "Votre code de vérification",
       "verifyCode": "Vérifier l'adresse email",
-      "errorMessage": "Une erreur est survenue.",
       "successMessage": "Votre adresse email a bien été vérifiée !",
       "successDetails": "Vous pouvez désormais vous connecter."
     }

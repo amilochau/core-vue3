@@ -12,24 +12,27 @@ export const useStore = defineStore('app', {
     homeMessages: new Array<IHomeMessage>()
   }),
   actions: {
-    displayMessage(message: ApplicationMessage, displaySnackbar: boolean = true) {
-      this.message = message
-      if (displaySnackbar) {
-        console.log('display snackbar')
-        this.snackbarMessage = message
+    displayMessage(message: ApplicationMessage, destination: 'snackbar' | 'internal' = 'snackbar') {
+      switch (destination) {
+        case 'internal':
+          this.snackbarMessage = message
+          break;
+        case 'internal':
+          this.message = message
+          break;
       }
     },
-    displayInfoMessage(title: string, details?: string, displaySnackbar: boolean = true) {
-      this.displayMessage(new ApplicationMessage(title, 'info', mdiInformation, details), displaySnackbar)
+    displayInfoMessage(title: string, details?: string, destination: 'snackbar' | 'internal' = 'snackbar') {
+      this.displayMessage(new ApplicationMessage(title, 'info', mdiInformation, details), destination)
     },
-    displaySuccessMessage(title: string, details?: string, displaySnackbar: boolean = true) {
-      this.displayMessage(new ApplicationMessage(title, 'success', mdiCheckboxMarkedCircle, details), displaySnackbar)
+    displaySuccessMessage(title: string, details?: string, destination: 'snackbar' | 'internal' = 'snackbar') {
+      this.displayMessage(new ApplicationMessage(title, 'success', mdiCheckboxMarkedCircle, details), destination)
     },
-    displayWarningMessage(title: string, details?: string, displaySnackbar: boolean = true) {
-      this.displayMessage(new ApplicationMessage(title, 'warning', mdiAlertOctagon, details), displaySnackbar)
+    displayWarningMessage(title: string, details?: string, destination: 'snackbar' | 'internal' = 'snackbar') {
+      this.displayMessage(new ApplicationMessage(title, 'warning', mdiAlertOctagon, details), destination)
     },
-    displayErrorMessage(title: string, details?: string, displaySnackbar: boolean = true) {
-      this.displayMessage(new ApplicationMessage(title, 'error', mdiAlert, details), displaySnackbar)
+    displayErrorMessage(title: string, details?: string, destination: 'snackbar' | 'internal' = 'snackbar') {
+      this.displayMessage(new ApplicationMessage(title, 'error', mdiAlert, details), destination)
     },
     setDrawer(value: boolean) {
       this.drawer = value

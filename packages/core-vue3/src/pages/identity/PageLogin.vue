@@ -84,7 +84,7 @@
 
 <script setup lang="ts">
 import { mdiAccountLockOpen, mdiAt, mdiLock } from '@mdi/js';
-import { useCognito, usePage, useValidationRules } from '../../composition';
+import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
 import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -101,6 +101,7 @@ const online = useOnline()
 const route = useRoute()
 const router = useRouter()
 const identityStore = useIdentityStore()
+const { handleLoadAndError, handleFormValidation } = useHandle()
 const { authenticateUser, fetchUserAttributes } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
@@ -113,23 +114,17 @@ const request: Ref<Login> = ref({
 })
 
 async function login() {
-  const { valid } = await form.value!.validate()
-  if (!valid) {
-    return;
+  if (!await handleFormValidation(form)) {
+    return
   }
 
-  try {
-    appStore.loading = true
+  await handleLoadAndError(async () => {
     await authenticateUser(request.value)
     identityStore.isAuthenticated = true
     fetchUserAttributes()
-    appStore.displayInfoMessage(t('successMessage'))
+    appStore.displayInfoMessage(t('successMessage'), 'snackbar')
     router.push({ name: 'Home' })
-  } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error as string)
-  } finally {
-    appStore.loading = false
-  }
+  }, 'snackbar')
 }
 </script>
 
@@ -152,7 +147,6 @@ async function login() {
       "email": "Your email address",
       "password": "Your password",
       "login": "Login",
-      "errorMessage": "An error occured.",
       "successMessage": "Welcome!",
       "registerTitle": "You don't have any account yet?",
       "registerLink": "Register",
@@ -164,7 +158,6 @@ async function login() {
       "email": "Votre adresse email",
       "password": "Votre mot de passe",
       "login": "Se connecter",
-      "errorMessage": "Une erreur est survenue.",
       "successMessage": "Bienvenue !",
       "registerTitle": "Vous n'avez pas encore de compte ?",
       "registerLink": "S'inscrire",
