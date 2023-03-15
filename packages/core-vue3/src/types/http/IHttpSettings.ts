@@ -1,5 +1,4 @@
 export type IHttpSettings = {
-  errors: boolean;
   redirect404: boolean;
   authPolicy?: AuthPolicy;
 }
