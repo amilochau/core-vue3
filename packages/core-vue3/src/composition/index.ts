@@ -2,6 +2,7 @@ import { useApi } from "./api";
 import { useClean } from './clean';
 import { useCognito } from './cognito';
 import { useCoreOptions } from "./options";
+import { useHandle } from "./handle";
 import { usePage } from "./page";
 import { useValidationRules } from './validation'
 
@@ -10,6 +11,7 @@ export {
   useClean,
   useCognito,
   useCoreOptions,
+  useHandle,
   usePage,
   useValidationRules
 }

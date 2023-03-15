@@ -63,7 +63,7 @@
 
 <script setup lang="ts">
 import { mdiAccountOff, mdiAt, mdiLock } from '@mdi/js';
-import { useClean, useCognito, usePage, useValidationRules } from '../../composition';
+import { useClean, useCognito, useHandle, usePage, useValidationRules } from '../../composition';
 import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -80,6 +80,7 @@ const online = useOnline()
 const { clean } = useClean()
 const router = useRouter()
 const identityStore = useIdentityStore()
+const { handleLoadAndError, handleFormValidation } = useHandle()
 const { authenticateUser, deleteUser } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
@@ -92,24 +93,18 @@ const request: Ref<Login> = ref({
 })
 
 async function deleteAccount() {
-  const { valid } = await form.value!.validate()
-  if (!valid) {
-    return;
+  if (!await handleFormValidation(form)) {
+    return
   }
 
-  try {
-    appStore.loading = true
+  await handleLoadAndError(async () => {
     await authenticateUser(request.value)
     await deleteUser()
-  } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error as string)
     identityStore.isAuthenticated = false
     clean();
-    appStore.displayInfoMessage(t('successMessage'))
+    appStore.displayInfoMessage(t('successMessage'), 'snackbar')
     router.push({ name: 'Home' })
-  } finally {
-    appStore.loading = false
-  }
+  }, 'snackbar')
 }
 </script>
 
@@ -132,7 +127,6 @@ async function deleteAccount() {
       "email": "Your email address",
       "password": "Your password",
       "deleteAccount": "Delete account",
-      "errorMessage": "An error occured.",
       "successMessage": "Your account has been deleted!"
     },
     "fr": {
@@ -140,7 +134,6 @@ async function deleteAccount() {
       "email": "Votre adresse email",
       "password": "Votre mot de passe",
       "deleteAccount": "Supprimer le compte",
-      "errorMessage": "Une erreur est survenue.",
       "successMessage": "Votre compte a bien été supprimé !"
     }
   }

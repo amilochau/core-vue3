@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { mdiLockReset, mdiAt } from '@mdi/js';
-import { useCognito, usePage, useValidationRules } from '../../composition';
+import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -67,6 +67,7 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
+const { handleLoadAndError, handleFormValidation } = useHandle()
 const { forgotPassword } = useCognito()
 const { required, maxLength, emailAddress } = useValidationRules()
 
@@ -78,21 +79,15 @@ const request: Ref<ForgotPassword> = ref({
 })
 
 async function reset() {
-  const { valid } = await form.value!.validate()
-  if (!valid) {
-    return;
+  if (!await handleFormValidation(form)) {
+    return
   }
 
-  try {
-    appStore.loading = true
+  await handleLoadAndError(async () => {
     await forgotPassword(request.value)
-    appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
+    appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
     router.push({ name: 'ResetPassword', query: { email: request.value.email } })
-  } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error as string)
-  } finally {
-    appStore.loading = false
-  }
+  }, 'snackbar')
 }
 </script>
 
@@ -114,7 +109,6 @@ async function reset() {
       "title": "Password forgotten",
       "email": "Your email address",
       "reset": "Reset password",
-      "errorMessage": "An error occured.",
       "successMessage": "Your password has been reset!",
       "successDetails": "An email with the reset code has been sent to you. Check your spams if you don't find it!"
     },
@@ -122,7 +116,6 @@ async function reset() {
       "title": "Mot de passe oublié",
       "email": "Votre adresse email",
       "reset": "Réinitialiser le mot de passe",
-      "errorMessage": "Une erreur est survenue.",
       "successMessage": "Votre mot de passe a été réinitialisé !",
       "successDetails": "Un email avec le code de réinitialisation vous a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !"
     }

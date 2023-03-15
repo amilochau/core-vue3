@@ -95,7 +95,7 @@
 
 <script setup lang="ts">
 import { mdiAccountPlus, mdiAccount, mdiAt, mdiLock } from '@mdi/js';
-import { useCognito, usePage, useValidationRules } from '../../composition';
+import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -110,6 +110,7 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
+const { handleLoadAndError, handleFormValidation } = useHandle()
 const { signUp } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
@@ -124,21 +125,15 @@ const request: Ref<Register> = ref({
 })
 
 async function register() {
-  const { valid } = await form.value!.validate()
-  if (!valid) {
-    return;
+  if (!await handleFormValidation(form)) {
+    return
   }
 
-  try {
-    appStore.loading = true
+  await handleLoadAndError(async () => {
     const result = await signUp(request.value)
-    appStore.displayInfoMessage(t('successMessage'), t('successDetails'))
+    appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
     router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
-  } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error as string)
-  } finally {
-    appStore.loading = false
-  }
+  }, 'snackbar')
 }
 </script>
 
@@ -163,7 +158,6 @@ async function register() {
       "password": "Your password",
       "confirmationPassword": "Your password, again",
       "register": "Create account",
-      "errorMessage": "An error occured.",
       "successMessage": "Your account has now been created!",
       "successDetails": "You must confirm your email address - a code has been sent to you. Check your spams if you don't find it!",
       "loginTitle": "You already have an account?",
@@ -176,7 +170,6 @@ async function register() {
       "password": "Votre mot de passe",
       "confirmationPassword": "Votre mot de passe, encore",
       "register": "Créer le compte",
-      "errorMessage": "Une erreur est survenue.",
       "successMessage": "Votre compte a bien été créé !",
       "successDetails": "Vous devez désormais confirmer votre addresse email - un code vous a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !",
       "loginTitle": "Vous avez déjà un compte ?",

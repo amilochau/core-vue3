@@ -1,6 +1,6 @@
 import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import { useRouter } from "vue-router"
-import { useAppStore, useIdentityStore, useLanguageStore } from "../stores"
+import { useIdentityStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
 import type { IHttpSettings, IProblemDetails } from "../types/http"
 import { AuthPolicy } from "../types/http/IHttpSettings"
@@ -32,7 +32,6 @@ export function useApi(relativeBaseUri: string) {
     }
   })
 
-  const appStore = useAppStore()
   const languageStore = useLanguageStore()
   const identityStore = useIdentityStore()
   const { getToken } = useCognito()
@@ -136,9 +135,6 @@ export function useApi(relativeBaseUri: string) {
     var response: Response;
 
     try {
-      // Start loading
-      if (settings.load) { appStore.loading = true }
-
       // Get bearer token for API
       var accessToken = '';
 
@@ -154,17 +150,11 @@ export function useApi(relativeBaseUri: string) {
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
     } catch (error) {
-      const errorMessage = new ApplicationMessage(t('errors.networkError'), 'warning', mdiAccessPointNetworkOff)
-      if (settings.errors) { appStore.displayMessage(errorMessage) }
-      throw errorMessage;
-    } finally {
-      if (settings.load) { appStore.loading = false }
+      throw new ApplicationMessage(t('errors.networkError'), 'warning', mdiAccessPointNetworkOff)
     }
 
     if (!response.ok) {
-      const errorMessage = await analyzeResponse(response, settings)
-      if (settings.errors) { appStore.displayMessage(errorMessage) }
-      throw errorMessage;
+      throw await analyzeResponse(response, settings)
     }
 
     return response

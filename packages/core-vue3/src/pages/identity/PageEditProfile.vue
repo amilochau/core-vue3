@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import { mdiAccountEdit, mdiAccount } from '@mdi/js';
-import { useCognito, usePage, useValidationRules } from '../../composition';
+import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
 import { useAppStore, useIdentityStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -67,6 +67,7 @@ const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
 const identityStore = useIdentityStore()
+const { handleLoadAndError, handleFormValidation } = useHandle()
 const { updateAttributes, fetchUserAttributes } = useCognito()
 const { required, maxLength } = useValidationRules()
 
@@ -79,22 +80,16 @@ const request: Ref<EditProfile> = ref({
 })
 
 async function editProfile() {
-  const { valid } = await form.value!.validate()
-  if (!valid) {
-    return;
+  if (!await handleFormValidation(form)) {
+    return
   }
 
-  try {
-    appStore.loading = true
+  await handleLoadAndError(async () => {
     await updateAttributes(request.value)
-    appStore.displayInfoMessage(t('successMessage'))
+    appStore.displayInfoMessage(t('successMessage'), 'snackbar')
     router.push({ name: 'Profile' })
     fetchUserAttributes()
-  } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error as string)
-  } finally {
-    appStore.loading = false
-  }
+  }, 'snackbar')
 }
 </script>
 
@@ -116,14 +111,12 @@ async function editProfile() {
       "title": "Edit profile",
       "name": "Your name",
       "editProfile": "Edit profile",
-      "errorMessage": "An error occured.",
       "successMessage": "Your profile has been changed!"
     },
     "fr": {
       "title": "Modification de profil",
       "name": "Votre nom",
       "editProfile": "Modifier le profil",
-      "errorMessage": "Une erreur est survenue.",
       "successMessage": "Votre profil a bien été changé !"
     }
   }

@@ -74,7 +74,7 @@
 
 <script setup lang="ts">
 import { mdiLockReset, mdiLockClock, mdiLock } from '@mdi/js';
-import { useCognito, usePage, useValidationRules } from '../../composition';
+import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
 import { useAppStore } from '../../stores';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -89,6 +89,7 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
+const { handleLoadAndError, handleFormValidation } = useHandle()
 const { changePassword } = useCognito()
 const { required, minLength, maxLength } = useValidationRules()
 
@@ -102,21 +103,15 @@ const request: Ref<EditPassword> = ref({
 })
 
 async function editPassword() {
-  const { valid } = await form.value!.validate()
-  if (!valid) {
-    return;
+  if (!await handleFormValidation(form)) {
+    return
   }
 
-  try {
-    appStore.loading = true
+  await handleLoadAndError(async () => {
     await changePassword(request.value)
-    appStore.displayInfoMessage(t('successMessage'))
+    appStore.displayInfoMessage(t('successMessage'), 'snackbar')
     router.push({ name: 'Profile' })
-  } catch (error) {
-    appStore.displayErrorMessage(t('errorMessage'), error as string)
-  } finally {
-    appStore.loading = false
-  }
+  }, 'snackbar')
 }
 </script>
 
@@ -140,7 +135,6 @@ async function editPassword() {
       "password": "Your new password",
       "confirmationPassword": "Your new password, again",
       "editPassword": "Edit password",
-      "errorMessage": "An error occured.",
       "successMessage": "Your password has been changed!"
     },
     "fr": {
@@ -149,7 +143,6 @@ async function editPassword() {
       "password": "Votre nouveau mot de passe",
       "confirmationPassword": "Votre nouveau mot de passe, encore",
       "editPassword": "Modifier le mot de passe",
-      "errorMessage": "Une erreur est survenue.",
       "successMessage": "Votre mot de passe a bien été changé !"
     }
   }
