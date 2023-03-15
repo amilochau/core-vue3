@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Core plugin for vue.js (v3) projects",
   "author": "Antoine Milochau",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "deepmerge": "^4.3.0",
     "pinia": "^2.0.33",
     "roboto-fontface": "^0.10.0",
-    "sass": "^1.59.2",
+    "sass": "^1.59.3",
     "sass-loader": "^13.2.0",
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
@@ -54,7 +54,7 @@
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6",
     "vue-tsc": "^1.2.0",
-    "vuetify": "^3.1.8"
+    "vuetify": "^3.1.9"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.55.0",
