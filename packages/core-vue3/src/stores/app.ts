@@ -14,7 +14,7 @@ export const useStore = defineStore('app', {
   actions: {
     displayMessage(message: ApplicationMessage, destination: 'snackbar' | 'internal' = 'snackbar') {
       switch (destination) {
-        case 'internal':
+        case 'snackbar':
           this.snackbarMessage = message
           break;
         case 'internal':
