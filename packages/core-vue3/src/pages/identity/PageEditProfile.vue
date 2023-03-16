@@ -86,7 +86,7 @@ async function editProfile() {
 
   await handleLoadAndError(async () => {
     await updateAttributes(request.value)
-    appStore.displayInfoMessage(t('successMessage'), 'snackbar')
+    appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
     router.push({ name: 'Profile' })
     fetchUserAttributes()
   }, 'snackbar')

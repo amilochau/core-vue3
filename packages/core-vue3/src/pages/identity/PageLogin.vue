@@ -122,7 +122,7 @@ async function login() {
     await authenticateUser(request.value)
     identityStore.isAuthenticated = true
     fetchUserAttributes()
-    appStore.displayInfoMessage(t('successMessage'), 'snackbar')
+    appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
     router.push({ name: 'Home' })
   }, 'snackbar')
 }

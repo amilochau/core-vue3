@@ -109,7 +109,7 @@ async function editPassword() {
 
   await handleLoadAndError(async () => {
     await changePassword(request.value)
-    appStore.displayInfoMessage(t('successMessage'), 'snackbar')
+    appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
     router.push({ name: 'Profile' })
   }, 'snackbar')
 }

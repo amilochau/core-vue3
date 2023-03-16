@@ -102,7 +102,7 @@ async function deleteAccount() {
     await deleteUser()
     identityStore.isAuthenticated = false
     clean();
-    appStore.displayInfoMessage(t('successMessage'), 'snackbar')
+    appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
     router.push({ name: 'Home' })
   }, 'snackbar')
 }
