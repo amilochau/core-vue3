@@ -8,7 +8,6 @@
     density="comfortable"
     hide-details="auto"
     class="mb-3"
-    required
     @update:model-value="emits('update:modelValue', parseInt($event))">
     <template #item="templateProps">
       <v-list-item v-bind="templateProps.props">
