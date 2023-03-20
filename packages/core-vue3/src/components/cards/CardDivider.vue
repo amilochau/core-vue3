@@ -4,7 +4,7 @@
 
 <style>
 .divider-dialog-extended {
-  margin-left: -24px;
-  margin-right: -24px;
+  margin-left: -16px;
+  margin-right: -16px;
 }
 </style>
