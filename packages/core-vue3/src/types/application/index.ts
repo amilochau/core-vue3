@@ -1,10 +1,10 @@
 import { ApplicationMessage } from './ApplicationMessage'
+import type { FormattedData } from './FormattedData'
 import type { IHomeMessage } from './IHomeMessage'
-import type { ISelectOption } from './ISelectOption'
 
 export type {
   IHomeMessage,
-  ISelectOption
+  FormattedData,
 }
 
 export {
