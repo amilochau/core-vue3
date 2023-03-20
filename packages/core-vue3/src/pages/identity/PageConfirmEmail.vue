@@ -29,6 +29,7 @@
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
+                autocomplete="email"
                 type="email"
                 required />
               <v-text-field
@@ -40,6 +41,7 @@
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
+                autocomplete="one-time-code"
                 required />
             </v-card-text>
             <v-card-text class="text-center">
