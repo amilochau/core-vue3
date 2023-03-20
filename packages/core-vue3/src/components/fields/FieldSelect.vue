@@ -14,6 +14,7 @@
       <v-list-item v-bind="templateProps.props">
         <template #title>
           <v-icon
+            v-if="format(templateProps.item.value).icon"
             :icon="format(templateProps.item.value).icon"
             :color="format(templateProps.item.value).color"
             start />
@@ -23,6 +24,7 @@
     </template>
     <template #selection="templateProps">
       <v-icon
+        v-if="format(templateProps.item.value).icon"
         :icon="format(templateProps.item.value).icon"
         :color="format(templateProps.item.value).color"
         start />

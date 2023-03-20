@@ -3,6 +3,7 @@ import CardDivider from "./cards/CardDivider.vue"
 import CardMessages from "./cards/CardMessages.vue"
 import CardSectionTitle from "./cards/CardSectionTitle.vue"
 import CardTitleClosable from "./cards/CardTitleClosable.vue"
+import FieldSelect from "./fields/FieldSelect.vue"
 
 export {
   CardActions,
@@ -10,4 +11,5 @@ export {
   CardMessages,
   CardSectionTitle,
   CardTitleClosable,
+  FieldSelect,
 }
