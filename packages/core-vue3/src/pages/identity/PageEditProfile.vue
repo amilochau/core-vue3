@@ -30,6 +30,7 @@
                 hide-details="auto"
                 class="mb-3"
                 autocomplete="name"
+                type="text"
                 required />
             </v-card-text>
             <v-card-text class="text-center">

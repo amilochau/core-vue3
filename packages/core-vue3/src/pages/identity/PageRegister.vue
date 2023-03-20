@@ -31,6 +31,7 @@
                 hide-details="auto"
                 class="mb-3"
                 autocomplete="name"
+                type="text"
                 required />
               <v-text-field
                 v-model="request.email"
@@ -43,6 +44,7 @@
                 class="mb-3"
                 autocomplete="email"
                 type="email"
+                inputmode="email"
                 required />
               <v-text-field
                 v-model="request.password"

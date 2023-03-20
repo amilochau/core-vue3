@@ -31,6 +31,7 @@
                 class="mb-3"
                 autocomplete="email"
                 type="email"
+                inputmode="email"
                 required />
               <v-text-field
                 v-model="request.password"

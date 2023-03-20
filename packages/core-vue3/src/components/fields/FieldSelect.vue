@@ -7,6 +7,7 @@
     variant="underlined"
     density="comfortable"
     hide-details="auto"
+    type="text"
     class="mb-3"
     @update:model-value="emits('update:modelValue', parseInt($event))">
     <template #item="templateProps">

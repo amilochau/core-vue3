@@ -31,6 +31,7 @@
                 class="mb-3"
                 autocomplete="email"
                 type="email"
+                inputmode="email"
                 required />
               <v-text-field
                 v-model="request.code"
@@ -42,6 +43,7 @@
                 hide-details="auto"
                 class="mb-3"
                 autocomplete="one-time-code"
+                type="text"
                 required />
             </v-card-text>
             <v-card-text class="text-center">
