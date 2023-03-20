@@ -1,3 +1,5 @@
+// Custom styles
+
 .multi-line {
   white-space: pre-line !important;
 
@@ -6,10 +8,18 @@
   }
 }
 
+// Vuetify overrides
+
 .v-timeline-item__body {
   min-width: 100%;
 }
 
 .v-dialog--fullscreen .v-overlay__content .v-card {
   border-radius: 0;
+}
+
+// Print helpers
+
+.p-avoid-break-inside {
+  break-inside: avoid;
 }

@@ -12,7 +12,7 @@
         density="comfortable"
         variant="tonal"
         closable
-        class="ma-2" />
+        class="ma-2 multi-line" />
     </v-sheet>
   </v-expand-transition>
 </template>

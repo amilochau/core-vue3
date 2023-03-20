@@ -82,7 +82,8 @@ async function save() {
   }
 
   await handleLoadAndError(() => {
-    throw new ApplicationMessage(t('testMessage'), 'error', mdiAlert, 'Important details to display in the snackbar')
+    throw new ApplicationMessage(t('testMessage'), 'error', mdiAlert, `Important details to display in the snackbar
+    New line here`)
   }, 'internal')
 }
 
