@@ -29,6 +29,7 @@
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
+                autocomplete="email"
                 type="email"
                 required />
             </v-card-text>

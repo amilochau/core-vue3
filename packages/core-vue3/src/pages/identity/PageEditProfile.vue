@@ -29,6 +29,7 @@
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
+                autocomplete="name"
                 required />
             </v-card-text>
             <v-card-text class="text-center">

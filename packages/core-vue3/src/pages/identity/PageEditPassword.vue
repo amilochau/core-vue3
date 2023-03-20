@@ -29,6 +29,7 @@
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
+                autocomplete="current-password"
                 type="password"
                 required />
               <v-text-field
@@ -40,6 +41,7 @@
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
+                autocomplete="new-password"
                 type="password"
                 required />
               <v-text-field
@@ -51,6 +53,7 @@
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
+                autocomplete="new-password"
                 type="password"
                 required />
             </v-card-text>
