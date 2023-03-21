@@ -9,7 +9,7 @@
     <v-form
       ref="form"
       :readonly="loading"
-      class="fill-height"
+      class="fill-height overflow-y-auto"
       @submit.prevent="save">
       <v-card>
         <card-title-closable
