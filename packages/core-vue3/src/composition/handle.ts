@@ -1,14 +1,30 @@
-import type { ApplicationMessage } from "../types";
+import { ApplicationMessage } from "../types";
 import { useOnline } from "@vueuse/core";
 import { storeToRefs } from "pinia";
 import type { Ref } from "vue";
 import { useAppStore } from "../stores";
+import { mdiAlert } from "@mdi/js";
+import { useI18n } from "vue-i18n";
 
 export function useHandle() {
 
+  const { t, mergeLocaleMessage } = useI18n()
   const appStore = useAppStore()
   const online = useOnline()
   const { loading } = storeToRefs(appStore)
+
+  mergeLocaleMessage('en', {
+    internalError: {
+      title: 'Internal error',
+      desc: "You can't do anything, it's a bug..."
+    }
+  })
+  mergeLocaleMessage('fr', {
+    internalError: {
+      title: 'Erreur interne',
+      desc: "Vous ne pouvez rien faire, il s'agit d'un bug..."
+    }
+  })
 
   const handleFormValidation = async (form: Ref<any>) => {
     if (loading.value || !online.value) {
@@ -36,8 +52,11 @@ export function useHandle() {
     try {
       return await request();
     } catch (error) {
-      const applicationMessage = error as ApplicationMessage
-      appStore.displayMessage(applicationMessage, destination)
+      if (error instanceof ApplicationMessage) {
+        appStore.displayMessage(error as ApplicationMessage, destination)
+      } else {
+        appStore.displayMessage(new ApplicationMessage(t('internalError.title'), 'error', mdiAlert, t('internalError.desc')), destination)
+      }
     }
   }
 
