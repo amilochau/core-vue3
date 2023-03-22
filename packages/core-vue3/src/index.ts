@@ -9,7 +9,6 @@ import pinia from './plugins/pinia'
 import router from './plugins/router'
 
 // Styles
-import 'vuetify/styles'
 import './styles/main.scss'
 
 let coreOptions: MilochauCoreOptions
