@@ -55,6 +55,7 @@ export function useHandle() {
       if (error instanceof ApplicationMessage) {
         appStore.displayMessage(error as ApplicationMessage, destination)
       } else {
+        console.error(error)
         appStore.displayMessage(new ApplicationMessage(t('internalError.title'), 'error', mdiAlert, t('internalError.desc')), destination)
       }
     }
