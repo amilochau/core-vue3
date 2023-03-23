@@ -1,13 +1,7 @@
+import type { FormattedData } from '@amilochau/core-vue3'
 import { mdiAccountClock, mdiAlertCircle, mdiArchive } from '@mdi/js'
 import { useI18n } from 'vue-i18n'
 import { ContactStatus } from '../types/contacts'
-
-export type FormattedData<TData> = {
-  value: TData
-  title: string
-  icon?: string
-  color?: string
-}
 
 export function useFormat() {
   const { t, mergeLocaleMessage } = useI18n()

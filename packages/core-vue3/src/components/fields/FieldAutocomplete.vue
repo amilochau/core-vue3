@@ -1,5 +1,5 @@
 <template>
-  <v-select
+  <v-autocomplete
     :model-value="modelValue"
     :label="labelTitle"
     :rules="rules"
@@ -9,8 +9,9 @@
     hide-details="auto"
     type="text"
     class="mb-3"
+    :multiple="multiple"
     :clearable="clearable"
-    @update:model-value="emits('update:modelValue', parseInt($event))">
+    @update:model-value="emits('update:modelValue', $event)">
     <template #item="templateProps">
       <v-list-item
         v-if="!templateProps.item.raw.hidden"
@@ -19,8 +20,12 @@
         :subtitle="templateProps.item.raw.subtitle"
         :disabled="templateProps.item.raw.disabled">
         <template
-          v-if="templateProps.item.raw.icon"
-          #prepend>
+          v-if="templateProps.item.raw.icon || multiple"
+          #prepend="{ isSelected }">
+          <v-checkbox-btn
+            v-if="multiple"
+            :model-value="isSelected"
+            :ripple="false" />
           <v-icon
             v-if="templateProps.item.raw.icon"
             :icon="templateProps.item.raw.icon"
@@ -35,23 +40,26 @@
         :icon="templateProps.item.raw.icon"
         :color="templateProps.item.raw.color"
         start />
-      {{ templateProps.item.title }}
+      <span class="mr-2">
+        {{ templateProps.item.title }}
+      </span>
     </template>
-  </v-select>
+  </v-autocomplete>
 </template>
 
 <script setup lang="ts">
 import type { FormattedData } from '../../types';
 
 defineProps<{
-  modelValue?: number,
+  modelValue?: number | string | string[],
   labelTitle: string,
   rules?: any[],
   items: FormattedData<any>[],
+  multiple?: boolean,
   clearable?: boolean,
 }>()
 
 const emits = defineEmits<{
-  (eventName: 'update:modelValue', value?: number): void
+  (eventName: 'update:modelValue', value?: string | string[]): void
 }>()
 </script>
