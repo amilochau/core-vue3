@@ -15,7 +15,8 @@ export default defineConfig({
     vuetify(),
     VueI18n({
       fullInstall: false,
-      compositionOnly: true
+      compositionOnly: true,
+      runtimeOnly: false,
     }),
     VitePluginFonts({
       google: {
