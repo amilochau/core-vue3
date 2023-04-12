@@ -7,21 +7,17 @@ export function useFormat() {
   const { t, mergeLocaleMessage } = useI18n()
 
   mergeLocaleMessage('en', {
-    format: {
-      contactStatuses: {
-        new: "New",
-        inProgress: "In progress",
-        closed: "Closed"
-      }
+    contactStatuses: {
+      new: "New",
+      inProgress: "In progress",
+      closed: "Closed"
     }
   })
   mergeLocaleMessage('fr', {
-    format: {
-      contactStatuses: {
-        new: "Nouveau",
-        inProgress: "En cours",
-        closed: "Fermé"
-      }
+    contactStatuses: {
+      new: "Nouveau",
+      inProgress: "En cours",
+      closed: "Fermé"
     }
   })
 
@@ -31,7 +27,7 @@ export function useFormat() {
         case ContactStatus.New: {
           return {
             value: ContactStatus.New,
-            title: t('format.contactStatuses.new'),
+            title: t('contactStatuses.new'),
             icon: mdiAlertCircle,
             color: 'info'
           }
@@ -39,7 +35,7 @@ export function useFormat() {
         case ContactStatus.InProgress: {
           return {
             value: ContactStatus.InProgress,
-            title: t('format.contactStatuses.inProgress'),
+            title: t('contactStatuses.inProgress'),
             icon: mdiAccountClock,
             color: 'warning'
           }
@@ -47,7 +43,7 @@ export function useFormat() {
         case ContactStatus.Closed: {
           return {
             value: ContactStatus.Closed,
-            title: t('format.contactStatuses.closed'),
+            title: t('contactStatuses.closed'),
             icon: mdiArchive,
             color: 'success'
           }
