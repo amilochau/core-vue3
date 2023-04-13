@@ -9,7 +9,11 @@
 }
 
 .cursor-pointer {
-  cursor: pointer;
+  cursor: pointer !important;
+}
+
+.no-user-select {
+  user-select: none !important;
 }
 
 // Vuetify overrides
