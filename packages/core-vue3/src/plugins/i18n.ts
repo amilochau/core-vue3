@@ -10,13 +10,8 @@ export default {
       merge({
         locale: 'en',
         fallbackLocale: 'en',
-        messages: {
-          en: {},
-          fr: {}
-        },
         legacy: false,
-
-      }, options.i18n))
+      }, options.i18n || {}))
 
     app.use(i18n)
 

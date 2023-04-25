@@ -127,7 +127,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 
 | Configuration path | Description |
 | ------------------ | ----------- |
-| `application.name` | Name of the application, as used in the page title, page description, and policy page |
+| `application.name` | Name of the application |
 | `application.contact` | Application owner, as used in the policy page |
 | `application.navigation` | Navigation links, as `vuetify` list items, used in the navigation drawer |
 | `application.onAppBarTitleClick` | Action to run when the user clicks on the title from the app bar |

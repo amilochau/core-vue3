@@ -13,7 +13,7 @@ export type MilochauCoreOptions = {
   api: {
     gatewayUri: string,
   },
-  i18n: I18nOptions & { messages: { [lang: string]: { appTitle: string }}},
+  i18n: I18nOptions & { messages: MilochauCoreOptionsMessages },
   vuetify?: VuetifyOptions,
   identity: {
     cognito: {
@@ -23,4 +23,10 @@ export type MilochauCoreOptions = {
   },
   routes: Array<RouteRecordRaw>,
   clean: () => () => void,
+}
+
+export type MilochauCoreOptionsMessages = {
+  [lang: string]: {
+    appTitle: string
+  }
 }

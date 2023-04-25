@@ -9,7 +9,7 @@
           {{ t('header11') }}
         </h1>
         <p class="mb-4">
-          {{ t('text11', { name: coreOptions.application.name }) }}
+          {{ t('text11', { name: appTitle }) }}
         </p>
       </v-col>
     </v-row>
@@ -19,21 +19,21 @@
         sm="6">
         <section>
           <app-section-header>{{ t('header21') }}</app-section-header>
-          <app-section-text>{{ t('text21', { name: coreOptions.application.name }) }}</app-section-text>
+          <app-section-text>{{ t('text21', { name: appTitle }) }}</app-section-text>
           <app-section-sub-header>{{ t('header22') }}</app-section-sub-header>
-          <app-section-text>{{ t('text22', { name: coreOptions.application.name }) }}</app-section-text>
+          <app-section-text>{{ t('text22', { name: appTitle }) }}</app-section-text>
           <app-section-sub-header>{{ t('header23') }}</app-section-sub-header>
-          <app-section-text>{{ t('text23', { name: coreOptions.application.name }) }}</app-section-text>
+          <app-section-text>{{ t('text23', { name: appTitle }) }}</app-section-text>
           <app-section-sub-header>{{ t('header24') }}</app-section-sub-header>
           <app-section-text>{{ t('text24') }}</app-section-text>
           <app-section-sub-header>{{ t('header25') }}</app-section-sub-header>
-          <app-section-text>{{ t('text25', { name: coreOptions.application.name, contact: coreOptions.application.contact }) }}</app-section-text>
+          <app-section-text>{{ t('text25', { name: appTitle, contact: coreOptions.application.contact }) }}</app-section-text>
           <app-section-sub-header>{{ t('header26') }}</app-section-sub-header>
-          <app-section-text>{{ t('text26', { name: coreOptions.application.name }) }}</app-section-text>
+          <app-section-text>{{ t('text26', { name: appTitle }) }}</app-section-text>
           <app-section-sub-header>{{ t('header27') }}</app-section-sub-header>
-          <app-section-text>{{ t('text27', { name: coreOptions.application.name }) }}</app-section-text>
+          <app-section-text>{{ t('text27', { name: appTitle }) }}</app-section-text>
           <app-section-sub-header>{{ t('header28') }}</app-section-sub-header>
-          <app-section-text>{{ t('text28', { name: coreOptions.application.name }) }}</app-section-text>
+          <app-section-text>{{ t('text28', { name: appTitle }) }}</app-section-text>
         </section>
       </v-col>
     </v-row>
@@ -71,11 +71,20 @@ import AppSectionText from '../components/app/section/AppSectionText.vue'
 import { useI18n } from 'vue-i18n';
 import { useCookiesStore } from '../stores';
 import { useCoreOptions, usePage } from '../composition';
+import { computed } from 'vue';
 
 usePage()
-const { t } = useI18n()
+const { t, mergeLocaleMessage } = useI18n()
 const coreOptions = useCoreOptions()
 const cookiesStore = useCookiesStore()
+
+Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
+  mergeLocaleMessage(key, {
+    appTitle: item.appTitle
+  })
+})
+
+const appTitle = computed(() => t('appTitle'))
 </script>
 
 <style lang="sass" scoped>

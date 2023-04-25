@@ -69,7 +69,6 @@ export const coreOptions: MilochauCoreOptions = {
         appTitle: 'Example core-vue3'
       }
     },
-    //fallbackWarn: false
   },
   identity: {
     cognito: {
