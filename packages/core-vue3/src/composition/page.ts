@@ -6,11 +6,18 @@ import type { Ref } from "vue";
 
 export function usePage(args?: Ref<any>) {
 
-  const { t, te } = useI18n()
+  const { t, te, mergeLocaleMessage } = useI18n()
   const coreOptions = useCoreOptions()
 
-  const pageTitle = computed(() => te('pageTitle', args?.value) && t('pageTitle', args?.value) ? `${t('pageTitle', args?.value)} — ${coreOptions.application.name}` : coreOptions.application.name)
-  const pageDescription = computed(() => te('pageDescription', args?.value) && t('pageDescription', args?.value) ? `${t('pageDescription', args?.value)} — ${coreOptions.application.name}` : coreOptions.application.name)
+  Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
+    mergeLocaleMessage(key, {
+      appTitle: item.appTitle
+    })
+  })
+  
+  const appTitle = computed(() => t('appTitle'))
+  const pageTitle = computed(() => te('pageTitle', args?.value) && t('pageTitle', args?.value) ? `${t('pageTitle', args?.value)} — ${appTitle.value}` : appTitle.value)
+  const pageDescription = computed(() => te('pageDescription', args?.value) && t('pageDescription', args?.value) ? `${t('pageDescription', args?.value)} — ${appTitle.value}` : appTitle.value)
 
   useHead({
     title: pageTitle,

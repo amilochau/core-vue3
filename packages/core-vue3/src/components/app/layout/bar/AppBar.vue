@@ -33,7 +33,7 @@ import { useCoreOptions } from '../../../../composition';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
-const { t } = useI18n()
+const { t, mergeLocaleMessage } = useI18n()
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const coreOptions = useCoreOptions()
@@ -50,6 +50,12 @@ function onTitleClick() {
     coreOptions.application.onAppBarTitleClick(router)
   }
 }
+
+Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
+  mergeLocaleMessage(key, {
+    appTitle: item.appTitle
+  })
+})
 </script>
 
 <style scoped>
