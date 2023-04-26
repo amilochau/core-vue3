@@ -13,7 +13,6 @@ The following plugins are installed by `@amilochau/core-vue3`:
 
 The following libraries are used, and are defined as dependencies:
 - `@mdi/js` for icons
-- `webfontloader` with Roboto fontface
 - `@vueuse/core` and `@vueuse/head` as vue helpers
 
 ---

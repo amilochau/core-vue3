@@ -5,7 +5,6 @@ import vuetify from 'vite-plugin-vuetify'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import { VitePluginFonts } from 'vite-plugin-fonts'
 import { setDefaultResultOrder } from 'dns'
-import analyze from 'rollup-plugin-analyzer'
 
 setDefaultResultOrder('verbatim')
 
@@ -26,7 +25,6 @@ export default defineConfig({
         }],
       },
     }),
-    analyze({ summaryOnly: true }),
   ],
   resolve: {
     alias: [
