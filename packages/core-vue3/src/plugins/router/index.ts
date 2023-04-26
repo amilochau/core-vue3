@@ -5,7 +5,6 @@ import routes from '../../data/routes'
 import { registerGuards } from './guards'
 import type { App } from 'vue'
 import type { MilochauCoreOptions } from '../../types'
-import merge from 'deepmerge'
 import { useIdentityStore, useLanguageStore } from '../../stores'
 
 declare module 'vue-router' {
@@ -23,7 +22,7 @@ export default {
       {
         path: '/:lang([a-z]{2})',
         component: PageRoot,
-        children: merge(routes, options.routes)
+        children: routes.concat(options.routes)
       },
       {
         path: '/:pathMatch(.*)*',

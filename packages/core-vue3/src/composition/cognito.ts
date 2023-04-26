@@ -87,6 +87,7 @@ export function useCognito() {
       } catch (error) {
         console.log('error on getToken')
         console.log(error)
+        throw error
       }
     })
   }

@@ -6,7 +6,6 @@ import { createVuetify } from 'vuetify'
 import { en, fr } from 'vuetify/locale'
 import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 import type { VuetifyOptions } from 'vuetify/framework'
-import merge from 'deepmerge'
 
 export default {
   install: (app: App, options: MilochauCoreOptions) => {
@@ -36,7 +35,7 @@ export default {
       }
     }
 
-    const vuetifyOptions = options.vuetify ? merge(defaultVuetifyOptions, options.vuetify) : defaultVuetifyOptions
+    const vuetifyOptions = Object.assign(defaultVuetifyOptions, options.vuetify || {})
     const vuetify = createVuetify(vuetifyOptions)
 
     app.use(vuetify)

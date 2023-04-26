@@ -19,7 +19,7 @@
       </v-btn>
       <p>Date: {{ d(stringDate) }}</p>
 
-      <v-select />
+      <v-select multiple />
       <v-btn
         :disabled="loading || !online"
         color="primary"
@@ -34,6 +34,13 @@
       <p>
         {{ attributes }}
       </p>
+
+      <suspense>
+        <div>Real content after suspense</div>
+        <template #fallback>
+          Temporary content during suspense
+        </template>
+      </suspense>
 
       <dialog-test v-model="dialog" />
     </v-col>
