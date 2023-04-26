@@ -1,10 +1,11 @@
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
+import { defineConfig, type PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import { VitePluginFonts } from 'vite-plugin-fonts'
 import { setDefaultResultOrder } from 'dns'
+import { visualizer } from "rollup-plugin-visualizer";
 
 setDefaultResultOrder('verbatim')
 
@@ -25,6 +26,7 @@ export default defineConfig({
         }],
       },
     }),
+    visualizer() as PluginOption,
   ],
   resolve: {
     alias: [
