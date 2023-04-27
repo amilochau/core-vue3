@@ -136,24 +136,24 @@ export function useApi(relativeBaseUri: string) {
 
     var response: Response;
 
-    try {
-      // Get bearer token for API
-      var accessToken = '';
+    // Get bearer token for API
+    var accessToken = '';
 
-      if (router.currentRoute.value.meta.anonymousRequests
-        || settings.authPolicy === AuthPolicy.SendRequestsAsAnonymous
-        || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
-        // The user is not logged in but we don't mind
-      } else {
-        try {
-          accessToken = await getToken()
-        } catch (error) {
-          signOut()
-          router.push({ name: 'Login' })
-          throw new ApplicationMessage(t('errors.sessionExpired'), 'warning', mdiTimerRefreshOutline)
-        }
+    if (router.currentRoute.value.meta.anonymousRequests
+      || settings.authPolicy === AuthPolicy.SendRequestsAsAnonymous
+      || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
+      // The user is not logged in but we don't mind
+    } else {
+      try {
+        accessToken = await getToken()
+      } catch (error) {
+        signOut()
+        router.push({ name: 'Login' })
+        throw new ApplicationMessage(t('errors.sessionExpired'), 'warning', mdiTimerRefreshOutline)
       }
+    }
 
+    try {
       const requestInit = getRequestInit(accessToken);
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
