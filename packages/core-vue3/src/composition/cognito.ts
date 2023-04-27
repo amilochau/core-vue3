@@ -76,19 +76,9 @@ export function useCognito() {
 
   const getToken = async () => {
     return processRequest(async () => {
-      try {
-        const session = await Auth.currentSession()
-        console.log('Auth.currentSession()')
-        console.log(session)
-        const idToken = session.getIdToken()
-        console.log('session.getIdToken()')
-        console.log(idToken)
-        return idToken.getJwtToken()
-      } catch (error) {
-        console.log('error on getToken')
-        console.log(error)
-        throw error
-      }
+      const session = await Auth.currentSession()
+      const idToken = session.getIdToken()
+      return idToken.getJwtToken()
     })
   }
 

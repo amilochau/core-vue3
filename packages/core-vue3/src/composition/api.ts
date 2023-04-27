@@ -1,4 +1,4 @@
-import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
+import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from "@mdi/js"
 import { useRouter } from "vue-router"
 import { useIdentityStore, useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
@@ -19,7 +19,8 @@ export function useApi(relativeBaseUri: string) {
       notAuthorized: "Not authorized",
       notFound: "Not found",
       serverError: "Server error",
-      networkError: "Network error: check your connection"
+      networkError: "Network error: check your connection",
+      sessionExpired: "Session expired: please login again",
     }
   })
   mergeLocaleMessage('fr', {
@@ -28,13 +29,14 @@ export function useApi(relativeBaseUri: string) {
       notAuthorized: "Non autorisé",
       notFound: "Inconnu",
       serverError: "Erreur interne",
-      networkError: "Erreur réseau : vérifiez votre connexion"
+      networkError: "Erreur réseau : vérifiez votre connexion",
+      sessionExpired: "Session expirée : veuillez vous reconnecter",
     }
   })
 
   const languageStore = useLanguageStore()
   const identityStore = useIdentityStore()
-  const { getToken } = useCognito()
+  const { getToken, signOut } = useCognito()
   const router = useRouter();
   const coreOptions = useCoreOptions()
 
@@ -143,7 +145,13 @@ export function useApi(relativeBaseUri: string) {
         || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
         // The user is not logged in but we don't mind
       } else {
-        accessToken = await getToken()
+        try {
+          accessToken = await getToken()
+        } catch (error) {
+          signOut()
+          router.push({ name: 'Login' })
+          throw new ApplicationMessage(t('errors.sessionExpired'), 'warning', mdiTimerRefreshOutline)
+        }
       }
 
       const requestInit = getRequestInit(accessToken);
