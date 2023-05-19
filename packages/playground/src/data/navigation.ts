@@ -11,12 +11,12 @@ export default computed(() => {
   mergeLocaleMessage('en', {
     home: 'Home',
     privacy: 'Privacy',
-    contact: 'Contact'
+    contact: 'Contact',
   })
   mergeLocaleMessage('fr', {
     home: 'Accueil',
     privacy: 'Confidentialité',
-    contact: 'Contact'
+    contact: 'Contact',
   })
 
   const contactUrl = computed(() => `https://contact.milochau.com/${route.params.lang}?returnUrl=${window.location.href}`)
