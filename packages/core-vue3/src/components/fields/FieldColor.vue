@@ -23,7 +23,7 @@
       <v-color-picker
         v-model="internalColor"
         :swatches="swatches"
-        :modes="modes"
+        :modes="['hexa']"
         show-swatches
         swatches-max-height="160px"
         elevation="0" />
@@ -60,8 +60,6 @@ const props = defineProps<{
 const emits = defineEmits<{
   (eventName: 'update:modelValue', value?: string): void
 }>()
-
-const modes = [ "rgba" ]
 
 const display = ref(false)
 const internalColor: Ref<string | undefined> = ref('')
