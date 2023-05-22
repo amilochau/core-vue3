@@ -36,11 +36,11 @@ const { loading } = storeToRefs(appStore)
   {
     "en": {
       "pageTitle": "Not found",
-      "pageDescription": "Page for access to not found resources"
+      "pageDescription": "Page for access to forbidden resources"
     },
     "fr": {
       "pageTitle": "Non trouvé",
-      "pageDescription": "Page pour accès à des ressources non trouvées"
+      "pageDescription": "Page pour accès à des ressources interdites"
     }
   }
 </i18n>
