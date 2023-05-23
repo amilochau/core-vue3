@@ -1,5 +1,5 @@
 import type { MilochauCoreOptions } from "@amilochau/core-vue3"
-import { getConfig } from "../utils/config"
+import { getConfig, getCurrentEnvironment } from "../utils/config"
 import routes from "./routes"
 import { useMapsStore } from "../stores"
 import navigation from "./navigation"
@@ -55,7 +55,8 @@ export const coreOptions: MilochauCoreOptions = {
     name: 'Maps',
     contact: 'Antoine Milochau',
     navigation,
-    onAppBarTitleClick: (router) => router.push({ name: 'Home' })
+    onAppBarTitleClick: (router) => router.push({ name: 'Home' }),
+    isProduction: getCurrentEnvironment() === Environment.Production,
   },
   api: {
     gatewayUri: getConfig('VITE_API_URL')
