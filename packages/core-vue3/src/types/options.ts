@@ -9,6 +9,7 @@ export type MilochauCoreOptions = {
     contact: string,
     navigation: Ref<any[]>,
     onAppBarTitleClick?: (router: Router) => void,
+    isProduction: boolean,
   },
   api: {
     gatewayUri: string,
