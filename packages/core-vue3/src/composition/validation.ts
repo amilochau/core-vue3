@@ -9,6 +9,7 @@ export function useValidationRules() {
     maxLength: "This field must be less than {max} characters.",
     emailAddress: "This field must be a valid email address.",
     date: "This field must be a valid date.",
+    url: "This field must be a valid URL",
     minValue: "This field must be upper than {min}.",
     maxValue: "This field must be lower than {max}."
   })
@@ -18,6 +19,7 @@ export function useValidationRules() {
     maxLength: "Ce champ doit faire moins de {max} caractères.",
     emailAddress: "Ce champ doit correspondre à une adresse email valide.",
     date: "Ce champ doit correspondre à une date valide.",
+    url: "Ce champ doit correspondre à une URL valide.",
     minValue: "Ce champ doit être supérieur à {min}.",
     maxValue: "Ce champ doit être inférieur à {max}."
   })
@@ -33,6 +35,18 @@ export function useValidationRules() {
   const maxLength = (max: number) => (v: any) => !v || v.length <= max || t('maxLength', { max })
   const emailAddress = () => (v: any) => !v || /.+@.+\..+/.test(v) || t('emailAddress')
   const date = () => (v: any) => !v || (!isNaN(Date.parse(v)) && /^\d{4}-\d{2}-\d{2}$/.test(v)) || t('date')
+  const url = () => (v: any) => {
+    if (!v) {
+      return true
+    }
+    let url;
+    try {
+      url = new URL(v);
+    } catch (_) {
+      return t('url')
+    }
+    return url.protocol === 'http:' || url.protocol === 'https:' || t('url')
+  }
   const minValue = (min: number) => (v: any) => {
     if (v === null || v === undefined) {
       return true;
@@ -54,6 +68,7 @@ export function useValidationRules() {
     maxLength,
     emailAddress,
     date,
+    url,
     minValue,
     maxValue
   }
