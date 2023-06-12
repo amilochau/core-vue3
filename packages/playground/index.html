@@ -4,10 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Security-Policy" content="
       script-src 'self' 'unsafe-inline' 'unsafe-eval';
-      img-src 'self';
+      img-src 'self' data:;
       frame-src 'self' https://*.milochau.com;
-      connect-src 'self' https://*.milochau.com https://*.amazonaws.com https://*.cloudfront.net;
-      font-src https://fonts.gstatic.com;
+      connect-src 'self' https://*.milochau.com https://*.amazonaws.com data: blob: http://localhost:4000;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     ">
     <meta charset="UTF-8" />
