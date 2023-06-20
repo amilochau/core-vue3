@@ -39,7 +39,7 @@ watch(loading, () => {
 <style lang="sass" scoped>
 .progress-bar
   position: absolute !important
-  z-index: 9
+  z-index: 1001
 </style>
 
 <i18n lang="json">

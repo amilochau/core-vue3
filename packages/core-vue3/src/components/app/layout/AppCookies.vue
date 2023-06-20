@@ -46,7 +46,7 @@ const cookiesStore = useCookiesStore()
   position: fixed !important
   bottom: 0
   width: 100%
-  z-index: 10
+  z-index: 1002
 
 .cookies-title
   line-height: 1.2

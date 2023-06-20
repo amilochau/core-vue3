@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3-playground",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "author": "Antoine Milochau",
   "license": "MIT",
   "private": true,
@@ -38,6 +38,6 @@
     }
   },
   "devDependencies": {
-    "rollup-plugin-visualizer": "^5.9.0"
+    "rollup-plugin-visualizer": "^5.9.2"
   }
 }
