@@ -11,12 +11,12 @@ export type MilochauCoreOptions = {
     onAppBarTitleClick?: (router: Router) => void,
     isProduction: boolean,
   },
-  api: {
+  api?: {
     gatewayUri: string,
   },
   i18n: I18nOptions & { messages: MilochauCoreOptionsMessages },
   vuetify?: VuetifyOptions,
-  identity: {
+  identity?: {
     cognito: {
       userPoolId: string,
       clientId: string,

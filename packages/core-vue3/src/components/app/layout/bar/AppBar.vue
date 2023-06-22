@@ -15,8 +15,8 @@
     </v-app-bar-title>
     <app-offline />
     <app-settings-menu />
-    <app-profile-menu v-if="isAuthenticated" />
-    <app-login-btn v-else />
+    <app-profile-menu v-if="coreOptions.authenticationEnabled && isAuthenticated" />
+    <app-login-btn v-else-if="coreOptions.authenticationEnabled" />
     <app-progress-bar :lazy-delay="200" />
   </v-app-bar>
 </template>
