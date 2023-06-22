@@ -19,5 +19,5 @@ import { useAppStore } from '../../../stores'
 var appStore = useAppStore()
 const coreOptions = useCoreOptions()
 
-const menuItems = coreOptions.application.navigation
+const menuItems = coreOptions.application.navigation.items
 </script>

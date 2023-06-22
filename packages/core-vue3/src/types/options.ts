@@ -7,7 +7,9 @@ export type MilochauCoreOptions = {
   application: {
     name: string,
     contact: string,
-    navigation: Ref<any[]>,
+    navigation: {
+      items: Ref<any[]>
+    },
     header: {
       disabled?: boolean,
       onTitleClick?: (router: Router) => void,
