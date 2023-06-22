@@ -55,7 +55,9 @@ export const coreOptions: MilochauCoreOptions = {
     name: 'Maps',
     contact: 'Antoine Milochau',
     navigation,
-    onAppBarTitleClick: (router) => router.push({ name: 'Home' }),
+    headerBar: {
+      onTitleClick: (router) => router.push({ name: 'Home' }),
+    },
     isProduction: getCurrentEnvironment() === Environment.Production,
   },
   api: {

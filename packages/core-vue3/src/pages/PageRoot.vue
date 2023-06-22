@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex fill-height">
     <v-main>
-      <app-bar />
+      <app-bar v-if="!coreOptions.application.headerBar.disabled" />
       <app-cookies />
       <router-view v-slot="{ Component }">
         <v-fade-transition mode="out-in">
@@ -9,8 +9,8 @@
         </v-fade-transition>
       </router-view>
       <app-navigation-drawer />
+      <app-snackbar />
     </v-main>
-    <app-snackbar />
   </div>
 </template>
 
@@ -23,11 +23,13 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useLocale } from 'vuetify'
 import { useLanguageStore } from '../stores';
+import { useCoreOptions } from '..';
 
 const i18n = useI18n({ useScope: 'global' })
 const route = useRoute()
 const languageStore = useLanguageStore()
 const { current } = useLocale()
+const coreOptions = useCoreOptions()
 
 setLanguage(route.params.lang?.toString())
 
