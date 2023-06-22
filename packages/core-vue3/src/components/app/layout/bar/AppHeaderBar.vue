@@ -8,7 +8,7 @@
     <v-app-bar-title
       :class="{
         'ml-4': true,
-        'clickable-title': coreOptions.application.headerBar.onTitleClick
+        'clickable-title': coreOptions.application.header.onTitleClick
       }"
       @click="onTitleClick">
       {{ t('appTitle') }}
@@ -46,8 +46,8 @@ function toggleDrawer() {
 }
 
 function onTitleClick() {
-  if (coreOptions.application.headerBar.onTitleClick) {
-    coreOptions.application.headerBar.onTitleClick(router)
+  if (coreOptions.application.header.onTitleClick) {
+    coreOptions.application.header.onTitleClick(router)
   }
 }
 
