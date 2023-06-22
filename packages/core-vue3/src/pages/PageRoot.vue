@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex fill-height">
     <v-main>
-      <app-bar v-if="!coreOptions.application.appBar.disabled" />
+      <app-bar v-if="!coreOptions.application.headerBar.disabled" />
       <app-cookies />
       <router-view v-slot="{ Component }">
         <v-fade-transition mode="out-in">

@@ -45,7 +45,7 @@ export const coreOptions: MilochauCoreOptions = {
     navigation: ref([
       // YOUR APPLICATION NAVIGATION LINKS
     ]),
-    appBar: {
+    headerBar: {
       onTitleClick: router => router.push({ name: 'YOUR HOME PAGE NAME' })
     }
   },
@@ -131,8 +131,8 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `application.name` | Name of the application |
 | `application.contact` | Application owner, as used in the policy page |
 | `application.navigation` | Navigation links, as `vuetify` list items, used in the navigation drawer |
-| `application.appBar.disabled` | Whether the app bar should be disabled (not displayed) |
-| `application.appBar.onTitleClick` | Action to run when the user clicks on the title from the app bar |
+| `application.headerBar.disabled` | Whether the app bar should be disabled (not displayed) |
+| `application.headerBar.onTitleClick` | Action to run when the user clicks on the title from the app bar |
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
 | `i18n` | Options used by `vue-i18n` |
 | `identity.cognito` | Cognito settings for authentication |
