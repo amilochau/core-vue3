@@ -3,10 +3,12 @@ import { type EditPassword, type ConfirmEmail, type ForgotPassword, type Login, 
 import { Auth } from '@aws-amplify/auth';
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
+import { useCoreOptions } from './options';
 
 export function useCognito() {
 
   const identityStore = useIdentityStore()
+  const coreOptions = useCoreOptions()
   const { t, mergeLocaleMessage } = useI18n()
 
   mergeLocaleMessage('en', {
@@ -17,6 +19,10 @@ export function useCognito() {
   })
 
   const processRequest = async <TResponse>(request: () => Promise<TResponse>) => {
+    if (!coreOptions.authenticationEnabled) {
+      throw 'Authentication is not configured.'
+    }
+
     try {
       return await request()
     } catch (error) {

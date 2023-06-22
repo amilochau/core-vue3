@@ -41,7 +41,7 @@ export function useApi(relativeBaseUri: string) {
   const coreOptions = useCoreOptions()
 
   const { isAuthenticated } = storeToRefs(identityStore)
-  const baseUri = `${coreOptions.api.gatewayUri}${relativeBaseUri}`
+  const baseUri = `${coreOptions.api?.gatewayUri}${relativeBaseUri}`
 
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
     switch (response.status) {
@@ -136,6 +136,10 @@ export function useApi(relativeBaseUri: string) {
 
     var response: Response;
 
+    if (!coreOptions.apiEnabled) {
+      throw 'API integration is not configured.'
+    }
+
     // Get bearer token for API
     var accessToken = '';
 
@@ -144,6 +148,10 @@ export function useApi(relativeBaseUri: string) {
       || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
       // The user is not logged in but we don't mind
     } else {
+      if (!coreOptions.authenticationEnabled) {
+        throw 'Authentication is not configured.'
+      }
+
       try {
         accessToken = await getToken()
       } catch (error) {
