@@ -8,7 +8,10 @@ export type MilochauCoreOptions = {
     name: string,
     contact: string,
     navigation: Ref<any[]>,
-    onAppBarTitleClick?: (router: Router) => void,
+    appBar: {
+      disabled?: boolean,
+      onTitleClick?: (router: Router) => void,
+    },
     isProduction: boolean,
   },
   api?: {
