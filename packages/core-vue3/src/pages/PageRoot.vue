@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex fill-height">
-    <v-main>
-      <app-bar v-if="!coreOptions.application.headerBar.disabled" />
+  <v-main>
+    <div class="d-flex fill-height flex-column">
+      <app-header-bar v-if="!coreOptions.application.header.disabled" />
       <app-cookies />
       <router-view v-slot="{ Component }">
         <v-fade-transition mode="out-in">
@@ -9,13 +9,15 @@
         </v-fade-transition>
       </router-view>
       <app-navigation-drawer />
+      <app-footer-bar v-if="coreOptions.application.footer?.enabled" />
       <app-snackbar />
-    </v-main>
-  </div>
+    </div>
+  </v-main>
 </template>
 
 <script setup lang="ts">
-import AppBar from '../components/app/layout/bar/AppBar.vue'
+import AppFooterBar from '../components/app/layout/bar/AppFooterBar.vue'
+import AppHeaderBar from '../components/app/layout/bar/AppHeaderBar.vue'
 import AppNavigationDrawer from '../components/app/layout/AppNavigationDrawer.vue'
 import AppCookies from '../components/app/layout/AppCookies.vue'
 import AppSnackbar from '../components/app/layout/AppSnackbar.vue'
