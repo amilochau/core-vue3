@@ -3,7 +3,7 @@ import { defineConfig, type PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
-import { VitePluginFonts } from 'vite-plugin-fonts'
+import Unfonts from 'unplugin-fonts/vite'
 import { setDefaultResultOrder } from 'dns'
 import { visualizer } from "rollup-plugin-visualizer";
 
@@ -18,7 +18,7 @@ export default defineConfig({
       compositionOnly: true,
       runtimeOnly: false,
     }),
-    VitePluginFonts({
+    Unfonts({
       google: {
         families: [{
           name: 'Roboto',
