@@ -1,12 +1,10 @@
-import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
+import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from "@mdi/js"
 import { useRouter } from "vue-router"
-import { useLanguageStore } from "../stores"
-import { ApplicationMessage } from "../types"
-import type { IHttpSettings, IProblemDetails } from "../types/http"
-import { useCoreOptions } from "./options"
+import { useCognito } from './cognito'
 import { useI18n } from 'vue-i18n'
+import { useCoreOptions, useLanguageStore, type IHttpSettings, type IProblemDetails, ApplicationMessage } from "@amilochau/core-vue3"
 
-export function useApiAnonymous(relativeBaseUri: string) {
+export function useApi(relativeBaseUri: string) {
 
   const { t, mergeLocaleMessage } = useI18n()
 
@@ -32,6 +30,7 @@ export function useApiAnonymous(relativeBaseUri: string) {
   })
 
   const languageStore = useLanguageStore()
+  const { getToken, signOut } = useCognito()
   const router = useRouter();
   const coreOptions = useCoreOptions()
 
@@ -111,11 +110,15 @@ export function useApiAnonymous(relativeBaseUri: string) {
     return `${baseUri}${url}`
   }
 
-  const getRequestInit = (): RequestInit => {
+  const getRequestInit = (accessToken: string): RequestInit => {
     const headers: HeadersInit = {
       'Accept-Language': languageStore.language,
       'Content-Type': 'application/json;charset=utf-8'
     };
+
+    if (accessToken) {
+      headers.Authorization = `Bearer ${accessToken}`
+    }
 
     return { headers }
   }
@@ -130,8 +133,23 @@ export function useApiAnonymous(relativeBaseUri: string) {
       throw 'API integration is not configured.'
     }
 
+    if (!coreOptions.authenticationEnabled) {
+      throw 'Authentication is not configured.'
+    }
+
+    // Get bearer token for API
+    var accessToken = '';
+
     try {
-      const requestInit = getRequestInit();
+      accessToken = await getToken()
+    } catch (error) {
+      signOut()
+      router.push({ name: 'Login' })
+      throw new ApplicationMessage(t('errors.sessionExpired'), 'warning', mdiTimerRefreshOutline)
+    }
+
+    try {
+      const requestInit = getRequestInit(accessToken);
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
     } catch (error) {

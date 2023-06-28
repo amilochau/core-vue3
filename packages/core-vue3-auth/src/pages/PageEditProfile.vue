@@ -53,15 +53,15 @@
 
 <script setup lang="ts">
 import { mdiAccountEdit, mdiAccount } from '@mdi/js';
-import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
-import { useAppStore, useIdentityStore } from '../../stores';
+import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { EditProfile } from '../../types';
+import type { EditProfile } from '../types';
+import { useAppStore, useHandle, useIdentityStore, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()

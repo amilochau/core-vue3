@@ -22,6 +22,18 @@
             elevation="0">
             <v-card-text>
               <v-text-field
+                v-model="request.name"
+                :label="t('name')"
+                :prepend-icon="mdiAccount"
+                :rules="[ required(), maxLength(200) ]"
+                variant="underlined"
+                density="comfortable"
+                hide-details="auto"
+                class="mb-3"
+                autocomplete="name"
+                type="text"
+                required />
+              <v-text-field
                 v-model="request.email"
                 :label="t('email')"
                 :prepend-icon="mdiAt"
@@ -43,7 +55,19 @@
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
-                autocomplete="current-password"
+                autocomplete="new-password"
+                type="password"
+                required />
+              <v-text-field
+                v-model="request.confirmationPassword"
+                :label="t('confirmationPassword')"
+                :prepend-icon="mdiLock"
+                :rules="[ required(), minLength(6), maxLength(200) ]"
+                variant="underlined"
+                density="comfortable"
+                hide-details="auto"
+                class="mb-3"
+                autocomplete="new-password"
                 type="password"
                 required />
             </v-card-text>
@@ -51,33 +75,23 @@
               <v-btn
                 :disabled="loading || !online"
                 :loading="loading"
-                :prepend-icon="mdiAccountLockOpen"
+                :prepend-icon="mdiAccountPlus"
                 color="primary"
                 variant="text"
-                @click="login">
-                {{ t('login') }}
+                @click="register">
+                {{ t('register') }}
               </v-btn>
             </v-card-text>
           </v-card>
         </v-form>
         <h4 class="mb-4 text-body-2 font-italic text-center">
-          {{ t('registerTitle') }}
+          {{ t('loginTitle') }}
           <v-btn
-            :to="{ name: 'Register' }"
+            :to="{ name: 'Login' }"
             density="compact"
             variant="text"
             class="ml-1">
-            {{ t('registerLink') }}
-          </v-btn>
-        </h4>
-        <h4 class="mb-4 text-body-2 font-italic text-center">
-          {{ t('forgotPasswordTitle') }}
-          <v-btn
-            :to="{ name: 'ForgotPassword' }"
-            density="compact"
-            variant="text"
-            class="ml-1">
-            {{ t('forgotPasswordLink') }}
+            {{ t('loginLink') }}
           </v-btn>
         </h4>
       </v-col>
@@ -86,47 +100,45 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAccountLockOpen, mdiAt, mdiLock } from '@mdi/js';
-import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
-import { useAppStore, useIdentityStore } from '../../stores';
+import { mdiAccountPlus, mdiAccount, mdiAt, mdiLock } from '@mdi/js';
+import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import type { Login } from '../../types';
+import { useRouter } from 'vue-router';
+import type { Register } from '../types';
+import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
-const route = useRoute()
 const router = useRouter()
-const identityStore = useIdentityStore()
 const { handleLoadAndError, handleFormValidation } = useHandle()
-const { authenticateUser, fetchUserAttributes } = useCognito()
+const { signUp } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<Login> = ref({
-  email: route.query.email?.toString() || '',
+const request: Ref<Register> = ref({
+  name: '',
+  email: '',
   password: '',
+  confirmationPassword: ''
 })
 
-async function login() {
+async function register() {
   if (!await handleFormValidation(form)) {
     return
   }
 
   await handleLoadAndError(async () => {
-    await authenticateUser(request.value)
-    identityStore.isAuthenticated = true
-    fetchUserAttributes()
-    appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
-    router.push({ name: 'Home' })
+    const result = await signUp(request.value)
+    appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
+    router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
   }, 'snackbar')
 }
 </script>
@@ -134,38 +146,40 @@ async function login() {
 <i18n lang="json">
   {
     "en": {
-      "pageTitle": "Login",
-      "pageDescription": "Login page"
+      "pageTitle": "Register",
+      "pageDescription": "Register page"
     },
     "fr": {
-      "pageTitle": "Connexion",
-      "pageDescription": "Page de connexion"
+      "pageTitle": "Création de compte",
+      "pageDescription": "Page de création de compte"
     }
   }
 </i18n>
 <i18n lang="json">
   {
     "en": {
-      "title": "Login",
+      "title": "Register",
+      "name": "Your name",
       "email": "Your email address",
       "password": "Your password",
-      "login": "Login",
-      "successMessage": "Welcome!",
-      "registerTitle": "You don't have any account yet?",
-      "registerLink": "Register",
-      "forgotPasswordTitle": "You can't remember your password?",
-      "forgotPasswordLink": "Reset"
+      "confirmationPassword": "Your password, again",
+      "register": "Create account",
+      "successMessage": "Your account has now been created!",
+      "successDetails": "You must confirm your email address - a code has been sent to you. Check your spams if you don't find it!",
+      "loginTitle": "You already have an account?",
+      "loginLink": "Login"
     },
     "fr": {
-      "title": "Connexion",
+      "title": "Création de compte",
+      "name": "Votre nom",
       "email": "Votre adresse email",
       "password": "Votre mot de passe",
-      "login": "Se connecter",
-      "successMessage": "Bienvenue !",
-      "registerTitle": "Vous n'avez pas encore de compte ?",
-      "registerLink": "S'inscrire",
-      "forgotPasswordTitle": "Vous avez oublié votre mot de passe ?",
-      "forgotPasswordLink": "Réinitialiser"
+      "confirmationPassword": "Votre mot de passe, encore",
+      "register": "Créer le compte",
+      "successMessage": "Votre compte a bien été créé !",
+      "successDetails": "Vous devez désormais confirmer votre addresse email - un code vous a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !",
+      "loginTitle": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter"
     }
   }
 </i18n>

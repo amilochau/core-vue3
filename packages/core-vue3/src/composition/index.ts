@@ -1,15 +1,13 @@
-import { useApi } from "./api";
+import { useApiAnonymous } from "./api";
 import { useClean } from './clean';
-import { useCognito } from './cognito';
 import { useCoreOptions } from "./options";
 import { useHandle } from "./handle";
 import { usePage } from "./page";
 import { useValidationRules } from './validation'
 
 export {
-  useApi,
+  useApiAnonymous,
   useClean,
-  useCognito,
   useCoreOptions,
   useHandle,
   usePage,

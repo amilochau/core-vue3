@@ -16,23 +16,10 @@
         sm="6">
         <v-form
           ref="form"
-          :readonly="loading"
-          class="mb-4">
+          :readonly="loading">
           <v-card
             elevation="0">
             <v-card-text>
-              <v-text-field
-                v-model="request.name"
-                :label="t('name')"
-                :prepend-icon="mdiAccount"
-                :rules="[ required(), maxLength(200) ]"
-                variant="underlined"
-                density="comfortable"
-                hide-details="auto"
-                class="mb-3"
-                autocomplete="name"
-                type="text"
-                required />
               <v-text-field
                 v-model="request.email"
                 :label="t('email')"
@@ -70,75 +57,77 @@
                 autocomplete="new-password"
                 type="password"
                 required />
+              <v-text-field
+                v-model="request.code"
+                :label="t('code')"
+                :prepend-icon="mdiNumeric"
+                :rules="[ required(), minLength(6), maxLength(200) ]"
+                variant="underlined"
+                density="comfortable"
+                hide-details="auto"
+                class="mb-3"
+                autocomplete="one-time-code"
+                required />
             </v-card-text>
             <v-card-text class="text-center">
               <v-btn
                 :disabled="loading || !online"
                 :loading="loading"
-                :prepend-icon="mdiAccountPlus"
+                :prepend-icon="mdiLockReset"
                 color="primary"
                 variant="text"
-                @click="register">
-                {{ t('register') }}
+                @click="reset">
+                {{ t('reset') }}
               </v-btn>
             </v-card-text>
           </v-card>
         </v-form>
-        <h4 class="mb-4 text-body-2 font-italic text-center">
-          {{ t('loginTitle') }}
-          <v-btn
-            :to="{ name: 'Login' }"
-            density="compact"
-            variant="text"
-            class="ml-1">
-            {{ t('loginLink') }}
-          </v-btn>
-        </h4>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { mdiAccountPlus, mdiAccount, mdiAt, mdiLock } from '@mdi/js';
-import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
-import { useAppStore } from '../../stores';
+import { mdiLockReset, mdiAt, mdiLock, mdiNumeric } from '@mdi/js';
+import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
-import { useRouter } from 'vue-router';
-import type { Register } from '../../types';
+import { useRoute, useRouter } from 'vue-router';
+import type { ResetPassword } from '../types';
+import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
+const route = useRoute()
 const { handleLoadAndError, handleFormValidation } = useHandle()
-const { signUp } = useCognito()
+const { confirmPassword } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<Register> = ref({
-  name: '',
-  email: '',
+const request: Ref<ResetPassword> = ref({
+  email: route.query.email?.toString() || '',
   password: '',
-  confirmationPassword: ''
+  confirmationPassword: '',
+  code: '',
 })
 
-async function register() {
+async function reset() {
   if (!await handleFormValidation(form)) {
     return
   }
 
   await handleLoadAndError(async () => {
-    const result = await signUp(request.value)
+    await confirmPassword(request.value);
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
-    router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
+    router.push({ name: 'Login', query: { email: request.value.email } })
   }, 'snackbar')
 }
 </script>
@@ -146,40 +135,34 @@ async function register() {
 <i18n lang="json">
   {
     "en": {
-      "pageTitle": "Register",
-      "pageDescription": "Register page"
+      "pageTitle": "Reset password",
+      "pageDescription": "Password reset page"
     },
     "fr": {
-      "pageTitle": "Création de compte",
-      "pageDescription": "Page de création de compte"
+      "pageTitle": "Réinitialisation de mot de passe",
+      "pageDescription": "Page de réinitialisation de mot de passe"
     }
   }
 </i18n>
 <i18n lang="json">
   {
     "en": {
-      "title": "Register",
-      "name": "Your name",
+      "title": "Reset password",
       "email": "Your email address",
       "password": "Your password",
       "confirmationPassword": "Your password, again",
-      "register": "Create account",
-      "successMessage": "Your account has now been created!",
-      "successDetails": "You must confirm your email address - a code has been sent to you. Check your spams if you don't find it!",
-      "loginTitle": "You already have an account?",
-      "loginLink": "Login"
+      "code": "Your verification code",
+      "reset": "Reset password",
+      "successMessage": "Your new password has been set!"
     },
     "fr": {
-      "title": "Création de compte",
-      "name": "Votre nom",
+      "title": "Réinitialisation de mot de passe",
       "email": "Votre adresse email",
       "password": "Votre mot de passe",
       "confirmationPassword": "Votre mot de passe, encore",
-      "register": "Créer le compte",
-      "successMessage": "Votre compte a bien été créé !",
-      "successDetails": "Vous devez désormais confirmer votre addresse email - un code vous a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !",
-      "loginTitle": "Vous avez déjà un compte ?",
-      "loginLink": "Se connecter"
+      "code": "Votre code de vérification",
+      "reset": "Réinitialiser le mot de passe",
+      "successMessage": "Votre nouveau mot de passe a été enregistré !"
     }
   }
 </i18n>

@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import PageRoot from '../../pages/PageRoot.vue'
 import routes from '../../data/routes'
 import { registerGuards } from './guards'
-import type { App } from 'vue'
+import { type App } from 'vue'
 import type { MilochauCoreOptions } from '../../types'
 import { useIdentityStore, useLanguageStore } from '../../stores'
 
@@ -22,7 +22,7 @@ export default {
       {
         path: '/:lang([a-z]{2})',
         component: PageRoot,
-        children: routes.concat(options.routes)
+        children: options.routes.concat(routes)
       },
       {
         path: '/:pathMatch(.*)*',
@@ -33,6 +33,8 @@ export default {
         }
       }
     ]
+
+    console.log('routesWithRedirection', routesWithRedirection)
 
     const router = createRouter({
       history: createWebHistory(),

@@ -1,9 +1,8 @@
-import { useIdentityStore } from '../stores'
-import { type EditPassword, type ConfirmEmail, type ForgotPassword, type Login, type Register, type ResetPassword, type EditProfile, ApplicationMessage } from "../types"
+import { type EditPassword, type ConfirmEmail, type ForgotPassword, type Login, type Register, type ResetPassword, type EditProfile } from "../types"
 import { Auth } from '@aws-amplify/auth';
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
-import { useCoreOptions } from './options';
+import { ApplicationMessage, useCoreOptions, useIdentityStore } from '@amilochau/core-vue3';
 
 export function useCognito() {
 
@@ -41,11 +40,13 @@ export function useCognito() {
     }))
   }
 
-  const authenticateUser = (model: Login) => {
-    return processRequest(() => Auth.signIn({
+  const authenticateUser = async (model: Login) => {
+    await processRequest(() => Auth.signIn({
       username: model.email,
       password: model.password,
     }))
+    identityStore.isAuthenticated = true
+    identityStore.onLogout = () => signOut()
   }
 
   const forgotPassword = (model: ForgotPassword) => {

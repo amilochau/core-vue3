@@ -15,7 +15,8 @@
     "packages/core-vue3"
   ],
   "dependencies": {
-    "@amilochau/core-vue3": "file:packages/core-vue3"
+    "@amilochau/core-vue3": "file:packages/core-vue3",
+    "@amilochau/core-vue3-auth": "file:packages/core-vue3-auth"
   },
   "eslintConfig": {
     "root": true,

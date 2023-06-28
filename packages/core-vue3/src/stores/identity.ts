@@ -7,7 +7,8 @@ function getDefaultState() {
       id: '',
       name: '',
       email: '',
-    }
+    },
+    onLogout: async () => {},
   }
 }
 
@@ -20,7 +21,11 @@ export const useStore = defineStore('identity', {
 
     clean() {
       this.$patch(getDefaultState())
-    }
+    },
+
+    logout() {
+      return this.onLogout();
+    },
   },
   persist: {
     storage: localStorage

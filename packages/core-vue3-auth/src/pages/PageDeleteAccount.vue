@@ -66,15 +66,15 @@
 
 <script setup lang="ts">
 import { mdiAccountOff, mdiAt, mdiLock } from '@mdi/js';
-import { useClean, useCognito, useHandle, usePage, useValidationRules } from '../../composition';
-import { useAppStore, useIdentityStore } from '../../stores';
+import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { Login } from '../../types';
+import type { Login } from '../types';
+import { useAppStore, useClean, useHandle, useIdentityStore, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()

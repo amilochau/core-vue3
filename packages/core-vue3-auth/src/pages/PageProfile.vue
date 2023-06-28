@@ -67,9 +67,8 @@ import { mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit } from '
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { usePage } from '../../composition';
-import { useAppStore, useIdentityStore } from '../../stores';
 import { useOnline } from '@vueuse/core';
+import { useAppStore, useIdentityStore, usePage } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()

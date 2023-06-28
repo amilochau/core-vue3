@@ -33,16 +33,28 @@
                 type="email"
                 inputmode="email"
                 required />
+              <v-text-field
+                v-model="request.code"
+                :label="t('code')"
+                :prepend-icon="mdiNumeric"
+                :rules="[ required(), minLength(6), maxLength(8) ]"
+                variant="underlined"
+                density="comfortable"
+                hide-details="auto"
+                class="mb-3"
+                autocomplete="one-time-code"
+                type="text"
+                required />
             </v-card-text>
             <v-card-text class="text-center">
               <v-btn
                 :disabled="loading || !online"
                 :loading="loading"
-                :prepend-icon="mdiLockReset"
+                :prepend-icon="mdiAccountCheck"
                 color="primary"
                 variant="text"
-                @click="reset">
-                {{ t('reset') }}
+                @click="verifyCode">
+                {{ t('verifyCode') }}
               </v-btn>
             </v-card-text>
           </v-card>
@@ -53,42 +65,44 @@
 </template>
 
 <script setup lang="ts">
-import { mdiLockReset, mdiAt } from '@mdi/js';
-import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
-import { useAppStore } from '../../stores';
+import { mdiAccountCheck, mdiAt, mdiNumeric } from '@mdi/js';
+import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
-import { useRouter } from 'vue-router';
-import type { ForgotPassword } from "../../types"
+import { useRoute, useRouter } from 'vue-router';
+import type { ConfirmEmail } from '../types';
+import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
+const route = useRoute()
 const router = useRouter()
 const { handleLoadAndError, handleFormValidation } = useHandle()
-const { forgotPassword } = useCognito()
-const { required, maxLength, emailAddress } = useValidationRules()
+const { confirmRegistration } = useCognito()
+const { required, minLength, maxLength, emailAddress } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<ForgotPassword> = ref({
-  email: ''
+const request: Ref<ConfirmEmail> = ref({
+  email: route.query.email?.toString() || '',
+  code: '',
 })
 
-async function reset() {
+async function verifyCode() {
   if (!await handleFormValidation(form)) {
     return
   }
 
   await handleLoadAndError(async () => {
-    await forgotPassword(request.value)
+    await confirmRegistration(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
-    router.push({ name: 'ResetPassword', query: { email: request.value.email } })
+    router.push({ name: 'Login', query: { email: request.value.email } })
   }, 'snackbar')
 }
 </script>
@@ -96,30 +110,32 @@ async function reset() {
 <i18n lang="json">
   {
     "en": {
-      "pageTitle": "Forgot password",
-      "pageDescription": "Password forgotten page"
+      "pageTitle": "Email confirmation",
+      "pageDescription": "Email confirmation page"
     },
     "fr": {
-      "pageTitle": "Mot de passe oublié",
-      "pageDescription": "Page de mot de passe oublié"
+      "pageTitle": "Confirmation d'email",
+      "pageDescription": "Page de confirmation d'email"
     }
   }
 </i18n>
 <i18n lang="json">
   {
     "en": {
-      "title": "Password forgotten",
+      "title": "Email confirmation",
       "email": "Your email address",
-      "reset": "Reset password",
-      "successMessage": "Your password has been reset!",
-      "successDetails": "An email with the reset code has been sent to you. Check your spams if you don't find it!"
+      "code": "Your verification code",
+      "verifyCode": "Verify email address",
+      "successMessage": "Your email address has now been verified!",
+      "successDetails": "You can now sign in."
     },
     "fr": {
-      "title": "Mot de passe oublié",
+      "title": "Confirmation d'email",
       "email": "Votre adresse email",
-      "reset": "Réinitialiser le mot de passe",
-      "successMessage": "Votre mot de passe a été réinitialisé !",
-      "successDetails": "Un email avec le code de réinitialisation vous a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !"
+      "code": "Votre code de vérification",
+      "verifyCode": "Vérifier l'adresse email",
+      "successMessage": "Votre adresse email a bien été vérifiée !",
+      "successDetails": "Vous pouvez désormais vous connecter."
     }
   }
 </i18n>

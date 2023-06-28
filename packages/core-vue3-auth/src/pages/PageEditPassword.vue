@@ -21,17 +21,16 @@
             elevation="0">
             <v-card-text>
               <v-text-field
-                v-model="request.email"
-                :label="t('email')"
-                :prepend-icon="mdiAt"
-                :rules="[ required(), maxLength(200), emailAddress() ]"
+                v-model="request.oldPassword"
+                :label="t('oldPassword')"
+                :prepend-icon="mdiLockClock"
+                :rules="[ required(), minLength(6), maxLength(200) ]"
                 variant="underlined"
                 density="comfortable"
                 hide-details="auto"
                 class="mb-3"
-                autocomplete="email"
-                type="email"
-                inputmode="email"
+                autocomplete="current-password"
+                type="password"
                 required />
               <v-text-field
                 v-model="request.password"
@@ -57,27 +56,16 @@
                 autocomplete="new-password"
                 type="password"
                 required />
-              <v-text-field
-                v-model="request.code"
-                :label="t('code')"
-                :prepend-icon="mdiNumeric"
-                :rules="[ required(), minLength(6), maxLength(200) ]"
-                variant="underlined"
-                density="comfortable"
-                hide-details="auto"
-                class="mb-3"
-                autocomplete="one-time-code"
-                required />
             </v-card-text>
             <v-card-text class="text-center">
               <v-btn
                 :disabled="loading || !online"
                 :loading="loading"
                 :prepend-icon="mdiLockReset"
-                color="primary"
+                color="warning"
                 variant="text"
-                @click="reset">
-                {{ t('reset') }}
+                @click="editPassword">
+                {{ t('editPassword') }}
               </v-btn>
             </v-card-text>
           </v-card>
@@ -88,46 +76,44 @@
 </template>
 
 <script setup lang="ts">
-import { mdiLockReset, mdiAt, mdiLock, mdiNumeric } from '@mdi/js';
-import { useCognito, useHandle, usePage, useValidationRules } from '../../composition';
-import { useAppStore } from '../../stores';
+import { mdiLockReset, mdiLockClock, mdiLock } from '@mdi/js';
+import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import type { ResetPassword } from '../../types';
+import { useRouter } from 'vue-router';
+import type { EditPassword } from '../types';
+import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
 const router = useRouter()
-const route = useRoute()
 const { handleLoadAndError, handleFormValidation } = useHandle()
-const { confirmPassword } = useCognito()
-const { required, minLength, maxLength, emailAddress } = useValidationRules()
+const { changePassword } = useCognito()
+const { required, minLength, maxLength } = useValidationRules()
 
 const { loading } = storeToRefs(appStore)
 
 const form: Ref<any> = ref(null)
-const request: Ref<ResetPassword> = ref({
-  email: route.query.email?.toString() || '',
+const request: Ref<EditPassword> = ref({
+  oldPassword: '',
   password: '',
   confirmationPassword: '',
-  code: '',
 })
 
-async function reset() {
+async function editPassword() {
   if (!await handleFormValidation(form)) {
     return
   }
 
   await handleLoadAndError(async () => {
-    await confirmPassword(request.value);
-    appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
-    router.push({ name: 'Login', query: { email: request.value.email } })
+    await changePassword(request.value)
+    appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
+    router.push({ name: 'Profile' })
   }, 'snackbar')
 }
 </script>
@@ -135,34 +121,32 @@ async function reset() {
 <i18n lang="json">
   {
     "en": {
-      "pageTitle": "Reset password",
-      "pageDescription": "Password reset page"
+      "pageTitle": "Password change",
+      "pageDescription": "Password change page"
     },
     "fr": {
-      "pageTitle": "Réinitialisation de mot de passe",
-      "pageDescription": "Page de réinitialisation de mot de passe"
+      "pageTitle": "Modification de mot de passe",
+      "pageDescription": "Page de modification de mot de passe"
     }
   }
 </i18n>
 <i18n lang="json">
   {
     "en": {
-      "title": "Reset password",
-      "email": "Your email address",
-      "password": "Your password",
-      "confirmationPassword": "Your password, again",
-      "code": "Your verification code",
-      "reset": "Reset password",
-      "successMessage": "Your new password has been set!"
+      "title": "Edit password",
+      "oldPassword": "Your old password",
+      "password": "Your new password",
+      "confirmationPassword": "Your new password, again",
+      "editPassword": "Edit password",
+      "successMessage": "Your password has been changed!"
     },
     "fr": {
-      "title": "Réinitialisation de mot de passe",
-      "email": "Votre adresse email",
-      "password": "Votre mot de passe",
-      "confirmationPassword": "Votre mot de passe, encore",
-      "code": "Votre code de vérification",
-      "reset": "Réinitialiser le mot de passe",
-      "successMessage": "Votre nouveau mot de passe a été enregistré !"
+      "title": "Modification de mot de passe",
+      "oldPassword": "Votre ancien mot de passe",
+      "password": "Votre nouveau mot de passe",
+      "confirmationPassword": "Votre nouveau mot de passe, encore",
+      "editPassword": "Modifier le mot de passe",
+      "successMessage": "Votre mot de passe a bien été changé !"
     }
   }
 </i18n>
