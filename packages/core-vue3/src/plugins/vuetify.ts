@@ -9,37 +9,40 @@ import type { VuetifyOptions } from 'vuetify/framework'
 
 export default {
   install: (app: App, options: MilochauCoreOptions) => {
-
-    const defaultVuetifyOptions: VuetifyOptions = {
-      theme: {
-        themes: {
-          light: {
-            colors: {
-              background: '#fcfcfc'
-            }
-          }
-        }
-      },
-      icons: {
-        defaultSet: 'mdi',
-        aliases,
-        sets: {
-          mdi
-        }
-      },
-      locale: {
-        messages: {
-          en,
-          fr
-        }
-      }
-    }
-
-    const vuetifyOptions = Object.assign(defaultVuetifyOptions, options.vuetify || {})
-    const vuetify = createVuetify(vuetifyOptions)
-
-    app.use(vuetify)
-
-    return vuetify
+    return registerVuetify(app, options)
   }
 }
+
+export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
+  const defaultVuetifyOptions: VuetifyOptions = {
+    theme: {
+      themes: {
+        light: {
+          colors: {
+            background: '#fcfcfc'
+          }
+        }
+      }
+    },
+    icons: {
+      defaultSet: 'mdi',
+      aliases,
+      sets: {
+        mdi
+      }
+    },
+    locale: {
+      messages: {
+        en,
+        fr
+      }
+    }
+  }
+
+  const vuetifyOptions = Object.assign(defaultVuetifyOptions, options.vuetify || {})
+  const vuetify = createVuetify(vuetifyOptions)
+
+  app.use(vuetify)
+
+  return vuetify
+} 

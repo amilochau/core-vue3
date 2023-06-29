@@ -15,34 +15,8 @@ declare module 'vue-router' {
 
 export default {
   install: (app: App, options: MilochauCoreOptions) => {
-    const languageStore = useLanguageStore()
-    const identityStore = useIdentityStore()
-
-    const routesWithRedirection: Array<RouteRecordRaw> = [
-      {
-        path: '/:lang([a-z]{2})',
-        component: PageRoot,
-        children: options.routes.concat(routes)
-      },
-      {
-        path: '/:pathMatch(.*)*',
-        redirect: to => {
-          return {
-            path: `/${languageStore.language}${to.fullPath}`
-          }
-        }
-      }
-    ]
-
-    const router = createRouter({
-      history: createWebHistory(),
-      routes: routesWithRedirection,
-      // @todo Add scrollBehavior
-    })
-
-    // Register guards
-    registerGuards(router, identityStore);
-
+    const router = registerRouter(app, options)
+    
     app.use(router)
 
     // Mount app when ready
@@ -52,4 +26,36 @@ export default {
 
     return router
   }
+}
+
+export const registerRouter = (app: App, options: MilochauCoreOptions) => {
+  const languageStore = useLanguageStore()
+  const identityStore = useIdentityStore()
+
+  const routesWithRedirection: Array<RouteRecordRaw> = [
+    {
+      path: '/:lang([a-z]{2})',
+      component: PageRoot,
+      children: options.routes.concat(routes)
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: to => {
+        return {
+          path: `/${languageStore.language}${to.fullPath}`
+        }
+      }
+    }
+  ]
+
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: routesWithRedirection,
+    // @todo Add scrollBehavior
+  })
+
+  // Register guards
+  registerGuards(router, identityStore);
+
+  return router
 }
