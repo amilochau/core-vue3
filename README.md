@@ -1,53 +1,62 @@
 # @amilochau/core-vue3
 
+vue.js v3 layout for AWS clients
+
 ## Introduction
 
-`@amilochau/core-vue3` is a opinionated package used to initialize vue 3 applications.
+`@amilochau/core-vue3` is a opinionated package used to create vue.js v3 applications.
 
-The following plugins are installed by `@amilochau/core-vue3`:
-- `aws-amplify`
-- `pinia`
-- `vue-i18n`
-- `vue-router`
-- `vuetify`
+## Features
 
-The following libraries are used, and are defined as dependencies:
-- `@mdi/js` for icons
-- `@vueuse/core` and `@vueuse/head` as vue helpers
+- Application layout, with header and footer bars, navigation drawer, snackbar for messages
+- Privacy with cookies approbation via a dedicated layer, privacy page, data cleaning on logout
+- API integration, with error codes handling
+- Default pages for error codes
+- Reactive SEO tags per page
+- Internationalization, light/dark themes
+- Forms validation helpers
+- Identity integration with AWS Cognito, using `amilochau/core-vue3-auth`
 
----
+## Usage
 
-## Integration
+`amilochau/core-vue3` is proposed as a vue plugin.
 
-To integrate the `@amilochau/core-vue3` package, you must follow these steps.
-
-1. Install the npm package
+1. Install the npm packages
 
 Run the following command to install the npm package:
 
 ```pwsh
-npm install @amilochau/core-vue3
+npm install @amilochau/core-vue3 @amilochau/core-vue3-auth
 ```
 
-2. Create and configure the plugin
+Note that `amilochau/core-vue3-auth` is optional - you can skip it if you don't need authentication with AWS Cognito.
 
-Create a dedicated file (typically `milochau-core.ts` in your `src/plugins` folder) to create and configure the plugin:
+2. Configure the plugin
+
+Define your `coreOptions` - use a dedicated file for better code separation:
 
 ```typescript
-import { createMilochauCore } from '@amilochau/core-vue3'
-import { ref } from 'vue'
+import type { MilochauCoreOptions } from "@amilochau/core-vue3"
 
-// Create and export options
 export const coreOptions: MilochauCoreOptions = {
   application: {
     name: 'YOU APPLICATION NAME',
     contact: 'YOUR APPLICATION OWNER',
-    navigation: ref([
-      // YOUR APPLICATION NAVIGATION LINKS
-    ]),
+    navigation: {
+      items: ref([
+        // YOUR APPLICATION NAVIGATION LINKS
+      ])
+    },
     header: {
       onTitleClick: router => router.push({ name: 'YOUR HOME PAGE NAME' })
-    }
+    },
+    footer: {
+      enabled: true,
+      items: ref([
+        // YOUR APPLICATION FOOTER LINKS
+      ])
+    },
+    isProduction: true,
   },
   api: {
     gatewayUri: 'YOUR API BASE URI'
@@ -65,39 +74,43 @@ export const coreOptions: MilochauCoreOptions = {
     }
   },
   routes: [], // <== USE THIS SECTION TO ADD ROUTES
-  clean: () => {
-    // WHAT TO USE, TO BE CALLED ON THE NEXT FUNCTION
-
-    return () => {
-      // WHAT TO CALL TO CLEAN LOCAL DATA ON LOGOUT
-    }
-  }
+  clean: () => () => {} // WHAT TO CALL TO CLEAN LOCAL DATA ON LOGOUT
 }
-
-// Create the plugin to be registered
-export default createMilochauCore(coreOptions)
 ```
 
 3. Register the plugin
 
-In your main file (typically `main.ts`), use the plugin as follows:
+Register `amilochau/core-vue3` in your main file:
 
 ```typescript
 import { createApp } from 'vue'
 import App from './App.vue'
-import milochauCore from './plugins/milochau-core'
+import milochauCore from '@amilochau/core-vue3'
+import milochauCoreAuth from '@amilochau/core-vue3-auth'
+import { coreOptions } from './data/config'
+
+import 'vuetify/styles'
 
 const app = createApp(App);
-app.use(milochauCore); // <== This line registers the plugin
+
+app.use(milochauCoreAuth, coreOptions); // Optional, only if you want to add authentication features
+app.use(milochauCore, coreOptions);
 ```
 
-## Result
+---
 
-When the plugin is registered, you can focus to create business code in your application.
+## Dependencies
 
-The plugin presents your pages (defined with the `routes` configuration) in a pre-defined template, with a navigation drawer, an application bar, menus for user settings and user account, a cookie bar and privacy page.
+The following plugins are installed by `@amilochau/core-vue3`:
+- `pinia`
+- `vue-i18n`
+- `vue-router`
+- `vuetify`
+- 
+The following plugin is installed by `@amilochau/core-vue3-auth`:
+- `@aws-amplify/auth`
 
-Many helpers can be used from your code, via the Composition API.
+See the full list of dependencies [here](/packages/core-vue3/package.json).
 
 ## Composition API
 
@@ -105,11 +118,13 @@ Here are the helpers you can use from your code.
 
 | Helper | Description |
 | ------ | ----------- |
-| `useApi` | Sends HTTP requests to the API gateway configured via `api.gatewayUri` ; manages HTTP errors |
+| `useApiAnonymous` | Sends HTTP requests to the API gateway configured via `api.gatewayUri` ; manages HTTP errors |
+| `useApi` | Sends authenticated HTTP requests to the API gateway configured via `api.gatewayUri` ; manages HTTP errors *(only if `amilochau/core-vue3-auth is configured`)* |
 | `useClean` | Cleans data from storage, typically on logout, as configured via `clean` |
-| `useCognito` | Gets Cognito helpers |
+| `useCognito` | Interact with AWS Cognito *(only if `amilochau/core-vue3-auth is configured`)* |
 | `useCoreOptions` | Lets you get the core options defined on plugin registration |
-| `usePage` | Lets you define page metadata |
+| `useHandle` | Handle asynchronous requests to manage errors, with loader bar and snackbar messages |
+| `usePage` | Define page metadata |
 | `useValidationRules` | Lets you use pre-defined validation rules on plain data |
 
 Here are the `pinia` stores you can use from your code.
@@ -135,11 +150,14 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `application.header.onTitleClick` | Action to run when the user clicks on the title from the header bar |
 | `application.footer.enabled` | Whether the footer bar should be enabled (displayed) |
 | `application.footer.items` | Additional items to display into the footer bar |
+| `application.isProduction` | Whether the current application is production |
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
 | `i18n` | Options used by `vue-i18n` |
 | `identity.cognito` | Cognito settings for authentication |
 | `routes` | List of `vue-router` routes, to register application pages |
 | `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
+
+See the full definition of options [here](/packages/core-vue3/src/types/options.ts).
 
 You can find a sample of these configuration options in the [sample app options](/packages/playground/src/data/config.ts).
 

@@ -27,11 +27,10 @@ import { storeToRefs } from 'pinia';
 import { computed, mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useClean, useCognito } from '../../../../composition';
+import { useClean } from '../../../../composition';
 import { useAppStore, useIdentityStore } from '../../../../stores';
 
 const { t } = useI18n()
-const { signOut } = useCognito()
 const { clean } = useClean()
 const router = useRouter()
 const identityStore = useIdentityStore()
@@ -42,7 +41,7 @@ const { attributes } = storeToRefs(identityStore)
 const cleanAndLogout = async () => {
   try {
     appStore.loading = true
-    await signOut();
+    await identityStore.logout();
     clean();
     router.push({ name: 'Home' })
   } finally {

@@ -1,0 +1,44 @@
+{
+  "name": "@amilochau/core-vue3-playground-auth",
+  "version": "0.7.0-beta.2",
+  "author": "Antoine Milochau",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "serve": "vite serve --port 3000",
+    "preview": "vite preview",
+    "build": "vue-tsc --noEmit && vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore --fix"
+  },
+  "files": [
+    "packages/core-vue3"
+  ],
+  "dependencies": {
+    "@amilochau/core-vue3": "file:packages/core-vue3",
+    "@amilochau/core-vue3-auth": "file:packages/core-vue3-auth"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "plugin:vue/vue3-recommended"
+    ],
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser",
+      "sourceType": "module"
+    },
+    "rules": {
+      "vue/html-closing-bracket-newline": [
+        "error",
+        {
+          "singleline": "never",
+          "multiline": "never"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "rollup-plugin-visualizer": "^5.9.2"
+  }
+}

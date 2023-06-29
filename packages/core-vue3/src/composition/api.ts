@@ -1,15 +1,12 @@
-import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from "@mdi/js"
+import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import { useRouter } from "vue-router"
-import { useIdentityStore, useLanguageStore } from "../stores"
+import { useLanguageStore } from "../stores"
 import { ApplicationMessage } from "../types"
 import type { IHttpSettings, IProblemDetails } from "../types/http"
-import { AuthPolicy } from "../types/http/IHttpSettings"
-import { useCognito } from './cognito'
 import { useCoreOptions } from "./options"
 import { useI18n } from 'vue-i18n'
-import { storeToRefs } from "pinia"
 
-export function useApi(relativeBaseUri: string) {
+export function useApiAnonymous(relativeBaseUri: string) {
 
   const { t, mergeLocaleMessage } = useI18n()
 
@@ -35,12 +32,9 @@ export function useApi(relativeBaseUri: string) {
   })
 
   const languageStore = useLanguageStore()
-  const identityStore = useIdentityStore()
-  const { getToken, signOut } = useCognito()
   const router = useRouter();
   const coreOptions = useCoreOptions()
 
-  const { isAuthenticated } = storeToRefs(identityStore)
   const baseUri = `${coreOptions.api?.gatewayUri}${relativeBaseUri}`
 
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
@@ -117,15 +111,11 @@ export function useApi(relativeBaseUri: string) {
     return `${baseUri}${url}`
   }
 
-  const getRequestInit = (accessToken: string): RequestInit => {
+  const getRequestInit = (): RequestInit => {
     const headers: HeadersInit = {
       'Accept-Language': languageStore.language,
       'Content-Type': 'application/json;charset=utf-8'
     };
-
-    if (accessToken) {
-      headers.Authorization = `Bearer ${accessToken}`
-    }
 
     return { headers }
   }
@@ -140,29 +130,8 @@ export function useApi(relativeBaseUri: string) {
       throw 'API integration is not configured.'
     }
 
-    // Get bearer token for API
-    var accessToken = '';
-
-    if (router.currentRoute.value.meta.anonymousRequests
-      || settings.authPolicy === AuthPolicy.SendRequestsAsAnonymous
-      || settings.authPolicy === AuthPolicy.SendRequestsAsAuthenticatedIfLoggedIn && !isAuthenticated.value) {
-      // The user is not logged in but we don't mind
-    } else {
-      if (!coreOptions.authenticationEnabled) {
-        throw 'Authentication is not configured.'
-      }
-
-      try {
-        accessToken = await getToken()
-      } catch (error) {
-        signOut()
-        router.push({ name: 'Login' })
-        throw new ApplicationMessage(t('errors.sessionExpired'), 'warning', mdiTimerRefreshOutline)
-      }
-    }
-
     try {
-      const requestInit = getRequestInit(accessToken);
+      const requestInit = getRequestInit();
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
     } catch (error) {

@@ -5,7 +5,6 @@
     <v-col class="text-center">
       <home-welcome />
       <home-messages />
-      <home-login v-if="!isAuthenticated" />
 
       <p>{{ mapsStore.items }}</p>
       <v-btn @click="fetchMaps">
@@ -28,13 +27,7 @@
       </v-btn>
 
       <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
-      <p>
-        Cognito user attributes
-      </p>
-      <p>
-        {{ attributes }}
-      </p>
-
+      
       <suspense>
         <div>Real content after suspense</div>
         <template #fallback>
@@ -49,11 +42,10 @@
 
 <script setup lang="ts">
 import HomeWelcome from '../components/home/HomeWelcome.vue'
-import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useAppStore, useHandle, useIdentityStore, usePage } from '@amilochau/core-vue3';
+import { useAppStore, useHandle, usePage } from '@amilochau/core-vue3';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
@@ -68,12 +60,10 @@ const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
 const appStore = useAppStore()
 const { handleLoadAndError } = useHandle()
-const identityStore = useIdentityStore()
 const online = useOnline()
 const { formatContactStatus } = useFormat()
 
 const { loading } = storeToRefs(appStore)
-const { attributes, isAuthenticated } = storeToRefs(identityStore)
 
 const dialog = ref(false)
 

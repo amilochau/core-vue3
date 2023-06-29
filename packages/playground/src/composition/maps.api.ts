@@ -1,11 +1,11 @@
 import type { MapsListResponse } from "../types/maps"
 import { useMapsStore } from "../stores"
-import { useApi, ListRequest } from "@amilochau/core-vue3";
+import { ListRequest, useApiAnonymous } from "@amilochau/core-vue3";
 import type { IListResult, IDefaultCreateResponse } from "@amilochau/core-vue3";
 
 export function useMapsApi() {
 
-  const api = useApi('/maps')
+  const api = useApiAnonymous('/maps')
 
   const mapsStore = useMapsStore()
 
