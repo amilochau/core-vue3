@@ -39,5 +39,10 @@ export default defineConfig({
         replacement: './runtimeConfig.browser',
       },
     ]
+  },
+  optimizeDeps: {
+    include: [
+      "@aws-amplify/auth"
+    ]
   }
 })

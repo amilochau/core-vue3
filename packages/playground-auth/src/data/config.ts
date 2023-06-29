@@ -20,15 +20,24 @@ export const defaultEnv: Environment = Environment.Default
 
 export const envConfig: EnvConfigValues = {
   default: {
+    VITE_GOOGLE_MAPS_API_KEY: "AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg",
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   },
   local: {
     VITE_API_URL: "https://d37652aw4wwcmu.cloudfront.net/api/dev/a",
+    VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
+    VITE_COGNITO_CLIENT_ID: '1oed2va2em6r9lkfvqbd3tspiu',
   },
   dev: {
     VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   },
   prd: {
     VITE_API_URL: "https://api.milochau.com/maps/v1",
+    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_COGNITO_CLIENT_ID: '',
   }
 }
 
@@ -56,7 +65,7 @@ export const coreOptions: MilochauCoreOptions = {
       enabled: true,
       items: ref([{
         title: 'GitHub',
-        link: 'https://github.com/amilochau/core-vue3',
+        link: 'https://github.com',
       }])
     },
     isProduction: getCurrentEnvironment() === Environment.Production,
@@ -72,6 +81,12 @@ export const coreOptions: MilochauCoreOptions = {
       fr: {
         appTitle: 'Example core-vue3'
       }
+    },
+  },
+  identity: {
+    cognito: {
+      userPoolId: getConfig('VITE_COGNITO_USERPOOL_ID'),
+      clientId: getConfig('VITE_COGNITO_CLIENT_ID'),
     },
   },
   routes: routes,
