@@ -34,8 +34,6 @@ export default {
       }
     ]
 
-    console.log('routesWithRedirection', routesWithRedirection)
-
     const router = createRouter({
       history: createWebHistory(),
       routes: routesWithRedirection,
