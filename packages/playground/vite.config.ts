@@ -30,14 +30,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: [
-      {
-        find: '@',
-        replacement: fileURLToPath(new URL('./src', import.meta.url))
-      },
-      {
-        find: './runtimeConfig',
-        replacement: './runtimeConfig.browser',
-      },
+      { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
+      { find: /^pinia$/, replacement: 'pinia/dist/pinia.mjs' },
     ]
   }
 })

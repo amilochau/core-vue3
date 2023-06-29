@@ -25,7 +25,7 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useLocale } from 'vuetify'
 import { useLanguageStore } from '../stores';
-import { useCoreOptions } from '..';
+import { useCoreOptions } from '../composition';
 
 const i18n = useI18n({ useScope: 'global' })
 const route = useRoute()
