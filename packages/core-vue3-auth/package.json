@@ -23,6 +23,8 @@
   "funding": "https://github.com/sponsors/amilochau",
   "company": "Milochau",
   "copyright": "Copyright © Milochau",
+  "type": "module",
+  "module": "./src/index.ts",
   "main": "src/index.ts",
   "scripts": {
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
@@ -32,7 +34,7 @@
     "src/"
   ],
   "dependencies": {
-    "@aws-amplify/auth": "^5.5.1"
+    "@aws-amplify/auth": "^5.5.3"
   },
   "peerDependencies": {
     "@amilochau/core-vue3": "0.7.0-beta.2"
