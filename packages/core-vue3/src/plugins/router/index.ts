@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import PageRoot from '../../pages/PageRoot.vue'
 import routes from '../../data/routes'
 import { registerGuards } from './guards'
 import { type App } from 'vue'
 import type { MilochauCoreOptions } from '../../types'
 import { useIdentityStore, useLanguageStore } from '../../stores'
+import type { Pinia } from 'pinia'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -13,29 +13,14 @@ declare module 'vue-router' {
   }
 }
 
-export default {
-  install: (app: App, options: MilochauCoreOptions) => {
-    const router = registerRouter(app, options)
-    
-    app.use(router)
-
-    // Mount app when ready
-    router.isReady().then(() => {
-      app.mount('#app');
-    })
-
-    return router
-  }
-}
-
-export const registerRouter = (app: App, options: MilochauCoreOptions) => {
-  const languageStore = useLanguageStore()
-  const identityStore = useIdentityStore()
+export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOptions) => {
+  const languageStore = useLanguageStore(pinia)
+  const identityStore = useIdentityStore(pinia)
 
   const routesWithRedirection: Array<RouteRecordRaw> = [
     {
       path: '/:lang([a-z]{2})',
-      component: PageRoot,
+      component: () => import('../../pages/PageRoot.vue'),
       children: options.routes.concat(routes)
     },
     {

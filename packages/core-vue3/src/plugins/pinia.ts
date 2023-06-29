@@ -32,12 +32,6 @@ const piniaPersist = ({ options, store }: PiniaPluginContext) => {
   }
 }
 
-export default {
-  install: (app: App, options: MilochauCoreOptions) => {
-    return registerPinia(app, options)
-  }
-}
-
 export const registerPinia = (app: App, options: MilochauCoreOptions) => {
   const pinia = createPinia()
     .use(piniaPersist)

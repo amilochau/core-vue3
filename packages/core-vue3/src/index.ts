@@ -1,36 +1,21 @@
 import { type App, type Component, createApp as createClientApp } from 'vue'
+import type { Router } from 'vue-router'
+import type { Pinia } from 'pinia'
 import type { MilochauCoreOptions } from './types/options'
 
-import { createHead } from '@vueuse/head'
-import { createRouter, createWebHistory } from 'vue-router'
-
-import i18n, { registerI18n } from './plugins/i18n'
-import head, { registerHead } from './plugins/head'
-import vuetify, { registerVuetify } from './plugins/vuetify'
-import pinia, { registerPinia } from './plugins/pinia'
-import router, { registerRouter } from './plugins/router'
+import { registerI18n } from './plugins/i18n'
+import { registerHead } from './plugins/head'
+import { registerVuetify } from './plugins/vuetify'
+import { registerPinia } from './plugins/pinia'
+import { registerRouter } from './plugins/router'
 
 // Styles
 import './styles/main.scss'
 
-export default {
-  install: (app: App, options: MilochauCoreOptions) => {
-    // Provide options availble through 'inject'
-    app.provide('core-options', options)
-
-    // Install plugins
-    app.use(i18n, options);
-    app.use(head, options);
-    app.use(vuetify, options);
-    app.use(pinia, options);
-    app.use(router, options); // Mount app, so should be the last one
-  }
-}
-
 export function CoreVue3(
   App: Component,
   options: MilochauCoreOptions,
-  fn?: (context: { app: App }) => Promise<any>,
+  fn?: (context: { app: App, pinia: Pinia, router: Router }) => Promise<any>,
 ) {
   async function createApp() {
     const app = createClientApp(App);
@@ -41,9 +26,9 @@ export function CoreVue3(
     const head = registerHead(app, options)
     const vuetify = registerVuetify(app, options)
     const pinia = registerPinia(app, options)
-    const router = registerRouter(app, options)
+    const router = registerRouter(app, pinia, options)
 
-    await fn?.({ app })
+    await fn?.({ app, pinia, router })
 
     // @todo Add ctx.app, ctx.router handlers
 

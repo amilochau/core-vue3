@@ -7,12 +7,6 @@ import { en, fr } from 'vuetify/locale'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import type { VuetifyOptions } from 'vuetify/framework'
 
-export default {
-  install: (app: App, options: MilochauCoreOptions) => {
-    return registerVuetify(app, options)
-  }
-}
-
 export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   const defaultVuetifyOptions: VuetifyOptions = {
     theme: {
