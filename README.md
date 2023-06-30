@@ -152,6 +152,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | ------------------ | ----------- |
 | `application.name` | Name of the application |
 | `application.contact` | Application owner, as used in the policy page |
+| `application.logoUrl` | URL of the application logo |
 | `application.navigation.items` | Navigation links, as `vuetify` list items, used in the navigation drawer |
 | `application.header.disabled` | Whether the header bar should be disabled (not displayed) |
 | `application.header.onTitleClick` | Action to run when the user clicks on the title from the header bar |
