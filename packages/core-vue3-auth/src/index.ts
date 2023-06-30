@@ -6,16 +6,6 @@ import { CoreVue3, type MilochauCoreOptions } from '@amilochau/core-vue3'
 import cognito from './plugins/cognito'
 import routes from './data/routes'
 
-export default {
-  install: (app: App, options: MilochauCoreOptions) => {
-    // Add identity routes
-    options.routes.push(...routes)
-
-    // Install plugins
-    app.use(cognito, options);
-  }
-}
-
 export const CoreVue3Auth = (
   App: Component,
   options: MilochauCoreOptions,
@@ -26,8 +16,12 @@ export const CoreVue3Auth = (
     return CoreVue3(App, options, async (context) => {
       context.app.use(cognito, options);
       fn?.(context);
-    })
+    })()
   }
+
+  (async () => {
+    await createApp()
+  })()
 
   return createApp
 }
