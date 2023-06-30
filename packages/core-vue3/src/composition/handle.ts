@@ -6,7 +6,7 @@ import { useAppStore } from "../stores";
 import { mdiAlert } from "@mdi/js";
 import { useI18n } from "vue-i18n";
 
-export function useHandle() {
+export const useHandle = () => {
 
   const { t, mergeLocaleMessage } = useI18n()
   const appStore = useAppStore()

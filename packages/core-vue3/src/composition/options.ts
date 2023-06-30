@@ -1,7 +1,7 @@
 import { inject } from "vue"
 import type { MilochauCoreOptions } from "../types"
 
-export function useCoreOptions() {
+export const useCoreOptions = () => {
   const options = inject('core-options') as MilochauCoreOptions
 
   const authenticationEnabled = !!options.identity

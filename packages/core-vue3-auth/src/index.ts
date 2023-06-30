@@ -16,12 +16,12 @@ export default {
   }
 }
 
-export function CoreVue3Auth(
+export const CoreVue3Auth = (
   App: Component,
   options: MilochauCoreOptions,
   fn?: (context: { app: App, pinia: Pinia, router: Router }) => Promise<any>,
-) {
-  async function createApp() {
+) => {
+  const createApp = async () => {
     options.routes.push(...routes)
     return CoreVue3(App, options, async (context) => {
       context.app.use(cognito, options);

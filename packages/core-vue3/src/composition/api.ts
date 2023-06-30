@@ -6,7 +6,7 @@ import type { IHttpSettings, IProblemDetails } from "../types/http"
 import { useCoreOptions } from "./options"
 import { useI18n } from 'vue-i18n'
 
-export function useApiAnonymous(relativeBaseUri: string) {
+export const useApiAnonymous = (relativeBaseUri: string) => {
 
   const { t, mergeLocaleMessage } = useI18n()
 
@@ -145,49 +145,39 @@ export function useApiAnonymous(relativeBaseUri: string) {
     return response
   }
 
-  const getHttp = async (url: string, settings: IHttpSettings) => {
-    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
-      ...requestInit,
-      method: 'GET'
-    }))
-  }
-
-  const postHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
-    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
-      ...requestInit,
-      method: 'POST',
-      body: JSON.stringify(data)
-    }))
-  }
-
-  const putHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
-    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
-      ...requestInit,
-      method: 'PUT',
-      body: JSON.stringify(data)
-    }))
-  }
-
-  const patchHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
-    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
-      ...requestInit,
-      method: 'PATCH',
-      body: JSON.stringify(data)
-    }))
-  }
-
-  const deleteHttp = async (url: string, settings: IHttpSettings) => {
-    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
-      ...requestInit,
-      method: 'DELETE'
-    }))
-  }
-
   return {
-    getHttp,
-    postHttp,
-    putHttp,
-    patchHttp,
-    deleteHttp
+    getHttp: async (url: string, settings: IHttpSettings) => {
+      return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+        ...requestInit,
+        method: 'GET'
+      }))
+    },
+    postHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+      return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+        ...requestInit,
+        method: 'POST',
+        body: JSON.stringify(data)
+      }))
+    },
+    putHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+      return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+        ...requestInit,
+        method: 'PUT',
+        body: JSON.stringify(data)
+      }))
+    },
+    patchHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+      return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+        ...requestInit,
+        method: 'PATCH',
+        body: JSON.stringify(data)
+      }))
+    },
+    deleteHttp: async (url: string, settings: IHttpSettings) => {
+      return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+        ...requestInit,
+        method: 'DELETE'
+      }))
+    },
   }
 }
