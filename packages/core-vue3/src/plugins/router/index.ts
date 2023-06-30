@@ -36,7 +36,27 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
   const router = createRouter({
     history: createWebHistory(),
     routes: routesWithRedirection,
-    // @todo Add scrollBehavior
+    scrollBehavior: async (to, from, savedPosition) => {
+      // Wait for initial page load, or for cross page navigation
+      if (!document.querySelector('main') || to.path !== from.path && to.hash) {
+        await (new Promise(resolve => setTimeout(resolve, 500)))
+      }
+
+      if (to.hash) {
+        return {
+          el: to.hash,
+          behavior: 'smooth',
+          top: options.application.header.disabled ? 0 : 48,
+        }
+      } else if (savedPosition) {
+        return savedPosition
+      }
+      else {
+        return {
+          top: 0
+        }
+      }
+    }
   })
 
   // Register guards
