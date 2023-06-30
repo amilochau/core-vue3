@@ -4,6 +4,7 @@ import routes from "./routes"
 import { useMapsStore } from "../stores"
 import navigationItems from "./navigation"
 import { ref } from 'vue'
+import logoUrl from "@/assets/logo.png"
 
 export enum Environment {
   Default = 'default',
@@ -46,6 +47,7 @@ export const coreOptions: MilochauCoreOptions = {
   application: {
     name: 'Maps',
     contact: 'Antoine Milochau',
+    logoUrl,
     navigation: {
       items: navigationItems,
     },

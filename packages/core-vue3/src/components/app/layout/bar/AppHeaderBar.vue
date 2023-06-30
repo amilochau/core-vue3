@@ -4,7 +4,19 @@
     density="compact"
     class="border-b"
     flat>
-    <v-app-bar-nav-icon @click="toggleDrawer" />
+    <template #prepend>
+      <v-app-bar-nav-icon @click="toggleDrawer" />
+      <v-img
+        v-if="coreOptions.application.logoUrl"
+        :alt="t('appTitle')"
+        :src="coreOptions.application.logoUrl"
+        :width="40"
+        :class="{
+          'ml-2': true,
+          'clickable-title': coreOptions.application.header.onTitleClick
+        }"
+        @click="onTitleClick" />
+    </template>
     <v-app-bar-title
       :class="{
         'ml-4': true,
@@ -13,11 +25,13 @@
       @click="onTitleClick">
       {{ t('appTitle') }}
     </v-app-bar-title>
-    <app-offline />
-    <app-settings-menu />
-    <app-profile-menu v-if="coreOptions.authenticationEnabled && isAuthenticated" />
-    <app-login-btn v-else-if="coreOptions.authenticationEnabled" />
-    <app-progress-bar :lazy-delay="200" />
+    <template #append>
+      <app-offline />
+      <app-settings-menu />
+      <app-profile-menu v-if="coreOptions.authenticationEnabled && isAuthenticated" />
+      <app-login-btn v-else-if="coreOptions.authenticationEnabled" />
+      <app-progress-bar :lazy-delay="200" />
+    </template>
   </v-app-bar>
 </template>
 

@@ -7,6 +7,7 @@ export type MilochauCoreOptions = {
   application: {
     name: string,
     contact: string,
+    logoUrl?: string,
     navigation: {
       items: Ref<any[]>
     },
