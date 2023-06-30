@@ -12,12 +12,12 @@ import { registerRouter } from './plugins/router'
 // Styles
 import './styles/main.scss'
 
-export function CoreVue3(
+export const CoreVue3 = (
   App: Component,
   options: MilochauCoreOptions,
   fn?: (context: { app: App, pinia: Pinia, router: Router }) => Promise<any>,
-) {
-  async function createApp() {
+) => {
+  const createApp = async () => {
     const app = createClientApp(App);
     
     app.provide('core-options', options)
@@ -30,7 +30,9 @@ export function CoreVue3(
 
     await fn?.({ app, pinia, router })
 
-    // @todo Add ctx.app, ctx.router handlers
+    app.config.errorHandler = console.error
+    app.config.warnHandler = console.warn
+    router.onError(console.error)
 
     app.use(router);
     

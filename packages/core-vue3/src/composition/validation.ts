@@ -1,6 +1,6 @@
 import { useI18n } from "vue-i18n"
 
-export function useValidationRules() {
+export const useValidationRules = () => {
   const { t, mergeLocaleMessage } = useI18n()
 
   mergeLocaleMessage('en', {
@@ -24,52 +24,43 @@ export function useValidationRules() {
     maxValue: "Ce champ doit être inférieur à {max}."
   })
 
-  const required = () => (v: any) => {
-    if (typeof v === 'string') {
-      return (v !== null && v !== undefined && v.trim() !== '') || t('required')
-    } else {
-      return (v !== null && v !== undefined) || t('required')
-    }
-  }
-  const minLength = (min: number) => (v: any) => !v || v.length >= min || t('minLength', { min })
-  const maxLength = (max: number) => (v: any) => !v || v.length <= max || t('maxLength', { max })
-  const emailAddress = () => (v: any) => !v || /.+@.+\..+/.test(v) || t('emailAddress')
-  const date = () => (v: any) => !v || (!isNaN(Date.parse(v)) && /^\d{4}-\d{2}-\d{2}$/.test(v)) || t('date')
-  const url = () => (v: any) => {
-    if (!v) {
-      return true
-    }
-    let url;
-    try {
-      url = new URL(v);
-    } catch (_) {
-      return t('url')
-    }
-    return url.protocol === 'http:' || url.protocol === 'https:' || t('url')
-  }
-  const minValue = (min: number) => (v: any) => {
-    if (v === null || v === undefined) {
-      return true;
-    }
-    const floatValue = parseFloat(v)
-    return floatValue >= min || t('minValue', { min })
-  }
-  const maxValue = (max: number) => (v: any) => {
-    if (v === null || v === undefined) {
-      return true;
-    }
-    const floatValue = parseFloat(v)
-    return floatValue <= max || t('maxValue', { max })
-  }
-
   return {
-    required,
-    minLength,
-    maxLength,
-    emailAddress,
-    date,
-    url,
-    minValue,
-    maxValue
+    required: () => (v: any) => {
+      if (typeof v === 'string') {
+        return (v !== null && v !== undefined && v.trim() !== '') || t('required')
+      } else {
+        return (v !== null && v !== undefined) || t('required')
+      }
+    },
+    minLength: (min: number) => (v: any) => !v || v.length >= min || t('minLength', { min }),
+    maxLength: (max: number) => (v: any) => !v || v.length <= max || t('maxLength', { max }),
+    emailAddress: () => (v: any) => !v || /.+@.+\..+/.test(v) || t('emailAddress'),
+    date: () => (v: any) => !v || (!isNaN(Date.parse(v)) && /^\d{4}-\d{2}-\d{2}$/.test(v)) || t('date'),
+    url: () => (v: any) => {
+      if (!v) {
+        return true
+      }
+      let url;
+      try {
+        url = new URL(v);
+      } catch (_) {
+        return t('url')
+      }
+      return url.protocol === 'http:' || url.protocol === 'https:' || t('url')
+    },
+    minValue: (min: number) => (v: any) => {
+      if (v === null || v === undefined) {
+        return true;
+      }
+      const floatValue = parseFloat(v)
+      return floatValue >= min || t('minValue', { min })
+    },
+    maxValue: (max: number) => (v: any) => {
+      if (v === null || v === undefined) {
+        return true;
+      }
+      const floatValue = parseFloat(v)
+      return floatValue <= max || t('maxValue', { max })
+    },
   }
 }

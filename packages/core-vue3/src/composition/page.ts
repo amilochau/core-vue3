@@ -3,7 +3,7 @@ import { useHead } from '@vueuse/head';
 import { useCoreOptions } from './options';
 import { computed, ref, type Ref } from "vue";
 
-export function usePage(pageArgs: { i18n?: Ref<any>, noindex?: boolean } = {}) {
+export const usePage = (pageArgs: { i18n?: Ref<any>, noindex?: boolean } = {}) => {
 
   const { t, te, mergeLocaleMessage } = useI18n()
   const coreOptions = useCoreOptions()
