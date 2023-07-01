@@ -1,8 +1,20 @@
-# @amilochau/core-vue3
-
-vue.js v3 layout for AWS clients
-
-## Introduction
+<p align="center">
+  <a href="https://github.com/amilochau/core-vue3/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/amilochau/core-vue3" alt="License">
+  </a>
+  <a href="https://github.com/amilochau/core-vue3/releases">
+    <img src="https://img.shields.io/github/v/release/amilochau/core-vue3" alt="Release">
+  </a>
+  <a href="https://www.npmjs.com/package/@amilochau/core-vue3">
+    <img src="https://img.shields.io/npm/v/@amilochau/core-vue3.svg" alt="Version">
+  </a>
+  <a href="https://www.npmjs.com/package/@amilochau/core-vue3">
+    <img src="https://img.shields.io/npm/dt/@amilochau/core-vue3.svg" alt="Downloads">
+  </a>
+</p>
+<h1 align="center">
+  @amilochau/core-vue3
+</h1>
 
 `@amilochau/core-vue3` is a opinionated package used to create vue.js v3 applications.
 
