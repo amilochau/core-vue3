@@ -6,7 +6,7 @@ vue.js v3 layout for AWS clients
 
 `@amilochau/core-vue3` is a opinionated package used to create vue.js v3 applications.
 
-## Features
+## Main features
 
 - Application layout, with header and footer bars, navigation drawer, snackbar for messages
 - Privacy with cookies approbation via a dedicated layer, privacy page, data cleaning on logout
