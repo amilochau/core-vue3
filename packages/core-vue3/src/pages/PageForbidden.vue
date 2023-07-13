@@ -35,11 +35,11 @@ const { loading } = storeToRefs(appStore)
 <i18n lang="json">
   {
     "en": {
-      "pageTitle": "Not found",
+      "pageTitle": "Forbidden",
       "pageDescription": "Page for access to forbidden resources"
     },
     "fr": {
-      "pageTitle": "Non trouvé",
+      "pageTitle": "Accès non autorisé",
       "pageDescription": "Page pour accès à des ressources interdites"
     }
   }
