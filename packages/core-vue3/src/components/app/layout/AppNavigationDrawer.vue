@@ -5,10 +5,22 @@
     temporary
     nav>
     <v-list
-      :items="menuItems"
+      :items="navigationOptions.items"
+      color="primary"
       density="comfortable"
       item-props
       nav />
+    <template
+      v-if="navigationOptions.appendItems && navigationOptions.appendItems.length"
+      #append>
+      <v-divider />
+      <v-list
+        :items="navigationOptions.appendItems"
+        color="primary"
+        density="compact"
+        item-props
+        nav />
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -19,5 +31,5 @@ import { useAppStore } from '../../../stores'
 var appStore = useAppStore()
 const coreOptions = useCoreOptions()
 
-const menuItems = coreOptions.application.navigation.items
+const navigationOptions = coreOptions.application.navigation
 </script>

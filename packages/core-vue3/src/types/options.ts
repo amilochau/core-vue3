@@ -8,9 +8,10 @@ export type MilochauCoreOptions = {
     name: string,
     contact: string,
     logoUrl?: string,
-    navigation: {
-      items: Ref<any[]>
-    },
+    navigation: Ref<{
+      items: any[],
+      appendItems?: any[],
+    }>,
     header: {
       disabled?: boolean,
       onTitleClick?: (router: Router) => void,
