@@ -23,6 +23,8 @@
           :key="i"
           :title="item.title"
           :prepend-avatar="item.prependAvatar"
+          :active="language === item.lang"
+          color="primary"
           @click="item.onClick" />
         <v-divider />
         <v-list-subheader :title="t('display.title')" />
@@ -42,14 +44,15 @@
 
 <script setup lang="ts">
 import { mdiCog } from '@mdi/js'
-import { mergeProps } from 'vue'
+import { computed, mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useThemeStore } from '../../../../stores';
 import { useTheme } from 'vuetify'
 
 const { t } = useI18n()
 const router = useRouter()
+const route = useRoute()
 const themeStore = useThemeStore()
 const theme = useTheme()
 
@@ -57,6 +60,8 @@ const languageItems = [
   { title: t('languages.english'), onClick: () => onClick('en'), prependAvatar: '/img/us/24.png', lang: 'en' },
   { title: t('languages.french'), onClick: () => onClick('fr'), prependAvatar: '/img/fr/24.png', lang: 'fr' }
 ]
+
+const language = computed(() => route.params.lang?.toString())
 
 const onClick = (lang: string) => {
   router.replace({ params: { lang }})
