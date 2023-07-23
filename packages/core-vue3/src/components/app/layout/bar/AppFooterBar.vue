@@ -67,10 +67,14 @@
             <v-list-item
               prepend-avatar="/img/us/24.png"
               :title="t('languages.english')"
+              :active="language === 'en'"
+              color="primary"
               @click="router.replace({ params: { lang: 'en' }})" />
             <v-list-item
               prepend-avatar="/img/fr/24.png"
               :title="t('languages.french')"
+              :active="language === 'fr'"
+              color="primary"
               @click="router.replace({ params: { lang: 'fr' }})" />
           </v-list>
         </v-menu>
@@ -97,6 +101,7 @@ const coreOptions = useCoreOptions()
 const theme = useTheme()
 
 const barItems = computed(() => coreOptions.application.footer?.items?.value ?? [])
+const language = computed(() => route.params.lang?.toString())
 
 const toggleTheme = () => {
   themeStore.darkMode = !themeStore.darkMode
