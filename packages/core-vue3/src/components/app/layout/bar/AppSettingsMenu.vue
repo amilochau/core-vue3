@@ -28,7 +28,7 @@
         <v-list-subheader :title="t('display.title')" />
         <v-list-item
           :title="t('display.darkMode')"
-          @click="themeStore.darkMode = !themeStore.darkMode">
+          @click="toggleTheme">
           <template #prepend>
             <v-list-item-action start>
               <v-checkbox-btn :model-value="themeStore.darkMode" />
@@ -46,18 +46,25 @@ import { mergeProps } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useThemeStore } from '../../../../stores';
+import { useTheme } from 'vuetify'
 
 const { t } = useI18n()
 const router = useRouter()
 const themeStore = useThemeStore()
+const theme = useTheme()
 
 const languageItems = [
   { title: t('languages.english'), onClick: () => onClick('en'), prependAvatar: '/img/us/24.png', lang: 'en' },
   { title: t('languages.french'), onClick: () => onClick('fr'), prependAvatar: '/img/fr/24.png', lang: 'fr' }
 ]
 
-function onClick(lang: string) {
+const onClick = (lang: string) => {
   router.replace({ params: { lang }})
+}
+
+const toggleTheme = () => {
+  themeStore.darkMode = !themeStore.darkMode
+  theme.global.name.value = themeStore.darkMode ? 'dark' : 'light'
 }
 </script>
 
