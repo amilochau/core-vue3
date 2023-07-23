@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-function getDefaultState() {
+const getDefaultState = () => {
   return {
     isAuthenticated: false,
     attributes: {

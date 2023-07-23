@@ -9,6 +9,9 @@
     "serve": "npm run serve --workspace=packages/playground",
     "build": "npm run build --workspace=packages/playground",
     "preview": "npm run preview --workspace=packages/playground",
+    "serve:auth": "npm run serve --workspace=packages/playground-auth",
+    "build:auth": "npm run build --workspace=packages/playground-auth",
+    "preview:auth": "npm run preview --workspace=packages/playground-auth",
     "lint": "npm run lint --workspaces --if-present",
     "lint:fix": "npm run lint:fix --workspaces --if-present"
   }

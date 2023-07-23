@@ -94,7 +94,7 @@ const request: Ref<ConfirmEmail> = ref({
   code: '',
 })
 
-async function verifyCode() {
+const verifyCode = async () => {
   if (!await handleFormValidation(form)) {
     return
   }

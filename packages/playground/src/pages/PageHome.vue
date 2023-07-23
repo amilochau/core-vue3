@@ -27,7 +27,7 @@
       </v-btn>
 
       <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
-      
+
       <suspense>
         <div>Real content after suspense</div>
         <template #fallback>
@@ -87,7 +87,7 @@ const editMarker = () => {
   }, 'snackbar')
 }
 
-function openDialog() {
+const openDialog = () => {
   dialog.value = true
 }
 </script>

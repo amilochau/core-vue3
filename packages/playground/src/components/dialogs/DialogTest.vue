@@ -76,7 +76,7 @@ const emits = defineEmits<{
 const form: Ref<any> = ref(null)
 const request: Ref<MapsCreateRequest> = ref(new MapsCreateRequest())
 
-async function save() {
+const save = async () => {
   if (!await handleFormValidation(form)) {
     return
   }
@@ -89,15 +89,15 @@ async function save() {
 
 watch(() => props.modelValue, () => props.modelValue ? open() : close())
 
-function open() {
+const open = () => {
   initMap()
   form.value?.reset()
 }
-function close() {
+const close = () => {
   emits('update:modelValue', false)
 }
 
-function initMap() {
+const initMap = () => {
   request.value = new MapsCreateRequest();
 }
 </script>

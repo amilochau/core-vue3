@@ -64,12 +64,12 @@ const emits = defineEmits<{
 const display = ref(false)
 const internalColor: Ref<string | undefined> = ref('')
 
-function reset() {
+const reset = () => {
   emits('update:modelValue', undefined)
   display.value = false
 }
 
-function save() {
+const save = () => {
   emits('update:modelValue', internalColor.value)
   display.value = false
 }

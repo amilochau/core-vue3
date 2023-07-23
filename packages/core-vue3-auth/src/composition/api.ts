@@ -4,7 +4,7 @@ import { useCognito } from './cognito'
 import { useI18n } from 'vue-i18n'
 import { useCoreOptions, useLanguageStore, type IHttpSettings, type IProblemDetails, ApplicationMessage } from "@amilochau/core-vue3"
 
-export function useApi(relativeBaseUri: string) {
+export const useApi = (relativeBaseUri: string) => {
 
   const { t, mergeLocaleMessage } = useI18n()
 

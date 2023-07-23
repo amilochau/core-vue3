@@ -3,7 +3,7 @@ import { mdiAccountClock, mdiAlertCircle, mdiArchive } from '@mdi/js'
 import { useI18n } from 'vue-i18n'
 import { ContactStatus } from '../types/contacts'
 
-export function useFormat() {
+export const useFormat = () => {
   const { t, mergeLocaleMessage } = useI18n()
 
   mergeLocaleMessage('en', {

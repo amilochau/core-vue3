@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-function setCookie(cookieName: string, expiration: Date) {
+const setCookie = (cookieName: string, expiration: Date) => {
   document.cookie = `${cookieName}=no; expires=${expiration.toUTCString()}; path=/; samesite=lax`
 }
 

@@ -55,11 +55,11 @@ const router = useRouter()
 
 const { isAuthenticated } = storeToRefs(identityStore)
 
-function toggleDrawer() {
+const toggleDrawer = () => {
   appStore.setDrawer(!appStore.drawer)
 }
 
-function onTitleClick() {
+const onTitleClick = () => {
   if (coreOptions.application.header.onTitleClick) {
     coreOptions.application.header.onTitleClick(router)
   }

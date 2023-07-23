@@ -119,7 +119,7 @@ const request: Ref<ResetPassword> = ref({
   code: '',
 })
 
-async function reset() {
+const reset = async () => {
   if (!await handleFormValidation(form)) {
     return
   }

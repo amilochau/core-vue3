@@ -1,6 +1,6 @@
 import type { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-router";
 
-export function registerGuards(router: Router, identityStore: any) {
+export const registerGuards = (router: Router, identityStore: any) => {
   router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
 
     if (to.meta.requiresAuth) {

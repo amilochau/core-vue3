@@ -95,7 +95,7 @@ const request: Ref<Login> = ref({
   password: '',
 })
 
-async function deleteAccount() {
+const deleteAccount = async () => {
   if (!await handleFormValidation(form)) {
     return
   }

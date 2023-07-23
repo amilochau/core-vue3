@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
 import { ApplicationMessage, useCoreOptions, useIdentityStore } from '@amilochau/core-vue3';
 
-export function useCognito() {
+export const useCognito = () => {
 
   const identityStore = useIdentityStore()
   const coreOptions = useCoreOptions()

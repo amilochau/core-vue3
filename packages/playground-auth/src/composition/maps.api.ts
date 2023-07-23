@@ -4,7 +4,7 @@ import { ListRequest } from "@amilochau/core-vue3";
 import type { IListResult, IDefaultCreateResponse } from "@amilochau/core-vue3";
 import { useApi } from "@amilochau/core-vue3-auth";
 
-export function useMapsApi() {
+export const useMapsApi = () => {
 
   const api = useApi('/maps')
 

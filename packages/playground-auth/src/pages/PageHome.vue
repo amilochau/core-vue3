@@ -97,7 +97,7 @@ const editMarker = () => {
   }, 'snackbar')
 }
 
-function openDialog() {
+const openDialog = () => {
   dialog.value = true
 }
 </script>

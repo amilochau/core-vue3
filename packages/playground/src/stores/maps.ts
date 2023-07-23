@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { MapsListResponse } from '../types/maps'
 
-function getDefaultState() {
+const getDefaultState = () => {
   return {
     search: '',
     items: new Array<MapsListResponse>(),

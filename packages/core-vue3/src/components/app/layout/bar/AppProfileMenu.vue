@@ -15,6 +15,7 @@
       <v-list
         :items="menuItems"
         density="comfortable"
+        color="primary"
         item-props
         nav />
     </v-card>

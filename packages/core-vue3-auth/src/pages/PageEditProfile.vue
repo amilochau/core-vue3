@@ -81,7 +81,7 @@ const request: Ref<EditProfile> = ref({
   name: attributes.value.name
 })
 
-async function editProfile() {
+const editProfile = async () => {
   if (!await handleFormValidation(form)) {
     return
   }

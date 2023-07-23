@@ -105,7 +105,7 @@ const request: Ref<EditPassword> = ref({
   confirmationPassword: '',
 })
 
-async function editPassword() {
+const editPassword = async () => {
   if (!await handleFormValidation(form)) {
     return
   }

@@ -80,7 +80,7 @@ const request: Ref<ForgotPassword> = ref({
   email: ''
 })
 
-async function reset() {
+const reset = async() => {
   if (!await handleFormValidation(form)) {
     return
   }

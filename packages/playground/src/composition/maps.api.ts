@@ -3,7 +3,7 @@ import { useMapsStore } from "../stores"
 import { ListRequest, useApiAnonymous } from "@amilochau/core-vue3";
 import type { IListResult, IDefaultCreateResponse } from "@amilochau/core-vue3";
 
-export function useMapsApi() {
+export const useMapsApi = () => {
 
   const api = useApiAnonymous('/maps')
 

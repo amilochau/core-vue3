@@ -130,7 +130,7 @@ const request: Ref<Register> = ref({
   confirmationPassword: ''
 })
 
-async function register() {
+const register = async () => {
   if (!await handleFormValidation(form)) {
     return
   }

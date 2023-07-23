@@ -115,7 +115,7 @@ const request: Ref<Login> = ref({
   password: '',
 })
 
-async function login() {
+const login = async () => {
   if (!await handleFormValidation(form)) {
     return
   }
