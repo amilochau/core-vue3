@@ -2,7 +2,7 @@ import type { MilochauCoreOptions } from "@amilochau/core-vue3"
 import { getConfig, getCurrentEnvironment } from "../utils/config"
 import routes from "./routes"
 import { useMapsStore } from "../stores"
-import navigationItems from "./navigation"
+import navigation from "./navigation"
 import { ref } from 'vue'
 
 export enum Environment {
@@ -55,9 +55,7 @@ export const coreOptions: MilochauCoreOptions = {
   application: {
     name: 'Maps',
     contact: 'Antoine Milochau',
-    navigation: {
-      items: navigationItems,
-    },
+    navigation,
     header: {
       onTitleClick: (router) => router.push({ name: 'Home' }),
     },

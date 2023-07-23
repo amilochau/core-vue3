@@ -21,10 +21,13 @@ export default computed(() => {
 
   const contactUrl = computed(() => `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`)
 
-  return [
-    { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
-    { type: 'divider' },
-    { title: t('privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
-    { title: t('contact'), prependIcon: mdiCardAccountMail, appendIcon: mdiOpenInNew, href: contactUrl.value, target: "_blank", rel: "noopener" },
-  ]
+  return {
+    items: [
+      { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
+    ],
+    appendItems: [
+      { title: t('privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
+      { title: t('contact'), prependIcon: mdiCardAccountMail, appendIcon: mdiOpenInNew, href: contactUrl.value, target: "_blank", rel: "noopener" },
+    ],
+  }
 })
