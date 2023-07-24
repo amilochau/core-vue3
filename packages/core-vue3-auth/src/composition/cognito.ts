@@ -103,7 +103,7 @@ export const useCognito = () => {
 
   const signOut = () => {
     return processRequest(() => Auth.signOut({
-      global: false
+      global: false,
     }))
   }
 
