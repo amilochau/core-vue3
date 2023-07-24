@@ -4,7 +4,8 @@ import CardMessages from "./cards/CardMessages.vue"
 import CardSectionTitle from "./cards/CardSectionTitle.vue"
 import CardTitleClosable from "./cards/CardTitleClosable.vue"
 import FieldAutocomplete from "./fields/FieldAutocomplete.vue"
-import FieldColor from "./fields/FieldColor.vue"
+import FieldColorBullets from "./fields/FieldColorBullets.vue"
+import FieldColorInput from "./fields/FieldColorInput.vue"
 import FieldSelect from "./fields/FieldSelect.vue"
 
 export {
@@ -14,6 +15,7 @@ export {
   CardSectionTitle,
   CardTitleClosable,
   FieldAutocomplete,
-  FieldColor,
+  FieldColorBullets,
+  FieldColorInput,
   FieldSelect,
 }
