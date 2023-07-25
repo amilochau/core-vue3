@@ -7,8 +7,7 @@ on:
 concurrency: deploy_libraries
 
 env:
-  PROJECT_UI_PUBLISH: 'publish --workspace=packages/core-vue3'
-  PROJECT_UI_PUBLISH_AUTH: 'publish --workspace=packages/core-vue3-auth'
+  PROJECT_UI_PUBLISH: 'publish --workspace=packages/core-vue3 --workspace=packages/core-vue3-auth'
 
 jobs:
   deploy:
@@ -26,11 +25,5 @@ jobs:
         uses: amilochau/github-actions/release/npm@v3
         with:
           npmPublishCommand: ${{ env.PROJECT_UI_PUBLISH }}
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          npmjsComToken: ${{ secrets.NPMJSCOM_TOKEN }}
-      - name: Deploy library
-        uses: amilochau/github-actions/release/npm@v3
-        with:
-          npmPublishCommand: ${{ env.PROJECT_UI_PUBLISH_AUTH }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           npmjsComToken: ${{ secrets.NPMJSCOM_TOKEN }}
