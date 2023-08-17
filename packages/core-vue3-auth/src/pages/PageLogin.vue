@@ -124,7 +124,7 @@ const login = async () => {
     await authenticateUser(request.value)
     fetchUserAttributes()
     appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
-    router.push({ name: 'Home' })
+    await router.push({ name: 'Home' })
   }, 'snackbar')
 }
 </script>

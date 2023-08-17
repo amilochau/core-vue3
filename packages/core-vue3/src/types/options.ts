@@ -14,7 +14,7 @@ export type MilochauCoreOptions = {
     }>,
     header: {
       disabled?: boolean,
-      onTitleClick?: (router: Router) => void,
+      onTitleClick?: (router: Router) => Promise<any>,
     },
     footer?: {
       enabled: true,

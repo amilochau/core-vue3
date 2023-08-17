@@ -89,17 +89,17 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
     }
     return errorMessage
   }
-  const buildApplicationMessage401 = () => {
-    router.push({ name: 'Home' })
+  const buildApplicationMessage401 = async () => {
+    await router.push({ name: 'Home' })
     return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
   }
-  const buildApplicationMessage403 = () => {
-    router.push({ name: 'Forbidden' })
+  const buildApplicationMessage403 = async () => {
+    await router.push({ name: 'Forbidden' })
     return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
   }
-  const buildApplicationMessage404 = (settings: IHttpSettings) => {
+  const buildApplicationMessage404 = async (settings: IHttpSettings) => {
     if (settings.redirect404) {
-      router.push({ name: 'NotFound' })
+      await router.push({ name: 'NotFound' })
     }
     return new ApplicationMessage(t('errors.notFound'), 'error', mdiAlert)
   }

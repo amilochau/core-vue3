@@ -138,7 +138,7 @@ const register = async () => {
   await handleLoadAndError(async () => {
     const result = await signUp(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
-    router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
+    await router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
   }, 'snackbar')
 }
 </script>
