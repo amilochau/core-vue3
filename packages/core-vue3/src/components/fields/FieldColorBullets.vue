@@ -33,7 +33,11 @@
         :color="modelValue"
         :icon="mdiPalette"
         class="full-opacity"
+        start
         @click="displayDialog = !displayDialog" />
+      <v-icon
+        :icon="mdiClose"
+        @click="reset" />
     </template>
   </v-input>
   <v-dialog
@@ -66,7 +70,7 @@
 
 <script setup lang="ts">
 import { swatches } from '../../data/swatches'
-import { mdiCheck, mdiPalette } from "@mdi/js"
+import { mdiCheck, mdiPalette, mdiClose } from "@mdi/js"
 import { computed, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
