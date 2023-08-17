@@ -44,7 +44,7 @@ const cleanAndLogout = async () => {
     appStore.loading = true
     await identityStore.logout();
     clean();
-    router.push({ name: 'Home' })
+    await router.push({ name: 'Home' })
   } finally {
     appStore.loading = false
   }

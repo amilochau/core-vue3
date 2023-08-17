@@ -63,8 +63,8 @@ const languageItems = [
 
 const language = computed(() => route.params.lang?.toString())
 
-const onClick = (lang: string) => {
-  router.replace({ params: { lang }})
+const onClick = async (lang: string) => {
+  await router.replace({ params: { lang }})
 }
 
 const toggleTheme = () => {

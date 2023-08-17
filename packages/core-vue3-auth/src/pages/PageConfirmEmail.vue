@@ -102,7 +102,7 @@ const verifyCode = async () => {
   await handleLoadAndError(async () => {
     await confirmRegistration(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
-    router.push({ name: 'Login', query: { email: request.value.email } })
+    await router.push({ name: 'Login', query: { email: request.value.email } })
   }, 'snackbar')
 }
 </script>
