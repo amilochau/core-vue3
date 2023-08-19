@@ -46,7 +46,7 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
         return {
           el: to.hash,
           behavior: 'smooth',
-          top: options.application.header.disabled ? 0 : 48,
+          top: 48,
         }
       } else if (savedPosition) {
         return savedPosition

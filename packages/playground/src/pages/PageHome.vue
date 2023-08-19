@@ -1,10 +1,16 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')" />
   <v-row
     class="h-100"
     no-gutters>
     <v-col class="text-center">
       <home-welcome />
       <home-messages />
+      <v-btn
+        :to="{ name: 'Settings' }">
+        Go to Settings page
+      </v-btn>
 
       <p>{{ mapsStore.items }}</p>
       <v-btn @click="fetchMaps">
@@ -38,9 +44,17 @@
       <dialog-test v-model="dialog" />
     </v-col>
   </v-row>
+  <app-footer-bar
+    :items="[
+      {
+        title: 'GitHub',
+        link: 'https://github.com/amilochau/core-vue3'
+      }
+    ]" />
 </template>
 
 <script setup lang="ts">
+import { AppFooterBar, AppHeaderBar } from '@amilochau/core-vue3/src/components'
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';

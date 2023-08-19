@@ -1,6 +1,6 @@
 import type { Ref } from "vue"
 import type { I18nOptions } from "vue-i18n"
-import type { Router, RouteRecordRaw } from "vue-router"
+import type { RouteRecordRaw } from "vue-router"
 import type { VuetifyOptions } from "vuetify/framework"
 
 export type MilochauCoreOptions = {
@@ -12,17 +12,6 @@ export type MilochauCoreOptions = {
       items: any[],
       appendItems?: any[],
     }>,
-    header: {
-      disabled?: boolean,
-      onTitleClick?: (router: Router) => Promise<any>,
-    },
-    footer?: {
-      enabled: true,
-      items?: Ref<{
-        link: string,
-        title: string,
-      }[]>,
-    },
     isProduction: boolean,
   },
   api?: {

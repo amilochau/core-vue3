@@ -49,16 +49,6 @@ export const coreOptions: MilochauCoreOptions = {
     contact: 'Antoine Milochau',
     logoUrl,
     navigation,
-    header: {
-      onTitleClick: (router) => router.push({ name: 'Home' }),
-    },
-    footer: {
-      enabled: true,
-      items: ref([{
-        title: 'GitHub',
-        link: 'https://github.com/amilochau/core-vue3',
-      }])
-    },
     isProduction: getCurrentEnvironment() === Environment.Production,
   },
   api: {

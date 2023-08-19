@@ -166,10 +166,6 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `application.contact` | Application owner, as used in the policy page |
 | `application.logoUrl` | URL of the application logo |
 | `application.navigation.items` | Navigation links, as `vuetify` list items, used in the navigation drawer |
-| `application.header.disabled` | Whether the header bar should be disabled (not displayed) |
-| `application.header.onTitleClick` | Action to run when the user clicks on the title from the header bar |
-| `application.footer.enabled` | Whether the footer bar should be enabled (displayed) |
-| `application.footer.items` | Additional items to display into the footer bar |
 | `application.isProduction` | Whether the current application is production |
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
 | `i18n` | Options used by `vue-i18n` |

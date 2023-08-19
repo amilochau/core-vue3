@@ -85,7 +85,6 @@
 
 <script setup lang="ts">
 import { useThemeStore } from '../../../../stores';
-import { useCoreOptions } from '../../../../composition';
 import { mdiBrightness6, mdiEarth } from '@mdi/js';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -93,14 +92,20 @@ import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
 import { useTheme } from 'vuetify'
 
+const props = defineProps<{
+  items?: {
+    link: string,
+    title: string,
+  }[]
+}>()
+
 const { t } = useI18n()
 const themeStore = useThemeStore()
 const router = useRouter()
 const route = useRoute()
-const coreOptions = useCoreOptions()
 const theme = useTheme()
 
-const barItems = computed(() => coreOptions.application.footer?.items?.value ?? [])
+const barItems = computed(() => props.items ?? [])
 const language = computed(() => route.params.lang?.toString())
 
 const toggleTheme = () => {
