@@ -60,7 +60,7 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
   })
 
   // Register guards
-  registerGuards(router, identityStore);
+  registerGuards(router, identityStore, options);
 
   return router
 }

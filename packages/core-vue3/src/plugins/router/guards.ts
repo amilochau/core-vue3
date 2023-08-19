@@ -1,13 +1,15 @@
+import type { MilochauCoreOptions } from "../..//types";
 import type { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-router";
 
-export const registerGuards = (router: Router, identityStore: any) => {
+export const registerGuards = (router: Router, identityStore: any, options: MilochauCoreOptions) => {
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
 
-    if (to.meta.requiresAuth) {
-      // @todo check if "coreOptions.authenticationEnabled"; if not, redirect to /forbidden
-
-      if (!identityStore.isAuthenticated) {
-        next('/login') // @todo { name: 'Login' } does not work (lang is required)
+    if (to.meta.requiresAuth && !identityStore.isAuthenticated) {
+      if (options.identity && router.hasRoute('Login')) {
+        next({ name: 'Login', params: { lang: to.params.lang } })
+        return;
+      } else {
+        next({ name: 'Forbidden', params: { lang: to.params.lang } })
         return;
       }
     }
