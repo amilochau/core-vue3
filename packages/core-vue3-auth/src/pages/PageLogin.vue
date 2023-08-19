@@ -130,7 +130,11 @@ const login = async () => {
     await authenticateUser(request.value)
     fetchUserAttributes()
     appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
-    await goBack({ name: 'Home' })
+    if (route.query.returnUrl) {
+      await router.replace(route.query.returnUrl.toString())
+    } else {
+      await goBack({ name: 'Home' })
+    }
   }, 'snackbar')
 }
 </script>

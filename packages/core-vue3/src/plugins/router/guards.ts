@@ -6,7 +6,7 @@ export const registerGuards = (router: Router, identityStore: any, options: Milo
 
     if (to.meta.requiresAuth && !identityStore.isAuthenticated) {
       if (options.identity && router.hasRoute('Login')) {
-        next({ name: 'Login', params: { lang: to.params.lang } })
+        next({ name: 'Login', params: { lang: to.params.lang }, query: { returnUrl: to.path } })
         return;
       } else {
         next({ name: 'Forbidden', params: { lang: to.params.lang } })
