@@ -69,13 +69,13 @@
               :title="t('languages.english')"
               :active="language === 'en'"
               color="primary"
-              @click="router.replace({ params: { lang: 'en' }})" />
+              @click="router.replace({ params: { lang: 'en' }, query: route.query })" />
             <v-list-item
               prepend-avatar="/img/fr/24.png"
               :title="t('languages.french')"
               :active="language === 'fr'"
               color="primary"
-              @click="router.replace({ params: { lang: 'fr' }})" />
+              @click="router.replace({ params: { lang: 'fr' }, query: route.query })" />
           </v-list>
         </v-menu>
       </v-col>
