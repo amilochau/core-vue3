@@ -55,9 +55,13 @@ const { snackbarMessage } = storeToRefs(appStore)
 const expanded = ref(false);
 const display = ref(false);
 
-watch(snackbarMessage, () => {
-  expanded.value = false
-  display.value = true
+watch(snackbarMessage, (newValue) => {
+  if (newValue.title) {
+    expanded.value = false
+    display.value = true
+  } else {
+    display.value = false
+  }
 }, { deep: true })
 </script>
 
