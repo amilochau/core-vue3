@@ -112,19 +112,15 @@ const labels = computed(() => {
 })
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Color",
-      "reset": "Reset",
-      "save": "Save"
-    },
-    "fr": {
-      "title": "Couleur",
-      "reset": "Supprimer",
-      "save": "Sauvegarder"
-    }
-  }
+<i18n lang="yaml">
+en:
+  title: Color
+  reset: Reset
+  save: Save
+fr:
+  title: Couleur
+  reset: Supprimer
+  save: Sauvegarder
 </i18n>
 
 <style>
@@ -162,8 +158,5 @@ const labels = computed(() => {
 }
 .colors-grid-cell__selected:hover {
   border-width: 2px !important;
-}
-.full-opacity {
-  opacity: 1 !important;
 }
 </style>

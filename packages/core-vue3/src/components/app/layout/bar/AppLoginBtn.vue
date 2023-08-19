@@ -17,13 +17,9 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n()
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Login"
-    },
-    "fr": {
-      "title": "Connexion"
-    }
-  }
+<i18n lang="yaml">
+en:
+  title: Login
+fr:
+  title: Connexion
 </i18n>

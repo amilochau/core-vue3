@@ -114,25 +114,19 @@ const toggleTheme = () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "home": "Home",
-      "privacy": "Privacy",
-      "contact": "Contact",
-      "languages": {
-        "english": "English",
-        "french": "French"
-      }
-    },
-    "fr": {
-      "home": "Accueil",
-      "privacy": "Confidentialité",
-      "contact": "Contact",
-      "languages": {
-        "english": "English",
-        "french": "Français"
-      }
-    }
-  }
+<i18n lang="yaml">
+en:
+  home: Home
+  privacy: Privacy
+  contact: Contact
+  languages:
+    english: English
+    french: French
+fr:
+  home: Accueil
+  privacy: Confidentialité
+  contact: Contact
+  languages:
+    english: English
+    french: Français
 </i18n>

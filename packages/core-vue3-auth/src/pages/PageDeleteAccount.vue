@@ -116,33 +116,26 @@ const deleteAccount = async () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Account deletion",
-      "pageDescription": "Account deletion page"
-    },
-    "fr": {
-      "pageTitle": "Suppression de compte",
-      "pageDescription": "Page de suppression de compte"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Account deletion
+  pageDescription: Account deletion page
+fr:
+  pageTitle: Suppression de compte
+  pageDescription: Page de suppression de compte
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Delete account",
-      "email": "Your email address",
-      "password": "Your password",
-      "deleteAccount": "Delete account",
-      "successMessage": "Your account has been deleted!"
-    },
-    "fr": {
-      "title": "Suppression de compte",
-      "email": "Votre adresse email",
-      "password": "Votre mot de passe",
-      "deleteAccount": "Supprimer le compte",
-      "successMessage": "Votre compte a bien été supprimé !"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Delete account
+  email: Your email address
+  password: Your password
+  deleteAccount: Delete account
+  successMessage: Your account has been deleted!
+fr:
+  title: Suppression de compte
+  email: Votre adresse email
+  password: Votre mot de passe
+  deleteAccount: Supprimer le compte
+  successMessage: Votre compte a bien été supprimé !
 </i18n>

@@ -98,31 +98,24 @@ const editProfile = async () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Profile change",
-      "pageDescription": "Profile change page"
-    },
-    "fr": {
-      "pageTitle": "Modification de profil",
-      "pageDescription": "Page de modification de profil"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Profile change
+  pageDescription: Profile change page
+fr:
+  pageTitle: Modification de profil
+  pageDescription: Page de modification de profil
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Edit profile",
-      "name": "Your name",
-      "editProfile": "Edit profile",
-      "successMessage": "Your profile has been changed!"
-    },
-    "fr": {
-      "title": "Modification de profil",
-      "name": "Votre nom",
-      "editProfile": "Modifier le profil",
-      "successMessage": "Votre profil a bien été changé !"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Edit profile
+  name: Your name
+  editProfile: Edit profile
+  successMessage: Your profile has been changed!
+fr:
+  title: Modification de profil
+  name: Votre nom
+  editProfile: Modifier le profil
+  successMessage: Votre profil a bien été changé !
 </i18n>

@@ -62,17 +62,13 @@ const saveTitleOrDefault = computed(() => props.saveTitle ?? t('save'))
 const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil)
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "offlineTitle": "You lost your Internet connection...",
-      "cancel": "Cancel",
-      "save": "Save"
-    },
-    "fr": {
-      "offlineTitle": "Vous avez perdu votre connexion Internet...",
-      "cancel": "Annuler",
-      "save": "Sauvegarder"
-    }
-  }
+<i18n lang="yaml">
+en:
+  offlineTitle: You lost your Internet connection...
+  cancel: Cancel
+  save: Save
+fr:
+  offlineTitle: Vous avez perdu votre connexion Internet...
+  cancel: Annuler
+  save: Sauvegarder
 </i18n>

@@ -112,35 +112,28 @@ const verifyCode = async () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Email confirmation",
-      "pageDescription": "Email confirmation page"
-    },
-    "fr": {
-      "pageTitle": "Confirmation d'email",
-      "pageDescription": "Page de confirmation d'email"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Email confirmation
+  pageDescription: Email confirmation page
+fr:
+  pageTitle: Confirmation d'email
+  pageDescription: Page de confirmation d'email
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Email confirmation",
-      "email": "Your email address",
-      "code": "Your verification code",
-      "verifyCode": "Verify email address",
-      "successMessage": "Your email address has now been verified!",
-      "successDetails": "You can now sign in."
-    },
-    "fr": {
-      "title": "Confirmation d'email",
-      "email": "Votre adresse email",
-      "code": "Votre code de vérification",
-      "verifyCode": "Vérifier l'adresse email",
-      "successMessage": "Votre adresse email a bien été vérifiée !",
-      "successDetails": "Vous pouvez désormais vous connecter."
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Email confirmation
+  email: Your email address
+  code: Your verification code
+  verifyCode: Verify email address
+  successMessage: Your email address has now been verified!
+  successDetails: You can now sign in.
+fr:
+  title: Confirmation d'email
+  email: Votre adresse email
+  code: Votre code de vérification
+  verifyCode: Vérifier l'adresse email
+  successMessage: Votre adresse email a bien été vérifiée !
+  successDetails: Vous pouvez désormais vous connecter.
 </i18n>

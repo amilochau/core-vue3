@@ -21,15 +21,11 @@ usePage()
 const { t } = useI18n()
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Settings",
-      "pageDescription": "Playground page"
-    },
-    "fr": {
-      "pageTitle": "Paramètres",
-      "pageDescription": "Page de test"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Settings
+  pageDescription: Playground page
+fr:
+  pageTitle: Paramètres
+  pageDescription: Page de test
 </i18n>

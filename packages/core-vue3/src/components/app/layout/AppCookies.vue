@@ -52,19 +52,15 @@ const cookiesStore = useCookiesStore()
   line-height: 1.2
 </style>
 
-<i18n lang="json">
-  {
-    "en": {
-      "title": "This website uses cookies to work.",
-      "read": "Read",
-      "accept": "Accept",
-      "refuse": "Refuse"
-    },
-    "fr": {
-      "title": "Ce site utilise des cookies pour fonctionner.",
-      "read": "Lire",
-      "accept": "Accepter",
-      "refuse": "Refuser"
-    }
-  }
+<i18n lang="yaml">
+en:
+  title: This website uses cookies to work.
+  read: Read
+  accept: Accept
+  refuse: Refuse
+fr:
+  title: Ce site utilise des cookies pour fonctionner.
+  read: Lire
+  accept: Accepter
+  refuse: Refuser
 </i18n>

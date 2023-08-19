@@ -122,35 +122,28 @@ const editPassword = async () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Password change",
-      "pageDescription": "Password change page"
-    },
-    "fr": {
-      "pageTitle": "Modification de mot de passe",
-      "pageDescription": "Page de modification de mot de passe"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Password change
+  pageDescription: Password change page
+fr:
+  pageTitle: Modification de mot de passe
+  pageDescription: Page de modification de mot de passe
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Edit password",
-      "oldPassword": "Your old password",
-      "password": "Your new password",
-      "confirmationPassword": "Your new password, again",
-      "editPassword": "Edit password",
-      "successMessage": "Your password has been changed!"
-    },
-    "fr": {
-      "title": "Modification de mot de passe",
-      "oldPassword": "Votre ancien mot de passe",
-      "password": "Votre nouveau mot de passe",
-      "confirmationPassword": "Votre nouveau mot de passe, encore",
-      "editPassword": "Modifier le mot de passe",
-      "successMessage": "Votre mot de passe a bien été changé !"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Edit password
+  oldPassword: Your old password
+  password: Your new password
+  confirmationPassword: Your new password, again
+  editPassword: Edit password
+  successMessage: Your password has been changed!
+fr:
+  title: Modification de mot de passe
+  oldPassword: Votre ancien mot de passe
+  password: Votre nouveau mot de passe
+  confirmationPassword: Votre nouveau mot de passe, encore
+  editPassword: Modifier le mot de passe
+  successMessage: Votre mot de passe a bien été changé !
 </i18n>

@@ -65,13 +65,9 @@ watch(snackbarMessage, (newValue) => {
 }, { deep: true })
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "close": "Close"
-    },
-    "fr": {
-      "close": "Fermer"
-    }
-  }
+<i18n lang="yaml">
+en:
+  close: Close
+fr:
+  close: Fermer
 </i18n>

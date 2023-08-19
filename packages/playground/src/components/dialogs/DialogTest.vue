@@ -102,15 +102,11 @@ const initMap = () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "close": "Close",
-      "testMessage": "Test message"
-    },
-    "fr": {
-      "close": "Fermer",
-      "testMessage": "Test message"
-    }
-  }
+<i18n lang="yaml">
+en:
+  close: Close
+  testMessage: Test message
+fr:
+  close: Fermer
+  testMessage: Test message
 </i18n>

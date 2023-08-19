@@ -148,43 +148,38 @@ const register = async () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Register",
-      "pageDescription": "Register page"
-    },
-    "fr": {
-      "pageTitle": "Création de compte",
-      "pageDescription": "Page de création de compte"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Register
+  pageDescription: Register page
+fr:
+  pageTitle: Création de compte
+  pageDescription: Page de création de compte
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Register",
-      "name": "Your name",
-      "email": "Your email address",
-      "password": "Your password",
-      "confirmationPassword": "Your password, again",
-      "register": "Create account",
-      "successMessage": "Your account has now been created!",
-      "successDetails": "You must confirm your email address - a code has been sent to you. Check your spams if you don't find it!",
-      "loginTitle": "You already have an account?",
-      "loginLink": "Login"
-    },
-    "fr": {
-      "title": "Création de compte",
-      "name": "Votre nom",
-      "email": "Votre adresse email",
-      "password": "Votre mot de passe",
-      "confirmationPassword": "Votre mot de passe, encore",
-      "register": "Créer le compte",
-      "successMessage": "Votre compte a bien été créé !",
-      "successDetails": "Vous devez désormais confirmer votre addresse email - un code vous a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !",
-      "loginTitle": "Vous avez déjà un compte ?",
-      "loginLink": "Se connecter"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Register
+  name: Your name
+  email: Your email address
+  password: Your password
+  confirmationPassword: Your password, again
+  register: Create account
+  successMessage: Your account has now been created!
+  successDetails: You must confirm your email address - a code has been sent to you.
+    Check your spams if you don't find it!
+  loginTitle: You already have an account?
+  loginLink: Login
+fr:
+  title: Création de compte
+  name: Votre nom
+  email: Votre adresse email
+  password: Votre mot de passe
+  confirmationPassword: Votre mot de passe, encore
+  register: Créer le compte
+  successMessage: Votre compte a bien été créé !
+  successDetails: Vous devez désormais confirmer votre addresse email - un code vous
+    a été envoyé. Vérifiez vos spams si vous ne le trouvez pas !
+  loginTitle: Vous avez déjà un compte ?
+  loginLink: Se connecter
 </i18n>

@@ -37,29 +37,22 @@ const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Forbidden",
-      "pageDescription": "Page for access to forbidden resources"
-    },
-    "fr": {
-      "pageTitle": "Accès non autorisé",
-      "pageDescription": "Page pour accès à des ressources interdites"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Forbidden
+  pageDescription: Page for access to forbidden resources
+fr:
+  pageTitle: Accès non autorisé
+  pageDescription: Page pour accès à des ressources interdites
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Whoops, 403",
-      "description": "You don't have enough privileges to access this page.",
-      "buttonText": "Get me out of here!"
-    },
-    "fr": {
-      "title": "Oups, erreur 403",
-      "description": "Vous n'avez pas suffisamment de droits pour accéder à cette page.",
-      "buttonText": "Sortez-moi de là !"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Whoops, 403
+  description: You don't have enough privileges to access this page.
+  buttonText: Get me out of here!
+fr:
+  title: Oups, erreur 403
+  description: Vous n'avez pas suffisamment de droits pour accéder à cette page.
+  buttonText: Sortez-moi de là !
 </i18n>

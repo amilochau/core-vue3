@@ -139,41 +139,34 @@ const login = async () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Login",
-      "pageDescription": "Login page"
-    },
-    "fr": {
-      "pageTitle": "Connexion",
-      "pageDescription": "Page de connexion"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Login
+  pageDescription: Login page
+fr:
+  pageTitle: Connexion
+  pageDescription: Page de connexion
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Login",
-      "email": "Your email address",
-      "password": "Your password",
-      "login": "Login",
-      "successMessage": "Welcome!",
-      "registerTitle": "You don't have any account yet?",
-      "registerLink": "Register",
-      "forgotPasswordTitle": "You can't remember your password?",
-      "forgotPasswordLink": "Reset"
-    },
-    "fr": {
-      "title": "Connexion",
-      "email": "Votre adresse email",
-      "password": "Votre mot de passe",
-      "login": "Se connecter",
-      "successMessage": "Bienvenue !",
-      "registerTitle": "Vous n'avez pas encore de compte ?",
-      "registerLink": "S'inscrire",
-      "forgotPasswordTitle": "Vous avez oublié votre mot de passe ?",
-      "forgotPasswordLink": "Réinitialiser"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Login
+  email: Your email address
+  password: Your password
+  login: Login
+  successMessage: Welcome!
+  registerTitle: You don't have any account yet?
+  registerLink: Register
+  forgotPasswordTitle: You can't remember your password?
+  forgotPasswordLink: Reset
+fr:
+  title: Connexion
+  email: Votre adresse email
+  password: Votre mot de passe
+  login: Se connecter
+  successMessage: Bienvenue !
+  registerTitle: Vous n'avez pas encore de compte ?
+  registerLink: S'inscrire
+  forgotPasswordTitle: Vous avez oublié votre mot de passe ?
+  forgotPasswordLink: Réinitialiser
 </i18n>

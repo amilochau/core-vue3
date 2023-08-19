@@ -37,29 +37,22 @@ const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Not Found",
-      "pageDescription": "Page for access to not found resources"
-    },
-    "fr": {
-      "pageTitle": "Inconnu",
-      "pageDescription": "Page pour accès à des ressources non trouvées"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Not Found
+  pageDescription: Page for access to not found resources
+fr:
+  pageTitle: Inconnu
+  pageDescription: Page pour accès à des ressources non trouvées
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Whoops, 404",
-      "description": "The page you were looking for does not exist.",
-      "buttonText": "Get me out of here!"
-    },
-    "fr": {
-      "title": "Oups, erreur 404",
-      "description": "La page que vous cherchez n'existe pas.",
-      "buttonText": "Sortez-moi de là !"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Whoops, 404
+  description: The page you were looking for does not exist.
+  buttonText: Get me out of here!
+fr:
+  title: Oups, erreur 404
+  description: La page que vous cherchez n'existe pas.
+  buttonText: Sortez-moi de là !
 </i18n>

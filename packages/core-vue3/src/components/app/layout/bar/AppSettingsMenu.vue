@@ -73,31 +73,23 @@ const toggleTheme = () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Settings",
-      "languages": {
-        "title": "Languages",
-        "english": "English",
-        "french": "French"
-      },
-      "display": {
-        "title": "Display",
-        "darkMode": "Dark mode"
-      }
-    },
-    "fr": {
-      "title": "Paramètres",
-      "languages": {
-        "title": "Langues",
-        "english": "English",
-        "french": "Français"
-      },
-      "display": {
-        "title": "Affichage",
-        "darkMode": "Mode sombre"
-      }
-    }
-  }
+<i18n lang="yaml">
+en:
+  title: Settings
+  languages:
+    title: Languages
+    english: English
+    french: French
+  display:
+    title: Display
+    darkMode: Dark mode
+fr:
+  title: Paramètres
+  languages:
+    title: Langues
+    english: English
+    french: Français
+  display:
+    title: Affichage
+    darkMode: Mode sombre
 </i18n>

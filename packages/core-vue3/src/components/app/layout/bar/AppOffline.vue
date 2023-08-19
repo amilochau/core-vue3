@@ -20,13 +20,9 @@ const { t } = useI18n()
 const online = useOnline()
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "title": "You lost your Internet connection..."
-    },
-    "fr": {
-      "title": "Vous avez perdu votre connexion Internet..."
-    }
-  }
+<i18n lang="yaml">
+en:
+  title: You lost your Internet connection...
+fr:
+  title: Vous avez perdu votre connexion Internet...
 </i18n>

@@ -137,37 +137,30 @@ const reset = async () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Reset password",
-      "pageDescription": "Password reset page"
-    },
-    "fr": {
-      "pageTitle": "Réinitialisation de mot de passe",
-      "pageDescription": "Page de réinitialisation de mot de passe"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Reset password
+  pageDescription: Password reset page
+fr:
+  pageTitle: Réinitialisation de mot de passe
+  pageDescription: Page de réinitialisation de mot de passe
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Reset password",
-      "email": "Your email address",
-      "password": "Your new password",
-      "confirmationPassword": "Your new password, again",
-      "code": "Your verification code",
-      "reset": "Reset password",
-      "successMessage": "Your new password has been set!"
-    },
-    "fr": {
-      "title": "Réinitialisation de mot de passe",
-      "email": "Votre adresse email",
-      "password": "Votre mot de passe",
-      "confirmationPassword": "Votre mot de passe, encore",
-      "code": "Votre code de vérification",
-      "reset": "Réinitialiser le mot de passe",
-      "successMessage": "Votre nouveau mot de passe a été enregistré !"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Reset password
+  email: Your email address
+  password: Your new password
+  confirmationPassword: Your new password, again
+  code: Your verification code
+  reset: Reset password
+  successMessage: Your new password has been set!
+fr:
+  title: Réinitialisation de mot de passe
+  email: Votre adresse email
+  password: Votre mot de passe
+  confirmationPassword: Votre mot de passe, encore
+  code: Votre code de vérification
+  reset: Réinitialiser le mot de passe
+  successMessage: Votre nouveau mot de passe a été enregistré !
 </i18n>

@@ -105,15 +105,11 @@ const openDialog = () => {
 }
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Playground",
-      "pageDescription": "Playground page"
-    },
-    "fr": {
-      "pageTitle": "Test",
-      "pageDescription": "Page de test"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Playground
+  pageDescription: Playground page
+fr:
+  pageTitle: Test
+  pageDescription: Page de test
 </i18n>

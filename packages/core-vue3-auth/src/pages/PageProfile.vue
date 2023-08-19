@@ -97,33 +97,26 @@ const contactItems = computed(() => [{
 }])
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "pageTitle": "Profile",
-      "pageDescription": "Profile page"
-    },
-    "fr": {
-      "pageTitle": "Profil",
-      "pageDescription": "Page de profil"
-    }
-  }
+<i18n lang="yaml">
+en:
+  pageTitle: Profile
+  pageDescription: Profile page
+fr:
+  pageTitle: Profil
+  pageDescription: Page de profil
 </i18n>
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Profile",
-      "profileDetails": "Profile details",
-      "editProfile": "Edit your profile",
-      "editPassword": "Edit password",
-      "deleteAccount": "Delete account"
-    },
-    "fr": {
-      "title": "Profil",
-      "profileDetails": "Détails du profil",
-      "editProfile": "Modifier votre profil",
-      "editPassword": "Modifier votre mot de passe",
-      "deleteAccount": "Supprimer votre compte"
-    }
-  }
+
+<i18n lang="yaml">
+en:
+  title: Profile
+  profileDetails: Profile details
+  editProfile: Edit your profile
+  editPassword: Edit password
+  deleteAccount: Delete account
+fr:
+  title: Profil
+  profileDetails: Détails du profil
+  editProfile: Modifier votre profil
+  editPassword: Modifier votre mot de passe
+  deleteAccount: Supprimer votre compte
 </i18n>

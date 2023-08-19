@@ -58,17 +58,13 @@ const menuItems = computed(() => [
 ])
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Profile",
-      "manageProfile": "Manage your profile",
-      "logout": "Logout"
-    },
-    "fr": {
-      "title": "Profil",
-      "manageProfile": "Gérer your profil",
-      "logout": "Déconnexion"
-    }
-  }
+<i18n lang="yaml">
+en:
+  title: Profile
+  manageProfile: Manage your profile
+  logout: Logout
+fr:
+  title: Profil
+  manageProfile: Gérer your profil
+  logout: Déconnexion
 </i18n>

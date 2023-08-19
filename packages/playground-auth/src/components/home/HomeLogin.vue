@@ -22,15 +22,11 @@ const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>
 
-<i18n lang="json">
-  {
-    "en": {
-      "title": "Login in to use services.",
-      "button": "Login"
-    },
-    "fr": {
-      "title": "Connectez-vous pour utiliser les services.",
-      "button": "Se connecter"
-    }
-  }
+<i18n lang="yaml">
+en:
+  title: Login in to use services.
+  button: Login
+fr:
+  title: Connectez-vous pour utiliser les services.
+  button: Se connecter
 </i18n>
