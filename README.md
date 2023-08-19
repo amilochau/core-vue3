@@ -59,15 +59,6 @@ export const coreOptions: MilochauCoreOptions = {
         // YOUR APPLICATION NAVIGATION LINKS
       ])
     },
-    header: {
-      onTitleClick: router => router.push({ name: 'YOUR HOME PAGE NAME' })
-    },
-    footer: {
-      enabled: true,
-      items: ref([
-        // YOUR APPLICATION FOOTER LINKS
-      ])
-    },
     isProduction: true,
   },
   api: {
@@ -95,25 +86,23 @@ export const coreOptions: MilochauCoreOptions = {
 Register `amilochau/core-vue3` in your main file:
 
 ```typescript
-import App from './App.vue'
 import { CoreVue3 } from '@amilochau/core-vue3'
 import { coreOptions } from './data/config'
 
 import 'vuetify/styles'
 
-export const createApp = CoreVue3(App, coreOptions);
+export const createApp = await CoreVue3(App, coreOptions)();
 ```
 
 If you want to use authentication, register `amilochau/core-vue3-auth` in your main file:
 
 ```typescript
-import App from './App.vue'
 import { CoreVue3Auth } from '@amilochau/core-vue3-auth'
 import { coreOptions } from './data/config'
 
 import 'vuetify/styles'
 
-export const createApp = CoreVue3Auth(App, coreOptions);
+export const createApp = await CoreVue3Auth(coreOptions)();
 ```
 
 ---
@@ -143,6 +132,7 @@ Here are the helpers you can use from your code.
 | `useCognito` | Interact with AWS Cognito *(only if `amilochau/core-vue3-auth is configured`)* |
 | `useCoreOptions` | Lets you get the core options defined on plugin registration |
 | `useHandle` | Handle asynchronous requests to manage errors, with loader bar and snackbar messages |
+| `useNavigation` | Helps you use router with back navigation |
 | `usePage` | Define page metadata |
 | `useValidationRules` | Lets you use pre-defined validation rules on plain data |
 
@@ -176,6 +166,10 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 See the full definition of options [here](/packages/core-vue3/src/types/options.ts).
 
 You can find a sample of these configuration options in the [sample app options](/packages/playground/src/data/config.ts).
+
+## Notes
+
+- You have to define a route named `Home`, so that default redirections can work.
 
 --- 
 

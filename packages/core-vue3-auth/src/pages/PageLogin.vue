@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'Home' }" />
   <v-container>
     <v-row justify="center">
       <v-col
@@ -86,6 +90,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
 import { mdiAccountLockOpen, mdiAt, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
@@ -95,7 +100,7 @@ import { ref } from 'vue';
 import type { Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { Login } from '../types';
-import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
+import { useAppStore, useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
@@ -106,6 +111,7 @@ const router = useRouter()
 const { handleLoadAndError, handleFormValidation } = useHandle()
 const { authenticateUser, fetchUserAttributes } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
+const { goBack } = useNavigation()
 
 const { loading } = storeToRefs(appStore)
 
@@ -124,7 +130,7 @@ const login = async () => {
     await authenticateUser(request.value)
     fetchUserAttributes()
     appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
-    await router.push({ name: 'Home' })
+    await goBack({ name: 'Home' })
   }, 'snackbar')
 }
 </script>

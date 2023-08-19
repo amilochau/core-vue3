@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'Home' }" />
   <v-container>
     <v-row justify="center">
       <v-col
@@ -63,6 +67,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
 import { mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';

@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'Profile' }" />
   <v-container>
     <v-row justify="center">
       <v-col
@@ -76,6 +80,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
 import { mdiLockReset, mdiLockClock, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
@@ -83,18 +88,17 @@ import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
-import { useRouter } from 'vue-router';
 import type { EditPassword } from '../types';
-import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
+import { useAppStore, useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
-const router = useRouter()
 const { handleLoadAndError, handleFormValidation } = useHandle()
 const { changePassword } = useCognito()
 const { required, minLength, maxLength } = useValidationRules()
+const { goBack } = useNavigation()
 
 const { loading } = storeToRefs(appStore)
 
@@ -113,7 +117,7 @@ const editPassword = async () => {
   await handleLoadAndError(async () => {
     await changePassword(request.value)
     appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
-    await router.push({ name: 'Profile' })
+    await goBack({ name: 'Profile' })
   }, 'snackbar')
 }
 </script>

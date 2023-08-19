@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'Profile' }" />
   <v-container>
     <v-row justify="center">
       <v-col
@@ -52,26 +56,25 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
 import { mdiAccountEdit, mdiAccount } from '@mdi/js';
 import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useOnline } from '@vueuse/core';
-import { ref } from 'vue';
-import type { Ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, type Ref } from 'vue';
 import type { EditProfile } from '../types';
-import { useAppStore, useHandle, useIdentityStore, usePage, useValidationRules } from '@amilochau/core-vue3';
+import { useAppStore, useHandle, useIdentityStore, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
 const online = useOnline()
-const router = useRouter()
 const identityStore = useIdentityStore()
 const { handleLoadAndError, handleFormValidation } = useHandle()
 const { updateAttributes, fetchUserAttributes } = useCognito()
 const { required, maxLength } = useValidationRules()
+const { goBack } = useNavigation()
 
 const { loading } = storeToRefs(appStore)
 const { attributes } = storeToRefs(identityStore)
@@ -89,7 +92,7 @@ const editProfile = async () => {
   await handleLoadAndError(async () => {
     await updateAttributes(request.value)
     appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
-    await router.push({ name: 'Profile' })
+    await goBack({ name: 'Profile' })
     fetchUserAttributes()
   }, 'snackbar')
 }

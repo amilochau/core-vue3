@@ -6,7 +6,7 @@
     flat>
     <template #prepend>
       <v-btn
-        v-if="(buttonMode === 'back' || buttonMode === 'default-back') && (hasStateHistory || defaultBackTo)"
+        v-if="buttonType === 'arrow-left'"
         :icon="mdiArrowLeft"
         @click="onBackButtonClick" />
       <v-app-bar-nav-icon
@@ -51,7 +51,7 @@ import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProfileMenu from './AppProfileMenu.vue';
 import AppProgressBar from '../AppProgressBar.vue'
 import { useAppStore, useIdentityStore } from '../../../../stores';
-import { useCoreOptions } from '../../../../composition';
+import { useCoreOptions, useNavigation } from '../../../../composition';
 import { storeToRefs } from 'pinia';
 import type { RouteLocationRaw } from 'vue-router';
 import { useRouter } from 'vue-router';
@@ -72,18 +72,26 @@ const identityStore = useIdentityStore()
 const coreOptions = useCoreOptions()
 const { isAuthenticated } = storeToRefs(identityStore)
 const router = useRouter()
+const { hasStateHistory } = useNavigation()
 
 const toggleDrawer = () => {
   appStore.setDrawer(!appStore.drawer)
 }
 
-const hasStateHistory = computed(() => !!window.history.state.back)
+const buttonType = computed(() => {
+  if (props.buttonMode === 'back' && (hasStateHistory.value || props.defaultBackTo)) {
+    return 'arrow-left'
+  } else if (props.buttonMode === 'default-back' && props.defaultBackTo) {
+    return 'arrow-left'
+  } else {
+    return 'nav'
+  }
+})
+
 const onBackButtonClick = async () => {
   if (props.buttonMode === 'back' && hasStateHistory.value) {
-    console.log('FROM HEADER: router.back')
     router.back()
   } else if (props.defaultBackTo) {
-    console.log('FROM HEADER: router.replace(props.defaultBackTo)')
     await router.replace(props.defaultBackTo)
   }
 }

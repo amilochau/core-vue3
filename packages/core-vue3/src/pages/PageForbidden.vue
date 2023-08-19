@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'Home' }" />
   <v-container class="fill-height">
     <v-row class="fill-height align-center">
       <v-col class="text-center">
@@ -21,6 +25,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '../components'
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
