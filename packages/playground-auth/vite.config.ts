@@ -42,5 +42,10 @@ export default defineConfig({
     include: [
       "@aws-amplify/auth"
     ]
+  },
+  esbuild: {
+    supported: {
+      'top-level-await': true // Used to enable await in main.ts
+    }
   }
 })
