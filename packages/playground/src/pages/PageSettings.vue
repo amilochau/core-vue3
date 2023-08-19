@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    :default-back-to="{ name: 'Home' }"
+    button-mode="back" />
   <v-row
     class="h-100"
     no-gutters>
@@ -9,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '@amilochau/core-vue3/src/components'
 import { usePage } from '@amilochau/core-vue3';
 import { useI18n } from 'vue-i18n';
 

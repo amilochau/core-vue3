@@ -5,6 +5,6 @@ export const useStore = defineStore('theme', {
     darkMode: false
   }),
   persist: {
-    storage: localStorage
+    storage: 'localStorage'
   }
 })
