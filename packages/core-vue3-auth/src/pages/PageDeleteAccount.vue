@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'Profile' }" />
   <v-container>
     <v-row justify="center">
       <v-col
@@ -65,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
 import { mdiAccountOff, mdiAt, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';

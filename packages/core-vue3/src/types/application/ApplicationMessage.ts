@@ -3,15 +3,15 @@ export class ApplicationMessage {
   details?: string;
   color: 'error' | 'warning' | 'success' | 'info';
   icon: string;
-  timeout: number;
+  timeout_ms: number;
   creation: number; // Used to toggle the same message multiple times
 
-  constructor(title: string, color: 'error' | 'warning' | 'success' | 'info', icon: string, details?: string, timeout?: number) {
+  constructor(title: string, color: 'error' | 'warning' | 'success' | 'info', icon: string, details?: string, timeout_ms?: number) {
     this.title = title
     this.details = details ? details : undefined
     this.color = color ?? 'info',
     this.icon = icon
-    this.timeout = timeout ?? 10000
+    this.timeout_ms = timeout_ms ?? 10000
     this.creation = new Date().valueOf()
   }
 }

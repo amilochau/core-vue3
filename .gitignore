@@ -26,4 +26,7 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# Custom files
 packages/playground/stats.html
+packages/playground-auth/stats.html

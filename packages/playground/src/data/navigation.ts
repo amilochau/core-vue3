@@ -1,4 +1,4 @@
-import { mdiGavel, mdiHome, mdiCardAccountMail, mdiOpenInNew } from '@mdi/js'
+import { mdiGavel, mdiHome, mdiCog, mdiCardAccountMail, mdiOpenInNew } from '@mdi/js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -10,11 +10,13 @@ export default computed(() => {
 
   mergeLocaleMessage('en', {
     home: 'Home',
+    settings: 'Settings',
     privacy: 'Privacy',
     contact: 'Contact',
   })
   mergeLocaleMessage('fr', {
     home: 'Accueil',
+    settings: 'Paramètres',
     privacy: 'Confidentialité',
     contact: 'Contact',
   })
@@ -24,6 +26,7 @@ export default computed(() => {
   return {
     items: [
       { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
+      { title: t('settings'), prependIcon: mdiCog, to: { name: 'Settings' }, exact: true },
     ],
     appendItems: [
       { title: t('privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },

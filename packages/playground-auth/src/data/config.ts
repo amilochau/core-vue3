@@ -3,7 +3,6 @@ import { getConfig, getCurrentEnvironment } from "../utils/config"
 import routes from "./routes"
 import { useMapsStore } from "../stores"
 import navigation from "./navigation"
-import { ref } from 'vue'
 
 export enum Environment {
   Default = 'default',
@@ -56,16 +55,6 @@ export const coreOptions: MilochauCoreOptions = {
     name: 'Maps',
     contact: 'Antoine Milochau',
     navigation,
-    header: {
-      onTitleClick: (router) => router.push({ name: 'Home' }),
-    },
-    footer: {
-      enabled: true,
-      items: ref([{
-        title: 'GitHub',
-        link: 'https://github.com',
-      }])
-    },
     isProduction: getCurrentEnvironment() === Environment.Production,
   },
   api: {

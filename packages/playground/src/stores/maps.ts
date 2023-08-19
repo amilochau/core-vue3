@@ -20,6 +20,6 @@ export const useStore = defineStore('maps', {
     }
   },
   persist: {
-    storage: localStorage
+    storage: 'localStorage'
   }
 })

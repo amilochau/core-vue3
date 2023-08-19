@@ -28,6 +28,6 @@ export const useStore = defineStore('identity', {
     },
   },
   persist: {
-    storage: localStorage
+    storage: 'localStorage'
   }
 })

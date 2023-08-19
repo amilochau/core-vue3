@@ -5,25 +5,32 @@
     class="border-b"
     flat>
     <template #prepend>
-      <v-app-bar-nav-icon @click="toggleDrawer" />
+      <v-btn
+        v-if="buttonType === 'arrow-left'"
+        :icon="mdiArrowLeft"
+        @click="onBackButtonClick" />
+      <v-app-bar-nav-icon
+        v-else
+        @click="toggleDrawer" />
       <v-img
-        v-if="coreOptions.application.logoUrl"
+        v-if="contentMode === 'img'"
         :alt="t('appTitle')"
         :src="coreOptions.application.logoUrl"
         :width="40"
         :class="{
           'ml-2': true,
-          'clickable-title': coreOptions.application.header.onTitleClick
+          'clickable-title': !!contentTo
         }"
-        @click="onTitleClick" />
+        :to="contentTo" />
     </template>
     <v-app-bar-title
+      v-if="!contentMode || contentMode === 'title'"
       :class="{
         'ml-4': true,
-        'clickable-title': coreOptions.application.header.onTitleClick
+        'clickable-title': !!contentTo
       }"
-      @click="onTitleClick">
-      {{ t('appTitle') }}
+      :to="contentTo">
+      {{ title }}
     </v-app-bar-title>
     <template #append>
       <app-offline />
@@ -36,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import { mdiArrowLeft } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
@@ -43,25 +51,48 @@ import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProfileMenu from './AppProfileMenu.vue';
 import AppProgressBar from '../AppProgressBar.vue'
 import { useAppStore, useIdentityStore } from '../../../../stores';
-import { useCoreOptions } from '../../../../composition';
-import { useRouter } from 'vue-router';
+import { useCoreOptions, useNavigation } from '../../../../composition';
 import { storeToRefs } from 'pinia';
+import type { RouteLocationRaw } from 'vue-router';
+import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+
+const props = defineProps<{
+  contentMode?: 'title' | 'img'
+  title?: string
+  contentTo?: RouteLocationRaw
+  buttonMode?: 'drawer' | 'back' | 'default-back'
+  backTo?: RouteLocationRaw
+  defaultBackTo?: RouteLocationRaw
+}>()
 
 const { t, mergeLocaleMessage } = useI18n()
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const coreOptions = useCoreOptions()
-const router = useRouter()
-
 const { isAuthenticated } = storeToRefs(identityStore)
+const router = useRouter()
+const { hasStateHistory } = useNavigation()
 
 const toggleDrawer = () => {
   appStore.setDrawer(!appStore.drawer)
 }
 
-const onTitleClick = () => {
-  if (coreOptions.application.header.onTitleClick) {
-    coreOptions.application.header.onTitleClick(router)
+const buttonType = computed(() => {
+  if (props.buttonMode === 'back' && (hasStateHistory.value || props.defaultBackTo)) {
+    return 'arrow-left'
+  } else if (props.buttonMode === 'default-back' && props.defaultBackTo) {
+    return 'arrow-left'
+  } else {
+    return 'nav'
+  }
+})
+
+const onBackButtonClick = async () => {
+  if (props.buttonMode === 'back' && hasStateHistory.value) {
+    router.back()
+  } else if (props.defaultBackTo) {
+    await router.replace(props.defaultBackTo)
   }
 }
 

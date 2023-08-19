@@ -3,7 +3,7 @@ import routes from '../../data/routes'
 import { registerGuards } from './guards'
 import { type App } from 'vue'
 import type { MilochauCoreOptions } from '../../types'
-import { useIdentityStore, useLanguageStore } from '../../stores'
+import { useAppStore, useIdentityStore, useLanguageStore } from '../../stores'
 import type { Pinia } from 'pinia'
 import PageRoot from '../../pages/PageRoot.vue'
 
@@ -16,6 +16,7 @@ declare module 'vue-router' {
 export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOptions) => {
   const languageStore = useLanguageStore(pinia)
   const identityStore = useIdentityStore(pinia)
+  const appStore = useAppStore(pinia)
 
   const routesWithRedirection: Array<RouteRecordRaw> = [
     {
@@ -46,7 +47,7 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
         return {
           el: to.hash,
           behavior: 'smooth',
-          top: options.application.header.disabled ? 0 : 48,
+          top: 48,
         }
       } else if (savedPosition) {
         return savedPosition
@@ -56,11 +57,11 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
           top: 0
         }
       }
-    }
+    },
   })
 
   // Register guards
-  registerGuards(router, identityStore);
+  registerGuards(router, identityStore, appStore, options);
 
   return router
 }

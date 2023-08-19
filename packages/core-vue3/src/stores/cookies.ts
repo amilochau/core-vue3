@@ -34,6 +34,6 @@ export const useStore = defineStore('cookies', {
     }
   },
   persist: {
-    storage: localStorage
+    storage: 'localStorage'
   }
 })

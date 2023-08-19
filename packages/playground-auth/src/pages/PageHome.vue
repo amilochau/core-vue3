@@ -1,4 +1,6 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')" />
   <v-row
     class="h-100"
     no-gutters>
@@ -35,19 +37,20 @@
         {{ attributes }}
       </p>
 
-      <suspense>
-        <div>Real content after suspense</div>
-        <template #fallback>
-          Temporary content during suspense
-        </template>
-      </suspense>
-
       <dialog-test v-model="dialog" />
     </v-col>
   </v-row>
+  <app-footer-bar
+    :items="[
+      {
+        title: 'GitHub',
+        link: 'https://github.com/amilochau/core-vue3'
+      }
+    ]" />
 </template>
 
 <script setup lang="ts">
+import { AppFooterBar, AppHeaderBar } from '@amilochau/core-vue3/src/components'
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
@@ -63,7 +66,7 @@ import { useFormat } from '../composition/format';
 import { ContactStatus } from '../types/contacts'
 
 usePage()
-const { d } = useI18n()
+const { d, t } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
 const appStore = useAppStore()

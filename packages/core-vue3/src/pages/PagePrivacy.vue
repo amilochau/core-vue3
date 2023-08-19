@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'Home' }" />
   <v-container>
     <v-row justify="center">
       <v-col
@@ -65,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '../components'
 import AppSectionHeader from '../components/app/section/AppSectionHeader.vue'
 import AppSectionSubHeader from '../components/app/section/AppSectionSubHeader.vue'
 import AppSectionText from '../components/app/section/AppSectionText.vue'

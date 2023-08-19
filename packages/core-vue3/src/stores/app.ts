@@ -34,6 +34,9 @@ export const useStore = defineStore('app', {
     displayErrorMessage(title: string, details?: string, destination: 'snackbar' | 'internal' = 'snackbar') {
       this.displayMessage(new ApplicationMessage(title, 'error', mdiAlert, details), destination)
     },
+    hideMessage(destination: 'snackbar' | 'internal' = 'snackbar') {
+      this.displayMessage(new ApplicationMessage('', 'info', mdiInformation), destination)
+    },
     setDrawer(value: boolean) {
       this.drawer = value
     }

@@ -35,7 +35,7 @@ watch(message, () => {
     display.value = true
     displayTimeout = setTimeout(() => {
       display.value = false
-    }, message.value.timeout)
+    }, message.value.timeout_ms)
   } else {
     display.value = false
   }

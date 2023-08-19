@@ -10,6 +10,6 @@ export const useStore = defineStore('language', {
     }
   },
   persist: {
-    storage: localStorage
+    storage: 'localStorage'
   }
 })

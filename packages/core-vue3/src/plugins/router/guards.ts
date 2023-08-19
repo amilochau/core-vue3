@@ -1,13 +1,21 @@
+import type { MilochauCoreOptions } from "../..//types";
 import type { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-router";
 
-export const registerGuards = (router: Router, identityStore: any) => {
-  router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+export const registerGuards = (router: Router, identityStore: any, appStore: any, options: MilochauCoreOptions) => {
+  router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    
+    // Hide snackbar if lang changes
+    if (to.params.lang !== from.params.lang) {
+      appStore.hideMessage('snackbar')
+    }
 
-    if (to.meta.requiresAuth) {
-      // @todo check if "coreOptions.authenticationEnabled"; if not, redirect to /forbidden
-
-      if (!identityStore.isAuthenticated) {
-        next('/login') // @todo { name: 'Login' } does not work (lang is required)
+    // Check if target route is protected
+    if (to.meta.requiresAuth && !identityStore.isAuthenticated) {
+      if (options.identity && router.hasRoute('Login')) {
+        next({ name: 'Login', params: { lang: to.params.lang }, query: { returnUrl: to.path } })
+        return;
+      } else {
+        next({ name: 'Forbidden', params: { lang: to.params.lang } })
         return;
       }
     }

@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'Home' }" />
   <v-container>
     <v-row justify="center">
       <v-col
@@ -65,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
 import { mdiAccountCheck, mdiAt, mdiNumeric } from '@mdi/js';
 import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
@@ -102,7 +107,7 @@ const verifyCode = async () => {
   await handleLoadAndError(async () => {
     await confirmRegistration(request.value)
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
-    await router.push({ name: 'Login', query: { email: request.value.email } })
+    await router.replace({ name: 'Login', query: { email: request.value.email } })
   }, 'snackbar')
 }
 </script>

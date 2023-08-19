@@ -1,4 +1,8 @@
 <template>
+  <app-header-bar
+    :title="t('pageTitle')"
+    button-mode="back"
+    :default-back-to="{ name: 'ForgotPassword' }" />
   <v-container>
     <v-row justify="center">
       <v-col
@@ -88,6 +92,7 @@
 </template>
 
 <script setup lang="ts">
+import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
 import { mdiLockReset, mdiAt, mdiLock, mdiNumeric } from '@mdi/js';
 import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
@@ -127,7 +132,7 @@ const reset = async () => {
   await handleLoadAndError(async () => {
     await confirmPassword(request.value);
     appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
-    await router.push({ name: 'Login', query: { email: request.value.email } })
+    await router.replace({ name: 'Login', query: { email: request.value.email } })
   }, 'snackbar')
 }
 </script>
@@ -149,8 +154,8 @@ const reset = async () => {
     "en": {
       "title": "Reset password",
       "email": "Your email address",
-      "password": "Your password",
-      "confirmationPassword": "Your password, again",
+      "password": "Your new password",
+      "confirmationPassword": "Your new password, again",
       "code": "Your verification code",
       "reset": "Reset password",
       "successMessage": "Your new password has been set!"
