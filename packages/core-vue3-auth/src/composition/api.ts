@@ -89,7 +89,7 @@ export const useApi = (relativeBaseUri: string) => {
     return errorMessage
   }
   const buildApplicationMessage401 = async () => {
-    await router.push({ name: 'Home' })
+    await router.push({ name: 'Login' })
     return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
   }
   const buildApplicationMessage403 = async () => {

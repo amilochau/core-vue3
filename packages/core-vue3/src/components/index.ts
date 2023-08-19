@@ -1,3 +1,5 @@
+import AppFooterBar from './app/layout/bar/AppFooterBar.vue'
+import AppHeaderBar from './app/layout/bar/AppHeaderBar.vue'
 import CardActions from "./cards/CardActions.vue"
 import CardDivider from "./cards/CardDivider.vue"
 import CardMessages from "./cards/CardMessages.vue"
@@ -9,6 +11,8 @@ import FieldColorInput from "./fields/FieldColorInput.vue"
 import FieldSelect from "./fields/FieldSelect.vue"
 
 export {
+  AppFooterBar,
+  AppHeaderBar,
   CardActions,
   CardDivider,
   CardMessages,

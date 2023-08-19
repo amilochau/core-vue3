@@ -55,7 +55,7 @@ import { useFormat } from '../composition/format';
 import { ContactStatus } from '../types/contacts'
 
 usePage()
-const { d } = useI18n()
+const { d, t } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
 const appStore = useAppStore()
@@ -95,11 +95,11 @@ const openDialog = () => {
 <i18n lang="json">
   {
     "en": {
-      "pageTitle": "Playground",
+      "pageTitle": "Home",
       "pageDescription": "Playground page"
     },
     "fr": {
-      "pageTitle": "Test",
+      "pageTitle": "Accueil",
       "pageDescription": "Page de test"
     }
   }
