@@ -1,6 +1,5 @@
 import { createPinia } from 'pinia'
 import type { PiniaPluginContext } from 'pinia'
-import { nextTick } from 'vue';
 import type { App } from 'vue';
 import type { MilochauCoreOptions } from '../types/options';
 
@@ -20,14 +19,11 @@ const piniaPersist = ({ options, store }: PiniaPluginContext) => {
 
     if (storageResult) {
       store.$patch(JSON.parse(storageResult))
-      localStorage.setItem(store.$id, JSON.stringify(store.$state))
     }
 
-    nextTick().then(() => {
-      store.$subscribe(() => {
-        localStorage.setItem(store.$id, JSON.stringify(store.$state))
-      }, { detached: true })
-    })
+    store.$subscribe(() => {
+      localStorage.setItem(store.$id, JSON.stringify(store.$state))
+    }, { detached: true, immediate: true, deep: true })
   }
 }
 

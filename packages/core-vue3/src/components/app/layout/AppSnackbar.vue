@@ -1,7 +1,7 @@
 <template>
   <v-snackbar
     v-model="display"
-    :timeout="snackbarMessage.timeout"
+    :timeout="snackbarMessage.timeout_ms"
     :color="snackbarMessage.color"
     :close-on-back="false"
     top
