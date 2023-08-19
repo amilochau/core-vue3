@@ -35,13 +35,6 @@
         {{ attributes }}
       </p>
 
-      <suspense>
-        <div>Real content after suspense</div>
-        <template #fallback>
-          Temporary content during suspense
-        </template>
-      </suspense>
-
       <dialog-test v-model="dialog" />
     </v-col>
   </v-row>
@@ -63,7 +56,7 @@ import { useFormat } from '../composition/format';
 import { ContactStatus } from '../types/contacts'
 
 usePage()
-const { d } = useI18n()
+const { d, t } = useI18n()
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
 const appStore = useAppStore()

@@ -56,7 +56,7 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
           top: 0
         }
       }
-    }
+    },
   })
 
   // Register guards
