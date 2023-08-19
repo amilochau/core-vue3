@@ -3,6 +3,7 @@
     v-model="display"
     :timeout="snackbarMessage.timeout"
     :color="snackbarMessage.color"
+    :close-on-back="false"
     top
     right
     class="d-print-none">
