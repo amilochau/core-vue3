@@ -22,8 +22,7 @@
           ref="form"
           :readonly="loading"
           class="mb-4">
-          <v-card
-            elevation="0">
+          <v-card flat>
             <v-card-text>
               <v-text-field
                 v-model="request.name"
