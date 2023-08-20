@@ -32,7 +32,7 @@ export default computed(() => {
     ],
     appendItems: [
       { type: 'subheader', title: t('settingsAndSupport') },
-      { title: t('settings'), prependIcon: mdiCogOutline },
+      { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
       { title: t('privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
       { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl.value, target: "_blank", rel: "noopener" },
     ],
