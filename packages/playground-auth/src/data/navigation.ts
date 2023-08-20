@@ -1,5 +1,5 @@
 import { useIdentityStore } from '@amilochau/core-vue3'
-import { mdiGavel, mdiHome, mdiCogOutline, mdiCardAccountDetailsOutline, mdiPower, mdiChatOutline, mdiOpenInNew } from '@mdi/js'
+import { mdiHome, mdiCogOutline, mdiCardAccountDetailsOutline, mdiPower, mdiChatOutline, mdiOpenInNew } from '@mdi/js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -18,7 +18,6 @@ export default computed(() => {
     profile: 'Profile',
     login: 'Login',
     settings: 'Settings',
-    privacy: 'Privacy',
     contact: 'Contact',
   })
   mergeLocaleMessage('fr', {
@@ -27,7 +26,6 @@ export default computed(() => {
     profile: 'Profil',
     login: 'Connexion',
     settings: 'Paramètres',
-    privacy: 'Confidentialité',
     contact: 'Contact',
   })
 
@@ -40,10 +38,9 @@ export default computed(() => {
     appendItems: [
       { type: 'subheader', title: t('settingsAndSupport') },
       ...isAuthenticated.value
-        ? [{ title: t('profile'), prependIcon: mdiCardAccountDetailsOutline, to: { name: 'Profile' } }] 
+        ? [{ title: t('profile'), prependIcon: mdiCardAccountDetailsOutline, to: { name: 'Profile' } }]
         : [{ title: t('login'), prependIcon: mdiPower, to: { name: 'Login' } }],
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
-      { title: t('privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
       { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl.value, target: "_blank", rel: "noopener" },
     ],
   }

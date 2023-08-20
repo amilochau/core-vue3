@@ -3,8 +3,10 @@
     :title="t('pageTitle')"
     button-mode="back"
     :default-back-to="{ name: 'Home' }" />
-  <v-container>
-    <v-row justify="center">
+  <v-container
+    class="cookies-bar-margin">
+    <v-row
+      justify="center">
       <v-col
         cols="12"
         sm="6"
@@ -39,30 +41,6 @@
           <app-section-sub-header>{{ t('header28') }}</app-section-sub-header>
           <app-section-text>{{ t('text28', { name: appTitle }) }}</app-section-text>
         </section>
-      </v-col>
-    </v-row>
-    <v-row
-      justify="center"
-      class="cookies-bar-margin">
-      <v-col
-        cols="12"
-        sm="6"
-        class="text-center">
-        <p>
-          {{ t('cookiesAccepted', { accepted: cookiesStore.cookiesAccepted }) }}
-        </p>
-        <v-btn
-          class="bg-success mr-1"
-          variant="text"
-          @click="cookiesStore.acceptCookies">
-          {{ t('accept') }}
-        </v-btn>
-        <v-btn
-          class="bg-error mr-1"
-          variant="text"
-          @click="cookiesStore.refuseCookies">
-          {{ t('refuse') }}
-        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -153,9 +131,6 @@ en:
     handling of the data to proceed with the removal of your user account. You might
     oppose some specific ways of handling your data through configuration options
     available in your user parameters.
-  cookiesAccepted: 'Cookies consent: {accepted}'
-  accept: Accept
-  refuse: Refuse
 fr:
   title: Confidentialité
   header11: Stockage et suppression
@@ -207,7 +182,4 @@ fr:
     de procéder à la suppression de votre compte utilisateur. Vous pouvez vous opposer
     à certains traitements spécifiques de vos données via les options de configuration
     disponibles dans vos paramètres utilisateur.
-  cookiesAccepted: 'Consentement aux cookies : {accepted}'
-  accept: Accepter
-  refuse: Refuser
 </i18n>

@@ -11,8 +11,6 @@ export const useStore = defineStore('cookies', {
     expiration: 0
   }),
   getters: {
-    cookiesAccepted: (state) => state.accepted,
-    cookieName: (state) => state.name,
     showCookies: (state) => {
       return state.expiration <= new Date().valueOf()
     }
