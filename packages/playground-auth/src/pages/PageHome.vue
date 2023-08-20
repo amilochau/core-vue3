@@ -20,6 +20,10 @@
         Edit marker
       </v-btn>
       <p>Date: {{ d(stringDate) }}</p>
+      
+      <v-btn @click="loading = !loading">
+        Toggle loading
+      </v-btn>
 
       <v-select multiple />
       <v-btn
@@ -107,9 +111,9 @@ const openDialog = () => {
 
 <i18n lang="yaml">
 en:
-  pageTitle: Playground
+  pageTitle: Home
   pageDescription: Playground page
 fr:
-  pageTitle: Test
+  pageTitle: Accueil
   pageDescription: Page de test
 </i18n>

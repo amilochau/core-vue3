@@ -54,6 +54,15 @@
           <v-btn
             :disabled="loading || !online"
             :loading="loading"
+            :prepend-icon="mdiPower"
+            color="error"
+            variant="text"
+            @click="cleanAndLogout">
+            {{ t('logout') }}
+          </v-btn>
+          <v-btn
+            :disabled="loading || !online"
+            :loading="loading"
             :prepend-icon="mdiAccountOff"
             :to="{ name: 'DeleteAccount' }"
             color="error"
@@ -68,18 +77,21 @@
 
 <script setup lang="ts">
 import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
-import { mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit } from '@mdi/js';
+import { mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit, mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 import { useOnline } from '@vueuse/core';
-import { useAppStore, useIdentityStore, usePage } from '@amilochau/core-vue3';
+import { useAppStore, useClean, useIdentityStore, usePage } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
 const online = useOnline()
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
+const { clean } = useClean()
+const router = useRouter()
 
 const { loading } = storeToRefs(appStore)
 const { attributes } = storeToRefs(identityStore)
@@ -95,6 +107,18 @@ const contactItems = computed(() => [{
     prependIcon: mdiAccount,
   },
 }])
+
+const cleanAndLogout = async () => {
+  try {
+    appStore.loading = true
+    await identityStore.logout();
+    clean();
+    await router.push({ name: 'Home' })
+  } finally {
+    appStore.loading = false
+  }
+}
+
 </script>
 
 <i18n lang="yaml">
@@ -112,11 +136,13 @@ en:
   profileDetails: Profile details
   editProfile: Edit your profile
   editPassword: Edit password
+  logout: Logout
   deleteAccount: Delete account
 fr:
   title: Profil
   profileDetails: Détails du profil
   editProfile: Modifier votre profil
   editPassword: Modifier votre mot de passe
+  logout: Se déconnecter
   deleteAccount: Supprimer votre compte
 </i18n>

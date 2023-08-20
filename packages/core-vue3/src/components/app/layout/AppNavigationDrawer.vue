@@ -18,6 +18,7 @@
         :items="navigationOptions.appendItems"
         color="primary"
         density="compact"
+        :lines="false"
         item-props
         nav />
     </template>
