@@ -1,20 +1,22 @@
 <template>
   <v-app-bar
-    app
     density="compact"
     class="border-b"
-    flat>
+    flat
+    app>
     <template #prepend>
-      <v-btn
-        v-if="buttonType === 'arrow-left'"
-        :icon="mdiArrowLeft"
-        @click="onBackButtonClick" />
-      <v-app-bar-nav-icon
-        v-else
-        @click="toggleDrawer" />
+      <v-scroll-y-reverse-transition mode="out-in">
+        <v-btn
+          v-if="buttonType === 'arrow-left'"
+          :icon="mdiArrowLeft"
+          @click="onBackButtonClick" />
+        <v-app-bar-nav-icon
+          v-else
+          @click="toggleDrawer" />
+      </v-scroll-y-reverse-transition>
       <v-img
         v-if="contentMode === 'img'"
-        :alt="t('appTitle')"
+        :alt="title"
         :src="coreOptions.application.logoUrl"
         :width="40"
         :class="{
@@ -35,20 +37,18 @@
     <app-progress-bar :lazy-delay="200" />
     <template #append>
       <app-offline />
-      <app-login-btn v-if="coreOptions.authenticationEnabled && !isAuthenticated" />
+      <app-login-btn />
     </template>
   </v-app-bar>
 </template>
 
 <script setup lang="ts">
 import { mdiArrowLeft } from '@mdi/js';
-import { useI18n } from 'vue-i18n';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppProgressBar from '../AppProgressBar.vue'
-import { useAppStore, useIdentityStore } from '../../../../stores';
+import { useAppStore } from '../../../../stores';
 import { useCoreOptions, useNavigation } from '../../../../composition';
-import { storeToRefs } from 'pinia';
 import type { RouteLocationRaw } from 'vue-router';
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
@@ -62,11 +62,8 @@ const props = defineProps<{
   defaultBackTo?: RouteLocationRaw
 }>()
 
-const { t, mergeLocaleMessage } = useI18n()
 const appStore = useAppStore()
-const identityStore = useIdentityStore()
 const coreOptions = useCoreOptions()
-const { isAuthenticated } = storeToRefs(identityStore)
 const router = useRouter()
 const { hasStateHistory } = useNavigation()
 
@@ -91,12 +88,6 @@ const onBackButtonClick = async () => {
     await router.replace(props.defaultBackTo)
   }
 }
-
-Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
-  mergeLocaleMessage(key, {
-    appTitle: item.appTitle
-  })
-})
 </script>
 
 <style scoped>

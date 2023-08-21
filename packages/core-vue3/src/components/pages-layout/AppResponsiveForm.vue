@@ -1,7 +1,8 @@
 <template>
   <app-responsive
     :title="title"
-    :links="links">
+    :links="links"
+    :fill-height="fillHeight">
     <v-form
       ref="form"
       :readonly="loading">
@@ -38,7 +39,7 @@ import { useOnline } from '@vueuse/core';
 import { useHandle } from '../../composition';
 
 const props = defineProps<{
-  title: string,
+  title?: string,
   button?: {
     title: string,
     icon: string,
@@ -46,6 +47,7 @@ const props = defineProps<{
     onClick: () => Promise<void>,
   },
   links?: any[],
+  fillHeight?: boolean,
 }>()
 
 const appStore = useAppStore()

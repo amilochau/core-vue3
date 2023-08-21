@@ -1,12 +1,10 @@
 <template>
-  <v-app>
+  <v-app full-height>
     <v-main>
-      <div class="d-flex fill-height flex-column">
-        <app-cookies />
-        <router-view />
-        <app-navigation-drawer />
-        <app-snackbar />
-      </div>
+      <app-cookies />
+      <router-view />
+      <app-navigation-drawer />
+      <app-snackbar />
     </v-main>
   </v-app>
 </template>

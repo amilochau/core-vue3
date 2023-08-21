@@ -1,8 +1,8 @@
-import { useStore as useAppStore } from './app'
-import { useStore as useCookiesStore } from './cookies'
-import { useStore as useIdentityStore } from './identity'
-import { useStore as useLanguageStore } from './language'
-import { useStore as useThemeStore } from './theme'
+import { useAppStore } from './app'
+import { useCookiesStore } from './cookies'
+import { useIdentityStore } from './identity'
+import { useLanguageStore } from './language'
+import { useThemeStore } from './theme'
 
 export {
   useAppStore,

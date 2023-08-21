@@ -1,8 +1,4 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Home' }" />
   <app-responsive-form
     :title="t('title')"
     :button="{
@@ -45,17 +41,24 @@
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar, AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
 import { mdiAccountCheckOutline, mdiAccountCheck, mdiAt, mdiNumeric } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
-import { ref, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { ConfirmEmail } from '../types';
 import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Home' },
+  }
+})))
 const appStore = useAppStore()
 const route = useRoute()
 const router = useRouter()

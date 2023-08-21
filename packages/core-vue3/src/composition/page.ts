@@ -1,38 +1,32 @@
 import { useI18n } from "vue-i18n";
 import { useHead } from '@vueuse/head';
 import { useCoreOptions } from './options';
-import { computed, ref, type Ref } from "vue";
+import { computed, ref, watch, type ComputedRef } from "vue";
+import { useAppStore } from "../stores";
+import type { PageData } from "../types";
 
-export const usePage = (pageArgs: { i18n?: Ref<any>, noindex?: boolean } = {}) => {
-
-  const { t, te, mergeLocaleMessage } = useI18n()
+export const usePage = (pageData: ComputedRef<PageData>) => {
+  const { locale } = useI18n()
   const coreOptions = useCoreOptions()
+  const appStore = useAppStore()
 
-  Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
-    mergeLocaleMessage(key, {
-      appTitle: item.appTitle
-    })
-  })
-  
-  const appTitle = computed(() => t('appTitle'))
-  const pageTitle = computed(() => te('pageTitle', pageArgs.i18n?.value) && t('pageTitle', pageArgs.i18n?.value) ? `${t('pageTitle', pageArgs.i18n?.value)} — ${appTitle.value}` : appTitle.value)
-  const pageDescription = computed(() => te('pageDescription', pageArgs.i18n?.value) && t('pageDescription', pageArgs.i18n?.value) ? `${t('pageDescription', pageArgs.i18n?.value)} — ${appTitle.value}` : appTitle.value)
+  watch(pageData, () => {
+    appStore.pageData = pageData.value
+  }, { immediate: true, deep: true })
 
-  const meta = computed(() => {
-    const items: { name: string, content: Ref<string> }[] = [
-      {
-        name: 'description',
-        content: pageDescription,
-      },
-    ]
-    if (!coreOptions.application.isProduction || pageArgs.noindex) {
-      items.push({
-        name: 'robots',
-        content: ref('noindex'),
-      })
-    }
-    return items
-  })
+  const appTitle = computed(() => coreOptions.i18n.messages[locale.value].appTitle)
+  const pageTitle = computed(() => pageData.value.title ? `${pageData.value.title} — ${appTitle.value}` : appTitle.value)
+
+  const meta = computed(() => ([
+    {
+      name: 'description',
+      content: pageData.value.description ? `${pageData.value.description} — ${appTitle.value}` : appTitle.value,
+    },
+    ...!coreOptions.application.isProduction || pageData.value.noindex ? [{
+      name: 'robots',
+      content: ref('noindex'),
+    }] : []
+  ]))
 
   useHead({
     title: pageTitle,

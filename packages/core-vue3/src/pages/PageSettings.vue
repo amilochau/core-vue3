@@ -1,8 +1,4 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Home' }" />
   <app-responsive-form
     :title="t('title')"
     :links="links">
@@ -60,7 +56,7 @@
 
 <script setup lang="ts">
 import { mdiBrightness6, mdiEarth, mdiGavel } from '@mdi/js'
-import { AppHeaderBar, AppResponsiveForm, CardSectionTitle } from '../components'
+import { AppResponsiveForm, CardSectionTitle } from '../components'
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
 import { useRouter, useRoute } from 'vue-router';
@@ -68,8 +64,15 @@ import { useCookiesStore, useThemeStore } from '../stores';
 import { useTheme } from 'vuetify'
 import { computed } from 'vue';
 
-usePage()
 const { d, t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Home' }
+  }
+})))
 const router = useRouter()
 const route = useRoute()
 const themeStore = useThemeStore()

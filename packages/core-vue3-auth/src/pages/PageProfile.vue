@@ -1,8 +1,4 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Home' }" />
   <app-responsive
     :title="t('title')"
     :links="links">
@@ -20,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar, AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/src/components';
 import { mdiCardAccountDetailsOutline, mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit, mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
@@ -28,8 +24,15 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useAppStore, useClean, useIdentityStore, usePage } from '@amilochau/core-vue3';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Home' },
+  }
+})))
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const { clean } = useClean()

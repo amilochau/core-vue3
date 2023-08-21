@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-const getDefaultState = () => {
+const getDefaultState = (): IdentityStoreState => {
   return {
     isAuthenticated: false,
     attributes: {
@@ -12,7 +12,17 @@ const getDefaultState = () => {
   }
 }
 
-export const useStore = defineStore('identity', {
+interface IdentityStoreState {
+  isAuthenticated: boolean,
+  attributes: {
+    id: string,
+    name: string,
+    email: string,
+  },
+  onLogout: () => Promise<any>,
+}
+
+export const useIdentityStore = defineStore('identity', {
   state: getDefaultState,
   actions: {
     setAttributes(attributes: {id: string, name: string, email: string}) {
