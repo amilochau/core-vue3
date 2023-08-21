@@ -5,13 +5,15 @@
     flat
     app>
     <template #prepend>
-      <v-btn
-        v-if="buttonType === 'arrow-left'"
-        :icon="mdiArrowLeft"
-        @click="onBackButtonClick" />
-      <v-app-bar-nav-icon
-        v-else
-        @click="toggleDrawer" />
+      <v-scroll-y-reverse-transition mode="out-in">
+        <v-btn
+          v-if="buttonType === 'arrow-left'"
+          :icon="mdiArrowLeft"
+          @click="onBackButtonClick" />
+        <v-app-bar-nav-icon
+          v-else
+          @click="toggleDrawer" />
+      </v-scroll-y-reverse-transition>
       <v-img
         v-if="contentMode === 'img'"
         :alt="title"
@@ -35,7 +37,7 @@
     <app-progress-bar :lazy-delay="200" />
     <template #append>
       <app-offline />
-      <app-login-btn v-if="coreOptions.authenticationEnabled && !isAuthenticated" />
+      <app-login-btn />
     </template>
   </v-app-bar>
 </template>
@@ -45,9 +47,8 @@ import { mdiArrowLeft } from '@mdi/js';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppProgressBar from '../AppProgressBar.vue'
-import { useAppStore, useIdentityStore } from '../../../../stores';
+import { useAppStore } from '../../../../stores';
 import { useCoreOptions, useNavigation } from '../../../../composition';
-import { storeToRefs } from 'pinia';
 import type { RouteLocationRaw } from 'vue-router';
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
@@ -62,9 +63,7 @@ const props = defineProps<{
 }>()
 
 const appStore = useAppStore()
-const identityStore = useIdentityStore()
 const coreOptions = useCoreOptions()
-const { isAuthenticated } = storeToRefs(identityStore)
 const router = useRouter()
 const { hasStateHistory } = useNavigation()
 
