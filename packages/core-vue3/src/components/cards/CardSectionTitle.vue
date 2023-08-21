@@ -1,11 +1,13 @@
 <template>
   <v-label
     :class="labelClass"
-    color="error">
+    color="error"
+    class="multi-line">
     <v-icon
       v-if="icon"
       :icon="icon"
-      start />
+      start
+      class="flex-shrink-0" />
     {{ title }}
   </v-label>
 </template>

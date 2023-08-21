@@ -1,4 +1,4 @@
-import { mdiCog, mdiGavel, mdiHome, mdiCogOutline, mdiChatOutline, mdiOpenInNew } from '@mdi/js'
+import { mdiCog, mdiHome, mdiCogOutline, mdiChatOutline, mdiOpenInNew } from '@mdi/js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -12,14 +12,12 @@ export default computed(() => {
     home: 'Home',
     settingsAndSupport: 'Settings and support',
     settings: 'Settings',
-    privacy: 'Privacy',
     contact: 'Contact',
   })
   mergeLocaleMessage('fr', {
     home: 'Accueil',
     settingsAndSupport: 'Paramètres et support',
     settings: 'Paramètres',
-    privacy: 'Confidentialité',
     contact: 'Contact',
   })
 
@@ -32,8 +30,7 @@ export default computed(() => {
     ],
     appendItems: [
       { type: 'subheader', title: t('settingsAndSupport') },
-      { title: t('settings'), prependIcon: mdiCogOutline },
-      { title: t('privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
+      { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
       { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl.value, target: "_blank", rel: "noopener" },
     ],
   }

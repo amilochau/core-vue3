@@ -3,98 +3,46 @@
     :title="t('pageTitle')"
     button-mode="back"
     :default-back-to="{ name: 'Home' }" />
-  <v-container>
-    <v-row justify="center">
-      <v-col
-        cols="12"
-        sm="6"
-        class="text-center">
-        <h1 class="my-4 text-h5 text-primary">
-          {{ t("title") }}
-        </h1>
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col
-        cols="12"
-        md="6">
-        <v-card class="h-100">
-          <v-card-item>
-            <v-card-subtitle>
-              {{ t('profileDetails') }}
-            </v-card-subtitle>
-          </v-card-item>
-          <v-list :items="contactItems" />
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col
-        cols="12"
-        sm="6">
-        <v-card-text class="text-center">
-          <v-btn
-            :disabled="loading || !online"
-            :loading="loading"
-            :prepend-icon="mdiAccountEdit"
-            :to="{ name: 'EditProfile' }"
-            color="primary"
-            variant="text">
-            {{ t('editProfile') }}
-          </v-btn>
-          <v-btn
-            :disabled="loading || !online"
-            :loading="loading"
-            :prepend-icon="mdiLockReset"
-            :to="{ name: 'EditPassword' }"
-            color="warning"
-            variant="text">
-            {{ t('editPassword') }}
-          </v-btn>
-          <v-btn
-            :disabled="loading || !online"
-            :loading="loading"
-            :prepend-icon="mdiPower"
-            color="error"
-            variant="text"
-            @click="cleanAndLogout">
-            {{ t('logout') }}
-          </v-btn>
-          <v-btn
-            :disabled="loading || !online"
-            :loading="loading"
-            :prepend-icon="mdiAccountOff"
-            :to="{ name: 'DeleteAccount' }"
-            color="error"
-            variant="text">
-            {{ t('deleteAccount') }}
-          </v-btn>
-        </v-card-text>
-      </v-col>
-    </v-row>
-  </v-container>
+  <app-responsive
+    :title="t('title')"
+    :links="links">
+    <v-card
+      class="mx-2"
+      elevation="2">
+      <v-card-text class="pb-0">
+        <card-section-title
+          :icon="mdiCardAccountDetailsOutline"
+          :title="t('profileSection.title')" />
+        <v-list :items="contactItems" />
+      </v-card-text>
+    </v-card>
+  </app-responsive>
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
-import { mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit, mdiPower } from '@mdi/js';
+import { AppHeaderBar, AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { mdiCardAccountDetailsOutline, mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit, mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useOnline } from '@vueuse/core';
 import { useAppStore, useClean, useIdentityStore, usePage } from '@amilochau/core-vue3';
 
 usePage()
 const { t } = useI18n()
-const online = useOnline()
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const { clean } = useClean()
 const router = useRouter()
 
-const { loading } = storeToRefs(appStore)
 const { attributes } = storeToRefs(identityStore)
+
+const links = computed(() => ([
+  { title: t('links.editProfile.title'), subtitle: t('links.editProfile.subtitle'), prependIcon: mdiAccountEdit, to: { name: 'EditProfile' } },
+  { title: t('links.editPassword.title'), subtitle: t('links.editPassword.subtitle'), prependIcon: mdiLockReset, to: { name: 'EditPassword' } },
+  { title: t('links.logout.title'), subtitle: t('links.logout.subtitle'), prependIcon: mdiPower, onClick: cleanAndLogout },
+  { title: t('links.deleteAccount.title'), subtitle: t('links.deleteAccount.subtitle'), prependIcon: mdiAccountOff, to: { name: 'DeleteAccount' } },
+]))
 
 const contactItems = computed(() => [{
   title: attributes.value.email,
@@ -118,7 +66,6 @@ const cleanAndLogout = async () => {
     appStore.loading = false
   }
 }
-
 </script>
 
 <i18n lang="yaml">
@@ -133,16 +80,36 @@ fr:
 <i18n lang="yaml">
 en:
   title: Profile
-  profileDetails: Profile details
-  editProfile: Edit your profile
-  editPassword: Edit password
-  logout: Logout
-  deleteAccount: Delete account
+  profileSection:
+    title: Profile details
+  links:
+    editProfile:
+      title: Edit your profile
+      subtitle: Change your account information
+    editPassword:
+      title: Edit password
+      subtitle: Change your password when you want
+    logout:
+      title: Logout
+      subtitle: Logout to remove your personal data from this device
+    deleteAccount:
+      title: Delete account
+      subtitle: Remove your personal data by permanently deleting your account
 fr:
   title: Profil
-  profileDetails: Détails du profil
-  editProfile: Modifier votre profil
-  editPassword: Modifier votre mot de passe
-  logout: Se déconnecter
-  deleteAccount: Supprimer votre compte
+  profileSection:
+    title: Détails du profil
+  links:
+    editProfile:
+      title: Modifier votre profil
+      subtitle: Mettez à jour les informations de votre compte
+    editPassword:
+      title: Modifier votre mot de passe
+      subtitle: Changez de mot de passe à tout moment
+    logout:
+      title: Se déconnecter
+      subtitle: Déconnectez-vous pour supprimer vos informations personnelles de cet appareil
+    deleteAccount:
+      title: Supprimer votre compte
+      subtitle: Supprimez vos informations personnelles en détruisant définitivement votre compte
 </i18n>

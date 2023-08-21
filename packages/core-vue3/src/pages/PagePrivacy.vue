@@ -3,85 +3,47 @@
     :title="t('pageTitle')"
     button-mode="back"
     :default-back-to="{ name: 'Home' }" />
-  <v-container>
-    <v-row justify="center">
-      <v-col
-        cols="12"
-        sm="6"
-        class="text-center">
-        <h1 class="mt-4 text-h5 text-primary">
-          {{ t('header11') }}
-        </h1>
-        <p class="mb-4">
-          {{ t('text11', { name: appTitle }) }}
-        </p>
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col
-        cols="12"
-        sm="6">
-        <section>
-          <app-section-header>{{ t('header21') }}</app-section-header>
-          <app-section-text>{{ t('text21', { name: appTitle }) }}</app-section-text>
-          <app-section-sub-header>{{ t('header22') }}</app-section-sub-header>
-          <app-section-text>{{ t('text22', { name: appTitle }) }}</app-section-text>
-          <app-section-sub-header>{{ t('header23') }}</app-section-sub-header>
-          <app-section-text>{{ t('text23', { name: appTitle }) }}</app-section-text>
-          <app-section-sub-header>{{ t('header24') }}</app-section-sub-header>
-          <app-section-text>{{ t('text24') }}</app-section-text>
-          <app-section-sub-header>{{ t('header25') }}</app-section-sub-header>
-          <app-section-text>{{ t('text25', { name: appTitle, contact: coreOptions.application.contact }) }}</app-section-text>
-          <app-section-sub-header>{{ t('header26') }}</app-section-sub-header>
-          <app-section-text>{{ t('text26', { name: appTitle }) }}</app-section-text>
-          <app-section-sub-header>{{ t('header27') }}</app-section-sub-header>
-          <app-section-text>{{ t('text27', { name: appTitle }) }}</app-section-text>
-          <app-section-sub-header>{{ t('header28') }}</app-section-sub-header>
-          <app-section-text>{{ t('text28', { name: appTitle }) }}</app-section-text>
-        </section>
-      </v-col>
-    </v-row>
-    <v-row
-      justify="center"
-      class="cookies-bar-margin">
-      <v-col
-        cols="12"
-        sm="6"
-        class="text-center">
-        <p>
-          {{ t('cookiesAccepted', { accepted: cookiesStore.cookiesAccepted }) }}
-        </p>
-        <v-btn
-          class="bg-success mr-1"
-          variant="text"
-          @click="cookiesStore.acceptCookies">
-          {{ t('accept') }}
-        </v-btn>
-        <v-btn
-          class="bg-error mr-1"
-          variant="text"
-          @click="cookiesStore.refuseCookies">
-          {{ t('refuse') }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+  <app-responsive-form :title="t('title')">
+    <v-card-text>
+      <section>
+        <app-section-header>{{ t('header11') }}</app-section-header>
+        <app-section-text>{{ t('text11', { name: appTitle }) }}</app-section-text>
+      </section>
+      <v-divider />
+      <section>
+        <app-section-header>{{ t('header21') }}</app-section-header>
+        <app-section-text>{{ t('text21', { name: appTitle }) }}</app-section-text>
+        <app-section-sub-header>{{ t('header22') }}</app-section-sub-header>
+        <app-section-text>{{ t('text22', { name: appTitle }) }}</app-section-text>
+        <app-section-sub-header>{{ t('header23') }}</app-section-sub-header>
+        <app-section-text>{{ t('text23', { name: appTitle }) }}</app-section-text>
+        <app-section-sub-header>{{ t('header24') }}</app-section-sub-header>
+        <app-section-text>{{ t('text24') }}</app-section-text>
+        <app-section-sub-header>{{ t('header25') }}</app-section-sub-header>
+        <app-section-text>{{ t('text25', { name: appTitle, contact: coreOptions.application.contact }) }}</app-section-text>
+        <app-section-sub-header>{{ t('header26') }}</app-section-sub-header>
+        <app-section-text>{{ t('text26', { name: appTitle }) }}</app-section-text>
+        <app-section-sub-header>{{ t('header27') }}</app-section-sub-header>
+        <app-section-text>{{ t('text27', { name: appTitle }) }}</app-section-text>
+        <app-section-sub-header>{{ t('header28') }}</app-section-sub-header>
+        <app-section-text>{{ t('text28', { name: appTitle }) }}</app-section-text>
+      </section>
+    </v-card-text>
+  </app-responsive-form>
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar } from '../components'
+import { AppHeaderBar, AppResponsiveForm } from '../components'
 import AppSectionHeader from '../components/app/section/AppSectionHeader.vue'
 import AppSectionSubHeader from '../components/app/section/AppSectionSubHeader.vue'
 import AppSectionText from '../components/app/section/AppSectionText.vue'
 import { useI18n } from 'vue-i18n';
-import { useCookiesStore } from '../stores';
 import { useCoreOptions, usePage } from '../composition';
 import { computed } from 'vue';
 
 usePage()
 const { t, mergeLocaleMessage } = useI18n()
 const coreOptions = useCoreOptions()
-const cookiesStore = useCookiesStore()
 
 Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
   mergeLocaleMessage(key, {
@@ -153,9 +115,6 @@ en:
     handling of the data to proceed with the removal of your user account. You might
     oppose some specific ways of handling your data through configuration options
     available in your user parameters.
-  cookiesAccepted: 'Cookies consent: {accepted}'
-  accept: Accept
-  refuse: Refuse
 fr:
   title: Confidentialité
   header11: Stockage et suppression
@@ -207,7 +166,4 @@ fr:
     de procéder à la suppression de votre compte utilisateur. Vous pouvez vous opposer
     à certains traitements spécifiques de vos données via les options de configuration
     disponibles dans vos paramètres utilisateur.
-  cookiesAccepted: 'Consentement aux cookies : {accepted}'
-  accept: Accepter
-  refuse: Refuser
 </i18n>

@@ -35,7 +35,6 @@
     <app-progress-bar :lazy-delay="200" />
     <template #append>
       <app-offline />
-      <app-settings-menu />
       <app-login-btn v-if="coreOptions.authenticationEnabled && !isAuthenticated" />
     </template>
   </v-app-bar>
@@ -46,7 +45,6 @@ import { mdiArrowLeft } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
-import AppSettingsMenu from './AppSettingsMenu.vue';
 import AppProgressBar from '../AppProgressBar.vue'
 import { useAppStore, useIdentityStore } from '../../../../stores';
 import { useCoreOptions, useNavigation } from '../../../../composition';

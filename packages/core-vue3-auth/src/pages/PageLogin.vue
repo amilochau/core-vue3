@@ -3,101 +3,54 @@
     :title="t('pageTitle')"
     button-mode="back"
     :default-back-to="{ name: 'Home' }" />
-  <v-container>
-    <v-row justify="center">
-      <v-col
-        cols="12"
-        sm="6"
-        class="text-center">
-        <h1 class="my-4 text-h5 text-primary">
-          {{ t('title') }}
-        </h1>
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col
-        cols="12"
-        sm="6">
-        <v-form
-          ref="form"
-          :readonly="loading"
-          class="mb-4">
-          <v-card
-            elevation="0">
-            <v-card-text>
-              <v-text-field
-                v-model="request.email"
-                :label="t('email')"
-                :prepend-icon="mdiAt"
-                :rules="[ required(), maxLength(200), emailAddress() ]"
-                variant="underlined"
-                density="comfortable"
-                hide-details="auto"
-                class="mb-3"
-                autocomplete="email"
-                type="email"
-                inputmode="email"
-                required />
-              <v-text-field
-                v-model="request.password"
-                :label="t('password')"
-                :prepend-icon="mdiLock"
-                :rules="[ required(), minLength(6), maxLength(200) ]"
-                variant="underlined"
-                density="comfortable"
-                hide-details="auto"
-                class="mb-3"
-                autocomplete="current-password"
-                type="password"
-                required />
-            </v-card-text>
-            <v-card-text class="text-center">
-              <v-btn
-                :disabled="loading || !online"
-                :loading="loading"
-                :prepend-icon="mdiAccountLockOpen"
-                color="primary"
-                variant="text"
-                @click="login">
-                {{ t('login') }}
-              </v-btn>
-            </v-card-text>
-          </v-card>
-        </v-form>
-        <h4 class="mb-4 text-body-2 font-italic text-center">
-          {{ t('registerTitle') }}
-          <v-btn
-            :to="{ name: 'Register' }"
-            density="compact"
-            variant="text"
-            class="ml-1">
-            {{ t('registerLink') }}
-          </v-btn>
-        </h4>
-        <h4 class="mb-4 text-body-2 font-italic text-center">
-          {{ t('forgotPasswordTitle') }}
-          <v-btn
-            :to="{ name: 'ForgotPassword' }"
-            density="compact"
-            variant="text"
-            class="ml-1">
-            {{ t('forgotPasswordLink') }}
-          </v-btn>
-        </h4>
-      </v-col>
-    </v-row>
-  </v-container>
+  <app-responsive-form
+    :title="t('title')"
+    :button="{
+      title: t('login'),
+      icon: mdiAccountLockOpen,
+      onClick: login,
+      color: 'primary',
+    }"
+    :links="links">
+    <v-card-text>
+      <card-section-title
+        :icon="mdiAccountLockOutline"
+        :title="t('loginSection.title')" />
+      <v-text-field
+        v-model="request.email"
+        :label="t('email')"
+        :prepend-icon="mdiAt"
+        :rules="[ required(), maxLength(200), emailAddress() ]"
+        variant="underlined"
+        density="comfortable"
+        hide-details="auto"
+        class="mb-3"
+        autocomplete="email"
+        type="email"
+        inputmode="email"
+        required />
+      <v-text-field
+        v-model="request.password"
+        :label="t('password')"
+        :prepend-icon="mdiLock"
+        :rules="[ required(), minLength(6), maxLength(200) ]"
+        variant="underlined"
+        density="comfortable"
+        hide-details="auto"
+        class="mb-3"
+        autocomplete="current-password"
+        type="password"
+        required />
+    </v-card-text>
+  </app-responsive-form>
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar } from '@amilochau/core-vue3/src/components';
-import { mdiAccountLockOpen, mdiAt, mdiLock } from '@mdi/js';
+import { AppHeaderBar, AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { mdiAccountLockOutline, mdiAccountLockOpen, mdiAt, mdiLock, mdiAccountPlusOutline, mdiLockReset } from '@mdi/js';
 import { useCognito } from '../composition';
-import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useOnline } from '@vueuse/core';
-import { ref } from 'vue';
-import type { Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { Login } from '../types';
 import { useAppStore, useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3';
@@ -105,38 +58,33 @@ import { useAppStore, useHandle, useNavigation, usePage, useValidationRules } fr
 usePage()
 const { t } = useI18n()
 const appStore = useAppStore()
-const online = useOnline()
 const route = useRoute()
 const router = useRouter()
-const { handleLoadAndError, handleFormValidation } = useHandle()
+const { handleLoadAndError } = useHandle()
 const { authenticateUser, fetchUserAttributes } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
 const { goBack } = useNavigation()
 
-const { loading } = storeToRefs(appStore)
-
-const form: Ref<any> = ref(null)
 const request: Ref<Login> = ref({
   email: route.query.email?.toString() || '',
   password: '',
 })
 
-const login = async () => {
-  if (!await handleFormValidation(form)) {
-    return
-  }
+const links = computed(() => ([
+  { title: t('links.register.title'), subtitle: t('links.register.subtitle'), prependIcon: mdiAccountPlusOutline, to: { name: 'Register' } },
+  { title: t('links.forgotPassword.title'), subtitle: t('links.forgotPassword.subtitle'), prependIcon: mdiLockReset, to: { name: 'ForgotPassword' } },
+]))
 
-  await handleLoadAndError(async () => {
-    await authenticateUser(request.value)
-    fetchUserAttributes()
-    appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
-    if (route.query.returnUrl) {
-      await router.replace(route.query.returnUrl.toString())
-    } else {
-      await goBack({ name: 'Home' })
-    }
-  }, 'snackbar')
-}
+const login = () => handleLoadAndError(async () => {
+  await authenticateUser(request.value)
+  fetchUserAttributes()
+  appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
+  if (route.query.returnUrl) {
+    await router.replace(route.query.returnUrl.toString())
+  } else {
+    await goBack({ name: 'Home' })
+  }
+}, 'snackbar')
 </script>
 
 <i18n lang="yaml">
@@ -151,22 +99,32 @@ fr:
 <i18n lang="yaml">
 en:
   title: Login
+  loginSection:
+    title: Login data
   email: Your email address
   password: Your password
   login: Login
   successMessage: Welcome!
-  registerTitle: You don't have any account yet?
-  registerLink: Register
-  forgotPasswordTitle: You can't remember your password?
-  forgotPasswordLink: Reset
+  links:
+    register:
+      title: Register
+      subtitle: No account yet? Create yours in a few steps!
+    forgotPassword:
+      title: Reset password
+      subtitle: Forgot your password? Define a new one!
 fr:
   title: Connexion
+  loginSection:
+    title: Données de connexion
   email: Votre adresse email
   password: Votre mot de passe
   login: Se connecter
   successMessage: Bienvenue !
-  registerTitle: Vous n'avez pas encore de compte ?
-  registerLink: S'inscrire
-  forgotPasswordTitle: Vous avez oublié votre mot de passe ?
-  forgotPasswordLink: Réinitialiser
+  links:
+    register:
+      title: S'inscrire
+      subtitle: Pas encore de compte ? Créez-en un nouveau en seulement quelques étapes !
+    forgotPassword:
+      title: Réinitialiser le mot de passe
+      subtitle: Vous avez oublié votre mot de passe ? Créez-en un nouveau !
 </i18n>
