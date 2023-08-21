@@ -1,49 +1,51 @@
 <template>
   <app-header-bar
     :title="t('pageTitle')" />
-  <v-row
-    class="h-100"
-    no-gutters>
-    <v-col class="text-center">
-      <home-welcome />
-      <home-messages />
-      <v-btn
-        :to="{ name: 'Settings' }">
-        Go to Settings page
-      </v-btn>
+  <v-container>
+    <v-row
+      class="h-100"
+      no-gutters>
+      <v-col class="text-center">
+        <home-welcome />
+        <home-messages />
+        <v-btn
+          :to="{ name: 'Settings' }">
+          Go to Settings page
+        </v-btn>
 
-      <p>{{ mapsStore.items }}</p>
-      <v-btn @click="fetchMaps">
-        Fetch maps
-      </v-btn>
-      <v-btn @click="createMarker">
-        Create marker
-      </v-btn>
-      <v-btn @click="editMarker">
-        Edit marker
-      </v-btn>
-      <p>Date: {{ d(stringDate) }}</p>
+        <p>{{ mapsStore.items }}</p>
+        <v-btn @click="fetchMaps">
+          Fetch maps
+        </v-btn>
+        <v-btn @click="createMarker">
+          Create marker
+        </v-btn>
+        <v-btn @click="editMarker">
+          Edit marker
+        </v-btn>
+        <p>Date: {{ d(stringDate) }}</p>
 
-      <v-select multiple />
-      <v-btn
-        :disabled="loading || !online"
-        color="primary"
-        @click="openDialog">
-        Open dialog
-      </v-btn>
+        <v-select multiple />
+        <v-btn
+          :disabled="loading || !online"
+          color="primary"
+          @click="openDialog">
+          Open dialog
+        </v-btn>
 
-      <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
+        <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
 
-      <suspense>
-        <div>Real content after suspense</div>
-        <template #fallback>
-          Temporary content during suspense
-        </template>
-      </suspense>
+        <suspense>
+          <div>Real content after suspense</div>
+          <template #fallback>
+            Temporary content during suspense
+          </template>
+        </suspense>
 
-      <dialog-test v-model="dialog" />
-    </v-col>
-  </v-row>
+        <dialog-test v-model="dialog" />
+      </v-col>
+    </v-row>
+  </v-container>
   <app-footer-bar
     :items="[
       {

@@ -16,7 +16,8 @@
           :disabled="loading"
           :to="{ name: 'Home' }"
           variant="outlined"
-          color="primary">
+          color="primary"
+          rounded>
           {{ t('buttonText') }}
         </v-btn>
       </v-col>

@@ -3,13 +3,15 @@
     :title="t('pageTitle')"
     :default-back-to="{ name: 'Home' }"
     button-mode="back" />
-  <v-row
-    class="h-100"
-    no-gutters>
-    <v-col class="text-center">
-      Settings page content here...
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-row
+      class="h-100"
+      no-gutters>
+      <v-col class="text-center">
+        Settings page content here...
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup lang="ts">

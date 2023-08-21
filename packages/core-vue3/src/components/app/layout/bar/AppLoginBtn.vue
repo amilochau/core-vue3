@@ -4,7 +4,8 @@
       <v-btn
         v-bind="tooltip"
         :icon="mdiPower"
-        :to="{ name: 'Login' }" />
+        :to="{ name: 'Login' }"
+        :active="false" />
     </template>
     <span>{{ t('title') }}</span>
   </v-tooltip>
