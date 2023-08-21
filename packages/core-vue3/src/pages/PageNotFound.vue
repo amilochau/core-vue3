@@ -1,32 +1,32 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Home' }" />
-  <v-container class="fill-height">
-    <v-row class="fill-height align-center">
-      <v-col class="text-center">
-        <h1 class="text-h3 text-primary mb-4">
-          {{ t('title') }}
-        </h1>
-        <p class="mb-4">
-          {{ t('description') }}
-        </p>
-        <v-btn
-          :disabled="loading"
-          :to="{ name: 'Home' }"
-          variant="outlined"
-          color="primary"
-          rounded>
-          {{ t('buttonText') }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+  <app-responsive
+    :header="{
+      title: t('pageTitle'),
+      buttonMode: 'back',
+      defaultBackTo: { name: 'Home' }
+    }"
+    fill-height>
+    <div class="text-center">
+      <h1 class="text-h3 text-primary mb-4">
+        {{ t('title') }}
+      </h1>
+      <p class="mb-4">
+        {{ t('description') }}
+      </p>
+      <v-btn
+        :disabled="loading"
+        :to="{ name: 'Home' }"
+        variant="outlined"
+        color="primary"
+        rounded>
+        {{ t('buttonText') }}
+      </v-btn>
+    </div>
+  </app-responsive>
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar } from '../components'
+import { AppResponsive } from '../components'
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';

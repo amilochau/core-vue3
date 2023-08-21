@@ -1,9 +1,9 @@
 <template>
   <v-app-bar
-    app
     density="compact"
     class="border-b"
-    flat>
+    flat
+    app>
     <template #prepend>
       <v-btn
         v-if="buttonType === 'arrow-left'"

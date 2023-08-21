@@ -1,62 +1,56 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')" />
-  <v-container>
-    <v-row
-      class="h-100"
-      no-gutters>
-      <v-col class="text-center">
-        <home-welcome />
-        <home-messages />
-        <v-btn
-          :to="{ name: 'Settings' }">
-          Go to Settings page
-        </v-btn>
+  <app-responsive
+    :header="{
+      title: t('pageTitle'),
+    }"
+    :footer="{
+      items: [
+        {
+          title: 'GitHub',
+          link: 'https://github.com/amilochau/core-vue3'
+        }
+      ]
+    }">
+    <div class="text-center">
+      <home-welcome />
+      <home-messages />
 
-        <p>{{ mapsStore.items }}</p>
-        <v-btn @click="fetchMaps">
-          Fetch maps
-        </v-btn>
-        <v-btn @click="createMarker">
-          Create marker
-        </v-btn>
-        <v-btn @click="editMarker">
-          Edit marker
-        </v-btn>
-        <p>Date: {{ d(stringDate) }}</p>
+      <p>{{ mapsStore.items }}</p>
+      <v-btn @click="fetchMaps">
+        Fetch maps
+      </v-btn>
+      <v-btn @click="createMarker">
+        Create marker
+      </v-btn>
+      <v-btn @click="editMarker">
+        Edit marker
+      </v-btn>
+      <p>Date: {{ d(stringDate) }}</p>
 
-        <v-select multiple />
-        <v-btn
-          :disabled="loading || !online"
-          color="primary"
-          @click="openDialog">
-          Open dialog
-        </v-btn>
+      <v-select multiple />
+      <v-btn
+        :disabled="loading || !online"
+        color="primary"
+        @click="openDialog">
+        Open dialog
+      </v-btn>
 
-        <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
+      <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
 
-        <suspense>
-          <div>Real content after suspense</div>
-          <template #fallback>
-            Temporary content during suspense
-          </template>
-        </suspense>
+      <suspense>
+        <div>Real content after suspense</div>
+        <template #fallback>
+          Temporary content during suspense
+        </template>
+      </suspense>
 
-        <dialog-test v-model="dialog" />
-      </v-col>
-    </v-row>
-  </v-container>
-  <app-footer-bar
-    :items="[
-      {
-        title: 'GitHub',
-        link: 'https://github.com/amilochau/core-vue3'
-      }
-    ]" />
+      <dialog-test v-model="dialog" />
+    </div>
+  </app-responsive>
 </template>
 
 <script setup lang="ts">
-import { AppFooterBar, AppHeaderBar } from '@amilochau/core-vue3/src/components'
+import { AppResponsive } from '@amilochau/core-vue3/src/components'
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';

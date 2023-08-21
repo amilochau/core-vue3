@@ -1,62 +1,60 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')" />
-  <v-container>
-    <v-row
-      class="h-100"
-      no-gutters>
-      <v-col class="text-center">
-        <home-welcome />
-        <home-messages />
-        <home-login v-if="!isAuthenticated" />
+  <app-responsive
+    :header="{
+      title: t('pageTitle'),
+    }"
+    :footer="{
+      items: [
+        {
+          title: 'GitHub',
+          link: 'https://github.com/amilochau/core-vue3'
+        }
+      ]
+    }">
+    <div class="text-center">
+      <home-welcome />
+      <home-messages />
+      <home-login v-if="!isAuthenticated" />
 
-        <p>{{ mapsStore.items }}</p>
-        <v-btn @click="fetchMaps">
-          Fetch maps
-        </v-btn>
-        <v-btn @click="createMarker">
-          Create marker
-        </v-btn>
-        <v-btn @click="editMarker">
-          Edit marker
-        </v-btn>
-        <p>Date: {{ d(stringDate) }}</p>
-        
-        <v-btn @click="loading = !loading">
-          Toggle loading
-        </v-btn>
+      <p>{{ mapsStore.items }}</p>
+      <v-btn @click="fetchMaps">
+        Fetch maps
+      </v-btn>
+      <v-btn @click="createMarker">
+        Create marker
+      </v-btn>
+      <v-btn @click="editMarker">
+        Edit marker
+      </v-btn>
+      <p>Date: {{ d(stringDate) }}</p>
+      
+      <v-btn @click="loading = !loading">
+        Toggle loading
+      </v-btn>
 
-        <v-select multiple />
-        <v-btn
-          :disabled="loading || !online"
-          color="primary"
-          @click="openDialog">
-          Open dialog
-        </v-btn>
+      <v-select multiple />
+      <v-btn
+        :disabled="loading || !online"
+        color="primary"
+        @click="openDialog">
+        Open dialog
+      </v-btn>
 
-        <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
-        <p>
-          Cognito user attributes
-        </p>
-        <p>
-          {{ attributes }}
-        </p>
+      <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
+      <p>
+        Cognito user attributes
+      </p>
+      <p>
+        {{ attributes }}
+      </p>
 
-        <dialog-test v-model="dialog" />
-      </v-col>
-    </v-row>
-  </v-container>
-  <app-footer-bar
-    :items="[
-      {
-        title: 'GitHub',
-        link: 'https://github.com/amilochau/core-vue3'
-      }
-    ]" />
+      <dialog-test v-model="dialog" />
+    </div>
+  </app-responsive>
 </template>
 
 <script setup lang="ts">
-import { AppFooterBar, AppHeaderBar } from '@amilochau/core-vue3/src/components'
+import { AppResponsive } from '@amilochau/core-vue3/src/components'
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'

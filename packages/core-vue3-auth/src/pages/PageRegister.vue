@@ -1,8 +1,4 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Home' }" />
   <app-responsive-form
     :title="t('title')"
     :button="{
@@ -11,7 +7,12 @@
       onClick: register,
       color: 'primary',
     }"
-    :links="links">
+    :links="links"
+    :header="{
+      title: t('pageTitle'),
+      buttonMode: 'back',
+      defaultBackTo: { name: 'Home' }
+    }">
     <v-card-text>
       <card-section-title
         :icon="mdiAccountPlusOutline"
@@ -70,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar, AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
 import { mdiAccountPlusOutline, mdiAccountPlus, mdiAccount, mdiAt, mdiLock, mdiAccountLockOutline } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';

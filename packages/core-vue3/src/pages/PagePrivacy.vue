@@ -1,47 +1,55 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Home' }" />
-  <app-responsive-form :title="t('title')">
-    <v-card-text>
-      <section>
-        <app-section-header>{{ t('header11') }}</app-section-header>
-        <app-section-text>{{ t('text11', { name: appTitle }) }}</app-section-text>
-      </section>
-      <v-divider />
-      <section>
-        <app-section-header>{{ t('header21') }}</app-section-header>
-        <app-section-text>{{ t('text21', { name: appTitle }) }}</app-section-text>
-        <app-section-sub-header>{{ t('header22') }}</app-section-sub-header>
-        <app-section-text>{{ t('text22', { name: appTitle }) }}</app-section-text>
-        <app-section-sub-header>{{ t('header23') }}</app-section-sub-header>
-        <app-section-text>{{ t('text23', { name: appTitle }) }}</app-section-text>
-        <app-section-sub-header>{{ t('header24') }}</app-section-sub-header>
-        <app-section-text>{{ t('text24') }}</app-section-text>
-        <app-section-sub-header>{{ t('header25') }}</app-section-sub-header>
-        <app-section-text>{{ t('text25', { name: appTitle, contact: coreOptions.application.contact }) }}</app-section-text>
-        <app-section-sub-header>{{ t('header26') }}</app-section-sub-header>
-        <app-section-text>{{ t('text26', { name: appTitle }) }}</app-section-text>
-        <app-section-sub-header>{{ t('header27') }}</app-section-sub-header>
-        <app-section-text>{{ t('text27', { name: appTitle }) }}</app-section-text>
-        <app-section-sub-header>{{ t('header28') }}</app-section-sub-header>
-        <app-section-text>{{ t('text28', { name: appTitle }) }}</app-section-text>
-      </section>
-    </v-card-text>
-  </app-responsive-form>
+  <app-responsive
+    :title="t('title')"
+    :header="{
+      title: t('pageTitle'),
+      buttonMode: 'back',
+      defaultBackTo: { name: 'Home' }
+    }">
+    <v-card
+      :class="{ 'bg-transparent': xs, 'cookies-bar-margin': true }"
+      flat>
+      <v-card-text>
+        <section>
+          <app-section-header>{{ t('header11') }}</app-section-header>
+          <app-section-text>{{ t('text11', { name: appTitle }) }}</app-section-text>
+        </section>
+        <v-divider />
+        <section>
+          <app-section-header>{{ t('header21') }}</app-section-header>
+          <app-section-text>{{ t('text21', { name: appTitle }) }}</app-section-text>
+          <app-section-sub-header>{{ t('header22') }}</app-section-sub-header>
+          <app-section-text>{{ t('text22', { name: appTitle }) }}</app-section-text>
+          <app-section-sub-header>{{ t('header23') }}</app-section-sub-header>
+          <app-section-text>{{ t('text23', { name: appTitle }) }}</app-section-text>
+          <app-section-sub-header>{{ t('header24') }}</app-section-sub-header>
+          <app-section-text>{{ t('text24') }}</app-section-text>
+          <app-section-sub-header>{{ t('header25') }}</app-section-sub-header>
+          <app-section-text>{{ t('text25', { name: appTitle, contact: coreOptions.application.contact }) }}</app-section-text>
+          <app-section-sub-header>{{ t('header26') }}</app-section-sub-header>
+          <app-section-text>{{ t('text26', { name: appTitle }) }}</app-section-text>
+          <app-section-sub-header>{{ t('header27') }}</app-section-sub-header>
+          <app-section-text>{{ t('text27', { name: appTitle }) }}</app-section-text>
+          <app-section-sub-header>{{ t('header28') }}</app-section-sub-header>
+          <app-section-text>{{ t('text28', { name: appTitle }) }}</app-section-text>
+        </section>
+      </v-card-text>
+    </v-card>
+  </app-responsive>
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar, AppResponsiveForm } from '../components'
+import { AppResponsive } from '../components'
 import AppSectionHeader from '../components/app/section/AppSectionHeader.vue'
 import AppSectionSubHeader from '../components/app/section/AppSectionSubHeader.vue'
 import AppSectionText from '../components/app/section/AppSectionText.vue'
 import { useI18n } from 'vue-i18n';
 import { useCoreOptions, usePage } from '../composition';
 import { computed } from 'vue';
+import { useDisplay } from 'vuetify';
 
 usePage()
+const { xs } = useDisplay()
 const { t, mergeLocaleMessage } = useI18n()
 const coreOptions = useCoreOptions()
 

@@ -1,11 +1,12 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Home' }" />
   <app-responsive-form
     :title="t('title')"
-    :links="links">
+    :links="links"
+    :header="{
+      title: t('pageTitle'),
+      buttonMode: 'back',
+      defaultBackTo: { name: 'Home' }
+    }">
     <v-card-text>
       <card-section-title
         :icon="mdiBrightness6"
@@ -60,7 +61,7 @@
 
 <script setup lang="ts">
 import { mdiBrightness6, mdiEarth, mdiGavel } from '@mdi/js'
-import { AppHeaderBar, AppResponsiveForm, CardSectionTitle } from '../components'
+import { AppResponsiveForm, CardSectionTitle } from '../components'
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
 import { useRouter, useRoute } from 'vue-router';

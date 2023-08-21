@@ -2,8 +2,7 @@
   <v-navigation-drawer
     v-model="appStore.drawer"
     app
-    temporary
-    nav>
+    temporary>
     <v-list
       :items="navigationOptions.items"
       color="primary"

@@ -1,8 +1,4 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Profile' }" />
   <app-responsive-form
     :title="t('title')"
     :button="{
@@ -10,6 +6,11 @@
       icon: mdiAccountEdit,
       onClick: editProfile,
       color: 'primary',
+    }"
+    :header="{
+      title: t('pageTitle'),
+      buttonMode: 'back',
+      defaultBackTo: { name: 'Profile' }
     }">
     <v-card-text>
       <card-section-title
@@ -32,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar, AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
 import { mdiAccountEdit, mdiAccount, mdiCardAccountDetailsOutline } from '@mdi/js';
 import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';

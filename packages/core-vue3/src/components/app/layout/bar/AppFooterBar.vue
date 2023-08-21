@@ -1,86 +1,79 @@
 <template>
-  <v-container class="d-print-none">
-    <v-row>
-      <v-col
-        align="center"
-        class="py-0">
-        <v-divider class="mt-2 mb-4" />
-        <v-btn
-          :to="{ name: 'Home' }"
-          exact
-          rounded
-          size="small"
-          variant="text"
-          class="mb-1 mr-2">
-          {{ t('home') }}
-        </v-btn>
-        <v-btn
-          :to="{ name: 'Privacy' }"
-          exact
-          rounded
-          size="small"
-          variant="text"
-          class="mb-1 mr-2">
-          {{ t('privacy') }}
-        </v-btn>
-        <v-btn
-          :href="`https://contact.milochau.com/${route.params.lang}`"
-          rounded
-          size="small"
-          variant="text"
-          target="_blank"
-          rel="noopener"
-          class="mb-1">
-          {{ t('contact') }}
-        </v-btn>
-        <v-btn
-          v-for="(item, i) in barItems"
-          :key="i"
-          :href="item.link"
-          rounded
-          size="small"
-          variant="text"
-          target="_blank"
-          rel="noopener"
-          class="mb-1">
-          {{ item.title }}
-        </v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col
-        align="center"
-        class="py-0">
-        <v-btn
-          :icon="mdiBrightness6"
-          variant="text"
-          class="mr-2"
-          @click="toggleTheme" />
-        <v-menu location="top end">
-          <template #activator="{ props: menuProps }">
-            <v-btn
-              v-bind="menuProps"
-              :icon="mdiEarth"
-              variant="text" />
-          </template>
-          <v-list>
-            <v-list-item
-              prepend-avatar="/img/us/24.png"
-              :title="t('languages.english')"
-              :active="language === 'en'"
-              color="primary"
-              @click="router.replace({ params: { lang: 'en' }, query: route.query })" />
-            <v-list-item
-              prepend-avatar="/img/fr/24.png"
-              :title="t('languages.french')"
-              :active="language === 'fr'"
-              color="primary"
-              @click="router.replace({ params: { lang: 'fr' }, query: route.query })" />
-          </v-list>
-        </v-menu>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-footer
+    app
+    class="d-print-none d-flex flex-column">
+    <div>
+      <v-btn
+        :to="{ name: 'Home' }"
+        exact
+        rounded
+        size="small"
+        variant="text"
+        class="mb-1 mr-2">
+        {{ t('home') }}
+      </v-btn>
+      <v-btn
+        :to="{ name: 'Privacy' }"
+        exact
+        rounded
+        size="small"
+        variant="text"
+        class="mb-1 mr-2">
+        {{ t('privacy') }}
+      </v-btn>
+      <v-btn
+        :href="`https://contact.milochau.com/${route.params.lang}`"
+        rounded
+        size="small"
+        variant="text"
+        target="_blank"
+        rel="noopener"
+        class="mb-1">
+        {{ t('contact') }}
+      </v-btn>
+      <v-btn
+        v-for="(item, i) in barItems"
+        :key="i"
+        :href="item.link"
+        rounded
+        size="small"
+        variant="text"
+        target="_blank"
+        rel="noopener"
+        class="mb-1">
+        {{ item.title }}
+      </v-btn>
+    </div>
+    <div>
+      <v-btn
+        :icon="mdiBrightness6"
+        variant="text"
+        class="mr-2"
+        @click="toggleTheme" />
+      <v-menu location="top end">
+        <template #activator="{ props: menuProps }">
+          <v-btn
+            v-bind="menuProps"
+            :icon="mdiEarth"
+            variant="text" />
+        </template>
+        <v-list>
+          <v-list-item
+            prepend-avatar="/img/us/24.png"
+            :title="t('languages.english')"
+            :active="language === 'en'"
+            color="primary"
+            @click="router.replace({ params: { lang: 'en' }, query: route.query })" />
+          <v-list-item
+            prepend-avatar="/img/fr/24.png"
+            :title="t('languages.french')"
+            :active="language === 'fr'"
+            color="primary"
+            @click="router.replace({ params: { lang: 'fr' }, query: route.query })" />
+        </v-list>
+      </v-menu>
+    </div>
+  </v-footer>
 </template>
 
 <script setup lang="ts">

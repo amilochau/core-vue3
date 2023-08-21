@@ -1,7 +1,10 @@
 <template>
   <app-responsive
     :title="title"
-    :links="links">
+    :links="links"
+    :header="header"
+    :footer="footer"
+    :fill-height="fillHeight">
     <v-form
       ref="form"
       :readonly="loading">
@@ -36,9 +39,10 @@ import { useDisplay } from 'vuetify';
 import { ref, type Ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { useHandle } from '../../composition';
+import type { RouteLocationRaw } from 'vue-router';
 
 const props = defineProps<{
-  title: string,
+  title?: string,
   button?: {
     title: string,
     icon: string,
@@ -46,6 +50,21 @@ const props = defineProps<{
     onClick: () => Promise<void>,
   },
   links?: any[],
+  header?: {
+    contentMode?: 'title' | 'img'
+    title?: string
+    contentTo?: RouteLocationRaw
+    buttonMode?: 'drawer' | 'back' | 'default-back'
+    backTo?: RouteLocationRaw
+    defaultBackTo?: RouteLocationRaw
+  },
+  footer?: {
+    items?: {
+      link: string,
+      title: string,
+    }[]
+  },
+  fillHeight?: boolean,
 }>()
 
 const appStore = useAppStore()

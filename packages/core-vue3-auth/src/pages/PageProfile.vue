@@ -1,11 +1,12 @@
 <template>
-  <app-header-bar
-    :title="t('pageTitle')"
-    button-mode="back"
-    :default-back-to="{ name: 'Home' }" />
   <app-responsive
     :title="t('title')"
-    :links="links">
+    :links="links"
+    :header="{
+      title: t('pageTitle'),
+      buttonMode: 'back',
+      defaultBackTo: { name: 'Home' }
+    }">
     <v-card
       class="mx-2"
       elevation="2">
@@ -20,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { AppHeaderBar, AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/src/components';
 import { mdiCardAccountDetailsOutline, mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit, mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
