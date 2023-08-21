@@ -6,11 +6,6 @@
       icon: mdiAccountEdit,
       onClick: editProfile,
       color: 'primary',
-    }"
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Profile' }
     }">
     <v-card-text>
       <card-section-title
@@ -38,12 +33,19 @@ import { mdiAccountEdit, mdiAccount, mdiCardAccountDetailsOutline } from '@mdi/j
 import { useCognito } from '../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { ref, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import type { EditProfile } from '../types';
 import { useAppStore, useHandle, useIdentityStore, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Profile' },
+  }
+})))
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const { handleLoadAndError } = useHandle()

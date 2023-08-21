@@ -1,7 +1,11 @@
 import { defineStore } from 'pinia'
 
-export const useStore = defineStore('language', {
-  state: () => ({
+interface LanguageStoreState {
+  language: 'en' | 'fr' | string,
+}
+
+export const useLanguageStore = defineStore('language', {
+  state: (): LanguageStoreState => ({
     language: navigator.language.slice(0, 2) === 'fr' ? 'fr' : 'en' // @todo make that configurable
   }),
   actions: {

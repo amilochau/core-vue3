@@ -4,8 +4,14 @@ const setCookie = (cookieName: string, expiration: Date) => {
   document.cookie = `${cookieName}=no; expires=${expiration.toUTCString()}; path=/; samesite=lax`
 }
 
-export const useStore = defineStore('cookies', {
-  state: () => ({
+interface CookiesStoreState {
+  name: string,
+  accepted: boolean,
+  expiration: number,
+}
+
+export const useCookiesStore = defineStore('cookies', {
+  state: (): CookiesStoreState => ({
     name: '.Cookies.Consent',
     accepted: false,
     expiration: 0

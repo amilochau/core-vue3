@@ -1,10 +1,5 @@
 <template>
   <app-responsive
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Home' }
-    }"
     fill-height>
     <div class="text-center">
       <h1 class="text-h3 text-primary mb-4">
@@ -31,9 +26,17 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
 import { useAppStore } from '../stores';
+import { computed } from 'vue';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Home' },
+  }
+})))
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 </script>

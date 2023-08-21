@@ -1,12 +1,7 @@
 <template>
   <app-responsive
     :title="t('title')"
-    :links="links"
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Home' }
-    }">
+    :links="links">
     <v-card
       class="mx-2"
       elevation="2">
@@ -29,8 +24,15 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useAppStore, useClean, useIdentityStore, usePage } from '@amilochau/core-vue3';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Home' },
+  }
+})))
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const { clean } = useClean()

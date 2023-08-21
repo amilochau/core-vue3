@@ -1,11 +1,6 @@
 <template>
   <app-responsive
-    :title="t('title')"
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Home' }
-    }">
+    :title="t('title')">
     <v-card
       :class="{ 'bg-transparent': xs, 'cookies-bar-margin': true }"
       flat>
@@ -48,9 +43,16 @@ import { useCoreOptions, usePage } from '../composition';
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
-usePage()
-const { xs } = useDisplay()
 const { t, mergeLocaleMessage } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Home' },
+  }
+})))
+const { xs } = useDisplay()
 const coreOptions = useCoreOptions()
 
 Object.entries(coreOptions.i18n.messages).map(([key, item]) => {

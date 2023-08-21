@@ -14,7 +14,7 @@
         @click="toggleDrawer" />
       <v-img
         v-if="contentMode === 'img'"
-        :alt="t('appTitle')"
+        :alt="title"
         :src="coreOptions.application.logoUrl"
         :width="40"
         :class="{
@@ -42,7 +42,6 @@
 
 <script setup lang="ts">
 import { mdiArrowLeft } from '@mdi/js';
-import { useI18n } from 'vue-i18n';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppProgressBar from '../AppProgressBar.vue'
@@ -62,7 +61,6 @@ const props = defineProps<{
   defaultBackTo?: RouteLocationRaw
 }>()
 
-const { t, mergeLocaleMessage } = useI18n()
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const coreOptions = useCoreOptions()
@@ -91,12 +89,6 @@ const onBackButtonClick = async () => {
     await router.replace(props.defaultBackTo)
   }
 }
-
-Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
-  mergeLocaleMessage(key, {
-    appTitle: item.appTitle
-  })
-})
 </script>
 
 <style scoped>

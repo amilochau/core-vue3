@@ -6,11 +6,6 @@
       icon: mdiLockReset,
       onClick: reset,
       color: 'primary',
-    }"
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Login' }
     }">
     <v-card-text>
       <card-section-title
@@ -38,13 +33,20 @@ import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/co
 import { mdiLockOutline, mdiLockReset, mdiAt } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
-import { ref, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { ForgotPassword } from "../types"
 import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Login' },
+  }
+})))
 const appStore = useAppStore()
 const router = useRouter()
 const { handleLoadAndError } = useHandle()

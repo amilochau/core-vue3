@@ -6,11 +6,6 @@
       icon: mdiAccountOff,
       onClick: deleteAccount,
       color: 'error',
-    }"
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Profile' }
     }">
     <v-card-text>
       <card-section-title
@@ -50,13 +45,20 @@ import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/co
 import { mdiCardAccountDetailsOutline, mdiAccountOff, mdiAt, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
-import { ref, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { Login } from '../types';
 import { useAppStore, useClean, useHandle, useIdentityStore, usePage, useValidationRules } from '@amilochau/core-vue3';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Profile' },
+  }
+})))
 const appStore = useAppStore()
 const { clean } = useClean()
 const router = useRouter()

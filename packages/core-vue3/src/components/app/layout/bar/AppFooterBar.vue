@@ -1,7 +1,7 @@
 <template>
   <v-footer
     app
-    class="d-print-none d-flex flex-column">
+    class="d-print-none d-flex flex-column text-center border-t">
     <div>
       <v-btn
         :to="{ name: 'Home' }"

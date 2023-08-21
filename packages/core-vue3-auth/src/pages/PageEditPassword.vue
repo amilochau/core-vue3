@@ -6,11 +6,6 @@
       icon: mdiLockReset,
       onClick: editPassword,
       color: 'warning',
-    }"
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Profile' }
     }">
     <v-card-text>
       <card-section-title
@@ -61,12 +56,19 @@ import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/co
 import { mdiLockOutline, mdiLockReset, mdiLockClock, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
-import { ref, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import type { EditPassword } from '../types';
 import { useAppStore, useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Profile' },
+  }
+})))
 const appStore = useAppStore()
 const { handleLoadAndError } = useHandle()
 const { changePassword } = useCognito()

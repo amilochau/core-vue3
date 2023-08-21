@@ -1,15 +1,29 @@
 import { mdiAlert, mdiAlertOctagon, mdiCheckboxMarkedCircle, mdiInformation } from '@mdi/js'
 import { defineStore } from 'pinia'
 import { ApplicationMessage } from '../types/application'
-import type { IHomeMessage } from '../types/application'
+import type { IHomeMessage, PageData } from '../types/application'
 
-export const useStore = defineStore('app', {
-  state: () => ({
+interface AppStoreState {
+  drawer: boolean,
+  loading: boolean,
+  message: ApplicationMessage,
+  snackbarMessage: ApplicationMessage,
+  homeMessages: IHomeMessage[],
+  pageData: PageData,
+}
+
+export const useAppStore = defineStore('app', {
+  state: (): AppStoreState => ({
     drawer: false,
     loading: false,
     message: new ApplicationMessage('', 'info', mdiInformation),
     snackbarMessage: new ApplicationMessage('', 'info', mdiInformation),
-    homeMessages: new Array<IHomeMessage>()
+    homeMessages: new Array<IHomeMessage>(),
+    pageData: {
+      title: '',
+      description: '',
+      header: {}, footer: {}
+    },
   }),
   actions: {
     displayMessage(message: ApplicationMessage, destination: 'snackbar' | 'internal' = 'snackbar') {

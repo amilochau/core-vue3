@@ -7,12 +7,7 @@
       onClick: register,
       color: 'primary',
     }"
-    :links="links"
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Home' }
-    }">
+    :links="links">
     <v-card-text>
       <card-section-title
         :icon="mdiAccountPlusOutline"
@@ -80,8 +75,15 @@ import { useRouter } from 'vue-router';
 import type { Register } from '../types';
 import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
 
-usePage()
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Home' },
+  }
+})))
 const appStore = useAppStore()
 const router = useRouter()
 const { handleLoadAndError } = useHandle()

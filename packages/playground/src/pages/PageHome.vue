@@ -1,16 +1,5 @@
 <template>
-  <app-responsive
-    :header="{
-      title: t('pageTitle'),
-    }"
-    :footer="{
-      items: [
-        {
-          title: 'GitHub',
-          link: 'https://github.com/amilochau/core-vue3'
-        }
-      ]
-    }">
+  <app-responsive>
     <div class="text-center">
       <home-welcome />
       <home-messages />
@@ -57,15 +46,27 @@ import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
 import { useAppStore, useHandle, usePage } from '@amilochau/core-vue3';
 import DialogTest from '../components/dialogs/DialogTest.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useFormat } from '../composition/format';
 import { ContactStatus } from '../types/contacts'
 
-usePage()
 const { d, t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {},
+  footer: {
+    items: [
+      {
+        title: 'GitHub',
+        link: 'https://github.com/amilochau/core-vue3'
+      }
+    ]
+  }
+})))
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
 const appStore = useAppStore()

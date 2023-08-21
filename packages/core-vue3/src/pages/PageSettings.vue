@@ -1,12 +1,7 @@
 <template>
   <app-responsive-form
     :title="t('title')"
-    :links="links"
-    :header="{
-      title: t('pageTitle'),
-      buttonMode: 'back',
-      defaultBackTo: { name: 'Home' }
-    }">
+    :links="links">
     <v-card-text>
       <card-section-title
         :icon="mdiBrightness6"
@@ -69,8 +64,15 @@ import { useCookiesStore, useThemeStore } from '../stores';
 import { useTheme } from 'vuetify'
 import { computed } from 'vue';
 
-usePage()
 const { d, t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+    defaultBackTo: { name: 'Home' }
+  }
+})))
 const router = useRouter()
 const route = useRoute()
 const themeStore = useThemeStore()
