@@ -22,7 +22,6 @@ export const useAppStore = defineStore('app', {
     pageData: {
       title: '',
       description: '',
-      header: {}, footer: {}
     },
   }),
   actions: {

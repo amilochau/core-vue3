@@ -15,7 +15,7 @@
       Edit marker
     </v-btn>
     <p>Date: {{ d(stringDate) }}</p>
-    
+
     <v-btn @click="loading = !loading">
       Toggle loading
     </v-btn>
@@ -68,7 +68,7 @@ usePage(computed(() => ({
         link: 'https://github.com/amilochau/core-vue3'
       }
     ]
-  }
+  },
 })))
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
