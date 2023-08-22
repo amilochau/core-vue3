@@ -20,6 +20,10 @@
   opacity: 1 !important;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .colors-grid {
   display: flex;
   flex-wrap: wrap;

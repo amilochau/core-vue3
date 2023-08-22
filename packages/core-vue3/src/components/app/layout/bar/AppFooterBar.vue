@@ -12,13 +12,13 @@
         {{ t('home') }}
       </v-btn>
       <v-btn
-        :to="{ name: 'Privacy' }"
+        :to="{ name: 'Settings' }"
         exact
         rounded
         size="small"
         variant="text"
         class="mb-1 mr-2">
-        {{ t('privacy') }}
+        {{ t('settings') }}
       </v-btn>
       <v-btn
         :href="`https://contact.milochau.com/${route.params.lang}`"
@@ -57,18 +57,15 @@
             variant="text" />
         </template>
         <v-list>
+          <v-list-subheader>{{ t('languages.title') }}</v-list-subheader>
           <v-list-item
-            prepend-avatar="/img/us/24.png"
-            :title="t('languages.english')"
-            :active="language === 'en'"
+            v-for="(item, i) in languagesItems"
+            :key="i"
+            :title="item.title"
+            :prepend-icon="mdiEarth"
+            :active="language === item.lang"
             color="primary"
-            @click="router.replace({ params: { lang: 'en' }, query: route.query })" />
-          <v-list-item
-            prepend-avatar="/img/fr/24.png"
-            :title="t('languages.french')"
-            :active="language === 'fr'"
-            color="primary"
-            @click="router.replace({ params: { lang: 'fr' }, query: route.query })" />
+            @click="router.replace({ params: { lang: item.lang }, query: route.query })" />
         </v-list>
       </v-menu>
     </div>
@@ -104,21 +101,29 @@ const toggleTheme = () => {
   themeStore.darkMode = !themeStore.darkMode
   theme.global.name.value = themeStore.darkMode ? 'dark' : 'light'
 }
+
+const languagesItems = computed(() => ([
+  { title: t('languages.english'), lang: 'en' },
+  { title: t('languages.french'), lang: 'fr' },
+]))
+
 </script>
 
 <i18n lang="yaml">
 en:
   home: Home
-  privacy: Privacy
+  settings: Settings
   contact: Contact
   languages:
+    title: Display language
     english: English
     french: French
 fr:
   home: Accueil
-  privacy: Confidentialité
+  settings: Paramètres
   contact: Contact
   languages:
+    title: Langue d'affichage
     english: English
     french: Français
 </i18n>

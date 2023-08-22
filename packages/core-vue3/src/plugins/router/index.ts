@@ -49,14 +49,12 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
           behavior: 'smooth',
           top: 48,
         }
-      } else if (savedPosition) {
-        return savedPosition
-      }
-      else {
+      } else {
         return {
           top: 0
         }
       }
+      // Note: no saved position here, as it works badly with transitions
     },
   })
 

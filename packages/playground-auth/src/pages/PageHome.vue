@@ -1,48 +1,76 @@
 <template>
-  <app-responsive class="text-center">
-    <home-welcome />
-    <home-messages />
-    <home-login v-if="!isAuthenticated" />
+  <app-responsive
+    :button="{
+      title: 'Go back',
+      color: 'warning',
+      icon: mdiRefresh,
+    }"
+    :links="[
+      { title: 'Privacy', to: { name: 'Privacy' } }
+    ]">
+    <template #prepend>
+      <v-row
+        justify="center">
+        <v-col
+          cols="12"
+          sm="9"
+          md="8"
+          lg="6"
+          class="text-center">
+          <v-img
+            :src="logoUrl"
+            :height="72"
+            class="mt-4" />
+          <h1 class="mt-4 text-h4 text-primary">
+            {{ t('title') }}
+          </h1>
+          <home-messages />
+        </v-col>
+      </v-row>
+    </template>
+    <div class="text-center">
+      <home-login v-if="!isAuthenticated" />
 
-    <p>{{ mapsStore.items }}</p>
-    <v-btn @click="fetchMaps">
-      Fetch maps
-    </v-btn>
-    <v-btn @click="createMarker">
-      Create marker
-    </v-btn>
-    <v-btn @click="editMarker">
-      Edit marker
-    </v-btn>
-    <p>Date: {{ d(stringDate) }}</p>
+      <p>{{ mapsStore.items }}</p>
+      <v-btn @click="fetchMaps">
+        Fetch maps
+      </v-btn>
+      <v-btn @click="createMarker">
+        Create marker
+      </v-btn>
+      <v-btn @click="editMarker">
+        Edit marker
+      </v-btn>
+      <p>Date: {{ d(stringDate) }}</p>
 
-    <v-btn @click="loading = !loading">
-      Toggle loading
-    </v-btn>
+      <v-btn @click="loading = !loading">
+        Toggle loading
+      </v-btn>
 
-    <v-select multiple />
-    <v-btn
-      :disabled="loading || !online"
-      color="primary"
-      @click="openDialog">
-      Open dialog
-    </v-btn>
+      <v-select multiple />
+      <v-btn
+        :disabled="loading || !online"
+        color="primary"
+        @click="openDialog">
+        Open dialog
+      </v-btn>
 
-    <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
-    <p>
-      Cognito user attributes
-    </p>
-    <p>
-      {{ attributes }}
-    </p>
+      <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
+      <p>
+        Cognito user attributes
+      </p>
+      <p>
+        {{ attributes }}
+      </p>
 
-    <v-divider class="my-4" />
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+      <v-divider class="my-4" />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div>
 
     <dialog-test v-model="dialog" />
   </app-responsive>
@@ -50,7 +78,7 @@
 
 <script setup lang="ts">
 import { AppResponsive } from '@amilochau/core-vue3/src/components'
-import HomeWelcome from '../components/home/HomeWelcome.vue'
+import { mdiRefresh } from '@mdi/js'
 import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
@@ -63,6 +91,7 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useFormat } from '../composition/format';
 import { ContactStatus } from '../types/contacts'
+import logoUrl from "@/assets/logo.png"
 
 const { d, t } = useI18n()
 usePage(computed(() => ({
@@ -124,3 +153,11 @@ fr:
   pageTitle: Accueil
   pageDescription: Page de test
 </i18n>
+
+<i18n lang="yaml">
+en:
+  title: Welcome!
+fr:
+  title: Bienvenue !
+</i18n>
+  

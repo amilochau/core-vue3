@@ -7,13 +7,21 @@
       justify="center">
       <v-col
         cols="12"
-        sm="6"
+        sm="9"
+        md="8"
+        lg="6"
         class="text-center">
         <h1 class="mt-4 text-h5 text-primary">
           {{ title }}
         </h1>
+        <p
+          v-if="description"
+          class="mb-4">
+          {{ description }}
+        </p>
       </v-col>
     </v-row>
+    <slot name="prepend" />
     <v-row
       :class="{ 'nx-n4': xs }"
       justify="center">
@@ -25,6 +33,31 @@
         <slot />
       </v-col>
     </v-row>
+    <v-row
+      v-if="button"
+      justify="center">
+      <v-col
+        cols="12"
+        sm="9"
+        md="8"
+        lg="6"
+        align="center">
+        <v-btn
+          :disabled="loading || !online"
+          :loading="loading"
+          :prepend-icon="button.icon"
+          :href="button.href"
+          target="_blank"
+          rel="noopener"
+          :color="button.color"
+          variant="tonal"
+          rounded
+          @click="button.onClick">
+          {{ button.title }}
+        </v-btn>
+      </v-col>
+    </v-row>
+    <slot name="append" />
     <v-row
       v-if="links && links.length"
       :class="{ 'nx-n4': xs }"
@@ -42,14 +75,28 @@
 </template>
 
 <script setup lang="ts">
+import { useOnline } from '@vueuse/core';
 import AppLinks from './AppLinks.vue';
 import { useDisplay } from 'vuetify';
+import { storeToRefs } from 'pinia';
+import { useAppStore } from '../../stores';
 
 defineProps<{
   title?: string,
+  description?: string,
   links?: any[],
   fillHeight?: boolean,
+  button?: {
+    title: string,
+    icon: string,
+    color: 'primary' | 'warning' | 'error',
+    onClick?: () => Promise<void>,
+    href?: string
+  },
 }>()
 
 const { xs } = useDisplay()
+const online = useOnline()
+const appStore = useAppStore()
+const { loading } = storeToRefs(appStore)
 </script>

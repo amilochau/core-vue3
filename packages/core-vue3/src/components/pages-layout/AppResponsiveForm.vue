@@ -1,8 +1,15 @@
 <template>
   <app-responsive
     :title="title"
+    :description="description"
     :links="links"
     :fill-height="fillHeight">
+    <template #prepend>
+      <slot name="prepend" />
+    </template>
+    <template #append>
+      <slot name="append" />
+    </template>
     <v-form
       ref="form"
       :readonly="loading">
@@ -40,6 +47,7 @@ import { useHandle } from '../../composition';
 
 const props = defineProps<{
   title?: string,
+  description?: string,
   button?: {
     title: string,
     icon: string,

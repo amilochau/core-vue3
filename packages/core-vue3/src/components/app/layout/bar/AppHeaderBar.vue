@@ -21,7 +21,7 @@
         :width="40"
         :class="{
           'ml-2': true,
-          'clickable-title': !!contentTo
+          'clickable': !!contentTo
         }"
         :to="contentTo" />
     </template>
@@ -29,7 +29,7 @@
       v-if="!contentMode || contentMode === 'title'"
       :class="{
         'ml-4': true,
-        'clickable-title': !!contentTo
+        'clickable': !!contentTo
       }"
       :to="contentTo">
       {{ title }}
@@ -89,9 +89,3 @@ const onBackButtonClick = async () => {
   }
 }
 </script>
-
-<style scoped>
-.clickable-title {
-  cursor: pointer;
-}
-</style>
