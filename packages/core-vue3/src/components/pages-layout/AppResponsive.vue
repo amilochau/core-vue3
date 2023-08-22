@@ -1,6 +1,6 @@
 <template>
   <v-container
-    :class="{ 'pt-1': xs, 'fill-height': fillHeight }">
+    :class="{ 'fill-height': fillHeight }">
     <v-row
       v-if="title && !xs"
       :class="{ 'nx-n4': xs }"
@@ -89,7 +89,7 @@ defineProps<{
   button?: {
     title: string,
     icon: string,
-    color: 'primary' | 'warning' | 'error',
+    color: 'primary' | 'success' | 'warning' | 'error',
     onClick?: () => Promise<void>,
     href?: string
   },

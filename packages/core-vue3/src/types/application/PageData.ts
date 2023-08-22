@@ -5,6 +5,7 @@ export type PageData = {
   description: string;
   noindex?: boolean;
   header?: {
+    title?: string;
     contentMode?: 'title' | 'img';
     contentTo?: RouteLocationRaw;
     buttonMode?: 'drawer' | 'back' | 'default-back';

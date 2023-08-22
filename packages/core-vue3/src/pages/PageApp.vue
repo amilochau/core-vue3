@@ -5,7 +5,7 @@
         <app-header-bar
           v-if="pageData.header"
           v-bind="pageData.header"
-          :title="pageData.title" />
+          :title="pageData.header?.title ?? pageData.title" />
       </v-expand-transition>
       <router-view />
       <v-expand-transition mode="out-in">

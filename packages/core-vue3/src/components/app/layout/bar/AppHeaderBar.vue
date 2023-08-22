@@ -58,7 +58,6 @@ const props = defineProps<{
   title?: string
   contentTo?: RouteLocationRaw
   buttonMode?: 'drawer' | 'back' | 'default-back'
-  backTo?: RouteLocationRaw
   defaultBackTo?: RouteLocationRaw
 }>()
 

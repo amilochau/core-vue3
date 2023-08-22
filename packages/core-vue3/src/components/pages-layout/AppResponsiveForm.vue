@@ -51,7 +51,7 @@ const props = defineProps<{
   button?: {
     title: string,
     icon: string,
-    color: 'primary' | 'warning' | 'error',
+    color: 'primary' | 'success' | 'warning' | 'error',
     onClick: () => Promise<void>,
   },
   links?: any[],
