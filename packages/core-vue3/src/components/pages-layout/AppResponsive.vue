@@ -1,6 +1,6 @@
 <template>
   <v-container
-    :class="{ 'py-1': xs, 'fill-height': fillHeight }">
+    :class="{ 'pt-1': xs, 'fill-height': fillHeight }">
     <v-row
       v-if="title && !xs"
       :class="{ 'nx-n4': xs }"

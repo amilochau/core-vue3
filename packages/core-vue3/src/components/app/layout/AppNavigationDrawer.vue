@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="navigationOptions.items"
     v-model="appStore.drawer"
     app
     temporary>

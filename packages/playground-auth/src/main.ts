@@ -1,6 +1,6 @@
-import { CoreVue3Auth } from '@amilochau/core-vue3-auth'
+import { createCoreVue3AuthApp } from '@amilochau/core-vue3-auth'
 import { coreOptions } from './data/config'
 
 import 'vuetify/styles'
 
-export const createApp = await CoreVue3Auth(coreOptions)();
+export const coreVue3App = await createCoreVue3AuthApp(coreOptions);

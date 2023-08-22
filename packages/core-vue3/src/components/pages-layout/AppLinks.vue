@@ -1,5 +1,5 @@
 <template>
-  <v-divider />
+  <v-divider class="mb-2" />
   <v-list
     :items="enhancedLinks"
     :lines="false"

@@ -3,7 +3,7 @@
     :title="t('title')"
     :links="links">
     <v-card
-      class="mx-2"
+      class="mx-2 mt-4"
       elevation="2">
       <v-card-text class="pb-0">
         <card-section-title

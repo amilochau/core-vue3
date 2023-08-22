@@ -65,7 +65,7 @@ usePage(computed(() => ({
         link: 'https://github.com/amilochau/core-vue3'
       }
     ]
-  }
+  },
 })))
 const mapsStore = useMapsStore()
 const mapsApi = useMapsApi()
