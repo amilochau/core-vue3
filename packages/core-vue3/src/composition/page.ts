@@ -11,9 +11,7 @@ export const usePage = (pageData: ComputedRef<PageData>) => {
   const appStore = useAppStore()
 
   watch(pageData, () => {
-    appStore.$patch({
-      pageData: pageData.value,
-    })
+    appStore.pageData = pageData.value
   }, { immediate: true, deep: true })
 
   const appTitle = computed(() => coreOptions.i18n.messages[locale.value].appTitle)

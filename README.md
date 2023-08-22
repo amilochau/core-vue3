@@ -86,23 +86,23 @@ export const coreOptions: MilochauCoreOptions = {
 Register `amilochau/core-vue3` in your main file:
 
 ```typescript
-import { CoreVue3 } from '@amilochau/core-vue3'
+import { createCoreVue3App } from '@amilochau/core-vue3'
 import { coreOptions } from './data/config'
 
 import 'vuetify/styles'
 
-export const createApp = await CoreVue3(App, coreOptions)();
+export const coreVue3App = await createCoreVue3App(App, coreOptions);
 ```
 
 If you want to use authentication, register `amilochau/core-vue3-auth` in your main file:
 
 ```typescript
-import { CoreVue3Auth } from '@amilochau/core-vue3-auth'
+import { createCoreVue3AuthApp } from '@amilochau/core-vue3-auth'
 import { coreOptions } from './data/config'
 
 import 'vuetify/styles'
 
-export const createApp = await CoreVue3Auth(coreOptions)();
+export const coreVue3App = await createCoreVue3AuthApp(coreOptions);
 ```
 
 ---

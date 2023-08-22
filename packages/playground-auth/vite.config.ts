@@ -40,7 +40,8 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: [
-      "@aws-amplify/auth"
+      "@aws-amplify/auth",
+      'vue-router'
     ]
   },
   esbuild: {
