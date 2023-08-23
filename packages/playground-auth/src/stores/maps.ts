@@ -11,7 +11,7 @@ const getDefaultState = () => {
   }
 }
 
-export const useStore = defineStore('maps', {
+export const useMapsStore = defineStore('maps', {
   state: getDefaultState,
   getters: {},
   actions: {

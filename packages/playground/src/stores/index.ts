@@ -1,4 +1,4 @@
-import { useStore as useMapsStore } from './maps'
+import { useMapsStore } from './maps'
 
 export {
   useMapsStore,
