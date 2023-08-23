@@ -77,13 +77,14 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsive } from '@amilochau/core-vue3/src/components'
+import { AppResponsive } from '@amilochau/core-vue3/components'
 import { mdiRefresh } from '@mdi/js'
 import HomeLogin from '../components/home/HomeLogin.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useAppStore, useHandle, useIdentityStore, usePage } from '@amilochau/core-vue3';
+import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useHandle, usePage } from '@amilochau/core-vue3/composition';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
@@ -160,4 +161,3 @@ en:
 fr:
   title: Bienvenue !
 </i18n>
-  

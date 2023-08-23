@@ -2,7 +2,9 @@ import { type EditPassword, type ConfirmEmail, type ForgotPassword, type Login, 
 import { Auth } from '@aws-amplify/auth';
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
-import { ApplicationMessage, useCoreOptions, useIdentityStore } from '@amilochau/core-vue3';
+import { ApplicationMessage } from '@amilochau/core-vue3/types';
+import { useCoreOptions } from '@amilochau/core-vue3/composition';
+import { useIdentityStore } from '@amilochau/core-vue3/stores';
 
 export const useCognito = () => {
 

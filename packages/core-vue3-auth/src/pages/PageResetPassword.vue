@@ -64,14 +64,15 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiLockOutline, mdiLockReset, mdiAt, mdiLock, mdiNumeric } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
 import { computed, ref, type Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { ResetPassword } from '../types';
-import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
+import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n()
 usePage(computed(() => ({

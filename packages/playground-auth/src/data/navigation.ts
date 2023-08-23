@@ -1,4 +1,4 @@
-import { useIdentityStore } from '@amilochau/core-vue3'
+import { useIdentityStore } from '@amilochau/core-vue3/stores'
 import { mdiHome, mdiCogOutline, mdiCardAccountDetailsOutline, mdiPower, mdiChatOutline, mdiOpenInNew } from '@mdi/js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'

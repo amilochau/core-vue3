@@ -5,7 +5,7 @@ import type { MilochauCoreOptions } from '../types/options'
 import { createVuetify } from 'vuetify'
 import { en, fr } from 'vuetify/locale'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import type { VuetifyOptions } from 'vuetify/framework'
+import type { VuetifyOptions } from 'vuetify'
 
 export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   const defaultVuetifyOptions: VuetifyOptions = {
@@ -39,4 +39,4 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   app.use(vuetify)
 
   return vuetify
-} 
+}

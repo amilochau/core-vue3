@@ -16,13 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiCardAccountDetailsOutline, mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit, mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useAppStore, useClean, useIdentityStore, usePage } from '@amilochau/core-vue3';
+import { usePage, useClean } from '@amilochau/core-vue3/composition';
+import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n()
 usePage(computed(() => ({

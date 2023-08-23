@@ -6,7 +6,6 @@
     "src/**/*.vue"
   ],
   "compilerOptions": {
-    "moduleResolution": "node",
     "baseUrl": "."
   },
   "references": [

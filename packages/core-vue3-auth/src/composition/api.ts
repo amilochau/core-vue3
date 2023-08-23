@@ -2,7 +2,9 @@ import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from "@mdi
 import { useRouter } from "vue-router"
 import { useCognito } from './cognito'
 import { useI18n } from 'vue-i18n'
-import { useCoreOptions, useLanguageStore, type IHttpSettings, type IProblemDetails, ApplicationMessage } from "@amilochau/core-vue3"
+import { type IHttpSettings, type IProblemDetails, ApplicationMessage } from "@amilochau/core-vue3/types"
+import { useCoreOptions, } from "@amilochau/core-vue3/composition"
+import { useLanguageStore, } from "@amilochau/core-vue3/stores"
 
 export const useApi = (relativeBaseUri: string) => {
 

@@ -1,7 +1,8 @@
 import type { App } from 'vue'
 import type { Router } from 'vue-router'
 import type { Pinia } from 'pinia'
-import { createCoreVue3App, type MilochauCoreOptions } from '@amilochau/core-vue3'
+import { createCoreVue3App } from '@amilochau/core-vue3'
+import { type MilochauCoreOptions } from '@amilochau/core-vue3/types'
 
 import cognito from './plugins/cognito'
 import routes from './data/routes'
@@ -16,6 +17,3 @@ export const createCoreVue3AuthApp = (
     fn?.(context);
   })
 }
-
-export * from './composition'
-export * from './types'

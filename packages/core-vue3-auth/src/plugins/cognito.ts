@@ -1,4 +1,4 @@
-import type { MilochauCoreOptions } from "@amilochau/core-vue3"
+import { type MilochauCoreOptions } from "@amilochau/core-vue3/types"
 import { Auth } from "@aws-amplify/auth"
 import type { App } from "vue"
 

@@ -29,14 +29,15 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiLockOutline, mdiLockReset, mdiAt } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
 import { computed, ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { ForgotPassword } from "../types"
-import { useAppStore, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3';
+import { useAppStore } from '@amilochau/core-vue3/stores';
+import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n()
 usePage(computed(() => ({

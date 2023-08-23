@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useAppStore } from '@amilochau/core-vue3';
+import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const appStore = useAppStore()
 const { homeMessages } = storeToRefs(appStore)

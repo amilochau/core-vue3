@@ -1,4 +1,4 @@
-import type { FormattedData } from '@amilochau/core-vue3'
+import { type FormattedData } from '@amilochau/core-vue3/types'
 import { mdiAccountClock, mdiAlertCircle, mdiArchive } from '@mdi/js'
 import { useI18n } from 'vue-i18n'
 import { ContactStatus } from '../types/contacts'

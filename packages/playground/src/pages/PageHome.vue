@@ -39,12 +39,13 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsive } from '@amilochau/core-vue3/src/components'
+import { AppResponsive } from '@amilochau/core-vue3/components'
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
-import { useAppStore, useHandle, usePage } from '@amilochau/core-vue3';
+import { useAppStore } from '@amilochau/core-vue3/stores';
+import { useHandle, usePage } from '@amilochau/core-vue3/composition';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';

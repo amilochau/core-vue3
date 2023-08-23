@@ -52,13 +52,14 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiLockOutline, mdiLockReset, mdiLockClock, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
 import { computed, ref, type Ref } from 'vue';
 import type { EditPassword } from '../types';
-import { useAppStore, useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3';
+import { useAppStore } from '@amilochau/core-vue3/stores';
+import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n()
 usePage(computed(() => ({

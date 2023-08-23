@@ -18,7 +18,7 @@ export const createCoreVue3App = async (
   fn?: (context: { app: App, pinia: Pinia, router: Router }) => Promise<any>,
 ) => {
   const app = createApp(PageApp);
-  
+
   app.provide('core-options', options)
 
   const i18n = registerI18n(app, options)
@@ -34,11 +34,11 @@ export const createCoreVue3App = async (
   router.onError(console.error)
 
   app.use(router);
-  
+
   // wait until page component is fetched before mounting
   await router.isReady()
   app.mount("#app", true)
-  
+
   return {
     app,
     head,
@@ -48,7 +48,3 @@ export const createCoreVue3App = async (
     vuetify,
   }
 }
-
-export * from './composition'
-export * from './stores'
-export * from './types'

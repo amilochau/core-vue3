@@ -41,14 +41,15 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/src/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiCardAccountDetailsOutline, mdiAccountOff, mdiAt, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
 import { computed, ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { Login } from '../types';
-import { useAppStore, useClean, useHandle, useIdentityStore, usePage, useValidationRules } from '@amilochau/core-vue3';
+import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useClean, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n()
 usePage(computed(() => ({

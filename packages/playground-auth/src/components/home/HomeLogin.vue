@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '@amilochau/core-vue3';
+import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n()
 const appStore = useAppStore()

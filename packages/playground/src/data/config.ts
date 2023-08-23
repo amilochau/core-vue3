@@ -1,9 +1,8 @@
-import type { MilochauCoreOptions } from "@amilochau/core-vue3"
+import { type MilochauCoreOptions } from "@amilochau/core-vue3/types"
 import { getConfig, getCurrentEnvironment } from "../utils/config"
 import routes from "./routes"
 import { useMapsStore } from "../stores"
 import navigation from "./navigation"
-import { ref } from 'vue'
 import logoUrl from "@/assets/logo.png"
 
 export enum Environment {

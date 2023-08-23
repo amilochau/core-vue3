@@ -51,9 +51,11 @@ import { mdiAlert, mdiPlus } from "@mdi/js"
 import { storeToRefs } from 'pinia';
 import { ref, watch } from "vue";
 import type { Ref } from "vue";
-import { CardActions, CardMessages, CardTitleClosable } from "@amilochau/core-vue3/src/components"
+import { CardActions, CardMessages, CardTitleClosable } from "@amilochau/core-vue3/components"
 import { MapsCreateRequest } from "../../types/maps";
-import { ApplicationMessage, useAppStore, useHandle, useValidationRules } from "@amilochau/core-vue3";
+import { ApplicationMessage } from "@amilochau/core-vue3/types";
+import { useAppStore } from "@amilochau/core-vue3/stores";
+import { useHandle, useValidationRules } from "@amilochau/core-vue3/composition";
 import { useDisplay } from "vuetify";
 import { useI18n } from "vue-i18n";
 
