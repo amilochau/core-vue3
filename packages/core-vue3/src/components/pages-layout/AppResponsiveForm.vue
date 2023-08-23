@@ -77,4 +77,10 @@ const onButtonClick = async () => {
 
   await props.button.onClick()
 }
+
+defineExpose({
+  reset: () => form.value!.reset(),
+  resetValidation: () => form.value!.resetValidation(),
+  validate: () => form.value!.validate(),
+})
 </script>
