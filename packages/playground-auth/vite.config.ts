@@ -43,10 +43,5 @@ export default defineConfig({
       "@aws-amplify/auth",
       'vue-router'
     ]
-  },
-  esbuild: {
-    supported: {
-      'top-level-await': true // Used to enable await in main.ts
-    }
   }
 })

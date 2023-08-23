@@ -3,4 +3,4 @@ import { coreOptions } from './data/config'
 
 import 'vuetify/styles'
 
-export const coreVue3App = await createCoreVue3AuthApp(coreOptions);
+export const coreVue3App = createCoreVue3AuthApp(coreOptions);
