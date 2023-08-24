@@ -1,6 +1,6 @@
 <template>
   <v-card-item class="bg-primary py-1">
-    <v-card-title class="multi-line">
+    <v-card-title>
       {{ title }}
     </v-card-title>
     <template #append>

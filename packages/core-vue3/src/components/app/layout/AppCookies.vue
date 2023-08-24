@@ -7,24 +7,27 @@
     <v-icon
       color="white"
       :icon="mdiCookie" />
-    <span class="mx-4 nowrap cookies-title">{{ t('title') }}</span>
+    <span class="mx-4 mb-2 nowrap cookies-title">{{ t('title') }}</span>
     <template #extension>
       <v-spacer />
       <v-btn
+        :to="{ name: 'Privacy' }"
         class="bg-info mr-1"
         variant="text"
-        :to="{ name: 'Privacy' }">
+        rounded>
         {{ t('read') }}
       </v-btn>
       <v-btn
         class="bg-success mr-1"
         variant="text"
+        rounded
         @click="cookiesStore.acceptCookies">
         {{ t('accept') }}
       </v-btn>
       <v-btn
         class="bg-error mr-1"
         variant="text"
+        rounded
         @click="cookiesStore.refuseCookies">
         {{ t('refuse') }}
       </v-btn>

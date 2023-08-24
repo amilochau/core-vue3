@@ -27,6 +27,7 @@
           <v-btn
             variant="text"
             class="fill-height"
+            rounded
             @click="display = false">
             {{ t('close') }}
           </v-btn>

@@ -30,6 +30,23 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         en,
         fr
       }
+    },
+    defaults: {
+      VCardTitle: {
+        class: 'multi-line'
+      },
+      VCardSubtitle: {
+        class: 'multi-line'
+      },
+      VListItemTitle: {
+        class: 'multi-line',
+      },
+      VListItemSubtitle: {
+        class: 'multi-line'
+      },
+      VListSubheader: {
+        class: 'multi-line'
+      }
     }
   }
 
