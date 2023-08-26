@@ -133,7 +133,7 @@ en:
   links:
     privacy:
       title: Privacy policy
-      subtitle: Read the privacy policy to understand which data we use, and why
+      subtitle: Read the privacy policy to understand which data we use, and why.
 fr:
   title: Paramètres
   languages:
@@ -150,5 +150,5 @@ fr:
   links:
     privacy:
       title: Politique de confidentialité
-      subtitle: Lisez la politique de confidentialité, pour comprendre quelles données nous utilisons, et pourquoi
+      subtitle: Lisez la politique de confidentialité, pour comprendre quelles données nous utilisons, et pourquoi.
 </i18n>
