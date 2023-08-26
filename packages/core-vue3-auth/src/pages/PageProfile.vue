@@ -89,16 +89,16 @@ en:
   links:
     editProfile:
       title: Edit your profile
-      subtitle: Change your account information
+      subtitle: Change your account information.
     editPassword:
       title: Edit password
-      subtitle: Change your password when you want
+      subtitle: Change your password when you want.
     logout:
       title: Logout
-      subtitle: Logout to remove your personal data from this device
+      subtitle: Logout to remove your personal data from this device.
     deleteAccount:
       title: Delete account
-      subtitle: Remove your personal data by permanently deleting your account
+      subtitle: Remove your personal data by permanently deleting your account.
 fr:
   title: Profil
   profileSection:
@@ -106,14 +106,14 @@ fr:
   links:
     editProfile:
       title: Modifier votre profil
-      subtitle: Mettez à jour les informations de votre compte
+      subtitle: Mettez à jour les informations de votre compte.
     editPassword:
       title: Modifier votre mot de passe
-      subtitle: Changez de mot de passe à tout moment
+      subtitle: Changez de mot de passe à tout moment.
     logout:
       title: Se déconnecter
-      subtitle: Déconnectez-vous pour supprimer vos informations personnelles de cet appareil
+      subtitle: Déconnectez-vous pour supprimer vos informations personnelles de cet appareil.
     deleteAccount:
       title: Supprimer votre compte
-      subtitle: Supprimez vos informations personnelles en détruisant définitivement votre compte
+      subtitle: Supprimez vos informations personnelles en détruisant définitivement votre compte.
 </i18n>
