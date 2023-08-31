@@ -24,6 +24,7 @@
           'clickable': !!contentTo
         }"
         :to="contentTo" />
+      <slot name="prepend" />
     </template>
     <v-app-bar-title
       v-if="!contentMode || contentMode === 'title'"
@@ -36,6 +37,7 @@
     </v-app-bar-title>
     <app-progress-bar :lazy-delay="200" />
     <template #append>
+      <slot name="append" />
       <app-offline />
       <app-login-btn />
     </template>
