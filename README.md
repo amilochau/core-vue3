@@ -28,6 +28,7 @@
 - Internationalization, light/dark themes
 - Forms validation helpers
 - Identity integration with AWS Cognito, using `amilochau/core-vue3-auth`
+- PWA native support, with update button
 
 ## Usage
 
@@ -114,7 +115,8 @@ The following plugins are installed by `@amilochau/core-vue3`:
 - `vue-i18n`
 - `vue-router`
 - `vuetify`
-- 
+- `vite-plugin-pwa`
+
 The following plugin is installed by `@amilochau/core-vue3-auth`:
 - `@aws-amplify/auth`
 
@@ -145,6 +147,7 @@ Here are the `pinia` stores you can use from your code.
 | `identity` | `useIdentityStore` | Lets you display data from the current user |
 | `language` | `useLanguageStore` | Lets you know the current language configured for the UI |
 | `theme` | `useThemeStore` | Lets you know the current theme configured for the UI |
+| `pwa` | `usePwaStore` | Lets you manage the PWA application updates |
 
 ## Options
 

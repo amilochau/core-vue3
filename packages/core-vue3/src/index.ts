@@ -8,6 +8,8 @@ import { registerHead } from './plugins/head'
 import { registerVuetify } from './plugins/vuetify'
 import { registerPinia } from './plugins/pinia'
 import { registerRouter } from './plugins/router'
+import { registerPwa } from './plugins/pwa'
+
 import PageApp from './pages/PageApp.vue'
 
 // Styles
@@ -37,6 +39,10 @@ export const createCoreVue3App = async (
 
   // wait until page component is fetched before mounting
   await router.isReady()
+
+  // We use router in service worker definition, so router must be ready
+  registerPwa({ router })
+
   app.mount("#app", true)
 
   return {

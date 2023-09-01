@@ -6,7 +6,10 @@
     "src/**/*.vue"
   ],
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": [
+      "vite-plugin-pwa/client"
+    ]
   },
   "references": [
     {

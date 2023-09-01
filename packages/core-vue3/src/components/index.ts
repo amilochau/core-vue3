@@ -7,7 +7,6 @@ import CardSectionTitle from "./cards/CardSectionTitle.vue"
 import CardTitleClosable from "./cards/CardTitleClosable.vue"
 import FieldAutocomplete from "./fields/FieldAutocomplete.vue"
 import FieldColorBullets from "./fields/FieldColorBullets.vue"
-import FieldColorInput from "./fields/FieldColorInput.vue"
 import FieldSelect from "./fields/FieldSelect.vue"
 import AppForm from './pages-layout/AppForm.vue'
 import AppLinks from './pages-layout/AppLinks.vue'
@@ -24,7 +23,6 @@ export {
   CardTitleClosable,
   FieldAutocomplete,
   FieldColorBullets,
-  FieldColorInput,
   FieldSelect,
   AppForm,
   AppLinks,

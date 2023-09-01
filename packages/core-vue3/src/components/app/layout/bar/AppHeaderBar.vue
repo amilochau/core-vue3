@@ -38,6 +38,7 @@
     <app-progress-bar :lazy-delay="200" />
     <template #append>
       <slot name="append" />
+      <app-update-pwa />
       <app-offline />
       <app-login-btn />
     </template>
@@ -48,6 +49,7 @@
 import { mdiArrowLeft } from '@mdi/js';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
+import AppUpdatePwa from './AppUpdatePwa.vue'
 import AppProgressBar from '../AppProgressBar.vue'
 import { useAppStore } from '../../../../stores';
 import { useCoreOptions, useNavigation } from '../../../../composition';
