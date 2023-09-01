@@ -28,11 +28,34 @@ export const registerPwa = (context: { router: Router }) => {
     immediate: true, // Automatic page reload
   })
 
+  let registration: ServiceWorkerRegistration | undefined
   context.router.beforeEach(async (to, from) => {
     if (to.path !== from.path) {
-      navigator.serviceWorker?.getRegistration().then(registration => {
-        registration?.update()
+      // Update registration (get latest data to know if we have to update)
+      navigator.serviceWorker?.getRegistration().then(r => {
+        registration = r
+        r?.update()
       })
+
+      // If we have to update: update on page change
+      if (registration?.active && registration?.waiting) {
+        pwaStore.loading = true
+        pwaStore.display = true
+        const promise = new Promise<void>(resolve => {
+          registration!.waiting?.addEventListener('statechange', e => {
+            const sw = e.target as ServiceWorker
+            console.log('SW state change:', sw.state)
+            if (sw.state === 'activated') {
+              window.location.pathname = to.fullPath
+              resolve()
+            } else if (sw.state === 'redundant') {
+              resolve()
+            }
+          })
+        })
+        await messageSW(registration.waiting, { type: 'SKIP_WAITING' })
+        await promise
+      }
     }
   })
 }
