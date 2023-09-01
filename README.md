@@ -28,6 +28,7 @@
 - Internationalization, light/dark themes
 - Forms validation helpers
 - Identity integration with AWS Cognito, using `amilochau/core-vue3-auth`
+- PWA native support, with update button
 
 ## Usage
 
@@ -114,7 +115,8 @@ The following plugins are installed by `@amilochau/core-vue3`:
 - `vue-i18n`
 - `vue-router`
 - `vuetify`
-- 
+- `vite-plugin-pwa`
+
 The following plugin is installed by `@amilochau/core-vue3-auth`:
 - `@aws-amplify/auth`
 
@@ -163,7 +165,6 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `identity.cognito` | Cognito settings for authentication |
 | `routes` | List of `vue-router` routes, to register application pages |
 | `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
-| `pwa.enabled` | Whether the current application registers service workers |
 
 See the full definition of options [here](/packages/core-vue3/src/types/options.ts).
 

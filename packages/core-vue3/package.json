@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3",
-  "version": "0.7.0",
+  "version": "0.8.0-beta.1",
   "description": "Core plugin for vue.js (v3) projects",
   "author": "Antoine Milochau",
   "license": "MIT",

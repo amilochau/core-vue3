@@ -27,9 +27,6 @@ export type MilochauCoreOptions = {
   },
   routes: Array<RouteRecordRaw>,
   clean: () => () => void,
-  pwa?: {
-    enabled: boolean,
-  },
 }
 
 export type MilochauCoreOptionsMessages = {
