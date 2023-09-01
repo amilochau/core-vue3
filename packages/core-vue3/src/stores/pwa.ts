@@ -22,7 +22,4 @@ export const usePwaStore = defineStore('pwa', {
       this.updateSW?.(true)
     },
   },
-  persist: {
-    storage: 'localStorage',
-  },
 })
