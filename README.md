@@ -145,6 +145,7 @@ Here are the `pinia` stores you can use from your code.
 | `identity` | `useIdentityStore` | Lets you display data from the current user |
 | `language` | `useLanguageStore` | Lets you know the current language configured for the UI |
 | `theme` | `useThemeStore` | Lets you know the current theme configured for the UI |
+| `pwa` | `usePwaStore` | Lets you manage the PWA application updates |
 
 ## Options
 
@@ -162,6 +163,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `identity.cognito` | Cognito settings for authentication |
 | `routes` | List of `vue-router` routes, to register application pages |
 | `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
+| `pwa.enabled` | Whether the current application registers service workers |
 
 See the full definition of options [here](/packages/core-vue3/src/types/options.ts).
 
