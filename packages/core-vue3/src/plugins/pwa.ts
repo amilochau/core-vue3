@@ -46,7 +46,7 @@ export const registerPwa = (context: { router: Router }) => {
       // If we have to update: update on page change
       if (registration?.active && registration?.waiting) {
         pwaStore.updateLoading = true
-        pwaStore.upsateDisplay = true
+        pwaStore.updateDisplay = true
         const promise = new Promise<void>(resolve => {
           registration!.waiting?.addEventListener('statechange', e => {
             const sw = e.target as ServiceWorker
