@@ -19,7 +19,6 @@ export const usePwaStore = defineStore('pwa', {
       this.installPrompt?.()
     },
     update() {
-      this.updateDisplay = false
       this.updateLoading = true
       this.updateSW?.(true)
     },
