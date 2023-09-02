@@ -15,6 +15,12 @@ const messageSW = (serviceWorker: ServiceWorker, data: {}): Promise<any> => {
 export const registerPwa = (context: { router: Router }) => {
   const pwaStore = usePwaStore()
 
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault() // Don't let the default prompt go
+    pwaStore.installDisplay = true
+    pwaStore.installPrompt = e.prompt
+  })
+
   pwaStore.updateSW = registerSW({
     async onNeedRefresh() {
       const registration = await navigator.serviceWorker?.getRegistration()
@@ -23,7 +29,7 @@ export const registerPwa = (context: { router: Router }) => {
         await messageSW(registration.waiting, { type: 'SET_MANIFEST', manifest })
       }
 
-      pwaStore.display = true
+      pwaStore.updateDisplay = true
     },
     immediate: true, // Automatic page reload
   })
@@ -39,8 +45,8 @@ export const registerPwa = (context: { router: Router }) => {
 
       // If we have to update: update on page change
       if (registration?.active && registration?.waiting) {
-        pwaStore.loading = true
-        pwaStore.display = true
+        pwaStore.updateLoading = true
+        pwaStore.upsateDisplay = true
         const promise = new Promise<void>(resolve => {
           registration!.waiting?.addEventListener('statechange', e => {
             const sw = e.target as ServiceWorker
