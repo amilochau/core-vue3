@@ -15,7 +15,7 @@ const messageSW = (serviceWorker: ServiceWorker, data: {}): Promise<any> => {
 export const registerPwa = (context: { router: Router }) => {
   const pwaStore = usePwaStore()
 
-  window.addEventListener('beforeinstallprompt', (e) => {
+  window.addEventListener('beforeinstallprompt', (e: any /*BeforeInstallPromptEvent */) => {
     e.preventDefault() // Don't let the default prompt go
     pwaStore.installDisplay = true
     pwaStore.installPrompt = e.prompt

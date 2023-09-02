@@ -33,7 +33,7 @@ const { updateDisplay, updateLoading } = storeToRefs(pwaStore)
 
 <i18n lang="yaml">
 en:
-  title: You can update this page to have the latests available content!
+  title: You can update this application!
 fr:
-  title: Vous pouvez mettre à jour cette page pour avoir le dernier contenu disponible !
+  title: Vous pouvez mettre à jour cette application !
 </i18n>
