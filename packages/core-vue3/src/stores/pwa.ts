@@ -2,10 +2,10 @@ import { defineStore } from 'pinia'
 
 interface PwaStoreState {
   installDisplay: boolean,
-  installPrompt?: () => void,
+  installPromptEvent?: any,
   updateDisplay: boolean,
   updateLoading: boolean,
-  updateSW? : (reload?: boolean) => void, 
+  updateSW? : (reload?: boolean) => void,
 }
 
 export const usePwaStore = defineStore('pwa', {
@@ -16,7 +16,7 @@ export const usePwaStore = defineStore('pwa', {
   }),
   actions: {
     install() {
-      this.installPrompt?.()
+      this.installPromptEvent?.prompt()
     },
     update() {
       this.updateLoading = true

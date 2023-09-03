@@ -3,7 +3,7 @@
     <template #activator="{ props: tooltip }">
       <v-scroll-y-reverse-transition mode="out-in">
         <v-btn
-          v-if="installDisplay"
+          v-if="installDisplay && !isInstalled"
           v-bind="tooltip"
           :disabled="loading || !online"
           :icon="mdiDownload"
@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { mdiDownload } from '@mdi/js'
-import { useOnline } from '@vueuse/core'
+import { useMediaQuery, useOnline } from '@vueuse/core'
 import { useI18n } from 'vue-i18n';
 import { useAppStore, usePwaStore } from '../../../../stores'
 import { storeToRefs } from 'pinia'
@@ -29,6 +29,8 @@ const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 const pwaStore = usePwaStore()
 const { installDisplay } = storeToRefs(pwaStore)
+
+const isInstalled = useMediaQuery('(display-mode: standalone)')
 </script>
 
 <i18n lang="yaml">

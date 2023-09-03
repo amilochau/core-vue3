@@ -18,7 +18,7 @@ export const registerPwa = (context: { router: Router }) => {
   window.addEventListener('beforeinstallprompt', (e: any /*BeforeInstallPromptEvent */) => {
     e.preventDefault() // Don't let the default prompt go
     pwaStore.installDisplay = true
-    pwaStore.installPrompt = e.prompt
+    pwaStore.installPromptEvent = e
   })
 
   pwaStore.updateSW = registerSW({
