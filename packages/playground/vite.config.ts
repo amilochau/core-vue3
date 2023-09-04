@@ -49,7 +49,6 @@ export default defineConfig({
           dontCacheBustURLsMatching: /assets\/.+-[A-Za-z0-9]{8}\.(js|css|png)$/, // To reduce bandwidth consumed by precaching with assets uniquely versioned via their URL
           maximumFileSizeToCacheInBytes: 24 * 1024 ** 2, // To avoid precaching too large files
       },
-      minify: false, // Only for tests purpuse
       manifest: {
         name: 'core-vue3 - Playground',
         description: 'Test @amilochau/core-vue3',
@@ -68,7 +67,6 @@ export default defineConfig({
           },
         ]
       },
-      //// Nothing else
       devOptions: {
         enabled: true
       },
