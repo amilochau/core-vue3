@@ -165,6 +165,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `identity.cognito` | Cognito settings for authentication |
 | `routes` | List of `vue-router` routes, to register application pages |
 | `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
+| `pwa.hideInstallBtn` | Hide the PWA install button from the header bar |
 
 See the full definition of options [here](/packages/core-vue3/src/types/options.ts).
 

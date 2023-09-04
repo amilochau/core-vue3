@@ -27,6 +27,9 @@ export type MilochauCoreOptions = {
   },
   routes: Array<RouteRecordRaw>,
   clean: () => () => void,
+  pwa?: {
+    hideInstallBtn: boolean,
+  }
 }
 
 export type MilochauCoreOptionsMessages = {
