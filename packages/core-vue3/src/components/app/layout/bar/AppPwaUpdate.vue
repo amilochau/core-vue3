@@ -3,9 +3,9 @@
     <template #activator="{ props: tooltip }">
       <v-scroll-y-reverse-transition mode="out-in">
         <v-btn
-          v-if="display"
+          v-if="updateDisplay"
           v-bind="tooltip"
-          :disabled="loading || !online"
+          :disabled="updateLoading || loading || !online"
           :icon="mdiUpdate"
           :loading="loading"
           color="primary"
@@ -20,18 +20,20 @@
 import { mdiUpdate } from '@mdi/js'
 import { useOnline } from '@vueuse/core'
 import { useI18n } from 'vue-i18n';
-import { usePwaStore } from '../../../../stores'
+import { useAppStore, usePwaStore } from '../../../../stores'
 import { storeToRefs } from 'pinia'
 
 const { t } = useI18n()
 const online = useOnline()
+const appStore = useAppStore()
+const { loading } = storeToRefs(appStore)
 const pwaStore = usePwaStore()
-const { display, loading } = storeToRefs(pwaStore)
+const { updateDisplay, updateLoading } = storeToRefs(pwaStore)
 </script>
 
 <i18n lang="yaml">
 en:
-  title: You can update this page to have the latests available content!
+  title: You can update this application!
 fr:
-  title: Vous pouvez mettre à jour cette page pour avoir le dernier contenu disponible !
+  title: Vous pouvez mettre à jour cette application !
 </i18n>
