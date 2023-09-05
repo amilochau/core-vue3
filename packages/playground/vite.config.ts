@@ -105,6 +105,9 @@ export default defineConfig({
   optimizeDeps: {
     include:[
       'vue-router'
+    ],
+    exclude: [
+      'virtual:pwa-register'
     ]
   }
 })

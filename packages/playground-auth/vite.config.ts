@@ -106,6 +106,9 @@ export default defineConfig({
     include: [
       "@aws-amplify/auth",
       'vue-router'
+    ],
+    exclude: [
+      'virtual:pwa-register'
     ]
   }
 })
