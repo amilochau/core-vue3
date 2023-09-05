@@ -1,5 +1,4 @@
 import { usePwaStore } from '../stores'
-import { registerSW } from 'virtual:pwa-register'
 import { type Router } from 'vue-router'
 
 const messageSW = (serviceWorker: ServiceWorker, data: {}): Promise<any> => {
@@ -12,7 +11,9 @@ const messageSW = (serviceWorker: ServiceWorker, data: {}): Promise<any> => {
   })
 }
 
-export const registerPwa = (context: { router: Router }) => {
+export const registerPwa = async (context: { router: Router }) => {
+  const { registerSW } = await import('virtual:pwa-register')
+
   const pwaStore = usePwaStore()
 
   window.addEventListener('beforeinstallprompt', (e: any /*BeforeInstallPromptEvent */) => {

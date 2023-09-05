@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3",
-  "version": "0.8.0-beta.3",
+  "version": "0.8.0-beta.4",
   "description": "Core plugin for vue.js (v3) projects",
   "author": "Antoine Milochau",
   "license": "MIT",
@@ -41,7 +41,7 @@
     "./types": "./src/types/index.ts"
   },
   "dependencies": {
-    "@intlify/unplugin-vue-i18n": "^0.12.3",
+    "@intlify/unplugin-vue-i18n": "^1.0.1",
     "@mdi/js": "^7.2.96",
     "@tsconfig/node18": "^18.2.1",
     "@types/node": "^18.17.9",
@@ -63,7 +63,7 @@
     "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.3.4",
     "vue-cli-plugin-vuetify": "^2.5.8",
-    "vue-i18n": "9.3.0-beta.26",
+    "vue-i18n": "^9.3.0",
     "vue-router": "^4.2.4",
     "vue-tsc": "^1.8.8",
     "vuetify": "^3.3.14"
