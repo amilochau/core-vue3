@@ -41,7 +41,7 @@ export const createCoreVue3App = async (
   await router.isReady()
 
   // We use router in service worker definition, so router must be ready
-  await registerPwa({ router })
+  registerPwa({ router })
 
   app.mount("#app", true)
 
