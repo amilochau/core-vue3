@@ -19,6 +19,7 @@
       <v-select multiple />
       <v-btn
         :disabled="loading || !online"
+        :prepend-icon="mdiGithub"
         color="primary"
         @click="openDialog">
         Open dialog
@@ -40,6 +41,7 @@
 
 <script setup lang="ts">
 import { AppResponsive } from '@amilochau/core-vue3/components'
+import { mdiGithub } from '@mdi/js'
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import { useMapsStore } from '../stores';
