@@ -3,7 +3,6 @@
     <div class="text-center">
       <home-welcome />
       <home-messages />
-
       <p>{{ mapsStore.items }}</p>
       <v-btn @click="fetchMaps">
         Fetch maps
