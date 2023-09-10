@@ -50,21 +50,61 @@
         class="mb-3">
         {{ t('privacy.expiration', { expirationDate: d(cookiesStore.expiration) }) }}
       </v-alert>
+      <v-divider class="my-4" />
+      <card-section-title
+        :icon="mdiApplicationBraces"
+        :title="t('version.title')" />
+      <v-list
+        :items="versionItems"
+        item-props
+        :lines="false" />
+      <v-alert
+        v-if="updateDisplay"
+        :icon="mdiUpdate"
+        border="start"
+        color="primary"
+        variant="tonal"
+        class="mb-3 text-center">
+        <p class="text-left">
+          {{ t('version.update.desc') }}
+        </p>
+        <v-btn
+          :disabled="updateLoading || loading || !online"
+          :prepend-icon="mdiUpdate"
+          :loading="loading"
+          color="primary"
+          variant="tonal"
+          rounded
+          class="mt-2"
+          @click="pwaStore.update">
+          {{ t('version.update.action') }}
+        </v-btn>
+      </v-alert>
+      <v-alert
+        v-else
+        border="start"
+        type="success"
+        variant="tonal"
+        class="mb-3">
+        {{ t('version.update.success') }}
+      </v-alert>
     </v-card-text>
   </app-responsive-form>
 </template>
 
 <script setup lang="ts">
-import { mdiBrightness6, mdiEarth, mdiGavel } from '@mdi/js'
+import { mdiBrightness6, mdiEarth, mdiGavel, mdiApplicationBraces, mdiCalendarEdit, mdiCalendarImport, mdiCalendarMinus, mdiUpdate } from '@mdi/js'
 import { AppResponsiveForm, CardSectionTitle } from '../components'
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
 import { useRouter, useRoute } from 'vue-router';
-import { useCookiesStore, useThemeStore } from '../stores';
+import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../stores';
 import { useTheme } from 'vuetify'
 import { computed } from 'vue';
+import { useOnline } from '@vueuse/core';
+import { storeToRefs } from 'pinia';
 
-const { d, t } = useI18n()
+const { d, t, mergeDateTimeFormat } = useI18n()
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -78,6 +118,31 @@ const route = useRoute()
 const themeStore = useThemeStore()
 const theme = useTheme()
 const cookiesStore = useCookiesStore()
+const online = useOnline()
+const appStore = useAppStore()
+const { loading } = storeToRefs(appStore)
+const pwaStore = usePwaStore()
+const { updateDisplay, updateLoading } = storeToRefs(pwaStore)
+
+mergeDateTimeFormat('en', {
+  datetime: {
+    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+  },
+})
+mergeDateTimeFormat('fr', {
+  datetime: {
+    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+  },
+})
+
+const buildDate = import.meta.env.VITE_BUILD_DATE
+const commitDate = import.meta.env.VITE_COMMIT_DATE
+const commitSha = import.meta.env.VITE_COMMIT_SHA
+const versionItems = computed(() => ([
+  ...buildDate ? [{ title: d(buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarEdit }] : [],
+  ...commitDate ? [{ title: d(commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarImport }] : [],
+  ...commitSha ? [{ title: commitSha, subtitle: t('version.commitSha'), prependIcon: mdiCalendarMinus }] : [],
+]))
 
 const language = computed(() => route.params.lang?.toString())
 const languageItems = computed(() => ([
@@ -130,6 +195,15 @@ en:
     title: Privacy
     cookies: Accept cookies
     expiration: Your answer expires on {expirationDate}. You'll then be asked again.
+  version:
+    title: Application version
+    buildDate: Application deployment date
+    commitDate: Last modification date
+    commitSha: Version unique reference
+    update:
+      desc: A new version is available. You can get the latest content by updating this application!
+      action: Update
+      success: You have the latest version of the application!
   links:
     privacy:
       title: Privacy policy
@@ -147,6 +221,15 @@ fr:
     title: Confidentialité
     cookies: Accepter les cookies
     expiration: Votre réponse expirera le {expirationDate}. Vous serez alors interrogé de nouveau.
+  version:
+    title: Version de l'application
+    buildDate: Date de déploiement de l'application
+    commitDate: Date de dernière modification
+    commitSha: Référence unique de la version
+    update:
+      desc: Une nouvelle version est disponible. Vous pouvez obtenir le dernier contenu en mettant à jour cette application !
+      action: Mettre à jour
+      success: Vous avez la dernière version de l'application !
   links:
     privacy:
       title: Politique de confidentialité
