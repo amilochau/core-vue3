@@ -145,6 +145,7 @@ export const useApi = (relativeBaseUri: string) => {
     try {
       accessToken = await getToken()
     } catch (error) {
+      console.error('Authentication token can\'t be used', error)
       signOut()
       await router.push({ name: 'Login' })
       throw new ApplicationMessage(t('errors.sessionExpired'), 'warning', mdiTimerRefreshOutline)
