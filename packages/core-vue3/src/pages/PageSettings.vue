@@ -26,7 +26,7 @@
           v-for="(languageItem, i) in languageItems"
           :key="i"
           :value="languageItem.lang"
-          @click="languageItem.onClick">
+          :to="{ params: { lang: languageItem.lang }, query: route.query, replace: true }">
           {{ languageItem.title }}
         </v-chip>
       </v-chip-group>
@@ -139,24 +139,20 @@ const buildDate = import.meta.env.VITE_BUILD_DATE
 const commitDate = import.meta.env.VITE_COMMIT_DATE
 const commitSha = import.meta.env.VITE_COMMIT_SHA
 const versionItems = computed(() => ([
-  ...buildDate ? [{ title: d(buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarEdit }] : [],
-  ...commitDate ? [{ title: d(commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarImport }] : [],
+  ...commitDate ? [{ title: d(commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
+  ...buildDate ? [{ title: d(buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
   ...commitSha ? [{ title: commitSha, subtitle: t('version.commitSha'), prependIcon: mdiCalendarMinus }] : [],
 ]))
 
 const language = computed(() => route.params.lang?.toString())
 const languageItems = computed(() => ([
-  { title: t('languages.english'), onClick: () => onClick('en'), prependAvatar: '/img/us/24.png', lang: 'en' },
-  { title: t('languages.french'), onClick: () => onClick('fr'), prependAvatar: '/img/fr/24.png', lang: 'fr' },
+  { title: t('languages.english'), lang: 'en' },
+  { title: t('languages.french'), lang: 'fr' },
 ]))
 
 const links = computed(() => ([
   { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
 ]))
-
-const onClick = async (lang: string) => {
-  await router.replace({ params: { lang }, query: route.query })
-}
 
 const toggleTheme = () => {
   themeStore.darkMode = !themeStore.darkMode

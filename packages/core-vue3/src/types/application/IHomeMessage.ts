@@ -5,5 +5,5 @@ export type IHomeMessage = {
   color?: string;
   border?: "top" | "bottom" | "start" | "end";
   prominent: boolean;
-  variant?: "text" | "outlined" | "plain" | "elevated" | "flat" | "tonal" | undefined
+  variant?: "text" | "outlined" | "plain" | "elevated" | "flat" | "tonal"
 }

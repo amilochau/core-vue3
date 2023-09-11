@@ -8,8 +8,8 @@ export class ApplicationMessage {
 
   constructor(title: string, color: 'error' | 'warning' | 'success' | 'info', icon: string, details?: string, timeout_ms?: number) {
     this.title = title
-    this.details = details ? details : undefined
-    this.color = color ?? 'info',
+    this.details = details
+    this.color = color,
     this.icon = icon
     this.timeout_ms = timeout_ms ?? 10000
     this.creation = new Date().valueOf()
