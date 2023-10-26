@@ -1,11 +1,10 @@
 <template>
   <v-dialog
-    :model-value="modelValue"
+    v-model="modelValue"
     :fullscreen="xs"
     persistent
     scrollable
-    max-width="600px"
-    @update:model-value="emits('update:modelValue', $event)">
+    max-width="600px">
     <v-form
       ref="form"
       :readonly="loading"
@@ -67,13 +66,7 @@ const { xs } = useDisplay()
 
 const { loading } = storeToRefs(appStore)
 
-const props = defineProps<{
-  modelValue: boolean
-}>()
-
-const emits = defineEmits<{
-  (eventName: 'update:modelValue', value: boolean): void
-}>()
+const modelValue = defineModel<boolean>({ required: true })
 
 const form: Ref<any> = ref(null)
 const request: Ref<MapsCreateRequest> = ref(new MapsCreateRequest())
@@ -89,14 +82,14 @@ const save = async () => {
   }, 'internal')
 }
 
-watch(() => props.modelValue, () => props.modelValue ? open() : close())
+watch(modelValue, () => modelValue.value ? open() : close())
 
 const open = () => {
   initMap()
   form.value?.reset()
 }
 const close = () => {
-  emits('update:modelValue', false)
+  modelValue.value = false
 }
 
 const initMap = () => {

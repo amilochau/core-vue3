@@ -1,6 +1,6 @@
 <template>
   <v-select
-    :model-value="modelValue"
+    v-model="modelValue"
     :label="labelTitle"
     :rules="rules"
     :items="items"
@@ -10,8 +10,7 @@
     type="text"
     class="mb-3"
     :multiple="multiple"
-    :clearable="clearable"
-    @update:model-value="emits('update:modelValue', $event)">
+    :clearable="clearable">
     <template #item="templateProps">
       <v-list-item
         v-if="!templateProps.item.raw.hidden"
@@ -50,16 +49,13 @@
 <script setup lang="ts">
 import type { FormattedData } from '../../types';
 
+const modelValue = defineModel<number | string | string[]>()
+
 defineProps<{
-  modelValue?: number | string | string[],
   labelTitle: string,
   rules?: any[],
   items: FormattedData<any>[],
   multiple?: boolean,
   clearable?: boolean,
-}>()
-
-const emits = defineEmits<{
-  (eventName: 'update:modelValue', value?: number | string | string[]): void
 }>()
 </script>
