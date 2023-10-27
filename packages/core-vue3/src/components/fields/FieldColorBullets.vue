@@ -4,7 +4,7 @@
     :focused="focused"
     density="comfortable"
     hide-details="auto"
-    class="mb-1>">
+    class="mb-1">
     <v-field
       :label="labels.title"
       :focused="focused"
