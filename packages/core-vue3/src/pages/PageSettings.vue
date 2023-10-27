@@ -97,12 +97,19 @@ import { mdiBrightness6, mdiEarth, mdiGavel, mdiApplicationBraces, mdiCalendarEd
 import { AppResponsiveForm, CardSectionTitle } from '../components'
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../stores';
 import { useTheme } from 'vuetify'
 import { computed } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
+import type { BuildData } from '../types';
+
+declare global {
+  interface Window {
+    buildData: BuildData;
+  }
+}
 
 const { d, t, mergeDateTimeFormat } = useI18n()
 usePage(computed(() => ({
@@ -113,7 +120,6 @@ usePage(computed(() => ({
     defaultBackTo: { name: 'Home' }
   }
 })))
-const router = useRouter()
 const route = useRoute()
 const themeStore = useThemeStore()
 const theme = useTheme()
@@ -135,13 +141,11 @@ mergeDateTimeFormat('fr', {
   },
 })
 
-const buildDate = import.meta.env.VITE_BUILD_DATE
-const commitDate = import.meta.env.VITE_COMMIT_DATE
-const commitSha = import.meta.env.VITE_COMMIT_SHA
+const buildData = window.buildData as BuildData
 const versionItems = computed(() => ([
-  ...commitDate ? [{ title: d(commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
-  ...buildDate ? [{ title: d(buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
-  ...commitSha ? [{ title: commitSha, subtitle: t('version.commitSha'), prependIcon: mdiCalendarMinus }] : [],
+  ...buildData.commitDate ? [{ title: d(buildData.commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
+  ...buildData.buildDate ? [{ title: d(buildData.buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
+  ...buildData.commitSha ? [{ title: buildData.commitSha, subtitle: t('version.commitSha'), prependIcon: mdiCalendarMinus }] : [],
 ]))
 
 const language = computed(() => route.params.lang?.toString())
