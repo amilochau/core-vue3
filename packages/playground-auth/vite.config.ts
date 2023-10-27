@@ -85,8 +85,8 @@ export default defineConfig({
       name: 'amilochau:build-options',
       transformIndexHtml (html) {
         return html.replace(
-          /window.buildOptions = null;/,
-          `window.buildOptions = { date: "${buildDate}", commitSha: "${commitSha}", commitDate: "${commitDate}" };`,
+          /window.buildData = null;/,
+          `window.buildData = { buildDate: "${buildDate}", commitSha: "${commitSha}", commitDate: "${commitDate}" };`,
         )
       }
     },
