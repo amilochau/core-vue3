@@ -125,13 +125,36 @@ function getDate (response) {
 
 // Listen to push events
 self.addEventListener('push', (event) => {
-  if (Notification.permission === "granted") {
-    const message = event.data.json();
-    const showNotificationPromise = self.registration.showNotification(message.title, {
-      body: message.text,
-    });
+  if (Notification.permission !== "granted") {
+    return; // Permission not granted
+  }
 
-    // Keep the service worker running until the notification is displayed.
-    event.waitUntil(showNotificationPromise);
+  const message = event.data.json();
+  const showNotificationPromise = self.registration.showNotification(message.title, {
+    actions: message.actions,
+    badge: './img/icons/android-chrome-192x192.png',
+    body: message.body,
+    data: message.data,
+    icon: './img/icons/android-chrome-192x192.png',
+    image: message.image,
+    lang: message.lang,
+    requireInteraction: message.requireInteraction,
+    silent: message.silent,
+    tag: message.tag,
+    timestamp: message.timestamp,
+    vibrate: message.vibrate,
+  });
+
+  // Keep the service worker running until the notification is displayed.
+  event.waitUntil(showNotificationPromise);
+})
+
+self.addEventListener('notificationclick', (event) => {
+  if (event.action) {
+    event.notification.close();
+    event.waitUntil(clients.openWindow(event.action));
+  } else if (event.notification.data.redirectUrl) {
+    event.notification.close();
+    event.waitUntil(clients.openWindow(event.notification.data.redirectUrl));
   }
 })
