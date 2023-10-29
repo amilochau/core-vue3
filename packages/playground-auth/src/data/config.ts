@@ -3,6 +3,7 @@ import { getConfig, getCurrentEnvironment } from "../utils/config"
 import routes from "./routes"
 import { useMapsStore } from "../stores"
 import navigation from "./navigation"
+import { useNotificationsApi } from "@/composition/notifications.api"
 
 export enum Environment {
   Default = 'default',
@@ -24,17 +25,17 @@ export const envConfig: EnvConfigValues = {
     VITE_COGNITO_CLIENT_ID: '',
   },
   local: {
-    VITE_API_URL: "https://d37652aw4wwcmu.cloudfront.net/api/dev/a",
+    VITE_API_URL: "http://localhost:4000",
     VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
     VITE_COGNITO_CLIENT_ID: '1oed2va2em6r9lkfvqbd3tspiu',
   },
   dev: {
-    VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
+    VITE_API_URL: "http://localhost:4000",
     VITE_COGNITO_USERPOOL_ID: "",
     VITE_COGNITO_CLIENT_ID: '',
   },
   prd: {
-    VITE_API_URL: "https://api.milochau.com/maps/v1",
+    VITE_API_URL: "http://localhost:4000",
     VITE_COGNITO_USERPOOL_ID: "",
     VITE_COGNITO_CLIENT_ID: '',
   }
@@ -86,8 +87,13 @@ export const coreOptions: MilochauCoreOptions = {
   },
   notifications: {
     pushKey: 'BDKw7_ihg5mQvriWE7o7Stl2NWSfbCW9v2P-EbCJ48qcaLw05Fy2yaENB6LGRS6C2TE59ztoMOXxlEYQua308EE',
-    register: () => (request: NotificationsRegisterRequest) => {
-      throw 'Not supported';
-    }
+    register: () => {
+      const notificationsApi = useNotificationsApi()
+
+      return async (request: NotificationsRegisterRequest) => {
+        console.log('Notification registration', request)
+        await notificationsApi.register(request)
+      }
+    },
   }
 }

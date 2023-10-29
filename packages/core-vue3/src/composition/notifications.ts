@@ -29,6 +29,7 @@ export const useNotifications = () => {
   const appStore = useAppStore()
   const notificationsStore = useNotificationsStore()
   const { registred } = storeToRefs(notificationsStore)
+  const register = coreOptions.notifications?.register()
 
   mergeLocaleMessage('en', {
     permissionsNotGranted: 'You must allow notifications on your device to display them.'
@@ -84,7 +85,7 @@ export const useNotifications = () => {
         registerType: NotificationRegisterType.Subscribe,
       }
 
-      await coreOptions.notifications?.register()!(request)
+      await register!(request)
 
       notificationsStore.registred = true;
     } catch (error) {
@@ -142,7 +143,7 @@ export const useNotifications = () => {
         registerType: NotificationRegisterType.Unsusbscribe,
       }
 
-      await coreOptions.notifications?.register()!(request)
+      await register!(request)
 
       notificationsStore.registred = false;
     } catch (error) {
