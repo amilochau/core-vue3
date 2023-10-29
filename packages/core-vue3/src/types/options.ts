@@ -2,6 +2,7 @@ import type { Ref } from "vue"
 import type { I18nOptions } from "vue-i18n"
 import type { RouteRecordRaw } from "vue-router"
 import type { VuetifyOptions } from "vuetify"
+import type { NotificationsRegisterRequest } from "./application/notifications"
 
 export type MilochauCoreOptions = {
   application: {
@@ -29,7 +30,11 @@ export type MilochauCoreOptions = {
   clean: () => () => void,
   pwa?: {
     hideInstallBtn: boolean,
-  }
+  },
+  notifications?: {
+    pushKey: string,
+    register: () => (request: NotificationsRegisterRequest) => Promise<void>
+  },
 }
 
 export type MilochauCoreOptionsMessages = {

@@ -122,3 +122,16 @@ function getDate (response) {
   date.setMinutes(0, 0, 0)
   return date.getTime()
 }
+
+// Listen to push events
+self.addEventListener('push', (event) => {
+  if (Notification.permission === "granted") {
+    const message = event.data.json();
+    const showNotificationPromise = self.registration.showNotification(message.title, {
+      body: message.text,
+    });
+
+    // Keep the service worker running until the notification is displayed.
+    event.waitUntil(showNotificationPromise);
+  }
+})

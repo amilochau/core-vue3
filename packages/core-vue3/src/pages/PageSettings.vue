@@ -51,6 +51,55 @@
         {{ t('privacy.expiration', { expirationDate: d(cookiesStore.expiration) }) }}
       </v-alert>
       <v-divider class="my-4" />
+      <template v-if="notifications.isSupported.value">
+        <card-section-title
+          :icon="mdiBellOutline"
+          :title="t('notifications.title')" />
+        <p class="mb-2">
+          {{ t('notifications.summary') }}
+        </p>
+        <p v-if="notifications.isRegistred.value">
+          <v-icon
+            :icon="mdiBellCheckOutline"
+            class="mr-2"
+            color="success" />
+          {{ t('notifications.enabled') }}
+        </p>
+        <p v-else>
+          <v-icon
+            :icon="mdiBellAlertOutline"
+            class="mr-2"
+            color="error" />
+          {{ t('notifications.disabled') }}
+        </p>
+        <div class="text-center">
+          <v-btn
+            v-if="notifications.isRegistred.value"
+            :disabled="loading || !online"
+            :loading="loading"
+            :prepend-icon="mdiBellMinus"
+            class="my-2"
+            color="warning"
+            variant="outlined"
+            rounded
+            @click="notifications.unsubscribe">
+            {{ t('notifications.unsubscribe') }}
+          </v-btn>
+          <v-btn
+            v-else
+            :disabled="loading || !online"
+            :loading="loading"
+            :prepend-icon="mdiBellPlus"
+            class="my-2"
+            color="primary"
+            variant="tonal"
+            rounded
+            @click="notifications.subscribe">
+            {{ t('notifications.subscribe') }}
+          </v-btn>
+        </div>
+        <v-divider class="my-4" />
+      </template>
       <card-section-title
         :icon="mdiApplicationBraces"
         :title="t('version.title')" />
@@ -93,10 +142,10 @@
 </template>
 
 <script setup lang="ts">
-import { mdiBrightness6, mdiEarth, mdiGavel, mdiApplicationBraces, mdiCalendarEdit, mdiCalendarImport, mdiCalendarMinus, mdiUpdate } from '@mdi/js'
+import { mdiBrightness6, mdiEarth, mdiGavel, mdiApplicationBraces, mdiCalendarEdit, mdiCalendarImport, mdiCalendarMinus, mdiUpdate, mdiBellOutline, mdiBellPlus, mdiBellMinus, mdiBellCheckOutline, mdiBellAlertOutline } from '@mdi/js'
 import { AppResponsiveForm, CardSectionTitle } from '../components'
 import { useI18n } from 'vue-i18n';
-import { usePage } from '../composition';
+import { useNotifications, usePage } from '../composition';
 import { useRoute } from 'vue-router';
 import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../stores';
 import { useTheme } from 'vuetify'
@@ -124,6 +173,7 @@ const route = useRoute()
 const themeStore = useThemeStore()
 const theme = useTheme()
 const cookiesStore = useCookiesStore()
+const notifications = useNotifications()
 const online = useOnline()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
@@ -195,6 +245,13 @@ en:
     title: Privacy
     cookies: Accept cookies
     expiration: Your answer expires on {expirationDate}. You'll then be asked again.
+  notifications:
+    title: Notifications
+    summary: Notifications make it easy to stay informed, right on your device.
+    enabled: Notifications are enabled on this device!
+    disabled: Notifications are not enabled on this device!
+    subscribe: Enable notifications
+    unsubscribe: Disable notifications
   version:
     title: Application version
     buildDate: Application deployment date
@@ -221,6 +278,13 @@ fr:
     title: Confidentialité
     cookies: Accepter les cookies
     expiration: Votre réponse expirera le {expirationDate}. Vous serez alors interrogé de nouveau.
+  notifications:
+    title: Notifications
+    summary: Les notifications vous permettent d'être informé facilement, directement sur votre appareil.
+    enabled: Les notifications sont activées sur cet appareil !
+    disabled: Les notifications ne sont pas activées sur cet appareil !
+    subscribe: Activer les notifications
+    unsubscribe: Désactiver les notifications
   version:
     title: Version de l'application
     buildDate: Date de déploiement de l'application
