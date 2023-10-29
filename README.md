@@ -135,6 +135,7 @@ Here are the helpers you can use from your code.
 | `useCoreOptions` | Lets you get the core options defined on plugin registration |
 | `useHandle` | Handle asynchronous requests to manage errors, with loader bar and snackbar messages |
 | `useNavigation` | Helps you use router with back navigation |
+| `useNotifications` | Lets you register your application for push notifications |
 | `usePage` | Define page metadata |
 | `useValidationRules` | Lets you use pre-defined validation rules on plain data |
 
@@ -146,6 +147,7 @@ Here are the `pinia` stores you can use from your code.
 | `cookies` | `useCookiesStore` | Lets you known if the current user has accepted cookies |
 | `identity` | `useIdentityStore` | Lets you display data from the current user |
 | `language` | `useLanguageStore` | Lets you know the current language configured for the UI |
+| `notifications` | `useNotificationsStore` | Lets you get data on notifications registration |
 | `theme` | `useThemeStore` | Lets you know the current theme configured for the UI |
 | `pwa` | `usePwaStore` | Lets you manage the PWA application updates |
 
@@ -166,6 +168,8 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `routes` | List of `vue-router` routes, to register application pages |
 | `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
 | `pwa.hideInstallBtn` | Hide the PWA install button from the header bar |
+| `notifications.pushKey` | Public VAPID key for push notifications |
+| `notifications.register` | Function called on notifications registration, typically used to call an API to save the registration data |
 
 See the full definition of options [here](/packages/core-vue3/src/types/options.ts).
 

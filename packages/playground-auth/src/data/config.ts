@@ -1,4 +1,4 @@
-import { type MilochauCoreOptions } from "@amilochau/core-vue3/types"
+import { type MilochauCoreOptions, type NotificationsRegisterRequest } from "@amilochau/core-vue3/types"
 import { getConfig, getCurrentEnvironment } from "../utils/config"
 import routes from "./routes"
 import { useMapsStore } from "../stores"
@@ -84,4 +84,10 @@ export const coreOptions: MilochauCoreOptions = {
       mapsStore.clean();
     }
   },
+  notifications: {
+    pushKey: 'BDKw7_ihg5mQvriWE7o7Stl2NWSfbCW9v2P-EbCJ48qcaLw05Fy2yaENB6LGRS6C2TE59ztoMOXxlEYQua308EE',
+    register: () => (request: NotificationsRegisterRequest) => {
+      throw 'Not supported';
+    }
+  }
 }
