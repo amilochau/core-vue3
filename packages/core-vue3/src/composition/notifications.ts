@@ -29,7 +29,6 @@ export const useNotifications = () => {
   const appStore = useAppStore()
   const notificationsStore = useNotificationsStore()
   const { registred } = storeToRefs(notificationsStore)
-  const registerFromOptions = coreOptions.notifications?.register()
 
   mergeLocaleMessage('en', {
     permissionsNotGranted: 'You must allow notifications on your device to display them.'
@@ -49,7 +48,7 @@ export const useNotifications = () => {
         return;
       }
 
-      const registration = await navigator.serviceWorker.getRegistration()
+      const registration = await navigator.serviceWorker.ready
       if (!registration) {
         // Service worker registration not found
         return;
@@ -85,43 +84,72 @@ export const useNotifications = () => {
         registerType: NotificationRegisterType.Subscribe,
       }
 
-      await registerFromOptions!(request)
+      await coreOptions.notifications?.register()!(request)
 
       notificationsStore.registred = true;
     } catch (error) {
       console.error('Error when subscribing to push notifications', error)
+
+      try {
+        // Try to unregister
+      notificationsStore.registred = false;
+      const registration = await navigator.serviceWorker.ready
+      if (!registration) {
+        return;
+      }
+      const subscription = await registration.pushManager.getSubscription()
+      if (!subscription) {
+        return;
+      }
+
+      await subscription.unsubscribe()
+      } catch (error2) {
+        console.error('Error when unsubscribing to push notifications', error)
+      }
     } finally {
       appStore.loading = false
     }
   }
 
   const unsubscribe = async () => {
-    if (!isSupported.value ||  !notificationsStore.registred) {
-      return;
+    try {
+      appStore.loading = true
+
+      if (!isSupported.value ||  !notificationsStore.registred) {
+        notificationsStore.registred = false;
+        return;
+      }
+
+      const registration = await navigator.serviceWorker.ready
+      if (!registration) {
+        return;
+      }
+
+      const subscription = await registration.pushManager.getSubscription();
+      if (!subscription) {
+        notificationsStore.registred = false;
+        return;
+      }
+
+      await subscription.unsubscribe()
+
+      const subscriptionJson = subscription.toJSON();
+      const request: NotificationsRegisterRequest = {
+        endpoint: subscriptionJson.endpoint!,
+        expirationTime: subscriptionJson.expirationTime!,
+        auth: subscriptionJson.keys!.auth,
+        p256Dh: subscriptionJson.keys!.p256dh,
+        registerType: NotificationRegisterType.Unsusbscribe,
+      }
+
+      await coreOptions.notifications?.register()!(request)
+
+      notificationsStore.registred = false;
+    } catch (error) {
+      console.error('Error when unsubscribing to push notifications', error)
+    } finally {
+      appStore.loading = false
     }
-
-    const registration = await navigator.serviceWorker.getRegistration()
-    if (!registration) {
-      return;
-    }
-
-    const subscription = await registration.pushManager.getSubscription();
-    if (!subscription) {
-      return;
-    }
-
-    const subscriptionJson = subscription.toJSON();
-    const request: NotificationsRegisterRequest = {
-      endpoint: subscriptionJson.endpoint!,
-      expirationTime: subscriptionJson.expirationTime!,
-      auth: subscriptionJson.keys!.auth,
-      p256Dh: subscriptionJson.keys!.p256dh,
-      registerType: NotificationRegisterType.Unsusbscribe,
-    }
-
-    await registerFromOptions!(request)
-
-    notificationsStore.registred = false;
   }
 
   return {
