@@ -4,6 +4,7 @@ import { computed } from "vue";
 import { useCoreOptions } from "./options";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
 
 const urlB64ToUint8Array = (base64String: string) => {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -30,6 +31,7 @@ export const useNotifications = () => {
   const notificationsStore = useNotificationsStore()
   const { registred } = storeToRefs(notificationsStore)
   const register = coreOptions.notifications?.register()
+  const route = useRoute()
 
   mergeLocaleMessage('en', {
     permissionsNotGranted: 'You must allow notifications on your device to display them.'
@@ -83,6 +85,7 @@ export const useNotifications = () => {
         auth: subscriptionJson.keys!.auth,
         p256Dh: subscriptionJson.keys!.p256dh,
         registerType: NotificationRegisterType.Subscribe,
+        culture: route.params.lang.toString(),
       }
 
       await register!(request)
@@ -141,6 +144,7 @@ export const useNotifications = () => {
         auth: subscriptionJson.keys!.auth,
         p256Dh: subscriptionJson.keys!.p256dh,
         registerType: NotificationRegisterType.Unsusbscribe,
+        culture: route.params.lang.toString(),
       }
 
       await register!(request)

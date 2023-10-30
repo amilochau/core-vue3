@@ -9,4 +9,5 @@ export type NotificationsRegisterRequest = {
   p256Dh: string
   auth: string
   registerType: NotificationRegisterType
+  culture?: string
 }
