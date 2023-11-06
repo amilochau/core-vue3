@@ -24,42 +24,6 @@
   cursor: pointer;
 }
 
-.colors-grid {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  justify-content: center;
-  width: 100%;
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-.colors-grid-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 20px !important;
-  width: 20px !important;
-  margin: 2px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition-property: none;
-}
-.colors-grid-cell:hover {
-  height: 32px !important;
-  width: 32px !important;
-  margin: -4px;
-}
-.colors-grid-cell__selected {
-  height: 32px !important;
-  width: 32px !important;
-  margin: -4px;
-  border: 1px solid #515151;
-  z-index: 1;
-}
-.colors-grid-cell__selected:hover {
-  border-width: 2px !important;
-}
-
 // Vuetify overrides
 
 .v-timeline-item__body {

@@ -10,7 +10,7 @@
         v-if="button"
         class="text-center">
         <v-btn
-          :disabled="loading || !online"
+          :disabled="loading || !online || button.disabled"
           :loading="loading"
           :prepend-icon="button.icon"
           :color="button.color"
@@ -38,6 +38,7 @@ const props = defineProps<{
     icon: string,
     color: 'primary' | 'success' | 'warning' | 'error',
     onClick: () => Promise<void>,
+    disabled?: boolean,
   },
 }>()
 

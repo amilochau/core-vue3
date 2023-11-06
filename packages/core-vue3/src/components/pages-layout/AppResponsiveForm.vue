@@ -31,6 +31,7 @@ defineProps<{
     icon: string,
     color: 'primary' | 'success' | 'warning' | 'error',
     onClick: () => Promise<void>,
+    disabled?: boolean,
   },
   links?: any[],
   fillHeight?: boolean,

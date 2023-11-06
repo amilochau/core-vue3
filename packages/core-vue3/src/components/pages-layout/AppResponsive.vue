@@ -43,7 +43,7 @@
         lg="6"
         align="center">
         <v-btn
-          :disabled="loading || !online"
+          :disabled="loading || !online || button.disabled"
           :loading="loading"
           :prepend-icon="button.icon"
           :href="button.href"
@@ -91,7 +91,8 @@ defineProps<{
     icon: string,
     color: 'primary' | 'success' | 'warning' | 'error',
     onClick?: () => Promise<void>,
-    href?: string
+    href?: string,
+    disabled?: boolean,
   },
 }>()
 
