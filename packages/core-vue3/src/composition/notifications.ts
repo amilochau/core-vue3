@@ -34,10 +34,18 @@ export const useNotifications = () => {
   const route = useRoute()
 
   mergeLocaleMessage('en', {
-    permissionsNotGranted: 'You must allow notifications on your device to display them.'
+    permissionsNotGranted: 'You must allow notifications on your device to display them.',
+    permissionsRemoved: 'Notifications are not allowed.',
+    permissionsRemovedDesc: 'You must allow the notifications, in your web browser settings, to get alerts on your lists.',
+    unregistredSubscription: 'Notifications have been disabled.',
+    unregistredSubscriptionDesc: 'Your web browser disabled the notifications. You can re-activate them, from the settings page.',
   })
   mergeLocaleMessage('fr', {
-    permissionsNotGranted: 'Vous devez autoriser les notifications sur votre appareil pour pouvoir les afficher.'
+    permissionsNotGranted: 'Vous devez autoriser les notifications sur votre appareil pour pouvoir les afficher.',
+    permissionsRemoved: 'Les notifications ne sont pas autorisées.',
+    permissionsRemovedDesc: 'Vous devez autoriser les notifications, dans les paramètres de votre navigateur web, pour recevoir des alertes sur vos listes.',
+    unregistredSubscription: 'Les notifications ont été désactivées.',
+    unregistredSubscriptionDesc: 'Votre navigateur web a désactivé les notifications. Vous pouvez les réactiver, à partir de la page de paramètres.',
   })
 
   const isSupported = computed(() => registred.value || navigator.serviceWorker && 'PushManager' in window
@@ -157,10 +165,46 @@ export const useNotifications = () => {
     }
   }
 
+  const updateSubscription = async () => {
+    try {
+      if (!isSupported.value) {
+        return;
+      }
+
+      if (!registred.value) {
+        return;
+      }
+
+      const registration = await navigator.serviceWorker.ready
+      if (!registration) {
+        // Service worker registration not found
+        return;
+      }
+
+      if (Notification.permission !== 'granted') {
+        await unsubscribe();
+        // Permission not granted
+        appStore.displayErrorMessage(t('permissionsRemoved'), t('permissionsRemovedDesc'), 'snackbar')
+        return;
+      }
+
+      const currentSubscription = await registration.pushManager.getSubscription()
+      if (!currentSubscription) {
+        // Previously registred, but the subscription has been disabled
+        subscribe();
+        return;
+      }
+    } catch (error) {
+      console.error('Error on subscription update', error)
+      appStore.displayErrorMessage(t('unregistredSubscription'), t('unregistredSubscriptionDesc'), 'snackbar')
+    }
+  }
+
   return {
     isSupported,
     isRegistred: registred,
     subscribe,
     unsubscribe,
+    updateSubscription,
   }
 }

@@ -29,6 +29,7 @@ import AppSnackbar from '../components/app/layout/AppSnackbar.vue'
 import { useTheme } from 'vuetify'
 import { useThemeStore, useAppStore } from '../stores';
 import { storeToRefs } from 'pinia';
+import { useNotifications } from '../composition';
 
 const appStore = useAppStore()
 const { pageData } = storeToRefs(appStore)
@@ -40,4 +41,8 @@ const setTheme = (darkMode: boolean) => {
 }
 
 setTheme(themeStore.darkMode)
+
+// Update subscription
+const { updateSubscription } = useNotifications()
+updateSubscription();
 </script>
