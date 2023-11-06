@@ -5,7 +5,9 @@ import CardDivider from "./cards/CardDivider.vue"
 import CardMessages from "./cards/CardMessages.vue"
 import CardSectionTitle from "./cards/CardSectionTitle.vue"
 import CardTitleClosable from "./cards/CardTitleClosable.vue"
+import FieldChipGroup from "./fields/FieldChipGroup.vue"
 import FieldColorBullets from "./fields/FieldColorBullets.vue"
+import FieldIcon from "./fields/FieldIcon.vue"
 import AppForm from './pages-layout/AppForm.vue'
 import AppLinks from './pages-layout/AppLinks.vue'
 import AppResponsive from './pages-layout/AppResponsive.vue'
@@ -19,7 +21,9 @@ export {
   CardMessages,
   CardSectionTitle,
   CardTitleClosable,
+  FieldChipGroup,
   FieldColorBullets,
+  FieldIcon,
   AppForm,
   AppLinks,
   AppResponsive,
