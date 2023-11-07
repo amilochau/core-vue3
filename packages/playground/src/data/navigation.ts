@@ -21,7 +21,7 @@ export default computed(() => {
     contact: 'Contact',
   })
 
-  const contactUrl = computed(() => `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`)
+  const contactUrl = `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`
 
   return {
     items: [
@@ -31,7 +31,7 @@ export default computed(() => {
     appendItems: [
       { type: 'subheader', title: t('settingsAndSupport') },
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
-      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl.value, target: "_blank", rel: "noopener" },
+      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: "_blank", rel: "noopener" },
     ],
   }
 })

@@ -7,7 +7,7 @@
         :icon="icon"
         :color="color"
         variant="text"
-        @click="emits('click')" />
+        @click="emit('click')" />
     </template>
     <span>{{ t(tooltipText) }}</span>
   </v-tooltip>
@@ -20,12 +20,15 @@ import { useI18n } from 'vue-i18n';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
 defineProps<{
+  /** Button icon */
   icon: string,
+  /** Tooltip text */
   tooltipText: string,
+  /** Button color */
   color?: string
 }>()
 
-const emits = defineEmits<{
+const emit = defineEmits<{
   (eventName: 'click'): void
 }>()
 
@@ -33,5 +36,4 @@ const { t } = useI18n()
 const online = useOnline()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
-
 </script>
