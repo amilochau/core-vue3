@@ -42,10 +42,10 @@
 
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
-import { mdiAccountCheckOutline, mdiAccountCheck, mdiAt, mdiNumeric } from '@mdi/js';
+import { mdiAccountCheck, mdiAccountCheckOutline, mdiAt, mdiNumeric } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
-import { computed, ref, type Ref } from 'vue';
+import { type Ref, computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { ConfirmEmail } from '../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';

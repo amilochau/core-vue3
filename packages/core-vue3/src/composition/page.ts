@@ -1,7 +1,7 @@
 import { useI18n } from "vue-i18n";
 import { useHead } from '@vueuse/head';
 import { useCoreOptions } from './options';
-import { computed, ref, watch, type ComputedRef } from "vue";
+import { type ComputedRef, computed, ref, watch } from "vue";
 import { useAppStore } from "../stores";
 import type { PageData } from "../types";
 
@@ -30,6 +30,6 @@ export const usePage = (pageData: ComputedRef<PageData>) => {
 
   useHead({
     title: pageTitle,
-    meta: meta.value
+    meta: meta
   })
 }

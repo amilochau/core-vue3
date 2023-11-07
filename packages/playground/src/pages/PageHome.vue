@@ -4,16 +4,7 @@
       <home-welcome />
       <home-messages />
       <p>{{ mapsStore.items }}</p>
-      <v-btn @click="fetchMaps">
-        Fetch maps
-      </v-btn>
-      <v-btn @click="createMarker">
-        Create marker
-      </v-btn>
-      <v-btn @click="editMarker">
-        Edit marker
-      </v-btn>
-      <p>Date: {{ d(stringDate) }}</p>
+      <p>{{ d(stringDate) }}</p>
 
       <v-select multiple />
       <v-btn
@@ -21,15 +12,19 @@
         :prepend-icon="mdiGithub"
         color="primary"
         @click="openDialog">
-        Open dialog
+        {{ t('openDialog') }}
       </v-btn>
+
+      <btn-card
+        :icon="mdiGithub"
+        tooltip-text="OK" />
 
       <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
 
       <suspense>
-        <div>Real content after suspense</div>
+        <div>{{ true }}</div>
         <template #fallback>
-          Temporary content during suspense
+          {{ false }}
         </template>
       </suspense>
 
@@ -43,6 +38,7 @@ import { AppResponsive } from '@amilochau/core-vue3/components'
 import { mdiGithub } from '@mdi/js'
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
+import BtnCard from '../components/buttons/BtnCard.vue'
 import { useMapsStore } from '../stores';
 import { useMapsApi } from '../composition/maps.api';
 import { useAppStore } from '@amilochau/core-vue3/stores';
@@ -113,3 +109,10 @@ fr:
   pageTitle: Accueil
   pageDescription: Page de test
 </i18n>
+
+<i18n lang="yaml">
+  en:
+    openDialog: Open dialog
+  fr:
+    openDialog: Ouvrir le dialog
+  </i18n>

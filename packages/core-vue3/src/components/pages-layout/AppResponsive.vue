@@ -48,7 +48,7 @@
           :prepend-icon="button.icon"
           :href="button.href"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           :color="button.color"
           variant="tonal"
           rounded
@@ -82,10 +82,15 @@ import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../stores';
 
 defineProps<{
+  /** Title */
   title?: string,
+  /** Description, displayed as subtitle */
   description?: string,
+  /** Links for external pages */
   links?: any[],
+  /** Whether the component should fill the page height */
   fillHeight?: boolean,
+  /** Form button */
   button?: {
     title: string,
     icon: string,

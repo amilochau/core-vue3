@@ -14,7 +14,7 @@
         <v-icon>{{ snackbarMessage.icon }}</v-icon>
       </v-col>
       <v-col class="py-0 flex-grow-1">
-        <span style="white-space: pre-wrap">{{ snackbarMessage.title }}</span>
+        <span class="pre-wrap">{{ snackbarMessage.title }}</span>
       </v-col>
       <v-col class="py-0 d-flex flex-grow-0">
         <v-btn
@@ -36,14 +36,14 @@
       <v-col
         v-if="expanded && snackbarMessage.details"
         cols="12">
-        <span style="white-space: pre-wrap">{{ snackbarMessage.details }}</span>
+        <span class="pre-wrap">{{ snackbarMessage.details }}</span>
       </v-col>
     </v-row>
   </v-snackbar>
 </template>
 
 <script setup lang="ts">
-import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
+import { mdiChevronDown, mdiChevronUp } from '@mdi/js'
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';

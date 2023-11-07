@@ -2,7 +2,7 @@ import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from "@mdi
 import { useRouter } from "vue-router"
 import { useCognito } from './cognito'
 import { useI18n } from 'vue-i18n'
-import { type IHttpSettings, type IProblemDetails, ApplicationMessage } from "@amilochau/core-vue3/types"
+import { ApplicationMessage, type IHttpSettings, type IProblemDetails } from "@amilochau/core-vue3/types"
 import { useCoreOptions, } from "@amilochau/core-vue3/composition"
 import { useLanguageStore, } from "@amilochau/core-vue3/stores"
 
@@ -129,7 +129,7 @@ export const useApi = (relativeBaseUri: string) => {
     settings: IHttpSettings,
     request: (absoluteUrl: string, requestInit: RequestInit) => Promise<Response>) => {
 
-    var response: Response;
+    let response: Response;
 
     if (!coreOptions.apiEnabled) {
       throw 'API integration is not configured.'
@@ -140,7 +140,7 @@ export const useApi = (relativeBaseUri: string) => {
     }
 
     // Get bearer token for API
-    var accessToken = '';
+    let accessToken = '';
 
     try {
       accessToken = await getToken()

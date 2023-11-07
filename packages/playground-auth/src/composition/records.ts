@@ -1,7 +1,7 @@
 export const useRecords = () => {
   return {
     getNewKey: <TItem>(record: Record<string, TItem>, maxIndex: number = 100) => {
-      var index = 0;
+      let index = 0;
 
       while (index < maxIndex) {
         const indexAsString = `${index}`

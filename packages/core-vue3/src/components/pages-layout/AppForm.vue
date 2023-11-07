@@ -28,11 +28,12 @@
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../stores';
 import { useDisplay } from 'vuetify';
-import { ref, type Ref } from 'vue';
+import { type Ref, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { useHandle } from '../../composition';
 
 const props = defineProps<{
+  /** Form button */
   button?: {
     title: string,
     icon: string,

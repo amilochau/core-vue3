@@ -16,7 +16,8 @@
           v-for="(icon, i) in icons"
           :key="i"
           :color="icon.value === modelValue ? icon.color : undefined"
-          :class="{ 'icons-grid-cell': true, 'icons-grid-cell__selected': icon.value === modelValue }">
+          class="icons-grid-cell"
+          :class="{ 'icons-grid-cell__selected': icon.value === modelValue }">
           <v-icon
             :icon="icon.icon"
             :color="icon.value === modelValue ? undefined : icon.color"
@@ -40,13 +41,16 @@ import { mdiClose } from '@mdi/js'
 import { ref } from 'vue';
 import { type FormattedData } from '../../types';
 
-const modelValue = defineModel<TData | undefined>()
-
 defineProps<{
+  /** Title used as the input label */
   labelTitle: string
-  icons: FormattedData<TData>[]
+  /** Validation rules */
   rules?: any[]
+  /** Icons used as values */
+  icons: FormattedData<TData>[]
 }>()
+
+const modelValue = defineModel<TData | undefined>()
 
 const focused = ref(false)
 

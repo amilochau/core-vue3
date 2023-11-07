@@ -12,15 +12,15 @@ import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAppStore } from '../../../stores'
 
+const props = defineProps<{
+  /** Delay used before displaying the progress bar  */
+  lazyDelay?: number
+}>()
 const { t } = useI18n()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 
 let displayTimeout: any = 0
-
-const props = defineProps<{
-  lazyDelay?: number
-}>()
 
 const display = ref(false);
 
@@ -36,15 +36,15 @@ watch(loading, () => {
 })
 </script>
 
-<style lang="sass" scoped>
-.progress-bar
-  position: absolute !important
-  z-index: 1001
-</style>
-
 <i18n lang="yaml">
 en:
   label: Progress
 fr:
   label: Progression
 </i18n>
+
+<style lang="sass" scoped>
+.progress-bar
+  position: absolute !important
+  z-index: 1001
+</style>

@@ -9,7 +9,7 @@
         :icon="mdiClose"
         variant="plain"
         size="small"
-        @click="emits('close')" />
+        @click="emit('close')" />
     </template>
   </v-card-item>
 </template>
@@ -19,14 +19,13 @@ import { useAppStore } from '../../stores'
 import { mdiClose } from '@mdi/js'
 import { storeToRefs } from 'pinia';
 
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
-
 defineProps<{
+  /** Title */
   title: string
 }>()
-
-const emits = defineEmits<{
+const emit = defineEmits<{
   (eventName: 'close'): void
 }>()
+const appStore = useAppStore()
+const { loading } = storeToRefs(appStore)
 </script>

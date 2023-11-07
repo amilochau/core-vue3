@@ -192,7 +192,6 @@ export const useNotifications = () => {
       if (!currentSubscription) {
         // Previously registred, but the subscription has been disabled
         subscribe();
-        return;
       }
     } catch (error) {
       console.error('Error on subscription update', error)

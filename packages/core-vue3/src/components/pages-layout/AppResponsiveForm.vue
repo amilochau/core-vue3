@@ -21,11 +21,18 @@
 <script setup lang="ts">
 import AppForm from './AppForm.vue';
 import AppResponsive from './AppResponsive.vue';
-import { ref, type Ref } from 'vue';
+import { type Ref, ref } from 'vue';
 
 defineProps<{
+  /** Title */
   title?: string,
+  /** Description, displayed as subtitle */
   description?: string,
+  /** Links for external pages */
+  links?: any[],
+  /** Whether the component should fill the page height */
+  fillHeight?: boolean,
+  /** Form button */
   button?: {
     title: string,
     icon: string,
@@ -33,8 +40,6 @@ defineProps<{
     onClick: () => Promise<void>,
     disabled?: boolean,
   },
-  links?: any[],
-  fillHeight?: boolean,
 }>()
 
 const form: Ref<any> = ref(null)

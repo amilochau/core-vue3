@@ -1,4 +1,4 @@
-import { type EditPassword, type ConfirmEmail, type ForgotPassword, type Login, type Register, type ResetPassword, type EditProfile } from "../types"
+import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword } from "../types"
 import { Auth } from '@aws-amplify/auth';
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
@@ -66,14 +66,14 @@ export const useCognito = () => {
   const changePassword = async (model: EditPassword) => {
     return processRequest(async () => {
       const user = await Auth.currentAuthenticatedUser()
-      return await Auth.changePassword(user, model.oldPassword, model.password)
+      return Auth.changePassword(user, model.oldPassword, model.password)
     })
   }
 
   const updateAttributes = async (model: EditProfile) => {
     return processRequest(async () => {
       const user = await Auth.currentAuthenticatedUser()
-      return await Auth.updateUserAttributes(user, {
+      return Auth.updateUserAttributes(user, {
         name: model.name,
       })
     })

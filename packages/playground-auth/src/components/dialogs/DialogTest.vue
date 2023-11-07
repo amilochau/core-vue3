@@ -12,7 +12,7 @@
       @submit.prevent="save">
       <v-card>
         <card-title-closable
-          title="Test dialog"
+          :title="t('title')"
           @close="close" />
         <v-card-text class="pt-2">
           <v-text-field
@@ -48,8 +48,7 @@
 <script setup lang="ts">
 import { mdiAlert, mdiPlus } from "@mdi/js"
 import { storeToRefs } from 'pinia';
-import { ref, watch } from "vue";
-import type { Ref } from "vue";
+import { type Ref, ref, watch } from "vue";
 import { CardActions, CardMessages, CardTitleClosable } from "@amilochau/core-vue3/components"
 import { MapsCreateRequest } from "../../types/maps";
 import { ApplicationMessage } from "@amilochau/core-vue3/types";
@@ -99,9 +98,11 @@ const initMap = () => {
 
 <i18n lang="yaml">
 en:
+  title: Test dialog
   close: Close
   testMessage: Test message
 fr:
+  title: Dialog de test
   close: Fermer
   testMessage: Test message
 </i18n>

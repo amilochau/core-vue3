@@ -27,7 +27,7 @@ import AppNavigationDrawer from '../components/app/layout/AppNavigationDrawer.vu
 import AppCookies from '../components/app/layout/AppCookies.vue'
 import AppSnackbar from '../components/app/layout/AppSnackbar.vue'
 import { useTheme } from 'vuetify'
-import { useThemeStore, useAppStore } from '../stores';
+import { useAppStore, useThemeStore } from '../stores';
 import { storeToRefs } from 'pinia';
 import { useNotifications } from '../composition';
 

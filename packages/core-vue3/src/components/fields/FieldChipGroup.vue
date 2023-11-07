@@ -7,7 +7,7 @@
     hide-details="auto"
     class="mb-1">
     <v-field
-      :label="labelTitle"
+      :label="label"
       :focused="focused"
       variant="plain"
       active>
@@ -34,14 +34,18 @@
 import { ref } from 'vue';
 import { type FormattedData } from '../../types';
 
-const modelValue = defineModel<TDataValue | undefined>()
-
 defineProps<{
-  labelTitle: string
+  /** Title used as the input label */
+  label: string
+  /** Values proposed to be selected */
   values: FormattedData<TData>[]
+  /** Validation rules */
   rules?: any[]
+  /** Whether multiple values can be selected */
   multiple?: boolean
 }>()
+
+const modelValue = defineModel<TDataValue | undefined>()
 
 const focused = ref(false)
 </script>

@@ -2,7 +2,8 @@
   <app-responsive
     :title="t('title')">
     <v-card
-      :class="{ 'bg-transparent': xs, 'cookies-bar-margin': true }"
+      class="cookies-bar-margin"
+      :class="{ 'bg-transparent': xs }"
       flat>
       <v-card-text>
         <section>
@@ -63,11 +64,6 @@ Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
 
 const appTitle = computed(() => t('appTitle'))
 </script>
-
-<style lang="sass" scoped>
-.cookies-bar-margin
-  margin-bottom: 120px
-</style>
 
 <i18n lang="yaml">
 en:
@@ -177,3 +173,8 @@ fr:
     à certains traitements spécifiques de vos données via les options de configuration
     disponibles dans vos paramètres utilisateur.
 </i18n>
+
+<style lang="sass" scoped>
+.cookies-bar-margin
+  margin-bottom: 120px
+</style>

@@ -32,43 +32,17 @@
       <home-login v-if="!isAuthenticated" />
 
       <p>{{ mapsStore.items }}</p>
-      <v-btn @click="fetchMaps">
-        Fetch maps
-      </v-btn>
-      <v-btn @click="createMarker">
-        Create marker
-      </v-btn>
-      <v-btn @click="editMarker">
-        Edit marker
-      </v-btn>
-      <p>Date: {{ d(stringDate) }}</p>
-
-      <v-btn @click="loading = !loading">
-        Toggle loading
-      </v-btn>
-
       <v-select multiple />
       <v-btn
         :disabled="loading || !online"
         color="primary"
         @click="openDialog">
-        Open dialog
+        {{ t('openDialog') }}
       </v-btn>
 
       <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
       <p>
-        Cognito user attributes
-      </p>
-      <p>
         {{ attributes }}
-      </p>
-
-      <v-divider class="my-4" />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </p>
     </div>
 
@@ -158,6 +132,8 @@ fr:
 <i18n lang="yaml">
 en:
   title: Welcome!
+    openDialog: Open dialog
 fr:
   title: Bienvenue !
+    openDialog: Ouvrir le dialog
 </i18n>

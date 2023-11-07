@@ -1,7 +1,6 @@
 import { mdiAlert, mdiAlertOctagon, mdiCheckboxMarkedCircle, mdiInformation } from '@mdi/js'
 import { defineStore } from 'pinia'
-import { ApplicationMessage } from '../types/application'
-import type { IHomeMessage, PageData } from '../types/application'
+import { ApplicationMessage, type IHomeMessage, type PageData } from '../types/application'
 
 interface AppStoreState {
   drawer: boolean,

@@ -19,8 +19,8 @@
         :alt="title"
         :src="coreOptions.application.logoUrl"
         :width="40"
+        class="ml-2"
         :class="{
-          'ml-2': true,
           'clickable': !!contentTo
         }"
         :to="contentTo" />
@@ -28,8 +28,8 @@
     </template>
     <v-app-bar-title
       v-if="!contentMode || contentMode === 'title'"
+      class="ml-4"
       :class="{
-        'ml-4': true,
         'clickable': !!contentTo
       }"
       :to="contentTo">
@@ -55,15 +55,19 @@ import AppPwaUpdate from './AppPwaUpdate.vue'
 import AppProgressBar from '../AppProgressBar.vue'
 import { useAppStore } from '../../../../stores';
 import { useCoreOptions, useNavigation } from '../../../../composition';
-import type { RouteLocationRaw } from 'vue-router';
-import { useRouter } from 'vue-router';
+import { type RouteLocationRaw, useRouter } from 'vue-router';
 import { computed } from 'vue';
 
 const props = defineProps<{
+  /** Content mode, to display a text title or an image */
   contentMode?: 'title' | 'img'
+  /** Title text  */
   title?: string
+  /** Link to add to the content */
   contentTo?: RouteLocationRaw
+  /** Button mode, in first position */
   buttonMode?: 'drawer' | 'back' | 'default-back'
+  /** Default link, used as a fallback value when no history is found with the buttonMode set to 'back'  */
   defaultBackTo?: RouteLocationRaw
 }>()
 

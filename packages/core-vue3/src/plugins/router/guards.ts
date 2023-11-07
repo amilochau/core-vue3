@@ -3,7 +3,7 @@ import type { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-r
 
 export const registerGuards = (router: Router, identityStore: any, appStore: any, options: MilochauCoreOptions) => {
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    
+
     // Hide snackbar if lang changes
     if (to.params.lang !== from.params.lang) {
       appStore.hideMessage('snackbar')
