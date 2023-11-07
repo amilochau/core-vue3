@@ -124,7 +124,7 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
     settings: IHttpSettings,
     request: (absoluteUrl: string, requestInit: RequestInit) => Promise<Response>) => {
 
-    var response: Response;
+    let response: Response;
 
     if (!coreOptions.apiEnabled) {
       throw 'API integration is not configured.'

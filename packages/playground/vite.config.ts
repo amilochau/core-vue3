@@ -13,9 +13,9 @@ import { execSync } from 'child_process'
 
 setDefaultResultOrder('verbatim')
 
-var buildDate = new Date().toISOString()
-var commitSha = execSync('git rev-parse --short HEAD').toString().split('\n')[0]
-var commitDate = execSync('git log -1 --format=%cI').toString().split('\n')[0]
+let buildDate = new Date().toISOString()
+let commitSha = execSync('git rev-parse --short HEAD').toString().split('\n')[0]
+let commitDate = execSync('git log -1 --format=%cI').toString().split('\n')[0]
 
 export default defineConfig({
   plugins: [

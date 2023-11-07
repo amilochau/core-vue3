@@ -6,10 +6,6 @@ parserOptions:
   parser: '@typescript-eslint/parser'
   sourceType: module
 rules:
-  vue/html-closing-bracket-newline:
-    - error
-    - singleline: never
-      multiline: never
   # ===== Vue uncategorized rules - https://eslint.vuejs.org/rules/#uncategorized
   vue/block-lang: # Only '<script>' blocks with 'lang="ts"' are allowed
     - error
@@ -48,6 +44,10 @@ rules:
     - error
     - type-based
   vue/html-button-has-type: error # Enforce using <button> with an explicit 'type' attribute
+  vue/html-closing-bracket-newline: # Disallow line break before tag's closing brackets
+    - error
+    - singleline: never
+      multiline: never
   vue/next-tick-style: error  # Enforce using promise with nextTick
   vue/no-bare-strings-in-template: warn # Enforce translations in '<template>'
   vue/no-boolean-default: error # Disallow boolean properties with a default value to 'true'
@@ -95,7 +95,15 @@ rules:
   # ===== ESLint rules - https://eslint.org/docs/latest/rules/
   no-duplicate-imports: error
   no-import-assign: error
+  no-param-reassign: error
+  no-return-await: error
+  no-self-compare: error
+  no-tabs: error
+  no-trailing-spaces: error
+  no-useless-constructor: error
   no-useless-rename: error
+  no-useless-return: error
+  no-var: error
   sort-imports:
     - error
     - ignoreDeclarationSort: true

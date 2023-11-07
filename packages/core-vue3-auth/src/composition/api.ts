@@ -129,7 +129,7 @@ export const useApi = (relativeBaseUri: string) => {
     settings: IHttpSettings,
     request: (absoluteUrl: string, requestInit: RequestInit) => Promise<Response>) => {
 
-    var response: Response;
+    let response: Response;
 
     if (!coreOptions.apiEnabled) {
       throw 'API integration is not configured.'
@@ -140,7 +140,7 @@ export const useApi = (relativeBaseUri: string) => {
     }
 
     // Get bearer token for API
-    var accessToken = '';
+    let accessToken = '';
 
     try {
       accessToken = await getToken()

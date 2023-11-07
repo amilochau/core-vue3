@@ -29,7 +29,7 @@
 import { useCoreOptions } from '../../../composition';
 import { useAppStore } from '../../../stores'
 
-var appStore = useAppStore()
+const appStore = useAppStore()
 const coreOptions = useCoreOptions()
 
 const navigationOptions = coreOptions.application.navigation

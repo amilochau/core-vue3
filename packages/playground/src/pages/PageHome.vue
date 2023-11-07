@@ -116,4 +116,3 @@ fr:
   fr:
     openDialog: Ouvrir le dialog
   </i18n>
-  

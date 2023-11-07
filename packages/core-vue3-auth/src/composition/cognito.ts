@@ -66,14 +66,14 @@ export const useCognito = () => {
   const changePassword = async (model: EditPassword) => {
     return processRequest(async () => {
       const user = await Auth.currentAuthenticatedUser()
-      return await Auth.changePassword(user, model.oldPassword, model.password)
+      return Auth.changePassword(user, model.oldPassword, model.password)
     })
   }
 
   const updateAttributes = async (model: EditProfile) => {
     return processRequest(async () => {
       const user = await Auth.currentAuthenticatedUser()
-      return await Auth.updateUserAttributes(user, {
+      return Auth.updateUserAttributes(user, {
         name: model.name,
       })
     })
