@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { AppFooterBar, AppHeaderBar } from '../components';
+import { AppFooterBar } from '../components';
+import { AppHeaderBar } from '../components';
 import AppNavigationDrawer from '../components/app/layout/AppNavigationDrawer.vue'
 import AppCookies from '../components/app/layout/AppCookies.vue'
 import AppSnackbar from '../components/app/layout/AppSnackbar.vue'
