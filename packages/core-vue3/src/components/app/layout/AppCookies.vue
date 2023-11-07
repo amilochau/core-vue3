@@ -44,17 +44,6 @@ const { t } = useI18n()
 const cookiesStore = useCookiesStore()
 </script>
 
-<style lang="sass" scoped>
-.cookies-menu
-  position: fixed !important
-  bottom: 0
-  width: 100%
-  z-index: 1002
-
-.cookies-title
-  line-height: 1.2
-</style>
-
 <i18n lang="yaml">
 en:
   title: This website uses cookies to work.
@@ -67,3 +56,14 @@ fr:
   accept: Accepter
   refuse: Refuser
 </i18n>
+
+<style lang="sass" scoped>
+.cookies-menu
+  position: fixed !important
+  bottom: 0
+  width: 100%
+  z-index: 1002
+
+.cookies-title
+  line-height: 1.2
+</style>

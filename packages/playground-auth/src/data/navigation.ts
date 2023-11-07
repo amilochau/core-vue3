@@ -1,5 +1,5 @@
 import { useIdentityStore } from '@amilochau/core-vue3/stores'
-import { mdiHome, mdiCogOutline, mdiCardAccountDetailsOutline, mdiPower, mdiChatOutline, mdiOpenInNew } from '@mdi/js'
+import { mdiCardAccountDetailsOutline, mdiChatOutline, mdiCogOutline, mdiHome, mdiOpenInNew, mdiPower } from '@mdi/js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -29,7 +29,7 @@ export default computed(() => {
     contact: 'Contact',
   })
 
-  const contactUrl = computed(() => `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`)
+  const contactUrl = `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`
 
   return {
     items: [
@@ -41,7 +41,7 @@ export default computed(() => {
         ? [{ title: t('profile'), prependIcon: mdiCardAccountDetailsOutline, to: { name: 'Profile' } }]
         : [{ title: t('login'), prependIcon: mdiPower, to: { name: 'Login' } }],
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
-      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl.value, target: "_blank", rel: "noopener" },
+      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: "_blank", rel: "noopener noreferrer" },
     ],
   }
 })

@@ -6,16 +6,17 @@
     hide-details="auto"
     class="mb-1">
     <v-field
-      :label="labels.title"
+      :label="label"
       :focused="focused"
       variant="plain"
       active>
       <div class="colors-grid">
         <div
-          v-for="(color, i) in bullets"
+          v-for="(color, i) in colors"
           :key="i"
           :style="{ 'background-color': color }"
-          :class="{ 'colors-grid-cell': true, 'colors-grid-cell__selected': color === modelValue }"
+          class="colors-grid-cell"
+          :class="{ 'colors-grid-cell__selected': color === modelValue }"
           tabindex="0"
           @focus="focused = true"
           @blur="focused = false"
@@ -70,18 +71,22 @@
 
 <script setup lang="ts">
 import { swatches } from '../../data/swatches'
-import { mdiCheck, mdiPalette, mdiClose } from "@mdi/js"
-import { computed, ref, watch, type Ref } from 'vue';
+import { mdiCheck, mdiClose, mdiPalette } from "@mdi/js"
+import { type Ref, computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const modelValue = defineModel<string | undefined>()
-
 const props = defineProps<{
-  labelTitle?: string
+  /** Title used as the input label */
+  label: string
+  /** Title used for the reset button, in the detailed dialog */
   resetTitle?: string,
+  /** Title used for the save button, in the detailed dialog */
   saveTitle?: string,
-  bullets: string[],
+  /** Colors used as values */
+  colors: string[],
 }>()
+
+const modelValue = defineModel<string | undefined>()
 
 const { t } = useI18n()
 
@@ -105,7 +110,6 @@ watch(modelValue, () => {
 
 const labels = computed(() => {
   return {
-    title: props.labelTitle ?? t('title'),
     reset: props.resetTitle ?? t('reset'),
     save: props.saveTitle ?? t('save'),
   }
@@ -114,11 +118,9 @@ const labels = computed(() => {
 
 <i18n lang="yaml">
 en:
-  title: Color
   reset: Reset
   save: Save
 fr:
-  title: Couleur
   reset: Supprimer
   save: Sauvegarder
 </i18n>

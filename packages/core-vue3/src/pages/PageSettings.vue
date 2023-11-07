@@ -142,7 +142,7 @@
 </template>
 
 <script setup lang="ts">
-import { mdiBrightness6, mdiEarth, mdiGavel, mdiApplicationBraces, mdiCalendarEdit, mdiCalendarImport, mdiCalendarMinus, mdiUpdate, mdiBellOutline, mdiBellPlus, mdiBellMinus, mdiBellCheckOutline, mdiBellAlertOutline } from '@mdi/js'
+import { mdiApplicationBraces, mdiBellAlertOutline, mdiBellCheckOutline, mdiBellMinus, mdiBellOutline, mdiBellPlus, mdiBrightness6, mdiCalendarEdit, mdiCalendarImport, mdiCalendarMinus, mdiEarth, mdiGavel, mdiUpdate } from '@mdi/js'
 import { AppResponsiveForm, CardSectionTitle } from '../components'
 import { useI18n } from 'vue-i18n';
 import { useNotifications, usePage } from '../composition';

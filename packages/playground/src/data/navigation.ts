@@ -1,4 +1,4 @@
-import { mdiCog, mdiHome, mdiCogOutline, mdiChatOutline, mdiOpenInNew } from '@mdi/js'
+import { mdiChatOutline, mdiCog, mdiCogOutline, mdiHome, mdiOpenInNew } from '@mdi/js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -31,7 +31,7 @@ export default computed(() => {
     appendItems: [
       { type: 'subheader', title: t('settingsAndSupport') },
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
-      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: "_blank", rel: "noopener" },
+      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: "_blank", rel: "noopener noreferrer" },
     ],
   }
 })

@@ -16,7 +16,7 @@
         :prepend-icon="cancelIconOrDefault"
         variant="text"
         color="grey-lighten-2"
-        @click="emits('close')">
+        @click="emit('close')">
         {{ cancelTitleOrDefault }}
       </v-btn>
       <v-btn
@@ -24,7 +24,7 @@
         :loading="loading"
         :prepend-icon="saveIconOrDefault"
         variant="text"
-        @click="emits('save')">
+        @click="emit('save')">
         {{ saveTitleOrDefault }}
       </v-btn>
     </template>
@@ -39,22 +39,24 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+const props = defineProps<{
+  /** Title text for the cancel button */
+  cancelTitle?: string,
+  /** Icon for the cancel button */
+  cancelIcon?: string,
+  /** Title text for the save button */
+  saveTitle?: string,
+  /** Icon for the save button */
+  saveIcon?: string
+}>()
+const emit = defineEmits<{
+  (eventName: 'close'): void,
+  (eventName: 'save'): void
+}>()
 const appStore = useAppStore()
 const { loading } = storeToRefs(appStore)
 const online = useOnline()
 const { t } = useI18n()
-
-const props = defineProps<{
-  cancelTitle?: string,
-  cancelIcon?: string,
-  saveTitle?: string,
-  saveIcon?: string
-}>()
-
-const emits = defineEmits<{
-  (eventName: 'close'): void,
-  (eventName: 'save'): void
-}>()
 
 const cancelTitleOrDefault = computed(() => props.cancelTitle ?? t('cancel'))
 const cancelIconOrDefault = computed(() => props.cancelIcon ?? undefined)

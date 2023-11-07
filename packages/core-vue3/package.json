@@ -67,28 +67,5 @@
     "vue-router": "^4.2.5",
     "vue-tsc": "^1.8.22",
     "vuetify": "^3.3.23"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "vue/setup-compiler-macros": true
-    },
-    "extends": [
-      "plugin:vue/vue3-recommended"
-    ],
-    "parser": "vue-eslint-parser",
-    "parserOptions": {
-      "parser": "@typescript-eslint/parser",
-      "sourceType": "module"
-    },
-    "rules": {
-      "vue/html-closing-bracket-newline": [
-        "error",
-        {
-          "singleline": "never",
-          "multiline": "never"
-        }
-      ]
-    }
   }
 }

@@ -26,7 +26,7 @@
         size="small"
         variant="text"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         class="mb-1">
         {{ t('contact') }}
       </v-btn>
@@ -38,7 +38,7 @@
         size="small"
         variant="text"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         class="mb-1">
         {{ item.title }}
       </v-btn>
@@ -77,11 +77,11 @@ import { useThemeStore } from '../../../../stores';
 import { mdiBrightness6, mdiEarth } from '@mdi/js';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoute } from 'vue-router';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useTheme } from 'vuetify'
 
 const props = defineProps<{
+  /** Bar items */
   items?: {
     link: string,
     title: string,
@@ -106,7 +106,6 @@ const languagesItems = computed(() => ([
   { title: t('languages.english'), lang: 'en' },
   { title: t('languages.french'), lang: 'fr' },
 ]))
-
 </script>
 
 <i18n lang="yaml">

@@ -1,5 +1,4 @@
-import { createPinia } from 'pinia'
-import type { PiniaPluginContext } from 'pinia'
+import { type PiniaPluginContext, createPinia } from 'pinia'
 import type { App } from 'vue';
 import type { MilochauCoreOptions } from '../types/options';
 

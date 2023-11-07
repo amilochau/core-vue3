@@ -1,5 +1,5 @@
 import { computed } from "vue"
-import { useRouter, type RouteLocationRaw } from "vue-router"
+import { type RouteLocationRaw, useRouter } from "vue-router"
 
 export const useNavigation = () => {
   const router = useRouter()

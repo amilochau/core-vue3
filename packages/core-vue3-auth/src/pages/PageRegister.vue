@@ -67,10 +67,10 @@
 
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
-import { mdiAccountPlusOutline, mdiAccountPlus, mdiAccount, mdiAt, mdiLock, mdiAccountLockOutline } from '@mdi/js';
+import { mdiAccount, mdiAccountLockOutline, mdiAccountPlus, mdiAccountPlusOutline, mdiAt, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
-import { computed, ref, type Ref } from 'vue';
+import { type Ref, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { Register } from '../types';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';

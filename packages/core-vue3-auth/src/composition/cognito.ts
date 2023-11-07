@@ -1,4 +1,4 @@
-import { type EditPassword, type ConfirmEmail, type ForgotPassword, type Login, type Register, type ResetPassword, type EditProfile } from "../types"
+import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword } from "../types"
 import { Auth } from '@aws-amplify/auth';
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';

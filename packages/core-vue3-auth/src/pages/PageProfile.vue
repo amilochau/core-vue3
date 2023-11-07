@@ -17,12 +17,12 @@
 
 <script setup lang="ts">
 import { AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/components';
-import { mdiCardAccountDetailsOutline, mdiAccountOff, mdiAccount, mdiAt, mdiLockReset, mdiAccountEdit, mdiPower } from '@mdi/js';
+import { mdiAccount, mdiAccountEdit, mdiAccountOff, mdiAt, mdiCardAccountDetailsOutline, mdiLockReset, mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { usePage, useClean } from '@amilochau/core-vue3/composition';
+import { useClean, usePage } from '@amilochau/core-vue3/composition';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n()

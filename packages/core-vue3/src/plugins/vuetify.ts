@@ -2,10 +2,9 @@ import type { App } from 'vue'
 import type { MilochauCoreOptions } from '../types/options'
 
 // Vuetify
-import { createVuetify } from 'vuetify'
+import { type VuetifyOptions, createVuetify } from 'vuetify'
 import { en, fr } from 'vuetify/locale'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import type { VuetifyOptions } from 'vuetify'
 
 export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   const defaultVuetifyOptions: VuetifyOptions = {

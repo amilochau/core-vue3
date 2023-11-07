@@ -1,5 +1,5 @@
-import { fileURLToPath, URL } from 'node:url'
-import { defineConfig, type PluginOption } from 'vite'
+import { URL, fileURLToPath } from 'node:url'
+import { type PluginOption, defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'

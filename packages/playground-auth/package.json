@@ -19,26 +19,6 @@
     "@amilochau/core-vue3": "file:packages/core-vue3",
     "@amilochau/core-vue3-auth": "file:packages/core-vue3-auth"
   },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "plugin:vue/vue3-recommended"
-    ],
-    "parser": "vue-eslint-parser",
-    "parserOptions": {
-      "parser": "@typescript-eslint/parser",
-      "sourceType": "module"
-    },
-    "rules": {
-      "vue/html-closing-bracket-newline": [
-        "error",
-        {
-          "singleline": "never",
-          "multiline": "never"
-        }
-      ]
-    }
-  },
   "devDependencies": {
     "rollup-plugin-visualizer": "^5.9.2"
   }
