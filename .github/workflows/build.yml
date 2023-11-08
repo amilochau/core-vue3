@@ -14,7 +14,6 @@ on:
     - packages/**
 
 env:
-  PROJECT_UI_OUTPUT: '/packages/core-vue3'
   PROJECT_UI_BUILD: 'build --workspaces --if-present'
   PROJECT_UI_LINT: 'lint --workspaces --if-present'
 
@@ -23,10 +22,9 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build project
-        uses: amilochau/github-actions/build/node@v3
+        uses: amilochau/github-actions/build/node@v4
         with:
-          relativeOutputPath: ${{ env.PROJECT_UI_OUTPUT }}
-          npmBuildScript: ${{ env.PROJECT_UI_BUILD }}
-          npmLintScript: ${{ env.PROJECT_UI_LINT }}
+          npmBuildCommand: ${{ env.PROJECT_UI_BUILD }}
+          npmLintCommand: ${{ env.PROJECT_UI_LINT }}
