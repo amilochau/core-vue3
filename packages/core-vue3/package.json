@@ -10,7 +10,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amilochau/core-vue3.git",
-    "directory": "package"
+    "directory": "packages/core-vue3"
   },
   "keywords": [
     "vuejs",
