@@ -9,7 +9,7 @@
         variant="text"
         @click="emit('click')" />
     </template>
-    <span>{{ t(tooltipText) }}</span>
+    <span>{{ tooltipText }}</span>
   </v-tooltip>
 </template>
 

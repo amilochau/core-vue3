@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3-auth",
-  "version": "0.8.0-beta.14",
+  "version": "0.8.0-beta.15",
   "description": "Core plugin for vue.js (v3) projects, for authentication",
   "author": "Antoine Milochau",
   "license": "MIT",
@@ -42,7 +42,7 @@
     "@aws-amplify/auth": "^5.6.5"
   },
   "peerDependencies": {
-    "@amilochau/core-vue3": "0.8.0-beta.14"
+    "@amilochau/core-vue3": "0.8.0-beta.15"
   },
   "devDependencies": {
     "@amilochau/core-vue3": "file:packages/core-vue3"

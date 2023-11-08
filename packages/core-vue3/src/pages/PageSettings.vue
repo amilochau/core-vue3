@@ -26,7 +26,7 @@
           v-for="(languageItem, i) in languageItems"
           :key="i"
           :value="languageItem.lang"
-          :to="{ params: { lang: languageItem.lang }, query: route.query, replace: true }">
+          @click="changeLang(languageItem.lang)">
           {{ languageItem.title }}
         </v-chip>
       </v-chip-group>
@@ -146,10 +146,10 @@ import { mdiApplicationBraces, mdiBellAlertOutline, mdiBellCheckOutline, mdiBell
 import { AppResponsiveForm, CardSectionTitle } from '../components'
 import { useI18n } from 'vue-i18n';
 import { useNotifications, usePage } from '../composition';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../stores';
 import { useTheme } from 'vuetify'
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import type { BuildData } from '../types';
@@ -161,14 +161,16 @@ declare global {
 }
 
 const { d, t, mergeDateTimeFormat } = useI18n()
+const buttonMode = ref<'back' | 'default-back'>('back')
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
   header: {
-    buttonMode: 'back',
+    buttonMode: buttonMode.value,
     defaultBackTo: { name: 'Home' }
   }
 })))
+const router = useRouter()
 const route = useRoute()
 const themeStore = useThemeStore()
 const theme = useTheme()
@@ -219,6 +221,11 @@ const toggleCookies = (event: any) => {
   } else {
     cookiesStore.refuseCookies()
   }
+}
+
+const changeLang = async (lang: string) => {
+  await router.replace({ params: { lang: lang }, query: route.query })
+  buttonMode.value = 'default-back'
 }
 </script>
 
