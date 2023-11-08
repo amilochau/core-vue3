@@ -40,9 +40,8 @@ import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import BtnCard from '../components/buttons/BtnCard.vue'
 import { useMapsStore } from '../stores';
-import { useMapsApi } from '../composition/maps.api';
 import { useAppStore } from '@amilochau/core-vue3/stores';
-import { useHandle, usePage } from '@amilochau/core-vue3/composition';
+import { usePage } from '@amilochau/core-vue3/composition';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
@@ -66,9 +65,7 @@ usePage(computed(() => ({
   },
 })))
 const mapsStore = useMapsStore()
-const mapsApi = useMapsApi()
 const appStore = useAppStore()
-const { handleLoadAndError } = useHandle()
 const online = useOnline()
 const { formatContactStatus } = useFormat()
 
@@ -77,24 +74,6 @@ const { loading } = storeToRefs(appStore)
 const dialog = ref(false)
 
 const stringDate = '2022-09-01'
-
-const fetchMaps = () => {
-  handleLoadAndError(() => {
-    return mapsApi.get()
-  }, 'snackbar')
-}
-
-const createMarker = () => {
-  handleLoadAndError(() => {
-    return mapsApi.createMarker("8a3f6eabfcc3400aba1adeabe071b8e2")
-  }, 'snackbar')
-}
-
-const editMarker = () => {
-  handleLoadAndError(() => {
-    return mapsApi.editMarker("8a3f6eabfcc3400aba1adeabe071b8e2", "f3b9c83d0bf94cc098bfe92007add022")
-  }, 'snackbar')
-}
 
 const openDialog = () => {
   dialog.value = true
@@ -111,8 +90,8 @@ fr:
 </i18n>
 
 <i18n lang="yaml">
-  en:
-    openDialog: Open dialog
-  fr:
-    openDialog: Ouvrir le dialog
-  </i18n>
+en:
+  openDialog: Open dialog
+fr:
+  openDialog: Ouvrir le dialog
+</i18n>
