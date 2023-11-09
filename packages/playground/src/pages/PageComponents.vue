@@ -8,6 +8,9 @@
               {{ t('longText') }}
             </v-card-title>
           </v-card-item>
+          <v-card-text>
+            <p>{{ t('longText') }}</p>
+          </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="6">
@@ -57,11 +60,17 @@ const boolValue = ref(true)
 
 <i18n lang="yaml">
 en:
-  longText: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  longText: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed,
+    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   text1: Text 1
   text2: Text 2
 fr:
-  longText: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  longText: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed,
+    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   text1: Text 1
   text2: Text 2
 </i18n>

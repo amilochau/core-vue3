@@ -32,11 +32,23 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
       }
     },
     defaults: {
+      // Containment
+      VCard: {
+        class: 'multi-line',
+      },
       VCardTitle: {
         class: 'multi-line',
       },
       VCardSubtitle: {
         class: 'multi-line',
+      },
+      VCardText: {
+        class: 'multi-line',
+      },
+      VDialog: {
+        VForm: {
+          class: 'fill-height overflow-y-auto',
+        },
       },
       VListItemTitle: {
         class: 'multi-line',
@@ -47,26 +59,10 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
       VListSubheader: {
         class: 'multi-line',
       },
-      VTimeline: {
-        align: 'start',
-        density: 'compact',
-        side: 'end',
-        VTimelineItem: {
-          lineInset: 2,
-        },
-      },
       // Form inputs & controls
-      VSwitch: {
-        density: 'comfortable',
-        hideDetails: 'auto',
-        class: "mb-3",
-        color: 'primary',
-      },
-      VTextField: {
+      VInput: {
         variant: 'underlined',
-        density: 'comfortable',
         hideDetails: 'auto',
-        class: "mb-3",
       },
       VTextarea: {
         variant: 'underlined',
@@ -76,13 +72,25 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         autoGrow: true,
         rows: 3,
       },
-      VInput: {
+      VTextField: {
         variant: 'underlined',
+        density: 'comfortable',
         hideDetails: 'auto',
+        class: "mb-3",
       },
-      VDialog: {
-        VForm: {
-          class: 'fill-height overflow-y-auto',
+      VSwitch: {
+        density: 'comfortable',
+        hideDetails: 'auto',
+        class: "mb-3",
+        color: 'primary',
+      },
+      // Feedback
+      VTimeline: {
+        align: 'start',
+        density: 'compact',
+        side: 'end',
+        VTimelineItem: {
+          lineInset: 2,
         },
       },
     }
