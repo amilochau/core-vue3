@@ -1,4 +1,4 @@
-import { createHead } from '@vueuse/head'
+import { createHead } from '@unhead/vue'
 import type { App } from 'vue'
 import type { MilochauCoreOptions } from '../types/options'
 

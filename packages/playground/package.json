@@ -15,6 +15,9 @@
   "files": [
     "packages/core-vue3"
   ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@amilochau/core-vue3": "file:packages/core-vue3"
   },
