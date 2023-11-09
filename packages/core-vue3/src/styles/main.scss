@@ -2,10 +2,8 @@
 
 .multi-line {
   white-space: pre-line !important;
-
-  .v-list-item-title {
-    white-space: pre-line !important;
-  }
+  line-clamp: initial !important;
+  -webkit-line-clamp: initial !important;
 }
 
 .pre-wrap {

@@ -14,6 +14,13 @@
         </v-card>
       </v-col>
       <v-col cols="6">
+        <v-list>
+          <v-list-item
+            :title="t('longText')"
+            :subtitle="t('longText')" />
+        </v-list>
+      </v-col>
+      <v-col cols="6">
         <v-switch
           v-model="boolValue"
           :label="t('text1')" />
