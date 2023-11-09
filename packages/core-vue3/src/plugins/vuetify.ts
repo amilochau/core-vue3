@@ -55,6 +55,7 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
           lineInset: 2,
         },
       },
+      // Form inputs & controls
       VSwitch: {
         density: 'comfortable',
         hideDetails: 'auto',
@@ -74,6 +75,15 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         class: "mb-3",
         autoGrow: true,
         rows: 3,
+      },
+      VInput: {
+        variant: 'underlined',
+        hideDetails: 'auto',
+      },
+      VDialog: {
+        VForm: {
+          class: 'fill-height overflow-y-auto',
+        },
       },
     }
   }

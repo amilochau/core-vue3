@@ -12,7 +12,6 @@
         {{ t('seeComponents') }}
       </v-btn>
 
-      <v-select multiple />
       <v-btn
         :disabled="loading || !online"
         :prepend-icon="mdiGithub"
