@@ -22,8 +22,6 @@
         :icon="mdiGithub"
         tooltip-text="OK" />
 
-      <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
-
       <suspense>
         <div>{{ true }}</div>
         <template #fallback>
@@ -50,8 +48,6 @@ import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useFormat } from '../composition/format';
-import { ContactStatus } from '../types/contacts'
 import { useFormat1 } from '@/composition/format/1'
 import { useFormat2 } from '@/composition/format/2'
 
@@ -72,7 +68,6 @@ usePage(computed(() => ({
 const mapsStore = useMapsStore()
 const appStore = useAppStore()
 const online = useOnline()
-const { formatContactStatus } = useFormat()
 const { formatTest1 } = useFormat1()
 const { formatTest2 } = useFormat2()
 

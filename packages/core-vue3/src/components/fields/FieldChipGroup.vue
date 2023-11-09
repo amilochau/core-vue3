@@ -32,13 +32,13 @@
 
 <script setup lang="ts" generic="TData, TDataValue extends TData | TData[]">
 import { ref } from 'vue';
-import { type FormattedData } from '../../types';
+import { type FormattedDataWithValue } from '../../types';
 
 defineProps<{
   /** Title used as the input label */
   label: string
   /** Values proposed to be selected */
-  values: FormattedData<TData>[]
+  values: FormattedDataWithValue<TData>[]
   /** Validation rules */
   rules?: any[]
   /** Whether multiple values can be selected */

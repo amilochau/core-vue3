@@ -40,7 +40,6 @@
         {{ t('openDialog') }}
       </v-btn>
 
-      <p>{{ formatContactStatus(ContactStatus.InProgress).title }}</p>
       <p>
         {{ attributes }}
       </p>
@@ -63,8 +62,6 @@ import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useFormat } from '../composition/format';
-import { ContactStatus } from '../types/contacts'
 import logoUrl from "@/assets/logo.png"
 
 const { d, t } = useI18n()
@@ -85,7 +82,6 @@ const mapsStore = useMapsStore()
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const online = useOnline()
-const { formatContactStatus } = useFormat()
 
 const { loading } = storeToRefs(appStore)
 const { attributes, isAuthenticated } = storeToRefs(identityStore)

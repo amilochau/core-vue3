@@ -39,7 +39,7 @@
 <script setup lang="ts" generic="TData">
 import { mdiClose } from '@mdi/js'
 import { ref } from 'vue';
-import { type FormattedData } from '../../types';
+import { type FormattedDataWithValue } from '../../types';
 
 defineProps<{
   /** Title used as the input label */
@@ -47,7 +47,7 @@ defineProps<{
   /** Validation rules */
   rules?: any[]
   /** Icons used as values */
-  icons: FormattedData<TData>[]
+  icons: FormattedDataWithValue<TData>[]
 }>()
 
 const modelValue = defineModel<TData | undefined>()
