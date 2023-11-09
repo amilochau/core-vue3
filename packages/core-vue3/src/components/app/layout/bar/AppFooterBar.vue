@@ -2,46 +2,42 @@
   <v-footer
     class="d-print-none d-flex flex-column text-center border-t">
     <div>
-      <v-btn
+      <v-btn-action
         :to="{ name: 'Home' }"
         exact
-        rounded
         size="small"
         variant="text"
         class="mb-1 mr-2">
         {{ t('home') }}
-      </v-btn>
-      <v-btn
+      </v-btn-action>
+      <v-btn-action
         :to="{ name: 'Settings' }"
         exact
-        rounded
         size="small"
         variant="text"
         class="mb-1 mr-2">
         {{ t('settings') }}
-      </v-btn>
-      <v-btn
+      </v-btn-action>
+      <v-btn-action
         :href="`https://contact.milochau.com/${route.params.lang}`"
-        rounded
         size="small"
         variant="text"
         target="_blank"
         rel="noopener noreferrer"
         class="mb-1">
         {{ t('contact') }}
-      </v-btn>
-      <v-btn
+      </v-btn-action>
+      <v-btn-action
         v-for="(item, i) in barItems"
         :key="i"
         :href="item.link"
-        rounded
         size="small"
         variant="text"
         target="_blank"
         rel="noopener noreferrer"
         class="mb-1">
         {{ item.title }}
-      </v-btn>
+      </v-btn-action>
     </div>
     <div>
       <v-btn

@@ -58,7 +58,7 @@ const request: Ref<EditProfile> = ref({
 
 const editProfile = () => handleLoadAndError(async () => {
   await updateAttributes(request.value)
-  appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   await goBack({ name: 'Profile' })
   fetchUserAttributes()
 }, 'snackbar')

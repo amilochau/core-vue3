@@ -88,7 +88,7 @@ const links = computed(() => ([
 
 const register = () => handleLoadAndError(async () => {
   const result = await signUp(request.value)
-  appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
   await router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
 }, 'snackbar')
 </script>

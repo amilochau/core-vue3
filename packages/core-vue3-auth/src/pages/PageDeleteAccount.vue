@@ -70,7 +70,7 @@ const deleteAccount = () => handleLoadAndError(async () => {
   await deleteUser()
   identityStore.isAuthenticated = false
   clean();
-  appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   await router.push({ name: 'Home' })
 }, 'snackbar')
 </script>

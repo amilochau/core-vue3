@@ -2,7 +2,7 @@ import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from "@mdi
 import { useRouter } from "vue-router"
 import { useCognito } from './cognito'
 import { useI18n } from 'vue-i18n'
-import { ApplicationMessage, type IHttpSettings, type IProblemDetails } from "@amilochau/core-vue3/types"
+import { type ApplicationMessage, type IHttpSettings, type IProblemDetails } from "@amilochau/core-vue3/types"
 import { useCoreOptions, } from "@amilochau/core-vue3/composition"
 import { useLanguageStore, } from "@amilochau/core-vue3/stores"
 
@@ -66,7 +66,7 @@ export const useApi = (relativeBaseUri: string) => {
   }
 
   const buildApplicationMessage400 = (problemDetails: IProblemDetails) => {
-    const errorMessage = new ApplicationMessage('', 'error', mdiAlert)
+    const errorMessage = { title: '', color: 'error', icon: mdiAlert } as ApplicationMessage
     if (problemDetails.title) {
       errorMessage.title = problemDetails.title
     }
@@ -92,20 +92,20 @@ export const useApi = (relativeBaseUri: string) => {
   }
   const buildApplicationMessage401 = async () => {
     await router.push({ name: 'Login' })
-    return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
+    return { title: t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage
   }
   const buildApplicationMessage403 = async () => {
     await router.push({ name: 'Forbidden' })
-    return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
+    return { title: t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage
   }
   const buildApplicationMessage404 = async (settings: IHttpSettings) => {
     if (settings.redirect404) {
       await router.push({ name: 'NotFound' })
     }
-    return new ApplicationMessage(t('errors.notFound'), 'error', mdiAlert)
+    return { title: t('errors.notFound'), color: 'error', icon: mdiAlert } as ApplicationMessage
   }
   const buildApplicationMessage500 = () => {
-    return new ApplicationMessage(t('errors.serverError'), 'error', mdiAlert)
+    return { title: t('errors.serverError'), color: 'error', icon: mdiAlert } as ApplicationMessage
   }
 
   const getAbsoluteUrl = (url: string) => {
@@ -148,7 +148,7 @@ export const useApi = (relativeBaseUri: string) => {
       console.error('Authentication token can\'t be used', error)
       signOut()
       await router.push({ name: 'Login' })
-      throw new ApplicationMessage(t('errors.sessionExpired'), 'warning', mdiTimerRefreshOutline)
+      throw { title: t('errors.sessionExpired'), color: 'warning', icon: mdiTimerRefreshOutline } as ApplicationMessage
     }
 
     try {
@@ -156,7 +156,7 @@ export const useApi = (relativeBaseUri: string) => {
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
     } catch (error) {
-      throw new ApplicationMessage(t('errors.networkError'), 'warning', mdiAccessPointNetworkOff)
+      throw { title: t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff } as ApplicationMessage
     }
 
     if (!response.ok) {

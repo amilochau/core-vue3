@@ -45,18 +45,50 @@
           </v-timeline-item>
         </v-timeline>
       </v-col>
+      <v-col cols="6">
+        <v-btn>
+          {{ t('text1') }}
+        </v-btn>
+        <v-btn-action>
+          {{ t('text2') }}
+        </v-btn-action>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { usePage } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n()
+usePage(computed(() => ({
+  title: t('pageTitle'),
+  description: t('pageDescription'),
+  header: {
+    buttonMode: 'back',
+  },
+  footer: {
+    items: [
+      {
+        title: 'GitHub',
+        link: 'https://github.com/amilochau/core-vue3'
+      }
+    ]
+  },
+})))
 const boolValue = ref(true)
 </script>
 
+<i18n lang="yaml">
+en:
+  pageTitle: Components
+  pageDescription: Components test page
+fr:
+  pageTitle: Composants
+  pageDescription: Page de test de composants
+</i18n>
 
 <i18n lang="yaml">
 en:

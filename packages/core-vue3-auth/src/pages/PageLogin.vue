@@ -74,7 +74,7 @@ const links = computed(() => ([
 const login = () => handleLoadAndError(async () => {
   await authenticateUser(request.value)
   fetchUserAttributes()
-  appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   if (route.query.returnUrl) {
     await router.replace(route.query.returnUrl.toString())
   } else {

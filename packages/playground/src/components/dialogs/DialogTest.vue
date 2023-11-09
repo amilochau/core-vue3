@@ -41,7 +41,7 @@ import { storeToRefs } from 'pinia';
 import { type Ref, ref, watch } from "vue";
 import { CardActions, CardMessages, CardTitleClosable } from "@amilochau/core-vue3/components"
 import { MapsCreateRequest } from "../../types/maps";
-import { ApplicationMessage } from "@amilochau/core-vue3/types";
+import { type ApplicationMessage } from "@amilochau/core-vue3/types";
 import { useAppStore } from "@amilochau/core-vue3/stores";
 import { useHandle, useValidationRules } from "@amilochau/core-vue3/composition";
 import { useDisplay } from "vuetify";
@@ -66,8 +66,8 @@ const save = async () => {
   }
 
   await handleLoadAndError(() => {
-    throw new ApplicationMessage(t('testMessage'), 'error', mdiAlert, `Important details to display in the snackbar
-    New line here`)
+    throw { title: t('testMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
+    New line here` } as ApplicationMessage
   }, 'internal')
 }
 

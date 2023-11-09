@@ -6,6 +6,7 @@ import deepmerge from 'deepmerge'
 import { type VuetifyOptions, createVuetify } from 'vuetify'
 import { en, fr } from 'vuetify/locale'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import { VBtn } from 'vuetify/components'
 
 export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   const defaultVuetifyOptions: VuetifyOptions = {
@@ -31,8 +32,15 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         fr
       }
     },
+    aliases: {
+      VBtnAction: VBtn,
+    },
     defaults: {
       // Containment
+      VBtnAction: {
+        variant: 'tonal',
+        rounded: true,
+      },
       VCard: {
         class: 'multi-line',
       },
@@ -102,4 +110,10 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   app.use(vuetify)
 
   return vuetify
+}
+
+declare module '@vue/runtime-core' {
+  export interface GlobalComponents {
+    VBtnAction: typeof import('vuetify/components/VBtn')['VBtn']
+  }
 }

@@ -2,14 +2,14 @@
   <h2 class="mb-2 text-h6">
     {{ t("title") }}
   </h2>
-  <v-btn
+  <v-btn-action
     :disabled="loading"
     :to="{ name: 'Login' }"
     class="mt-12"
     color="primary"
     large>
     {{ t("button") }}
-  </v-btn>
+  </v-btn-action>
 </template>
 
 <script setup lang="ts">

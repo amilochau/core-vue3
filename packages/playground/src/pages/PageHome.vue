@@ -5,20 +5,20 @@
       <home-messages />
       <p>{{ d(stringDate) }}</p>
 
-      <v-btn
+      <v-btn-action
         :to="{ name: 'Components' }"
         color="primary"
         class="my-6">
         {{ t('seeComponents') }}
-      </v-btn>
+      </v-btn-action>
 
-      <v-btn
+      <v-btn-action
         :disabled="loading || !online"
         :prepend-icon="mdiGithub"
         color="primary"
         @click="openDialog">
         {{ t('openDialog') }}
-      </v-btn>
+      </v-btn-action>
 
       {{ formatTest1("test").title }}
       {{ formatTest2("test").title }}

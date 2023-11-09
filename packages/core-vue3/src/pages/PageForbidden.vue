@@ -8,14 +8,12 @@
       <p class="mb-4">
         {{ t('description') }}
       </p>
-      <v-btn
+      <v-btn-action
         :disabled="loading"
         :to="{ name: 'Home' }"
-        variant="outlined"
-        color="primary"
-        rounded>
+        color="primary">
         {{ t('buttonText') }}
-      </v-btn>
+      </v-btn-action>
     </div>
   </app-responsive>
 </template>

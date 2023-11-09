@@ -9,16 +9,14 @@
       <v-card-text
         v-if="button"
         class="text-center">
-        <v-btn
+        <v-btn-action
           :disabled="loading || !online || button.disabled"
           :loading="loading"
           :prepend-icon="button.icon"
           :color="button.color"
-          variant="tonal"
-          rounded
           @click="onButtonClick">
           {{ button.title }}
-        </v-btn>
+        </v-btn-action>
       </v-card-text>
     </v-card>
   </v-form>

@@ -66,7 +66,7 @@ const request: Ref<ConfirmEmail> = ref({
 
 const verifyCode = () => handleLoadAndError(async () => {
   await confirmRegistration(request.value)
-  appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
   await router.replace({ name: 'Login', query: { email: request.value.email } })
 }, 'snackbar')
 </script>

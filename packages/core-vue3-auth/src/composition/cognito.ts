@@ -2,7 +2,7 @@ import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPass
 import { Auth } from '@aws-amplify/auth';
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
-import { ApplicationMessage } from '@amilochau/core-vue3/types';
+import { type ApplicationMessage } from '@amilochau/core-vue3/types';
 import { useCoreOptions } from '@amilochau/core-vue3/composition';
 import { useIdentityStore } from '@amilochau/core-vue3/stores';
 
@@ -27,7 +27,7 @@ export const useCognito = () => {
     try {
       return await request()
     } catch (error) {
-      throw new ApplicationMessage(t('errorMessage'), 'error', mdiAlert, error as string)
+      throw { title: t('errorMessage'), color: 'error', icon: mdiAlert, details: error as string } as ApplicationMessage
     }
   }
 

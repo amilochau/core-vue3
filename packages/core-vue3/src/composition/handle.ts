@@ -1,4 +1,3 @@
-import { ApplicationMessage } from "../types";
 import { useOnline } from "@vueuse/core";
 import { storeToRefs } from "pinia";
 import type { Ref } from "vue";
@@ -51,13 +50,15 @@ export const useHandle = () => {
   const handleError = async <TResponse>(request: () => Promise<TResponse>, destination: 'snackbar' | 'internal') => {
     try {
       return await request();
-    } catch (error) {
-      if (error instanceof ApplicationMessage) {
-        appStore.displayMessage(error as ApplicationMessage, destination)
-      } else {
-        console.error(error)
-        appStore.displayMessage(new ApplicationMessage(t('internalError.title'), 'error', mdiAlert, t('internalError.desc')), destination)
-      }
+    } catch (error: any) {
+      console.error(error)
+      appStore.displayMessage({
+        title: error.title ?? t('internalError.title'),
+        color: error.color ?? 'error',
+        icon: error.icon ?? mdiAlert,
+        details: error.details ?? t('internalError.desc'),
+        timeout_ms: error.timeout_ms,
+      }, destination)
     }
   }
 
