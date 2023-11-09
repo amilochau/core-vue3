@@ -17,10 +17,6 @@
         :label="t('name')"
         :prepend-icon="mdiAccount"
         :rules="[ required(), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="name"
         type="text"
         required />
@@ -29,10 +25,6 @@
         :label="t('email')"
         :prepend-icon="mdiAt"
         :rules="[ required(), maxLength(200), emailAddress() ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="email"
         type="email"
         inputmode="email"
@@ -42,10 +34,6 @@
         :label="t('password')"
         :prepend-icon="mdiLock"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="new-password"
         type="password"
         required />
@@ -54,10 +42,6 @@
         :label="t('confirmationPassword')"
         :prepend-icon="mdiLock"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="new-password"
         type="password"
         required />
@@ -104,7 +88,7 @@ const links = computed(() => ([
 
 const register = () => handleLoadAndError(async () => {
   const result = await signUp(request.value)
-  appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
   await router.push({ name: 'ConfirmEmail', query: { email: result?.user.getUsername() } })
 }, 'snackbar')
 </script>

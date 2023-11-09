@@ -17,10 +17,6 @@
         :label="t('email')"
         :prepend-icon="mdiAt"
         :rules="[ required(), maxLength(200), emailAddress() ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="email"
         type="email"
         inputmode="email"
@@ -30,10 +26,6 @@
         :label="t('password')"
         :prepend-icon="mdiLock"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="current-password"
         type="password"
         required />
@@ -82,7 +74,7 @@ const links = computed(() => ([
 const login = () => handleLoadAndError(async () => {
   await authenticateUser(request.value)
   fetchUserAttributes()
-  appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   if (route.query.returnUrl) {
     await router.replace(route.query.returnUrl.toString())
   } else {

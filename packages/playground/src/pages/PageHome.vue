@@ -3,17 +3,22 @@
     <div class="text-center">
       <home-welcome />
       <home-messages />
-      <p>{{ mapsStore.items }}</p>
       <p>{{ d(stringDate) }}</p>
 
-      <v-select multiple />
-      <v-btn
+      <v-btn-action
+        :to="{ name: 'Components' }"
+        color="primary"
+        class="my-6">
+        {{ t('seeComponents') }}
+      </v-btn-action>
+
+      <v-btn-action
         :disabled="loading || !online"
         :prepend-icon="mdiGithub"
         color="primary"
         @click="openDialog">
         {{ t('openDialog') }}
-      </v-btn>
+      </v-btn-action>
 
       {{ formatTest1("test").title }}
       {{ formatTest2("test").title }}
@@ -40,7 +45,6 @@ import { mdiGithub } from '@mdi/js'
 import HomeWelcome from '../components/home/HomeWelcome.vue'
 import HomeMessages from '../components/home/HomeMessages.vue'
 import BtnCard from '../components/buttons/BtnCard.vue'
-import { useMapsStore } from '../stores';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { usePage } from '@amilochau/core-vue3/composition';
 import DialogTest from '../components/dialogs/DialogTest.vue';
@@ -65,7 +69,6 @@ usePage(computed(() => ({
     ]
   },
 })))
-const mapsStore = useMapsStore()
 const appStore = useAppStore()
 const online = useOnline()
 const { formatTest1 } = useFormat1()
@@ -94,6 +97,8 @@ fr:
 <i18n lang="yaml">
 en:
   openDialog: Open dialog
+  seeComponents: See components
 fr:
   openDialog: Ouvrir le dialog
+  seeComponents: Voir les composants
 </i18n>

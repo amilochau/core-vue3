@@ -9,10 +9,6 @@
       <v-switch
         :model-value="themeStore.darkMode"
         :label="t('display.darkMode')"
-        density="comfortable"
-        hide-details="auto"
-        color="primary"
-        class="mb-3"
         @update:model-value="toggleTheme" />
       <v-divider class="my-4" />
       <card-section-title
@@ -37,10 +33,6 @@
       <v-switch
         :model-value="!cookiesStore.showCookies && cookiesStore.accepted"
         :label="t('privacy.cookies')"
-        density="comfortable"
-        hide-details="auto"
-        color="primary"
-        class="mb-3"
         @update:model-value="toggleCookies" />
       <v-alert
         v-if="!cookiesStore.showCookies && cookiesStore.expiration"
@@ -73,30 +65,26 @@
           {{ t('notifications.disabled') }}
         </p>
         <div class="text-center">
-          <v-btn
+          <v-btn-action
             v-if="notifications.isRegistred.value"
             :disabled="loading || !online"
             :loading="loading"
             :prepend-icon="mdiBellMinus"
             class="my-2"
             color="warning"
-            variant="outlined"
-            rounded
             @click="notifications.unsubscribe">
             {{ t('notifications.unsubscribe') }}
-          </v-btn>
-          <v-btn
+          </v-btn-action>
+          <v-btn-action
             v-else
             :disabled="loading || !online"
             :loading="loading"
             :prepend-icon="mdiBellPlus"
             class="my-2"
             color="primary"
-            variant="tonal"
-            rounded
             @click="notifications.subscribe">
             {{ t('notifications.subscribe') }}
-          </v-btn>
+          </v-btn-action>
         </div>
         <v-divider class="my-4" />
       </template>
@@ -117,17 +105,15 @@
         <p class="text-left">
           {{ t('version.update.desc') }}
         </p>
-        <v-btn
+        <v-btn-action
           :disabled="updateLoading || loading || !online"
           :prepend-icon="mdiUpdate"
           :loading="loading"
           color="primary"
-          variant="tonal"
-          rounded
           class="mt-2"
           @click="pwaStore.update">
           {{ t('version.update.action') }}
-        </v-btn>
+        </v-btn-action>
       </v-alert>
       <v-alert
         v-else

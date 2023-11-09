@@ -32,13 +32,12 @@
       <home-login v-if="!isAuthenticated" />
 
       <p>{{ mapsStore.items }}</p>
-      <v-select multiple />
-      <v-btn
+      <v-btn-action
         :disabled="loading || !online"
         color="primary"
         @click="openDialog">
         {{ t('openDialog') }}
-      </v-btn>
+      </v-btn-action>
 
       <p>
         {{ attributes }}

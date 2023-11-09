@@ -2,8 +2,6 @@
   <v-input
     v-model:model-value="modelValue"
     :focused="focused"
-    density="comfortable"
-    hide-details="auto"
     class="mb-1">
     <v-field
       :label="label"

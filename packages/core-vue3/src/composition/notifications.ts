@@ -68,7 +68,7 @@ export const useNotifications = () => {
       const permissionResult = await Notification.requestPermission();
       if (permissionResult !== 'granted') {
         // Permission not granted
-        appStore.displayErrorMessage(t('permissionsNotGranted'), undefined, 'snackbar')
+        appStore.displayErrorMessage({ title: t('permissionsNotGranted') }, 'snackbar')
         return;
       }
 
@@ -184,7 +184,7 @@ export const useNotifications = () => {
       if (Notification.permission !== 'granted') {
         await unsubscribe();
         // Permission not granted
-        appStore.displayErrorMessage(t('permissionsRemoved'), t('permissionsRemovedDesc'), 'snackbar')
+        appStore.displayErrorMessage({ title: t('permissionsRemoved'), details: t('permissionsRemovedDesc'), timeout_ms: 30000 }, 'snackbar')
         return;
       }
 
@@ -195,7 +195,7 @@ export const useNotifications = () => {
       }
     } catch (error) {
       console.error('Error on subscription update', error)
-      appStore.displayErrorMessage(t('unregistredSubscription'), t('unregistredSubscriptionDesc'), 'snackbar')
+      appStore.displayErrorMessage({ title: t('unregistredSubscription'), details: t('unregistredSubscriptionDesc'), timeout_ms: 30000 }, 'snackbar')
     }
   }
 

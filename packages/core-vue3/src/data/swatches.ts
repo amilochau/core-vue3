@@ -1,4 +1,4 @@
-const swatches = [
+export const swatches = [
   [
     "#880E4F",
     "#A52714",
@@ -41,7 +41,7 @@ const swatches = [
   ]
 ]
 
-const bullets = [
+export const bullets = [
   "#880E4F",
   "#A52714",
   "#C2185B",
@@ -74,7 +74,7 @@ const bullets = [
   "#BDBDBD",
 ]
 
-const shortBullets = [
+export const shortBullets = [
   "#C2185B",
   "#FF5252",
   "#0F9D58",
@@ -86,8 +86,3 @@ const shortBullets = [
 ]
 
 export default swatches;
-export {
-  swatches,
-  bullets,
-  shortBullets,
-}

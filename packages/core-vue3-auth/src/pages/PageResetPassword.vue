@@ -16,10 +16,6 @@
         :label="t('email')"
         :prepend-icon="mdiAt"
         :rules="[ required(), maxLength(200), emailAddress() ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="email"
         type="email"
         inputmode="email"
@@ -29,10 +25,6 @@
         :label="t('password')"
         :prepend-icon="mdiLock"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="new-password"
         type="password"
         required />
@@ -41,10 +33,6 @@
         :label="t('confirmationPassword')"
         :prepend-icon="mdiLock"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="new-password"
         type="password"
         required />
@@ -53,10 +41,6 @@
         :label="t('code')"
         :prepend-icon="mdiNumeric"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="one-time-code"
         required />
     </v-card-text>
@@ -99,7 +83,7 @@ const request: Ref<ResetPassword> = ref({
 
 const reset = () => handleLoadAndError(async () => {
   await confirmPassword(request.value);
-  appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
   await router.replace({ name: 'Login', query: { email: request.value.email } })
 }, 'snackbar')
 </script>

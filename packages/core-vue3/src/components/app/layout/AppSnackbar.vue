@@ -1,8 +1,8 @@
 <template>
   <v-snackbar
     v-model="display"
-    :timeout="snackbarMessage.timeout_ms"
-    :color="snackbarMessage.color"
+    :timeout="snackbarMessage.timeout_ms ?? 10000"
+    :color="snackbarMessage.color ?? 'primary'"
     :close-on-back="false"
     top
     right
@@ -18,7 +18,7 @@
       </v-col>
       <v-col class="py-0 d-flex flex-grow-0">
         <v-btn
-          v-if="snackbarMessage.details"
+          v-if="snackbarMessage.details && snackbarMessage.details.length"
           variant="text"
           :icon="expanded ? mdiChevronUp : mdiChevronDown"
           size="small"
@@ -34,7 +34,7 @@
         </div>
       </v-col>
       <v-col
-        v-if="expanded && snackbarMessage.details"
+        v-if="expanded && snackbarMessage.details && snackbarMessage.details.length"
         cols="12">
         <span class="pre-wrap">{{ snackbarMessage.details }}</span>
       </v-col>

@@ -16,10 +16,6 @@
         :label="t('oldPassword')"
         :prepend-icon="mdiLockClock"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="current-password"
         type="password"
         required />
@@ -28,10 +24,6 @@
         :label="t('password')"
         :prepend-icon="mdiLock"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="new-password"
         type="password"
         required />
@@ -40,10 +32,6 @@
         :label="t('confirmationPassword')"
         :prepend-icon="mdiLock"
         :rules="[ required(), minLength(6), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="new-password"
         type="password"
         required />
@@ -84,7 +72,7 @@ const request: Ref<EditPassword> = ref({
 
 const editPassword = () => handleLoadAndError(async () => {
   await changePassword(request.value)
-  appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   await goBack({ name: 'Profile' })
 }, 'snackbar')
 </script>

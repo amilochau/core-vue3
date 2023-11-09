@@ -14,5 +14,8 @@
     "preview:auth": "npm run preview --workspace=packages/playground-auth",
     "lint": "npm run lint --workspaces --if-present",
     "lint:fix": "npm run lint:fix --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

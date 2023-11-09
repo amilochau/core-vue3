@@ -1,7 +1,7 @@
 import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
 import { useRouter } from "vue-router"
 import { useLanguageStore } from "../stores"
-import { ApplicationMessage } from "../types"
+import { type ApplicationMessage } from "../types"
 import type { IHttpSettings, IProblemDetails } from "../types/http"
 import { useCoreOptions } from "./options"
 import { useI18n } from 'vue-i18n'
@@ -65,7 +65,7 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
   }
 
   const buildApplicationMessage400 = (problemDetails: IProblemDetails) => {
-    const errorMessage = new ApplicationMessage('', 'error', mdiAlert)
+    const errorMessage = { title: '', color: 'error', icon: mdiAlert } as ApplicationMessage
     if (problemDetails.title) {
       errorMessage.title = problemDetails.title
     }
@@ -91,20 +91,20 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
   }
   const buildApplicationMessage401 = async () => {
     await router.push({ name: 'Home' })
-    return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
+    return { title: t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage
   }
   const buildApplicationMessage403 = async () => {
     await router.push({ name: 'Forbidden' })
-    return new ApplicationMessage(t('errors.notAuthorized'), 'error', mdiAlert)
+    return { title: t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage
   }
   const buildApplicationMessage404 = async (settings: IHttpSettings) => {
     if (settings.redirect404) {
       await router.push({ name: 'NotFound' })
     }
-    return new ApplicationMessage(t('errors.notFound'), 'error', mdiAlert)
+    return { title: t('errors.notFound'), color: 'error', icon: mdiAlert } as ApplicationMessage
   }
   const buildApplicationMessage500 = () => {
-    return new ApplicationMessage(t('errors.serverError'), 'error', mdiAlert)
+    return { title: t('errors.serverError'), color: 'error', icon: mdiAlert } as ApplicationMessage
   }
 
   const getAbsoluteUrl = (url: string) => {
@@ -135,7 +135,7 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
     } catch (error) {
-      throw new ApplicationMessage(t('errors.networkError'), 'warning', mdiAccessPointNetworkOff)
+      throw { title: t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff } as ApplicationMessage
     }
 
     if (!response.ok) {

@@ -38,8 +38,11 @@
     "./composition": "./src/composition/index.ts",
     "./types": "./src/types/index.ts"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
-    "@aws-amplify/auth": "^5.6.5"
+    "@aws-amplify/auth": "^5.6.6"
   },
   "peerDependencies": {
     "@amilochau/core-vue3": "0.8.0-beta.15"

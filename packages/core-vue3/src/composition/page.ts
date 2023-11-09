@@ -1,5 +1,5 @@
 import { useI18n } from "vue-i18n";
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 import { useCoreOptions } from './options';
 import { type ComputedRef, computed, ref, watch } from "vue";
 import { useAppStore } from "../stores";

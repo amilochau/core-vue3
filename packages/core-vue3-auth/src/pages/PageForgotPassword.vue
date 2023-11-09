@@ -16,10 +16,6 @@
         :label="t('email')"
         :prepend-icon="mdiAt"
         :rules="[ required(), maxLength(200), emailAddress() ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="email"
         type="email"
         inputmode="email"
@@ -60,7 +56,7 @@ const request: Ref<ForgotPassword> = ref({
 
 const reset = () => handleLoadAndError(async () => {
   await forgotPassword(request.value)
-  appStore.displayInfoMessage(t('successMessage'), t('successDetails'), 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
   await router.push({ name: 'ResetPassword', query: { email: request.value.email } })
 }, 'snackbar')
 </script>

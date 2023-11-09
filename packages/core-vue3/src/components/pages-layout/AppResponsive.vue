@@ -42,7 +42,7 @@
         md="8"
         lg="6"
         align="center">
-        <v-btn
+        <v-btn-action
           :disabled="loading || !online || button.disabled"
           :loading="loading"
           :prepend-icon="button.icon"
@@ -50,11 +50,9 @@
           target="_blank"
           rel="noopener noreferrer"
           :color="button.color"
-          variant="tonal"
-          rounded
           @click="button.onClick">
           {{ button.title }}
-        </v-btn>
+        </v-btn-action>
       </v-col>
     </v-row>
     <slot name="append" />

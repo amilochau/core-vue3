@@ -16,10 +16,6 @@
         :label="t('name')"
         :prepend-icon="mdiAccount"
         :rules="[ required(), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="name"
         type="text"
         required />
@@ -62,7 +58,7 @@ const request: Ref<EditProfile> = ref({
 
 const editProfile = () => handleLoadAndError(async () => {
   await updateAttributes(request.value)
-  appStore.displayInfoMessage(t('successMessage'), undefined, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   await goBack({ name: 'Profile' })
   fetchUserAttributes()
 }, 'snackbar')
