@@ -9,10 +9,6 @@
       <v-switch
         :model-value="themeStore.darkMode"
         :label="t('display.darkMode')"
-        density="comfortable"
-        hide-details="auto"
-        color="primary"
-        class="mb-3"
         @update:model-value="toggleTheme" />
       <v-divider class="my-4" />
       <card-section-title
@@ -37,10 +33,6 @@
       <v-switch
         :model-value="!cookiesStore.showCookies && cookiesStore.accepted"
         :label="t('privacy.cookies')"
-        density="comfortable"
-        hide-details="auto"
-        color="primary"
-        class="mb-3"
         @update:model-value="toggleCookies" />
       <v-alert
         v-if="!cookiesStore.showCookies && cookiesStore.expiration"

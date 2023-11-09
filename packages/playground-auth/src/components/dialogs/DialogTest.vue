@@ -19,20 +19,11 @@
             v-model="request.name"
             label="Required text"
             :rules="[ required(), minLength(2) ]"
-            variant="underlined"
-            density="comfortable"
-            hide-details="auto"
-            class="mb-3"
             required />
           <v-textarea
             v-model="request.desc"
             label="Required long test"
-            :rules="[ minLength(10) ]"
-            variant="underlined"
-            density="comfortable"
-            hide-details="auto"
-            class="mb-3"
-            rows="3" />
+            :rules="[ minLength(10) ]" />
         </v-card-text>
         <card-messages />
         <card-actions

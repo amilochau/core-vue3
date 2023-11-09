@@ -16,10 +16,6 @@
         :label="t('name')"
         :prepend-icon="mdiAccount"
         :rules="[ required(), maxLength(200) ]"
-        variant="underlined"
-        density="comfortable"
-        hide-details="auto"
-        class="mb-3"
         autocomplete="name"
         type="text"
         required />
