@@ -15,6 +15,9 @@
         {{ t('openDialog') }}
       </v-btn>
 
+      {{ formatTest1("test").title }}
+      {{ formatTest2("test").title }}
+
       <btn-card
         :icon="mdiGithub"
         tooltip-text="OK" />
@@ -49,6 +52,8 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useFormat } from '../composition/format';
 import { ContactStatus } from '../types/contacts'
+import { useFormat1 } from '@/composition/format/1'
+import { useFormat2 } from '@/composition/format/2'
 
 const { d, t } = useI18n()
 usePage(computed(() => ({
@@ -68,6 +73,8 @@ const mapsStore = useMapsStore()
 const appStore = useAppStore()
 const online = useOnline()
 const { formatContactStatus } = useFormat()
+const { formatTest1 } = useFormat1()
+const { formatTest2 } = useFormat2()
 
 const { loading } = storeToRefs(appStore)
 
