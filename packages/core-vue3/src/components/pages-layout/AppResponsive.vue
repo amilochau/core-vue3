@@ -3,7 +3,7 @@
     :class="{ 'fill-height': fillHeight }">
     <v-row
       v-if="title && !xs"
-      :class="{ 'nx-n4': xs }"
+      :class="{ 'mx-n4': xs }"
       justify="center">
       <v-col
         cols="12"
@@ -23,7 +23,7 @@
     </v-row>
     <slot name="prepend" />
     <v-row
-      :class="{ 'nx-n4': xs }"
+      :class="{ 'mx-n4': xs }"
       justify="center">
       <v-col
         cols="12"
@@ -58,7 +58,7 @@
     <slot name="append" />
     <v-row
       v-if="links && links.length"
-      :class="{ 'nx-n4': xs }"
+      :class="{ 'mx-n4': xs }"
       justify="center">
       <v-col
         cols="12"
