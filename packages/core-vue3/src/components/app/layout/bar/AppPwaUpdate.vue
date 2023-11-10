@@ -7,7 +7,7 @@
           v-bind="tooltip"
           :disabled="updateLoading || loading || !online"
           :icon="mdiUpdate"
-          :loading="loading"
+          :loading="updateLoading"
           color="primary"
           @click="pwaStore.update" />
       </v-scroll-y-reverse-transition>

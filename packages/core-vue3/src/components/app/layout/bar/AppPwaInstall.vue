@@ -7,7 +7,6 @@
           v-bind="tooltip"
           :disabled="loading || !online"
           :icon="mdiDownload"
-          :loading="loading"
           color="primary"
           @click="pwaStore.install" />
       </v-scroll-y-reverse-transition>
