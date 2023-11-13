@@ -22,13 +22,13 @@
           <v-btn-action
             color="success"
             class="mb-2"
-            @click="cookiesStore.acceptCookies">
+            @click="accept">
             {{ t('accept') }}
           </v-btn-action>
           <v-btn-action
             color="error"
             class="mb-2"
-            @click="cookiesStore.refuseCookies">
+            @click="refuse">
             {{ t('refuse') }}
           </v-btn-action>
         </div>
@@ -58,13 +58,13 @@
         <v-btn-action
           color="success"
           class="mb-2"
-          @click="cookiesStore.acceptCookies">
+          @click="accept">
           {{ t('accept') }}
         </v-btn-action>
         <v-btn-action
           color="error"
           class="mb-2"
-          @click="cookiesStore.refuseCookies">
+          @click="refuse">
           {{ t('refuse') }}
         </v-btn-action>
       </v-card-actions>
@@ -91,6 +91,16 @@ const policyDisplayed = ref(false)
 const seePolicy = () => {
   displayed.value = false
   policyDisplayed.value = true
+}
+const accept = () => {
+  displayed.value = false
+  policyDisplayed.value = false
+  cookiesStore.acceptCookies()
+}
+const refuse = () => {
+  displayed.value = false
+  policyDisplayed.value = false
+  cookiesStore.refuseCookies()
 }
 </script>
 
