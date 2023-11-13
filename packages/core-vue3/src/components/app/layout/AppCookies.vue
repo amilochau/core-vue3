@@ -1,69 +1,115 @@
 <template>
-  <v-toolbar
-    v-if="cookiesStore.showCookies"
-    density="comfortable"
-    class="cookies-menu bg-primary text-white pa-2 d-print-none"
-    height="72px">
-    <v-icon
-      color="white"
-      :icon="mdiCookie" />
-    <span class="mx-4 mb-2 nowrap cookies-title">{{ t('title') }}</span>
-    <template #extension>
-      <v-spacer />
-      <v-btn
-        :to="{ name: 'Privacy' }"
-        class="bg-info mr-1"
-        variant="text"
-        rounded>
-        {{ t('read') }}
-      </v-btn>
-      <v-btn
-        class="bg-success mr-1"
-        variant="text"
-        rounded
-        @click="cookiesStore.acceptCookies">
-        {{ t('accept') }}
-      </v-btn>
-      <v-btn
-        class="bg-error mr-1"
-        variant="text"
-        rounded
-        @click="cookiesStore.refuseCookies">
-        {{ t('refuse') }}
-      </v-btn>
-    </template>
-  </v-toolbar>
+  <v-bottom-sheet
+    v-model="displayed"
+    inset>
+    <v-card>
+      <v-card-item :title="t('title')">
+        <template #prepend>
+          <v-icon
+            :icon="mdiCookie"
+            color="primary" />
+        </template>
+      </v-card-item>
+      <v-card-actions class="flex-wrap justify-center">
+        <v-btn-action
+          color="info"
+          class="mb-2 mx-2"
+          variant="text"
+          @click="seePolicy">
+          {{ t('seePolicy') }}
+        </v-btn-action>
+        <div>
+          <v-btn-action
+            color="success"
+            class="mb-2"
+            @click="cookiesStore.acceptCookies">
+            {{ t('accept') }}
+          </v-btn-action>
+          <v-btn-action
+            color="error"
+            class="mb-2"
+            @click="cookiesStore.refuseCookies">
+            {{ t('refuse') }}
+          </v-btn-action>
+        </div>
+      </v-card-actions>
+    </v-card>
+  </v-bottom-sheet>
+  <v-dialog
+    v-model="policyDisplayed"
+    max-width="500px"
+    scrollable>
+    <v-card>
+      <v-card-item
+        :prepend-icon="mdiGavel"
+        :title="t('title')"
+        class="py-1">
+        <template #append>
+          <v-btn
+            :disabled="loading"
+            :icon="mdiClose"
+            variant="plain"
+            size="small"
+            @click="policyDisplayed = false" />
+        </template>
+      </v-card-item>
+      <privacy-card />
+      <v-card-actions class="py-1 justify-center">
+        <v-btn-action
+          color="success"
+          class="mb-2"
+          @click="cookiesStore.acceptCookies">
+          {{ t('accept') }}
+        </v-btn-action>
+        <v-btn-action
+          color="error"
+          class="mb-2"
+          @click="cookiesStore.refuseCookies">
+          {{ t('refuse') }}
+        </v-btn-action>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script setup lang="ts">
-import { mdiCookie } from '@mdi/js'
+import { mdiClose, mdiCookie, mdiGavel } from '@mdi/js'
 import { useI18n } from 'vue-i18n';
-import { useCookiesStore } from '../../../stores'
+import { useAppStore, useCookiesStore } from '../../../stores'
+import { ref } from 'vue'
+import PrivacyCard from '../content/PrivacyCard.vue'
+import { storeToRefs } from 'pinia';
 
 const { t } = useI18n()
 const cookiesStore = useCookiesStore()
+const appStore = useAppStore()
+const { loading } = storeToRefs(appStore)
+
+const displayed = ref(cookiesStore.showCookies)
+const policyDisplayed = ref(false)
+
+const seePolicy = () => {
+  displayed.value = false
+  policyDisplayed.value = true
+}
 </script>
 
 <i18n lang="yaml">
 en:
   title: This website uses cookies to work.
-  read: Read
+  seePolicy: Read
   accept: Accept
   refuse: Refuse
 fr:
   title: Ce site utilise des cookies pour fonctionner.
-  read: Lire
+  seePolicy: En savoir plus
   accept: Accepter
   refuse: Refuser
 </i18n>
 
-<style lang="sass" scoped>
-.cookies-menu
-  position: fixed !important
-  bottom: 0
-  width: 100%
-  z-index: 1002
-
-.cookies-title
-  line-height: 1.2
-</style>
+<i18n lang="yaml">
+en:
+  title: Privacy
+fr:
+  title: Confidentialité
+</i18n>
