@@ -25,8 +25,18 @@ export const useHandle = () => {
     }
   })
 
-  const handleFormValidation = async (form: Ref<{ validate: () => Promise<{ valid: boolean }>}>) => {
-    if (loading.value || !online.value) {
+  type ValidatableForm = {
+    validate: () => Promise<{
+      valid: boolean;
+      errors: {
+          id: string | number;
+          errorMessages: string[];
+      }[];
+    }>
+  }
+
+  const handleFormValidation = async <TForm extends ValidatableForm>(form: Ref<TForm | undefined>) => {
+    if (loading.value || !online.value || !form.value) {
       return false;
     }
 
