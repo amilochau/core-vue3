@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3",
-  "version": "0.8.0-beta.15",
+  "version": "0.8.0-beta.16",
   "description": "Core plugin for vue.js (v3) projects",
   "author": "Antoine Milochau",
   "license": "MIT",
@@ -52,7 +52,7 @@
     "@unhead/vue": "^1.8.3",
     "@vitejs/plugin-vue": "^4.4.1",
     "@vue/tsconfig": "^0.4.0",
-    "@vueuse/core": "^10.5.0",
+    "@vueuse/core": "^10.6.1",
     "eslint": "^8.53.0",
     "eslint-plugin-vue": "^9.18.1",
     "pinia": "^2.1.7",
