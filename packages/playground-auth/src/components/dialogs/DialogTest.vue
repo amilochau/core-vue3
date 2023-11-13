@@ -46,6 +46,7 @@ import { useAppStore } from "@amilochau/core-vue3/stores";
 import { useHandle, useValidationRules } from "@amilochau/core-vue3/composition";
 import { useDisplay } from "vuetify";
 import { useI18n } from "vue-i18n";
+import { VForm } from 'vuetify/components'
 
 const { t } = useI18n()
 const appStore = useAppStore()
@@ -57,7 +58,7 @@ const { loading } = storeToRefs(appStore)
 
 const modelValue = defineModel<boolean>({ required: true })
 
-const form: Ref<any> = ref(null)
+const form = ref<InstanceType<typeof VForm>>()
 const request: Ref<MapsCreateRequest> = ref(new MapsCreateRequest())
 
 const save = async () => {

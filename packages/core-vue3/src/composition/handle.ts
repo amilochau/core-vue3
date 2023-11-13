@@ -25,17 +25,13 @@ export const useHandle = () => {
     }
   })
 
-  const handleFormValidation = async (form: Ref<any>) => {
+  const handleFormValidation = async (form: Ref<{ validate: () => Promise<{ valid: boolean }>}>) => {
     if (loading.value || !online.value) {
       return false;
     }
 
-    const { valid } = await form.value!.validate()
-    if (!valid) {
-      return false;
-    }
-
-    return true;
+    const { valid } = await form.value.validate()
+    return valid;
   }
 
   const handleLoad = async <TResponse>(request: () => Promise<TResponse>) => {

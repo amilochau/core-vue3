@@ -29,6 +29,7 @@ import { useDisplay } from 'vuetify';
 import { type Ref, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { useHandle } from '../../composition';
+import { VForm } from 'vuetify/components'
 
 const props = defineProps<{
   /** Form button */
@@ -47,7 +48,7 @@ const { xs } = useDisplay()
 const { handleFormValidation } = useHandle()
 const { loading } = storeToRefs(appStore)
 
-const form: Ref<any> = ref(null)
+const form = ref<InstanceType<typeof VForm>>()
 
 const onButtonClick = async () => {
   if (!props.button) {
@@ -62,8 +63,8 @@ const onButtonClick = async () => {
 }
 
 defineExpose({
-  reset: () => form.value!.reset(),
-  resetValidation: () => form.value!.resetValidation(),
-  validate: () => form.value!.validate(),
+  reset: () => form.value?.reset(),
+  resetValidation: () => form.value?.resetValidation(),
+  validate: () => form.value?.validate(),
 })
 </script>

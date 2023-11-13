@@ -21,7 +21,8 @@
 <script setup lang="ts">
 import AppForm from './AppForm.vue';
 import AppResponsive from './AppResponsive.vue';
-import { type Ref, ref } from 'vue';
+import { ref } from 'vue';
+import { VForm } from 'vuetify/components'
 
 defineProps<{
   /** Title */
@@ -42,11 +43,11 @@ defineProps<{
   },
 }>()
 
-const form: Ref<any> = ref(null)
+const form = ref<InstanceType<typeof VForm>>()
 
 defineExpose({
-  reset: () => form.value!.reset(),
-  resetValidation: () => form.value!.resetValidation(),
-  validate: () => form.value!.validate(),
+  reset: () => form.value?.reset(),
+  resetValidation: () => form.value?.resetValidation(),
+  validate: () => form.value?.validate(),
 })
 </script>
