@@ -3,10 +3,12 @@
     v-model:model-value="modelValue"
     :focused="focused"
     :rules="rules"
+    :disabled="disabled"
     class="mb-1">
     <v-field
       :label="label"
       :focused="focused"
+      :disabled="disabled"
       variant="plain"
       active>
       <v-chip-group
@@ -39,6 +41,8 @@ defineProps<{
   values: FormattedDataWithValue<TData>[]
   /** Validation rules */
   rules?: any[]
+  /** Whether the input is disabled */
+  disabled?: boolean
   /** Whether multiple values can be selected */
   multiple?: boolean
 }>()

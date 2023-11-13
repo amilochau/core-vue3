@@ -60,14 +60,43 @@
           {{ t('text2') }}
         </v-btn-action>
       </v-col>
+      <v-col cols="6">
+        <field-chip-group
+          v-model="selectedValue"
+          :label="t('text1')"
+          :values="values" />
+        <field-chip-group
+          v-model="selectedValue"
+          :label="t('text1')"
+          :values="values"
+          disabled />
+        <field-color-bullets
+          :label="t('text1')"
+          :colors="colors" />
+        <field-color-bullets
+          :label="t('text1')"
+          :colors="colors"
+          disabled />
+        <field-icon
+          :label="t('text1')"
+          :icons="icons" />
+        <field-icon
+          :label="t('text1')"
+          :icons="icons"
+          disabled />
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { computed, ref } from 'vue'
+import { type ComputedRef, computed, ref } from 'vue'
 import { usePage } from '@amilochau/core-vue3/composition';
+import { FieldChipGroup, FieldColorBullets, FieldIcon } from '@amilochau/core-vue3/components';
+import { TestEnum } from '@/types/test';
+import { type FormattedDataWithValue } from '@amilochau/core-vue3/types';
+import { mdiRefresh, mdiTree } from '@mdi/js'
 
 const { t } = useI18n()
 usePage(computed(() => ({
@@ -86,6 +115,18 @@ usePage(computed(() => ({
   },
 })))
 const boolValue = ref(true)
+
+const values: ComputedRef<FormattedDataWithValue<TestEnum>[]> = computed(() => [
+  { value: TestEnum.First, title: t('text1') },
+  { value: TestEnum.Second, title: t('text2') },
+])
+const selectedValue = ref<TestEnum>(TestEnum.First)
+
+const colors = ref(['#000000', '#444444', '#888888', '#BBBBBB', '#FFFFFF'])
+const icons: ComputedRef<(FormattedDataWithValue<TestEnum> & { icon: string })[]> = computed(() => [
+  { value: TestEnum.First, icon: mdiRefresh, title: t('text1') },
+  { value: TestEnum.Second, icon: mdiTree, title: t('text2') },
+])
 </script>
 
 <i18n lang="yaml">

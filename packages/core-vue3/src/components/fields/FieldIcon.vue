@@ -3,10 +3,12 @@
     v-model:model-value="modelValue"
     :focused="focused"
     :rules="rules"
+    :disabled="disabled"
     class="mb-1">
     <v-field
-      :label="labelTitle"
+      :label="label"
       :focused="focused"
+      :disabled="disabled"
       variant="plain"
       active>
       <div class="icons-grid">
@@ -41,9 +43,11 @@ import { type FormattedDataWithValue } from '../../types';
 
 defineProps<{
   /** Title used as the input label */
-  labelTitle: string
+  label: string
   /** Validation rules */
   rules?: any[]
+  /** Whether the input is disabled */
+  disabled?: boolean
   /** Icons used as values */
   icons: FormattedDataWithValue<TData>[]
 }>()

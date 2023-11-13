@@ -2,10 +2,13 @@
   <v-input
     v-model:model-value="modelValue"
     :focused="focused"
+    :rules="rules"
+    :disabled="disabled"
     class="mb-1">
     <v-field
       :label="label"
       :focused="focused"
+      :disabled="disabled"
       variant="plain"
       active>
       <div class="colors-grid">
@@ -76,6 +79,10 @@ import { useI18n } from 'vue-i18n';
 const props = defineProps<{
   /** Title used as the input label */
   label: string
+  /** Validation rules */
+  rules?: any[]
+  /** Whether the input is disabled */
+  disabled?: boolean
   /** Title used for the reset button, in the detailed dialog */
   resetTitle?: string,
   /** Title used for the save button, in the detailed dialog */
