@@ -44,8 +44,9 @@
   </v-input>
   <v-dialog
     v-model="displayDialog"
-    scrollable>
-    <v-card max-width="300px">
+    scrollable
+    width="auto">
+    <v-card>
       <v-color-picker
         v-model="internalValue"
         :swatches="swatches"
@@ -78,7 +79,7 @@ import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   /** Title used as the input label */
-  label: string
+  label?: string
   /** Validation rules */
   rules?: any[]
   /** Whether the input is disabled */

@@ -84,6 +84,11 @@
           :label="t('text1')"
           :icons="icons"
           disabled />
+        <field-date
+          :label="t('text1')" />
+        <field-date
+          :label="t('text1')"
+          disabled />
       </v-col>
     </v-row>
   </v-container>
@@ -93,7 +98,7 @@
 import { useI18n } from 'vue-i18n'
 import { type ComputedRef, computed, ref } from 'vue'
 import { usePage } from '@amilochau/core-vue3/composition';
-import { FieldChipGroup, FieldColorBullets, FieldIcon } from '@amilochau/core-vue3/components';
+import { FieldChipGroup, FieldColorBullets, FieldDate, FieldIcon } from '@amilochau/core-vue3/components';
 import { TestEnum } from '@/types/test';
 import { type FormattedDataWithValue } from '@amilochau/core-vue3/types';
 import { mdiRefresh, mdiTree } from '@mdi/js'

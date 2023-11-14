@@ -36,7 +36,7 @@ import { type FormattedDataWithValue } from '../../types';
 
 defineProps<{
   /** Title used as the input label */
-  label: string
+  label?: string
   /** Values proposed to be selected */
   values: FormattedDataWithValue<TData>[]
   /** Validation rules */

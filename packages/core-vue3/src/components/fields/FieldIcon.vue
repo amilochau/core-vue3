@@ -43,7 +43,7 @@ import { type FormattedDataWithValue } from '../../types';
 
 defineProps<{
   /** Title used as the input label */
-  label: string
+  label?: string
   /** Validation rules */
   rules?: any[]
   /** Whether the input is disabled */

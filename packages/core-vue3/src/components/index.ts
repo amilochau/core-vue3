@@ -7,6 +7,7 @@ import CardSectionTitle from "./cards/CardSectionTitle.vue"
 import CardTitleClosable from "./cards/CardTitleClosable.vue"
 import FieldChipGroup from "./fields/FieldChipGroup.vue"
 import FieldColorBullets from "./fields/FieldColorBullets.vue"
+import FieldDate from "./fields/FieldDate.vue"
 import FieldIcon from "./fields/FieldIcon.vue"
 import AppForm from './pages-layout/AppForm.vue'
 import AppLinks from './pages-layout/AppLinks.vue'
@@ -23,6 +24,7 @@ export {
   CardTitleClosable,
   FieldChipGroup,
   FieldColorBullets,
+  FieldDate,
   FieldIcon,
   AppForm,
   AppLinks,
