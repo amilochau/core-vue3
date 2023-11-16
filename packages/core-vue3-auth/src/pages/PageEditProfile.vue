@@ -34,7 +34,7 @@ import type { EditProfile } from '../types';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -42,26 +42,26 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Profile' },
   },
-})))
-const appStore = useAppStore()
-const identityStore = useIdentityStore()
-const { handleLoadAndError } = useHandle()
-const { updateAttributes, fetchUserAttributes } = useCognito()
-const { required, maxLength } = useValidationRules()
-const { goBack } = useNavigation()
+})));
+const appStore = useAppStore();
+const identityStore = useIdentityStore();
+const { handleLoadAndError } = useHandle();
+const { updateAttributes, fetchUserAttributes } = useCognito();
+const { required, maxLength } = useValidationRules();
+const { goBack } = useNavigation();
 
-const { attributes } = storeToRefs(identityStore)
+const { attributes } = storeToRefs(identityStore);
 
 const request: Ref<EditProfile> = ref({
   name: attributes.value.name,
-})
+});
 
 const editProfile = () => handleLoadAndError(async () => {
-  await updateAttributes(request.value)
-  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
-  await goBack({ name: 'Profile' })
-  fetchUserAttributes()
-}, 'snackbar')
+  await updateAttributes(request.value);
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+  await goBack({ name: 'Profile' });
+  fetchUserAttributes();
+}, 'snackbar');
 </script>
 
 <i18n lang="yaml">

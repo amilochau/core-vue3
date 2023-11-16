@@ -10,4 +10,4 @@ export type NotificationsRegisterRequest = {
   auth: string
   registerType: NotificationRegisterType
   culture?: string
-}
+};

@@ -17,9 +17,9 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
-const { t } = useI18n()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
+const { t } = useI18n();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
 </script>
 
 <i18n lang="yaml">

@@ -1,27 +1,27 @@
-import { mdiChatOutline, mdiCog, mdiCogOutline, mdiHome, mdiOpenInNew } from '@mdi/js'
-import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
+import { mdiChatOutline, mdiCog, mdiCogOutline, mdiHome, mdiOpenInNew } from '@mdi/js';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 
 export default computed(() => {
 
-  const { t, mergeLocaleMessage } = useI18n()
-  const route = useRoute()
+  const { t, mergeLocaleMessage } = useI18n();
+  const route = useRoute();
 
   mergeLocaleMessage('en', {
     home: 'Home',
     settingsAndSupport: 'Settings and support',
     settings: 'Settings',
     contact: 'Contact',
-  })
+  });
   mergeLocaleMessage('fr', {
     home: 'Accueil',
     settingsAndSupport: 'Paramètres et support',
     settings: 'Paramètres',
     contact: 'Contact',
-  })
+  });
 
-  const contactUrl = `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`
+  const contactUrl = `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`;
 
   return {
     items: [
@@ -33,5 +33,5 @@ export default computed(() => {
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
       { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: '_blank', rel: 'noopener noreferrer' },
     ],
-  }
-})
+  };
+});

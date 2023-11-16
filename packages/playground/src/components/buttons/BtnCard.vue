@@ -26,14 +26,14 @@ defineProps<{
   tooltipText: string,
   /** Button color */
   color?: string
-}>()
+}>();
 
 const emit = defineEmits<{
   (eventName: 'click'): void
-}>()
+}>();
 
-const { t } = useI18n()
-const online = useOnline()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
+const { t } = useI18n();
+const online = useOnline();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
 </script>

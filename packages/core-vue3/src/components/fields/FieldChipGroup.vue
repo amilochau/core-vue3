@@ -45,9 +45,9 @@ defineProps<{
   disabled?: boolean
   /** Whether multiple values can be selected */
   multiple?: boolean
-}>()
+}>();
 
-const modelValue = defineModel<TDataValue | undefined>()
+const modelValue = defineModel<TDataValue | undefined>();
 
-const focused = ref(false)
+const focused = ref(false);
 </script>

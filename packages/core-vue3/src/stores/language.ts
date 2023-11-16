@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 interface LanguageStoreState {
   language: 'en' | 'fr' | string,
@@ -10,10 +10,10 @@ export const useLanguageStore = defineStore('language', {
   }),
   actions: {
     setLanguage(lang: string) {
-      this.language = lang
+      this.language = lang;
     },
   },
   persist: {
     storage: 'localStorage',
   },
-})
+});

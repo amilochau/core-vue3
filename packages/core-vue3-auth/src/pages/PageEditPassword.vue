@@ -49,7 +49,7 @@ import type { EditPassword } from '../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -57,24 +57,24 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Profile' },
   },
-})))
-const appStore = useAppStore()
-const { handleLoadAndError } = useHandle()
-const { changePassword } = useCognito()
-const { required, minLength, maxLength } = useValidationRules()
-const { goBack } = useNavigation()
+})));
+const appStore = useAppStore();
+const { handleLoadAndError } = useHandle();
+const { changePassword } = useCognito();
+const { required, minLength, maxLength } = useValidationRules();
+const { goBack } = useNavigation();
 
 const request: Ref<EditPassword> = ref({
   oldPassword: '',
   password: '',
   confirmationPassword: '',
-})
+});
 
 const editPassword = () => handleLoadAndError(async () => {
-  await changePassword(request.value)
-  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
-  await goBack({ name: 'Profile' })
-}, 'snackbar')
+  await changePassword(request.value);
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+  await goBack({ name: 'Profile' });
+}, 'snackbar');
 </script>
 
 <i18n lang="yaml">

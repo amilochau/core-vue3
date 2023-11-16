@@ -1,6 +1,6 @@
-import { createCoreVue3App } from '@amilochau/core-vue3'
-import { coreOptions } from './data/config'
+import { createCoreVue3App } from '@amilochau/core-vue3';
+import { coreOptions } from './data/config';
 
-import 'vuetify/styles'
+import 'vuetify/styles';
 
 export const coreVue3App = createCoreVue3App(coreOptions);

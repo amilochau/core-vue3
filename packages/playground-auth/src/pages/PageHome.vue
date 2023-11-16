@@ -49,10 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsive } from '@amilochau/core-vue3/components'
-import { mdiRefresh } from '@mdi/js'
-import HomeLogin from '../components/home/HomeLogin.vue'
-import HomeMessages from '../components/home/HomeMessages.vue'
+import { AppResponsive } from '@amilochau/core-vue3/components';
+import { mdiRefresh } from '@mdi/js';
+import HomeLogin from '../components/home/HomeLogin.vue';
+import HomeMessages from '../components/home/HomeMessages.vue';
 import { useMapsStore } from '../stores';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { usePage } from '@amilochau/core-vue3/composition';
@@ -61,9 +61,9 @@ import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import logoUrl from '@/assets/logo.png'
+import logoUrl from '@/assets/logo.png';
 
-const { d, t } = useI18n()
+const { d, t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -76,20 +76,20 @@ usePage(computed(() => ({
       },
     ],
   },
-})))
-const mapsStore = useMapsStore()
-const appStore = useAppStore()
-const identityStore = useIdentityStore()
-const online = useOnline()
+})));
+const mapsStore = useMapsStore();
+const appStore = useAppStore();
+const identityStore = useIdentityStore();
+const online = useOnline();
 
-const { loading } = storeToRefs(appStore)
-const { attributes, isAuthenticated } = storeToRefs(identityStore)
+const { loading } = storeToRefs(appStore);
+const { attributes, isAuthenticated } = storeToRefs(identityStore);
 
-const dialog = ref(false)
+const dialog = ref(false);
 
 const openDialog = () => {
-  dialog.value = true
-}
+  dialog.value = true;
+};
 </script>
 
 <i18n lang="yaml">

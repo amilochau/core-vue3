@@ -1,4 +1,4 @@
-import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword } from '../types'
+import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword } from '../types';
 import {
   confirmResetPassword as awsConfirmResetPassword,
   confirmSignUp as awsConfirmSignUp,
@@ -20,9 +20,9 @@ import { useIdentityStore } from '@amilochau/core-vue3/stores';
 
 export const useCognito = () => {
 
-  const identityStore = useIdentityStore()
-  const coreOptions = useCoreOptions()
-  const { t, mergeLocaleMessage } = useI18n()
+  const identityStore = useIdentityStore();
+  const coreOptions = useCoreOptions();
+  const { t, mergeLocaleMessage } = useI18n();
 
   mergeLocaleMessage('en', {
     errorMessage: 'An error occured.',
@@ -32,7 +32,7 @@ export const useCognito = () => {
     expiredCode: 'Expired validation code, or bad email address.',
     userAlreadyAuthenticated: 'You are already authenticated. If this does not seem to be the case, try to clean your browser data.',
     usernameExists: 'A user account already exists with this email address. You can try to login!',
-  })
+  });
   mergeLocaleMessage('fr', {
     errorMessage: 'Une erreur est survenue.',
     incorrectUsernamePassword: 'Adresse email ou mot de passe incorrect.',
@@ -41,26 +41,26 @@ export const useCognito = () => {
     expiredCode: 'Code de validation expiré, ou mauvaise adresse email.',
     userAlreadyAuthenticated: 'Vous êtes déjà connecté. Si cela ne semble pas être le cas, essayez de nettoyer les données de votre navigateur.',
     usernameExists: 'Un compte utilisateur existe déjà avec cette adresse email. Vous pouvez essayer de vous connecter !',
-  })
+  });
 
   const processRequest = async <TResponse>(request: () => Promise<TResponse>, errorMapping: Record<string, string>) => {
     if (!coreOptions.authenticationEnabled) {
-      throw 'Authentication is not configured.'
+      throw 'Authentication is not configured.';
     }
 
     try {
-      return await request()
+      return await request();
     } catch (error: any) {
-      let errorMessage = errorMapping[error?.name]
+      let errorMessage = errorMapping[error?.name];
       if (!errorMessage) {
-        console.warn('Unexpected error from Cognito', error?.name, error)
-        errorMessage = t('errorMessage')
+        console.warn('Unexpected error from Cognito', error?.name, error);
+        errorMessage = t('errorMessage');
       }
-      throw { title: errorMessage, color: 'error', icon: mdiAlert, details: error as string } as ApplicationMessage
+      throw { title: errorMessage, color: 'error', icon: mdiAlert, details: error as string } as ApplicationMessage;
     }
-  }
+  };
 
-  const signOut = () => processRequest(() => awsSignOut(), {})
+  const signOut = () => processRequest(() => awsSignOut(), {});
 
   return {
     signUp: (model: Register) => processRequest(() => awsSignUp({
@@ -88,8 +88,8 @@ export const useCognito = () => {
       await awsSignIn({
         username: model.email,
         password: model.password,
-      })
-      identityStore.isAuthenticated = true
+      });
+      identityStore.isAuthenticated = true;
     }, {
       ['NotAuthorizedException']: t('incorrectUsernamePassword'),
     }),
@@ -122,19 +122,19 @@ export const useCognito = () => {
     deleteUser: () => processRequest(() => awsDeleteUser(), {}),
 
     getJwtToken: () => processRequest(async () => {
-      const authSession = await awsFetchAuthSession()
-      return authSession.tokens?.idToken?.toString()
+      const authSession = await awsFetchAuthSession();
+      return authSession.tokens?.idToken?.toString();
     }, {}),
 
     fetchUserAttributes: () => processRequest(async () => {
-      const userAttributes = await awsFetchUserAttributes()
+      const userAttributes = await awsFetchUserAttributes();
       identityStore.setAttributes({
         id: userAttributes.sub || '',
         name: userAttributes.name || '',
         email: userAttributes.email || '',
-      })
+      });
     }, {}),
 
     signOut,
-  }
-}
+  };
+};

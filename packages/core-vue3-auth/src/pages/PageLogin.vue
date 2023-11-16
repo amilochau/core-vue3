@@ -52,7 +52,7 @@ import type { Login } from '../types';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -60,34 +60,34 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
-})))
-const appStore = useAppStore()
-const route = useRoute()
-const router = useRouter()
-const { handleLoadAndError } = useHandle()
-const { authenticateUser, fetchUserAttributes } = useCognito()
-const { required, minLength, maxLength, emailAddress } = useValidationRules()
+})));
+const appStore = useAppStore();
+const route = useRoute();
+const router = useRouter();
+const { handleLoadAndError } = useHandle();
+const { authenticateUser, fetchUserAttributes } = useCognito();
+const { required, minLength, maxLength, emailAddress } = useValidationRules();
 
 const request: Ref<Login> = ref({
   email: route.query.email?.toString() || '',
   password: '',
-})
+});
 
 const links = computed(() => ([
   { title: t('links.register.title'), subtitle: t('links.register.subtitle'), prependIcon: mdiAccountPlusOutline, to: { name: 'Register' } },
   { title: t('links.forgotPassword.title'), subtitle: t('links.forgotPassword.subtitle'), prependIcon: mdiLockReset, to: { name: 'ForgotPassword' } },
-]))
+]));
 
 const login = () => handleLoadAndError(async () => {
-  await authenticateUser(request.value)
-  await fetchUserAttributes()
-  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
+  await authenticateUser(request.value);
+  await fetchUserAttributes();
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
   if (route.query.returnUrl) {
-    await router.replace(route.query.returnUrl.toString())
+    await router.replace(route.query.returnUrl.toString());
   } else {
-    await router.replace({ name: 'Home' })
+    await router.replace({ name: 'Home' });
   }
-}, 'snackbar')
+}, 'snackbar');
 </script>
 
 <i18n lang="yaml">

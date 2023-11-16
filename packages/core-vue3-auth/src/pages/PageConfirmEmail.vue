@@ -57,7 +57,7 @@ import type { ConfirmEmail } from '../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -65,24 +65,24 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
-})))
-const appStore = useAppStore()
-const route = useRoute()
-const router = useRouter()
-const { handleLoadAndError } = useHandle()
-const { confirmRegistration } = useCognito()
-const { required, minLength, maxLength, emailAddress } = useValidationRules()
+})));
+const appStore = useAppStore();
+const route = useRoute();
+const router = useRouter();
+const { handleLoadAndError } = useHandle();
+const { confirmRegistration } = useCognito();
+const { required, minLength, maxLength, emailAddress } = useValidationRules();
 
 const request: Ref<ConfirmEmail> = ref({
   email: route.query.email?.toString() || '',
   code: '',
-})
+});
 
 const verifyCode = () => handleLoadAndError(async () => {
-  await confirmRegistration(request.value)
-  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
-  await router.replace({ name: 'Login', query: { email: request.value.email } })
-}, 'snackbar')
+  await confirmRegistration(request.value);
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar');
+  await router.replace({ name: 'Login', query: { email: request.value.email } });
+}, 'snackbar');
 </script>
 
 <i18n lang="yaml">

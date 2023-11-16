@@ -15,16 +15,16 @@
 </template>
 
 <script setup lang="ts">
-import { mdiPower } from '@mdi/js'
+import { mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { useCoreOptions } from '../../../../composition';
 import { useIdentityStore } from '../../../../stores';
 import { useI18n } from 'vue-i18n';
 
-const { t } = useI18n()
-const identityStore = useIdentityStore()
-const coreOptions = useCoreOptions()
-const { isAuthenticated } = storeToRefs(identityStore)
+const { t } = useI18n();
+const identityStore = useIdentityStore();
+const coreOptions = useCoreOptions();
+const { isAuthenticated } = storeToRefs(identityStore);
 </script>
 
 <i18n lang="yaml">

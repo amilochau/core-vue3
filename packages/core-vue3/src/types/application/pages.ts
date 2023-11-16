@@ -18,4 +18,4 @@ export type PageData = {
       title: string,
     }[]
   };
-}
+};

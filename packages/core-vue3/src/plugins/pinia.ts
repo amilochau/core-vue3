@@ -1,4 +1,4 @@
-import { type PiniaPluginContext, createPinia } from 'pinia'
+import { type PiniaPluginContext, createPinia } from 'pinia';
 import type { App } from 'vue';
 import type { MilochauCoreOptions } from '../types/options';
 
@@ -14,23 +14,23 @@ declare module 'pinia' {
 
 const piniaPersist = ({ options, store }: PiniaPluginContext) => {
   if (options.persist?.storage === 'localStorage') {
-    const storageResult = localStorage.getItem(store.$id)
+    const storageResult = localStorage.getItem(store.$id);
 
     if (storageResult) {
-      store.$patch(JSON.parse(storageResult))
+      store.$patch(JSON.parse(storageResult));
     }
 
     store.$subscribe(() => {
-      localStorage.setItem(store.$id, JSON.stringify(store.$state))
-    }, { detached: true, immediate: true, deep: true })
+      localStorage.setItem(store.$id, JSON.stringify(store.$state));
+    }, { detached: true, immediate: true, deep: true });
   }
-}
+};
 
 export const registerPinia = (app: App, options: MilochauCoreOptions) => {
   const pinia = createPinia()
-    .use(piniaPersist)
+    .use(piniaPersist);
 
   app.use(pinia);
 
-  return pinia
-}
+  return pinia;
+};

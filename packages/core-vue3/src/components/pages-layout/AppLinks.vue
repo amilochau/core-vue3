@@ -7,16 +7,16 @@
 </template>
 
 <script setup lang="ts">
-import { mdiChevronRight } from '@mdi/js'
-import { computed } from 'vue'
+import { mdiChevronRight } from '@mdi/js';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   /** Links for external pages */
   links: any[],
-}>()
+}>();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const enhancedLinks = computed(() => {
   return [
@@ -25,8 +25,8 @@ const enhancedLinks = computed(() => {
       appendIcon: mdiChevronRight,
       ...link,
     })),
-  ]
-})
+  ];
+});
 </script>
 
 <i18n lang="yaml">

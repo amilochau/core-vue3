@@ -4,7 +4,7 @@ export const useRecords = () => {
       let index = 0;
 
       while (index < maxIndex) {
-        const indexAsString = `${index}`
+        const indexAsString = `${index}`;
         if (!record[index]) {
           // The current index is free
           return indexAsString;
@@ -15,5 +15,5 @@ export const useRecords = () => {
       // No index is free
       throw new Error('Can\'t create new item!');
     },
-  }
-}
+  };
+};

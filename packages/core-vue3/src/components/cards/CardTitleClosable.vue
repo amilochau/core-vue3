@@ -15,17 +15,17 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '../../stores'
-import { mdiClose } from '@mdi/js'
+import { useAppStore } from '../../stores';
+import { mdiClose } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 
 defineProps<{
   /** Title */
   title: string
-}>()
+}>();
 const emit = defineEmits<{
   (eventName: 'close'): void
-}>()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
+}>();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
 </script>

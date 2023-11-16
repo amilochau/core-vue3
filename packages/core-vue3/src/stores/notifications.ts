@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 interface NotificationsStoreState {
   registred: boolean
@@ -11,4 +11,4 @@ export const useNotificationsStore = defineStore('notifications', {
   persist: {
     storage: 'localStorage',
   },
-})
+});

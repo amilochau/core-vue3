@@ -43,27 +43,27 @@
 </template>
 
 <script setup lang="ts">
-import { mdiChevronDown, mdiChevronUp } from '@mdi/js'
+import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '../../../stores'
+import { useAppStore } from '../../../stores';
 
-const { t } = useI18n()
-const appStore = useAppStore()
-const { snackbarMessage } = storeToRefs(appStore)
+const { t } = useI18n();
+const appStore = useAppStore();
+const { snackbarMessage } = storeToRefs(appStore);
 
 const expanded = ref(false);
 const display = ref(false);
 
 watch(snackbarMessage, (newValue) => {
   if (newValue.title) {
-    expanded.value = false
-    display.value = true
+    expanded.value = false;
+    display.value = true;
   } else {
-    display.value = false
+    display.value = false;
   }
-}, { deep: true })
+}, { deep: true });
 </script>
 
 <i18n lang="yaml">

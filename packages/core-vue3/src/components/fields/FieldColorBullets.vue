@@ -72,8 +72,8 @@
 </template>
 
 <script setup lang="ts">
-import { swatches } from '../../data/swatches'
-import { mdiCheck, mdiClose, mdiPalette } from '@mdi/js'
+import { swatches } from '../../data/swatches';
+import { mdiCheck, mdiClose, mdiPalette } from '@mdi/js';
 import { type Ref, computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -90,36 +90,36 @@ const props = defineProps<{
   saveTitle?: string,
   /** Colors used as values */
   colors: string[],
-}>()
+}>();
 
-const modelValue = defineModel<string | undefined>()
+const modelValue = defineModel<string | undefined>();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const displayDialog = ref(false)
-const internalValue: Ref<string | undefined> = ref(undefined)
-const focused = ref(false)
+const displayDialog = ref(false);
+const internalValue: Ref<string | undefined> = ref(undefined);
+const focused = ref(false);
 
 function reset() {
-  modelValue.value = undefined
-  displayDialog.value = false
+  modelValue.value = undefined;
+  displayDialog.value = false;
 }
 
 function save() {
-  modelValue.value = internalValue.value
-  displayDialog.value = false
+  modelValue.value = internalValue.value;
+  displayDialog.value = false;
 }
 
 watch(modelValue, () => {
-  internalValue.value = modelValue.value
-}, { immediate: true })
+  internalValue.value = modelValue.value;
+}, { immediate: true });
 
 const labels = computed(() => {
   return {
     reset: props.resetTitle ?? t('reset'),
     save: props.saveTitle ?? t('save'),
-  }
-})
+  };
+});
 </script>
 
 <i18n lang="yaml">

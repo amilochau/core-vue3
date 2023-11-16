@@ -10,6 +10,6 @@ const routes: Array<RouteRecordRaw> = [
   { name: 'EditProfile', path: 'edit-profile', component: () => import('../pages/PageEditProfile.vue'), meta: { requiresAuth: true } },
   { name: 'EditPassword', path: 'edit-password', component: () => import('../pages/PageEditPassword.vue'), meta: { requiresAuth: true } },
   { name: 'DeleteAccount', path: 'delete-account', component: () => import('../pages/PageDeleteAccount.vue'), meta: { requiresAuth: true } },
-]
+];
 
-export default routes
+export default routes;

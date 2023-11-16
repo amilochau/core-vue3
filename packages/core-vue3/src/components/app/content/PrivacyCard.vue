@@ -27,25 +27,25 @@
 </template>
 
 <script setup lang="ts">
-import AppSectionHeader from '../section/AppSectionHeader.vue'
-import AppSectionSubHeader from '../section/AppSectionSubHeader.vue'
-import AppSectionText from '../section/AppSectionText.vue'
+import AppSectionHeader from '../section/AppSectionHeader.vue';
+import AppSectionSubHeader from '../section/AppSectionSubHeader.vue';
+import AppSectionText from '../section/AppSectionText.vue';
 import { useI18n } from 'vue-i18n';
 import { useCoreOptions } from '../../../composition';
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
-const { t, mergeLocaleMessage } = useI18n()
-const { xs } = useDisplay()
-const coreOptions = useCoreOptions()
+const { t, mergeLocaleMessage } = useI18n();
+const { xs } = useDisplay();
+const coreOptions = useCoreOptions();
 
 Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
   mergeLocaleMessage(key, {
     appTitle: item.appTitle,
-  })
-})
+  });
+});
 
-const appTitle = computed(() => t('appTitle'))
+const appTitle = computed(() => t('appTitle'));
 </script>
 
 <i18n lang="yaml">

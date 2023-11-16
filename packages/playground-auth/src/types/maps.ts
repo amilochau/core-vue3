@@ -6,7 +6,7 @@ export class MapsListResponse {
 }
 
 export class MapsCreateRequest {
-  name: string = ''
+  name: string = '';
   desc?: string;
   settings: MapSettings = new MapSettings();
 }
@@ -19,8 +19,8 @@ export class MapsDetailsResponse {
   userAccessLevel: AccessLevel = AccessLevel.None;
   accessPolicy: MapAccessPolicy = new MapAccessPolicy();
 
-  markers: Record<string, MapsMarkersDetailsResponse> = {}
-  lines: Record<string, MapsLinesDetailsResponse> = {}
+  markers: Record<string, MapsMarkersDetailsResponse> = {};
+  lines: Record<string, MapsLinesDetailsResponse> = {};
 }
 
 export class MapsEditRequest {
@@ -35,10 +35,10 @@ export class MapsMarkersDetailsResponse {
   desc?: string;
   lat: number = 0;
   lng: number = 0;
-  color?: string
+  color?: string;
   size?: number;
-  placeId?: string
-  tags?: Array<string>
+  placeId?: string;
+  tags?: Array<string>;
   fields?: Record<string, string>;
 }
 
@@ -46,9 +46,9 @@ export class MapsLinesDetailsResponse {
   name: string = '';
   desc?: string;
   points: Array<string> = [];
-  color?: string
+  color?: string;
   size?: number;
-  tags?: Array<string>
+  tags?: Array<string>;
   fields?: Record<string, string>;
 }
 
@@ -72,19 +72,19 @@ export class MapLayerSettings {
 export class MapMarkersSettings {
   defaultColor?: string;
   defaultSize?: number;
-  defaultTags: Record<string, Tag> = {}
-  defaultFields: Record<string, Field> = {}
+  defaultTags: Record<string, Tag> = {};
+  defaultFields: Record<string, Field> = {};
 }
 
 export class MapLinesSettings {
   defaultColor?: string;
   defaultSize?: number;
-  defaultTags: Record<string, Tag> = {}
-  defaultFields: Record<string, Field> = {}
+  defaultTags: Record<string, Tag> = {};
+  defaultFields: Record<string, Field> = {};
 }
 
 export class MapAccessPolicy {
-  anonymousAccessLevel: AccessLevel = AccessLevel.None
+  anonymousAccessLevel: AccessLevel = AccessLevel.None;
 }
 
 export class Tag {
@@ -96,12 +96,12 @@ export class Field {
   label: string = '';
   desc?: string;
   type: FieldType = FieldType.Text;
-  validationRules?: FieldValidationRule[] = []
+  validationRules?: FieldValidationRule[] = [];
 }
 
 export class FieldValidationRule {
   type: FieldValidationRuleType = FieldValidationRuleType.Required;
-  args?: string[] = []
+  args?: string[] = [];
 }
 
 export enum AccessLevel {
@@ -131,10 +131,10 @@ export enum FieldValidationRuleType {
   EmailAddress = 3,
 }
 
-export const MapsDefaultColorMarkers: string = 'rgb(166,27,74)'
-export const MapsDefaultColorLines: string = 'rgb(166,27,74)'
-export const MapsMaxDefaultFields: number = 10
-export const MapsMaxDefaultTags: number = 10
-export const MapsMaxMarkersLines: number = 500
-export const MapsDefaultSizeMarkers: number = 7
-export const MapsDefaultSizeLines: number = 5
+export const MapsDefaultColorMarkers: string = 'rgb(166,27,74)';
+export const MapsDefaultColorLines: string = 'rgb(166,27,74)';
+export const MapsMaxDefaultFields: number = 10;
+export const MapsMaxDefaultTags: number = 10;
+export const MapsMaxMarkersLines: number = 500;
+export const MapsDefaultSizeMarkers: number = 7;
+export const MapsDefaultSizeLines: number = 5;

@@ -4,4 +4,4 @@ import { useCognito } from './cognito';
 export {
   useApi,
   useCognito,
-}
+};

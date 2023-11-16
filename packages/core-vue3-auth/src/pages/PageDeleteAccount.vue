@@ -42,10 +42,10 @@ import { useRouter } from 'vue-router';
 import type { Login } from '../types';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { useClean, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia';
 import type { ApplicationMessage } from '@amilochau/core-vue3/types';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -53,32 +53,32 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Profile' },
   },
-})))
-const appStore = useAppStore()
-const { clean } = useClean()
-const router = useRouter()
-const identityStore = useIdentityStore()
-const { handleLoadAndError } = useHandle()
-const { deleteUser } = useCognito()
-const { required, minLength, maxLength, emailAddress } = useValidationRules()
-const { attributes } = storeToRefs(identityStore)
+})));
+const appStore = useAppStore();
+const { clean } = useClean();
+const router = useRouter();
+const identityStore = useIdentityStore();
+const { handleLoadAndError } = useHandle();
+const { deleteUser } = useCognito();
+const { required, minLength, maxLength, emailAddress } = useValidationRules();
+const { attributes } = storeToRefs(identityStore);
 
 const request: Ref<Login> = ref({
   email: '',
   password: '',
-})
+});
 
 const deleteAccount = () => handleLoadAndError(async () => {
   if (request.value.email !== attributes.value.email) {
-    throw { title: t('incorrectEmailAddress'), color: 'error', icon: mdiAlert, details: '' } as ApplicationMessage
+    throw { title: t('incorrectEmailAddress'), color: 'error', icon: mdiAlert, details: '' } as ApplicationMessage;
   }
 
-  await deleteUser()
-  identityStore.isAuthenticated = false
+  await deleteUser();
+  identityStore.isAuthenticated = false;
   clean();
-  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
-  await router.push({ name: 'Home' })
-}, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+  await router.push({ name: 'Home' });
+}, 'snackbar');
 </script>
 
 <i18n lang="yaml">

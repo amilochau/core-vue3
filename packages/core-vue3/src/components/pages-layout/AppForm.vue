@@ -29,7 +29,7 @@ import { useDisplay } from 'vuetify';
 import { type Ref, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { useHandle } from '../../composition';
-import { VForm } from 'vuetify/components'
+import { VForm } from 'vuetify/components';
 
 const props = defineProps<{
   /** Form button */
@@ -40,31 +40,31 @@ const props = defineProps<{
     onClick: () => Promise<void>,
     disabled?: boolean,
   },
-}>()
+}>();
 
-const appStore = useAppStore()
-const online = useOnline()
-const { xs } = useDisplay()
-const { handleFormValidation } = useHandle()
-const { loading } = storeToRefs(appStore)
+const appStore = useAppStore();
+const online = useOnline();
+const { xs } = useDisplay();
+const { handleFormValidation } = useHandle();
+const { loading } = storeToRefs(appStore);
 
-const form = ref<InstanceType<typeof VForm>>()
+const form = ref<InstanceType<typeof VForm>>();
 
 const onButtonClick = async () => {
   if (!props.button) {
-    return
+    return;
   }
 
   if (!await handleFormValidation(form)) {
-    return
+    return;
   }
 
-  await props.button.onClick()
-}
+  await props.button.onClick();
+};
 
 defineExpose({
   reset: () => form.value?.reset(),
   resetValidation: () => form.value?.resetValidation(),
   validate: () => form.value?.validate(),
-})
+});
 </script>

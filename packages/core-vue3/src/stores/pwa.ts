@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 interface PwaStoreState {
   installDisplay: boolean,
@@ -16,11 +16,11 @@ export const usePwaStore = defineStore('pwa', {
   }),
   actions: {
     install() {
-      this.installPromptEvent?.prompt()
+      this.installPromptEvent?.prompt();
     },
     update() {
-      this.updateLoading = true
-      this.updateSW?.(true)
+      this.updateLoading = true;
+      this.updateSW?.(true);
     },
   },
-})
+});

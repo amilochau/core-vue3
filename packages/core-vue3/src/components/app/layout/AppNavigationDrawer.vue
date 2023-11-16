@@ -27,10 +27,10 @@
 
 <script setup lang="ts">
 import { useCoreOptions } from '../../../composition';
-import { useAppStore } from '../../../stores'
+import { useAppStore } from '../../../stores';
 
-const appStore = useAppStore()
-const coreOptions = useCoreOptions()
+const appStore = useAppStore();
+const coreOptions = useCoreOptions();
 
-const navigationOptions = coreOptions.application.navigation
+const navigationOptions = coreOptions.application.navigation;
 </script>

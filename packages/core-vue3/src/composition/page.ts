@@ -6,16 +6,16 @@ import { useAppStore } from '../stores';
 import type { PageData } from '../types';
 
 export const usePage = (pageData: ComputedRef<PageData>) => {
-  const { locale } = useI18n()
-  const coreOptions = useCoreOptions()
-  const appStore = useAppStore()
+  const { locale } = useI18n();
+  const coreOptions = useCoreOptions();
+  const appStore = useAppStore();
 
   watch(pageData, () => {
-    appStore.pageData = pageData.value
-  }, { immediate: true, deep: true })
+    appStore.pageData = pageData.value;
+  }, { immediate: true, deep: true });
 
-  const appTitle = computed(() => coreOptions.i18n.messages[locale.value].appTitle)
-  const pageTitle = computed(() => pageData.value.title ? `${pageData.value.title} — ${appTitle.value}` : appTitle.value)
+  const appTitle = computed(() => coreOptions.i18n.messages[locale.value].appTitle);
+  const pageTitle = computed(() => pageData.value.title ? `${pageData.value.title} — ${appTitle.value}` : appTitle.value);
 
   const meta = computed(() => ([
     {
@@ -26,10 +26,10 @@ export const usePage = (pageData: ComputedRef<PageData>) => {
       name: 'robots',
       content: ref('noindex'),
     }] : [],
-  ]))
+  ]));
 
   useHead({
     title: pageTitle,
     meta: meta,
-  })
-}
+  });
+};

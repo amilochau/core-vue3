@@ -118,3 +118,4 @@ rules:
   '@stylistic/quotes':
     - error
     - single
+  '@stylistic/semi': error

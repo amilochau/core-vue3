@@ -22,7 +22,7 @@
 import AppForm from './AppForm.vue';
 import AppResponsive from './AppResponsive.vue';
 import { ref } from 'vue';
-import { VForm } from 'vuetify/components'
+import { VForm } from 'vuetify/components';
 
 defineProps<{
   /** Title */
@@ -41,13 +41,13 @@ defineProps<{
     onClick: () => Promise<void>,
     disabled?: boolean,
   },
-}>()
+}>();
 
-const form = ref<InstanceType<typeof VForm>>()
+const form = ref<InstanceType<typeof VForm>>();
 
 defineExpose({
   reset: () => form.value?.reset(),
   resetValidation: () => form.value?.resetValidation(),
   validate: () => form.value?.validate(),
-})
+});
 </script>

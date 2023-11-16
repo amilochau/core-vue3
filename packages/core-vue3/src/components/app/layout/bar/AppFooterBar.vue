@@ -74,7 +74,7 @@ import { mdiBrightness6, mdiEarth } from '@mdi/js';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
-import { useTheme } from 'vuetify'
+import { useTheme } from 'vuetify';
 
 const props = defineProps<{
   /** Bar items */
@@ -82,26 +82,26 @@ const props = defineProps<{
     link: string,
     title: string,
   }[]
-}>()
+}>();
 
-const { t } = useI18n()
-const themeStore = useThemeStore()
-const router = useRouter()
-const route = useRoute()
-const theme = useTheme()
+const { t } = useI18n();
+const themeStore = useThemeStore();
+const router = useRouter();
+const route = useRoute();
+const theme = useTheme();
 
-const barItems = computed(() => props.items ?? [])
-const language = computed(() => route.params.lang?.toString())
+const barItems = computed(() => props.items ?? []);
+const language = computed(() => route.params.lang?.toString());
 
 const toggleTheme = () => {
-  themeStore.darkMode = !themeStore.darkMode
-  theme.global.name.value = themeStore.darkMode ? 'dark' : 'light'
-}
+  themeStore.darkMode = !themeStore.darkMode;
+  theme.global.name.value = themeStore.darkMode ? 'dark' : 'light';
+};
 
 const languagesItems = computed(() => ([
   { title: t('languages.english'), lang: 'en' },
   { title: t('languages.french'), lang: 'fr' },
-]))
+]));
 </script>
 
 <i18n lang="yaml">

@@ -14,12 +14,12 @@
 </template>
 
 <script setup lang="ts">
-import { mdiWifiStrengthAlertOutline } from '@mdi/js'
-import { useOnline } from '@vueuse/core'
+import { mdiWifiStrengthAlertOutline } from '@mdi/js';
+import { useOnline } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
 
-const { t } = useI18n()
-const online = useOnline()
+const { t } = useI18n();
+const online = useOnline();
 </script>
 
 <i18n lang="yaml">

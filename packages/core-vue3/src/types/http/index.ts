@@ -4,6 +4,6 @@ import type { IProblemDetails } from './IProblemDetails';
 export type {
   IHttpSettings,
   IProblemDetails,
-}
+};
 
-export * from './ListPayload'
+export * from './ListPayload';

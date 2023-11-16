@@ -22,6 +22,6 @@
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
-const appStore = useAppStore()
-const { homeMessages } = storeToRefs(appStore)
+const appStore = useAppStore();
+const { homeMessages } = storeToRefs(appStore);
 </script>

@@ -31,11 +31,11 @@ import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { ForgotPassword } from '../types'
+import type { ForgotPassword } from '../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -43,22 +43,22 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Login' },
   },
-})))
-const appStore = useAppStore()
-const router = useRouter()
-const { handleLoadAndError } = useHandle()
-const { forgotPassword } = useCognito()
-const { required, maxLength, emailAddress } = useValidationRules()
+})));
+const appStore = useAppStore();
+const router = useRouter();
+const { handleLoadAndError } = useHandle();
+const { forgotPassword } = useCognito();
+const { required, maxLength, emailAddress } = useValidationRules();
 
 const request: Ref<ForgotPassword> = ref({
   email: '',
-})
+});
 
 const reset = () => handleLoadAndError(async () => {
-  await forgotPassword(request.value)
-  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
-  await router.push({ name: 'ResetPassword', query: { email: request.value.email } })
-}, 'snackbar')
+  await forgotPassword(request.value);
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar');
+  await router.push({ name: 'ResetPassword', query: { email: request.value.email } });
+}, 'snackbar');
 </script>
 
 <i18n lang="yaml">

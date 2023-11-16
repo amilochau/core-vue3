@@ -25,7 +25,7 @@ import { useRouter } from 'vue-router';
 import { useClean, useCoreOptions, usePage } from '@amilochau/core-vue3/composition';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -33,21 +33,21 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
-})))
-const appStore = useAppStore()
-const identityStore = useIdentityStore()
-const { clean } = useClean()
-const router = useRouter()
-const coreOptions = useCoreOptions()
+})));
+const appStore = useAppStore();
+const identityStore = useIdentityStore();
+const { clean } = useClean();
+const router = useRouter();
+const coreOptions = useCoreOptions();
 
-const { attributes } = storeToRefs(identityStore)
+const { attributes } = storeToRefs(identityStore);
 
 const links = computed(() => ([
   { title: t('links.editProfile.title'), subtitle: t('links.editProfile.subtitle'), prependIcon: mdiAccountEdit, to: { name: 'EditProfile' } },
   { title: t('links.editPassword.title'), subtitle: t('links.editPassword.subtitle'), prependIcon: mdiLockReset, to: { name: 'EditPassword' } },
   { title: t('links.logout.title'), subtitle: t('links.logout.subtitle'), prependIcon: mdiPower, onClick: cleanAndLogout },
   { title: t('links.deleteAccount.title'), subtitle: t('links.deleteAccount.subtitle'), prependIcon: mdiAccountOff, to: { name: 'DeleteAccount' } },
-]))
+]));
 
 const contactItems = computed(() => [{
   title: attributes.value.email,
@@ -59,20 +59,20 @@ const contactItems = computed(() => [{
   props: {
     prependIcon: mdiAccount,
   },
-}])
+}]);
 
 const cleanAndLogout = async () => {
   try {
-    appStore.loading = true
+    appStore.loading = true;
     if (coreOptions.identity?.logout) {
       await coreOptions.identity?.logout();
     }
     clean();
-    await router.push({ name: 'Home' })
+    await router.push({ name: 'Home' });
   } finally {
-    appStore.loading = false
+    appStore.loading = false;
   }
-}
+};
 </script>
 
 <i18n lang="yaml">

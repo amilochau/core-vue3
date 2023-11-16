@@ -60,7 +60,7 @@ import type { Register } from '../types';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -68,29 +68,29 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
-})))
-const appStore = useAppStore()
-const router = useRouter()
-const { handleLoadAndError } = useHandle()
-const { signUp } = useCognito()
-const { required, minLength, maxLength, emailAddress } = useValidationRules()
+})));
+const appStore = useAppStore();
+const router = useRouter();
+const { handleLoadAndError } = useHandle();
+const { signUp } = useCognito();
+const { required, minLength, maxLength, emailAddress } = useValidationRules();
 
 const request: Ref<Register> = ref({
   name: '',
   email: '',
   password: '',
   confirmationPassword: '',
-})
+});
 
 const links = computed(() => ([
   { title: t('links.login.title'), subtitle: t('links.login.subtitle'), prependIcon: mdiAccountLockOutline, to: { name: 'Login' } },
-]))
+]));
 
 const register = () => handleLoadAndError(async () => {
-  await signUp(request.value)
-  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
-  await router.push({ name: 'ConfirmEmail', query: { email: request.value.email } })
-}, 'snackbar')
+  await signUp(request.value);
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar');
+  await router.push({ name: 'ConfirmEmail', query: { email: request.value.email } });
+}, 'snackbar');
 </script>
 
 <i18n lang="yaml">

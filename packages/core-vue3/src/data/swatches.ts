@@ -39,7 +39,7 @@ export const swatches = [
     '#424242',
     '#000000',
   ],
-]
+];
 
 export const bullets = [
   '#880E4F',
@@ -72,7 +72,7 @@ export const bullets = [
   '#424242',
   '#757575',
   '#BDBDBD',
-]
+];
 
 export const shortBullets = [
   '#C2185B',
@@ -83,6 +83,6 @@ export const shortBullets = [
   '#3949AB',
   '#673AB7',
   '#9C27B0',
-]
+];
 
 export default swatches;

@@ -1,12 +1,12 @@
-import type { App } from 'vue'
-import type { MilochauCoreOptions } from '../types/options'
-import deepmerge from 'deepmerge'
+import type { App } from 'vue';
+import type { MilochauCoreOptions } from '../types/options';
+import deepmerge from 'deepmerge';
 
 // Vuetify
-import { type VuetifyOptions, createVuetify } from 'vuetify'
-import { en, fr } from 'vuetify/locale'
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import { VBtn } from 'vuetify/components'
+import { type VuetifyOptions, createVuetify } from 'vuetify';
+import { en, fr } from 'vuetify/locale';
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
+import { VBtn } from 'vuetify/components';
 
 export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   const defaultVuetifyOptions: VuetifyOptions = {
@@ -102,15 +102,15 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         },
       },
     },
-  }
+  };
 
-  const vuetifyOptions = deepmerge(defaultVuetifyOptions, options.vuetify || {})
-  const vuetify = createVuetify(vuetifyOptions)
+  const vuetifyOptions = deepmerge(defaultVuetifyOptions, options.vuetify || {});
+  const vuetify = createVuetify(vuetifyOptions);
 
-  app.use(vuetify)
+  app.use(vuetify);
 
-  return vuetify
-}
+  return vuetify;
+};
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {

@@ -1,21 +1,21 @@
-import { URL, fileURLToPath } from 'node:url'
-import { type PluginOption, defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vuetify from 'vite-plugin-vuetify'
-import VueI18n from '@intlify/unplugin-vue-i18n/vite'
-import Unfonts from 'unplugin-fonts/vite'
-import { setDefaultResultOrder } from 'dns'
+import { URL, fileURLToPath } from 'node:url';
+import { type PluginOption, defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vuetify from 'vite-plugin-vuetify';
+import VueI18n from '@intlify/unplugin-vue-i18n/vite';
+import Unfonts from 'unplugin-fonts/vite';
+import { setDefaultResultOrder } from 'dns';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { VitePWA } from 'vite-plugin-pwa'
-import path from 'upath'
-import fs from 'fs'
-import { execSync } from 'child_process'
+import { VitePWA } from 'vite-plugin-pwa';
+import path from 'upath';
+import fs from 'fs';
+import { execSync } from 'child_process';
 
-setDefaultResultOrder('verbatim')
+setDefaultResultOrder('verbatim');
 
-let buildDate = new Date().toISOString()
-let commitSha = execSync('git rev-parse --short HEAD').toString().split('\n')[0]
-let commitDate = execSync('git log -1 --format=%cI').toString().split('\n')[0]
+let buildDate = new Date().toISOString();
+let commitSha = execSync('git rev-parse --short HEAD').toString().split('\n')[0];
+let commitDate = execSync('git log -1 --format=%cI').toString().split('\n')[0];
 
 export default defineConfig({
   plugins: [
@@ -87,15 +87,15 @@ export default defineConfig({
         return html.replace(
           /window.buildData = null;/,
           `window.buildData = { buildDate: "${buildDate}", commitSha: "${commitSha}", commitDate: "${commitDate}" };`,
-        )
+        );
       },
     },
     {
       name: 'amilochau:fallback',
       enforce: 'post',
       transformIndexHtml (html) {
-        fs.mkdirSync('dist', { recursive: true })
-        fs.writeFileSync(path.join('dist/_fallback.html'), html)
+        fs.mkdirSync('dist', { recursive: true });
+        fs.writeFileSync(path.join('dist/_fallback.html'), html);
       },
     },
     visualizer() as PluginOption,
@@ -114,4 +114,4 @@ export default defineConfig({
       'virtual:pwa-register',
     ],
   },
-})
+});

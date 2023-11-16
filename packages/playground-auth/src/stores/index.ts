@@ -1,5 +1,5 @@
-import { useMapsStore } from './maps'
+import { useMapsStore } from './maps';
 
 export {
   useMapsStore,
-}
+};

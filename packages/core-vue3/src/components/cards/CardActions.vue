@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '../../stores'
+import { useAppStore } from '../../stores';
 import { mdiPencil, mdiWifiStrengthAlertOutline } from '@mdi/js';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
@@ -48,20 +48,20 @@ const props = defineProps<{
   saveTitle?: string,
   /** Icon for the save button */
   saveIcon?: string
-}>()
+}>();
 const emit = defineEmits<{
   (eventName: 'close'): void,
   (eventName: 'save'): void
-}>()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
-const online = useOnline()
-const { t } = useI18n()
+}>();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
+const online = useOnline();
+const { t } = useI18n();
 
-const cancelTitleOrDefault = computed(() => props.cancelTitle ?? t('cancel'))
-const cancelIconOrDefault = computed(() => props.cancelIcon ?? undefined)
-const saveTitleOrDefault = computed(() => props.saveTitle ?? t('save'))
-const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil)
+const cancelTitleOrDefault = computed(() => props.cancelTitle ?? t('cancel'));
+const cancelIconOrDefault = computed(() => props.cancelIcon ?? undefined);
+const saveTitleOrDefault = computed(() => props.saveTitle ?? t('save'));
+const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil);
 </script>
 
 <i18n lang="yaml">

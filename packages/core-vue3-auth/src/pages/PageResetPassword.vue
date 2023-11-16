@@ -72,7 +72,7 @@ import type { ResetPassword } from '../types';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -80,26 +80,26 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'ForgotPassword' },
   },
-})))
-const appStore = useAppStore()
-const router = useRouter()
-const route = useRoute()
-const { handleLoadAndError } = useHandle()
-const { confirmPassword } = useCognito()
-const { required, minLength, maxLength, emailAddress } = useValidationRules()
+})));
+const appStore = useAppStore();
+const router = useRouter();
+const route = useRoute();
+const { handleLoadAndError } = useHandle();
+const { confirmPassword } = useCognito();
+const { required, minLength, maxLength, emailAddress } = useValidationRules();
 
 const request: Ref<ResetPassword> = ref({
   email: route.query.email?.toString() || '',
   password: '',
   confirmationPassword: '',
   code: '',
-})
+});
 
 const reset = () => handleLoadAndError(async () => {
   await confirmPassword(request.value);
-  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
-  await router.replace({ name: 'Login', query: { email: request.value.email } })
-}, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+  await router.replace({ name: 'Login', query: { email: request.value.email } });
+}, 'snackbar');
 </script>
 
 <i18n lang="yaml">

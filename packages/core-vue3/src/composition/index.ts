@@ -5,7 +5,7 @@ import { useHandle } from './handle';
 import { useNavigation } from './navigation';
 import { useNotifications } from './notifications';
 import { usePage } from './page';
-import { useValidationRules } from './validation'
+import { useValidationRules } from './validation';
 
 export {
   useApiAnonymous,
@@ -16,4 +16,4 @@ export {
   useNotifications,
   usePage,
   useValidationRules,
-}
+};

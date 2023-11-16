@@ -97,10 +97,10 @@ defineProps<{
     href?: string,
     disabled?: boolean,
   },
-}>()
+}>();
 
-const { xs } = useDisplay()
-const online = useOnline()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
+const { xs } = useDisplay();
+const online = useOnline();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
 </script>

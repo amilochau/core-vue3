@@ -31,10 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import { mdiClose } from '@mdi/js'
+import { mdiClose } from '@mdi/js';
 import { type Ref, computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useDate } from 'vuetify'
+import { useDate } from 'vuetify';
 
 defineProps<{
   /** Title used as the input label */
@@ -45,40 +45,40 @@ defineProps<{
   disabled?: boolean
   /** Whether the input is clearable */
   clearable?: boolean
-}>()
+}>();
 
-const modelValue = defineModel<string | undefined>()
+const modelValue = defineModel<string | undefined>();
 
-const { d, mergeDateTimeFormat } = useI18n()
-const date = useDate()
+const { d, mergeDateTimeFormat } = useI18n();
+const date = useDate();
 
 mergeDateTimeFormat('en', {
   datetime: {
     year: 'numeric', month: 'numeric', day: 'numeric',
   },
-})
+});
 mergeDateTimeFormat('fr', {
   datetime: {
     year: 'numeric', month: 'numeric', day: 'numeric',
   },
-})
+});
 
-const displayDialog = ref(false)
-const internalValue: Ref<any> = ref(undefined)
-const displayedValue = computed(() => internalValue.value ? d(internalValue.value, 'datetime') : '')
+const displayDialog = ref(false);
+const internalValue: Ref<any> = ref(undefined);
+const displayedValue = computed(() => internalValue.value ? d(internalValue.value, 'datetime') : '');
 
 function reset() {
-  modelValue.value = undefined
-  displayDialog.value = false
+  modelValue.value = undefined;
+  displayDialog.value = false;
 }
 
 function save(value: any) {
-  internalValue.value = value
-  modelValue.value = date.toISO(value)
-  displayDialog.value = false
+  internalValue.value = value;
+  modelValue.value = date.toISO(value);
+  displayDialog.value = false;
 }
 
 watch(modelValue, () => {
-  internalValue.value = modelValue.value ? date.parseISO(modelValue.value) : undefined
-}, { immediate: true })
+  internalValue.value = modelValue.value ? date.parseISO(modelValue.value) : undefined;
+}, { immediate: true });
 </script>

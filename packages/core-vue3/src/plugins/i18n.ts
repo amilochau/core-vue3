@@ -8,9 +8,9 @@ export const registerI18n = (app: App, options: MilochauCoreOptions) => {
       locale: 'en',
       fallbackLocale: 'en',
       legacy: false,
-    }, options.i18n))
+    }, options.i18n));
 
-  app.use(i18n)
+  app.use(i18n);
 
-  return i18n
-}
+  return i18n;
+};

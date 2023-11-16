@@ -19,14 +19,14 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsive } from '../components'
+import { AppResponsive } from '../components';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
 import { useAppStore } from '../stores';
 import { computed } from 'vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -34,9 +34,9 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
-})))
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
+})));
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
 </script>
 
 <i18n lang="yaml">

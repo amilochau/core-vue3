@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts" generic="TData">
-import { mdiClose } from '@mdi/js'
+import { mdiClose } from '@mdi/js';
 import { ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
@@ -50,15 +50,15 @@ defineProps<{
   disabled?: boolean
   /** Icons used as values */
   icons: FormattedDataWithValue<TData>[]
-}>()
+}>();
 
-const modelValue = defineModel<TData | undefined>()
+const modelValue = defineModel<TData | undefined>();
 
-const focused = ref(false)
+const focused = ref(false);
 
 const setModelValue = (value: TData) => {
-  modelValue.value = value
-}
+  modelValue.value = value;
+};
 </script>
 
 <style>

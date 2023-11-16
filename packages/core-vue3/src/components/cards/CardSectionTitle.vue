@@ -22,7 +22,7 @@ const props = defineProps<{
   icon?: string,
   /** Text and icon color */
   color?: 'primary' | 'warning' | 'error'
-}>()
+}>();
 
 const labelClass = computed(() => [
   { 'text-subtitle-2': true },
@@ -31,5 +31,5 @@ const labelClass = computed(() => [
   { 'text-primary': !props.color || props.color === 'primary' },
   { 'text-warning': props.color === 'warning' },
   { 'text-error': props.color === 'error' },
-])
+]);
 </script>

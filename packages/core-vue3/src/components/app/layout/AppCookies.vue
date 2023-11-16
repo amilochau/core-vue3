@@ -73,35 +73,35 @@
 </template>
 
 <script setup lang="ts">
-import { mdiClose, mdiCookie, mdiGavel } from '@mdi/js'
+import { mdiClose, mdiCookie, mdiGavel } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
-import { useAppStore, useCookiesStore } from '../../../stores'
-import { ref } from 'vue'
-import PrivacyCard from '../content/PrivacyCard.vue'
+import { useAppStore, useCookiesStore } from '../../../stores';
+import { ref } from 'vue';
+import PrivacyCard from '../content/PrivacyCard.vue';
 import { storeToRefs } from 'pinia';
 
-const { t } = useI18n()
-const cookiesStore = useCookiesStore()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
+const { t } = useI18n();
+const cookiesStore = useCookiesStore();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
 
-const displayed = ref(cookiesStore.showCookies)
-const policyDisplayed = ref(false)
+const displayed = ref(cookiesStore.showCookies);
+const policyDisplayed = ref(false);
 
 const seePolicy = () => {
-  displayed.value = false
-  policyDisplayed.value = true
-}
+  displayed.value = false;
+  policyDisplayed.value = true;
+};
 const accept = () => {
-  displayed.value = false
-  policyDisplayed.value = false
-  cookiesStore.acceptCookies()
-}
+  displayed.value = false;
+  policyDisplayed.value = false;
+  cookiesStore.acceptCookies();
+};
 const refuse = () => {
-  displayed.value = false
-  policyDisplayed.value = false
-  cookiesStore.refuseCookies()
-}
+  displayed.value = false;
+  policyDisplayed.value = false;
+  cookiesStore.refuseCookies();
+};
 </script>
 
 <i18n lang="yaml">

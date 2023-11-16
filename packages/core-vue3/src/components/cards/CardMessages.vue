@@ -20,24 +20,24 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
-import { useAppStore } from '../../stores'
+import { useAppStore } from '../../stores';
 
-const appStore = useAppStore()
-const { message } = storeToRefs(appStore)
+const appStore = useAppStore();
+const { message } = storeToRefs(appStore);
 
-let displayTimeout: any = 0
+let displayTimeout: any = 0;
 
 const display = ref(false);
 
 watch(message, () => {
-  clearTimeout(displayTimeout)
+  clearTimeout(displayTimeout);
   if (message.value) {
-    display.value = true
+    display.value = true;
     displayTimeout = setTimeout(() => {
-      display.value = false
-    }, message.value.timeout_ms)
+      display.value = false;
+    }, message.value.timeout_ms);
   } else {
-    display.value = false
+    display.value = false;
   }
-}, { deep: true })
+}, { deep: true });
 </script>

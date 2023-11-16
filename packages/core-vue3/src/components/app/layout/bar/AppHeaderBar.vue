@@ -50,9 +50,9 @@
 import { mdiArrowLeft } from '@mdi/js';
 import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
-import AppPwaInstall from './AppPwaInstall.vue'
-import AppPwaUpdate from './AppPwaUpdate.vue'
-import AppProgressBar from '../AppProgressBar.vue'
+import AppPwaInstall from './AppPwaInstall.vue';
+import AppPwaUpdate from './AppPwaUpdate.vue';
+import AppProgressBar from '../AppProgressBar.vue';
 import { useAppStore } from '../../../../stores';
 import { useCoreOptions, useNavigation } from '../../../../composition';
 import { type RouteLocationRaw, useRouter } from 'vue-router';
@@ -69,32 +69,32 @@ const props = defineProps<{
   buttonMode?: 'drawer' | 'back' | 'default-back'
   /** Default link, used as a fallback value when no history is found with the buttonMode set to 'back'  */
   defaultBackTo?: RouteLocationRaw
-}>()
+}>();
 
-const appStore = useAppStore()
-const coreOptions = useCoreOptions()
-const router = useRouter()
-const { hasStateHistory } = useNavigation()
+const appStore = useAppStore();
+const coreOptions = useCoreOptions();
+const router = useRouter();
+const { hasStateHistory } = useNavigation();
 
 const toggleDrawer = () => {
-  appStore.setDrawer(!appStore.drawer)
-}
+  appStore.setDrawer(!appStore.drawer);
+};
 
 const buttonType = computed(() => {
   if (props.buttonMode === 'back' && (hasStateHistory.value || props.defaultBackTo)) {
-    return 'arrow-left'
+    return 'arrow-left';
   } else if (props.buttonMode === 'default-back' && props.defaultBackTo) {
-    return 'arrow-left'
+    return 'arrow-left';
   } else {
-    return 'nav'
+    return 'nav';
   }
-})
+});
 
 const onBackButtonClick = async () => {
   if (props.buttonMode === 'back' && hasStateHistory.value) {
-    router.back()
+    router.back();
   } else if (props.defaultBackTo) {
-    await router.replace(props.defaultBackTo)
+    await router.replace(props.defaultBackTo);
   }
-}
+};
 </script>

@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 interface ThemeStoreState {
   darkMode: boolean,
@@ -11,4 +11,4 @@ export const useThemeStore = defineStore('theme', {
   persist: {
     storage: 'localStorage',
   },
-})
+});

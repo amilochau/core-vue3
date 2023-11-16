@@ -17,18 +17,18 @@
 </template>
 
 <script setup lang="ts">
-import { mdiUpdate } from '@mdi/js'
-import { useOnline } from '@vueuse/core'
+import { mdiUpdate } from '@mdi/js';
+import { useOnline } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
-import { useAppStore, usePwaStore } from '../../../../stores'
-import { storeToRefs } from 'pinia'
+import { useAppStore, usePwaStore } from '../../../../stores';
+import { storeToRefs } from 'pinia';
 
-const { t } = useI18n()
-const online = useOnline()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
-const pwaStore = usePwaStore()
-const { updateDisplay, updateLoading } = storeToRefs(pwaStore)
+const { t } = useI18n();
+const online = useOnline();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
+const pwaStore = usePwaStore();
+const { updateDisplay, updateLoading } = storeToRefs(pwaStore);
 </script>
 
 <i18n lang="yaml">

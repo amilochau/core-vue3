@@ -6,7 +6,7 @@ export type IHomeMessage = {
   border?: 'top' | 'bottom' | 'start' | 'end';
   prominent: boolean;
   variant?: 'text' | 'outlined' | 'plain' | 'elevated' | 'flat' | 'tonal'
-}
+};
 
 export type ApplicationMessage = {
   title: string;
@@ -15,4 +15,4 @@ export type ApplicationMessage = {
   icon?: string;
   timeout_ms?: number;
   creation?: number; // Used to toggle the same message multiple times
-}
+};

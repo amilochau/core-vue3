@@ -40,11 +40,11 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsive } from '@amilochau/core-vue3/components'
-import { mdiGithub } from '@mdi/js'
-import HomeWelcome from '../components/home/HomeWelcome.vue'
-import HomeMessages from '../components/home/HomeMessages.vue'
-import BtnCard from '../components/buttons/BtnCard.vue'
+import { AppResponsive } from '@amilochau/core-vue3/components';
+import { mdiGithub } from '@mdi/js';
+import HomeWelcome from '../components/home/HomeWelcome.vue';
+import HomeMessages from '../components/home/HomeMessages.vue';
+import BtnCard from '../components/buttons/BtnCard.vue';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { usePage } from '@amilochau/core-vue3/composition';
 import DialogTest from '../components/dialogs/DialogTest.vue';
@@ -52,10 +52,10 @@ import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useFormat1 } from '@/composition/format/1'
-import { useFormat2 } from '@/composition/format/2'
+import { useFormat1 } from '@/composition/format/1';
+import { useFormat2 } from '@/composition/format/2';
 
-const { d, t } = useI18n()
+const { d, t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -68,21 +68,21 @@ usePage(computed(() => ({
       },
     ],
   },
-})))
-const appStore = useAppStore()
-const online = useOnline()
-const { formatTest1 } = useFormat1()
-const { formatTest2 } = useFormat2()
+})));
+const appStore = useAppStore();
+const online = useOnline();
+const { formatTest1 } = useFormat1();
+const { formatTest2 } = useFormat2();
 
-const { loading } = storeToRefs(appStore)
+const { loading } = storeToRefs(appStore);
 
-const dialog = ref(false)
+const dialog = ref(false);
 
-const stringDate = '2022-09-01'
+const stringDate = '2022-09-01';
 
 const openDialog = () => {
-  dialog.value = true
-}
+  dialog.value = true;
+};
 </script>
 
 <i18n lang="yaml">

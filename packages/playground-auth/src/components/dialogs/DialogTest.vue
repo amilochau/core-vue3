@@ -36,55 +36,55 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAlert, mdiPlus } from '@mdi/js'
+import { mdiAlert, mdiPlus } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { type Ref, ref, watch } from 'vue';
-import { CardActions, CardMessages, CardTitleClosable } from '@amilochau/core-vue3/components'
+import { CardActions, CardMessages, CardTitleClosable } from '@amilochau/core-vue3/components';
 import { MapsCreateRequest } from '../../types/maps';
 import { type ApplicationMessage } from '@amilochau/core-vue3/types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useDisplay } from 'vuetify';
 import { useI18n } from 'vue-i18n';
-import { VForm } from 'vuetify/components'
+import { VForm } from 'vuetify/components';
 
-const { t } = useI18n()
-const appStore = useAppStore()
-const { handleLoadAndError, handleFormValidation } = useHandle()
-const { required, minLength } = useValidationRules()
-const { xs } = useDisplay()
+const { t } = useI18n();
+const appStore = useAppStore();
+const { handleLoadAndError, handleFormValidation } = useHandle();
+const { required, minLength } = useValidationRules();
+const { xs } = useDisplay();
 
-const { loading } = storeToRefs(appStore)
+const { loading } = storeToRefs(appStore);
 
-const modelValue = defineModel<boolean>({ required: true })
+const modelValue = defineModel<boolean>({ required: true });
 
-const form = ref<InstanceType<typeof VForm>>()
-const request: Ref<MapsCreateRequest> = ref(new MapsCreateRequest())
+const form = ref<InstanceType<typeof VForm>>();
+const request: Ref<MapsCreateRequest> = ref(new MapsCreateRequest());
 
 const save = async () => {
   if (!await handleFormValidation(form)) {
-    return
+    return;
   }
 
   await handleLoadAndError(() => {
     throw { title: t('testMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
-    New line here` } as ApplicationMessage
-  }, 'internal')
-}
+    New line here` } as ApplicationMessage;
+  }, 'internal');
+};
 
-watch(modelValue, () => modelValue.value ? open() : close())
+watch(modelValue, () => modelValue.value ? open() : close());
 
 const open = () => {
-  initMap()
-  form.value?.reset()
-}
+  initMap();
+  form.value?.reset();
+};
 const close = () => {
-  modelValue.value = false
-}
+  modelValue.value = false;
+};
 
 const initMap = () => {
   request.value = new MapsCreateRequest();
-}
+};
 </script>
 
 <i18n lang="yaml">

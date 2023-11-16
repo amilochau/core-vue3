@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 const getDefaultState = (): IdentityStoreState => {
   return {
@@ -8,8 +8,8 @@ const getDefaultState = (): IdentityStoreState => {
       name: '',
       email: '',
     },
-  }
-}
+  };
+};
 
 interface IdentityStoreState {
   isAuthenticated: boolean,
@@ -24,14 +24,14 @@ export const useIdentityStore = defineStore('identity', {
   state: getDefaultState,
   actions: {
     setAttributes(attributes: {id: string, name: string, email: string}) {
-      this.attributes = attributes
+      this.attributes = attributes;
     },
 
     clean() {
-      this.$patch(getDefaultState())
+      this.$patch(getDefaultState());
     },
   },
   persist: {
     storage: 'localStorage',
   },
-})
+});

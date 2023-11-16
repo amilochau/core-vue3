@@ -1,9 +1,9 @@
-import { type MilochauCoreOptions } from '@amilochau/core-vue3/types'
-import { getConfig, getCurrentEnvironment } from '../utils/config'
-import routes from './routes'
-import { useMapsStore } from '../stores'
-import navigation from './navigation'
-import logoUrl from '@/assets/logo.png'
+import { type MilochauCoreOptions } from '@amilochau/core-vue3/types';
+import { getConfig, getCurrentEnvironment } from '../utils/config';
+import routes from './routes';
+import { useMapsStore } from '../stores';
+import navigation from './navigation';
+import logoUrl from '@/assets/logo.png';
 
 export enum Environment {
   Default = 'default',
@@ -14,9 +14,9 @@ export enum Environment {
 
 export type EnvConfigValues = {
   [key in Environment]: Record<string, string>
-}
+};
 
-export const defaultEnv: Environment = Environment.Default
+export const defaultEnv: Environment = Environment.Default;
 
 export const envConfig: EnvConfigValues = {
   default: {
@@ -30,17 +30,17 @@ export const envConfig: EnvConfigValues = {
   prd: {
     VITE_API_URL: 'https://api.milochau.com/maps/v1',
   },
-}
+};
 
 export const getCurrentEnv = (host: string, subdomain: string): Environment => {
   if (host.includes('localhost')) {
-    return Environment.Local
+    return Environment.Local;
   } else if (subdomain.includes('dev')) {
-    return Environment.Development
+    return Environment.Development;
   } else {
-    return Environment.Production
+    return Environment.Production;
   }
-}
+};
 
 export const coreOptions: MilochauCoreOptions = {
   application: {
@@ -65,10 +65,10 @@ export const coreOptions: MilochauCoreOptions = {
   },
   routes: routes,
   clean: () => {
-    const mapsStore = useMapsStore()
+    const mapsStore = useMapsStore();
 
     return () => {
       mapsStore.clean();
-    }
+    };
   },
-}
+};

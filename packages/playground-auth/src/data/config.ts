@@ -1,9 +1,9 @@
-import { type MilochauCoreOptions, type NotificationsRegisterRequest } from '@amilochau/core-vue3/types'
-import { getConfig, getCurrentEnvironment } from '../utils/config'
-import routes from './routes'
-import { useMapsStore } from '../stores'
-import navigation from './navigation'
-import { useNotificationsApi } from '@/composition/notifications.api'
+import { type MilochauCoreOptions, type NotificationsRegisterRequest } from '@amilochau/core-vue3/types';
+import { getConfig, getCurrentEnvironment } from '../utils/config';
+import routes from './routes';
+import { useMapsStore } from '../stores';
+import navigation from './navigation';
+import { useNotificationsApi } from '@/composition/notifications.api';
 
 export enum Environment {
   Default = 'default',
@@ -14,9 +14,9 @@ export enum Environment {
 
 export type EnvConfigValues = {
   [key in Environment]: Record<string, string>
-}
+};
 
-export const defaultEnv: Environment = Environment.Default
+export const defaultEnv: Environment = Environment.Default;
 
 export const envConfig: EnvConfigValues = {
   default: {
@@ -39,17 +39,17 @@ export const envConfig: EnvConfigValues = {
     VITE_COGNITO_USERPOOL_ID: '',
     VITE_COGNITO_CLIENT_ID: '',
   },
-}
+};
 
 export const getCurrentEnv = (host: string, subdomain: string): Environment => {
   if (host.includes('localhost')) {
-    return Environment.Local
+    return Environment.Local;
   } else if (subdomain.includes('dev')) {
-    return Environment.Development
+    return Environment.Development;
   } else {
-    return Environment.Production
+    return Environment.Production;
   }
-}
+};
 
 export const coreOptions: MilochauCoreOptions = {
   application: {
@@ -79,21 +79,21 @@ export const coreOptions: MilochauCoreOptions = {
   },
   routes: routes,
   clean: () => {
-    const mapsStore = useMapsStore()
+    const mapsStore = useMapsStore();
 
     return () => {
       mapsStore.clean();
-    }
+    };
   },
   notifications: {
     pushKey: 'BDKw7_ihg5mQvriWE7o7Stl2NWSfbCW9v2P-EbCJ48qcaLw05Fy2yaENB6LGRS6C2TE59ztoMOXxlEYQua308EE',
     register: () => {
-      const notificationsApi = useNotificationsApi()
+      const notificationsApi = useNotificationsApi();
 
       return async (request: NotificationsRegisterRequest) => {
-        console.log('Notification registration', request)
-        await notificationsApi.register(request)
-      }
+        console.log('Notification registration', request);
+        await notificationsApi.register(request);
+      };
     },
   },
-}
+};

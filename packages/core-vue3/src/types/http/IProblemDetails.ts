@@ -4,4 +4,4 @@ export type IProblemDetails = {
   traceId?: string;
   status?: number;
   errors?: Record<string, string[]>;
-}
+};

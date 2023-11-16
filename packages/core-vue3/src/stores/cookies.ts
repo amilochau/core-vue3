@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 const setCookie = (cookieName: string, expiration: Date) => {
-  document.cookie = `${cookieName}=no; expires=${expiration.toUTCString()}; path=/; samesite=lax`
-}
+  document.cookie = `${cookieName}=no; expires=${expiration.toUTCString()}; path=/; samesite=lax`;
+};
 
 interface CookiesStoreState {
   name: string,
@@ -18,26 +18,26 @@ export const useCookiesStore = defineStore('cookies', {
   }),
   getters: {
     showCookies: (state) => {
-      return state.expiration <= new Date().valueOf()
+      return state.expiration <= new Date().valueOf();
     },
   },
   actions: {
     acceptCookies() {
-      this.accepted = true
-      const expirationDate = new Date()
-      expirationDate.setDate(expirationDate.getDate() + 360) // 360 days
-      this.expiration = expirationDate.valueOf()
-      setCookie(this.name, expirationDate)
+      this.accepted = true;
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 360); // 360 days
+      this.expiration = expirationDate.valueOf();
+      setCookie(this.name, expirationDate);
     },
     refuseCookies() {
-      this.accepted = false
-      const expirationDate = new Date()
-      expirationDate.setDate(expirationDate.getDate() + 180) // 180 days
-      this.expiration = expirationDate.valueOf()
-      setCookie(this.name, expirationDate)
+      this.accepted = false;
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 180); // 180 days
+      this.expiration = expirationDate.valueOf();
+      setCookie(this.name, expirationDate);
     },
   },
   persist: {
     storage: 'localStorage',
   },
-})
+});

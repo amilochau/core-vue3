@@ -128,13 +128,13 @@
 </template>
 
 <script setup lang="ts">
-import { mdiApplicationBraces, mdiBellAlertOutline, mdiBellCheckOutline, mdiBellMinus, mdiBellOutline, mdiBellPlus, mdiBrightness6, mdiCalendarEdit, mdiCalendarImport, mdiCalendarMinus, mdiEarth, mdiGavel, mdiUpdate } from '@mdi/js'
-import { AppResponsiveForm, CardSectionTitle } from '../components'
+import { mdiApplicationBraces, mdiBellAlertOutline, mdiBellCheckOutline, mdiBellMinus, mdiBellOutline, mdiBellPlus, mdiBrightness6, mdiCalendarEdit, mdiCalendarImport, mdiCalendarMinus, mdiEarth, mdiGavel, mdiUpdate } from '@mdi/js';
+import { AppResponsiveForm, CardSectionTitle } from '../components';
 import { useI18n } from 'vue-i18n';
 import { useNotifications, usePage } from '../composition';
 import { useRoute, useRouter } from 'vue-router';
 import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../stores';
-import { useTheme } from 'vuetify'
+import { useTheme } from 'vuetify';
 import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
@@ -146,8 +146,8 @@ declare global {
   }
 }
 
-const { d, t, mergeDateTimeFormat } = useI18n()
-const buttonMode = ref<'back' | 'default-back'>('back')
+const { d, t, mergeDateTimeFormat } = useI18n();
+const buttonMode = ref<'back' | 'default-back'>('back');
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -155,64 +155,64 @@ usePage(computed(() => ({
     buttonMode: buttonMode.value,
     defaultBackTo: { name: 'Home' },
   },
-})))
-const router = useRouter()
-const route = useRoute()
-const themeStore = useThemeStore()
-const theme = useTheme()
-const cookiesStore = useCookiesStore()
-const notifications = useNotifications()
-const online = useOnline()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
-const pwaStore = usePwaStore()
-const { updateDisplay, updateLoading } = storeToRefs(pwaStore)
+})));
+const router = useRouter();
+const route = useRoute();
+const themeStore = useThemeStore();
+const theme = useTheme();
+const cookiesStore = useCookiesStore();
+const notifications = useNotifications();
+const online = useOnline();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
+const pwaStore = usePwaStore();
+const { updateDisplay, updateLoading } = storeToRefs(pwaStore);
 
 mergeDateTimeFormat('en', {
   datetime: {
     year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
   },
-})
+});
 mergeDateTimeFormat('fr', {
   datetime: {
     year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
   },
-})
+});
 
-const buildData = window.buildData as BuildData
+const buildData = window.buildData as BuildData;
 const versionItems = computed(() => ([
   ...buildData.commitDate ? [{ title: d(buildData.commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
   ...buildData.buildDate ? [{ title: d(buildData.buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
   ...buildData.commitSha ? [{ title: buildData.commitSha, subtitle: t('version.commitSha'), prependIcon: mdiCalendarMinus }] : [],
-]))
+]));
 
-const language = computed(() => route.params.lang?.toString())
+const language = computed(() => route.params.lang?.toString());
 const languageItems = computed(() => ([
   { title: t('languages.english'), lang: 'en' },
   { title: t('languages.french'), lang: 'fr' },
-]))
+]));
 
 const links = computed(() => ([
   { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
-]))
+]));
 
 const toggleTheme = () => {
-  themeStore.darkMode = !themeStore.darkMode
-  theme.global.name.value = themeStore.darkMode ? 'dark' : 'light'
-}
+  themeStore.darkMode = !themeStore.darkMode;
+  theme.global.name.value = themeStore.darkMode ? 'dark' : 'light';
+};
 
 const toggleCookies = (event: any) => {
   if (event as boolean) {
-    cookiesStore.acceptCookies()
+    cookiesStore.acceptCookies();
   } else {
-    cookiesStore.refuseCookies()
+    cookiesStore.refuseCookies();
   }
-}
+};
 
 const changeLang = async (lang: string) => {
-  await router.replace({ params: { lang: lang }, query: route.query })
-  buttonMode.value = 'default-back'
-}
+  await router.replace({ params: { lang: lang }, query: route.query });
+  buttonMode.value = 'default-back';
+};
 </script>
 
 <i18n lang="yaml">

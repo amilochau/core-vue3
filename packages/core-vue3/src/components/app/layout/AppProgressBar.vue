@@ -10,30 +10,30 @@
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '../../../stores'
+import { useAppStore } from '../../../stores';
 
 const props = defineProps<{
   /** Delay used before displaying the progress bar  */
   lazyDelay?: number
-}>()
-const { t } = useI18n()
-const appStore = useAppStore()
-const { loading } = storeToRefs(appStore)
+}>();
+const { t } = useI18n();
+const appStore = useAppStore();
+const { loading } = storeToRefs(appStore);
 
-let displayTimeout: any = 0
+let displayTimeout: any = 0;
 
 const display = ref(false);
 
 watch(loading, () => {
-  clearTimeout(displayTimeout)
+  clearTimeout(displayTimeout);
   if (loading.value) {
     displayTimeout = setTimeout(() => {
-      display.value = true
-    }, props.lazyDelay ?? 0)
+      display.value = true;
+    }, props.lazyDelay ?? 0);
   } else {
-    display.value = false
+    display.value = false;
   }
-})
+});
 </script>
 
 <i18n lang="yaml">
