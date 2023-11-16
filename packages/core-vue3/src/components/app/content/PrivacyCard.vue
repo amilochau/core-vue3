@@ -33,10 +33,8 @@ import AppSectionText from '../section/AppSectionText.vue';
 import { useI18n } from 'vue-i18n';
 import { useCoreOptions } from '../../../composition';
 import { computed } from 'vue';
-import { useDisplay } from 'vuetify';
 
 const { t, mergeLocaleMessage } = useI18n();
-const { xs } = useDisplay();
 const coreOptions = useCoreOptions();
 
 Object.entries(coreOptions.i18n.messages).map(([key, item]) => {

@@ -26,7 +26,7 @@
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../stores';
 import { useDisplay } from 'vuetify';
-import { type Ref, ref } from 'vue';
+import { ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { useHandle } from '../../composition';
 import { VForm } from 'vuetify/components';

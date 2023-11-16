@@ -1,4 +1,3 @@
-import { useI18n } from 'vue-i18n';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: Array<RouteRecordRaw> = [

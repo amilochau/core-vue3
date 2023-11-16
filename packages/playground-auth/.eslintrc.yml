@@ -95,13 +95,17 @@ rules:
   vue/space-in-parens: error
   vue/space-infix-ops: error
   # ===== ESLint rules - https://eslint.org/docs/latest/rules/
+  eqeqeq: error
+  no-console:
+    - error
+    - allow:
+      - warn
+      - error
+  no-debugger: error
   no-duplicate-imports: error
   no-import-assign: error
   no-param-reassign: error
-  no-return-await: error
   no-self-compare: error
-  no-tabs: error
-  no-trailing-spaces: error
   no-useless-constructor: error
   no-useless-rename: error
   no-useless-return: error
@@ -109,12 +113,14 @@ rules:
   sort-imports:
     - error
     - ignoreDeclarationSort: true
-  # ===== ESLint stylistic rules -  https://eslint.style/packages/default
+  # ===== ESLint stylistic rules - https://eslint.style/packages/default
   '@stylistic/comma-dangle':
     - error
     - always-multiline
   '@stylistic/comma-spacing': error
   '@stylistic/comma-style': error
+  '@stylistic/no-tabs': error
+  '@stylistic/no-trailing-spaces': error
   '@stylistic/quotes':
     - error
     - single

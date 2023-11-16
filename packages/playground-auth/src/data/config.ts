@@ -91,7 +91,6 @@ export const coreOptions: MilochauCoreOptions = {
       const notificationsApi = useNotificationsApi();
 
       return async (request: NotificationsRegisterRequest) => {
-        console.log('Notification registration', request);
         await notificationsApi.register(request);
       };
     },
