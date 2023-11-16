@@ -1,4 +1,4 @@
-import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword } from "../types"
+import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword } from '../types'
 import {
   confirmResetPassword as awsConfirmResetPassword,
   confirmSignUp as awsConfirmSignUp,
@@ -25,18 +25,18 @@ export const useCognito = () => {
   const { t, mergeLocaleMessage } = useI18n()
 
   mergeLocaleMessage('en', {
-    errorMessage: "An error occured.",
-    incorrectUsernamePassword: "Incorrect email address or password.",
-    incorrectPassword: "Incorrect password.",
+    errorMessage: 'An error occured.',
+    incorrectUsernamePassword: 'Incorrect email address or password.',
+    incorrectPassword: 'Incorrect password.',
     incorrectCode: 'Incorrect validation code.',
     expiredCode: 'Expired validation code, or bad email address.',
     userAlreadyAuthenticated: 'You are already authenticated. If this does not seem to be the case, try to clean your browser data.',
     usernameExists: 'A user account already exists with this email address. You can try to login!',
   })
   mergeLocaleMessage('fr', {
-    errorMessage: "Une erreur est survenue.",
-    incorrectUsernamePassword: "Adresse email ou mot de passe incorrect.",
-    incorrectPassword: "Mot de passe incorrect.",
+    errorMessage: 'Une erreur est survenue.',
+    incorrectUsernamePassword: 'Adresse email ou mot de passe incorrect.',
+    incorrectPassword: 'Mot de passe incorrect.',
     incorrectCode: 'Code de validation incorrect.',
     expiredCode: 'Code de validation expiré, ou mauvaise adresse email.',
     userAlreadyAuthenticated: 'Vous êtes déjà connecté. Si cela ne semble pas être le cas, essayez de nettoyer les données de votre navigateur.',

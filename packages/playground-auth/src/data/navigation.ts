@@ -41,7 +41,7 @@ export default computed(() => {
         ? [{ title: t('profile'), prependIcon: mdiCardAccountDetailsOutline, to: { name: 'Profile' } }]
         : [{ title: t('login'), prependIcon: mdiPower, to: { name: 'Login' } }],
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
-      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: "_blank", rel: "noopener noreferrer" },
+      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: '_blank', rel: 'noopener noreferrer' },
     ],
   }
 })

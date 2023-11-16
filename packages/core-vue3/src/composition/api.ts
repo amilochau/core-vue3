@@ -1,9 +1,9 @@
-import { mdiAccessPointNetworkOff, mdiAlert } from "@mdi/js"
-import { useRouter } from "vue-router"
-import { useLanguageStore } from "../stores"
-import { type ApplicationMessage } from "../types"
-import type { IHttpSettings, IProblemDetails } from "../types/http"
-import { useCoreOptions } from "./options"
+import { mdiAccessPointNetworkOff, mdiAlert } from '@mdi/js'
+import { useRouter } from 'vue-router'
+import { useLanguageStore } from '../stores'
+import { type ApplicationMessage } from '../types'
+import type { IHttpSettings, IProblemDetails } from '../types/http'
+import { useCoreOptions } from './options'
 import { useI18n } from 'vue-i18n'
 
 export const useApiAnonymous = (relativeBaseUri: string) => {
@@ -12,22 +12,22 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
 
   mergeLocaleMessage('en', {
     errors: {
-      validation: "Validation error",
-      notAuthorized: "Not authorized",
-      notFound: "Not found",
-      serverError: "Server error",
-      networkError: "Network error: check your connection",
-      sessionExpired: "Session expired: please login again",
+      validation: 'Validation error',
+      notAuthorized: 'Not authorized',
+      notFound: 'Not found',
+      serverError: 'Server error',
+      networkError: 'Network error: check your connection',
+      sessionExpired: 'Session expired: please login again',
     },
   })
   mergeLocaleMessage('fr', {
     errors: {
-      validation: "Erreur de validation",
-      notAuthorized: "Non autorisé",
-      notFound: "Inconnu",
-      serverError: "Erreur interne",
-      networkError: "Erreur réseau : vérifiez votre connexion",
-      sessionExpired: "Session expirée : veuillez vous reconnecter",
+      validation: 'Erreur de validation',
+      notAuthorized: 'Non autorisé',
+      notFound: 'Inconnu',
+      serverError: 'Erreur interne',
+      networkError: 'Erreur réseau : vérifiez votre connexion',
+      sessionExpired: 'Session expirée : veuillez vous reconnecter',
     },
   })
 

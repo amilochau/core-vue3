@@ -73,7 +73,7 @@
 
 <script setup lang="ts">
 import { swatches } from '../../data/swatches'
-import { mdiCheck, mdiClose, mdiPalette } from "@mdi/js"
+import { mdiCheck, mdiClose, mdiPalette } from '@mdi/js'
 import { type Ref, computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 

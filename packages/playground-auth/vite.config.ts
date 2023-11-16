@@ -5,7 +5,7 @@ import vuetify from 'vite-plugin-vuetify'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import Unfonts from 'unplugin-fonts/vite'
 import { setDefaultResultOrder } from 'dns'
-import { visualizer } from "rollup-plugin-visualizer";
+import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA } from 'vite-plugin-pwa'
 import path from 'upath'
 import fs from 'fs'
@@ -108,7 +108,7 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: [
-      "@aws-amplify/auth",
+      '@aws-amplify/auth',
       'vue-router',
     ],
     exclude: [

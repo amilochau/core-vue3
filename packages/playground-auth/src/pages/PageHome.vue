@@ -61,7 +61,7 @@ import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import logoUrl from "@/assets/logo.png"
+import logoUrl from '@/assets/logo.png'
 
 const { d, t } = useI18n()
 usePage(computed(() => ({

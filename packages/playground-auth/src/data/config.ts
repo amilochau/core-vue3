@@ -1,9 +1,9 @@
-import { type MilochauCoreOptions, type NotificationsRegisterRequest } from "@amilochau/core-vue3/types"
-import { getConfig, getCurrentEnvironment } from "../utils/config"
-import routes from "./routes"
-import { useMapsStore } from "../stores"
-import navigation from "./navigation"
-import { useNotificationsApi } from "@/composition/notifications.api"
+import { type MilochauCoreOptions, type NotificationsRegisterRequest } from '@amilochau/core-vue3/types'
+import { getConfig, getCurrentEnvironment } from '../utils/config'
+import routes from './routes'
+import { useMapsStore } from '../stores'
+import navigation from './navigation'
+import { useNotificationsApi } from '@/composition/notifications.api'
 
 export enum Environment {
   Default = 'default',
@@ -20,23 +20,23 @@ export const defaultEnv: Environment = Environment.Default
 
 export const envConfig: EnvConfigValues = {
   default: {
-    VITE_GOOGLE_MAPS_API_KEY: "AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg",
-    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_GOOGLE_MAPS_API_KEY: 'AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg',
+    VITE_COGNITO_USERPOOL_ID: '',
     VITE_COGNITO_CLIENT_ID: '',
   },
   local: {
-    VITE_API_URL: "http://localhost:4000",
-    VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
+    VITE_API_URL: 'http://localhost:4000',
+    VITE_COGNITO_USERPOOL_ID: 'eu-west-3_91PfBkcmP',
     VITE_COGNITO_CLIENT_ID: '1oed2va2em6r9lkfvqbd3tspiu',
   },
   dev: {
-    VITE_API_URL: "http://localhost:4000",
-    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_API_URL: 'http://localhost:4000',
+    VITE_COGNITO_USERPOOL_ID: '',
     VITE_COGNITO_CLIENT_ID: '',
   },
   prd: {
-    VITE_API_URL: "http://localhost:4000",
-    VITE_COGNITO_USERPOOL_ID: "",
+    VITE_API_URL: 'http://localhost:4000',
+    VITE_COGNITO_USERPOOL_ID: '',
     VITE_COGNITO_CLIENT_ID: '',
   },
 }

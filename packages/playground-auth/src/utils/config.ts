@@ -1,4 +1,4 @@
-import { Environment, defaultEnv, envConfig, getCurrentEnv } from "../data/config"
+import { Environment, defaultEnv, envConfig, getCurrentEnv } from '../data/config'
 
 export const getCurrentEnvironment = () : Environment => {
   const host = window.location.host

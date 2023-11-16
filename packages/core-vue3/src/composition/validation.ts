@@ -1,27 +1,27 @@
-import { useI18n } from "vue-i18n"
+import { useI18n } from 'vue-i18n'
 
 export const useValidationRules = () => {
   const { t, mergeLocaleMessage } = useI18n()
 
   mergeLocaleMessage('en', {
-    required: "This field is required.",
-    minLength: "This field must be more than {min} characters.",
-    maxLength: "This field must be less than {max} characters.",
-    emailAddress: "This field must be a valid email address.",
-    date: "This field must be a valid date.",
-    url: "This field must be a valid URL",
-    minValue: "This field must be upper than {min}.",
-    maxValue: "This field must be lower than {max}.",
+    required: 'This field is required.',
+    minLength: 'This field must be more than {min} characters.',
+    maxLength: 'This field must be less than {max} characters.',
+    emailAddress: 'This field must be a valid email address.',
+    date: 'This field must be a valid date.',
+    url: 'This field must be a valid URL',
+    minValue: 'This field must be upper than {min}.',
+    maxValue: 'This field must be lower than {max}.',
   })
   mergeLocaleMessage('fr', {
-    required: "Ce champ est requis.",
-    minLength: "Ce champ doit faire plus de {min} caractères.",
-    maxLength: "Ce champ doit faire moins de {max} caractères.",
-    emailAddress: "Ce champ doit correspondre à une adresse email valide.",
-    date: "Ce champ doit correspondre à une date valide.",
-    url: "Ce champ doit correspondre à une URL valide.",
-    minValue: "Ce champ doit être supérieur à {min}.",
-    maxValue: "Ce champ doit être inférieur à {max}.",
+    required: 'Ce champ est requis.',
+    minLength: 'Ce champ doit faire plus de {min} caractères.',
+    maxLength: 'Ce champ doit faire moins de {max} caractères.',
+    emailAddress: 'Ce champ doit correspondre à une adresse email valide.',
+    date: 'Ce champ doit correspondre à une date valide.',
+    url: 'Ce champ doit correspondre à une URL valide.',
+    minValue: 'Ce champ doit être supérieur à {min}.',
+    maxValue: 'Ce champ doit être inférieur à {max}.',
   })
 
   return {

@@ -1,10 +1,10 @@
-import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from "@mdi/js"
-import { useRouter } from "vue-router"
+import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from '@mdi/js'
+import { useRouter } from 'vue-router'
 import { useCognito } from './cognito'
 import { useI18n } from 'vue-i18n'
-import { type ApplicationMessage, type IHttpSettings, type IProblemDetails } from "@amilochau/core-vue3/types"
-import { useCoreOptions } from "@amilochau/core-vue3/composition"
-import { useLanguageStore } from "@amilochau/core-vue3/stores"
+import { type ApplicationMessage, type IHttpSettings, type IProblemDetails } from '@amilochau/core-vue3/types'
+import { useCoreOptions } from '@amilochau/core-vue3/composition'
+import { useLanguageStore } from '@amilochau/core-vue3/stores'
 
 export const useApi = (relativeBaseUri: string) => {
 
@@ -12,22 +12,22 @@ export const useApi = (relativeBaseUri: string) => {
 
   mergeLocaleMessage('en', {
     errors: {
-      validation: "Validation error",
-      notAuthorized: "Not authorized",
-      notFound: "Not found",
-      serverError: "Server error",
-      networkError: "Network error: check your connection",
-      sessionExpired: "Session expired: please login again",
+      validation: 'Validation error',
+      notAuthorized: 'Not authorized',
+      notFound: 'Not found',
+      serverError: 'Server error',
+      networkError: 'Network error: check your connection',
+      sessionExpired: 'Session expired: please login again',
     },
   })
   mergeLocaleMessage('fr', {
     errors: {
-      validation: "Erreur de validation",
-      notAuthorized: "Non autorisé",
-      notFound: "Inconnu",
-      serverError: "Erreur interne",
-      networkError: "Erreur réseau : vérifiez votre connexion",
-      sessionExpired: "Session expirée : veuillez vous reconnecter",
+      validation: 'Erreur de validation',
+      notAuthorized: 'Non autorisé',
+      notFound: 'Inconnu',
+      serverError: 'Erreur interne',
+      networkError: 'Erreur réseau : vérifiez votre connexion',
+      sessionExpired: 'Session expirée : veuillez vous reconnecter',
     },
   })
 

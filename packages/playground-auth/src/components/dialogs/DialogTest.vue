@@ -36,16 +36,16 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAlert, mdiPlus } from "@mdi/js"
+import { mdiAlert, mdiPlus } from '@mdi/js'
 import { storeToRefs } from 'pinia';
-import { type Ref, ref, watch } from "vue";
-import { CardActions, CardMessages, CardTitleClosable } from "@amilochau/core-vue3/components"
-import { MapsCreateRequest } from "../../types/maps";
-import { type ApplicationMessage } from "@amilochau/core-vue3/types";
-import { useAppStore } from "@amilochau/core-vue3/stores";
-import { useHandle, useValidationRules } from "@amilochau/core-vue3/composition";
-import { useDisplay } from "vuetify";
-import { useI18n } from "vue-i18n";
+import { type Ref, ref, watch } from 'vue';
+import { CardActions, CardMessages, CardTitleClosable } from '@amilochau/core-vue3/components'
+import { MapsCreateRequest } from '../../types/maps';
+import { type ApplicationMessage } from '@amilochau/core-vue3/types';
+import { useAppStore } from '@amilochau/core-vue3/stores';
+import { useHandle, useValidationRules } from '@amilochau/core-vue3/composition';
+import { useDisplay } from 'vuetify';
+import { useI18n } from 'vue-i18n';
 import { VForm } from 'vuetify/components'
 
 const { t } = useI18n()

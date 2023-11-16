@@ -1,16 +1,16 @@
-import { useAppStore, useIdentityStore, useNotificationsStore } from "../stores"
-import { NotificationRegisterType, type NotificationsRegisterRequest } from "../types/application/notifications";
-import { computed } from "vue";
-import { useCoreOptions } from "./options";
-import { storeToRefs } from "pinia";
-import { useI18n } from "vue-i18n";
-import { useRoute } from "vue-router";
+import { useAppStore, useIdentityStore, useNotificationsStore } from '../stores'
+import { NotificationRegisterType, type NotificationsRegisterRequest } from '../types/application/notifications';
+import { computed } from 'vue';
+import { useCoreOptions } from './options';
+import { storeToRefs } from 'pinia';
+import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 
 const urlB64ToUint8Array = (base64String: string) => {
-  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding)
-    .replace(/\-/g, "+")
-    .replace(/_/g, "/");
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
 
   const rawData = window.atob(base64);
   const outputArray = new Uint8Array(rawData.length);

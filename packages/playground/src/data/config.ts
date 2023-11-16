@@ -1,9 +1,9 @@
-import { type MilochauCoreOptions } from "@amilochau/core-vue3/types"
-import { getConfig, getCurrentEnvironment } from "../utils/config"
-import routes from "./routes"
-import { useMapsStore } from "../stores"
-import navigation from "./navigation"
-import logoUrl from "@/assets/logo.png"
+import { type MilochauCoreOptions } from '@amilochau/core-vue3/types'
+import { getConfig, getCurrentEnvironment } from '../utils/config'
+import routes from './routes'
+import { useMapsStore } from '../stores'
+import navigation from './navigation'
+import logoUrl from '@/assets/logo.png'
 
 export enum Environment {
   Default = 'default',
@@ -22,13 +22,13 @@ export const envConfig: EnvConfigValues = {
   default: {
   },
   local: {
-    VITE_API_URL: "https://d37652aw4wwcmu.cloudfront.net/api/dev/a",
+    VITE_API_URL: 'https://d37652aw4wwcmu.cloudfront.net/api/dev/a',
   },
   dev: {
-    VITE_API_URL: "https://api-dev.milochau.com/maps/v1",
+    VITE_API_URL: 'https://api-dev.milochau.com/maps/v1',
   },
   prd: {
-    VITE_API_URL: "https://api.milochau.com/maps/v1",
+    VITE_API_URL: 'https://api.milochau.com/maps/v1',
   },
 }
 

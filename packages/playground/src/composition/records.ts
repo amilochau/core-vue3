@@ -13,7 +13,7 @@ export const useRecords = () => {
       }
 
       // No index is free
-      throw new Error("Can't create new item!");
+      throw new Error('Can\'t create new item!');
     },
   }
 }

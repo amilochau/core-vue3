@@ -1,5 +1,5 @@
-import type { MilochauCoreOptions } from "../..//types";
-import type { NavigationGuardNext, RouteLocationNormalized, Router } from "vue-router";
+import type { MilochauCoreOptions } from '../..//types';
+import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-router';
 
 export const registerGuards = (router: Router, identityStore: any, appStore: any, options: MilochauCoreOptions) => {
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {

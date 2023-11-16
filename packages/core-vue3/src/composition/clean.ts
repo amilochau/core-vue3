@@ -1,5 +1,5 @@
-import { useIdentityStore } from "../stores";
-import { useCoreOptions } from "./options";
+import { useIdentityStore } from '../stores';
+import { useCoreOptions } from './options';
 
 export const useClean = () => {
 

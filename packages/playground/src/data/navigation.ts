@@ -31,7 +31,7 @@ export default computed(() => {
     appendItems: [
       { type: 'subheader', title: t('settingsAndSupport') },
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
-      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: "_blank", rel: "noopener noreferrer" },
+      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: '_blank', rel: 'noopener noreferrer' },
     ],
   }
 })

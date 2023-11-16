@@ -1,5 +1,5 @@
-import { useApi } from "@amilochau/core-vue3-auth/composition";
-import type { NotificationsRegisterRequest } from "@amilochau/core-vue3/types";
+import { useApi } from '@amilochau/core-vue3-auth/composition';
+import type { NotificationsRegisterRequest } from '@amilochau/core-vue3/types';
 
 export const useNotificationsApi = () => {
 

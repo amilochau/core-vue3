@@ -31,7 +31,7 @@ import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { ForgotPassword } from "../types"
+import type { ForgotPassword } from '../types'
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 

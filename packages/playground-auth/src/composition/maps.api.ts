@@ -1,7 +1,7 @@
-import type { MapsListResponse } from "../types/maps"
-import { useMapsStore } from "../stores"
-import { type IDefaultCreateResponse, type IListResult, ListRequest } from "@amilochau/core-vue3/types";
-import { useApi } from "@amilochau/core-vue3-auth/composition";
+import type { MapsListResponse } from '../types/maps'
+import { useMapsStore } from '../stores'
+import { type IDefaultCreateResponse, type IListResult, ListRequest } from '@amilochau/core-vue3/types';
+import { useApi } from '@amilochau/core-vue3-auth/composition';
 
 export const useMapsApi = () => {
 

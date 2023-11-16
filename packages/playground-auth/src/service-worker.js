@@ -125,7 +125,7 @@ function getDate (response) {
 
 // Listen to push events
 self.addEventListener('push', (event) => {
-  if (Notification.permission !== "granted") {
+  if (Notification.permission !== 'granted') {
     return; // Permission not granted
   }
 

@@ -76,7 +76,7 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         variant: 'underlined',
         density: 'comfortable',
         hideDetails: 'auto',
-        class: "mb-3",
+        class: 'mb-3',
         autoGrow: true,
         rows: 3,
       },
@@ -84,12 +84,12 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         variant: 'underlined',
         density: 'comfortable',
         hideDetails: 'auto',
-        class: "mb-3",
+        class: 'mb-3',
       },
       VSwitch: {
         density: 'comfortable',
         hideDetails: 'auto',
-        class: "mb-3",
+        class: 'mb-3',
         color: 'primary',
       },
       // Feedback

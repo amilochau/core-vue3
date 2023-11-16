@@ -1,9 +1,9 @@
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 import { useHead } from '@unhead/vue';
 import { useCoreOptions } from './options';
-import { type ComputedRef, computed, ref, watch } from "vue";
-import { useAppStore } from "../stores";
-import type { PageData } from "../types";
+import { type ComputedRef, computed, ref, watch } from 'vue';
+import { useAppStore } from '../stores';
+import type { PageData } from '../types';
 
 export const usePage = (pageData: ComputedRef<PageData>) => {
   const { locale } = useI18n()
