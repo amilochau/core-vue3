@@ -32,7 +32,7 @@ export const useApi = (relativeBaseUri: string) => {
   })
 
   const languageStore = useLanguageStore()
-  const { getToken, signOut } = useCognito()
+  const { getJwtToken, signOut } = useCognito()
   const router = useRouter();
   const coreOptions = useCoreOptions()
 
@@ -112,7 +112,7 @@ export const useApi = (relativeBaseUri: string) => {
     return `${baseUri}${url}`
   }
 
-  const getRequestInit = (accessToken: string): RequestInit => {
+  const getRequestInit = (accessToken?: string): RequestInit => {
     const headers: HeadersInit = {
       'Accept-Language': languageStore.language,
       'Content-Type': 'application/json;charset=utf-8'
@@ -140,10 +140,10 @@ export const useApi = (relativeBaseUri: string) => {
     }
 
     // Get bearer token for API
-    let accessToken = '';
+    let jwtToken: string | undefined;
 
     try {
-      accessToken = await getToken()
+      jwtToken = await getJwtToken()
     } catch (error) {
       console.error('Authentication token can\'t be used', error)
       signOut()
@@ -152,7 +152,7 @@ export const useApi = (relativeBaseUri: string) => {
     }
 
     try {
-      const requestInit = getRequestInit(accessToken);
+      const requestInit = getRequestInit(jwtToken);
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
     } catch (error) {

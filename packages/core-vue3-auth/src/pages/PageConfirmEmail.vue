@@ -7,6 +7,20 @@
       onClick: verifyCode,
       color: 'primary',
     }">
+    <v-alert
+      border="start"
+      type="info"
+      variant="tonal"
+      class="mb-3">
+      {{ t('description') }}
+    </v-alert>
+    <v-alert
+      border="start"
+      type="warning"
+      variant="tonal"
+      class="mb-3">
+      {{ t('spam') }}
+    </v-alert>
     <v-card-text>
       <card-section-title
         :icon="mdiAccountCheckOutline"
@@ -83,6 +97,8 @@ fr:
 <i18n lang="yaml">
 en:
   title: Email confirmation
+  description: We have to validate your email address. We just sent an email to you, with a code. You can now enter this code here to continue.
+  spam: If you didn't receive this email, you can check your spam folder. Please also check that you didn't make a mistake in your email address!
   confirmEmailSection:
     title: Verification data
   email: Your email address
@@ -92,6 +108,8 @@ en:
   successDetails: You can now sign in.
 fr:
   title: Confirmation d'email
+  description: Nous devons valider votre adresse email. Nous venons de vous envoyer un email, avec un code. Vous pouvez désormais entrer ce code ici pour continuer.
+  spam: Si vous n'avez pas reçu l'email, vous pouvez vérifier dans votre dossier de spams. Vous pouvez également vérifier que vous n'avez pas fait d'erreur dans votre adresse email !
   confirmEmailSection:
     title: Données de vérification
   email: Votre adresse email

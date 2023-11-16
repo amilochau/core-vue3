@@ -7,6 +7,20 @@
       onClick: reset,
       color: 'primary',
     }">
+    <v-alert
+      border="start"
+      type="info"
+      variant="tonal"
+      class="mb-3">
+      {{ t('description') }}
+    </v-alert>
+    <v-alert
+      border="start"
+      type="warning"
+      variant="tonal"
+      class="mb-3">
+      {{ t('spam') }}
+    </v-alert>
     <v-card-text>
       <card-section-title
         :icon="mdiLockOutline"
@@ -83,7 +97,7 @@ const request: Ref<ResetPassword> = ref({
 
 const reset = () => handleLoadAndError(async () => {
   await confirmPassword(request.value);
-  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar')
+  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   await router.replace({ name: 'Login', query: { email: request.value.email } })
 }, 'snackbar')
 </script>
@@ -100,6 +114,8 @@ fr:
 <i18n lang="yaml">
 en:
   title: Reset password
+  description: We just sent an email to you, with a code. You can now enter this code here to define a new password.
+  spam: If you didn't receive this email, you can check your spam folder. Please also check that you didn't make a mistake in your email address!
   resetPasswordSection:
     title: Login data
   email: Your email address
@@ -110,6 +126,8 @@ en:
   successMessage: Your new password has been set!
 fr:
   title: Réinitialisation de mot de passe
+  description: Nous venons de vous envoyer un email, avec un code. Vous pouvez désormais entrer ce code ici pour réinitialiser votre mot de passe.
+  spam: Si vous n'avez pas reçu l'email, vous pouvez vérifier dans votre dossier de spams. Vous pouvez également vérifier que vous n'avez pas fait d'erreur dans votre adresse email !
   resetPasswordSection:
     title: Données de connexion
   email: Votre adresse email

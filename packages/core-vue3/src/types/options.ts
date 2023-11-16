@@ -25,6 +25,7 @@ export type MilochauCoreOptions = {
       userPoolId: string,
       clientId: string,
     },
+    logout?: () => Promise<void>,
   },
   routes: Array<RouteRecordRaw>,
   clean: () => () => void,

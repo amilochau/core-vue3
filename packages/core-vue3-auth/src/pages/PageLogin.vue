@@ -8,6 +8,14 @@
       color: 'primary',
     }"
     :links="links">
+    <v-alert
+      v-if="route.query.email"
+      border="start"
+      type="info"
+      variant="tonal"
+      class="mb-3">
+      {{ t('description') }}
+    </v-alert>
     <v-card-text>
       <card-section-title
         :icon="mdiAccountLockOutline"
@@ -41,7 +49,7 @@ import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { Login } from '../types';
-import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n()
@@ -59,7 +67,6 @@ const router = useRouter()
 const { handleLoadAndError } = useHandle()
 const { authenticateUser, fetchUserAttributes } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
-const { goBack } = useNavigation()
 
 const request: Ref<Login> = ref({
   email: route.query.email?.toString() || '',
@@ -73,12 +80,12 @@ const links = computed(() => ([
 
 const login = () => handleLoadAndError(async () => {
   await authenticateUser(request.value)
-  fetchUserAttributes()
+  await fetchUserAttributes()
   appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   if (route.query.returnUrl) {
     await router.replace(route.query.returnUrl.toString())
   } else {
-    await goBack({ name: 'Home' })
+    await router.replace({ name: 'Home' })
   }
 }, 'snackbar')
 </script>
@@ -95,6 +102,7 @@ fr:
 <i18n lang="yaml">
 en:
   title: Login
+  description: 'Last step: you can now login!'
   loginSection:
     title: Login data
   email: Your email address
@@ -110,6 +118,7 @@ en:
       subtitle: Forgot your password? Define a new one!
 fr:
   title: Connexion
+  description: 'Dernière étape : vous pouvez désormais vous connecter !'
   loginSection:
     title: Données de connexion
   email: Votre adresse email

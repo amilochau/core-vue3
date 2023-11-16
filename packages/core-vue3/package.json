@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3",
-  "version": "0.8.0-beta.16",
+  "version": "0.8.0-beta.17",
   "description": "Core plugin for vue.js (v3) projects",
   "author": "Antoine Milochau",
   "license": "MIT",
@@ -48,9 +48,9 @@
     "@mdi/js": "^7.3.67",
     "@tsconfig/node20": "^20.1.2",
     "@types/node": "^20.9.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "@unhead/vue": "^1.8.3",
-    "@vitejs/plugin-vue": "^4.4.1",
+    "@typescript-eslint/parser": "^6.11.0",
+    "@unhead/vue": "^1.8.4",
+    "@vitejs/plugin-vue": "^4.5.0",
     "@vue/tsconfig": "^0.4.0",
     "@vueuse/core": "^10.6.1",
     "eslint": "^8.53.0",
@@ -66,9 +66,9 @@
     "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.3.8",
     "vue-cli-plugin-vuetify": "^2.5.8",
-    "vue-i18n": "^9.6.5",
+    "vue-i18n": "^9.7.0",
     "vue-router": "^4.2.5",
     "vue-tsc": "^1.8.22",
-    "vuetify": "^3.4.0"
+    "vuetify": "^3.4.1"
   }
 }
