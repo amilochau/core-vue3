@@ -79,7 +79,7 @@ usePage(computed(() => ({
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'ForgotPassword' },
-  }
+  },
 })))
 const appStore = useAppStore()
 const router = useRouter()

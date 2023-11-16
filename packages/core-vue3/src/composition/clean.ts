@@ -11,6 +11,6 @@ export const useClean = () => {
     clean: () => {
       identityStore.clean();
       cleanFromCoreOptions();
-    }
+    },
   }
 }

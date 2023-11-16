@@ -6,14 +6,14 @@ interface LanguageStoreState {
 
 export const useLanguageStore = defineStore('language', {
   state: (): LanguageStoreState => ({
-    language: navigator.language.slice(0, 2) === 'fr' ? 'fr' : 'en' // @todo make that configurable
+    language: navigator.language.slice(0, 2) === 'fr' ? 'fr' : 'en', // @todo make that configurable
   }),
   actions: {
     setLanguage(lang: string) {
       this.language = lang
-    }
+    },
   },
   persist: {
-    storage: 'localStorage'
-  }
+    storage: 'localStorage',
+  },
 })

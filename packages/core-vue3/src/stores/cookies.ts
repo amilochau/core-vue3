@@ -14,12 +14,12 @@ export const useCookiesStore = defineStore('cookies', {
   state: (): CookiesStoreState => ({
     name: '.Cookies.Consent',
     accepted: false,
-    expiration: 0
+    expiration: 0,
   }),
   getters: {
     showCookies: (state) => {
       return state.expiration <= new Date().valueOf()
-    }
+    },
   },
   actions: {
     acceptCookies() {
@@ -35,9 +35,9 @@ export const useCookiesStore = defineStore('cookies', {
       expirationDate.setDate(expirationDate.getDate() + 180) // 180 days
       this.expiration = expirationDate.valueOf()
       setCookie(this.name, expirationDate)
-    }
+    },
   },
   persist: {
-    storage: 'localStorage'
-  }
+    storage: 'localStorage',
+  },
 })

@@ -31,7 +31,7 @@ export const useMapsApi = () => {
 
   const createMarker = async (mapId: string) => {
     const request = {
-      name: 'test'
+      name: 'test',
     }
     const reponse = await api.postHttp<MapsMarkersAddRequest>(`/${mapId}/markers`, request, { redirect404: false })
     await reponse.json() as IDefaultCreateResponse
@@ -39,7 +39,7 @@ export const useMapsApi = () => {
 
   const editMarker = async (mapId: string, markerId: string) => {
     const request = {
-      name: 'test 2'
+      name: 'test 2',
     }
     await api.postHttp<MapsMarkersChangeRequest>(`/${mapId}/markers/${markerId}`, request, { redirect404: false })
   }
@@ -47,6 +47,6 @@ export const useMapsApi = () => {
   return {
     get,
     createMarker,
-    editMarker
+    editMarker,
   }
 }

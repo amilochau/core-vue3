@@ -56,7 +56,7 @@ usePage(computed(() => ({
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Profile' },
-  }
+  },
 })))
 const appStore = useAppStore()
 const { handleLoadAndError } = useHandle()

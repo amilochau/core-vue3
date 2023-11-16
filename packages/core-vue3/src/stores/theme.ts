@@ -6,9 +6,9 @@ interface ThemeStoreState {
 
 export const useThemeStore = defineStore('theme', {
   state: (): ThemeStoreState => ({
-    darkMode: false
+    darkMode: false,
   }),
   persist: {
-    storage: 'localStorage'
-  }
+    storage: 'localStorage',
+  },
 })

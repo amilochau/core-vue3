@@ -9,7 +9,7 @@ export enum Environment {
   Default = 'default',
   Local = 'local',
   Development = 'dev',
-  Production = 'prd'
+  Production = 'prd',
 }
 
 export type EnvConfigValues = {
@@ -29,7 +29,7 @@ export const envConfig: EnvConfigValues = {
   },
   prd: {
     VITE_API_URL: "https://api.milochau.com/maps/v1",
-  }
+  },
 }
 
 export const getCurrentEnv = (host: string, subdomain: string): Environment => {
@@ -51,16 +51,16 @@ export const coreOptions: MilochauCoreOptions = {
     isProduction: getCurrentEnvironment() === Environment.Production,
   },
   api: {
-    gatewayUri: getConfig('VITE_API_URL')
+    gatewayUri: getConfig('VITE_API_URL'),
   },
   i18n: {
     messages: {
       en: {
-        appTitle: 'core-vue3 playground'
+        appTitle: 'core-vue3 playground',
       },
       fr: {
-        appTitle: 'Example core-vue3'
-      }
+        appTitle: 'Example core-vue3',
+      },
     },
   },
   routes: routes,

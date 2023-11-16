@@ -59,7 +59,7 @@ usePage(computed(() => ({
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
-  }
+  },
 })))
 const appStore = useAppStore()
 const route = useRoute()

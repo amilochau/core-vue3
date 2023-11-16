@@ -11,7 +11,7 @@ export const useValidationRules = () => {
     date: "This field must be a valid date.",
     url: "This field must be a valid URL",
     minValue: "This field must be upper than {min}.",
-    maxValue: "This field must be lower than {max}."
+    maxValue: "This field must be lower than {max}.",
   })
   mergeLocaleMessage('fr', {
     required: "Ce champ est requis.",
@@ -21,7 +21,7 @@ export const useValidationRules = () => {
     date: "Ce champ doit correspondre à une date valide.",
     url: "Ce champ doit correspondre à une URL valide.",
     minValue: "Ce champ doit être supérieur à {min}.",
-    maxValue: "Ce champ doit être inférieur à {max}."
+    maxValue: "Ce champ doit être inférieur à {max}.",
   })
 
   return {

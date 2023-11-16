@@ -18,7 +18,7 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
       serverError: "Server error",
       networkError: "Network error: check your connection",
       sessionExpired: "Session expired: please login again",
-    }
+    },
   })
   mergeLocaleMessage('fr', {
     errors: {
@@ -28,7 +28,7 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
       serverError: "Erreur interne",
       networkError: "Erreur réseau : vérifiez votre connexion",
       sessionExpired: "Session expirée : veuillez vous reconnecter",
-    }
+    },
   })
 
   const languageStore = useLanguageStore()
@@ -114,7 +114,7 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
   const getRequestInit = (): RequestInit => {
     const headers: HeadersInit = {
       'Accept-Language': languageStore.language,
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     };
 
     return { headers }
@@ -149,34 +149,34 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
     getHttp: async (url: string, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
-        method: 'GET'
+        method: 'GET',
       }))
     },
     postHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       }))
     },
     putHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
         method: 'PUT',
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       }))
     },
     patchHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
         method: 'PATCH',
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       }))
     },
     deleteHttp: async (url: string, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
-        method: 'DELETE'
+        method: 'DELETE',
       }))
     },
   }

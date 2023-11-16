@@ -15,5 +15,5 @@ export {
   useNavigation,
   useNotifications,
   usePage,
-  useValidationRules
+  useValidationRules,
 }

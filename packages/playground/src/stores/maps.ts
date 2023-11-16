@@ -17,9 +17,9 @@ export const useMapsStore = defineStore('maps', {
   actions: {
     clean() {
       this.$patch(getDefaultState())
-    }
+    },
   },
   persist: {
-    storage: 'localStorage'
-  }
+    storage: 'localStorage',
+  },
 })

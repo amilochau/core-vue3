@@ -41,7 +41,7 @@ const coreOptions = useCoreOptions()
 
 Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
   mergeLocaleMessage(key, {
-    appTitle: item.appTitle
+    appTitle: item.appTitle,
   })
 })
 

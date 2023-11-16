@@ -14,6 +14,6 @@ export const useRecords = () => {
 
       // No index is free
       throw new Error("Can't create new item!");
-    }
+    },
   }
 }

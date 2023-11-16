@@ -64,9 +64,9 @@ usePage(computed(() => ({
     items: [
       {
         title: 'GitHub',
-        link: 'https://github.com/amilochau/core-vue3'
-      }
-    ]
+        link: 'https://github.com/amilochau/core-vue3',
+      },
+    ],
   },
 })))
 const appStore = useAppStore()

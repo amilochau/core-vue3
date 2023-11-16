@@ -153,8 +153,8 @@ usePage(computed(() => ({
   description: t('pageDescription'),
   header: {
     buttonMode: buttonMode.value,
-    defaultBackTo: { name: 'Home' }
-  }
+    defaultBackTo: { name: 'Home' },
+  },
 })))
 const router = useRouter()
 const route = useRoute()
@@ -170,12 +170,12 @@ const { updateDisplay, updateLoading } = storeToRefs(pwaStore)
 
 mergeDateTimeFormat('en', {
   datetime: {
-    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
   },
 })
 mergeDateTimeFormat('fr', {
   datetime: {
-    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'
+    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
   },
 })
 

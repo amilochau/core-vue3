@@ -41,7 +41,7 @@ usePage(computed(() => ({
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Profile' },
-  }
+  },
 })))
 const appStore = useAppStore()
 const identityStore = useIdentityStore()
@@ -53,7 +53,7 @@ const { goBack } = useNavigation()
 const { attributes } = storeToRefs(identityStore)
 
 const request: Ref<EditProfile> = ref({
-  name: attributes.value.name
+  name: attributes.value.name,
 })
 
 const editProfile = () => handleLoadAndError(async () => {

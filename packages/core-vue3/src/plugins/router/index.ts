@@ -22,16 +22,16 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
     {
       path: '/:lang([a-z]{2})',
       component: PageRoot,
-      children: options.routes.concat(routes)
+      children: options.routes.concat(routes),
     },
     {
       path: '/:pathMatch(.*)*',
       redirect: to => {
         return {
-          path: `/${languageStore.language}${to.fullPath}`
+          path: `/${languageStore.language}${to.fullPath}`,
         }
-      }
-    }
+      },
+    },
   ]
 
   const router = createRouter({
@@ -51,7 +51,7 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
         }
       } else {
         return {
-          top: 0
+          top: 0,
         }
       }
       // Note: no saved position here, as it works badly with transitions

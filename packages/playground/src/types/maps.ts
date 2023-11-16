@@ -108,27 +108,27 @@ export enum AccessLevel {
   None = 0,
   Read = 1,
   Change = 3,
-  Manage = 7
+  Manage = 7,
 }
 
 export enum LayerType {
   Roadmap = 0,
   Satellite = 1,
   Hybrid = 2,
-  Terrain = 3
+  Terrain = 3,
 }
 
 export enum FieldType {
   Text = 0,
   Textarea = 1,
-  Date = 2
+  Date = 2,
 }
 
 export enum FieldValidationRuleType {
   Required = 0,
   MinLength = 1,
   MaxLength = 2,
-  EmailAddress = 3
+  EmailAddress = 3,
 }
 
 export const MapsDefaultColorMarkers: string = 'rgb(166,27,74)'

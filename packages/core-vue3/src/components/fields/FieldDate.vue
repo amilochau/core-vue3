@@ -54,13 +54,13 @@ const date = useDate()
 
 mergeDateTimeFormat('en', {
   datetime: {
-    year: 'numeric', month: 'numeric', day: 'numeric'
-  }
+    year: 'numeric', month: 'numeric', day: 'numeric',
+  },
 })
 mergeDateTimeFormat('fr', {
   datetime: {
-    year: 'numeric', month: 'numeric', day: 'numeric'
-  }
+    year: 'numeric', month: 'numeric', day: 'numeric',
+  },
 })
 
 const displayDialog = ref(false)

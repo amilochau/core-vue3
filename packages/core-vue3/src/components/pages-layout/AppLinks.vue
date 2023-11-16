@@ -24,7 +24,7 @@ const enhancedLinks = computed(() => {
     ...props.links.map((link) => ({
       appendIcon: mdiChevronRight,
       ...link,
-    }))
+    })),
   ]
 })
 </script>

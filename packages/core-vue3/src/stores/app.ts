@@ -53,6 +53,6 @@ export const useAppStore = defineStore('app', {
     },
     setDrawer(value: boolean) {
       this.drawer = value
-    }
-  }
+    },
+  },
 })

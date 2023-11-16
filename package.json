@@ -17,5 +17,8 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@stylistic/eslint-plugin": "^1.2.0"
   }
 }

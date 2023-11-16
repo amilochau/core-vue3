@@ -15,14 +15,14 @@ export const useHandle = () => {
   mergeLocaleMessage('en', {
     internalError: {
       title: 'Internal error',
-      desc: "You can't do anything, it's a bug..."
-    }
+      desc: "You can't do anything, it's a bug...",
+    },
   })
   mergeLocaleMessage('fr', {
     internalError: {
       title: 'Erreur interne',
-      desc: "Vous ne pouvez rien faire, il s'agit d'un bug..."
-    }
+      desc: "Vous ne pouvez rien faire, il s'agit d'un bug...",
+    },
   })
 
   type ValidatableForm = {

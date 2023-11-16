@@ -14,23 +14,23 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
       themes: {
         light: {
           colors: {
-            background: '#fcfcfc'
-          }
-        }
-      }
+            background: '#fcfcfc',
+          },
+        },
+      },
     },
     icons: {
       defaultSet: 'mdi',
       aliases,
       sets: {
-        mdi
-      }
+        mdi,
+      },
     },
     locale: {
       messages: {
         en,
-        fr
-      }
+        fr,
+      },
     },
     aliases: {
       VBtnAction: VBtn,
@@ -101,7 +101,7 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
           lineInset: 2,
         },
       },
-    }
+    },
   }
 
   const vuetifyOptions = deepmerge(defaultVuetifyOptions, options.vuetify || {})

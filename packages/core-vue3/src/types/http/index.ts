@@ -3,7 +3,7 @@ import type { IProblemDetails } from "./IProblemDetails";
 
 export type {
   IHttpSettings,
-  IProblemDetails
+  IProblemDetails,
 }
 
 export * from './ListPayload'

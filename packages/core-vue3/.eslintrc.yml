@@ -5,6 +5,8 @@ parser: vue-eslint-parser
 parserOptions:
   parser: '@typescript-eslint/parser'
   sourceType: module
+plugins:
+  - '@stylistic'
 rules:
   # ===== Vue uncategorized rules - https://eslint.vuejs.org/rules/#uncategorized
   vue/block-lang: # Only '<script>' blocks with 'lang="ts"' are allowed
@@ -107,3 +109,7 @@ rules:
   sort-imports:
     - error
     - ignoreDeclarationSort: true
+  # ===== ESLint stylistic rules -  https://eslint.style/packages/default
+  '@stylistic/comma-dangle':
+    - error
+    - always-multiline

@@ -78,7 +78,7 @@ export const useCognito = () => {
 
     confirmRegistration: (model: ConfirmEmail) => processRequest(() => awsConfirmSignUp({
       username: model.email,
-      confirmationCode: model.code
+      confirmationCode: model.code,
     }), {
       ['CodeMismatchException']: t('incorrectCode'),
       ['ExpiredCodeException']: t('expiredCode'),
@@ -108,7 +108,7 @@ export const useCognito = () => {
 
     changePassword: (model: EditPassword) => processRequest(() => awsUpdatePassword({
       oldPassword: model.oldPassword,
-      newPassword: model.password
+      newPassword: model.password,
     }), {
       ['NotAuthorizedException']: t('incorrectPassword'),
     }),

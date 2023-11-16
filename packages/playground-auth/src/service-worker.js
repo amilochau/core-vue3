@@ -17,14 +17,14 @@ registerRoute(
     'https://fonts.googleapis.com',
     'https://fonts.gstatic.com',
   ].includes(url.origin),
-  cacheFirst
+  cacheFirst,
 )
 
 registerRoute(
   ({ url }) => [
     'https://cognito-idp.eu-west-3.amazonaws.com',
   ].includes(url.origin),
-  networkOnly
+  networkOnly,
 )
 
 registerRoute(
@@ -37,7 +37,7 @@ registerRoute(
     }
 
     return fallback ?? networkOnly.handle(options)
-  }
+  },
 )
 
 setDefaultHandler(new NetworkFirst({
@@ -47,8 +47,8 @@ setDefaultHandler(new NetworkFirst({
       maxEntries: 100,
       maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
       purgeOnQuotaError: true,
-    })
-  ]
+    }),
+  ],
 }))
 
 setCatchHandler(async ({ url, request }) => {
@@ -88,12 +88,12 @@ async function cleanCache (manifest) {
   const precache = await openCache('precache')
 
   const responses = await Promise.all(
-    manifest.map(entry => precache.match(entry.url + (entry.revision ? `?__WB_REVISION__=${entry.revision}` : '')))
+    manifest.map(entry => precache.match(entry.url + (entry.revision ? `?__WB_REVISION__=${entry.revision}` : ''))),
   )
 
   // Date of earliest entry in the old manifest
   const date = Array.from(
-    new Set(responses.map(getDate))
+    new Set(responses.map(getDate)),
   ).sort()[0]
 
   let n = 0

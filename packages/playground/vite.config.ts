@@ -21,8 +21,8 @@ export default defineConfig({
   plugins: [
     vue({
       script: {
-        defineModel: true // Opt-in feature, see https://github.com/vuejs/rfcs/discussions/503
-      }
+        defineModel: true, // Opt-in feature, see https://github.com/vuejs/rfcs/discussions/503
+      },
     }),
     vuetify(),
     VueI18n({
@@ -56,29 +56,29 @@ export default defineConfig({
           {
             src: 'img/icons/android-chrome-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'img/icons/android-chrome-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: 'img/icons/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any'
           },
           {
             src: 'img/icons/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'maskable'
+            purpose: 'any',
           },
-        ]
+          {
+            src: 'img/icons/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
       },
       devOptions: {
-        enabled: true
+        enabled: true,
       },
     }),
     {
@@ -88,7 +88,7 @@ export default defineConfig({
           /window.buildData = null;/,
           `window.buildData = { buildDate: "${buildDate}", commitSha: "${commitSha}", commitDate: "${commitDate}" };`,
         )
-      }
+      },
     },
     {
       name: 'amilochau:fallback',
@@ -104,14 +104,14 @@ export default defineConfig({
     alias: [
       { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
       { find: /^pinia$/, replacement: 'pinia/dist/pinia.mjs' },
-    ]
+    ],
   },
   optimizeDeps: {
     include:[
-      'vue-router'
+      'vue-router',
     ],
     exclude: [
-      'virtual:pwa-register'
-    ]
-  }
+      'virtual:pwa-register',
+    ],
+  },
 })

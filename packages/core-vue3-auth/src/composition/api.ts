@@ -3,8 +3,8 @@ import { useRouter } from "vue-router"
 import { useCognito } from './cognito'
 import { useI18n } from 'vue-i18n'
 import { type ApplicationMessage, type IHttpSettings, type IProblemDetails } from "@amilochau/core-vue3/types"
-import { useCoreOptions, } from "@amilochau/core-vue3/composition"
-import { useLanguageStore, } from "@amilochau/core-vue3/stores"
+import { useCoreOptions } from "@amilochau/core-vue3/composition"
+import { useLanguageStore } from "@amilochau/core-vue3/stores"
 
 export const useApi = (relativeBaseUri: string) => {
 
@@ -18,7 +18,7 @@ export const useApi = (relativeBaseUri: string) => {
       serverError: "Server error",
       networkError: "Network error: check your connection",
       sessionExpired: "Session expired: please login again",
-    }
+    },
   })
   mergeLocaleMessage('fr', {
     errors: {
@@ -28,7 +28,7 @@ export const useApi = (relativeBaseUri: string) => {
       serverError: "Erreur interne",
       networkError: "Erreur réseau : vérifiez votre connexion",
       sessionExpired: "Session expirée : veuillez vous reconnecter",
-    }
+    },
   })
 
   const languageStore = useLanguageStore()
@@ -115,7 +115,7 @@ export const useApi = (relativeBaseUri: string) => {
   const getRequestInit = (accessToken?: string): RequestInit => {
     const headers: HeadersInit = {
       'Accept-Language': languageStore.language,
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     };
 
     if (accessToken) {
@@ -169,7 +169,7 @@ export const useApi = (relativeBaseUri: string) => {
   const getHttp = async (url: string, settings: IHttpSettings) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
-      method: 'GET'
+      method: 'GET',
     }))
   }
 
@@ -177,7 +177,7 @@ export const useApi = (relativeBaseUri: string) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     }))
   }
 
@@ -185,7 +185,7 @@ export const useApi = (relativeBaseUri: string) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
       method: 'PUT',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     }))
   }
 
@@ -193,14 +193,14 @@ export const useApi = (relativeBaseUri: string) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
       method: 'PATCH',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     }))
   }
 
   const deleteHttp = async (url: string, settings: IHttpSettings) => {
     return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
       ...requestInit,
-      method: 'DELETE'
+      method: 'DELETE',
     }))
   }
 
@@ -209,6 +209,6 @@ export const useApi = (relativeBaseUri: string) => {
     postHttp,
     putHttp,
     patchHttp,
-    deleteHttp
+    deleteHttp,
   }
 }

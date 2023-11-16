@@ -38,7 +38,7 @@ export const swatches = [
     "#757575",
     "#424242",
     "#000000",
-  ]
+  ],
 ]
 
 export const bullets = [

@@ -25,11 +25,11 @@ export const usePage = (pageData: ComputedRef<PageData>) => {
     ...!coreOptions.application.isProduction || pageData.value.noindex ? [{
       name: 'robots',
       content: ref('noindex'),
-    }] : []
+    }] : [],
   ]))
 
   useHead({
     title: pageTitle,
-    meta: meta
+    meta: meta,
   })
 }

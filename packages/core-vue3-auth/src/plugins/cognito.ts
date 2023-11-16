@@ -10,9 +10,9 @@ export default {
           Cognito: {
             userPoolId: options.identity.cognito.userPoolId,
             userPoolClientId: options.identity.cognito.clientId,
-          }
-        }
+          },
+        },
       })
     }
-  }
+  },
 }

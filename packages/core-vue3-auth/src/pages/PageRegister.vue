@@ -67,7 +67,7 @@ usePage(computed(() => ({
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
-  }
+  },
 })))
 const appStore = useAppStore()
 const router = useRouter()
@@ -79,7 +79,7 @@ const request: Ref<Register> = ref({
   name: '',
   email: '',
   password: '',
-  confirmationPassword: ''
+  confirmationPassword: '',
 })
 
 const links = computed(() => ([

@@ -24,14 +24,14 @@ usePage(computed(() => ({
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
-  }
+  },
 })))
 const coreOptions = useCoreOptions()
 const { xs } = useDisplay()
 
 Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
   mergeLocaleMessage(key, {
-    appTitle: item.appTitle
+    appTitle: item.appTitle,
   })
 })
 </script>

@@ -9,6 +9,6 @@ export const useNotificationsStore = defineStore('notifications', {
     registred: false,
   }),
   persist: {
-    storage: 'localStorage'
-  }
+    storage: 'localStorage',
+  },
 })

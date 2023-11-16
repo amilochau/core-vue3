@@ -42,7 +42,7 @@ usePage(computed(() => ({
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Login' },
-  }
+  },
 })))
 const appStore = useAppStore()
 const router = useRouter()
@@ -51,7 +51,7 @@ const { forgotPassword } = useCognito()
 const { required, maxLength, emailAddress } = useValidationRules()
 
 const request: Ref<ForgotPassword> = ref({
-  email: ''
+  email: '',
 })
 
 const reset = () => handleLoadAndError(async () => {
