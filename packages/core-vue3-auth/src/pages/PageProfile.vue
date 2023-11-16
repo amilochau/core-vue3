@@ -22,7 +22,7 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useClean, usePage } from '@amilochau/core-vue3/composition';
+import { useClean, useCoreOptions, usePage } from '@amilochau/core-vue3/composition';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n()
@@ -38,6 +38,7 @@ const appStore = useAppStore()
 const identityStore = useIdentityStore()
 const { clean } = useClean()
 const router = useRouter()
+const coreOptions = useCoreOptions()
 
 const { attributes } = storeToRefs(identityStore)
 
@@ -63,7 +64,9 @@ const contactItems = computed(() => [{
 const cleanAndLogout = async () => {
   try {
     appStore.loading = true
-    await identityStore.logout();
+    if (coreOptions.identity?.logout) {
+      await coreOptions.identity?.logout();
+    }
     clean();
     await router.push({ name: 'Home' })
   } finally {

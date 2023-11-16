@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
-import { mdiAccountOff, mdiAt, mdiCardAccountDetailsOutline, mdiLock } from '@mdi/js';
+import { mdiAccountOff, mdiAlert, mdiAt, mdiCardAccountDetailsOutline, mdiLock } from '@mdi/js';
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
@@ -42,6 +42,8 @@ import { useRouter } from 'vue-router';
 import type { Login } from '../types';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { useClean, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { storeToRefs } from 'pinia'
+import type { ApplicationMessage } from '@amilochau/core-vue3/types';
 
 const { t } = useI18n()
 usePage(computed(() => ({
@@ -57,8 +59,9 @@ const { clean } = useClean()
 const router = useRouter()
 const identityStore = useIdentityStore()
 const { handleLoadAndError } = useHandle()
-const { authenticateUser, deleteUser } = useCognito()
+const { deleteUser } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
+const { attributes } = storeToRefs(identityStore)
 
 const request: Ref<Login> = ref({
   email: '',
@@ -66,7 +69,10 @@ const request: Ref<Login> = ref({
 })
 
 const deleteAccount = () => handleLoadAndError(async () => {
-  await authenticateUser(request.value)
+  if (request.value.email !== attributes.value.email) {
+    throw { title: t('incorrectEmailAddress'), color: 'error', icon: mdiAlert, details: '' } as ApplicationMessage
+  }
+
   await deleteUser()
   identityStore.isAuthenticated = false
   clean();
@@ -92,6 +98,7 @@ en:
   email: Your email address
   password: Your password
   deleteAccount: Delete account
+  incorrectEmailAddress: Incorrect email address.
   successMessage: Your account has been deleted!
 fr:
   title: Suppression de compte
@@ -100,5 +107,6 @@ fr:
   email: Votre adresse email
   password: Votre mot de passe
   deleteAccount: Supprimer le compte
+  incorrectEmailAddress: Adresse email incorrecte.
   successMessage: Votre compte a bien été supprimé !
 </i18n>

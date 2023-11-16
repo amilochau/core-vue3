@@ -57,7 +57,6 @@ export const useHandle = () => {
     try {
       return await request();
     } catch (error: any) {
-      console.error(error)
       appStore.displayMessage({
         title: error.title ?? t('internalError.title'),
         color: error.color ?? 'error',

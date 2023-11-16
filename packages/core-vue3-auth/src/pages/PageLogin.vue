@@ -41,7 +41,7 @@ import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { Login } from '../types';
-import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n()
@@ -59,7 +59,6 @@ const router = useRouter()
 const { handleLoadAndError } = useHandle()
 const { authenticateUser, fetchUserAttributes } = useCognito()
 const { required, minLength, maxLength, emailAddress } = useValidationRules()
-const { goBack } = useNavigation()
 
 const request: Ref<Login> = ref({
   email: route.query.email?.toString() || '',
@@ -78,7 +77,7 @@ const login = () => handleLoadAndError(async () => {
   if (route.query.returnUrl) {
     await router.replace(route.query.returnUrl.toString())
   } else {
-    await goBack({ name: 'Home' })
+    await router.replace({ name: 'Home' })
   }
 }, 'snackbar')
 </script>

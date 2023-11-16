@@ -8,7 +8,6 @@ const getDefaultState = (): IdentityStoreState => {
       name: '',
       email: '',
     },
-    onLogout: async () => {},
   }
 }
 
@@ -19,7 +18,6 @@ interface IdentityStoreState {
     name: string,
     email: string,
   },
-  onLogout: () => Promise<any>,
 }
 
 export const useIdentityStore = defineStore('identity', {
@@ -31,10 +29,6 @@ export const useIdentityStore = defineStore('identity', {
 
     clean() {
       this.$patch(getDefaultState())
-    },
-
-    logout() {
-      return this.onLogout();
     },
   },
   persist: {
