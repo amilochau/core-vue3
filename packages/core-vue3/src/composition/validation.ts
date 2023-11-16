@@ -12,6 +12,7 @@ export const useValidationRules = () => {
     url: 'This field must be a valid URL',
     minValue: 'This field must be upper than {min}.',
     maxValue: 'This field must be lower than {max}.',
+    number: 'This field must be a number.',
   });
   mergeLocaleMessage('fr', {
     required: 'Ce champ est requis.',
@@ -22,6 +23,7 @@ export const useValidationRules = () => {
     url: 'Ce champ doit correspondre à une URL valide.',
     minValue: 'Ce champ doit être supérieur à {min}.',
     maxValue: 'Ce champ doit être inférieur à {max}.',
+    number: 'Ce champ doit être un nombre.',
   });
 
   return {
@@ -62,5 +64,6 @@ export const useValidationRules = () => {
       const floatValue = parseFloat(v);
       return floatValue <= max || t('maxValue', { max });
     },
+    number: () => (v: string) => !v || !isNaN(Number(v.replace(',', '.'))) || t('number'),
   };
 };

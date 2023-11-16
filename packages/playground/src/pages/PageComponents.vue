@@ -89,6 +89,10 @@
         <field-date
           :label="t('text1')"
           disabled />
+        <field-numeric
+          v-model="numericValue"
+          :label="t('text1')" />
+        {{ numericValue }}
       </v-col>
     </v-row>
   </v-container>
@@ -98,7 +102,7 @@
 import { useI18n } from 'vue-i18n';
 import { type ComputedRef, computed, ref } from 'vue';
 import { usePage } from '@amilochau/core-vue3/composition';
-import { FieldChipGroup, FieldColorBullets, FieldDate, FieldIcon } from '@amilochau/core-vue3/components';
+import { FieldChipGroup, FieldColorBullets, FieldDate, FieldIcon, FieldNumeric } from '@amilochau/core-vue3/components';
 import { TestEnum } from '@/types/test';
 import { type FormattedDataWithValue } from '@amilochau/core-vue3/types';
 import { mdiRefresh, mdiTree } from '@mdi/js';
@@ -120,6 +124,7 @@ usePage(computed(() => ({
   },
 })));
 const boolValue = ref(true);
+const numericValue = ref(1);
 
 const values: ComputedRef<FormattedDataWithValue<TestEnum>[]> = computed(() => [
   { value: TestEnum.First, title: t('text1') },
