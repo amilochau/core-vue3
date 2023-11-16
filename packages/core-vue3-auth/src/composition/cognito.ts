@@ -28,6 +28,8 @@ export const useCognito = () => {
     errorMessage: "An error occured.",
     incorrectUsernamePassword: "Incorrect email address or password.",
     incorrectPassword: "Incorrect password.",
+    incorrectCode: 'Incorrect validation code.',
+    expiredCode: 'Expired validation code, or bad email address.',
     userAlreadyAuthenticated: 'You are already authenticated. If this does not seem to be the case, try to clean your browser data.',
     usernameExists: 'A user account already exists with this email address. You can try to login!',
   })
@@ -35,6 +37,8 @@ export const useCognito = () => {
     errorMessage: "Une erreur est survenue.",
     incorrectUsernamePassword: "Adresse email ou mot de passe incorrect.",
     incorrectPassword: "Mot de passe incorrect.",
+    incorrectCode: 'Code de validation incorrect.',
+    expiredCode: 'Code de validation expiré, ou mauvaise adresse email.',
     userAlreadyAuthenticated: 'Vous êtes déjà connecté. Si cela ne semble pas être le cas, essayez de nettoyer les données de votre navigateur.',
     usernameExists: 'Un compte utilisateur existe déjà avec cette adresse email. Vous pouvez essayer de vous connecter !',
   })
@@ -75,7 +79,10 @@ export const useCognito = () => {
     confirmRegistration: (model: ConfirmEmail) => processRequest(() => awsConfirmSignUp({
       username: model.email,
       confirmationCode: model.code
-    }), {}),
+    }), {
+      ['CodeMismatchException']: t('incorrectCode'),
+      ['ExpiredCodeException']: t('expiredCode'),
+    }),
 
     authenticateUser: (model: Login) => processRequest(async () => {
       await awsSignIn({
@@ -95,7 +102,9 @@ export const useCognito = () => {
       username: model.email,
       confirmationCode: model.code,
       newPassword: model.password,
-    }), {}),
+    }), {
+      ['CodeMismatchException']: t('incorrectCode'),
+    }),
 
     changePassword: (model: EditPassword) => processRequest(() => awsUpdatePassword({
       oldPassword: model.oldPassword,

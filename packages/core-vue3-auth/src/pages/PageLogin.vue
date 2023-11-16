@@ -8,6 +8,14 @@
       color: 'primary',
     }"
     :links="links">
+    <v-alert
+      v-if="route.query.email"
+      border="start"
+      type="info"
+      variant="tonal"
+      class="mb-3">
+      {{ t('description') }}
+    </v-alert>
     <v-card-text>
       <card-section-title
         :icon="mdiAccountLockOutline"
@@ -72,7 +80,7 @@ const links = computed(() => ([
 
 const login = () => handleLoadAndError(async () => {
   await authenticateUser(request.value)
-  fetchUserAttributes()
+  await fetchUserAttributes()
   appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar')
   if (route.query.returnUrl) {
     await router.replace(route.query.returnUrl.toString())
@@ -94,6 +102,7 @@ fr:
 <i18n lang="yaml">
 en:
   title: Login
+  description: 'Last step: you can now login!'
   loginSection:
     title: Login data
   email: Your email address
@@ -109,6 +118,7 @@ en:
       subtitle: Forgot your password? Define a new one!
 fr:
   title: Connexion
+  description: 'Dernière étape : vous pouvez désormais vous connecter !'
   loginSection:
     title: Données de connexion
   email: Votre adresse email
