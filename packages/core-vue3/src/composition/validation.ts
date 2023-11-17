@@ -13,6 +13,7 @@ export const useValidationRules = () => {
     minValue: 'This field must be upper than {min}.',
     maxValue: 'This field must be lower than {max}.',
     number: 'This field must be a number.',
+    integer: 'This field must be an integer.',
   });
   mergeLocaleMessage('fr', {
     required: 'Ce champ est requis.',
@@ -24,6 +25,7 @@ export const useValidationRules = () => {
     minValue: 'Ce champ doit être supérieur à {min}.',
     maxValue: 'Ce champ doit être inférieur à {max}.',
     number: 'Ce champ doit être un nombre.',
+    integer: 'Ce champ doit être un nombre entier.',
   });
 
   return {
@@ -65,5 +67,12 @@ export const useValidationRules = () => {
       return floatValue <= max || t('maxValue', { max });
     },
     number: () => (v: string) => !v || !isNaN(Number(v.replace(',', '.'))) || t('number'),
+    integer: () => (v: string) => {
+      if (!v) {
+        return true;
+      }
+      const parsedValue = Number(v.replace(',', '.'));
+      return isNaN(parsedValue) || parsedValue % 1 === 0 || t('integer');
+    },
   };
 };

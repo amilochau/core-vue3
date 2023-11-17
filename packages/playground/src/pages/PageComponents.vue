@@ -92,7 +92,12 @@
         <field-numeric
           v-model="numericValue"
           :label="t('text1')" />
-        {{ numericValue }}
+      </v-col>
+      <v-col cols="6">
+        <field-numeric
+          v-model="numericValue"
+          :label="t('text1')"
+          :rules="[required(), integer()]" />
       </v-col>
     </v-row>
   </v-container>
@@ -101,7 +106,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { type ComputedRef, computed, ref } from 'vue';
-import { usePage } from '@amilochau/core-vue3/composition';
+import { usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { FieldChipGroup, FieldColorBullets, FieldDate, FieldIcon, FieldNumeric } from '@amilochau/core-vue3/components';
 import { TestEnum } from '@/types/test';
 import { type FormattedDataWithValue } from '@amilochau/core-vue3/types';
@@ -123,6 +128,8 @@ usePage(computed(() => ({
     ],
   },
 })));
+const { required, integer } = useValidationRules();
+
 const boolValue = ref(true);
 const numericValue = ref(1);
 
