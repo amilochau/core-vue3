@@ -5,6 +5,11 @@
     :rules="rules"
     :disabled="disabled"
     class="mb-1">
+    <template
+      v-if="$slots.prepend"
+      #prepend>
+      <slot name="prepend" />
+    </template>
     <v-field
       :label="label"
       :focused="focused"
@@ -32,6 +37,7 @@
       <v-icon
         :icon="mdiClose"
         @click="modelValue = undefined" />
+      <slot name="append" />
     </template>
   </v-input>
 </template>

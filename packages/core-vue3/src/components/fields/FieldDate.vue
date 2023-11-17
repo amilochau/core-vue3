@@ -9,11 +9,17 @@
     readonly
     @click:control="displayDialog = !displayDialog">
     <template
+      v-if="$slots.prepend"
+      #prepend>
+      <slot name="prepend" />
+    </template>
+    <template
       v-if="clearable"
       #append>
       <v-icon
         :icon="mdiClose"
         @click="reset" />
+      <slot name="append" />
     </template>
   </v-text-field>
   <v-dialog

@@ -5,6 +5,11 @@
     :rules="rules"
     :disabled="disabled"
     class="mb-1">
+    <template
+      v-if="$slots.prepend"
+      #prepend>
+      <slot name="prepend" />
+    </template>
     <v-field
       :label="label"
       :focused="focused"
@@ -27,6 +32,11 @@
         </v-chip>
       </v-chip-group>
     </v-field>
+    <template
+      v-if="$slots.append"
+      #append>
+      <slot name="append" />
+    </template>
   </v-input>
 </template>
 

@@ -85,7 +85,11 @@
           :icons="icons"
           disabled />
         <field-date
-          :label="t('text1')" />
+          :label="t('text1')">
+          <template #prepend>
+            <v-icon :icon="mdiRefresh" />
+          </template>
+        </field-date>
         <field-date
           :label="t('text1')"
           disabled />

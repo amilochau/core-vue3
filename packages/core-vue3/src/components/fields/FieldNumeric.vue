@@ -8,10 +8,22 @@
     :suffix="suffix"
     type="text"
     inputmode="decimal"
-    @update:model-value="parseInput" />
+    @update:model-value="parseInput">
+    <template
+      v-if="$slots.prepend"
+      #prepend>
+      <slot name="prepend" />
+    </template>
+    <template
+      v-if="$slots.append"
+      #append>
+      <slot name="append" />
+    </template>
+  </v-text-field>
 </template>
 
 <script setup lang="ts">
+import { VTextField } from 'vuetify/components';
 import { useValidationRules } from '../../composition';
 import { ref, watch } from 'vue';
 
