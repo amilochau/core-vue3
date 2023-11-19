@@ -118,7 +118,7 @@ The following plugins are installed by `@amilochau/core-vue3`:
 - `vite-plugin-pwa`
 
 The following plugin is installed by `@amilochau/core-vue3-auth`:
-- `@aws-amplify/auth`
+- `aws-amplify`
 
 See the full list of dependencies [here](/packages/core-vue3/package.json).
 
