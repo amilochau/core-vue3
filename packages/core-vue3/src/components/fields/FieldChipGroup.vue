@@ -20,6 +20,7 @@
       <v-chip-group
         v-model="modelValue"
         :multiple="multiple"
+        :mandatory="mandatory"
         selected-class="text-primary"
         class="mt-3">
         <v-chip
@@ -67,6 +68,8 @@ defineProps<{
   color?: string
   /** Whether multiple values can be selected */
   multiple?: boolean
+  /** Whether at least one value must be selected */
+  mandatory?: boolean
 }>();
 
 const modelValue = defineModel<TDataValue | undefined>();

@@ -212,6 +212,11 @@
               disabled />
             <field-chip-group
               v-model="fieldChipGroupValue"
+              :label="t('sections.inputs.variants.mandatory')"
+              :values="values"
+              mandatory />
+            <field-chip-group
+              v-model="fieldChipGroupValue"
               :label="t('sections.inputs.variants.multiple')"
               :values="values"
               multiple />
@@ -454,6 +459,7 @@ en:
         prependAppend: With append and prepend
         color: Color
         disabled: Disabled
+        mandatory: Mandatory
         multiple: Multiple
   longText: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -480,6 +486,7 @@ fr:
         prependAppend: With append and prepend
         color: Color
         disabled: Disabled
+        mandatory: Mandatory
         multiple: Multiple
   longText: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
