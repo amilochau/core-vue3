@@ -14,6 +14,7 @@
       :label="label"
       :focused="focused"
       :disabled="disabled"
+      :color="color"
       variant="plain"
       active>
       <v-chip-group
@@ -27,20 +28,27 @@
           :value="value.value"
           :color="value.color"
           :prepend-icon="value.icon"
-          :disabled="value.disabled">
+          :disabled="value.disabled"
+          @focus="focused = true"
+          @blur="focused = false">
           {{ value.title }}
         </v-chip>
       </v-chip-group>
     </v-field>
     <template
-      v-if="$slots.append"
+      v-if="clearable || $slots.append"
       #append>
+      <v-icon
+        v-if="clearable"
+        :icon="mdiClose"
+        @click="modelValue = undefined" />
       <slot name="append" />
     </template>
   </v-input>
 </template>
 
 <script setup lang="ts" generic="TData, TDataValue extends TData | TData[]">
+import { mdiClose } from '@mdi/js';
 import { ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
@@ -53,6 +61,10 @@ defineProps<{
   rules?: any[]
   /** Whether the input is disabled */
   disabled?: boolean
+  /** Whether the input is clearable */
+  clearable?: boolean
+  /** Input color */
+  color?: string
   /** Whether multiple values can be selected */
   multiple?: boolean
 }>();

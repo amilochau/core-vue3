@@ -14,21 +14,22 @@
       :label="label"
       :focused="focused"
       :disabled="disabled"
+      :color="color"
       variant="plain"
       active>
       <div class="colors-grid">
         <div
-          v-for="(color, i) in colors"
+          v-for="(value, i) in colors"
           :key="i"
-          :style="{ 'background-color': color }"
+          :style="{ 'background-color': value }"
           class="colors-grid-cell"
-          :class="{ 'colors-grid-cell__selected': color === modelValue }"
+          :class="{ 'colors-grid-cell__selected': value === modelValue }"
           tabindex="0"
           @focus="focused = true"
           @blur="focused = false"
-          @click="modelValue = color">
+          @click="modelValue = value">
           <v-icon
-            v-if="color === modelValue"
+            v-if="value === modelValue"
             :icon="mdiCheck"
             class="text-white"
             size="x-small" />
@@ -43,6 +44,7 @@
         start
         @click="displayDialog = !displayDialog" />
       <v-icon
+        v-if="clearable"
         :icon="mdiClose"
         @click="reset" />
       <slot name="append" />
@@ -90,6 +92,10 @@ const props = defineProps<{
   rules?: any[]
   /** Whether the input is disabled */
   disabled?: boolean
+  /** Whether the input is clearable */
+  clearable?: boolean
+  /** Input color */
+  color?: string
   /** Title used for the reset button, in the detailed dialog */
   resetTitle?: string,
   /** Title used for the save button, in the detailed dialog */

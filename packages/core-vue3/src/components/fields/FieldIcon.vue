@@ -14,6 +14,7 @@
       :label="label"
       :focused="focused"
       :disabled="disabled"
+      :color="color"
       variant="plain"
       active>
       <div class="icons-grid">
@@ -33,8 +34,11 @@
         </v-avatar>
       </div>
     </v-field>
-    <template #append>
+    <template
+      v-if="clearable || $slots.append"
+      #append>
       <v-icon
+        v-if="clearable"
         :icon="mdiClose"
         @click="modelValue = undefined" />
       <slot name="append" />
@@ -54,6 +58,10 @@ defineProps<{
   rules?: any[]
   /** Whether the input is disabled */
   disabled?: boolean
+  /** Whether the input is clearable */
+  clearable?: boolean
+  /** Input color */
+  color?: string
   /** Icons used as values */
   icons: FormattedDataWithValue<TData>[]
 }>();

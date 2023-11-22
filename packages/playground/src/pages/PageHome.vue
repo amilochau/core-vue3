@@ -3,25 +3,23 @@
     <div class="text-center">
       <home-welcome />
       <home-messages />
-      <p>{{ d(stringDate) }}</p>
 
-      <v-btn-action
-        :to="{ name: 'Components' }"
-        color="primary"
-        class="my-6">
-        {{ t('seeComponents') }}
-      </v-btn-action>
+      <p>
+        <v-btn-action
+          :to="{ name: 'Components' }"
+          color="primary"
+          class="my-6">
+          {{ t('seeComponents') }}
+        </v-btn-action>
+      </p>
 
       <v-btn-action
         :disabled="loading || !online"
         :prepend-icon="mdiGithub"
-        color="primary"
+        color="secondary"
         @click="openDialog">
         {{ t('openDialog') }}
       </v-btn-action>
-
-      {{ formatTest1("test").title }}
-      {{ formatTest2("test").title }}
 
       <btn-card
         :icon="mdiGithub"
@@ -52,10 +50,8 @@ import { computed, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useFormat1 } from '@/composition/format/1';
-import { useFormat2 } from '@/composition/format/2';
 
-const { d, t } = useI18n();
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -71,14 +67,10 @@ usePage(computed(() => ({
 })));
 const appStore = useAppStore();
 const online = useOnline();
-const { formatTest1 } = useFormat1();
-const { formatTest2 } = useFormat2();
 
 const { loading } = storeToRefs(appStore);
 
 const dialog = ref(false);
-
-const stringDate = '2022-09-01';
 
 const openDialog = () => {
   dialog.value = true;

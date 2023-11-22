@@ -4,6 +4,8 @@
     :label="label"
     :rules="rules"
     :disabled="disabled"
+    :color="color"
+    :variant="variant"
     type="text"
     class="cursor-pointer"
     readonly
@@ -14,9 +16,10 @@
       <slot name="prepend" />
     </template>
     <template
-      v-if="clearable"
+      v-if="clearable || $slots.append"
       #append>
       <v-icon
+        v-if="clearable"
         :icon="mdiClose"
         @click="reset" />
       <slot name="append" />
@@ -29,7 +32,7 @@
       <v-date-picker
         :model-value="internalValue"
         :disabled="disabled"
-        color="primary"
+        :color="color ?? 'primary'"
         show-adjacent-months
         @update:model-value="save" />
     </v-card>
@@ -51,6 +54,10 @@ defineProps<{
   disabled?: boolean
   /** Whether the input is clearable */
   clearable?: boolean
+  /** Input color */
+  color?: string
+  /** Input variant */
+  variant?: 'filled' | 'outlined' | 'plain' | 'underlined' | 'solo' | 'solo-inverted' | 'solo-filled'
 }>();
 
 const modelValue = defineModel<string | undefined>();
@@ -75,6 +82,7 @@ const displayedValue = computed(() => internalValue.value ? d(internalValue.valu
 
 function reset() {
   modelValue.value = undefined;
+  internalValue.value = undefined;
   displayDialog.value = false;
 }
 
