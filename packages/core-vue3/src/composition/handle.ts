@@ -61,7 +61,7 @@ export const useHandle = () => {
         title: error.title ?? t('internalError.title'),
         color: error.color ?? 'error',
         icon: error.icon ?? mdiAlert,
-        details: error.details ?? t('internalError.desc'),
+        details: error.details ?? (error.title ? undefined : t('internalError.desc')),
         timeout_ms: error.timeout_ms,
       }, destination);
     }
