@@ -35,7 +35,7 @@ watch(message, () => {
     display.value = true;
     displayTimeout = setTimeout(() => {
       display.value = false;
-    }, message.value.timeout_ms);
+    }, message.value.timeout_ms ?? 10000);
   } else {
     display.value = false;
   }
