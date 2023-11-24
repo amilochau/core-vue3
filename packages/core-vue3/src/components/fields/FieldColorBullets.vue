@@ -4,6 +4,7 @@
     :focused="focused"
     :rules="rules"
     :disabled="disabled"
+    :readonly="readonly"
     class="mb-1">
     <template
       v-if="$slots.prepend"
@@ -27,7 +28,7 @@
           tabindex="0"
           @focus="focused = true"
           @blur="focused = false"
-          @click="modelValue = value">
+          @click="select(value)">
           <v-icon
             v-if="value === modelValue"
             :icon="mdiCheck"
@@ -42,7 +43,7 @@
         :icon="mdiPalette"
         class="full-opacity"
         start
-        @click="displayDialog = !displayDialog" />
+        @click="open" />
       <v-icon
         v-if="clearable"
         :icon="mdiClose"
@@ -96,6 +97,8 @@ const props = defineProps<{
   clearable?: boolean
   /** Input color */
   color?: string
+  /** Whether the input is readonly */
+  readonly?: boolean
   /** Title used for the reset button, in the detailed dialog */
   resetTitle?: string,
   /** Title used for the save button, in the detailed dialog */
@@ -112,12 +115,32 @@ const displayDialog = ref(false);
 const internalValue: Ref<string | undefined> = ref(undefined);
 const focused = ref(false);
 
+const select = (value: string) => {
+  if (props.readonly) {
+    return;
+  }
+  modelValue.value = value;
+};
+
+const open = () => {
+  if (props.readonly) {
+    return;
+  }
+  displayDialog.value = true;
+};
+
 function reset() {
+  if (props.readonly) {
+    return;
+  }
   modelValue.value = undefined;
   displayDialog.value = false;
 }
 
 function save() {
+  if (props.readonly) {
+    return;
+  }
   modelValue.value = internalValue.value;
   displayDialog.value = false;
 }

@@ -4,6 +4,7 @@
     :focused="focused"
     :rules="rules"
     :disabled="disabled"
+    :readonly="readonly"
     class="mb-1">
     <template
       v-if="$slots.prepend"
@@ -29,7 +30,7 @@
           :value="value.value"
           :color="value.color"
           :prepend-icon="value.icon"
-          :disabled="value.disabled"
+          :disabled="readonly || value.disabled"
           @focus="focused = true"
           @blur="focused = false">
           {{ value.title }}
@@ -42,7 +43,7 @@
       <v-icon
         v-if="clearable"
         :icon="mdiClose"
-        @click="modelValue = undefined" />
+        @click="reset" />
       <slot name="append" />
     </template>
   </v-input>
@@ -53,7 +54,7 @@ import { mdiClose } from '@mdi/js';
 import { ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
-defineProps<{
+const props = defineProps<{
   /** Title used as the input label */
   label?: string
   /** Values proposed to be selected */
@@ -66,6 +67,8 @@ defineProps<{
   clearable?: boolean
   /** Input color */
   color?: string
+  /** Whether the input is readonly */
+  readonly?: boolean
   /** Whether multiple values can be selected */
   multiple?: boolean
   /** Whether at least one value must be selected */
@@ -75,4 +78,11 @@ defineProps<{
 const modelValue = defineModel<TDataValue | undefined>();
 
 const focused = ref(false);
+
+const reset = () => {
+  if (props.readonly) {
+    return;
+  }
+  modelValue.value = undefined;
+};
 </script>

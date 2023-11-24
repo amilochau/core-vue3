@@ -4,6 +4,7 @@
     :focused="focused"
     :rules="rules"
     :disabled="disabled"
+    :readonly="readonly"
     class="mb-1">
     <template
       v-if="$slots.prepend"
@@ -40,7 +41,7 @@
       <v-icon
         v-if="clearable"
         :icon="mdiClose"
-        @click="modelValue = undefined" />
+        @click="reset" />
       <slot name="append" />
     </template>
   </v-input>
@@ -51,7 +52,7 @@ import { mdiClose } from '@mdi/js';
 import { ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
-defineProps<{
+const props = defineProps<{
   /** Title used as the input label */
   label?: string
   /** Validation rules */
@@ -62,6 +63,8 @@ defineProps<{
   clearable?: boolean
   /** Input color */
   color?: string
+  /** Whether the input is readonly */
+  readonly?: boolean
   /** Icons used as values */
   icons: FormattedDataWithValue<TData>[]
 }>();
@@ -71,7 +74,17 @@ const modelValue = defineModel<TData | undefined>();
 const focused = ref(false);
 
 const setModelValue = (value: TData) => {
+  if (props.readonly) {
+    return;
+  }
   modelValue.value = value;
+};
+
+const reset = () => {
+  if (props.readonly) {
+    return;
+  }
+  modelValue.value = undefined;
 };
 </script>
 

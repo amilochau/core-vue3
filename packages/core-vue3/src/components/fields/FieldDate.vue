@@ -9,7 +9,7 @@
     type="text"
     class="cursor-pointer"
     readonly
-    @click:control="displayDialog = !displayDialog">
+    @click:control="open">
     <template
       v-if="$slots.prepend"
       #prepend>
@@ -45,7 +45,7 @@ import { type Ref, computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useDate } from 'vuetify';
 
-defineProps<{
+const props = defineProps<{
   /** Title used as the input label */
   label?: string
   /** Validation rules */
@@ -56,6 +56,8 @@ defineProps<{
   clearable?: boolean
   /** Input color */
   color?: string
+  /** Whether the input is readonly */
+  readonly?: boolean
   /** Input variant */
   variant?: 'filled' | 'outlined' | 'plain' | 'underlined' | 'solo' | 'solo-inverted' | 'solo-filled'
 }>();
@@ -80,7 +82,17 @@ const displayDialog = ref(false);
 const internalValue: Ref<any> = ref(undefined);
 const displayedValue = computed(() => internalValue.value ? d(internalValue.value, 'datetime') : '');
 
+const open = () => {
+  if (props.readonly) {
+    return;
+  }
+  displayDialog.value = true;
+};
+
 function reset() {
+  if (props.readonly) {
+    return;
+  }
   modelValue.value = undefined;
   internalValue.value = undefined;
   displayDialog.value = false;

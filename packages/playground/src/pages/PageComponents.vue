@@ -35,6 +35,10 @@
             <v-text-field
               :label="t('sections.inputs.variants.disabled')"
               disabled />
+            <v-text-field
+              :label="t('sections.inputs.variants.readonly')"
+              clearable
+              readonly />
           </v-card-text>
           <v-card-text>Badly supported: clearable</v-card-text>
         </v-card>
@@ -81,6 +85,11 @@
               v-model="numericValue"
               :label="t('sections.inputs.variants.disabled')"
               disabled />
+            <field-numeric
+              v-model="numericValue"
+              :label="t('sections.inputs.variants.readonly')"
+              clearable
+              readonly />
           </v-card-text>
         </v-card>
       </v-col>
@@ -126,6 +135,11 @@
               v-model="fieldDateValue"
               :label="t('sections.inputs.variants.disabled')"
               disabled />
+            <field-date
+              v-model="fieldDateValue"
+              :label="t('sections.inputs.variants.readonly')"
+              clearable
+              readonly />
           </v-card-text>
         </v-card>
       </v-col>
@@ -163,6 +177,11 @@
               v-model="switchValue"
               :label="t('sections.inputs.variants.disabled')"
               disabled />
+            <v-switch
+              v-model="switchValue"
+              :label="t('sections.inputs.variants.readonly')"
+              clearable
+              readonly />
           </v-card-text>
           <v-card-text>Not supported: outlined (variant), clearable</v-card-text>
         </v-card>
@@ -210,6 +229,12 @@
               :label="t('sections.inputs.variants.disabled')"
               :values="values"
               disabled />
+            <field-chip-group
+              v-model="fieldChipGroupValue"
+              :label="t('sections.inputs.variants.readonly')"
+              :values="values"
+              clearable
+              readonly />
             <field-chip-group
               v-model="fieldChipGroupValue"
               :label="t('sections.inputs.variants.mandatory')"
@@ -267,6 +292,12 @@
               :label="t('sections.inputs.variants.disabled')"
               :colors="colors"
               disabled />
+            <field-color-bullets
+              v-model="fieldColorBulletsValue"
+              :label="t('sections.inputs.variants.readonly')"
+              :colors="colors"
+              clearable
+              readonly />
           </v-card-text>
           <v-card-text>Not supported: outlined (variant)</v-card-text>
         </v-card>
@@ -314,6 +345,12 @@
               :label="t('sections.inputs.variants.disabled')"
               :icons="icons"
               disabled />
+            <field-icon
+              v-model="fieldIconValue"
+              :label="t('sections.inputs.variants.readonly')"
+              :icons="icons"
+              clearable
+              readonly />
           </v-card-text>
           <v-card-text>Not supported: outlined (variant)</v-card-text>
         </v-card>
@@ -351,18 +388,75 @@
             <v-textarea
               :label="t('sections.inputs.variants.disabled')"
               disabled />
+            <v-textarea
+              :label="t('sections.inputs.variants.readonly')"
+              clearable
+              readonly />
           </v-card-text>
           <v-card-text>Badly supported: clearable</v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="6">
+      <v-col
+        cols="12"
+        sm="6">
+        <v-form
+          readonly>
+          <v-card>
+            <v-card-item>
+              <v-card-title>
+                {{ t('sections.forms.readonly') }}
+              </v-card-title>
+            </v-card-item>
+            <v-card-text>
+              <v-text-field
+                :label="t('sections.inputs.variants.readonly')"
+                clearable />
+              <field-numeric
+                v-model="numericValue"
+                :label="t('sections.inputs.variants.readonly')"
+                clearable />
+              <field-date
+                v-model="fieldDateValue"
+                :label="t('sections.inputs.variants.readonly')"
+                clearable />
+              <v-switch
+                v-model="switchValue"
+                :label="t('sections.inputs.variants.readonly')"
+                clearable />
+              <field-chip-group
+                v-model="fieldChipGroupValue"
+                :label="t('sections.inputs.variants.readonly')"
+                :values="values"
+                clearable />
+              <field-color-bullets
+                v-model="fieldColorBulletsValue"
+                :label="t('sections.inputs.variants.readonly')"
+                :colors="colors"
+                clearable />
+              <field-icon
+                v-model="fieldIconValue"
+                :label="t('sections.inputs.variants.readonly')"
+                :icons="icons"
+                clearable />
+              <v-textarea
+                :label="t('sections.inputs.variants.readonly')"
+                clearable />
+            </v-card-text>
+          </v-card>
+        </v-form>
+      </v-col>
+      <v-col
+        cols="12"
+        sm="6">
         <v-list>
           <v-list-item
             :title="t('longText')"
             :subtitle="t('longText')" />
         </v-list>
       </v-col>
-      <v-col cols="6">
+      <v-col
+        cols="12"
+        sm="6">
         <v-timeline>
           <v-timeline-item>
             {{ t('text1') }}
@@ -372,7 +466,9 @@
           </v-timeline-item>
         </v-timeline>
       </v-col>
-      <v-col cols="6">
+      <v-col
+        cols="12"
+        sm="6">
         <v-btn>
           {{ t('text1') }}
         </v-btn>
@@ -459,8 +555,11 @@ en:
         prependAppend: With append and prepend
         color: Color
         disabled: Disabled
+        readonly: Readonly (+ Clearable)
         mandatory: Mandatory
         multiple: Multiple
+    forms:
+      readonly: Readonly form
   longText: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     sed,
@@ -486,8 +585,11 @@ fr:
         prependAppend: With append and prepend
         color: Color
         disabled: Disabled
+        readonly: Readonly (+ Clearable)
         mandatory: Mandatory
         multiple: Multiple
+    forms:
+      readonly: Readonly form
   longText: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     sed,

@@ -7,6 +7,7 @@
     :suffix="suffix"
     :color="color"
     :variant="variant"
+    :readonly="readonly"
     type="text"
     inputmode="decimal"
     @update:model-value="parseInput">
@@ -33,7 +34,7 @@ import { VTextField } from 'vuetify/components';
 import { useValidationRules } from '../../composition';
 import { ref, watch } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   /** Title used as the input label */
   label?: string
   /** Validation rules */
@@ -44,6 +45,8 @@ defineProps<{
   clearable?: boolean
   /** Input color */
   color?: string
+  /** Whether the input is readonly */
+  readonly?: boolean
   /** Text field suffix */
   suffix?: string
   /** Input variant */
@@ -70,6 +73,9 @@ const parseInput = (input: string) => {
 };
 
 function reset() {
+  if (props.readonly) {
+    return;
+  }
   modelValue.value = undefined;
   internalValue.value = '';
 }
