@@ -53,6 +53,7 @@ const emit = defineEmits<{
   (eventName: 'close'): void,
   (eventName: 'save'): void
 }>();
+
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 const online = useOnline();
