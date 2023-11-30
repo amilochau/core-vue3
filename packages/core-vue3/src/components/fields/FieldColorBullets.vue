@@ -3,8 +3,8 @@
     v-model:model-value="modelValue"
     :focused="focused"
     :rules="rules"
-    :disabled="disabled"
-    :readonly="readonly"
+    :disabled="itemDisabled"
+    :readonly="itemReadonly"
     class="mb-1">
     <template
       v-if="$slots.prepend"
@@ -14,7 +14,7 @@
     <v-field
       :label="label"
       :focused="focused"
-      :disabled="disabled"
+      :disabled="itemDisabled"
       :color="color"
       variant="plain"
       active>
@@ -83,7 +83,7 @@
 <script setup lang="ts">
 import { swatches } from '../../data/swatches';
 import { mdiCheck, mdiClose, mdiPalette } from '@mdi/js';
-import { type Ref, computed, ref, watch } from 'vue';
+import { type Ref, computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
@@ -116,21 +116,21 @@ const internalValue: Ref<string | undefined> = ref(undefined);
 const focused = ref(false);
 
 const select = (value: string) => {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = value;
 };
 
 const open = () => {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   displayDialog.value = true;
 };
 
 function reset() {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = undefined;
@@ -138,7 +138,7 @@ function reset() {
 }
 
 function save() {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = internalValue.value;
@@ -155,6 +155,12 @@ const labels = computed(() => {
     save: props.saveTitle ?? t('save'),
   };
 });
+
+
+// Vuetify only uses 'disabled' and 'readonly' from 'v-form' if no value is defined... In contradiction with vue.js standards
+const vuetifyForm: any = inject(Symbol.for('vuetify:form'), null);
+const itemDisabled = computed(() => props.disabled || !!vuetifyForm?.isDisabled.value);
+const itemReadonly = computed(() => props.readonly || !!vuetifyForm?.isReadonly.value);
 </script>
 
 <i18n lang="yaml">

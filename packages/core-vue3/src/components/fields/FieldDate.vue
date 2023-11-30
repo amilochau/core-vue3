@@ -3,7 +3,7 @@
     :model-value="displayedValue"
     :label="label"
     :rules="rules"
-    :disabled="disabled"
+    :disabled="itemDisabled"
     :color="color"
     :variant="variant"
     type="text"
@@ -31,7 +31,7 @@
     <v-card>
       <v-date-picker
         :model-value="internalValue"
-        :disabled="disabled"
+        :disabled="itemDisabled"
         :color="color ?? 'primary'"
         show-adjacent-months
         @update:model-value="save" />
@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import { mdiClose } from '@mdi/js';
-import { type Ref, computed, ref, watch } from 'vue';
+import { type Ref, computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useDate } from 'vuetify';
 
@@ -83,14 +83,14 @@ const internalValue: Ref<any> = ref(undefined);
 const displayedValue = computed(() => internalValue.value ? d(internalValue.value, 'datetime') : '');
 
 const open = () => {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   displayDialog.value = true;
 };
 
 function reset() {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = undefined;
@@ -107,4 +107,9 @@ function save(value: any) {
 watch(modelValue, () => {
   internalValue.value = modelValue.value ? date.parseISO(modelValue.value) : undefined;
 }, { immediate: true });
+
+// Vuetify only uses 'disabled' and 'readonly' from 'v-form' if no value is defined... In contradiction with vue.js standards
+const vuetifyForm: any = inject(Symbol.for('vuetify:form'), null);
+const itemDisabled = computed(() => props.disabled || !!vuetifyForm?.isDisabled.value);
+const itemReadonly = computed(() => props.readonly || !!vuetifyForm?.isReadonly.value);
 </script>

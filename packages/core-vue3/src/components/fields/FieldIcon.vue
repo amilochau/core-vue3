@@ -3,8 +3,8 @@
     v-model:model-value="modelValue"
     :focused="focused"
     :rules="rules"
-    :disabled="disabled"
-    :readonly="readonly"
+    :disabled="itemDisabled"
+    :readonly="itemReadonly"
     class="mb-1">
     <template
       v-if="$slots.prepend"
@@ -14,7 +14,7 @@
     <v-field
       :label="label"
       :focused="focused"
-      :disabled="disabled"
+      :disabled="itemDisabled"
       :color="color"
       variant="plain"
       active>
@@ -49,7 +49,7 @@
 
 <script setup lang="ts" generic="TData">
 import { mdiClose } from '@mdi/js';
-import { ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
 const props = defineProps<{
@@ -74,18 +74,23 @@ const modelValue = defineModel<TData | undefined>();
 const focused = ref(false);
 
 const setModelValue = (value: TData) => {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = value;
 };
 
 const reset = () => {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = undefined;
 };
+
+// Vuetify only uses 'disabled' and 'readonly' from 'v-form' if no value is defined... In contradiction with vue.js standards
+const vuetifyForm: any = inject(Symbol.for('vuetify:form'), null);
+const itemDisabled = computed(() => props.disabled || !!vuetifyForm?.isDisabled.value);
+const itemReadonly = computed(() => props.readonly || !!vuetifyForm?.isReadonly.value);
 </script>
 
 <style>

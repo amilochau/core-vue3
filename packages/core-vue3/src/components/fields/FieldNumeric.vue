@@ -3,11 +3,11 @@
     v-model="internalValue"
     :label="label"
     :rules="[...rules ?? [], number()]"
-    :disabled="disabled"
+    :disabled="itemDisabled"
     :suffix="suffix"
     :color="color"
     :variant="variant"
-    :readonly="readonly"
+    :readonly="itemReadonly"
     type="text"
     inputmode="decimal"
     @update:model-value="parseInput">
@@ -32,7 +32,7 @@
 import { mdiClose } from '@mdi/js';
 import { VTextField } from 'vuetify/components';
 import { useValidationRules } from '../../composition';
-import { ref, watch } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 
 const props = defineProps<{
   /** Title used as the input label */
@@ -73,7 +73,7 @@ const parseInput = (input: string) => {
 };
 
 function reset() {
-  if (props.readonly) {
+  if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = undefined;
@@ -87,4 +87,9 @@ watch(modelValue, (newValue) => {
 }, {
   immediate: true,
 });
+
+// Vuetify only uses 'disabled' and 'readonly' from 'v-form' if no value is defined... In contradiction with vue.js standards
+const vuetifyForm: any = inject(Symbol.for('vuetify:form'), null);
+const itemDisabled = computed(() => props.disabled || vuetifyForm?.isDisabled.value);
+const itemReadonly = computed(() => props.readonly || vuetifyForm?.isReadonly.value);
 </script>
