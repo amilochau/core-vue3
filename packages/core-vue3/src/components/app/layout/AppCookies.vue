@@ -35,73 +35,54 @@
       </v-card-actions>
     </v-card>
   </v-bottom-sheet>
-  <v-dialog
-    v-model="policyDisplayed"
-    max-width="500px"
-    scrollable>
-    <v-card>
-      <v-card-item
-        :prepend-icon="mdiGavel"
-        :title="t('title')"
-        class="py-1">
-        <template #append>
-          <v-btn
-            :disabled="loading"
-            :icon="mdiClose"
-            variant="plain"
-            size="small"
-            @click="policyDisplayed = false" />
-        </template>
-      </v-card-item>
-      <privacy-card />
-      <v-card-actions class="py-1 justify-center">
-        <v-btn-action
-          color="success"
-          class="mb-2"
-          @click="accept">
-          {{ t('accept') }}
-        </v-btn-action>
-        <v-btn-action
-          color="error"
-          class="mb-2"
-          @click="refuse">
-          {{ t('refuse') }}
-        </v-btn-action>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+  <dialog-form
+    ref="dialogFormRef"
+    :dialog-title="t('title')"
+    :dialog-icon="mdiGavel"
+    :cancel-title="t('refuse')"
+    :save-title="t('accept')"
+    :save-icon="mdiCheck"
+    not-persistent
+    @close="close"
+    @save="accept">
+    <privacy-card /><!-- @todo Don't add text- -->
+  </dialog-form>
 </template>
 
 <script setup lang="ts">
-import { mdiClose, mdiCookie, mdiGavel } from '@mdi/js';
+import { mdiCheck, mdiCookie, mdiGavel } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
-import { useAppStore, useCookiesStore } from '../../../stores';
+import { useCookiesStore } from '../../../stores';
 import { ref } from 'vue';
 import PrivacyCard from '../content/PrivacyCard.vue';
-import { storeToRefs } from 'pinia';
+import DialogForm from '../../dialogs/DialogForm.vue';
 
 const { t } = useI18n();
 const cookiesStore = useCookiesStore();
-const appStore = useAppStore();
-const { loading } = storeToRefs(appStore);
 
 const displayed = ref(cookiesStore.showCookies);
-const policyDisplayed = ref(false);
 
 const seePolicy = () => {
   displayed.value = false;
-  policyDisplayed.value = true;
+  dialogFormRef.value?.open();
 };
 const accept = () => {
   displayed.value = false;
-  policyDisplayed.value = false;
+  dialogFormRef.value?.open();
   cookiesStore.acceptCookies();
 };
 const refuse = () => {
   displayed.value = false;
-  policyDisplayed.value = false;
   cookiesStore.refuseCookies();
 };
+
+const close = (source: 'title' | 'actions' | 'out' | 'expose') => {
+  if (source === 'actions') {
+    refuse();
+  }
+};
+
+const dialogFormRef = ref<InstanceType<typeof DialogForm>>();
 </script>
 
 <i18n lang="yaml">

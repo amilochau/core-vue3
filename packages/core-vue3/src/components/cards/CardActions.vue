@@ -16,7 +16,7 @@
         :prepend-icon="cancelIconOrDefault"
         variant="text"
         color="grey-lighten-2"
-        @click="emit('close')">
+        @click="emit('cancel')">
         {{ cancelTitleOrDefault }}
       </v-btn>
       <v-btn
@@ -50,7 +50,7 @@ const props = defineProps<{
   saveIcon?: string
 }>();
 const emit = defineEmits<{
-  (eventName: 'close'): void,
+  (eventName: 'cancel'): void,
   (eventName: 'save'): void
 }>();
 

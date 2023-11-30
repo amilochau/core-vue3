@@ -21,13 +21,14 @@
       </v-col>
     </v-row>
     <dialog-test
-      ref="dialogTest" />
+      ref="dialogTest"
+      not-persistent />
   </v-container>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { type Ref, computed, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { usePage } from '@amilochau/core-vue3/composition';
 import DialogTest from '../components/dialogs/DialogTest.vue';
 

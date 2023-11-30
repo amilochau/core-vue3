@@ -32,19 +32,11 @@
       <home-login v-if="!isAuthenticated" />
 
       <p>{{ mapsStore.items }}</p>
-      <v-btn-action
-        :disabled="loading || !online"
-        color="primary"
-        @click="openDialog">
-        {{ t('openDialog') }}
-      </v-btn-action>
 
       <p>
         {{ attributes }}
       </p>
     </div>
-
-    <dialog-test v-model="dialog" />
   </app-responsive>
 </template>
 
@@ -54,16 +46,14 @@ import { mdiRefresh } from '@mdi/js';
 import HomeLogin from '../components/home/HomeLogin.vue';
 import HomeMessages from '../components/home/HomeMessages.vue';
 import { useMapsStore } from '../stores';
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useIdentityStore } from '@amilochau/core-vue3/stores';
 import { usePage } from '@amilochau/core-vue3/composition';
-import DialogTest from '../components/dialogs/DialogTest.vue';
-import { computed, ref } from 'vue';
-import { useOnline } from '@vueuse/core';
+import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import logoUrl from '@/assets/logo.png';
 
-const { d, t } = useI18n();
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -78,18 +68,8 @@ usePage(computed(() => ({
   },
 })));
 const mapsStore = useMapsStore();
-const appStore = useAppStore();
 const identityStore = useIdentityStore();
-const online = useOnline();
-
-const { loading } = storeToRefs(appStore);
 const { attributes, isAuthenticated } = storeToRefs(identityStore);
-
-const dialog = ref(false);
-
-const openDialog = () => {
-  dialog.value = true;
-};
 </script>
 
 <i18n lang="yaml">
@@ -104,8 +84,6 @@ fr:
 <i18n lang="yaml">
 en:
   title: Welcome!
-  openDialog: Open dialog
 fr:
   title: Bienvenue !
-  openDialog: Ouvrir le dialog
 </i18n>

@@ -1,8 +1,15 @@
 <template>
-  <v-card-item class="bg-primary py-1">
-    <v-card-title>
-      {{ title }}
-    </v-card-title>
+  <v-card-item
+    :title="title"
+    :prepend-icon="prependIcon"
+    class="bg-primary py-1">
+    <template
+      v-if="prependIcon"
+      #prepend>
+      <v-icon
+        :icon="prependIcon"
+        start />
+    </template>
     <template #append>
       <v-btn
         :disabled="loading"
@@ -22,6 +29,8 @@ import { storeToRefs } from 'pinia';
 defineProps<{
   /** Title */
   title: string
+  /** Prepend icon */
+  prependIcon?: string
 }>();
 const emit = defineEmits<{
   (eventName: 'close'): void
