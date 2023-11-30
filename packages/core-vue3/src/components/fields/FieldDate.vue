@@ -89,20 +89,20 @@ const open = () => {
   displayDialog.value = true;
 };
 
-function reset() {
+const reset = () => {
   if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = undefined;
   internalValue.value = undefined;
   displayDialog.value = false;
-}
+};
 
-function save(value: any) {
+const save = (value: any) => {
   internalValue.value = value;
   modelValue.value = date.toISO(value);
   displayDialog.value = false;
-}
+};
 
 watch(modelValue, () => {
   internalValue.value = modelValue.value ? date.parseISO(modelValue.value) : undefined;

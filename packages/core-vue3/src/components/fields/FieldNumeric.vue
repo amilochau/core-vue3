@@ -72,13 +72,13 @@ const parseInput = (input: string) => {
   }
 };
 
-function reset() {
+const reset = () => {
   if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = undefined;
   internalValue.value = '';
-}
+};
 
 watch(modelValue, (newValue) => {
   if (newValue !== convertToNumber(internalValue.value)) {

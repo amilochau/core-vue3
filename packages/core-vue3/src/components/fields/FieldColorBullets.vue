@@ -129,21 +129,21 @@ const open = () => {
   displayDialog.value = true;
 };
 
-function reset() {
+const reset = () => {
   if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = undefined;
   displayDialog.value = false;
-}
+};
 
-function save() {
+const save = () => {
   if (itemDisabled.value || itemReadonly.value) {
     return;
   }
   modelValue.value = internalValue.value;
   displayDialog.value = false;
-}
+};
 
 watch(modelValue, () => {
   internalValue.value = modelValue.value;
