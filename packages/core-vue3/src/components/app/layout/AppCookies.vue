@@ -68,7 +68,6 @@ const seePolicy = () => {
 };
 const accept = () => {
   displayed.value = false;
-  dialogFormRef.value?.open();
   cookiesStore.acceptCookies();
 };
 const refuse = () => {
