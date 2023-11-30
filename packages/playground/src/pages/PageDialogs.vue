@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-bare-strings-in-template -->
 <template>
   <v-container>
     <v-row>

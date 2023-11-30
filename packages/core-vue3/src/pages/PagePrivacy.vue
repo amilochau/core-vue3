@@ -4,7 +4,9 @@
     <v-card
       :class="{ 'bg-transparent': xs }"
       flat>
-      <privacy-card />
+      <v-card-text>
+        <privacy-card />
+      </v-card-text>
     </v-card>
   </app-responsive>
 </template>

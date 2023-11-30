@@ -1,29 +1,27 @@
 <template>
-  <v-card-text>
-    <section>
-      <app-section-header>{{ t('header11') }}</app-section-header>
-      <app-section-text>{{ t('text11', { name: appTitle }) }}</app-section-text>
-    </section>
-    <v-divider />
-    <section>
-      <app-section-header>{{ t('header21') }}</app-section-header>
-      <app-section-text>{{ t('text21', { name: appTitle }) }}</app-section-text>
-      <app-section-sub-header>{{ t('header22') }}</app-section-sub-header>
-      <app-section-text>{{ t('text22', { name: appTitle }) }}</app-section-text>
-      <app-section-sub-header>{{ t('header23') }}</app-section-sub-header>
-      <app-section-text>{{ t('text23', { name: appTitle }) }}</app-section-text>
-      <app-section-sub-header>{{ t('header24') }}</app-section-sub-header>
-      <app-section-text>{{ t('text24') }}</app-section-text>
-      <app-section-sub-header>{{ t('header25') }}</app-section-sub-header>
-      <app-section-text>{{ t('text25', { name: appTitle, contact: coreOptions.application.contact }) }}</app-section-text>
-      <app-section-sub-header>{{ t('header26') }}</app-section-sub-header>
-      <app-section-text>{{ t('text26', { name: appTitle }) }}</app-section-text>
-      <app-section-sub-header>{{ t('header27') }}</app-section-sub-header>
-      <app-section-text>{{ t('text27', { name: appTitle }) }}</app-section-text>
-      <app-section-sub-header>{{ t('header28') }}</app-section-sub-header>
-      <app-section-text>{{ t('text28', { name: appTitle }) }}</app-section-text>
-    </section>
-  </v-card-text>
+  <section>
+    <app-section-header>{{ t('header11') }}</app-section-header>
+    <app-section-text>{{ t('text11', { name: appTitle }) }}</app-section-text>
+  </section>
+  <v-divider />
+  <section>
+    <app-section-header>{{ t('header21') }}</app-section-header>
+    <app-section-text>{{ t('text21', { name: appTitle }) }}</app-section-text>
+    <app-section-sub-header>{{ t('header22') }}</app-section-sub-header>
+    <app-section-text>{{ t('text22', { name: appTitle }) }}</app-section-text>
+    <app-section-sub-header>{{ t('header23') }}</app-section-sub-header>
+    <app-section-text>{{ t('text23', { name: appTitle }) }}</app-section-text>
+    <app-section-sub-header>{{ t('header24') }}</app-section-sub-header>
+    <app-section-text>{{ t('text24') }}</app-section-text>
+    <app-section-sub-header>{{ t('header25') }}</app-section-sub-header>
+    <app-section-text>{{ t('text25', { name: appTitle, contact: coreOptions.application.contact }) }}</app-section-text>
+    <app-section-sub-header>{{ t('header26') }}</app-section-sub-header>
+    <app-section-text>{{ t('text26', { name: appTitle }) }}</app-section-text>
+    <app-section-sub-header>{{ t('header27') }}</app-section-sub-header>
+    <app-section-text>{{ t('text27', { name: appTitle }) }}</app-section-text>
+    <app-section-sub-header>{{ t('header28') }}</app-section-sub-header>
+    <app-section-text>{{ t('text28', { name: appTitle }) }}</app-section-text>
+  </section>
 </template>
 
 <script setup lang="ts">
