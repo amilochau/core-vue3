@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="modelValue"
+    v-model="dialog"
     :fullscreen="xs"
     persistent
     scrollable
@@ -15,14 +15,15 @@
           @close="close" />
         <v-card-text class="pt-2">
           <v-text-field
-            v-model="request.name"
+            v-model="item.name"
             label="Required text"
             :rules="[ required(), minLength(2) ]"
-            required />
+            required
+            clearable />
           <v-textarea
-            v-model="request.desc"
-            label="Required long test"
-            :rules="[ minLength(10) ]" />
+            v-model="item.desc"
+            label="Non required text"
+            clearable />
         </v-card-text>
         <card-messages />
         <card-actions
@@ -36,17 +37,18 @@
 </template>
 
 <script setup lang="ts">
-import { mdiAlert, mdiPlus } from '@mdi/js';
+import { mdiPlus } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { type Ref, ref, watch } from 'vue';
 import { CardActions, CardMessages, CardTitleClosable } from '@amilochau/core-vue3/components';
-import { MapsCreateRequest } from '../../types/maps';
-import { type ApplicationMessage } from '@amilochau/core-vue3/types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useDisplay } from 'vuetify';
 import { useI18n } from 'vue-i18n';
 import { VForm } from 'vuetify/components';
+import { clone } from '@/utils/clone';
+
+type ItemType = { name: string, desc: string };
 
 const { t } = useI18n();
 const appStore = useAppStore();
@@ -56,10 +58,9 @@ const { xs } = useDisplay();
 
 const { loading } = storeToRefs(appStore);
 
-const modelValue = defineModel<boolean>({ required: true });
-
+const dialog = ref(false);
 const form = ref<InstanceType<typeof VForm>>();
-const request: Ref<MapsCreateRequest> = ref(new MapsCreateRequest());
+const item: Ref<ItemType> = ref({ name: '', desc: '' });
 
 const save = async () => {
   if (!await handleFormValidation(form)) {
@@ -67,24 +68,32 @@ const save = async () => {
   }
 
   await handleLoadAndError(() => {
-    throw { title: t('testMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
-    New line here` } as ApplicationMessage;
+    return new Promise<void>((resolve) => {
+      close();
+      resolve();
+    });
   }, 'internal');
 };
+const initItem = (itemInfo: ItemType) => {
+  item.value = clone(itemInfo);
+};
+const onClose = () => {
+  // We can have specific logics in the 'close'
+};
 
-watch(modelValue, () => modelValue.value ? open() : close());
-
-const open = () => {
-  initMap();
+watch(dialog, (newValue) => { if (!newValue) { onClose(); } });
+const open = (itemInfo: ItemType) => {
+  initItem(itemInfo);
   form.value?.reset();
+  dialog.value = true;
 };
 const close = () => {
-  modelValue.value = false;
+  dialog.value = false;
 };
 
-const initMap = () => {
-  request.value = new MapsCreateRequest();
-};
+defineExpose({
+  open,
+});
 </script>
 
 <i18n lang="yaml">

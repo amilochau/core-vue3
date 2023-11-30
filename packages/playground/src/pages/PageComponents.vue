@@ -483,7 +483,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { type ComputedRef, computed, ref } from 'vue';
-import { usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { usePage } from '@amilochau/core-vue3/composition';
 import { FieldChipGroup, FieldColorBullets, FieldDate, FieldIcon, FieldNumeric } from '@amilochau/core-vue3/components';
 import { TestEnum } from '@/types/test';
 import { type FormattedDataWithValue } from '@amilochau/core-vue3/types';
@@ -505,7 +505,6 @@ usePage(computed(() => ({
     ],
   },
 })));
-const { required, integer } = useValidationRules();
 
 const numericValue = ref<number>();
 const fieldDateValue = ref<string>();

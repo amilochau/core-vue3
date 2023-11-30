@@ -12,14 +12,22 @@
           {{ t('seeComponents') }}
         </v-btn-action>
       </p>
-
-      <v-btn-action
-        :disabled="loading || !online"
-        :prepend-icon="mdiGithub"
-        color="secondary"
-        @click="openDialog">
-        {{ t('openDialog') }}
-      </v-btn-action>
+      <p>
+        <v-btn-action
+          :to="{ name: 'Dialogs' }"
+          color="primary"
+          class="my-6">
+          {{ t('seeDialogs') }}
+        </v-btn-action>
+      </p>
+      <p>
+        <v-btn-action
+          :to="{ name: 'Validations' }"
+          color="primary"
+          class="my-6">
+          {{ t('seeValidations') }}
+        </v-btn-action>
+      </p>
 
       <btn-card
         :icon="mdiGithub"
@@ -31,8 +39,6 @@
           {{ false }}
         </template>
       </suspense>
-
-      <dialog-test v-model="dialog" />
     </div>
   </app-responsive>
 </template>
@@ -43,12 +49,8 @@ import { mdiGithub } from '@mdi/js';
 import HomeWelcome from '../components/home/HomeWelcome.vue';
 import HomeMessages from '../components/home/HomeMessages.vue';
 import BtnCard from '../components/buttons/BtnCard.vue';
-import { useAppStore } from '@amilochau/core-vue3/stores';
 import { usePage } from '@amilochau/core-vue3/composition';
-import DialogTest from '../components/dialogs/DialogTest.vue';
-import { computed, ref } from 'vue';
-import { useOnline } from '@vueuse/core';
-import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -65,16 +67,6 @@ usePage(computed(() => ({
     ],
   },
 })));
-const appStore = useAppStore();
-const online = useOnline();
-
-const { loading } = storeToRefs(appStore);
-
-const dialog = ref(false);
-
-const openDialog = () => {
-  dialog.value = true;
-};
 </script>
 
 <i18n lang="yaml">
@@ -90,7 +82,11 @@ fr:
 en:
   openDialog: Open dialog
   seeComponents: See components
+  seeDialogs: See dialogs
+  seeValidations: See validations
 fr:
   openDialog: Ouvrir le dialog
   seeComponents: Voir les composants
+  seeDialogs: Voir les dialogs
+  seeValidations: Voir les validations
 </i18n>
