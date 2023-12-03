@@ -52,7 +52,7 @@
               {{ t('sections.inputs.fieldNumeric') }}
             </v-card-title>
             <v-card-subtitle>
-              Value: {{ numericValue }}
+              Value: {{ { value: numericValue } }}
             </v-card-subtitle>
           </v-card-item>
           <v-card-text>
@@ -102,7 +102,7 @@
               {{ t('sections.inputs.fieldDate') }}
             </v-card-title>
             <v-card-subtitle>
-              Value: {{ fieldDateValue }}
+              Value: {{ { value: fieldDateValue } }}
             </v-card-subtitle>
           </v-card-item>
           <v-card-text>
@@ -152,7 +152,7 @@
               {{ t('sections.inputs.switch') }}
             </v-card-title>
             <v-card-subtitle>
-              Value: {{ switchValue }}
+              Value: {{ { value: switchValue } }}
             </v-card-subtitle>
           </v-card-item>
           <v-card-text>
@@ -195,7 +195,7 @@
               {{ t('sections.inputs.fieldChipGroup') }}
             </v-card-title>
             <v-card-subtitle>
-              Value: {{ fieldChipGroupValue }}
+              Value: {{ { value: fieldChipGroupValue } }}
             </v-card-subtitle>
           </v-card-item>
           <v-card-text>
@@ -258,7 +258,7 @@
               {{ t('sections.inputs.fieldColorBullets') }}
             </v-card-title>
             <v-card-subtitle>
-              Value: {{ fieldColorBulletsValue }}
+              Value: {{ { value: fieldColorBulletsValue } }}
             </v-card-subtitle>
           </v-card-item>
           <v-card-text>
@@ -311,7 +311,7 @@
               {{ t('sections.inputs.fieldIcon') }}
             </v-card-title>
             <v-card-subtitle>
-              Value: {{ fieldIconValue }}
+              Value: {{ { value: fieldIconValue } }}
             </v-card-subtitle>
           </v-card-item>
           <v-card-text>
