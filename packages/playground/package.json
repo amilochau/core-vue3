@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3-playground",
-  "version": "0.8.0-beta.23",
+  "version": "0.8.0-beta.24",
   "author": "Antoine Milochau",
   "license": "MIT",
   "private": true,
@@ -22,6 +22,6 @@
     "@amilochau/core-vue3": "file:packages/core-vue3"
   },
   "devDependencies": {
-    "rollup-plugin-visualizer": "^5.11.0"
+    "rollup-plugin-visualizer": "^5.12.0"
   }
 }
