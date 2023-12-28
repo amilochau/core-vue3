@@ -1,15 +1,18 @@
 <template>
   <v-app full-height>
     <v-main>
-      <app-header-bar
-        v-if="pageData.header"
-        v-bind="pageData.header"
-        :title="pageData.header?.title ?? pageData.title" />
+      <v-expand-transition mode="out-in">
+        <app-header-bar
+          v-if="pageData.header"
+          v-bind="pageData.header"
+          :title="pageData.header?.title ?? pageData.title" />
+      </v-expand-transition>
       <router-view />
-      <app-footer-bar
-        v-if="pageData.footer"
-        v-bind="pageData.footer" />
-
+      <v-expand-transition mode="out-in">
+        <app-footer-bar
+          v-if="pageData.footer"
+          v-bind="pageData.footer" />
+      </v-expand-transition>
       <app-cookies />
       <app-navigation-drawer />
       <app-snackbar />
