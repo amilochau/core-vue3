@@ -9,6 +9,12 @@ export type ResetPassword = {
   code: string
 };
 
+export type SetPassword = {
+  email: string
+  password: string
+  confirmationPassword: string
+};
+
 export type ConfirmEmail = {
   email: string
   code: string

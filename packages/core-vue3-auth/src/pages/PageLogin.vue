@@ -51,6 +51,7 @@ import { useRoute, useRouter } from 'vue-router';
 import type { Login } from '../types';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
+import type { ApplicationMessage } from '@amilochau/core-vue3/types';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -79,13 +80,26 @@ const links = computed(() => ([
 ]));
 
 const login = () => handleLoadAndError(async () => {
-  await authenticateUser(request.value);
-  await fetchUserAttributes();
-  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
-  if (route.query.returnUrl) {
-    await router.replace(route.query.returnUrl.toString());
+  const authenticationResult = await authenticateUser(request.value);
+  if (!authenticationResult.success) {
+    switch (authenticationResult.nextStep) {
+    case 'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED':
+      await router.push({ name: 'SetPassword', query: { email: request.value.email } });
+      break;
+    case 'RESET_PASSWORD':
+      await router.push({ name: 'ResetPassword', query: { email: request.value.email } });
+      break;
+    default:
+      appStore.displayErrorMessage({ title: t('errorMessage') }, 'snackbar');
+    }
   } else {
-    await router.replace({ name: 'Home' });
+    await fetchUserAttributes();
+    appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+    if (route.query.returnUrl) {
+      await router.replace(route.query.returnUrl.toString());
+    } else {
+      await router.replace({ name: 'Home' });
+    }
   }
 }, 'snackbar');
 </script>
@@ -109,6 +123,7 @@ en:
   password: Your password
   login: Login
   successMessage: Welcome!
+  errorMessage: An error occurred. You can try again later.
   links:
     register:
       title: Register
@@ -125,6 +140,7 @@ fr:
   password: Votre mot de passe
   login: Se connecter
   successMessage: Bienvenue !
+  errorMessage: Une erreur est survenue. Vous pouvez réessayer plus tard.
   links:
     register:
       title: S'inscrire

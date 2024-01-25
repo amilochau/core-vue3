@@ -26,8 +26,8 @@ export const envConfig: EnvConfigValues = {
   },
   local: {
     VITE_API_URL: 'http://localhost:4000',
-    VITE_COGNITO_USERPOOL_ID: 'eu-west-3_91PfBkcmP',
-    VITE_COGNITO_CLIENT_ID: '1oed2va2em6r9lkfvqbd3tspiu',
+    VITE_COGNITO_USERPOOL_ID: 'eu-west-3_vvLe6XKKJ',
+    VITE_COGNITO_CLIENT_ID: '5kit3shpjfhc8mmje5vcki23gj',
   },
   dev: {
     VITE_API_URL: 'http://localhost:4000',
