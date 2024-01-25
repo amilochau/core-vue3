@@ -1,6 +1,7 @@
-import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword } from '../types';
+import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword, type SetPassword } from '../types';
 import {
   confirmResetPassword as awsConfirmResetPassword,
+  confirmSignIn as awsConfirmSignIn,
   confirmSignUp as awsConfirmSignUp,
   deleteUser as awsDeleteUser,
   fetchAuthSession as awsFetchAuthSession,
@@ -85,14 +86,37 @@ export const useCognito = () => {
     }),
 
     authenticateUser: (model: Login) => processRequest(async () => {
-      await awsSignIn({
+      const response = await awsSignIn({
         username: model.email,
         password: model.password,
       });
-      identityStore.isAuthenticated = true;
+
+      if (response.isSignedIn) {
+        identityStore.isAuthenticated = true;
+      }
+
+      return {
+        success: response.isSignedIn,
+        nextStep: response.nextStep.signInStep,
+      };
     }, {
       ['NotAuthorizedException']: t('incorrectUsernamePassword'),
     }),
+
+    confirmLogin: (model: SetPassword) => processRequest(async () => {
+      const response = await awsConfirmSignIn({
+        challengeResponse: model.password,
+      });
+
+      if (response.isSignedIn) {
+        identityStore.isAuthenticated = true;
+      }
+
+      return {
+        success: response.isSignedIn,
+        nextStep: response.nextStep.signInStep,
+      };
+    }, {}),
 
     forgotPassword: (model: ForgotPassword) => processRequest(() => awsResetPassword({
       username: model.email,

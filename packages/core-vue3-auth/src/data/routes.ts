@@ -5,6 +5,7 @@ const routes: Array<RouteRecordRaw> = [
   { name: 'ConfirmEmail', path: 'verify', component: () => import('../pages/PageConfirmEmail.vue') },
   { name: 'ForgotPassword', path: 'forgot-password', component: () => import('../pages/PageForgotPassword.vue') },
   { name: 'ResetPassword', path: 'reset-password', component: () => import('../pages/PageResetPassword.vue') },
+  { name: 'SetPassword', path: 'set-password', component: () => import('../pages/PageSetPassword.vue') },
   { name: 'Login', path: 'login', component: () => import('../pages/PageLogin.vue') },
   { name: 'Profile', path: 'profile', component: () => import('../pages/PageProfile.vue'), meta: { requiresAuth: true } },
   { name: 'EditProfile', path: 'edit-profile', component: () => import('../pages/PageEditProfile.vue'), meta: { requiresAuth: true } },
