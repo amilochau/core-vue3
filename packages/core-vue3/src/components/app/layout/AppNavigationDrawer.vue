@@ -1,21 +1,21 @@
 <template>
   <v-navigation-drawer
-    v-if="navigationOptions.items"
+    v-if="items"
     v-model="appStore.drawer"
     app
     temporary>
     <v-list
-      :items="navigationOptions.items"
+      :items="items"
       color="primary"
       density="comfortable"
       item-props
       nav />
     <template
-      v-if="navigationOptions.appendItems && navigationOptions.appendItems.length"
+      v-if="appendItems && appendItems.length"
       #append>
       <v-divider />
       <v-list
-        :items="navigationOptions.appendItems"
+        :items="appendItems"
         color="primary"
         density="compact"
         :lines="false"
@@ -26,11 +26,12 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useCoreOptions } from '../../../composition';
 import { useAppStore } from '../../../stores';
 
 const appStore = useAppStore();
 const coreOptions = useCoreOptions();
 
-const navigationOptions = coreOptions.application.navigation;
+const { items, appendItems } = coreOptions.application.navigation();
 </script>

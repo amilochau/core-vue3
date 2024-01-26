@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
-export default computed(() => {
+export const navigation = () => {
 
   const { t, mergeLocaleMessage } = useI18n();
   const route = useRoute();
@@ -32,16 +32,16 @@ export default computed(() => {
   const contactUrl = `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`;
 
   return {
-    items: [
+    items: computed(() => [
       { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
-    ],
-    appendItems: [
+    ]),
+    appendItems: computed(() => [
       { type: 'subheader', title: t('settingsAndSupport') },
       ...isAuthenticated.value
         ? [{ title: t('profile'), prependIcon: mdiCardAccountDetailsOutline, to: { name: 'Profile' } }]
         : [{ title: t('login'), prependIcon: mdiPower, to: { name: 'Login' } }],
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
       { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: '_blank', rel: 'noopener noreferrer' },
-    ],
+    ]),
   };
-});
+};

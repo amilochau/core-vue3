@@ -9,10 +9,10 @@ export type MilochauCoreOptions = {
     name: string,
     contact: string,
     logoUrl?: string,
-    navigation: Ref<{
-      items: any[],
-      appendItems?: any[],
-    }>,
+    navigation: () => {
+      items: Ref<any[]>,
+      appendItems?: Ref<any[]>,
+    },
     isProduction: boolean,
   },
   api?: {

@@ -2,7 +2,7 @@ import { type MilochauCoreOptions, type NotificationsRegisterRequest } from '@am
 import { getConfig, getCurrentEnvironment } from '../utils/config';
 import routes from './routes';
 import { useMapsStore } from '../stores';
-import navigation from './navigation';
+import { navigation } from './navigation';
 import { useNotificationsApi } from '@/composition/notifications.api';
 
 export enum Environment {
