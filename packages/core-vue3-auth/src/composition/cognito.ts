@@ -89,6 +89,9 @@ export const useCognito = () => {
       const response = await awsSignIn({
         username: model.email,
         password: model.password,
+        options: {
+          authFlowType: coreOptions.identity?.usersMigrationDisabled ? 'USER_SRP_AUTH' : 'USER_PASSWORD_AUTH',
+        },
       });
 
       if (response.isSignedIn) {

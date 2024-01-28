@@ -20,7 +20,6 @@ export const defaultEnv: Environment = Environment.Default;
 
 export const envConfig: EnvConfigValues = {
   default: {
-    VITE_GOOGLE_MAPS_API_KEY: 'AIzaSyA11QlCEpdVbQTSOcMzgtI97kSFHrdNqRg',
     VITE_COGNITO_USERPOOL_ID: '',
     VITE_COGNITO_CLIENT_ID: '',
   },
