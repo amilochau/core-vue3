@@ -156,9 +156,10 @@ export const useCognito = () => {
     fetchUserAttributes: () => processRequest(async () => {
       const userAttributes = await awsFetchUserAttributes();
       identityStore.setAttributes({
-        id: userAttributes.sub || '',
+        sub: userAttributes.sub || '',
         name: userAttributes.name || '',
         email: userAttributes.email || '',
+        user_id: userAttributes['custom:user_id'] || '',
       });
     }, {}),
 

@@ -4,9 +4,10 @@ const getDefaultState = (): IdentityStoreState => {
   return {
     isAuthenticated: false,
     attributes: {
-      id: '',
+      sub: '',
       name: '',
       email: '',
+      user_id: '',
     },
   };
 };
@@ -14,16 +15,17 @@ const getDefaultState = (): IdentityStoreState => {
 interface IdentityStoreState {
   isAuthenticated: boolean,
   attributes: {
-    id: string,
+    sub: string,
     name: string,
     email: string,
+    user_id: string,
   },
 }
 
 export const useIdentityStore = defineStore('identity', {
   state: getDefaultState,
   actions: {
-    setAttributes(attributes: {id: string, name: string, email: string}) {
+    setAttributes(attributes: { sub: string, name: string, email: string, user_id: string }) {
       this.attributes = attributes;
     },
 
