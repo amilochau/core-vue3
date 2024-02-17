@@ -1,5 +1,6 @@
 import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword, type SetPassword } from '../types';
 import {
+  type SignInOutput,
   confirmResetPassword as awsConfirmResetPassword,
   confirmSignIn as awsConfirmSignIn,
   confirmSignUp as awsConfirmSignUp,
@@ -16,7 +17,7 @@ import {
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
 import { type ApplicationMessage } from '@amilochau/core-vue3/types';
-import { useCoreOptions } from '@amilochau/core-vue3/composition';
+import { useClean, useCoreOptions } from '@amilochau/core-vue3/composition';
 import { useIdentityStore } from '@amilochau/core-vue3/stores';
 
 export const useCognito = () => {
@@ -24,9 +25,10 @@ export const useCognito = () => {
   const identityStore = useIdentityStore();
   const coreOptions = useCoreOptions();
   const { t, mergeLocaleMessage } = useI18n();
+  const { clean } = useClean();
 
   mergeLocaleMessage('en', {
-    errorMessage: 'An error occured.',
+    defaultError: 'An error occured.',
     incorrectUsernamePassword: 'Incorrect email address or password.',
     incorrectPassword: 'Incorrect password.',
     incorrectCode: 'Incorrect validation code.',
@@ -35,7 +37,7 @@ export const useCognito = () => {
     usernameExists: 'A user account already exists with this email address. You can try to login!',
   });
   mergeLocaleMessage('fr', {
-    errorMessage: 'Une erreur est survenue.',
+    defaultError: 'Une erreur est survenue.',
     incorrectUsernamePassword: 'Adresse email ou mot de passe incorrect.',
     incorrectPassword: 'Mot de passe incorrect.',
     incorrectCode: 'Code de validation incorrect.',
@@ -55,13 +57,16 @@ export const useCognito = () => {
       let errorMessage = errorMapping[error?.name];
       if (!errorMessage) {
         console.warn('Unexpected error from Cognito', error?.name, error);
-        errorMessage = t('errorMessage');
+        errorMessage = t('defaultError');
       }
       throw { title: errorMessage, color: 'error', icon: mdiAlert, details: error as string } as ApplicationMessage;
     }
   };
 
-  const signOut = () => processRequest(() => awsSignOut(), {});
+  const signOut = () => processRequest(async () => {
+    await awsSignOut();
+    clean();
+  }, {});
 
   return {
     signUp: (model: Register) => processRequest(() => awsSignUp({
@@ -86,13 +91,30 @@ export const useCognito = () => {
     }),
 
     authenticateUser: (model: Login) => processRequest(async () => {
-      const response = await awsSignIn({
-        username: model.email,
-        password: model.password,
-        options: {
-          authFlowType: coreOptions.identity?.usersMigrationDisabled ? 'USER_SRP_AUTH' : 'USER_PASSWORD_AUTH',
-        },
-      });
+      let response: SignInOutput;
+      try {
+        response = await awsSignIn({
+          username: model.email,
+          password: model.password,
+          options: {
+            authFlowType: coreOptions.identity?.usersMigrationDisabled ? 'USER_SRP_AUTH' : 'USER_PASSWORD_AUTH',
+          },
+        });
+      } catch (error: any) {
+        if (error.name === 'UserAlreadyAuthenticatedException') {
+          console.warn('Logout has been required, because use has already been logged in.');
+          await signOut();
+          response = await awsSignIn({
+            username: model.email,
+            password: model.password,
+            options: {
+              authFlowType: coreOptions.identity?.usersMigrationDisabled ? 'USER_SRP_AUTH' : 'USER_PASSWORD_AUTH',
+            },
+          });
+        } else {
+          throw error;
+        }
+      }
 
       if (response.isSignedIn) {
         identityStore.isAuthenticated = true;

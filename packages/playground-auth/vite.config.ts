@@ -112,6 +112,7 @@ export default defineConfig({
     ],
     exclude: [
       'virtual:pwa-register',
+      'aws-amplify',
     ],
   },
 });

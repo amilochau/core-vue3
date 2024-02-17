@@ -146,7 +146,7 @@ export const useApi = (relativeBaseUri: string) => {
       jwtToken = await getJwtToken();
     } catch (error) {
       console.error('Authentication token can\'t be used', error);
-      signOut();
+      await signOut();
       await router.push({ name: 'Login' });
       throw { title: t('errors.sessionExpired'), color: 'warning', icon: mdiTimerRefreshOutline } as ApplicationMessage;
     }

@@ -22,8 +22,9 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useClean, useCoreOptions, usePage } from '@amilochau/core-vue3/composition';
+import { useCoreOptions, usePage } from '@amilochau/core-vue3/composition';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useCognito } from '../composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -36,16 +37,16 @@ usePage(computed(() => ({
 })));
 const appStore = useAppStore();
 const identityStore = useIdentityStore();
-const { clean } = useClean();
 const router = useRouter();
 const coreOptions = useCoreOptions();
+const { signOut } = useCognito();
 
 const { attributes } = storeToRefs(identityStore);
 
 const links = computed(() => ([
   { title: t('links.editProfile.title'), subtitle: t('links.editProfile.subtitle'), prependIcon: mdiAccountEdit, to: { name: 'EditProfile' } },
   { title: t('links.editPassword.title'), subtitle: t('links.editPassword.subtitle'), prependIcon: mdiLockReset, to: { name: 'EditPassword' } },
-  { title: t('links.logout.title'), subtitle: t('links.logout.subtitle'), prependIcon: mdiPower, onClick: cleanAndLogout },
+  { title: t('links.logout.title'), subtitle: t('links.logout.subtitle'), prependIcon: mdiPower, onClick: logout },
   { title: t('links.deleteAccount.title'), subtitle: t('links.deleteAccount.subtitle'), prependIcon: mdiAccountOff, to: { name: 'DeleteAccount' } },
 ]));
 
@@ -61,13 +62,10 @@ const contactItems = computed(() => [{
   },
 }]);
 
-const cleanAndLogout = async () => {
+const logout = async () => {
   try {
     appStore.loading = true;
-    if (coreOptions.identity?.logout) {
-      await coreOptions.identity?.logout();
-    }
-    clean();
+    await signOut();
     await router.push({ name: 'Home' });
   } finally {
     appStore.loading = false;
