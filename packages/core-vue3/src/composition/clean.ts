@@ -11,6 +11,17 @@ export const useClean = () => {
     clean: () => {
       identityStore.clean();
       cleanFromCoreOptions();
+
+      const exceptions = [
+        'cookies',
+      ];
+
+      const localStorageKeys = Object.keys(localStorage);
+      localStorageKeys.forEach((key) => {
+        if (!exceptions.includes(key)) {
+          localStorage.removeItem(key);
+        }
+      });
     },
   };
 };

@@ -101,8 +101,8 @@ export const useCognito = () => {
           },
         });
       } catch (error: any) {
-        if (error.name === 'UserAlreadyAuthenticatedException') {
-          console.warn('Logout has been required, because use has already been logged in.');
+        if (error.name === 'UserAlreadyAuthenticatedException' || error.name === 'DeviceMetadataNotFoundException') {
+          console.warn('Logout has been required, because user has already been logged in.', error);
           await signOut();
           response = await awsSignIn({
             username: model.email,
