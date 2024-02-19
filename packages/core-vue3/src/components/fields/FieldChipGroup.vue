@@ -30,10 +30,15 @@
           :key="i"
           :value="value.value"
           :color="value.color"
-          :prepend-icon="value.icon"
           :disabled="itemReadonly || itemDisabled || value.disabled"
           @focus="focused = true"
           @blur="focused = false">
+          <template #prepend>
+            <v-icon
+              :icon="value.icon"
+              start
+              :color="value.color" />
+          </template>
           {{ value.title }}
         </v-chip>
       </v-chip-group>
