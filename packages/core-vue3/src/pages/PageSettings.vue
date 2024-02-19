@@ -16,6 +16,7 @@
         :title="t('languages.title')" />
       <v-chip-group
         :model-value="language"
+        column
         mandatory
         selected-class="text-primary">
         <v-chip

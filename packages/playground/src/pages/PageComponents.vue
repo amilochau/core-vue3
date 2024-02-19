@@ -516,6 +516,10 @@ const fieldIconValue = ref<TestEnum | undefined>();
 const values: ComputedRef<FormattedDataWithValue<TestEnum>[]> = computed(() => [
   { value: TestEnum.First, title: t('text1') },
   { value: TestEnum.Second, title: t('text2') },
+  { value: TestEnum.Third, title: t('text3') },
+  { value: TestEnum.Fourth, title: t('text4') },
+  { value: TestEnum.Fifth, title: t('text5') },
+  { value: TestEnum.Sixth, title: t('text6') },
 ]);
 
 const colors = ref(['#000000', '#444444', '#888888', '#BBBBBB', '#FFFFFF']);
@@ -565,6 +569,10 @@ en:
     do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   text1: Text 1
   text2: Text 2
+  text3: Text 3
+  text4: Text 4
+  text5: Text 5
+  text6: Text 6
 fr:
   sections:
     inputs:
@@ -595,4 +603,8 @@ fr:
     do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   text1: Text 1
   text2: Text 2
+  text3: Text 3
+  text4: Text 4
+  text5: Text 5
+  text6: Text 6
 </i18n>

@@ -23,6 +23,7 @@
         :multiple="multiple"
         :mandatory="mandatory"
         selected-class="text-primary"
+        column
         class="mt-3">
         <v-chip
           v-for="(value, i) in values"
