@@ -517,9 +517,9 @@ const values: ComputedRef<FormattedDataWithValue<TestEnum>[]> = computed(() => [
   { value: TestEnum.First, title: t('text1'), icon: mdiRefresh, color: 'error' },
   { value: TestEnum.Second, title: t('text2'), icon: mdiRefresh, color: 'warning' },
   { value: TestEnum.Third, title: t('text3'), icon: mdiRefresh, color: 'info' },
-  { value: TestEnum.Fourth, title: t('text4'), icon: mdiRefresh, color: 'primary' },
-  { value: TestEnum.Fifth, title: t('text5'), icon: mdiRefresh, color: 'success' },
-  { value: TestEnum.Sixth, title: t('text6'), icon: mdiRefresh },
+  { value: TestEnum.Fourth, title: t('text4'), color: 'primary' },
+  { value: TestEnum.Fifth, title: t('text5'), icon: mdiRefresh },
+  { value: TestEnum.Sixth, title: t('text6') },
 ]);
 
 const colors = ref(['#000000', '#444444', '#888888', '#BBBBBB', '#FFFFFF']);

@@ -33,7 +33,9 @@
           :disabled="itemReadonly || itemDisabled || value.disabled"
           @focus="focused = true"
           @blur="focused = false">
-          <template #prepend>
+          <template
+            v-if="value.icon"
+            #prepend>
             <v-icon
               :icon="value.icon"
               start
