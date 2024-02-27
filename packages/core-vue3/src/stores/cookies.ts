@@ -1,18 +1,12 @@
 import { defineStore } from 'pinia';
 
-const setCookie = (cookieName: string, expiration: Date) => {
-  document.cookie = `${cookieName}=no; expires=${expiration.toUTCString()}; path=/; samesite=lax`;
-};
-
 interface CookiesStoreState {
-  name: string,
   accepted: boolean,
   expiration: number,
 }
 
 export const useCookiesStore = defineStore('cookies', {
   state: (): CookiesStoreState => ({
-    name: '.Cookies.Consent',
     accepted: false,
     expiration: 0,
   }),
@@ -27,14 +21,12 @@ export const useCookiesStore = defineStore('cookies', {
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 360); // 360 days
       this.expiration = expirationDate.valueOf();
-      setCookie(this.name, expirationDate);
     },
     refuseCookies() {
       this.accepted = false;
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 180); // 180 days
       this.expiration = expirationDate.valueOf();
-      setCookie(this.name, expirationDate);
     },
   },
   persist: {
