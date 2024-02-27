@@ -90,7 +90,15 @@
         <v-divider class="my-4" />
       </template>
       <card-section-title
-        :icon="mdiApplicationBraces"
+        :icon="mdiDatabaseOutline"
+        :title="t('storage.title')" />
+      <v-list
+        :items="storageItems"
+        item-props
+        :lines="false" />
+      <v-divider class="my-4" />
+      <card-section-title
+        :icon="mdiApplicationBracesOutline"
         :title="t('version.title')" />
       <v-list
         :items="versionItems"
@@ -129,7 +137,7 @@
 </template>
 
 <script setup lang="ts">
-import { mdiApplicationBraces, mdiBellAlertOutline, mdiBellCheckOutline, mdiBellMinus, mdiBellOutline, mdiBellPlus, mdiBrightness6, mdiCalendarEdit, mdiCalendarImport, mdiCalendarMinus, mdiEarth, mdiGavel, mdiUpdate } from '@mdi/js';
+import { mdiApplicationBracesOutline, mdiBellAlertOutline, mdiBellCheckOutline, mdiBellMinus, mdiBellOutline, mdiBellPlus, mdiBrightness6, mdiCalendarEdit, mdiCalendarImport, mdiDatabase, mdiDatabaseOutline, mdiEarth, mdiGaugeLow, mdiGavel, mdiPoundBox, mdiUpdate } from '@mdi/js';
 import { AppResponsiveForm, CardSectionTitle } from '../components';
 import { useI18n } from 'vue-i18n';
 import { useNotifications, usePage } from '../composition';
@@ -145,9 +153,15 @@ declare global {
   interface Window {
     buildData: BuildData;
   }
+
+  interface StorageEstimate {
+    usageDetails?: {
+      [key: string]: number;
+    };
+  }
 }
 
-const { d, t, mergeDateTimeFormat } = useI18n();
+const { d, n, t, mergeDateTimeFormat } = useI18n();
 const buttonMode = ref<'back' | 'default-back'>('back');
 usePage(computed(() => ({
   title: t('pageTitle'),
@@ -180,28 +194,25 @@ mergeDateTimeFormat('fr', {
   },
 });
 
-const buildData = window.buildData as BuildData;
-const versionItems = computed(() => ([
-  ...buildData.commitDate ? [{ title: d(buildData.commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
-  ...buildData.buildDate ? [{ title: d(buildData.buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
-  ...buildData.commitSha ? [{ title: buildData.commitSha, subtitle: t('version.commitSha'), prependIcon: mdiCalendarMinus }] : [],
-]));
+// Theme
+const toggleTheme = () => {
+  themeStore.darkMode = !themeStore.darkMode;
+  theme.global.name.value = themeStore.darkMode ? 'dark' : 'light';
+};
 
+// Language
 const language = computed(() => route.params.lang?.toString());
 const languageItems = computed(() => ([
   { title: t('languages.english'), lang: 'en' },
   { title: t('languages.french'), lang: 'fr' },
 ]));
 
-const links = computed(() => ([
-  { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
-]));
-
-const toggleTheme = () => {
-  themeStore.darkMode = !themeStore.darkMode;
-  theme.global.name.value = themeStore.darkMode ? 'dark' : 'light';
+const changeLang = async (lang: string) => {
+  await router.replace({ params: { lang: lang }, query: route.query });
+  buttonMode.value = 'default-back';
 };
 
+// Privacy
 const toggleCookies = (event: any) => {
   if (event as boolean) {
     cookiesStore.acceptCookies();
@@ -210,10 +221,39 @@ const toggleCookies = (event: any) => {
   }
 };
 
-const changeLang = async (lang: string) => {
-  await router.replace({ params: { lang: lang }, query: route.query });
-  buttonMode.value = 'default-back';
-};
+// Storage data
+const storageEstimate = ref<StorageEstimate | undefined>(undefined);
+navigator.storage.estimate().then(value => storageEstimate.value = value);
+const memoryUsage = computed(() => storageEstimate.value?.usage ?? 0);
+const memoryUsageDetails = computed(() => Object.entries(storageEstimate.value?.usageDetails ? storageEstimate.value.usageDetails : {}));
+const quotaUsage = computed(() => (storageEstimate.value?.usage ?? 0) / (storageEstimate.value?.quota ?? 1));
+const storageItems = computed(() => ([
+  {
+    title: n(memoryUsage.value / 1024 / 1024, { style: 'unit', maximumSignificantDigits: 3, minimumSignificantDigits: 2, unit: 'megabyte', unitDisplay: 'short' }),
+    subtitle: t('storage.memory'),
+    prependIcon: mdiDatabase,
+    children: memoryUsageDetails.value.length ? memoryUsageDetails.value.map(([k, v]) => ({ title: n(v / 1024 / 1024, { style: 'unit', maximumSignificantDigits: 3, minimumSignificantDigits: 2, unit: 'megabyte', unitDisplay: 'short' }), subtitle: k })) : undefined,
+  },
+  {
+    title: n(quotaUsage.value, { style: 'percent', maximumFractionDigits: 1 }),
+    subtitle: t('storage.quota'),
+    prependIcon: mdiGaugeLow,
+  },
+]));
+
+// text-capitalize
+
+// Build data
+const buildData = window.buildData as BuildData;
+const versionItems = computed(() => ([
+  ...buildData.commitDate ? [{ title: d(buildData.commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
+  ...buildData.buildDate ? [{ title: d(buildData.buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
+  ...buildData.commitSha ? [{ title: buildData.commitSha, subtitle: t('version.commitSha'), prependIcon: mdiPoundBox }] : [],
+]));
+
+const links = computed(() => ([
+  { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
+]));
 </script>
 
 <i18n lang="yaml">
@@ -246,6 +286,10 @@ en:
     disabled: Notifications are not enabled on this device!
     subscribe: Enable notifications
     unsubscribe: Disable notifications
+  storage:
+    title: Storage and memory
+    memory: Memory used by the application to store offline data
+    quota: Memory quota used on the device
   version:
     title: Application version
     buildDate: Application deployment date
@@ -279,6 +323,10 @@ fr:
     disabled: Les notifications ne sont pas activées sur cet appareil !
     subscribe: Activer les notifications
     unsubscribe: Désactiver les notifications
+  storage:
+    title: Stockage et mémoire
+    memory: Mémoire utilisée par l'application pour les données hors-ligne
+    quota: Quota de mémoire de l'appareil utilisé
   version:
     title: Version de l'application
     buildDate: Date de déploiement de l'application
