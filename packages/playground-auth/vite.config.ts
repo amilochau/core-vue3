@@ -40,7 +40,7 @@ export default defineConfig({
     }),
     VitePWA({
       srcDir: 'src',
-      filename: 'service-worker.js',
+      filename: 'service-worker.ts',
       strategies: 'injectManifest',
       injectManifest: {
         globPatterns: ['**/*.{js,css,html,ico,png}'],
@@ -76,9 +76,6 @@ export default defineConfig({
             purpose: 'maskable',
           },
         ],
-      },
-      devOptions: {
-        enabled: true,
       },
     }),
     {

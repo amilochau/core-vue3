@@ -3,7 +3,9 @@
     <div class="text-center">
       <home-welcome />
       <home-messages />
-
+      <p>
+        {{ buildData.buildDate }}
+      </p>
       <p>
         <v-btn-action
           :to="{ name: 'Components' }"
@@ -53,6 +55,18 @@ import { usePage } from '@amilochau/core-vue3/composition';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+type BuildData = {
+  buildDate: string,
+  commitDate: string,
+  commitSha: string,
+};
+
+declare global {
+  interface Window {
+    buildData: BuildData;
+  }
+}
+
 const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
@@ -67,6 +81,8 @@ usePage(computed(() => ({
     ],
   },
 })));
+
+const buildData = window.buildData as BuildData;
 </script>
 
 <i18n lang="yaml">
