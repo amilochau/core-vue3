@@ -41,7 +41,7 @@
         type="info"
         variant="tonal"
         class="mb-3">
-        {{ t('privacy.expiration', { expirationDate: d(cookiesStore.expiration) }) }}
+        {{ t('privacy.expiration', { expirationDate: d(cookiesStore.expiration, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }) }) }}
       </v-alert>
       <v-divider class="my-4" />
       <template v-if="notifications.isSupported.value">
@@ -161,7 +161,7 @@ declare global {
   }
 }
 
-const { d, n, t, mergeDateTimeFormat } = useI18n();
+const { d, n, t } = useI18n();
 const buttonMode = ref<'back' | 'default-back'>('back');
 usePage(computed(() => ({
   title: t('pageTitle'),
@@ -182,17 +182,6 @@ const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 const pwaStore = usePwaStore();
 const { updateDisplay, updateLoading } = storeToRefs(pwaStore);
-
-mergeDateTimeFormat('en', {
-  datetime: {
-    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
-  },
-});
-mergeDateTimeFormat('fr', {
-  datetime: {
-    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
-  },
-});
 
 // Theme
 const toggleTheme = () => {
@@ -241,13 +230,11 @@ const storageItems = computed(() => ([
   },
 ]));
 
-// text-capitalize
-
 // Build data
 const buildData = window.buildData as BuildData;
 const versionItems = computed(() => ([
-  ...buildData.commitDate ? [{ title: d(buildData.commitDate, 'datetime'), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
-  ...buildData.buildDate ? [{ title: d(buildData.buildDate, 'datetime'), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
+  ...buildData.commitDate ? [{ title: d(buildData.commitDate, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
+  ...buildData.buildDate ? [{ title: d(buildData.buildDate, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
   ...buildData.commitSha ? [{ title: buildData.commitSha, subtitle: t('version.commitSha'), prependIcon: mdiPoundBox }] : [],
 ]));
 

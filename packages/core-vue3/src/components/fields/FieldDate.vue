@@ -64,23 +64,12 @@ const props = defineProps<{
 
 const modelValue = defineModel<string | undefined>();
 
-const { d, mergeDateTimeFormat } = useI18n();
+const { d } = useI18n();
 const date = useDate();
-
-mergeDateTimeFormat('en', {
-  datetime: {
-    year: 'numeric', month: 'numeric', day: 'numeric',
-  },
-});
-mergeDateTimeFormat('fr', {
-  datetime: {
-    year: 'numeric', month: 'numeric', day: 'numeric',
-  },
-});
 
 const displayDialog = ref(false);
 const internalValue: Ref<any> = ref(undefined);
-const displayedValue = computed(() => internalValue.value ? d(internalValue.value, 'datetime') : '');
+const displayedValue = computed(() => internalValue.value ? d(internalValue.value, { year: 'numeric', month: 'numeric', day: 'numeric' }) : '');
 
 const open = () => {
   if (itemDisabled.value || itemReadonly.value) {
