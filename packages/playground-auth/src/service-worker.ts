@@ -43,6 +43,14 @@ registerRoute(
   }),
 );
 
+// Cognito - Network only
+registerRoute(
+  ({ url }) => [
+    'https://cognito-idp.eu-west-3.amazonaws.com',
+  ].includes(url.origin),
+  defaultNetworkOnly,
+);
+
 // APIs - Network First
 registerRoute(
   ({ request }) => request.destination !== 'document',
