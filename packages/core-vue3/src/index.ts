@@ -37,11 +37,10 @@ export const createCoreVue3App = async (
 
   app.use(router);
 
+  registerPwa({ router });
+
   // wait until page component is fetched before mounting
   await router.isReady();
-
-  // We use router in service worker definition, so router must be ready
-  registerPwa({ router });
 
   app.mount('#app', true);
 
