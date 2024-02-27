@@ -3,7 +3,6 @@ import { type PluginOption, defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vuetify from 'vite-plugin-vuetify';
 import VueI18n from '@intlify/unplugin-vue-i18n/vite';
-import Unfonts from 'unplugin-fonts/vite';
 import { setDefaultResultOrder } from 'dns';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -29,14 +28,6 @@ export default defineConfig({
       fullInstall: false,
       compositionOnly: true,
       runtimeOnly: false,
-    }),
-    Unfonts({
-      google: {
-        families: [{
-          name: 'Roboto',
-          styles: 'wght@100;300;400;500;700;900',
-        }],
-      },
     }),
     VitePWA({
       srcDir: 'src',
