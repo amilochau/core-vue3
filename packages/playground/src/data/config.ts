@@ -7,7 +7,8 @@ import logoUrl from '@/assets/logo.png';
 
 export enum Environment {
   Default = 'default',
-  Local = 'local',
+  LocalDevelopment = 'local_development',
+  LocalProduction = 'local_production',
   Development = 'dev',
   Production = 'prd',
 }
@@ -21,20 +22,23 @@ export const defaultEnv: Environment = Environment.Default;
 export const envConfig: EnvConfigValues = {
   default: {
   },
-  local: {
-    VITE_API_URL: 'https://d37652aw4wwcmu.cloudfront.net/api/dev/a',
+  local_development: {
+    VITE_API_URL: 'http://localhost:4000',
+  },
+  local_production: {
+    VITE_API_URL: 'http://localhost:4000',
   },
   dev: {
-    VITE_API_URL: 'https://api-dev.milochau.com/maps/v1',
+    VITE_API_URL: 'http://localhost:4000',
   },
   prd: {
-    VITE_API_URL: 'https://api.milochau.com/maps/v1',
+    VITE_API_URL: 'http://localhost:4000',
   },
 };
 
 export const getCurrentEnv = (host: string, subdomain: string): Environment => {
   if (host.includes('localhost')) {
-    return Environment.Local;
+    return Environment.LocalDevelopment;
   } else if (subdomain.includes('dev')) {
     return Environment.Development;
   } else {

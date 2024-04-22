@@ -7,7 +7,8 @@ import { useNotificationsApi } from '@/composition/notifications.api';
 
 export enum Environment {
   Default = 'default',
-  Local = 'local',
+  LocalDevelopment = 'local_development',
+  LocalProduction = 'local_production',
   Development = 'dev',
   Production = 'prd',
 }
@@ -23,10 +24,15 @@ export const envConfig: EnvConfigValues = {
     VITE_COGNITO_USERPOOL_ID: '',
     VITE_COGNITO_CLIENT_ID: '',
   },
-  local: {
+  local_development: {
     VITE_API_URL: 'http://localhost:4000',
     VITE_COGNITO_USERPOOL_ID: 'eu-west-3_Trx7Zxn8M',
     VITE_COGNITO_CLIENT_ID: 'utanndb0eu3s7gdtuj19rb45e',
+  },
+  local_production: {
+    VITE_API_URL: 'http://localhost:4000',
+    VITE_COGNITO_USERPOOL_ID: 'eu-west-3_UBYZWnUAL',
+    VITE_COGNITO_CLIENT_ID: '3630qvq2muq2fkl2e8lsj5800o',
   },
   dev: {
     VITE_API_URL: 'http://localhost:4000',
@@ -42,7 +48,7 @@ export const envConfig: EnvConfigValues = {
 
 export const getCurrentEnv = (host: string, subdomain: string): Environment => {
   if (host.includes('localhost')) {
-    return Environment.Local;
+    return Environment.LocalDevelopment;
   } else if (subdomain.includes('dev')) {
     return Environment.Development;
   } else {
