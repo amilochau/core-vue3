@@ -50,8 +50,8 @@ const props = defineProps<{
   saveIcon?: string
 }>();
 const emit = defineEmits<{
-  (eventName: 'cancel'): void,
-  (eventName: 'save'): void
+  cancel: [],
+  save: [],
 }>();
 
 const appStore = useAppStore();

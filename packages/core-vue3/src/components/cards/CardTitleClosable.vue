@@ -33,7 +33,7 @@ defineProps<{
   prependIcon?: string
 }>();
 const emit = defineEmits<{
-  (eventName: 'close'): void
+  close: [],
 }>();
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);

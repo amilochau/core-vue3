@@ -73,8 +73,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (eventName: 'close', source: 'title' | 'actions' | 'out' | 'expose'): void
-  (eventName: 'save'): void
+  close: [source: 'title' | 'actions' | 'out' | 'expose'],
+  save: [],
 }>();
 
 const { xs } = useDisplay();
