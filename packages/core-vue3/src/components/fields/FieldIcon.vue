@@ -100,8 +100,7 @@ const itemReadonly = computed(() => props.readonly || !!vuetifyForm?.isReadonly.
   align-items: start;
   justify-content: center;
   width: 100%;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 18px;
 }
 .icons-grid-cell {
   display: flex;

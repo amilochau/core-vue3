@@ -4,8 +4,7 @@
     :focused="focused"
     :rules="rules"
     :disabled="itemDisabled"
-    :readonly="itemReadonly"
-    class="mb-1">
+    :readonly="itemReadonly">
     <template
       v-if="$slots.prepend"
       #prepend>
@@ -50,34 +49,34 @@
         @click="reset" />
       <slot name="append" />
     </template>
+    <v-dialog
+      v-model="displayDialog"
+      scrollable
+      width="auto">
+      <v-card>
+        <v-color-picker
+          v-model="internalValue"
+          :swatches="swatches"
+          :modes="['hexa']"
+          show-swatches
+          swatches-max-height="160px"
+          elevation="0" />
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="error"
+            @click="reset">
+            {{ labels.reset }}
+          </v-btn>
+          <v-btn
+            color="primary"
+            @click="save">
+            {{ labels.save }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-input>
-  <v-dialog
-    v-model="displayDialog"
-    scrollable
-    width="auto">
-    <v-card>
-      <v-color-picker
-        v-model="internalValue"
-        :swatches="swatches"
-        :modes="['hexa']"
-        show-swatches
-        swatches-max-height="160px"
-        elevation="0" />
-      <v-card-actions>
-        <v-spacer />
-        <v-btn
-          color="error"
-          @click="reset">
-          {{ labels.reset }}
-        </v-btn>
-        <v-btn
-          color="primary"
-          @click="save">
-          {{ labels.save }}
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
 </template>
 
 <script setup lang="ts">
@@ -179,8 +178,7 @@ fr:
   align-items: start;
   justify-content: center;
   width: 100%;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 18px;
 }
 .colors-grid-cell {
   display: flex;

@@ -71,11 +71,14 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
       VInput: {
         variant: 'underlined',
         hideDetails: 'auto',
+        persistentHint: true,
+        class: 'mb-3',
       },
       VTextarea: {
         variant: 'underlined',
         density: 'comfortable',
         hideDetails: 'auto',
+        persistentHint: true,
         class: 'mb-3',
         autoGrow: true,
         rows: 3,
@@ -84,11 +87,13 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         variant: 'underlined',
         density: 'comfortable',
         hideDetails: 'auto',
+        persistentHint: true,
         class: 'mb-3',
       },
       VSwitch: {
         density: 'comfortable',
         hideDetails: 'auto',
+        persistentHint: true,
         class: 'mb-3',
         color: 'primary',
       },

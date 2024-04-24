@@ -4,8 +4,7 @@
     :focused="focused"
     :rules="rules"
     :disabled="itemDisabled"
-    :readonly="itemReadonly"
-    class="mb-1">
+    :readonly="itemReadonly">
     <template
       v-if="$slots.prepend"
       #prepend>
@@ -24,7 +23,7 @@
         :mandatory="mandatory"
         selected-class="text-primary"
         column
-        class="mt-3">
+        class="mt-3 pb-0">
         <v-chip
           v-for="(value, i) in values"
           :key="i"

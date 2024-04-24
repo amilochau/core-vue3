@@ -24,19 +24,19 @@
         @click="reset" />
       <slot name="append" />
     </template>
+    <v-dialog
+      v-model="displayDialog"
+      width="auto">
+      <v-card>
+        <v-date-picker
+          :model-value="internalValue"
+          :disabled="itemDisabled"
+          :color="color ?? 'primary'"
+          show-adjacent-months
+          @update:model-value="save" />
+      </v-card>
+    </v-dialog>
   </v-text-field>
-  <v-dialog
-    v-model="displayDialog"
-    width="auto">
-    <v-card>
-      <v-date-picker
-        :model-value="internalValue"
-        :disabled="itemDisabled"
-        :color="color ?? 'primary'"
-        show-adjacent-months
-        @update:model-value="save" />
-    </v-card>
-  </v-dialog>
 </template>
 
 <script setup lang="ts">

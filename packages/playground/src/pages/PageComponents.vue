@@ -13,7 +13,8 @@
           </v-card-item>
           <v-card-text>
             <v-text-field
-              :label="t('sections.inputs.variants.default')" />
+              :label="t('sections.inputs.variants.default')"
+              hint="This is a hint" />
             <v-text-field
               :label="t('sections.inputs.variants.outlined')"
               variant="outlined" />
@@ -58,7 +59,8 @@
           <v-card-text>
             <field-numeric
               v-model="numericValue"
-              :label="t('sections.inputs.variants.default')" />
+              :label="t('sections.inputs.variants.default')"
+              hint="This is a hint" />
             <field-numeric
               v-model="numericValue"
               :label="t('sections.inputs.variants.outlined')"
@@ -108,7 +110,8 @@
           <v-card-text>
             <field-date
               v-model="fieldDateValue"
-              :label="t('sections.inputs.variants.default')" />
+              :label="t('sections.inputs.variants.default')"
+              hint="This is a hint" />
             <field-date
               v-model="fieldDateValue"
               :label="t('sections.inputs.variants.outlined')"
@@ -158,7 +161,13 @@
           <v-card-text>
             <v-switch
               v-model="switchValue"
-              :label="t('sections.inputs.variants.default')" />
+              :label="t('sections.inputs.variants.default')"
+              hint="This is a hint" />
+            <v-switch
+              v-model="switchValue"
+              :label="t('sections.inputs.variants.inset')"
+              inset
+              hint="This is a hint" />
             <v-switch
               v-model="switchValue"
               :label="t('sections.inputs.variants.prependAppend')">
@@ -202,7 +211,8 @@
             <field-chip-group
               v-model="fieldChipGroupValue"
               :label="t('sections.inputs.variants.default')"
-              :values="values" />
+              :values="values"
+              hint="This is a hint" />
             <field-chip-group
               v-model="fieldChipGroupValue"
               :label="t('sections.inputs.variants.clearable')"
@@ -265,7 +275,8 @@
             <field-color-bullets
               v-model="fieldColorBulletsValue"
               :label="t('sections.inputs.variants.default')"
-              :colors="colors" />
+              :colors="colors"
+              hint="This is a hint" />
             <field-color-bullets
               v-model="fieldColorBulletsValue"
               :label="t('sections.inputs.variants.clearable')"
@@ -318,7 +329,8 @@
             <field-icon
               v-model="fieldIconValue"
               :label="t('sections.inputs.variants.default')"
-              :icons="icons" />
+              :icons="icons"
+              hint="This is a hint" />
             <field-icon
               v-model="fieldIconValue"
               :label="t('sections.inputs.variants.clearable')"
@@ -366,7 +378,8 @@
           </v-card-item>
           <v-card-text>
             <v-textarea
-              :label="t('sections.inputs.variants.default')" />
+              :label="t('sections.inputs.variants.default')"
+              hint="This is a hint" />
             <v-textarea
               :label="t('sections.inputs.variants.outlined')"
               variant="outlined" />
@@ -410,7 +423,8 @@
             <v-card-text>
               <v-text-field
                 :label="t('sections.inputs.variants.readonly')"
-                clearable />
+                clearable
+                hint="This is a hint" />
               <field-numeric
                 v-model="numericValue"
                 :label="t('sections.inputs.variants.readonly')"
@@ -522,7 +536,7 @@ const values: ComputedRef<FormattedDataWithValue<TestEnum>[]> = computed(() => [
   { value: TestEnum.Sixth, title: t('text6') },
 ]);
 
-const colors = ref(['#000000', '#444444', '#888888', '#BBBBBB', '#FFFFFF']);
+const colors = ref(['#000', '#111', '#222', '#333', '#444', '#555', '#666', '#777', '#888', '#999', '#AAA', '#BBB', '#CCC', '#DDD', '#EEE', '#FFF']);
 const icons: ComputedRef<(FormattedDataWithValue<TestEnum> & { icon: string })[]> = computed(() => [
   { value: TestEnum.First, icon: mdiRefresh, title: t('text1') },
   { value: TestEnum.Second, icon: mdiTree, title: t('text2') },
@@ -561,6 +575,7 @@ en:
         readonly: Readonly (+ Clearable)
         mandatory: Mandatory
         multiple: Multiple
+        inset: Inset
     forms:
       readonly: Readonly form
   longText: |
@@ -595,6 +610,7 @@ fr:
         readonly: Readonly (+ Clearable)
         mandatory: Mandatory
         multiple: Multiple
+        inset: Inset
     forms:
       readonly: Readonly form
   longText: |
