@@ -5,6 +5,7 @@ export type FormattedData = {
   color?: string
   disabled?: boolean
   hidden?: boolean
+  masked?: boolean
 };
 
 export type FormattedDataWithValue<K> = { value: K } & FormattedData;

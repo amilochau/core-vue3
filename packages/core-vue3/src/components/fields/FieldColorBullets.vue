@@ -41,7 +41,6 @@
         :color="modelValue"
         :icon="mdiPalette"
         class="full-opacity"
-        start
         @click="open" />
       <v-icon
         v-if="clearable"

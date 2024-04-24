@@ -255,6 +255,11 @@
               :label="t('sections.inputs.variants.multiple')"
               :values="values"
               multiple />
+            <field-chip-group
+              v-model="fieldChipGroupValue"
+              :label="t('sections.inputs.variants.filter')"
+              :values="values"
+              filter />
           </v-card-text>
           <v-card-text>Not supported: outlined (variant)</v-card-text>
         </v-card>
@@ -527,13 +532,16 @@ const fieldChipGroupValue = ref<TestEnum>(TestEnum.First);
 const fieldColorBulletsValue = ref<string | undefined>();
 const fieldIconValue = ref<TestEnum | undefined>();
 
-const values: ComputedRef<FormattedDataWithValue<TestEnum>[]> = computed(() => [
-  { value: TestEnum.First, title: t('text1'), icon: mdiRefresh, color: 'error' },
-  { value: TestEnum.Second, title: t('text2'), icon: mdiRefresh, color: 'warning' },
-  { value: TestEnum.Third, title: t('text3'), icon: mdiRefresh, color: 'info' },
-  { value: TestEnum.Fourth, title: t('text4'), color: 'primary' },
-  { value: TestEnum.Fifth, title: t('text5'), icon: mdiRefresh },
-  { value: TestEnum.Sixth, title: t('text6') },
+const values: ComputedRef<FormattedDataWithValue<number>[]> = computed(() => [
+  { value: 1, title: t('options.error'), icon: mdiRefresh, color: 'error' },
+  { value: 2, title: t('options.warning'), icon: mdiRefresh, color: 'warning' },
+  { value: 3, title: t('options.info'), icon: mdiRefresh, color: 'info' },
+  { value: 4, title: t('options.withoutIcon'), color: 'primary' },
+  { value: 5, title: t('options.withoutColor'), icon: mdiRefresh },
+  { value: 6, title: t('options.masked'), masked: true },
+  { value: 7, title: t('options.masked'), masked: true },
+  { value: 8, title: t('options.hidden'), hidden: true },
+  { value: 9, title: t('options.default') },
 ]);
 
 const colors = ref(['#000', '#111', '#222', '#333', '#444', '#555', '#666', '#777', '#888', '#999', '#AAA', '#BBB', '#CCC', '#DDD', '#EEE', '#FFF']);
@@ -576,18 +584,24 @@ en:
         mandatory: Mandatory
         multiple: Multiple
         inset: Inset
+        filter: Filter
     forms:
       readonly: Readonly form
   longText: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     sed,
     do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  options:
+    default: default
+    error: error
+    warning: warning
+    info: info
+    withoutIcon: without icon
+    withoutColor: without color
+    masked: masked
+    hidden: hidden
   text1: Text 1
   text2: Text 2
-  text3: Text 3
-  text4: Text 4
-  text5: Text 5
-  text6: Text 6
 fr:
   sections:
     inputs:
@@ -611,16 +625,22 @@ fr:
         mandatory: Mandatory
         multiple: Multiple
         inset: Inset
+        filter: Filter
     forms:
       readonly: Readonly form
   longText: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     sed,
     do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  options:
+    default: default
+    error: error
+    warning: warning
+    info: info
+    withoutIcon: without icon
+    withoutColor: without color
+    masked: masked
+    hidden: hidden
   text1: Text 1
   text2: Text 2
-  text3: Text 3
-  text4: Text 4
-  text5: Text 5
-  text6: Text 6
 </i18n>
