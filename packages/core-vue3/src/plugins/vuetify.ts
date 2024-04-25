@@ -72,7 +72,6 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
         variant: 'underlined',
         hideDetails: 'auto',
         persistentHint: true,
-        class: 'mb-3',
       },
       VTextarea: {
         variant: 'underlined',
