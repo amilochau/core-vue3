@@ -19,6 +19,23 @@
           @close="closeFromTitle" />
         <v-card-text class="pt-2">
           <slot />
+          <v-scroll-y-transition group>
+            <template v-if="displayMasked">
+              <slot name="masked" />
+            </template>
+          </v-scroll-y-transition>
+          <div
+            v-if="slots.masked"
+            class="text-center">
+            <v-btn-action
+              :prepend-icon="displayMasked ? mdiChevronUp : mdiChevronDown"
+              density="comfortable"
+              class="mt-2"
+              color="primary"
+              @click="displayMasked = !displayMasked">
+              {{ displayMasked ? t('hideMore') : t('seeMore') }}
+            </v-btn-action>
+          </div>
         </v-card-text>
         <slot name="messages" />
         <card-messages v-if="!slots.messages" />
@@ -40,12 +57,15 @@
 import { ref } from 'vue';
 import { useDisplay } from 'vuetify';
 import CardActions from '../cards/CardActions.vue';
+import CardDivider from '../cards/CardDivider.vue';
 import CardMessages from '../cards/CardMessages.vue';
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../stores';
 import type { VForm } from 'vuetify/components';
 import { useHandle } from '../../composition';
+import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
+import { useI18n } from 'vue-i18n';
 
 defineProps<{
   /** Dialog title */
@@ -81,8 +101,10 @@ const slots = defineSlots<{
   default(): any,
   messages?(): any,
   actions?(): any,
+  masked?(): any,
 }>();
 
+const { t } = useI18n();
 const { xs } = useDisplay();
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
@@ -90,6 +112,7 @@ const { handleFormValidation } = useHandle();
 
 const dialog = ref(false);
 const form = ref<InstanceType<typeof VForm>>();
+const displayMasked = ref(false);
 
 const save = async () => {
   if (!await handleFormValidation(form)) {
@@ -128,3 +151,12 @@ defineExpose({
   form,
 });
 </script>
+
+<i18n lang="yaml">
+  en:
+    seeMore: See more options
+    hideMore: Hide options
+  fr:
+    seeMore: Voir plus d'options
+    hideMore: Masquer les options
+</i18n>
