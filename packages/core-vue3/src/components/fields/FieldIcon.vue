@@ -5,7 +5,7 @@
     :rules="rules"
     :disabled="itemDisabled"
     :readonly="itemReadonly"
-    class="mb-1">
+    class="mb-3">
     <template
       v-if="slots.prepend"
       #prepend>
