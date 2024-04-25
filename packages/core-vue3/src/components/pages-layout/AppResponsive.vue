@@ -99,6 +99,12 @@ defineProps<{
   },
 }>();
 
+defineSlots<{
+  default(): any,
+  prepend?(): any,
+  append?(): any,
+}>();
+
 const { xs } = useDisplay();
 const online = useOnline();
 const appStore = useAppStore();

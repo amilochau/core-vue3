@@ -6,7 +6,7 @@
     :disabled="itemDisabled"
     :readonly="itemReadonly">
     <template
-      v-if="$slots.prepend"
+      v-if="slots.prepend"
       #prepend>
       <slot name="prepend" />
     </template>
@@ -103,6 +103,11 @@ const props = defineProps<{
   saveTitle?: string,
   /** Colors used as values */
   colors: string[],
+}>();
+
+const slots = defineSlots<{
+  prepend?(): any,
+  append?(): any,
 }>();
 
 const modelValue = defineModel<string | undefined>();

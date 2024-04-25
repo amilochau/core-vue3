@@ -21,10 +21,10 @@
           <slot />
         </v-card-text>
         <slot name="messages" />
-        <card-messages v-if="!$slots.messages" />
+        <card-messages v-if="!slots.messages" />
         <slot name="actions" />
         <card-actions
-          v-if="!$slots.actions && !hideActions"
+          v-if="!slots.actions && !hideActions"
           :cancel-icon="cancelIcon"
           :cancel-title="cancelTitle"
           :save-icon="saveIcon"
@@ -47,7 +47,7 @@ import { useAppStore } from '../../stores';
 import type { VForm } from 'vuetify/components';
 import { useHandle } from '../../composition';
 
-const props = defineProps<{
+defineProps<{
   /** Dialog title */
   dialogTitle: string
   /** Dialog icon */
@@ -75,6 +75,12 @@ const props = defineProps<{
 const emit = defineEmits<{
   close: [source: 'title' | 'actions' | 'out' | 'expose'],
   save: [],
+}>();
+
+const slots = defineSlots<{
+  default(): any,
+  messages?(): any,
+  actions?(): any,
 }>();
 
 const { xs } = useDisplay();

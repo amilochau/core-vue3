@@ -4,10 +4,14 @@
     :description="description"
     :links="links"
     :fill-height="fillHeight">
-    <template #prepend>
+    <template
+      v-if="slots.prepend"
+      #prepend>
       <slot name="prepend" />
     </template>
-    <template #append>
+    <template
+      v-if="slots.append"
+      #append>
       <slot name="append" />
     </template>
     <app-form
@@ -41,6 +45,12 @@ defineProps<{
     onClick: () => Promise<void>,
     disabled?: boolean,
   },
+}>();
+
+const slots = defineSlots<{
+  default(): any,
+  prepend?(): any,
+  append?(): any,
 }>();
 
 const form = ref<InstanceType<typeof VForm>>();

@@ -71,6 +71,11 @@ const props = defineProps<{
   defaultBackTo?: RouteLocationRaw
 }>();
 
+defineSlots<{
+  prepend?(): any,
+  append?(): any,
+}>();
+
 const appStore = useAppStore();
 const coreOptions = useCoreOptions();
 const router = useRouter();

@@ -42,6 +42,10 @@ const props = defineProps<{
   },
 }>();
 
+defineSlots<{
+  default(): any,
+}>();
+
 const appStore = useAppStore();
 const online = useOnline();
 const { xs } = useDisplay();

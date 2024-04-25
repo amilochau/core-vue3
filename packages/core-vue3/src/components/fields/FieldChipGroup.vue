@@ -6,7 +6,7 @@
     :disabled="itemDisabled"
     :readonly="itemReadonly">
     <template
-      v-if="$slots.prepend"
+      v-if="slots.prepend"
       #prepend>
       <slot name="prepend" />
     </template>
@@ -48,7 +48,7 @@
       </v-chip-group>
     </v-field>
     <template
-      v-if="clearable || useMasked || $slots.append"
+      v-if="clearable || useMasked || slots.append"
       #append>
       <v-icon
         v-if="useMasked"
@@ -89,6 +89,11 @@ const props = defineProps<{
   mandatory?: boolean
   /** Whether chips filter style (using a checkmark icon when selected) should be disabled */
   disabledFilter?: boolean
+}>();
+
+const slots = defineSlots<{
+  prepend?(): any,
+  append?(): any,
 }>();
 
 const modelValue = defineModel<TDataValue | undefined>();

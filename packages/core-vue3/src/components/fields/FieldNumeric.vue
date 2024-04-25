@@ -12,12 +12,12 @@
     inputmode="decimal"
     @update:model-value="parseInput">
     <template
-      v-if="$slots.prepend"
+      v-if="slots.prepend"
       #prepend>
       <slot name="prepend" />
     </template>
     <template
-      v-if="clearable || $slots.append"
+      v-if="clearable || slots.append"
       #append>
       <v-icon
         v-if="clearable"
@@ -51,6 +51,11 @@ const props = defineProps<{
   suffix?: string
   /** Input variant */
   variant?: 'filled' | 'outlined' | 'plain' | 'underlined' | 'solo' | 'solo-inverted' | 'solo-filled'
+}>();
+
+const slots = defineSlots<{
+  prepend?(): any,
+  append?(): any,
 }>();
 
 const modelValue = defineModel<number | undefined>();
