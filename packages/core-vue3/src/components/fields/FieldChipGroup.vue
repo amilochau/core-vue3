@@ -31,7 +31,7 @@
             :value="value.value"
             :color="value.color"
             :disabled="itemReadonly || itemDisabled || value.disabled"
-            :filter="filter"
+            :filter="!disabledFilter"
             @focus="focused = true"
             @blur="focused = false">
             <template
@@ -87,8 +87,8 @@ const props = defineProps<{
   multiple?: boolean
   /** Whether at least one value must be selected */
   mandatory?: boolean
-  /** Whether chips use filter style, with a checkmark icon when selected */
-  filter?: boolean
+  /** Whether chips filter style (using a checkmark icon when selected) should be disabled */
+  disabledFilter?: boolean
 }>();
 
 const modelValue = defineModel<TDataValue | undefined>();
