@@ -26,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useCoreOptions } from '../../../composition';
 import { useAppStore } from '../../../stores';
 

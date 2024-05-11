@@ -21,7 +21,7 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
   const routesWithRedirection: Array<RouteRecordRaw> = [
     {
       path: '/:lang([a-z]{2})',
-      component: PageRoot,
+      component: options.rootComponent ?? PageRoot,
       children: options.routes.concat(routes),
     },
     {
