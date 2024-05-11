@@ -165,6 +165,7 @@ Here are the options you should provide in the `MilochauCoreOptions` class.
 | `api.gatewayUri` | Base URI used by the `useApi` composition API |
 | `i18n` | Options used by `vue-i18n` |
 | `identity.cognito` | Cognito settings for authentication |
+| `rootComponent` | A custom component to use as a base parent for all the others |
 | `routes` | List of `vue-router` routes, to register application pages |
 | `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
 | `pwa.hideInstallBtn` | Hide the PWA install button from the header bar |

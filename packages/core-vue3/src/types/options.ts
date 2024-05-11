@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import type { I18nOptions } from 'vue-i18n';
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteComponent, RouteRecordRaw } from 'vue-router';
 import type { VuetifyOptions } from 'vuetify';
 import type { NotificationsRegisterRequest } from './application/notifications';
 
@@ -28,6 +28,7 @@ export type MilochauCoreOptions = {
     usersMigrationDisabled?: boolean,
   },
   routes: Array<RouteRecordRaw>,
+  rootComponent?: RouteComponent,
   clean: () => () => void,
   pwa?: {
     hideInstallBtn: boolean,
