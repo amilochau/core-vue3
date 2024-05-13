@@ -144,11 +144,15 @@ export const useApi = (relativeBaseUri: string) => {
 
     try {
       jwtToken = await getJwtToken();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Authentication token can\'t be used', error);
-      await signOut();
-      await router.push({ name: 'Login' });
-      throw { title: t('errors.sessionExpired'), color: 'warning', icon: mdiTimerRefreshOutline } as ApplicationMessage;
+      if (error && error.name === 'Unknown') {
+        throw { title: t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff } as ApplicationMessage;
+      } else {
+        await signOut();
+        await router.push({ name: 'Login' });
+        throw { title: t('errors.sessionExpired'), color: 'warning', icon: mdiTimerRefreshOutline } as ApplicationMessage;
+      }
     }
 
     try {

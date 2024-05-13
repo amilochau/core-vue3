@@ -63,10 +63,10 @@ export const useCognito = () => {
     }
   };
 
-  const signOut = () => processRequest(async () => {
+  const signOut = async () => {
     await awsSignOut();
     clean();
-  }, {});
+  };
 
   return {
     signUp: (model: Register) => processRequest(() => awsSignUp({
