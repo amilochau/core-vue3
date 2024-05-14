@@ -3,7 +3,8 @@
     v-if="items"
     v-model="appStore.drawer"
     app
-    temporary>
+    temporary
+    touchless>
     <v-list
       :items="items"
       color="primary"
