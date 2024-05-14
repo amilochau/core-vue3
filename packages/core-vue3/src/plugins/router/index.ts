@@ -18,20 +18,30 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
   const identityStore = useIdentityStore(pinia);
   const appStore = useAppStore(pinia);
 
+  const rootRoute: RouteRecordRaw = {
+    path: '/:lang([a-z]{2})',
+    component: PageRoot,
+    children: options.rootComponent ? [
+      {
+        path: '',
+        component: options.rootComponent,
+        children: options.routes.concat(routes),
+      } as RouteRecordRaw,
+    ] : options.routes.concat(routes),
+  };
+
+  const redirectionRoute: RouteRecordRaw = {
+    path: '/:pathMatch(.*)*',
+    redirect: to => {
+      return {
+        path: `/${languageStore.language}${to.fullPath}`,
+      };
+    },
+  };
+
   const routesWithRedirection: Array<RouteRecordRaw> = [
-    {
-      path: '/:lang([a-z]{2})',
-      component: options.rootComponent ?? PageRoot,
-      children: options.routes.concat(routes),
-    },
-    {
-      path: '/:pathMatch(.*)*',
-      redirect: to => {
-        return {
-          path: `/${languageStore.language}${to.fullPath}`,
-        };
-      },
-    },
+    rootRoute,
+    redirectionRoute,
   ];
 
   const router = createRouter({

@@ -4,6 +4,7 @@ import routes from './routes';
 import { useMapsStore } from '../stores';
 import { navigation } from './navigation';
 import logoUrl from '@/assets/logo.png';
+import PageRoot from '@/pages/PageRoot.vue';
 
 export enum Environment {
   Default = 'default',
@@ -68,6 +69,7 @@ export const coreOptions: MilochauCoreOptions = {
     },
   },
   routes: routes,
+  rootComponent: PageRoot,
   clean: () => {
     const mapsStore = useMapsStore();
 
