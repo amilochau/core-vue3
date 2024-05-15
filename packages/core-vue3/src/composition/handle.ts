@@ -4,6 +4,7 @@ import type { Ref } from 'vue';
 import { useAppStore } from '../stores';
 import { mdiAlert } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
+import type { MessageDestination } from '../stores/app';
 
 export const useHandle = () => {
 
@@ -53,7 +54,7 @@ export const useHandle = () => {
     }
   };
 
-  const handleError = async <TResponse>(request: () => Promise<TResponse>, destination: 'snackbar' | 'internal') => {
+  const handleError = async <TResponse>(request: () => Promise<TResponse>, destination: MessageDestination) => {
     try {
       return await request();
     } catch (error: any) {
@@ -67,7 +68,7 @@ export const useHandle = () => {
     }
   };
 
-  const handleLoadAndError = async <TResponse>(request: () => Promise<TResponse>, destination: 'snackbar' | 'internal') => {
+  const handleLoadAndError = async <TResponse>(request: () => Promise<TResponse>, destination: MessageDestination) => {
     return handleLoad(() => handleError(request, destination));
   };
 

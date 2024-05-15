@@ -11,7 +11,7 @@ interface AppStoreState {
   pageData: PageData,
 }
 
-export type MessageDestination = 'snackbar' | 'internal';
+export type MessageDestination = 'snackbar' | 'internal' | 'silent';
 
 export const useAppStore = defineStore('app', {
   state: (): AppStoreState => ({
@@ -33,6 +33,9 @@ export const useAppStore = defineStore('app', {
           break;
         case 'internal':
           this.message = { creation: new Date().valueOf(), ...message };
+          break;
+        case 'silent':
+          // @todo handle 'silent'
           break;
       }
     },
