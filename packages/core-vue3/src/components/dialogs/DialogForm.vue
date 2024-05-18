@@ -17,7 +17,7 @@
           :title="dialogTitle"
           :prepend-icon="dialogIcon"
           @close="closeFromTitle" />
-        <v-card-text class="pt-2">
+        <v-card-text class="py-2">
           <slot />
           <v-scroll-y-transition group>
             <template v-if="displayMasked">
