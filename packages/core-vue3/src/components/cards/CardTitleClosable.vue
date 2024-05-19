@@ -15,7 +15,7 @@
         :disabled="loading"
         :icon="mdiClose"
         variant="plain"
-        size="small"
+        density="comfortable"
         @click="emit('close')" />
     </template>
   </v-card-item>
