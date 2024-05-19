@@ -57,7 +57,6 @@
 import { ref } from 'vue';
 import { useDisplay } from 'vuetify';
 import CardActions from '../cards/CardActions.vue';
-import CardDivider from '../cards/CardDivider.vue';
 import CardMessages from '../cards/CardMessages.vue';
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
 import { storeToRefs } from 'pinia';
