@@ -19,10 +19,10 @@
           @close="closeFromTitle" />
         <v-card-text class="py-2">
           <slot />
-          <v-scroll-y-transition group>
-            <template v-if="displayMasked">
+          <v-scroll-y-transition>
+            <div v-if="displayMasked">
               <slot name="masked" />
-            </template>
+            </div>
           </v-scroll-y-transition>
           <div
             v-if="slots.masked"
