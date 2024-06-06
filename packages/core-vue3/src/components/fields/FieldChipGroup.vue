@@ -40,7 +40,7 @@
               #prepend>
               <v-icon
                 :icon="value.icon"
-                start
+                :start="!!value.title"
                 :color="value.color" />
             </template>
             {{ value.title }}
