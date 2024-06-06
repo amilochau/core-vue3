@@ -542,12 +542,13 @@ const values: ComputedRef<FormattedDataWithValue<number>[]> = computed(() => [
   { value: 7, title: t('options.masked'), masked: true },
   { value: 8, title: t('options.hidden'), hidden: true },
   { value: 9, title: t('options.default') },
+  { value: 10, icon: mdiRefresh },
 ]);
 
 const colors = ref(['#000', '#111', '#222', '#333', '#444', '#555', '#666', '#777', '#888', '#999', '#AAA', '#BBB', '#CCC', '#DDD', '#EEE', '#FFF']);
 const icons: ComputedRef<(FormattedDataWithValue<TestEnum> & { icon: string })[]> = computed(() => [
-  { value: TestEnum.First, icon: mdiRefresh, title: t('text1') },
-  { value: TestEnum.Second, icon: mdiTree, title: t('text2') },
+  { value: TestEnum.First, icon: mdiRefresh },
+  { value: TestEnum.Second, icon: mdiTree },
 ]);
 </script>
 
