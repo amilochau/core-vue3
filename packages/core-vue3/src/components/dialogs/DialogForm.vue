@@ -18,10 +18,12 @@
           :prepend-icon="dialogIcon"
           @close="closeFromTitle" />
         <v-card-text class="py-2">
-          <slot />
+          <slot :model="internalModel" />
           <v-scroll-y-transition>
             <div v-if="displayMasked">
-              <slot name="masked" />
+              <slot
+                name="masked"
+                :model="internalModel" />
             </div>
           </v-scroll-y-transition>
           <div
@@ -46,15 +48,15 @@
           :cancel-title="cancelTitle"
           :save-icon="saveIcon"
           :save-title="saveTitle"
-          @cancel="closeFromActions"
+          @cancel="cancel"
           @save="save" />
       </v-card>
     </v-form>
   </v-dialog>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
+<script setup lang="ts" generic="TModel extends object">
+import { type Ref, ref } from 'vue';
 import { useDisplay } from 'vuetify';
 import CardActions from '../cards/CardActions.vue';
 import CardMessages from '../cards/CardMessages.vue';
@@ -65,8 +67,9 @@ import type { VForm } from 'vuetify/components';
 import { useHandle } from '../../composition';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
+import { clone } from '../../utils/clone';
 
-defineProps<{
+const props = defineProps<{
   /** Dialog title */
   dialogTitle: string
   /** Dialog icon */
@@ -89,39 +92,53 @@ defineProps<{
   saveIcon?: string
   /** Whether to attach the dialog, or the reference of the element to attach */
   attach?: string | boolean | Element
+  /** Save function called before using the proxyModel as the model */
+  save: (proxyModel: TModel) => Promise<any> | any
 }>();
 
 const emit = defineEmits<{
   close: [source: 'title' | 'actions' | 'out' | 'expose'],
+  cancel: [],
   save: [],
 }>();
 
 const slots = defineSlots<{
-  default(): any,
+  default(props: { model: TModel }): any,
   messages?(): any,
   actions?(): any,
-  masked?(): any,
+  masked?(props: { model: TModel }): any,
 }>();
+
+const model = defineModel<TModel>({ default: {} });
 
 const { t } = useI18n();
 const { xs } = useDisplay();
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
-const { handleFormValidation } = useHandle();
+const { handleFormValidation, handleLoadAndError } = useHandle();
 
 const dialog = ref(false);
 const form = ref<InstanceType<typeof VForm>>();
 const displayMasked = ref(false);
 
+// eslint-disable-next-line vue/no-ref-object-reactivity-loss
+const internalModel: Ref<TModel> = ref(clone(model.value)) as Ref<TModel>;
+
 const save = async () => {
   if (!await handleFormValidation(form)) {
     return;
   }
+  await handleLoadAndError(async () => {
+    await props.save(internalModel.value);
+    model.value = clone(internalModel.value);
+    close();
+  }, 'internal');
   emit('save');
 };
 
 const open = () => {
   form.value?.reset();
+  internalModel.value = clone(model.value);
   dialog.value = true;
 };
 
@@ -134,9 +151,11 @@ const closeFromTitle = () => {
   dialog.value = false;
   emit('close', 'title');
 };
-const closeFromActions = () => {
+const cancel = () => {
+  // @todo this should not close anymore - but revert changes back
   dialog.value = false;
   emit('close', 'actions');
+  emit('cancel');
 };
 const close = () => {
   dialog.value = false;
