@@ -10,9 +10,16 @@
     @update:model-value="updateDialog">
     <v-form
       ref="form"
-      :readonly="loading"
+      :readonly="loading || localLoading"
       @submit.prevent="save">
-      <v-card>
+      <v-card :loading="localLoading">
+        <template #loader="{ isActive }">
+          <v-progress-linear
+            :active="isActive"
+            indeterminate
+            color="info"
+            height="4" />
+        </template>
         <card-title-closable
           :title="dialogTitle"
           :prepend-icon="dialogIcon"
@@ -60,7 +67,7 @@
           </v-tooltip>
           <v-spacer />
           <v-btn
-            :disabled="loading || !closeOnCancel && !isModelChanged"
+            :disabled="loading || localLoading || !closeOnCancel && !isModelChanged"
             :prepend-icon="cancelIconOrDefault"
             variant="text"
             color="grey-lighten-2"
@@ -68,8 +75,8 @@
             {{ cancelTitleOrDefault }}
           </v-btn>
           <v-btn
-            :disabled="loading || !online"
-            :loading="loading"
+            :disabled="loading || localLoading || !online"
+            :loading="localLoading"
             :prepend-icon="saveIconOrDefault"
             variant="text"
             @click="save">
@@ -148,6 +155,7 @@ const online = useOnline();
 const { handleFormValidation, handleLoadAndError } = useHandle();
 
 const dialog = ref(false);
+const localLoading = ref(false);
 const form = ref<InstanceType<typeof VForm>>();
 const displayMasked = ref(false);
 const persistent = computed(() => !props.notPersistent && isModelChanged.value);
@@ -169,7 +177,7 @@ const save = async () => {
     await props.save(internalModel.value);
     model.value = clone(internalModel.value);
     close();
-  }, 'internal');
+  }, 'internal', localLoading);
   emit('save');
 };
 

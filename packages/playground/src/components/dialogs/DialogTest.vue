@@ -57,7 +57,8 @@ const { required, minLength } = useValidationRules();
 const dialogFormRef = ref<ComponentExposed<typeof DialogForm<ItemType>>>();
 const colors = ref(['#000', '#111', '#222', '#333', '#444', '#555', '#666', '#777', '#888', '#999', '#AAA', '#BBB', '#CCC', '#DDD', '#EEE', '#FFF']);
 
-const save = (proxyModel: ItemType) => {
+const save = async (proxyModel: ItemType) => {
+  await new Promise(resolve => setTimeout(resolve, 10000));
   if (proxyModel.desc.length) {
     throw { title: t('testMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
 New line here` } as ApplicationMessage;
