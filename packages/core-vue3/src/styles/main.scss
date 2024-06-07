@@ -35,8 +35,8 @@
   min-width: 100%;
 }
 
-.v-dialog--fullscreen .v-overlay__content .v-card {
-  border-radius: 0;
+.v-card-actions {
+  min-height: 48px;
 }
 
 // Print helpers

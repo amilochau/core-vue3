@@ -1,6 +1,5 @@
 import AppFooterBar from './app/layout/bar/AppFooterBar.vue';
 import AppHeaderBar from './app/layout/bar/AppHeaderBar.vue';
-import CardActions from './cards/CardActions.vue';
 import CardDivider from './cards/CardDivider.vue';
 import CardMessages from './cards/CardMessages.vue';
 import CardSectionTitle from './cards/CardSectionTitle.vue';
@@ -19,7 +18,6 @@ import AppResponsiveForm from './pages-layout/AppResponsiveForm.vue';
 export {
   AppFooterBar,
   AppHeaderBar,
-  CardActions,
   CardDivider,
   CardMessages,
   CardSectionTitle,
