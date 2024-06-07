@@ -18,10 +18,12 @@
           :prepend-icon="dialogIcon"
           @close="closeFromTitle" />
         <v-card-text class="py-2">
-          <slot />
+          <slot :proxy-model="proxyModel" />
           <v-scroll-y-transition>
             <div v-if="displayMasked">
-              <slot name="masked" />
+              <slot
+                name="masked"
+                :proxy-model="proxyModel" />
             </div>
           </v-scroll-y-transition>
           <div
@@ -53,8 +55,8 @@
   </v-dialog>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
+<script setup lang="ts" generic="TModel extends object">
+import { type Ref, ref } from 'vue';
 import { useDisplay } from 'vuetify';
 import CardActions from '../cards/CardActions.vue';
 import CardMessages from '../cards/CardMessages.vue';
@@ -65,8 +67,9 @@ import type { VForm } from 'vuetify/components';
 import { useHandle } from '../../composition';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
+import { clone } from '../../utils/clone';
 
-defineProps<{
+const props = defineProps<{
   /** Dialog title */
   dialogTitle: string
   /** Dialog icon */
@@ -89,39 +92,50 @@ defineProps<{
   saveIcon?: string
   /** Whether to attach the dialog, or the reference of the element to attach */
   attach?: string | boolean | Element
+  /** Save function called before using the proxyModel as the model */
+  save: (proxyModel: TModel) => Promise<any> | any
 }>();
 
 const emit = defineEmits<{
   close: [source: 'title' | 'actions' | 'out' | 'expose'],
-  save: [],
 }>();
 
 const slots = defineSlots<{
-  default(): any,
+  default(props: { proxyModel: TModel }): any,
   messages?(): any,
   actions?(): any,
-  masked?(): any,
+  masked?(props: { proxyModel: TModel }): any,
 }>();
+
+const model = defineModel<TModel>({ required: true });
 
 const { t } = useI18n();
 const { xs } = useDisplay();
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
-const { handleFormValidation } = useHandle();
+const { handleFormValidation, handleLoadAndError } = useHandle();
 
 const dialog = ref(false);
 const form = ref<InstanceType<typeof VForm>>();
 const displayMasked = ref(false);
 
+// eslint-disable-next-line vue/no-ref-object-reactivity-loss
+const proxyModel: Ref<TModel> = ref(clone(model.value)) as Ref<TModel>;
+
 const save = async () => {
   if (!await handleFormValidation(form)) {
     return;
   }
-  emit('save');
+  await handleLoadAndError(async () => {
+    await props.save(proxyModel.value);
+    model.value = clone(proxyModel.value);
+    close();
+  }, 'internal');
 };
 
 const open = () => {
   form.value?.reset();
+  proxyModel.value = clone(model.value);
   dialog.value = true;
 };
 

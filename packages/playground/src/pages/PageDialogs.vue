@@ -12,7 +12,7 @@
           </v-card-item>
           <v-card-text>
             <v-btn-action
-              @click="itemOpen">
+              @click="dialogTest?.open">
               {{ t('dialogs.open') }}
             </v-btn-action>
           </v-card-text>
@@ -21,7 +21,9 @@
     </v-row>
     <dialog-test
       ref="dialogTest"
+      v-model:item="item"
       not-persistent />
+    {{ t('model', { model: item }) }}
   </v-container>
 </template>
 
@@ -49,12 +51,7 @@ usePage(computed(() => ({
 })));
 
 const dialogTest = ref<InstanceType<typeof DialogTest>>();
-const itemOpen = () => {
-  dialogTest.value?.open({
-    name : '',
-    desc : '',
-  });
-};
+const item = ref({ name: 'zzd', desc: '' });
 </script>
 
 <i18n lang="yaml">
@@ -77,6 +74,7 @@ en:
     do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   text1: Text 1
   text2: Text 2
+  model: "Model: {model}"
 fr:
   dialogs:
     title: Dialogs
@@ -87,4 +85,5 @@ fr:
     do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   text1: Text 1
   text2: Text 2
+  model: "Model: {model}"
 </i18n>
