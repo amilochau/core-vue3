@@ -2,7 +2,7 @@
   <v-dialog
     v-model="dialog"
     :fullscreen="xs"
-    :persistent="!notPersistent"
+    :persistent="persistent"
     :attach="attach"
     :max-width="dialogMaxWidth ?? '600px'"
     :class="dialogClass"
@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts" generic="TModel extends object">
-import { type Ref, ref } from 'vue';
+import { type Ref, computed, ref } from 'vue';
 import { useDisplay } from 'vuetify';
 import CardActions from '../cards/CardActions.vue';
 import CardMessages from '../cards/CardMessages.vue';
@@ -68,6 +68,7 @@ import { useHandle } from '../../composition';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
 import { clone } from '../../utils/clone';
+import { deepEqual } from '../../utils/deepEqual';
 
 const props = defineProps<{
   /** Dialog title */
@@ -120,9 +121,11 @@ const { handleFormValidation, handleLoadAndError } = useHandle();
 const dialog = ref(false);
 const form = ref<InstanceType<typeof VForm>>();
 const displayMasked = ref(false);
+const persistent = computed(() => !props.notPersistent && isModelChanged.value);
 
 // eslint-disable-next-line vue/no-ref-object-reactivity-loss
 const internalModel: Ref<TModel> = ref(clone(model.value)) as Ref<TModel>;
+const isModelChanged = computed(() => !deepEqual(internalModel.value, model.value));
 
 const save = async () => {
   if (!await handleFormValidation(form)) {
@@ -167,6 +170,7 @@ defineExpose({
   close,
   save,
   form,
+  isModelChanged,
 });
 </script>
 
