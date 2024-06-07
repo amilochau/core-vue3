@@ -21,8 +21,7 @@
     </v-row>
     <dialog-test
       ref="dialogTest"
-      v-model:item="item"
-      not-persistent />
+      v-model:item="item" />
     {{ t('model', { model: item }) }}
   </v-container>
 </template>
