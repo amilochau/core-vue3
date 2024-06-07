@@ -18,12 +18,12 @@
           :prepend-icon="dialogIcon"
           @close="closeFromTitle" />
         <v-card-text class="py-2">
-          <slot :proxy-model="proxyModel" />
+          <slot :model="internalModel" />
           <v-scroll-y-transition>
             <div v-if="displayMasked">
               <slot
                 name="masked"
-                :proxy-model="proxyModel" />
+                :model="internalModel" />
             </div>
           </v-scroll-y-transition>
           <div
@@ -48,7 +48,7 @@
           :cancel-title="cancelTitle"
           :save-icon="saveIcon"
           :save-title="saveTitle"
-          @cancel="closeFromActions"
+          @cancel="cancel"
           @save="save" />
       </v-card>
     </v-form>
@@ -98,16 +98,18 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   close: [source: 'title' | 'actions' | 'out' | 'expose'],
+  cancel: [],
+  save: [],
 }>();
 
 const slots = defineSlots<{
-  default(props: { proxyModel: TModel }): any,
+  default(props: { model: TModel }): any,
   messages?(): any,
   actions?(): any,
-  masked?(props: { proxyModel: TModel }): any,
+  masked?(props: { model: TModel }): any,
 }>();
 
-const model = defineModel<TModel>({ required: true });
+const model = defineModel<TModel>({ default: {} });
 
 const { t } = useI18n();
 const { xs } = useDisplay();
@@ -120,22 +122,23 @@ const form = ref<InstanceType<typeof VForm>>();
 const displayMasked = ref(false);
 
 // eslint-disable-next-line vue/no-ref-object-reactivity-loss
-const proxyModel: Ref<TModel> = ref(clone(model.value)) as Ref<TModel>;
+const internalModel: Ref<TModel> = ref(clone(model.value)) as Ref<TModel>;
 
 const save = async () => {
   if (!await handleFormValidation(form)) {
     return;
   }
   await handleLoadAndError(async () => {
-    await props.save(proxyModel.value);
-    model.value = clone(proxyModel.value);
+    await props.save(internalModel.value);
+    model.value = clone(internalModel.value);
     close();
   }, 'internal');
+  emit('save');
 };
 
 const open = () => {
   form.value?.reset();
-  proxyModel.value = clone(model.value);
+  internalModel.value = clone(model.value);
   dialog.value = true;
 };
 
@@ -148,9 +151,11 @@ const closeFromTitle = () => {
   dialog.value = false;
   emit('close', 'title');
 };
-const closeFromActions = () => {
+const cancel = () => {
+  // @todo this should not close anymore - but revert changes back
   dialog.value = false;
   emit('close', 'actions');
+  emit('cancel');
 };
 const close = () => {
   dialog.value = false;

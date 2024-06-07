@@ -42,10 +42,10 @@
     :cancel-title="t('refuse')"
     :save-title="t('accept')"
     :save-icon="mdiCheck"
+    :save="accept"
     not-persistent
-    @close="close"
-    @save="accept">
-    <privacy-card /><!-- @todo Don't add text- -->
+    @cancel="refuse">
+    <privacy-card />
   </dialog-form>
 </template>
 
@@ -56,6 +56,7 @@ import { useCookiesStore } from '../../../stores';
 import { ref } from 'vue';
 import PrivacyCard from '../content/PrivacyCard.vue';
 import DialogForm from '../../dialogs/DialogForm.vue';
+import { type ComponentExposed } from 'vue-component-type-helpers';
 
 const { t } = useI18n();
 const cookiesStore = useCookiesStore();
@@ -75,13 +76,7 @@ const refuse = () => {
   cookiesStore.refuseCookies();
 };
 
-const close = (source: 'title' | 'actions' | 'out' | 'expose') => {
-  if (source === 'actions') {
-    refuse();
-  }
-};
-
-const dialogFormRef = ref<InstanceType<typeof DialogForm>>();
+const dialogFormRef = ref<ComponentExposed<typeof DialogForm<{}>>>();
 </script>
 
 <i18n lang="yaml">
