@@ -35,12 +35,29 @@
           show-adjacent-months
           @update:model-value="save" />
       </v-card>
+      <div class="my-2 text-center">
+        <v-btn-action
+          :text="t('yesterday')"
+          class="mx-1"
+          color="primary"
+          variant="elevated"
+          size="small"
+          @click="setDate(-1)" />
+        <v-btn-action
+          :text="t('today')"
+          :prepend-icon="mdiCalendarToday"
+          class="mx-1"
+          color="primary"
+          variant="elevated"
+          size="small"
+          @click="setDate(0)" />
+      </div>
     </v-dialog>
   </v-text-field>
 </template>
 
 <script setup lang="ts">
-import { mdiClose } from '@mdi/js';
+import { mdiCalendarToday, mdiClose } from '@mdi/js';
 import { type Ref, computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useDate } from 'vuetify';
@@ -69,12 +86,17 @@ const slots = defineSlots<{
 
 const modelValue = defineModel<string | undefined>();
 
-const { d } = useI18n();
+const { d, t } = useI18n();
 const date = useDate();
 
 const displayDialog = ref(false);
 const internalValue: Ref<any> = ref(undefined);
 const displayedValue = computed(() => internalValue.value ? d(internalValue.value, { year: 'numeric', month: 'numeric', day: 'numeric' }) : '');
+
+const setDate = (daysOffset: number) => {
+  const dateToSet = date.addDays(new Date(), daysOffset);
+  save(dateToSet);
+};
 
 const open = () => {
   if (itemDisabled.value || itemReadonly.value) {
@@ -93,9 +115,9 @@ const reset = () => {
 };
 
 const save = (value: any) => {
+  displayDialog.value = false;
   internalValue.value = value;
   modelValue.value = date.toISO(value);
-  displayDialog.value = false;
 };
 
 watch(modelValue, () => {
@@ -107,3 +129,12 @@ const vuetifyForm: any = inject(Symbol.for('vuetify:form'), null);
 const itemDisabled = computed(() => props.disabled || !!vuetifyForm?.isDisabled.value);
 const itemReadonly = computed(() => props.readonly || !!vuetifyForm?.isReadonly.value);
 </script>
+
+<i18n lang="yaml">
+en:
+  yesterday: Yesterday
+  today: Today
+fr:
+  yesterday: Hier
+  today: Aujourd'hui
+</i18n>
