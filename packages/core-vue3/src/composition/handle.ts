@@ -45,12 +45,20 @@ export const useHandle = () => {
     return valid;
   };
 
-  const handleLoad = async <TResponse>(request: () => Promise<TResponse>) => {
+  const handleLoad = async <TResponse>(request: () => Promise<TResponse>, loading?: Ref<boolean>) => {
     try {
-      appStore.loading = true;
+      if (loading) {
+        loading.value = true;
+      } else {
+        appStore.loading = true;
+      }
       return await request();
     } finally {
-      appStore.loading = false;
+      if (loading) {
+        loading.value = false;
+      } else {
+        appStore.loading = false;
+      }
     }
   };
 
@@ -68,8 +76,8 @@ export const useHandle = () => {
     }
   };
 
-  const handleLoadAndError = async <TResponse>(request: () => Promise<TResponse>, destination: MessageDestination) => {
-    return handleLoad(() => handleError(request, destination));
+  const handleLoadAndError = async <TResponse>(request: () => Promise<TResponse>, destination: MessageDestination, loading?: Ref<boolean>) => {
+    return handleLoad(() => handleError(request, destination), loading);
   };
 
   return {
