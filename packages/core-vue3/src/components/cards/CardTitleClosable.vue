@@ -14,7 +14,7 @@
       <v-btn
         :disabled="loading"
         :icon="mdiClose"
-        variant="plain"
+        variant="text"
         density="comfortable"
         @click="emit('close')" />
     </template>

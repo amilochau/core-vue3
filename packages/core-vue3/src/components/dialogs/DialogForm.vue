@@ -42,14 +42,40 @@
         <slot name="messages" />
         <card-messages v-if="!slots.messages" />
         <slot name="actions" />
-        <card-actions
+        <v-card-actions
           v-if="!slots.actions && !hideActions"
-          :cancel-icon="cancelIcon"
-          :cancel-title="cancelTitle"
-          :save-icon="saveIcon"
-          :save-title="saveTitle"
-          @cancel="cancel"
-          @save="save" />
+          class="bg-primary py-1">
+          <v-tooltip location="start">
+            <template #activator="{ props: tooltip }">
+              <v-avatar
+                v-if="!online"
+                v-bind="tooltip"
+                density="comfortable">
+                <v-icon
+                  :icon="mdiWifiStrengthAlertOutline"
+                  color="warning" />
+              </v-avatar>
+            </template>
+            <span>{{ t('offlineTitle') }}</span>
+          </v-tooltip>
+          <v-spacer />
+          <v-btn
+            :disabled="loading || !closeOnCancel && !isModelChanged"
+            :prepend-icon="cancelIconOrDefault"
+            variant="text"
+            color="grey-lighten-2"
+            @click="cancel">
+            {{ cancelTitleOrDefault }}
+          </v-btn>
+          <v-btn
+            :disabled="loading || !online"
+            :loading="loading"
+            :prepend-icon="saveIconOrDefault"
+            variant="text"
+            @click="save">
+            {{ saveTitleOrDefault }}
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-form>
   </v-dialog>
@@ -58,17 +84,17 @@
 <script setup lang="ts" generic="TModel extends object">
 import { type Ref, computed, ref } from 'vue';
 import { useDisplay } from 'vuetify';
-import CardActions from '../cards/CardActions.vue';
 import CardMessages from '../cards/CardMessages.vue';
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../stores';
 import type { VForm } from 'vuetify/components';
 import { useHandle } from '../../composition';
-import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
+import { mdiChevronDown, mdiChevronUp, mdiPencil, mdiWifiStrengthAlertOutline } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
 import { clone } from '../../utils/clone';
 import { deepEqual } from '../../utils/deepEqual';
+import { useOnline } from '@vueuse/core';
 
 const props = defineProps<{
   /** Dialog title */
@@ -95,10 +121,12 @@ const props = defineProps<{
   attach?: string | boolean | Element
   /** Save function called before using the proxyModel as the model */
   save: (proxyModel: TModel) => Promise<any> | any
+  /** Close dialog on cancel */
+  closeOnCancel?: boolean
 }>();
 
 const emit = defineEmits<{
-  close: [source: 'title' | 'actions' | 'out' | 'expose'],
+  close: [source: 'title' | 'cancel' | 'out' | 'expose'],
   cancel: [],
   save: [],
 }>();
@@ -116,12 +144,18 @@ const { t } = useI18n();
 const { xs } = useDisplay();
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
+const online = useOnline();
 const { handleFormValidation, handleLoadAndError } = useHandle();
 
 const dialog = ref(false);
 const form = ref<InstanceType<typeof VForm>>();
 const displayMasked = ref(false);
 const persistent = computed(() => !props.notPersistent && isModelChanged.value);
+
+const cancelTitleOrDefault = computed(() => props.cancelTitle ?? t('cancel'));
+const cancelIconOrDefault = computed(() => props.cancelIcon ?? undefined);
+const saveTitleOrDefault = computed(() => props.saveTitle ?? t('save'));
+const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil);
 
 // eslint-disable-next-line vue/no-ref-object-reactivity-loss
 const internalModel: Ref<TModel> = ref(clone(model.value)) as Ref<TModel>;
@@ -139,9 +173,13 @@ const save = async () => {
   emit('save');
 };
 
-const open = () => {
+const reset = () => {
   form.value?.reset();
   internalModel.value = clone(model.value);
+};
+
+const open = () => {
+  reset();
   dialog.value = true;
 };
 
@@ -156,8 +194,12 @@ const closeFromTitle = () => {
 };
 const cancel = () => {
   // @todo this should not close anymore - but revert changes back
-  dialog.value = false;
-  emit('close', 'actions');
+  if (props.closeOnCancel) {
+    dialog.value = false;
+    emit('close', 'cancel');
+  } else {
+    reset();
+  }
   emit('cancel');
 };
 const close = () => {
@@ -175,10 +217,16 @@ defineExpose({
 </script>
 
 <i18n lang="yaml">
-  en:
-    seeMore: See more options
-    hideMore: Hide options
-  fr:
-    seeMore: Voir plus d'options
-    hideMore: Masquer les options
+en:
+  seeMore: See more options
+  hideMore: Hide options
+  offlineTitle: You lost your Internet connection...
+  cancel: Cancel
+  save: Save
+fr:
+  seeMore: Voir plus d'options
+  hideMore: Masquer les options
+  offlineTitle: Vous avez perdu votre connexion Internet...
+  cancel: Annuler
+  save: Sauvegarder
 </i18n>
