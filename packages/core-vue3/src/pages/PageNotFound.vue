@@ -1,20 +1,21 @@
 <template>
   <app-responsive
     fill-height>
-    <div class="text-center">
-      <h1 class="text-h3 text-primary mb-4">
-        {{ t('title') }}
-      </h1>
-      <p class="mb-4">
-        {{ t('description') }}
-      </p>
-      <v-btn-action
-        :disabled="loading"
-        :to="{ name: 'Home' }"
-        color="primary">
-        {{ t('buttonText') }}
-      </v-btn-action>
-    </div>
+    <v-empty-state
+      :headline="t('headline')"
+      :title="t('title')"
+      :icon="mdiAlertOctagonOutline"
+      color="primary">
+      <template #actions>
+        <v-btn-action
+          :disabled="loading"
+          :to="{ name: 'Home' }"
+          color="primary"
+          class="mb-4">
+          {{ t('action') }}
+        </v-btn-action>
+      </template>
+    </v-empty-state>
   </app-responsive>
 </template>
 
@@ -25,6 +26,7 @@ import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
 import { useAppStore } from '../stores';
 import { computed } from 'vue';
+import { mdiAlertOctagonOutline } from '@mdi/js';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -50,11 +52,11 @@ fr:
 
 <i18n lang="yaml">
 en:
-  title: Whoops, 404
-  description: The page you were looking for does not exist.
-  buttonText: Get me out of here!
+  headline: Whoops, 404
+  title: The page you were looking for does not exist.
+  action: Get me out of here!
 fr:
-  title: Oups, erreur 404
-  description: La page que vous cherchez n'existe pas.
-  buttonText: Sortez-moi de là !
+  headline: Oups, erreur 404
+  title: La page que vous cherchez n'existe pas.
+  action: Sortez-moi de là !
 </i18n>
