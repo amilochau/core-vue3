@@ -1,20 +1,21 @@
 <template>
   <app-responsive
     fill-height>
-    <div class="text-center">
-      <h1 class="text-h3 text-primary mb-4">
-        {{ t('title') }}
-      </h1>
-      <p class="mb-4">
-        {{ t('description') }}
-      </p>
-      <v-btn-action
-        :disabled="loading"
-        :to="{ name: 'Home' }"
-        color="primary">
-        {{ t('buttonText') }}
-      </v-btn-action>
-    </div>
+    <v-empty-state
+      :headline="t('headline')"
+      :title="t('title')"
+      :icon="mdiLockOutline"
+      color="primary">
+      <template #actions>
+        <v-btn-action
+          :disabled="loading"
+          :to="{ name: 'Home' }"
+          color="primary"
+          class="mb-4">
+          {{ t('action') }}
+        </v-btn-action>
+      </template>
+    </v-empty-state>
   </app-responsive>
 </template>
 
@@ -25,6 +26,7 @@ import { useI18n } from 'vue-i18n';
 import { usePage } from '../composition';
 import { useAppStore } from '../stores';
 import { computed } from 'vue';
+import { mdiLockOutline } from '@mdi/js';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -50,11 +52,11 @@ fr:
 
 <i18n lang="yaml">
 en:
-  title: Whoops, 403
-  description: You don't have enough privileges to access this page.
-  buttonText: Get me out of here!
+  headline: Whoops, 403
+  title: You don't have enough privileges to access this page.
+  action: Get me out of here!
 fr:
-  title: Oups, erreur 403
-  description: Vous n'avez pas suffisamment de droits pour accéder à cette page.
-  buttonText: Sortez-moi de là !
+  headline: Oups, erreur 403
+  title: Vous n'avez pas suffisamment de droits pour accéder à cette page.
+  action: Sortez-moi de là !
 </i18n>
