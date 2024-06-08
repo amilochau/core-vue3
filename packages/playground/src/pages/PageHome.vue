@@ -6,36 +6,39 @@
       <p>
         {{ buildData.buildDate }}
       </p>
-      <p>
+      <p class="my-3">
         <v-btn-action
           :to="{ name: 'Components' }"
-          color="primary"
-          class="my-6">
+          color="primary">
           {{ t('seeComponents') }}
         </v-btn-action>
       </p>
-      <p>
+      <p class="my-3">
         <v-btn-action
           :to="{ name: 'Dialogs' }"
-          color="primary"
-          class="my-6">
+          color="primary">
           {{ t('seeDialogs') }}
         </v-btn-action>
       </p>
-      <p>
+      <p class="my-3">
         <v-btn-action
           :to="{ name: 'Validations' }"
-          color="primary"
-          class="my-6">
+          color="primary">
           {{ t('seeValidations') }}
         </v-btn-action>
       </p>
-      <p>
+      <p class="my-3">
         <v-btn-action
           :to="{ name: 'Loading' }"
-          color="primary"
-          class="my-6">
+          color="primary">
           {{ t('seeLoading') }}
+        </v-btn-action>
+      </p>
+      <p class="my-3">
+        <v-btn-action
+          color="warning"
+          @click="sendNotification">
+          {{ t('sendNotification') }}
         </v-btn-action>
       </p>
 
@@ -62,6 +65,7 @@ import BtnCard from '../components/buttons/BtnCard.vue';
 import { usePage } from '@amilochau/core-vue3/composition';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useAppStore } from '@amilochau/core-vue3/stores';
 
 type BuildData = {
   buildDate: string,
@@ -89,8 +93,13 @@ usePage(computed(() => ({
     ],
   },
 })));
+const appStore = useAppStore();
 
 const buildData = window.buildData as BuildData;
+
+const sendNotification = () => {
+  appStore.displayMessage({ title: 'Hey' + new Date().getUTCMilliseconds() });
+};
 </script>
 
 <i18n lang="yaml">
@@ -109,10 +118,12 @@ en:
   seeDialogs: See dialogs
   seeValidations: See validations
   seeLoading: See loading page
+  sendNotification: Send a notification
 fr:
   openDialog: Ouvrir le dialog
   seeComponents: Voir les composants
   seeDialogs: Voir les dialogs
   seeValidations: Voir les validations
   seeLoading: Voir une page de chargement
+  sendNotification: Envoyer une notification
 </i18n>
