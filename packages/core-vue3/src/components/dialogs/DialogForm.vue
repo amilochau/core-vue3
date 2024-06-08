@@ -201,7 +201,6 @@ const closeFromTitle = () => {
   emit('close', 'title');
 };
 const cancel = () => {
-  // @todo this should not close anymore - but revert changes back
   if (props.closeOnCancel) {
     dialog.value = false;
     emit('close', 'cancel');
