@@ -5,6 +5,7 @@ const routes: Array<RouteRecordRaw> = [
   { name: 'Components', path: 'components', component: () => import('../pages/PageComponents.vue') },
   { name: 'Dialogs', path: 'dialogs', component: () => import('../pages/PageDialogs.vue') },
   { name: 'Validations', path: 'validations', component: () => import('../pages/PageValidations.vue') },
+  { name: 'Loading', path: 'loading', component: () => import('../pages/PageLoading.vue') },
 ];
 
 export default routes;
