@@ -1,12 +1,12 @@
 import { mdiAlert, mdiAlertOctagon, mdiCheckboxMarkedCircle, mdiInformation } from '@mdi/js';
 import { defineStore } from 'pinia';
-import { type ApplicationMessage, type IHomeMessage, type PageData } from '../types/application';
+import { type ApplicationMessage, type IHomeMessage, type PageData, type SnackbarMessage } from '../types/application';
 
 interface AppStoreState {
   drawer: boolean,
   loading: boolean,
   message: ApplicationMessage,
-  snackbarMessage: ApplicationMessage,
+  snackbarMessagesQueue: SnackbarMessage[],
   homeMessages: IHomeMessage[],
   pageData: PageData,
 }
@@ -18,7 +18,7 @@ export const useAppStore = defineStore('app', {
     drawer: false,
     loading: false,
     message: { title: '' },
-    snackbarMessage: { title: '' },
+    snackbarMessagesQueue: [],
     homeMessages: new Array<IHomeMessage>(),
     pageData: {
       title: '',
@@ -29,10 +29,17 @@ export const useAppStore = defineStore('app', {
     displayMessage(message: ApplicationMessage, destination: MessageDestination = 'snackbar') {
       switch (destination) {
         case 'snackbar':
-          this.snackbarMessage = { creation: new Date().valueOf(), ...message };
+          if (message.title) { // @todo why do we send empty messages?
+            this.snackbarMessagesQueue.push({
+              ...message,
+              text: message.title,
+              timeout: message.timeout_ms ?? 10000,
+              color: message.color ?? 'primary',
+            });
+          }
           break;
         case 'internal':
-          this.message = { creation: new Date().valueOf(), ...message };
+          this.message = message;
           break;
         case 'silent':
           // @todo handle 'silent'

@@ -7,6 +7,7 @@ import { type VuetifyOptions, createVuetify } from 'vuetify';
 import { en, fr } from 'vuetify/locale';
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 import { VBtn } from 'vuetify/components';
+import { VSnackbarQueue } from 'vuetify/labs/components';
 
 export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   const defaultVuetifyOptions: VuetifyOptions = {
@@ -105,6 +106,9 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
           lineInset: 2,
         },
       },
+    },
+    components: {
+      VSnackbarQueue, // @todo Remove that once the composant is out of the lab
     },
   };
 

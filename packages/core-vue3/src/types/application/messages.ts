@@ -14,5 +14,15 @@ export type ApplicationMessage = {
   color?: 'error' | 'warning' | 'success' | 'info' | 'primary';
   icon?: string;
   timeout_ms?: number;
-  creation?: number; // Used to toggle the same message multiple times
+  expanded?: boolean;
+  hide?: boolean;
+};
+
+export type SnackbarMessage = ApplicationMessage & {
+  /** Text */
+  text: string;
+  /** Timeout in milliseconds */
+  timeout: number;
+  /** Color */
+  color: 'error' | 'warning' | 'success' | 'info' | 'primary';
 };
