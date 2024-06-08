@@ -30,6 +30,14 @@
           {{ t('seeValidations') }}
         </v-btn-action>
       </p>
+      <p>
+        <v-btn-action
+          :to="{ name: 'Loading' }"
+          color="primary"
+          class="my-6">
+          {{ t('seeLoading') }}
+        </v-btn-action>
+      </p>
 
       <btn-card
         :icon="mdiGithub"
@@ -100,9 +108,11 @@ en:
   seeComponents: See components
   seeDialogs: See dialogs
   seeValidations: See validations
+  seeLoading: See loading page
 fr:
   openDialog: Ouvrir le dialog
   seeComponents: Voir les composants
   seeDialogs: Voir les dialogs
   seeValidations: Voir les validations
+  seeLoading: Voir une page de chargement
 </i18n>

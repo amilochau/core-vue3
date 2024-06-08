@@ -43,8 +43,9 @@ fr:
   label: Progression
 </i18n>
 
-<style lang="sass" scoped>
-.progress-bar
-  position: absolute !important
-  z-index: 1001
+<style scoped>
+.progress-bar {
+  position: absolute !important;
+  z-index: 1001;
+}
 </style>
