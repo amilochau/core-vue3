@@ -10,6 +10,7 @@ import CardMessages from './cards/CardMessages.vue';
 import CardSectionTitle from './cards/CardSectionTitle.vue';
 import CardTitleClosable from './cards/CardTitleClosable.vue';
 import DialogForm from './dialogs/DialogForm.vue';
+import DialogSimple from './dialogs/DialogSimple.vue';
 import FieldChipGroup from './fields/FieldChipGroup.vue';
 import FieldColorBullets from './fields/FieldColorBullets.vue';
 import FieldDate from './fields/FieldDate.vue';
@@ -29,6 +30,7 @@ export {
   CardSectionTitle,
   CardTitleClosable,
   DialogForm,
+  DialogSimple,
   FieldChipGroup,
   FieldColorBullets,
   FieldDate,
