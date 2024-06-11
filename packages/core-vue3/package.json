@@ -38,7 +38,8 @@
     "./components": "./src/components/index.ts",
     "./composition": "./src/composition/index.ts",
     "./stores": "./src/stores/index.ts",
-    "./types": "./src/types/index.ts"
+    "./types": "./src/types/index.ts",
+    "./utils": "./src/utils/index.ts"
   },
   "engines": {
     "node": ">=20.0.0"
