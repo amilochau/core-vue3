@@ -35,18 +35,28 @@
       </v-card-actions>
     </v-card>
   </v-bottom-sheet>
-  <dialog-form
+  <dialog-simple
     ref="dialogFormRef"
     :dialog-title="t('title')"
     :dialog-icon="mdiGavel"
-    :cancel-title="t('refuse')"
-    :save-title="t('accept')"
-    :save-icon="mdiCheck"
-    :save="accept"
-    not-persistent
-    @cancel="refuse">
+    not-persistent>
     <privacy-card />
-  </dialog-form>
+    <template #actions>
+      <v-spacer />
+      <v-btn
+        variant="text"
+        color="grey-lighten-2"
+        @click="refuse">
+        {{ t('refuse') }}
+      </v-btn>
+      <v-btn
+        :prepend-icon="mdiCheck"
+        variant="text"
+        @click="accept">
+        {{ t('accept') }}
+      </v-btn>
+    </template>
+  </dialog-simple>
 </template>
 
 <script setup lang="ts">
@@ -55,8 +65,7 @@ import { useI18n } from 'vue-i18n';
 import { useCookiesStore } from '../../../stores';
 import { ref } from 'vue';
 import PrivacyCard from '../content/PrivacyCard.vue';
-import DialogForm from '../../dialogs/DialogForm.vue';
-import { type ComponentExposed } from 'vue-component-type-helpers';
+import DialogSimple from '../../dialogs/DialogSimple.vue';
 
 const { t } = useI18n();
 const cookiesStore = useCookiesStore();
@@ -76,7 +85,7 @@ const refuse = () => {
   cookiesStore.refuseCookies();
 };
 
-const dialogFormRef = ref<ComponentExposed<typeof DialogForm<{}>>>();
+const dialogFormRef = ref<InstanceType<typeof DialogSimple>>();
 </script>
 
 <i18n lang="yaml">
