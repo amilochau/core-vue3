@@ -79,10 +79,12 @@ const seePolicy = () => {
 const accept = () => {
   displayed.value = false;
   cookiesStore.acceptCookies();
+  dialogFormRef.value?.close();
 };
 const refuse = () => {
   displayed.value = false;
   cookiesStore.refuseCookies();
+  dialogFormRef.value?.close();
 };
 
 const dialogFormRef = ref<InstanceType<typeof DialogSimple>>();

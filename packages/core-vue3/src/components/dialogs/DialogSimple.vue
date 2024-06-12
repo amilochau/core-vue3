@@ -9,13 +9,6 @@
     scrollable
     @update:model-value="updateDialog">
     <v-card>
-      <template #loader="{ isActive }">
-        <v-progress-linear
-          :active="isActive"
-          indeterminate
-          color="info"
-          height="4" />
-      </template>
       <card-title-closable
         :title="dialogTitle"
         :prepend-icon="dialogIcon"
