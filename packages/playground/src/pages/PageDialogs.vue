@@ -11,18 +11,36 @@
             </v-card-title>
           </v-card-item>
           <v-card-text>
+            {{ t('model', { model: item }) }}
+          </v-card-text>
+          <v-card-text>
             <v-btn-action
-              @click="dialogTest?.open">
-              {{ t('dialogs.open') }}
+              @click="dialogRecordCreate?.open()">
+              {{ t('dialogs.createRecord') }}
+            </v-btn-action>
+            <v-btn-action
+              v-if="Object.keys(item.records).length"
+              @click="dialogRecordEdit?.open(Object.keys(item.records)[0])">
+              {{ t('dialogs.editRecord') }}
+            </v-btn-action>
+            <v-btn-action
+              v-if="Object.keys(item.records).length"
+              @click="dialogRecordDelete?.open(Object.keys(item.records)[0])">
+              {{ t('dialogs.deleteRecord') }}
             </v-btn-action>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <dialog-test
-      ref="dialogTest"
+    <dialog-record-create
+      ref="dialogRecordCreate"
       v-model:item="item" />
-    {{ t('model', { model: item }) }}
+    <dialog-record-edit
+      ref="dialogRecordEdit"
+      v-model:item="item" />
+    <dialog-record-delete
+      ref="dialogRecordDelete"
+      v-model:item="item" />
   </v-container>
 </template>
 
@@ -30,7 +48,10 @@
 import { useI18n } from 'vue-i18n';
 import { computed, ref } from 'vue';
 import { usePage } from '@amilochau/core-vue3/composition';
-import DialogTest from '../components/dialogs/DialogTest.vue';
+import DialogRecordCreate from '../components/dialogs/DialogRecordCreate.vue';
+import DialogRecordEdit from '../components/dialogs/DialogRecordEdit.vue';
+import DialogRecordDelete from '../components/dialogs/DialogRecordDelete.vue';
+import type { Item } from '@/types/test';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -49,8 +70,10 @@ usePage(computed(() => ({
   },
 })));
 
-const dialogTest = ref<InstanceType<typeof DialogTest>>();
-const item = ref({ name: 'zzd', desc: '' });
+const dialogRecordCreate = ref<InstanceType<typeof DialogRecordCreate>>();
+const dialogRecordEdit = ref<InstanceType<typeof DialogRecordEdit>>();
+const dialogRecordDelete = ref<InstanceType<typeof DialogRecordDelete>>();
+const item = ref<Item>({ name: 'zzd', desc: '', records: {} });
 </script>
 
 <i18n lang="yaml">
@@ -66,7 +89,9 @@ fr:
 en:
   dialogs:
     title: Dialogs
-    open: Open
+    createRecord: Create record
+    editRecord: Edit record
+    deleteRecord: Delete record
   longText: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     sed,
@@ -77,7 +102,9 @@ en:
 fr:
   dialogs:
     title: Dialogs
-    open: Ouvrir
+    createRecord: Create record
+    editRecord: Edit record
+    deleteRecord: Delete record
   longText: |
     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     sed,

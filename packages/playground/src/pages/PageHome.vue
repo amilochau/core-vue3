@@ -6,35 +6,31 @@
       <p>
         {{ buildData.buildDate }}
       </p>
-      <p>
+      <p class="my-3">
         <v-btn-action
           :to="{ name: 'Components' }"
-          color="primary"
-          class="my-6">
+          color="primary">
           {{ t('seeComponents') }}
         </v-btn-action>
       </p>
-      <p>
+      <p class="my-3">
         <v-btn-action
           :to="{ name: 'Dialogs' }"
-          color="primary"
-          class="my-6">
+          color="primary">
           {{ t('seeDialogs') }}
         </v-btn-action>
       </p>
-      <p>
+      <p class="my-3">
         <v-btn-action
           :to="{ name: 'Validations' }"
-          color="primary"
-          class="my-6">
+          color="primary">
           {{ t('seeValidations') }}
         </v-btn-action>
       </p>
-      <p>
+      <p class="my-3">
         <v-btn-action
           :to="{ name: 'Loading' }"
-          color="primary"
-          class="my-6">
+          color="primary">
           {{ t('seeLoading') }}
         </v-btn-action>
       </p>

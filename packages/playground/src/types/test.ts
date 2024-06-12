@@ -6,3 +6,16 @@ export enum TestEnum {
   Fifth = 5,
   Sixth = 6,
 }
+
+export class ItemRecord {
+  name: string = '';
+  desc?: string;
+  num?: number;
+  color?: string;
+}
+
+export class Item {
+  name: string = '';
+  desc?: string;
+  records: Record<string, ItemRecord> = {};
+}
