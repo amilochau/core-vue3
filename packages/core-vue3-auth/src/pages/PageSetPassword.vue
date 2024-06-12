@@ -83,16 +83,16 @@ const request: Ref<SetPassword> = ref({
 const set = () => handleLoadAndError(async () => {
   const authenticationResult = await confirmLogin(request.value);
   if (!authenticationResult.success) {
-    appStore.displayErrorMessage({ title: t('errorMessage') }, 'snackbar');
+    appStore.displayErrorMessage({ title: t('errorMessage') });
   } else {
-    appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+    appStore.displayInfoMessage({ title: t('successMessage') });
     if (route.query.returnUrl) {
       await router.replace(route.query.returnUrl.toString());
     } else {
       await router.replace({ name: 'Home' });
     }
   }
-}, 'snackbar');
+});
 </script>
 
 <i18n lang="yaml">

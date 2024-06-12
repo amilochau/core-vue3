@@ -72,9 +72,9 @@ const request: Ref<EditPassword> = ref({
 
 const editPassword = () => handleLoadAndError(async () => {
   await changePassword(request.value);
-  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+  appStore.displayInfoMessage({ title: t('successMessage') });
   await goBack({ name: 'Profile' });
-}, 'snackbar');
+});
 </script>
 
 <i18n lang="yaml">

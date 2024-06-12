@@ -56,9 +56,9 @@ const request: Ref<ForgotPassword> = ref({
 
 const reset = () => handleLoadAndError(async () => {
   await forgotPassword(request.value);
-  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar');
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') });
   await router.push({ name: 'ResetPassword', query: { email: request.value.email } });
-}, 'snackbar');
+});
 </script>
 
 <i18n lang="yaml">

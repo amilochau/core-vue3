@@ -51,7 +51,6 @@ import { useRoute, useRouter } from 'vue-router';
 import type { Login } from '../types';
 import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
-import type { ApplicationMessage } from '@amilochau/core-vue3/types';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -90,18 +89,18 @@ const login = () => handleLoadAndError(async () => {
       await router.push({ name: 'ResetPassword', query: { email: request.value.email } });
       break;
     default:
-      appStore.displayErrorMessage({ title: t('errorMessage') }, 'snackbar');
+      appStore.displayErrorMessage({ title: t('errorMessage') });
     }
   } else {
     await fetchUserAttributes();
-    appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+    appStore.displayInfoMessage({ title: t('successMessage') });
     if (route.query.returnUrl) {
       await router.replace(route.query.returnUrl.toString());
     } else {
       await router.replace({ name: 'Home' });
     }
   }
-}, 'snackbar');
+});
 </script>
 
 <i18n lang="yaml">

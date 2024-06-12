@@ -88,9 +88,9 @@ const links = computed(() => ([
 
 const register = () => handleLoadAndError(async () => {
   await signUp(request.value);
-  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') }, 'snackbar');
+  appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') });
   await router.push({ name: 'ConfirmEmail', query: { email: request.value.email } });
-}, 'snackbar');
+});
 </script>
 
 <i18n lang="yaml">

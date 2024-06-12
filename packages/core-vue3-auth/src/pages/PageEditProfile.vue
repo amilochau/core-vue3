@@ -58,10 +58,10 @@ const request: Ref<EditProfile> = ref({
 
 const editProfile = () => handleLoadAndError(async () => {
   await updateAttributes(request.value);
-  appStore.displayInfoMessage({ title: t('successMessage') }, 'snackbar');
+  appStore.displayInfoMessage({ title: t('successMessage') });
   await goBack({ name: 'Profile' });
   fetchUserAttributes();
-}, 'snackbar');
+});
 </script>
 
 <i18n lang="yaml">

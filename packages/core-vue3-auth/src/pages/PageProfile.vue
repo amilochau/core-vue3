@@ -22,7 +22,7 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useCoreOptions, usePage } from '@amilochau/core-vue3/composition';
+import { usePage } from '@amilochau/core-vue3/composition';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { useCognito } from '../composition';
 
@@ -38,7 +38,6 @@ usePage(computed(() => ({
 const appStore = useAppStore();
 const identityStore = useIdentityStore();
 const router = useRouter();
-const coreOptions = useCoreOptions();
 const { signOut } = useCognito();
 
 const { attributes } = storeToRefs(identityStore);
