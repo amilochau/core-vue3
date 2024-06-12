@@ -18,6 +18,7 @@
         class="py-2">
         <slot />
       </v-card-text>
+      <card-messages ref="cardMessagesRef" />
       <v-card-actions
         v-if="slots.actions && !hideActions"
         class="bg-primary py-1">
@@ -30,7 +31,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useDisplay } from 'vuetify';
+import CardMessages from '../cards/CardMessages.vue';
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
+import type { ApplicationMessage } from '../../types';
 
 defineProps<{
   /** Dialog title */
@@ -61,6 +64,7 @@ const slots = defineSlots<{
 const { xs } = useDisplay();
 
 const dialog = ref(false);
+const cardMessagesRef = ref<InstanceType<typeof CardMessages>>();
 
 const open = () => {
   dialog.value = true;
@@ -79,9 +83,11 @@ const close = () => {
   dialog.value = false;
   emit('close', 'expose');
 };
+const displayMessage = (message: ApplicationMessage) => cardMessagesRef.value?.displayMessage(message);
 
 defineExpose({
   open,
   close,
+  displayMessage,
 });
 </script>

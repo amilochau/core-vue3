@@ -50,22 +50,7 @@
             </v-btn-action>
           </div>
         </v-card-text>
-        <v-expand-transition>
-          <v-sheet
-            v-if="displayMessage && message">
-            <v-alert
-              v-model="displayMessage"
-              :color="message.color"
-              :icon="message.icon"
-              :title="message.title"
-              :text="message.details"
-              border="start"
-              density="comfortable"
-              variant="tonal"
-              closable
-              class="ma-2 multi-line" />
-          </v-sheet>
-        </v-expand-transition>
+        <card-messages ref="cardMessagesRef" />
         <slot name="actions" />
         <v-card-actions
           v-if="!slots.actions && !hideActions"
@@ -108,8 +93,9 @@
 </template>
 
 <script setup lang="ts" generic="TModel extends object">
-import { type Ref, computed, ref, watch } from 'vue';
+import { type Ref, computed, ref } from 'vue';
 import { useDisplay } from 'vuetify';
+import CardMessages from '../cards/CardMessages.vue';
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../stores';
@@ -178,6 +164,7 @@ const { handleFormValidation, handleLoadAndError } = useHandle();
 const dialog = ref(false);
 const localLoading = ref(false);
 const form = ref<InstanceType<typeof VForm>>();
+const cardMessagesRef = ref<InstanceType<typeof CardMessages>>();
 const displayMasked = ref(false);
 const persistent = computed(() => !props.notPersistent && isModelChanged.value);
 
@@ -198,7 +185,7 @@ const save = async () => {
     await props.save(internalModel.value);
     model.value = clone(internalModel.value);
     close();
-  }, (m) => message.value = m, localLoading);
+  }, (m) => cardMessagesRef.value?.displayMessage(m), localLoading);
   emit('save');
 };
 
@@ -230,27 +217,12 @@ const close = () => {
   dialog.value = false;
   emit('close', 'expose');
 };
-
-// Messages
-const displayMessage = ref(false);
-const message = ref<ApplicationMessage>();
-let displayMessageTimeout: any = 0;
-
-watch(message, () => {
-  clearTimeout(displayMessageTimeout);
-  if (message.value) {
-    displayMessage.value = true;
-    displayMessageTimeout = setTimeout(() => {
-      displayMessage.value = false;
-    }, message.value.timeout_ms ?? 10000);
-  } else {
-    displayMessage.value = false;
-  }
-}, { deep: true });
+const displayMessage = (message: ApplicationMessage) => cardMessagesRef.value?.displayMessage(message);
 
 defineExpose({
   open,
   close,
+  displayMessage,
   save,
   form,
   isModelChanged,
