@@ -50,7 +50,22 @@
             </v-btn-action>
           </div>
         </v-card-text>
-        <card-messages />
+        <v-expand-transition>
+          <v-sheet
+            v-if="displayMessage && message">
+            <v-alert
+              v-model="displayMessage"
+              :color="message.color"
+              :icon="message.icon"
+              :title="message.title"
+              :text="message.details"
+              border="start"
+              density="comfortable"
+              variant="tonal"
+              closable
+              class="ma-2 multi-line" />
+          </v-sheet>
+        </v-expand-transition>
         <slot name="actions" />
         <v-card-actions
           v-if="!slots.actions && !hideActions"
@@ -93,9 +108,8 @@
 </template>
 
 <script setup lang="ts" generic="TModel extends object">
-import { type Ref, computed, ref } from 'vue';
+import { type Ref, computed, ref, watch } from 'vue';
 import { useDisplay } from 'vuetify';
-import CardMessages from '../cards/CardMessages.vue';
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../stores';
@@ -106,6 +120,7 @@ import { useI18n } from 'vue-i18n';
 import { clone } from '../../utils/clone';
 import { deepEqual } from '../../utils/deepEqual';
 import { useOnline } from '@vueuse/core';
+import type { ApplicationMessage } from '../../types';
 
 const props = defineProps<{
   /** Dialog title */
@@ -183,7 +198,7 @@ const save = async () => {
     await props.save(internalModel.value);
     model.value = clone(internalModel.value);
     close();
-  }, 'internal', localLoading);
+  }, (m) => message.value = m, localLoading);
   emit('save');
 };
 
@@ -215,6 +230,23 @@ const close = () => {
   dialog.value = false;
   emit('close', 'expose');
 };
+
+// Messages
+const displayMessage = ref(false);
+const message = ref<ApplicationMessage>();
+let displayMessageTimeout: any = 0;
+
+watch(message, () => {
+  clearTimeout(displayMessageTimeout);
+  if (message.value) {
+    displayMessage.value = true;
+    displayMessageTimeout = setTimeout(() => {
+      displayMessage.value = false;
+    }, message.value.timeout_ms ?? 10000);
+  } else {
+    displayMessage.value = false;
+  }
+}, { deep: true });
 
 defineExpose({
   open,

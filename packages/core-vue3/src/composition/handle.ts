@@ -4,7 +4,7 @@ import type { Ref } from 'vue';
 import { useAppStore } from '../stores';
 import { mdiAlert } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
-import type { MessageDestination } from '../stores/app';
+import type { ApplicationMessage } from '../types';
 
 export const useHandle = () => {
 
@@ -62,22 +62,28 @@ export const useHandle = () => {
     }
   };
 
-  const handleError = async <TResponse>(request: () => Promise<TResponse>, destination: MessageDestination) => {
+  const handleError = async <TResponse>(request: () => Promise<TResponse>, callback?: (message: ApplicationMessage) => any) => {
     try {
       return await request();
     } catch (error: any) {
-      appStore.displayMessage({
+      const message: ApplicationMessage = {
         title: error.title ?? t('internalError.title'),
         color: error.color ?? 'error',
         icon: error.icon ?? mdiAlert,
         details: error.details ?? (error.title ? undefined : t('internalError.desc')),
         timeout_ms: error.timeout_ms,
-      }, destination);
+      };
+
+      if (callback) {
+        callback(message);
+      } else {
+        appStore.displayMessage(message);
+      }
     }
   };
 
-  const handleLoadAndError = async <TResponse>(request: () => Promise<TResponse>, destination: MessageDestination, loading?: Ref<boolean>) => {
-    return handleLoad(() => handleError(request, destination), loading);
+  const handleLoadAndError = async <TResponse>(request: () => Promise<TResponse>, callback?: (message: ApplicationMessage) => any, loading?: Ref<boolean>) => {
+    return handleLoad(() => handleError(request, callback), loading);
   };
 
   return {
