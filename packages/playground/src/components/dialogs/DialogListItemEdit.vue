@@ -39,7 +39,6 @@ const { required, minLength } = useValidationRules();
 
 const dialogFormRef = ref<ComponentExposed<typeof DialogForm<Item>>>();
 const name = ref('');
-
 const proxyModelCreation = (model: Item) => {
   return clone(items.value.find((x) => x.name === name.value)!);
 };

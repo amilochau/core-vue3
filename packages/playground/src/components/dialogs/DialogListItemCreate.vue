@@ -37,7 +37,6 @@ const { t } = useI18n();
 const { required, minLength } = useValidationRules();
 
 const dialogFormRef = ref<ComponentExposed<typeof DialogForm<Item>>>();
-
 const proxyModelCreation = (model: Item) => {
   return new Item();
 };
