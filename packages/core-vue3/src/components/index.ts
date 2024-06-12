@@ -6,7 +6,6 @@ import AppLinks from './pages-layout/AppLinks.vue';
 import AppResponsive from './pages-layout/AppResponsive.vue';
 import AppResponsiveForm from './pages-layout/AppResponsiveForm.vue';
 import CardDivider from './cards/CardDivider.vue';
-import CardMessages from './cards/CardMessages.vue';
 import CardSectionTitle from './cards/CardSectionTitle.vue';
 import CardTitleClosable from './cards/CardTitleClosable.vue';
 import DialogForm from './dialogs/DialogForm.vue';
@@ -26,7 +25,6 @@ export {
   AppResponsive,
   AppResponsiveForm,
   CardDivider,
-  CardMessages,
   CardSectionTitle,
   CardTitleClosable,
   DialogForm,

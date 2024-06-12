@@ -5,19 +5,15 @@ import { type ApplicationMessage, type IHomeMessage, type PageData } from '../ty
 interface AppStoreState {
   drawer: boolean,
   loading: boolean,
-  message: ApplicationMessage,
   snackbarMessage: ApplicationMessage,
   homeMessages: IHomeMessage[],
   pageData: PageData,
 }
 
-export type MessageDestination = 'snackbar' | 'internal' | 'silent';
-
 export const useAppStore = defineStore('app', {
   state: (): AppStoreState => ({
     drawer: false,
     loading: false,
-    message: { title: '' },
     snackbarMessage: { title: '' },
     homeMessages: new Array<IHomeMessage>(),
     pageData: {
@@ -26,33 +22,23 @@ export const useAppStore = defineStore('app', {
     },
   }),
   actions: {
-    displayMessage(message: ApplicationMessage, destination: MessageDestination = 'snackbar') {
-      switch (destination) {
-        case 'snackbar':
-          this.snackbarMessage = { creation: new Date().valueOf(), ...message };
-          break;
-        case 'internal':
-          this.message = { creation: new Date().valueOf(), ...message };
-          break;
-        case 'silent':
-          // @todo handle 'silent'
-          break;
-      }
+    displayMessage(message: ApplicationMessage) {
+      this.snackbarMessage = { creation: new Date().valueOf(), ...message };
     },
-    displayInfoMessage(message: { title: string, details?: string, timeout_ms?: number }, destination: MessageDestination = 'snackbar') {
-      this.displayMessage({ title: message.title, color: 'info', details: message.details, timeout_ms: message.timeout_ms, icon: mdiInformation }, destination);
+    displayInfoMessage(message: { title: string, details?: string, timeout_ms?: number }) {
+      this.displayMessage({ title: message.title, color: 'info', details: message.details, timeout_ms: message.timeout_ms, icon: mdiInformation });
     },
-    displaySuccessMessage(message: { title: string, details?: string, timeout_ms?: number }, destination: MessageDestination = 'snackbar') {
-      this.displayMessage({ title: message.title, color: 'success', details: message.details, timeout_ms: message.timeout_ms, icon: mdiCheckboxMarkedCircle }, destination);
+    displaySuccessMessage(message: { title: string, details?: string, timeout_ms?: number }) {
+      this.displayMessage({ title: message.title, color: 'success', details: message.details, timeout_ms: message.timeout_ms, icon: mdiCheckboxMarkedCircle });
     },
-    displayWarningMessage(message: { title: string, details?: string, timeout_ms?: number }, destination: MessageDestination = 'snackbar') {
-      this.displayMessage({ title: message.title, color: 'warning', details: message.details, timeout_ms: message.timeout_ms, icon: mdiAlertOctagon }, destination);
+    displayWarningMessage(message: { title: string, details?: string, timeout_ms?: number }) {
+      this.displayMessage({ title: message.title, color: 'warning', details: message.details, timeout_ms: message.timeout_ms, icon: mdiAlertOctagon });
     },
-    displayErrorMessage(message: { title: string, details?: string, timeout_ms?: number }, destination: MessageDestination = 'snackbar') {
-      this.displayMessage({ title: message.title, color: 'error', details: message.details, timeout_ms: message.timeout_ms, icon: mdiAlert }, destination);
+    displayErrorMessage(message: { title: string, details?: string, timeout_ms?: number }) {
+      this.displayMessage({ title: message.title, color: 'error', details: message.details, timeout_ms: message.timeout_ms, icon: mdiAlert });
     },
-    hideMessage(destination: MessageDestination = 'snackbar') {
-      this.displayMessage({ title: '' }, destination);
+    hideMessage() {
+      this.displayMessage({ title: '' });
     },
     setDrawer(value: boolean) {
       this.drawer = value;

@@ -18,7 +18,6 @@
         class="py-2">
         <slot />
       </v-card-text>
-      <card-messages />
       <v-card-actions
         v-if="slots.actions && !hideActions"
         class="bg-primary py-1">
@@ -31,7 +30,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useDisplay } from 'vuetify';
-import CardMessages from '../cards/CardMessages.vue';
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
 
 defineProps<{
