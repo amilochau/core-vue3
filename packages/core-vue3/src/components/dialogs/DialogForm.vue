@@ -24,8 +24,12 @@
           :title="dialogTitle"
           :prepend-icon="dialogIcon"
           @close="closeFromTitle" />
-        <v-card-text class="py-2">
-          <slot :model="internalModel" />
+        <v-card-text
+          v-if="slots.default || slots.masked"
+          class="py-2">
+          <slot
+            name="default"
+            :model="internalModel" />
           <v-scroll-y-transition>
             <div v-if="displayMasked">
               <slot
@@ -46,8 +50,7 @@
             </v-btn-action>
           </div>
         </v-card-text>
-        <slot name="messages" />
-        <card-messages v-if="!slots.messages" />
+        <card-messages />
         <slot name="actions" />
         <v-card-actions
           v-if="!slots.actions && !hideActions"
@@ -67,7 +70,8 @@
           </v-tooltip>
           <v-spacer />
           <v-btn
-            :disabled="loading || localLoading || !closeOnCancel && !isModelChanged"
+            v-if="!cancelHide"
+            :disabled="loading || localLoading || !isModelChanged"
             :prepend-icon="cancelIconOrDefault"
             variant="text"
             color="grey-lighten-2"
@@ -116,20 +120,23 @@ const props = defineProps<{
   notPersistent?: boolean
   /** Whether to hide actions */
   hideActions?: boolean
+  /** Whether to attach the dialog, or the reference of the element to attach */
+  attach?: string | boolean | Element
+
   /** Title text for the cancel button */
   cancelTitle?: string,
   /** Icon for the cancel button */
   cancelIcon?: string,
+  /** Whether to hide the cancel button */
+  cancelHide?: boolean,
   /** Title text for the save button */
   saveTitle?: string,
   /** Icon for the save button */
   saveIcon?: string
-  /** Whether to attach the dialog, or the reference of the element to attach */
-  attach?: string | boolean | Element
+  /** Function to initialize proxy model when dialog opens */
+  proxyModelCreation?: (model: TModel) => TModel
   /** Save function called before using the proxyModel as the model */
   save: (proxyModel: TModel) => Promise<any> | any
-  /** Close dialog on cancel */
-  closeOnCancel?: boolean
 }>();
 
 const emit = defineEmits<{
@@ -139,10 +146,9 @@ const emit = defineEmits<{
 }>();
 
 const slots = defineSlots<{
-  default(props: { model: TModel }): any,
-  messages?(): any,
-  actions?(): any,
+  default?(props: { model: TModel }): any,
   masked?(props: { model: TModel }): any,
+  actions?(): any,
 }>();
 
 const model = defineModel<TModel>({ default: {} });
@@ -165,9 +171,9 @@ const cancelIconOrDefault = computed(() => props.cancelIcon ?? undefined);
 const saveTitleOrDefault = computed(() => props.saveTitle ?? t('save'));
 const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil);
 
-// eslint-disable-next-line vue/no-ref-object-reactivity-loss
-const internalModel: Ref<TModel> = ref(clone(model.value)) as Ref<TModel>;
-const isModelChanged = computed(() => !deepEqual(internalModel.value, model.value));
+// eslint-disable-next-line vue/no-setup-props-reactivity-loss, vue/no-ref-object-reactivity-loss
+const internalModel: Ref<TModel> = ref((props.proxyModelCreation ?? clone)(model.value)) as Ref<TModel>;
+const isModelChanged = computed(() => !deepEqual(internalModel.value, (props.proxyModelCreation ?? clone)(model.value)));
 
 const save = async () => {
   if (!await handleFormValidation(form)) {
@@ -183,7 +189,8 @@ const save = async () => {
 
 const reset = () => {
   form.value?.reset();
-  internalModel.value = clone(model.value);
+  const creationFn = props.proxyModelCreation ?? clone;
+  internalModel.value = creationFn(model.value);
 };
 
 const open = () => {
@@ -201,12 +208,7 @@ const closeFromTitle = () => {
   emit('close', 'title');
 };
 const cancel = () => {
-  if (props.closeOnCancel) {
-    dialog.value = false;
-    emit('close', 'cancel');
-  } else {
-    reset();
-  }
+  reset();
   emit('cancel');
 };
 const close = () => {
