@@ -39,7 +39,7 @@ import { useValidationRules } from '@amilochau/core-vue3/composition';
 import { useI18n } from 'vue-i18n';
 import type { ApplicationMessage } from '@amilochau/core-vue3/types';
 import { type ComponentExposed } from 'vue-component-type-helpers';
-import { ItemRecord, type Item } from '@/types/test';
+import { type Item, ItemRecord } from '@/types/test';
 import { getNewKey } from '@amilochau/core-vue3/utils';
 
 const item = defineModel<Item>('item', { required: true });
