@@ -1,20 +1,19 @@
 <template>
   <dialog-form
     ref="dialogFormRef"
-    :proxy-model-creation="proxyModelCreation"
     :dialog-title="t('title')"
     :save-title="t('edit')"
     :save-icon="mdiPencil"
     :save="save">
     <template #default="{ model }">
       <v-text-field
-        v-model="model.name"
+        v-model="model.item.name"
         label="Required text"
         :rules="[ required(), minLength(2) ]"
         required
         clearable />
       <v-textarea
-        v-model="model.desc"
+        v-model="model.item.desc"
         label="Non required text (set something to make save fail)"
         clearable />
     </template>
@@ -30,35 +29,29 @@ import { useI18n } from 'vue-i18n';
 import type { ApplicationMessage } from '@amilochau/core-vue3/types';
 import { type ComponentExposed } from 'vue-component-type-helpers';
 import { Item } from '@/types/test';
-import { clone } from '@amilochau/core-vue3/utils';
 
 const items = defineModel<Item[]>('items', { required: true });
 
 const { t } = useI18n();
 const { required, minLength } = useValidationRules();
 
-const dialogFormRef = ref<ComponentExposed<typeof DialogForm<Item>>>();
-const name = ref('');
-const proxyModelCreation = (model: Item) => {
-  return clone(items.value.find((x) => x.name === name.value)!);
-};
+const dialogFormRef = ref<ComponentExposed<typeof DialogForm<{ name: string, item: Item }>>>();
 
-const save = async (model: Item) => {
+const save = async (model: { name: string, item: Item }) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
-  if (model.desc?.length) {
+  if (model.item.desc?.length) {
     throw { title: t('errorMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
 New line here` } as ApplicationMessage;
   }
-  const item = items.value.find((x) => x.name === name.value);
+  const item = items.value.find((x) => x.name === model.name);
   if (item) {
-    item.name = model.name;
-    item.desc = model.desc;
+    item.name = model.item.name;
+    item.desc = model.item.desc;
   }
 };
 
-const open = (itemName: string) => {
-  name.value = itemName;
-  dialogFormRef.value?.open();
+const open = (name: string) => {
+  dialogFormRef.value?.open({ name, item: items.value.find((x) => x.name === name)! });
 };
 
 defineExpose({

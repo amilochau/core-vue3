@@ -1,7 +1,6 @@
 <template>
   <dialog-form
     ref="dialogFormRef"
-    :proxy-model-creation="proxyModelCreation"
     :dialog-title="t('title')"
     :save-title="t('create')"
     :save-icon="mdiPlus"
@@ -37,9 +36,6 @@ const { t } = useI18n();
 const { required, minLength } = useValidationRules();
 
 const dialogFormRef = ref<ComponentExposed<typeof DialogForm<Item>>>();
-const proxyModelCreation = (model: Item) => {
-  return new Item();
-};
 
 const save = async (model: Item) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -47,11 +43,12 @@ const save = async (model: Item) => {
     throw { title: t('errorMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
 New line here` } as ApplicationMessage;
   }
+
   items.value.push(model);
 };
 
 const open = () => {
-  dialogFormRef.value?.open();
+  dialogFormRef.value?.open(new Item());
 };
 
 defineExpose({

@@ -1,7 +1,6 @@
 <template>
   <dialog-form
     ref="dialogFormRef"
-    v-model="item"
     :dialog-title="t('title')"
     cancel-hide
     :save-title="t('delete')"
@@ -15,24 +14,22 @@ import { ref } from 'vue';
 import { DialogForm } from '@amilochau/core-vue3/components';
 import { useI18n } from 'vue-i18n';
 import { type ComponentExposed } from 'vue-component-type-helpers';
-import type { Item } from '@/types/test';
+import type { Item, ItemRecord } from '@/types/test';
 
 const item = defineModel<Item>('item', { required: true });
 
 const { t } = useI18n();
 
-const key = ref<string>('');
+const dialogFormRef = ref<ComponentExposed<typeof DialogForm<{ key: string, record: ItemRecord }>>>();
 
-const dialogFormRef = ref<ComponentExposed<typeof DialogForm<Item>>>();
-
-const save = async (model: Item) => {
-  delete model.records[key.value];
+const save = async (model: { key: string, record: ItemRecord }) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
+
+  delete item.value.records[model.key];
 };
 
-const open = (itemRecordKey: string) => {
-  key.value = itemRecordKey;
-  dialogFormRef.value?.open();
+const open = (key: string) => {
+  dialogFormRef.value?.open({ key, record: item.value.records[key] });
 };
 
 defineExpose({
