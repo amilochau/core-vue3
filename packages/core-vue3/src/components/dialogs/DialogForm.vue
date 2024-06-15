@@ -29,12 +29,12 @@
           class="py-2">
           <slot
             name="default"
-            :model="internalModel" />
+            :model="internalModel!" />
           <v-scroll-y-transition>
             <div v-if="displayMasked">
               <slot
                 name="masked"
-                :model="internalModel" />
+                :model="internalModel!" />
             </div>
           </v-scroll-y-transition>
           <div
@@ -51,9 +51,8 @@
           </div>
         </v-card-text>
         <card-messages ref="cardMessagesRef" />
-        <slot name="actions" />
         <v-card-actions
-          v-if="!slots.actions && !hideActions"
+          v-if="!hideActions"
           class="bg-primary py-1">
           <v-tooltip location="start">
             <template #activator="{ props: tooltip }">
@@ -93,7 +92,7 @@
 </template>
 
 <script setup lang="ts" generic="TModel extends object">
-import { type Ref, computed, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useDisplay } from 'vuetify';
 import CardMessages from '../cards/CardMessages.vue';
 import CardTitleClosable from '../cards/CardTitleClosable.vue';
@@ -103,8 +102,7 @@ import type { VForm } from 'vuetify/components';
 import { useHandle } from '../../composition';
 import { mdiChevronDown, mdiChevronUp, mdiPencil, mdiWifiStrengthAlertOutline } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
-import { clone } from '../../utils/clone';
-import { deepEqual } from '../../utils/deepEqual';
+import { clone, deepEqual } from '../../utils';
 import { useOnline } from '@vueuse/core';
 import type { ApplicationMessage } from '../../types';
 
@@ -134,9 +132,7 @@ const props = defineProps<{
   saveTitle?: string,
   /** Icon for the save button */
   saveIcon?: string
-  /** Function to initialize proxy model when dialog opens */
-  proxyModelCreation?: (model: TModel) => TModel
-  /** Save function called before using the proxyModel as the model */
+  /** Function to modify model on save */
   save: (proxyModel: TModel) => Promise<any> | any
 }>();
 
@@ -149,10 +145,7 @@ const emit = defineEmits<{
 const slots = defineSlots<{
   default?(props: { model: TModel }): any,
   masked?(props: { model: TModel }): any,
-  actions?(): any,
 }>();
-
-const model = defineModel<TModel>({ default: {} });
 
 const { t } = useI18n();
 const { xs } = useDisplay();
@@ -173,17 +166,16 @@ const cancelIconOrDefault = computed(() => props.cancelIcon ?? undefined);
 const saveTitleOrDefault = computed(() => props.saveTitle ?? t('save'));
 const saveIconOrDefault = computed(() => props.saveIcon ?? mdiPencil);
 
-// eslint-disable-next-line vue/no-setup-props-reactivity-loss, vue/no-ref-object-reactivity-loss
-const internalModel: Ref<TModel> = ref((props.proxyModelCreation ?? clone)(model.value)) as Ref<TModel>;
-const isModelChanged = computed(() => !deepEqual(internalModel.value, (props.proxyModelCreation ?? clone)(model.value)));
+const originalModel = ref<TModel>();
+const internalModel = ref<TModel>();
+const isModelChanged = computed(() => !deepEqual(internalModel.value, originalModel.value));
 
 const save = async () => {
   if (!await handleFormValidation(form)) {
     return;
   }
   await handleLoadAndError(async () => {
-    await props.save(internalModel.value);
-    model.value = clone(internalModel.value);
+    await props.save(clone(internalModel.value!));
     close();
   }, (m) => cardMessagesRef.value?.displayMessage(m), localLoading);
   emit('save');
@@ -191,11 +183,11 @@ const save = async () => {
 
 const reset = () => {
   form.value?.reset();
-  const creationFn = props.proxyModelCreation ?? clone;
-  internalModel.value = creationFn(model.value);
+  internalModel.value = clone(originalModel.value!);
 };
 
-const open = () => {
+const open = (model: TModel) => {
+  originalModel.value = model;
   reset();
   dialog.value = true;
 };
