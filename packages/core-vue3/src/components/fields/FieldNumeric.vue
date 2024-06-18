@@ -62,11 +62,11 @@ const modelValue = defineModel<number | undefined>();
 
 const { number } = useValidationRules();
 
-const internalValue = ref('');
+const internalValue = ref<string | undefined | null>('');
 
 const convertToNumber = (input: string) => Number(input.replace(',', '.'));
 
-const parseInput = (input: string) => {
+const parseInput = (input: string | undefined) => {
   if (!input) {
     modelValue.value = undefined;
     return;
@@ -86,7 +86,8 @@ const reset = () => {
 };
 
 watch(modelValue, (newValue) => {
-  if (newValue !== convertToNumber(internalValue.value)) {
+  const internalValueConverted = internalValue.value ? convertToNumber(internalValue.value) : internalValue.value;
+  if (newValue !== internalValueConverted) {
     internalValue.value = newValue?.toString() || '';
   }
 }, {
