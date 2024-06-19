@@ -132,6 +132,8 @@ const props = defineProps<{
   saveTitle?: string,
   /** Icon for the save button */
   saveIcon?: string
+  /** Whether to remain the dialog open on save */
+  remainOpenOnSave?: boolean
   /** Function to modify model on save */
   save: (proxyModel: TModel) => Promise<any> | any
 }>();
@@ -176,7 +178,9 @@ const save = async () => {
   }
   await handleLoadAndError(async () => {
     await props.save(clone(internalModel.value!));
-    close();
+    if (!props.remainOpenOnSave) {
+      close();
+    }
   }, (m) => cardMessagesRef.value?.displayMessage(m), localLoading);
   emit('save');
 };
