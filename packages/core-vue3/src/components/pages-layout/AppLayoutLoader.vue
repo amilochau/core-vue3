@@ -2,10 +2,10 @@
   <v-empty-state
     :headline="headline"
     :title="title"
-    :icon="mdiRunFast"
-    color="primary">
+    :icon="icon ?? mdiRunFast"
+    :color="color ?? 'primary'">
     <v-progress-linear
-      color="primary"
+      :color="color ?? 'primary'"
       stream
       height="6"
       class="py-4 loading-progress" />
@@ -20,6 +20,10 @@ defineProps<{
   headline: string,
   /** Title */
   title: string,
+  /** Icon */
+  icon?: string,
+  /** Color */
+  color?: string,
 }>();
 </script>
 
