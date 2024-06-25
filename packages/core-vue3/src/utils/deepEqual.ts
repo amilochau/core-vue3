@@ -13,11 +13,5 @@ export const deepEqual = (a: any, b: any): boolean => {
     return false;
   }
 
-  const props = Object.keys(a);
-  if (props.length !== Object.keys(b).length) {
-    // Different number of props, don't bother to check
-    return false;
-  }
-
-  return props.every(p => deepEqual(a[p], b[p]));
+  return Object.keys(a).every(p => deepEqual(a[p], b[p]));
 };
