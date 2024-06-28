@@ -59,15 +59,15 @@ import { type RouteLocationRaw, useRouter } from 'vue-router';
 import { computed } from 'vue';
 
 const props = defineProps<{
-  /** Content mode, to display a text title or an image */
+  /** Content mode, to display a text title or an image. */
   contentMode?: 'title' | 'img'
-  /** Title text  */
+  /** Title text.  */
   title?: string
-  /** Link to add to the content */
+  /** Link to add to the content. */
   contentTo?: RouteLocationRaw
-  /** Button mode, in first position */
+  /** Button mode, in first position. */
   buttonMode?: 'drawer' | 'back' | 'default-back'
-  /** Default link, used as a fallback value when no history is found with the buttonMode set to 'back'  */
+  /** Default link, used as a fallback value when no history is found with the buttonMode set to 'back'.  */
   defaultBackTo?: RouteLocationRaw
 }>();
 

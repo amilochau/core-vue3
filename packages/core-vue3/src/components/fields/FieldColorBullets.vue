@@ -86,23 +86,23 @@ import { type Ref, computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
-  /** Title used as the input label */
+  /** Title used as the input label. */
   label?: string
-  /** Validation rules */
+  /** Validation rules. */
   rules?: any[]
-  /** Whether the input is disabled */
+  /** Whether the input is disabled. */
   disabled?: boolean
-  /** Whether the input is clearable */
+  /** Whether the input is clearable. */
   clearable?: boolean
-  /** Input color */
+  /** Input color. */
   color?: string
-  /** Whether the input is readonly */
+  /** Whether the input is readonly. */
   readonly?: boolean
-  /** Title used for the reset button, in the detailed dialog */
+  /** Title used for the reset button, in the detailed dialog. */
   resetTitle?: string,
-  /** Title used for the save button, in the detailed dialog */
+  /** Title used for the save button, in the detailed dialog. */
   saveTitle?: string,
-  /** Colors used as values */
+  /** Colors used as values. */
   colors: string[],
 }>();
 

@@ -27,9 +27,9 @@ import { mdiClose } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 
 defineProps<{
-  /** Title */
+  /** Title. */
   title: string
-  /** Prepend icon */
+  /** Prepend icon. */
   prependIcon?: string
 }>();
 const emit = defineEmits<{

@@ -80,15 +80,15 @@ import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../stores';
 
 defineProps<{
-  /** Title */
+  /** Title. */
   title?: string,
-  /** Description, displayed as subtitle */
+  /** Description, displayed as subtitle. */
   description?: string,
-  /** Links for external pages */
+  /** Links for external pages. */
   links?: any[],
-  /** Whether the component should fill the page height */
+  /** Whether the component should fill the page height. */
   fillHeight?: boolean,
-  /** Form button */
+  /** Form button. */
   button?: {
     title: string,
     icon: string,

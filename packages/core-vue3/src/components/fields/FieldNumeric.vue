@@ -35,21 +35,21 @@ import { useValidationRules } from '../../composition';
 import { computed, inject, ref, watch } from 'vue';
 
 const props = defineProps<{
-  /** Title used as the input label */
+  /** Title used as the input label. */
   label?: string
-  /** Validation rules */
+  /** Validation rules. */
   rules?: any[]
-  /** Whether the input is disabled */
+  /** Whether the input is disabled. */
   disabled?: boolean
-  /** Whether the input is clearable */
+  /** Whether the input is clearable. */
   clearable?: boolean
-  /** Input color */
+  /** Input color. */
   color?: string
-  /** Whether the input is readonly */
+  /** Whether the input is readonly. */
   readonly?: boolean
-  /** Text field suffix */
+  /** Text field suffix. */
   suffix?: string
-  /** Input variant */
+  /** Input variant. */
   variant?: 'filled' | 'outlined' | 'plain' | 'underlined' | 'solo' | 'solo-inverted' | 'solo-filled'
 }>();
 

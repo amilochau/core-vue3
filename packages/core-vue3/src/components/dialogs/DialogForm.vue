@@ -107,34 +107,34 @@ import { useOnline } from '@vueuse/core';
 import type { ApplicationMessage } from '../../types';
 
 const props = defineProps<{
-  /** Dialog title */
+  /** Dialog title. */
   dialogTitle: string
-  /** Dialog icon */
+  /** Dialog icon. */
   dialogIcon?: string
-  /** Dialog extra class */
+  /** Dialog extra class. */
   dialogClass?: string
-  /** Dialog max width */
+  /** Dialog max width. */
   dialogMaxWidth?: string | number
-  /** Whether the dialog is not persistent */
+  /** Whether the dialog is not persistent. */
   notPersistent?: boolean
-  /** Whether to hide actions */
+  /** Whether to hide actions. */
   hideActions?: boolean
-  /** Whether to attach the dialog, or the reference of the element to attach */
+  /** Whether to attach the dialog, or the reference of the element to attach. */
   attach?: string | boolean | Element
 
-  /** Title text for the cancel button */
+  /** Title text for the cancel button. */
   cancelTitle?: string,
-  /** Icon for the cancel button */
+  /** Icon for the cancel button. */
   cancelIcon?: string,
-  /** Whether to hide the cancel button */
+  /** Whether to hide the cancel button. */
   cancelHide?: boolean,
-  /** Title text for the save button */
+  /** Title text for the save button. */
   saveTitle?: string,
-  /** Icon for the save button */
+  /** Icon for the save button. */
   saveIcon?: string
-  /** Whether to remain the dialog open on save */
+  /** Whether to remain the dialog open on save. */
   remainOpenOnSave?: boolean
-  /** Function to modify model on save */
+  /** Function to modify model on save. */
   save: (proxyModel: TModel) => Promise<any> | any
 }>();
 

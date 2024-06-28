@@ -70,25 +70,25 @@ import { computed, inject, ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
 const props = defineProps<{
-  /** Title used as the input label */
+  /** Title used as the input label. */
   label?: string
-  /** Values proposed to be selected */
+  /** Values proposed to be selected. */
   values: FormattedDataWithValue<TData>[]
-  /** Validation rules */
+  /** Validation rules. */
   rules?: any[]
-  /** Whether the input is disabled */
+  /** Whether the input is disabled. */
   disabled?: boolean
-  /** Whether the input is clearable */
+  /** Whether the input is clearable. */
   clearable?: boolean
-  /** Input color */
+  /** Input color. */
   color?: string
-  /** Whether the input is readonly */
+  /** Whether the input is readonly. */
   readonly?: boolean
-  /** Whether multiple values can be selected */
+  /** Whether multiple values can be selected. */
   multiple?: boolean
-  /** Whether at least one value must be selected */
+  /** Whether at least one value must be selected. */
   mandatory?: boolean
-  /** Whether chips filter style (using a checkmark icon when selected) should be disabled */
+  /** Whether chips filter style (using a checkmark icon when selected) should be disabled. */
   disabledFilter?: boolean
 }>();
 
