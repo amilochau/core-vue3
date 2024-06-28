@@ -32,7 +32,7 @@ import { useHandle } from '../../composition';
 import { VForm } from 'vuetify/components';
 
 const props = defineProps<{
-  /** Form button */
+  /** Form button. */
   button?: {
     title: string,
     icon: string,

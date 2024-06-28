@@ -77,7 +77,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useTheme } from 'vuetify';
 
 const props = defineProps<{
-  /** Bar items */
+  /** Bar items. */
   items?: {
     link: string,
     title: string,

@@ -13,7 +13,7 @@ import { useI18n } from 'vue-i18n';
 import { useAppStore } from '../../../stores';
 
 const props = defineProps<{
-  /** Delay used before displaying the progress bar  */
+  /** Delay used before displaying the progress bar.  */
   lazyDelay?: number
 }>();
 const { t } = useI18n();
