@@ -1,3 +1,4 @@
+/** Problem details. */
 export type IProblemDetails = {
   title?: string;
   type?: string;

@@ -1,9 +1,11 @@
+/** List result. */
 export type IListResult<TListModel, TKey> = {
   items: TListModel[];
   endReached: boolean;
   lastKey?: TKey;
 };
 
+/** List request. */
 export type IListRequest<TKey> = {
   search: string;
   lastKey?: TKey;
@@ -11,28 +13,35 @@ export type IListRequest<TKey> = {
   getQuery(): string
 };
 
+/** Default response for `Create` operations. */
 export type IDefaultCreateResponse = {
   id: string;
 };
 
+/** List result, typically used for HTTP response data. */
 export class ListResult<TListModel, TKey> implements IListResult<TListModel, TKey> {
-  items: TListModel[] = [];
-  endReached: boolean = false;
-  lastKey?: TKey;
+  public items: TListModel[] = [];
+  public endReached: boolean = false;
+  public lastKey?: TKey;
 }
 
+/** List request, typically used for HTTP request data. */
 export class ListRequest<TKey> implements IListRequest<TKey> {
-  search: string;
-  lastKey?: TKey;
+  public search: string;
+  public lastKey?: TKey;
 
-  constructor(search: string, lastKey?: TKey) {
+  /**
+   * Creates a new instance.
+   * @param search Search pattern.
+   * @param lastKey Last key, of the last result returned.
+   */
+  public constructor(search: string, lastKey?: TKey) {
     this.search = search;
     this.lastKey = lastKey;
   }
 
   protected createQueryArguments(): Record<string, string> {
-    const args: Record<string, string> = { };
-    return args;
+    return {};
   }
 
   private createQueryArgumentsInteral() {
@@ -46,6 +55,7 @@ export class ListRequest<TKey> implements IListRequest<TKey> {
     return args;
   }
 
+  /** Get query string. */
   public getQuery(): string {
     const args = this.createQueryArgumentsInteral();
     let queryString = '';

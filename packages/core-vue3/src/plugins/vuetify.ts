@@ -117,6 +117,7 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
 };
 
 declare module '@vue/runtime-core' {
+  /** Extended global components. */
   export interface GlobalComponents {
     VBtnAction: typeof import('vuetify/components/VBtn')['VBtn']
   }

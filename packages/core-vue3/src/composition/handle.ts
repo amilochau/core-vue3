@@ -26,6 +26,7 @@ export const useHandle = () => {
     },
   });
 
+  /** Validatable form. */
   type ValidatableForm = {
     validate: () => Promise<{
       valid: boolean;

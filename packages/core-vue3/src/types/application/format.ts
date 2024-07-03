@@ -1,3 +1,4 @@
+/** Formatted data, typically created from a `format` composition method. */
 export type FormattedData = {
   title?: string
   subtitle?: string
@@ -8,6 +9,7 @@ export type FormattedData = {
   masked?: boolean
 };
 
+/** Formatted data, with value. */
 export type FormattedDataWithValue<K> = { value: K } & FormattedData;
 
 const entries = Object.entries as <K extends string, T>(o: Record<K, T>) => ([K, T])[];

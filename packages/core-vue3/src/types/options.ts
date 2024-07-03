@@ -4,6 +4,7 @@ import type { RouteComponent, RouteRecordRaw } from 'vue-router';
 import type { VuetifyOptions } from 'vuetify';
 import type { NotificationsRegisterRequest } from './application/notifications';
 
+/** Core options, to configure `@amilochau/core-vue3` plugin. */
 export type MilochauCoreOptions = {
   application: {
     name: string,
@@ -39,6 +40,7 @@ export type MilochauCoreOptions = {
   },
 };
 
+/** Core options, to configure `@amilochau/core-vue3` internal messages. */
 export type MilochauCoreOptionsMessages = {
   [lang: string]: {
     appTitle: string

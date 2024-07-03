@@ -2,11 +2,13 @@ import { type PiniaPluginContext, createPinia } from 'pinia';
 import type { App } from 'vue';
 import type { MilochauCoreOptions } from '../types/options';
 
+/** Additional options for data persistence. */
 export interface PersistOptions {
   storage?: 'localStorage' | 'sessionStorage';
 }
 
 declare module 'pinia' {
+  /** Extended options for pinia stores, including options for data persistence. */
   export interface DefineStoreOptionsBase<S extends StateTree, Store> {
     persist?: PersistOptions;
   }
