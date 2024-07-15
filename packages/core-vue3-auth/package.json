@@ -42,7 +42,7 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "aws-amplify": "^6.3.8"
+    "aws-amplify": "^6.4.0"
   },
   "peerDependencies": {
     "@amilochau/core-vue3": "0.8.9"
