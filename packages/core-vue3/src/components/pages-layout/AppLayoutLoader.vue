@@ -16,13 +16,13 @@
 import { mdiRunFast } from '@mdi/js';
 
 defineProps<{
-  /** Headline */
+  /** Headline. */
   headline: string,
-  /** Title */
+  /** Title. */
   title: string,
-  /** Icon */
+  /** Icon. */
   icon?: string,
-  /** Color */
+  /** Color. */
   color?: string,
 }>();
 </script>

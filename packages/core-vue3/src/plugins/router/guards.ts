@@ -1,6 +1,13 @@
 import type { MilochauCoreOptions } from '../..//types';
 import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-router';
 
+/**
+ * Register router guards.
+ * @param router Router instance.
+ * @param identityStore Identity store.
+ * @param appStore App store.
+ * @param options Registration options.
+ */
 export const registerGuards = (router: Router, identityStore: any, appStore: any, options: MilochauCoreOptions) => {
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
 

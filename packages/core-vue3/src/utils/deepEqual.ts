@@ -1,3 +1,8 @@
+/**
+ * Test equality between two values deeply.
+ * @param a First value.
+ * @param b Second value.
+ */
 export const deepEqual = (a: any, b: any): boolean => {
   if (a === b) {
     return true;

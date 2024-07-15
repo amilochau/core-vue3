@@ -1,5 +1,6 @@
 import type { RouteLocationRaw } from 'vue-router';
 
+/** Data specific to a page. */
 export type PageData = {
   title: string;
   description: string;

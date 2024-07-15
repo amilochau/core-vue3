@@ -16,11 +16,11 @@
 import { computed } from 'vue';
 
 const props = defineProps<{
-  /** Title text */
+  /** Title text. */
   title: string,
-  /** Prepend icon */
+  /** Prepend icon. */
   icon?: string,
-  /** Text and icon color */
+  /** Text and icon color. */
   color?: 'primary' | 'warning' | 'error'
 }>();
 

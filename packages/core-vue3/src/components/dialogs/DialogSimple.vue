@@ -36,19 +36,19 @@ import CardTitleClosable from '../cards/CardTitleClosable.vue';
 import type { ApplicationMessage } from '../../types';
 
 defineProps<{
-  /** Dialog title */
+  /** Dialog title. */
   dialogTitle: string
-  /** Dialog icon */
+  /** Dialog icon. */
   dialogIcon?: string
-  /** Dialog extra class */
+  /** Dialog extra class. */
   dialogClass?: string
-  /** Dialog max width */
+  /** Dialog max width. */
   dialogMaxWidth?: string | number
-  /** Whether the dialog is not persistent */
+  /** Whether the dialog is not persistent. */
   notPersistent?: boolean
-  /** Whether to hide actions */
+  /** Whether to hide actions. */
   hideActions?: boolean
-  /** Whether to attach the dialog, or the reference of the element to attach */
+  /** Whether to attach the dialog, or the reference of the element to attach. */
   attach?: string | boolean | Element
 }>();
 

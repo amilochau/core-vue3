@@ -6,6 +6,7 @@ import { mdiAlert } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
 import type { ApplicationMessage } from '../types';
 
+/** Use handle. */
 export const useHandle = () => {
 
   const { t, mergeLocaleMessage } = useI18n();
@@ -26,6 +27,7 @@ export const useHandle = () => {
     },
   });
 
+  /** Validatable form. */
   type ValidatableForm = {
     validate: () => Promise<{
       valid: boolean;
@@ -36,6 +38,10 @@ export const useHandle = () => {
     }>
   };
 
+  /**
+   * Handle form validation.
+   * @param form Form values.
+   */
   const handleFormValidation = async <TForm extends ValidatableForm>(form: Ref<TForm | undefined>) => {
     if (loading.value || !online.value || !form.value) {
       return false;
@@ -45,6 +51,11 @@ export const useHandle = () => {
     return valid;
   };
 
+  /**
+   * Handle load.
+   * @param request Request to be executed.
+   * @param loading Loading reactive value.
+   */
   const handleLoad = async <TResponse>(request: () => Promise<TResponse>, loading?: Ref<boolean>) => {
     try {
       if (loading) {
@@ -62,6 +73,11 @@ export const useHandle = () => {
     }
   };
 
+  /**
+   * Handle error.
+   * @param request Request to be executed.
+   * @param callback Callback to be executed to display error message.
+   */
   const handleError = async <TResponse>(request: () => Promise<TResponse>, callback?: (message: ApplicationMessage) => any) => {
     try {
       return await request();
@@ -82,6 +98,12 @@ export const useHandle = () => {
     }
   };
 
+  /**
+   * Combinaison of @see handleLoad and @see handleError.
+   * @param request Request to be executed.
+   * @param callback Callback to be executed to display error message.
+   * @param loading Loading reactive value.
+   */
   const handleLoadAndError = async <TResponse>(request: () => Promise<TResponse>, callback?: (message: ApplicationMessage) => any, loading?: Ref<boolean>) => {
     return handleLoad(() => handleError(request, callback), loading);
   };

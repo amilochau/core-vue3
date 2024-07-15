@@ -8,6 +8,11 @@ import { en, fr } from 'vuetify/locale';
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 import { VBtn } from 'vuetify/components';
 
+/**
+ * Register vuetify plugin.
+ * @param app App instance.
+ * @param options Registration options.
+ */
 export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
   const defaultVuetifyOptions: VuetifyOptions = {
     theme: {
@@ -117,6 +122,7 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
 };
 
 declare module '@vue/runtime-core' {
+  /** Extended global components. */
   export interface GlobalComponents {
     VBtnAction: typeof import('vuetify/components/VBtn')['VBtn']
   }

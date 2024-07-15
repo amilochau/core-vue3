@@ -1,12 +1,14 @@
 root: true
 extends:
   - plugin:vue/vue3-recommended
+  - plugin:jsdoc/recommended-typescript-error
 parser: vue-eslint-parser
 parserOptions:
   parser: '@typescript-eslint/parser'
   sourceType: module
 plugins:
   - '@stylistic'
+  - jsdoc
 rules:
   # ===== Vue uncategorized rules - https://eslint.vuejs.org/rules/#uncategorized
   vue/block-lang: # Only '<script>' blocks with 'lang="ts"' are allowed
@@ -126,3 +128,40 @@ rules:
     - error
     - single
   '@stylistic/semi': error
+  # ===== JSDoc
+  "jsdoc/check-examples": 0 # Not supported with ESLint 8+
+  "jsdoc/check-indentation": 1
+  "jsdoc/check-line-alignment": 1
+  "jsdoc/check-syntax": 1
+  "jsdoc/informative-docs": 0
+  "jsdoc/match-description": 1
+  "jsdoc/no-bad-blocks": 1
+  "jsdoc/no-blank-block-descriptions": 1
+  "jsdoc/no-defaults": 1
+  "jsdoc/no-missing-syntax": 0
+  "jsdoc/no-restricted-syntax": 0
+  "jsdoc/no-types": 1
+  "jsdoc/require-asterisk-prefix": 1
+  "jsdoc/require-description": 1
+  "jsdoc/require-description-complete-sentence": 1
+  "jsdoc/require-example": 0
+  "jsdoc/require-file-overview": 0
+  "jsdoc/require-hyphen-before-param-description":
+    - warn
+    - never
+  "jsdoc/require-jsdoc":
+    - warn
+    - contexts:
+        - TSEnumDeclaration
+        - TSInterfaceDeclaration
+        - TSTypeAliasDeclaration
+      require:
+        ArrowFunctionExpression: true
+        ClassDeclaration: true
+        FunctionDeclaration: true
+        FunctionExpression: true
+        MethodDefinition: true
+      publicOnly: true
+  "jsdoc/require-returns": 0
+  "jsdoc/require-throws": 1
+  "jsdoc/sort-tags": 1

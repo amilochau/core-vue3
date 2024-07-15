@@ -6,6 +6,10 @@ import type { IHttpSettings, IProblemDetails } from '../types/http';
 import { useCoreOptions } from './options';
 import { useI18n } from 'vue-i18n';
 
+/**
+ * Use API (anonymous).
+ * @param relativeBaseUri Relative base URI for the API.
+ */
 export const useApiAnonymous = (relativeBaseUri: string) => {
 
   const { t, mergeLocaleMessage } = useI18n();
@@ -146,12 +150,23 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
   };
 
   return {
+    /**
+     * GET request.
+     * @param url Request URL.
+     * @param settings Request settings.
+     */
     getHttp: async (url: string, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
         method: 'GET',
       }));
     },
+    /**
+     * POST request.
+     * @param url Request URL.
+     * @param data Request data.
+     * @param settings Request settings.
+     */
     postHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
@@ -159,6 +174,12 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
         body: JSON.stringify(data),
       }));
     },
+    /**
+     * PUT request.
+     * @param url Request URL.
+     * @param data Request data.
+     * @param settings Request settings.
+     */
     putHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
@@ -166,6 +187,12 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
         body: JSON.stringify(data),
       }));
     },
+    /**
+     * PATCH request.
+     * @param url Request URL.
+     * @param data Request data.
+     * @param settings Request settings.
+     */
     patchHttp: async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,
@@ -173,6 +200,11 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
         body: JSON.stringify(data),
       }));
     },
+    /**
+     * DELETE request.
+     * @param url Request URL.
+     * @param settings Request settings.
+     */
     deleteHttp: async (url: string, settings: IHttpSettings) => {
       return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
         ...requestInit,

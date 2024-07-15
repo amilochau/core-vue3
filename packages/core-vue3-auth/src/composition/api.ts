@@ -6,6 +6,10 @@ import { type ApplicationMessage, type IHttpSettings, type IProblemDetails } fro
 import { useCoreOptions } from '@amilochau/core-vue3/composition';
 import { useLanguageStore } from '@amilochau/core-vue3/stores';
 
+/**
+ * Use API.
+ * @param relativeBaseUri Relative base URI for the API.
+ */
 export const useApi = (relativeBaseUri: string) => {
 
   const { t, mergeLocaleMessage } = useI18n();

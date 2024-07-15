@@ -1,3 +1,4 @@
+/** Message, typically displayed on the home page. */
 export type IHomeMessage = {
   title?: string;
   message?: string;
@@ -8,6 +9,7 @@ export type IHomeMessage = {
   variant?: 'text' | 'outlined' | 'plain' | 'elevated' | 'flat' | 'tonal'
 };
 
+/** Application message, typically displayed on a snackbar or in a form. */
 export type ApplicationMessage = {
   title: string;
   details?: string;
