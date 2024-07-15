@@ -8,11 +8,18 @@ import type { Pinia } from 'pinia';
 import PageRoot from '../../pages/PageRoot.vue';
 
 declare module 'vue-router' {
+  /** Extended interface for routes. */
   interface RouteMeta {
     requiresAuth?: boolean
   }
 }
 
+/**
+ * Register vue-router.
+ * @param app App instance.
+ * @param pinia Pinia instance.
+ * @param options Registration options.
+ */
 export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOptions) => {
   const languageStore = useLanguageStore(pinia);
   const identityStore = useIdentityStore(pinia);
@@ -32,6 +39,10 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
 
   const redirectionRoute: RouteRecordRaw = {
     path: '/:pathMatch(.*)*',
+    /**
+     * Redirection using the language.
+     * @param to Target route.
+     */
     redirect: to => {
       return {
         path: `/${languageStore.language}${to.fullPath}`,
@@ -47,6 +58,12 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
   const router = createRouter({
     history: createWebHistory(),
     routes: routesWithRedirection,
+    /**
+     * Scroll behavior.
+     * @param to Target route.
+     * @param from Origin route.
+     * @param savedPosition Saved position.
+     */
     scrollBehavior: async (to, from, savedPosition) => {
       // Wait for initial page load, or for cross page navigation
       if (!document.querySelector('main') || to.path !== from.path && to.hash) {

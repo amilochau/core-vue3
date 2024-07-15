@@ -21,6 +21,7 @@ const urlB64ToUint8Array = (base64String: string) => {
   return outputArray;
 };
 
+/** Use notifications. */
 export const useNotifications = () => {
 
   const { t, mergeLocaleMessage } = useI18n();
@@ -48,10 +49,12 @@ export const useNotifications = () => {
     unregistredSubscriptionDesc: 'Votre navigateur web a désactivé les notifications. Vous pouvez les réactiver, à partir de la page de paramètres.',
   });
 
+  /** Whether notifications are supported. */
   const isSupported = computed(() => registred.value || navigator.serviceWorker && 'PushManager' in window
       && !!coreOptions.notifications
       && isAuthenticated.value);
 
+  /** Subscribe to notifications. */
   const subscribe = async () => {
     try {
       if (!isSupported.value ||  registred.value) {
@@ -123,6 +126,7 @@ export const useNotifications = () => {
     }
   };
 
+  /** Unsubscribe to notifications. */
   const unsubscribe = async () => {
     try {
       appStore.loading = true;
@@ -165,6 +169,7 @@ export const useNotifications = () => {
     }
   };
 
+  /** Update notifications subscription. */
   const updateSubscription = async () => {
     try {
       if (!isSupported.value) {

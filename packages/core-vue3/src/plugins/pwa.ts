@@ -2,7 +2,11 @@ import { usePwaStore } from '../stores';
 import { registerSW } from 'virtual:pwa-register';
 import { type RouteLocationNormalized, type Router } from 'vue-router';
 
-export const registerPwa = (context: { router: Router }) => {
+/**
+ * Register vue-pwa.
+ * @param router Router instance.
+ */
+export const registerPwa = (router: Router) => {
   const pwaStore = usePwaStore();
 
   window.addEventListener('beforeinstallprompt', (e: any /*BeforeInstallPromptEvent */) => {
@@ -12,18 +16,23 @@ export const registerPwa = (context: { router: Router }) => {
   });
 
   pwaStore.updateSW = registerSW({
+    /** On need refresh actions. */
     async onNeedRefresh() {
       pwaStore.updateDisplay = true;
     },
     immediate: true, // Automatic page reload
   });
 
-  context.router.beforeEach(async (to, from) => {
+  router.beforeEach(async (to, from) => {
     if (to.path !== from.path) {
       await postUpdate(to);
     }
   });
 
+  /**
+   * Post udpate actions.
+   * @param to Target route.
+   */
   const postUpdate = async (to: RouteLocationNormalized) => {
     // Update registration (get latest data to know if we have to update)
     const registration = await navigator.serviceWorker?.getRegistration();

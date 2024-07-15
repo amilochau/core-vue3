@@ -15,6 +15,11 @@ import PageApp from './pages/PageApp.vue';
 // Styles
 import './styles/main.scss';
 
+/**
+ * Create a core-vue3 app instance.
+ * @param options Registration options.
+ * @param fn Further registration steps to execute after context creation (standard plugins registration).
+ */
 export const createCoreVue3App = async (
   options: MilochauCoreOptions,
   fn?: (context: { app: App, pinia: Pinia, router: Router }) => Promise<any>,
@@ -37,7 +42,7 @@ export const createCoreVue3App = async (
 
   app.use(router);
 
-  registerPwa({ router });
+  registerPwa(router);
 
   // wait until page component is fetched before mounting
   await router.isReady();

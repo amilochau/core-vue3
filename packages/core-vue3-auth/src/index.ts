@@ -7,6 +7,11 @@ import { type MilochauCoreOptions } from '@amilochau/core-vue3/types';
 import cognito from './plugins/cognito';
 import routes from './data/routes';
 
+/**
+ * Create a core-vue3 app instance, with authentication plugin.
+ * @param options Registration options.
+ * @param fn Further registration steps to execute after context creation (standard plugins registration).
+ */
 export const createCoreVue3AuthApp = (
   options: MilochauCoreOptions,
   fn?: (context: { app: App, pinia: Pinia, router: Router }) => Promise<any>,

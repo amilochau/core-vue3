@@ -14,6 +14,12 @@ declare module 'pinia' {
   }
 }
 
+/**
+ * Pinia persist.
+ * @param param0 Persistence data.
+ * @param param0.options Options.
+ * @param param0.store Store.
+ */
 const piniaPersist = ({ options, store }: PiniaPluginContext) => {
   if (options.persist?.storage === 'localStorage') {
     const storageResult = localStorage.getItem(store.$id);
@@ -28,6 +34,11 @@ const piniaPersist = ({ options, store }: PiniaPluginContext) => {
   }
 };
 
+/**
+ * Register pinia.
+ * @param app App instance.
+ * @param options Registration options.
+ */
 export const registerPinia = (app: App, options: MilochauCoreOptions) => {
   const pinia = createPinia()
     .use(piniaPersist);

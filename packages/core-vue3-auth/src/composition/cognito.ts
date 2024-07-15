@@ -20,6 +20,7 @@ import { type ApplicationMessage } from '@amilochau/core-vue3/types';
 import { useClean, useCoreOptions } from '@amilochau/core-vue3/composition';
 import { useIdentityStore } from '@amilochau/core-vue3/stores';
 
+/** Use Cognito. */
 export const useCognito = () => {
 
   const identityStore = useIdentityStore();
@@ -69,6 +70,10 @@ export const useCognito = () => {
   };
 
   return {
+    /**
+     * Sign up.
+     * @param model Register model.
+     */
     signUp: (model: Register) => processRequest(() => awsSignUp({
       username: model.email,
       password: model.password,
@@ -82,6 +87,10 @@ export const useCognito = () => {
       ['UsernameExistsException']: t('usernameExists'),
     }),
 
+    /**
+     * Confirm registration.
+     * @param model Confirm email model.
+     */
     confirmRegistration: (model: ConfirmEmail) => processRequest(() => awsConfirmSignUp({
       username: model.email,
       confirmationCode: model.code,
@@ -90,6 +99,10 @@ export const useCognito = () => {
       ['ExpiredCodeException']: t('expiredCode'),
     }),
 
+    /**
+     * Authenticate user.
+     * @param model Login model.
+     */
     authenticateUser: (model: Login) => processRequest(async () => {
       let response: SignInOutput;
       try {
@@ -128,6 +141,10 @@ export const useCognito = () => {
       ['NotAuthorizedException']: t('incorrectUsernamePassword'),
     }),
 
+    /**
+     * Confirm login.
+     * @param model Set password model.
+     */
     confirmLogin: (model: SetPassword) => processRequest(async () => {
       const response = await awsConfirmSignIn({
         challengeResponse: model.password,
@@ -143,10 +160,18 @@ export const useCognito = () => {
       };
     }, {}),
 
+    /**
+     * Forgot password.
+     * @param model Forgot password model.
+     */
     forgotPassword: (model: ForgotPassword) => processRequest(() => awsResetPassword({
       username: model.email,
     }), {}),
 
+    /**
+     * Confirm password.
+     * @param model Confirm password model.
+     */
     confirmPassword: (model: ResetPassword) => processRequest(() => awsConfirmResetPassword({
       username: model.email,
       confirmationCode: model.code,
@@ -155,6 +180,10 @@ export const useCognito = () => {
       ['CodeMismatchException']: t('incorrectCode'),
     }),
 
+    /**
+     * Change password.
+     * @param model Edit password model.
+     */
     changePassword: (model: EditPassword) => processRequest(() => awsUpdatePassword({
       oldPassword: model.oldPassword,
       newPassword: model.password,
@@ -162,19 +191,26 @@ export const useCognito = () => {
       ['NotAuthorizedException']: t('incorrectPassword'),
     }),
 
+    /**
+     * Update profile attributes.
+     * @param model Edit profile model.
+     */
     updateAttributes: (model: EditProfile) => processRequest(async () => awsUpdateUserAttributes({
       userAttributes: {
         name: model.name,
       },
     }), {}),
 
+    /** Delete user. */
     deleteUser: () => processRequest(() => awsDeleteUser(), {}),
 
+    /** Get a JWT token. */
     getJwtToken: () => processRequest(async () => {
       const authSession = await awsFetchAuthSession();
       return authSession.tokens?.idToken?.toString();
     }, {}),
 
+    /** Fetch user attributes. */
     fetchUserAttributes: () => processRequest(async () => {
       const userAttributes = await awsFetchUserAttributes();
       identityStore.setAttributes({
@@ -185,6 +221,7 @@ export const useCognito = () => {
       });
     }, {}),
 
+    /** Sign out. */
     signOut,
   };
 };

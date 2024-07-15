@@ -1,5 +1,6 @@
 import { useI18n } from 'vue-i18n';
 
+/** Use validation rules. */
 export const useValidationRules = () => {
   const { t, mergeLocaleMessage } = useI18n();
 
@@ -29,6 +30,7 @@ export const useValidationRules = () => {
   });
 
   return {
+    /** Validates that a required value exists. */
     required: () => (v: any) => {
       if (typeof v === 'string') {
         return (v !== null && v !== undefined && v.trim() !== '') || t('required');
@@ -36,10 +38,21 @@ export const useValidationRules = () => {
         return (v !== null && v !== undefined) || t('required');
       }
     },
+    /**
+     * Validates that a value is longer that @param min.
+     * @param min Minimal length.
+     */
     minLength: (min: number) => (v: any) => !v || v.length >= min || t('minLength', { min }),
+    /**
+     * Validates that a value is shorted that @param max.
+     * @param max Maximal length.
+     */
     maxLength: (max: number) => (v: any) => !v || v.length <= max || t('maxLength', { max }),
+    /** Validates that a value is an email address. */
     emailAddress: () => (v: any) => !v || /.+@.+\..+/.test(v) || t('emailAddress'),
+    /** Validates that a value is a date. */
     date: () => (v: any) => !v || (!isNaN(Date.parse(v)) && /^\d{4}-\d{2}-\d{2}$/.test(v)) || t('date'),
+    /** Validates that a value is an URL. */
     url: () => (v: any) => {
       if (!v) {
         return true;
@@ -52,6 +65,10 @@ export const useValidationRules = () => {
       }
       return url.protocol === 'http:' || url.protocol === 'https:' || t('url');
     },
+    /**
+     * Validates that a value is higher that @param min.
+     * @param min Minimal value.
+     */
     minValue: (min: number) => (v: any) => {
       if (v === null || v === undefined) {
         return true;
@@ -59,6 +76,10 @@ export const useValidationRules = () => {
       const floatValue = parseFloat(v);
       return floatValue >= min || t('minValue', { min });
     },
+    /**
+     * Validates that a value is lower that @param max.
+     * @param max Maximal value.
+     */
     maxValue: (max: number) => (v: any) => {
       if (v === null || v === undefined) {
         return true;
@@ -66,7 +87,9 @@ export const useValidationRules = () => {
       const floatValue = parseFloat(v);
       return floatValue <= max || t('maxValue', { max });
     },
+    /** Validates that a value is a number. */
     number: () => (v: string) => !v || !isNaN(Number(v.replace(',', '.'))) || t('number'),
+    /** Validates that a value is an integer. */
     integer: () => (v: string) => {
       if (!v) {
         return true;
