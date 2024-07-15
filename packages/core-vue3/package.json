@@ -72,5 +72,8 @@
     "vue-router": "^4.4.0",
     "vue-tsc": "^2.0.22",
     "vuetify": "^3.6.10"
+  },
+  "devDependencies": {
+    "eslint-plugin-jsdoc": "^48.5.0"
   }
 }
