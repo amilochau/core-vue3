@@ -2,7 +2,7 @@
   <v-empty-state
     :headline="headline"
     :title="title"
-    :icon="icon ?? mdiRunFast"
+    :icon="icon ?? mdiProgressDownload"
     :color="color ?? 'primary'">
     <v-progress-linear
       :color="color ?? 'primary'"
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { mdiRunFast } from '@mdi/js';
+import { mdiProgressDownload } from '@mdi/js';
 
 defineProps<{
   /** Headline. */
