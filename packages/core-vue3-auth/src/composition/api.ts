@@ -41,7 +41,7 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
   const router = useRouter();
   const { apiEnabled, authenticationEnabled, coreOptions } = useAppOptions();
 
-  const baseUri = coreOptions.api?.apiBaseUriBuilder({ apiName });
+  const baseUri = `${coreOptions.api?.apiBaseUriBuilder({ apiName })}${relativeBaseUri}`;
 
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
     switch (response.status) {
