@@ -1,6 +1,6 @@
 import { useApiAnonymous } from './api';
+import { useAppOptions } from './options';
 import { useClean } from './clean';
-import { useCoreOptions } from './options';
 import { useHandle } from './handle';
 import { useNavigation } from './navigation';
 import { useNotifications } from './notifications';
@@ -9,8 +9,8 @@ import { useValidationRules } from './validation';
 
 export {
   useApiAnonymous,
+  useAppOptions,
   useClean,
-  useCoreOptions,
   useHandle,
   useNavigation,
   useNotifications,

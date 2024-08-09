@@ -1,5 +1,5 @@
 import type { App } from 'vue';
-import type { MilochauCoreOptions } from '../types/options';
+import type { CoreOptions } from '../types/options';
 import deepmerge from 'deepmerge';
 
 // Vuetify
@@ -11,9 +11,9 @@ import { VBtn } from 'vuetify/components';
 /**
  * Register vuetify plugin.
  * @param app App instance.
- * @param options Registration options.
+ * @param coreOptions Core options.
  */
-export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
+export const registerVuetify = (app: App, coreOptions: CoreOptions) => {
   const defaultVuetifyOptions: VuetifyOptions = {
     theme: {
       themes: {
@@ -113,7 +113,7 @@ export const registerVuetify = (app: App, options: MilochauCoreOptions) => {
     },
   };
 
-  const vuetifyOptions = deepmerge(defaultVuetifyOptions, options.vuetify || {});
+  const vuetifyOptions = deepmerge(defaultVuetifyOptions, coreOptions.vuetify || {});
   const vuetify = createVuetify(vuetifyOptions);
 
   app.use(vuetify);

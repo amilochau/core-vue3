@@ -1,6 +1,6 @@
 import { useI18n } from 'vue-i18n';
 import { useHead } from '@unhead/vue';
-import { useCoreOptions } from './options';
+import { useAppOptions } from './options';
 import { type ComputedRef, computed, ref, watch } from 'vue';
 import { useAppStore } from '../stores';
 import type { PageData } from '../types';
@@ -11,7 +11,7 @@ import type { PageData } from '../types';
  */
 export const usePage = (pageData: ComputedRef<PageData>) => {
   const { locale } = useI18n();
-  const coreOptions = useCoreOptions();
+  const { coreOptions, environmentOptions } = useAppOptions();
   const appStore = useAppStore();
 
   watch(pageData, () => {
@@ -26,7 +26,7 @@ export const usePage = (pageData: ComputedRef<PageData>) => {
       name: 'description',
       content: pageData.value.description ? `${pageData.value.description} — ${appTitle.value}` : appTitle.value,
     },
-    ...!coreOptions.application.isProduction || pageData.value.noindex ? [{
+    ...!environmentOptions.isProduction || pageData.value.noindex ? [{
       name: 'robots',
       content: ref('noindex'),
     }] : [],

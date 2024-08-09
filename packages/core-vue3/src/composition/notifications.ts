@@ -1,7 +1,7 @@
 import { useAppStore, useIdentityStore, useNotificationsStore } from '../stores';
 import { NotificationRegisterType, type NotificationsRegisterRequest } from '../types/application/notifications';
 import { computed } from 'vue';
-import { useCoreOptions } from './options';
+import { useAppOptions } from './options';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
@@ -25,7 +25,7 @@ const urlB64ToUint8Array = (base64String: string) => {
 export const useNotifications = () => {
 
   const { t, mergeLocaleMessage } = useI18n();
-  const coreOptions = useCoreOptions();
+  const { coreOptions } = useAppOptions();
   const identityStore = useIdentityStore();
   const { isAuthenticated } = storeToRefs(identityStore);
   const appStore = useAppStore();

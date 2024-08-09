@@ -49,9 +49,18 @@ Note that `amilochau/core-vue3-auth` is optional - you can skip it if you don't 
 Define your `coreOptions` - use a dedicated file for better code separation:
 
 ```typescript
-import type { MilochauCoreOptions } from "@amilochau/core-vue3"
+import type { CoreOptions } from '@amilochau/core-vue3':
 
-export const coreOptions: MilochauCoreOptions = {
+export const environmentOptionsBuilder: (context: { host: string, subdomain: string }) => EnvironmentOptions = ({ host, subdomain }) => {
+  return {
+    variables: {
+      VITE_API_URL: 'YOUR API BASE URI',
+    },
+    isProduction: !host.includes('localhost') && !subdomain.includes('dev'),
+  };
+};
+
+export const coreOptionsBuilder: (context: EnvironmentOptions) => CoreOptions = ({ variables }) => ({
   application: {
     name: 'YOU APPLICATION NAME',
     contact: 'YOUR APPLICATION OWNER',
@@ -60,10 +69,9 @@ export const coreOptions: MilochauCoreOptions = {
         // YOUR APPLICATION NAVIGATION LINKS
       ])
     },
-    isProduction: true,
   },
   api: {
-    gatewayUri: 'YOUR API BASE URI'
+    buildApiBaseUri: ({ relativeBaseUri }) => `${variables['VITE_API_URL']}${relativeBaseUri}`,
   },
   i18: {
     messages: {
@@ -79,7 +87,7 @@ export const coreOptions: MilochauCoreOptions = {
   },
   routes: [], // <== USE THIS SECTION TO ADD ROUTES
   clean: () => () => {} // WHAT TO CALL TO CLEAN LOCAL DATA ON LOGOUT
-}
+});
 ```
 
 3. Register the plugin
@@ -87,23 +95,23 @@ export const coreOptions: MilochauCoreOptions = {
 Register `amilochau/core-vue3` in your main file:
 
 ```typescript
-import { createCoreVue3App } from '@amilochau/core-vue3'
-import { coreOptions } from './data/config'
+import { createCoreVue3App } from '@amilochau/core-vue3';
+import { coreOptionsBuilder, environmentOptionsBuilder } from './data/config';
 
-import 'vuetify/styles'
+import 'vuetify/styles';
 
-export const coreVue3App = await createCoreVue3App(App, coreOptions);
+export const coreVue3App = createCoreVue3App(environmentOptionsBuilder, coreOptionsBuilder);
 ```
 
 If you want to use authentication, register `amilochau/core-vue3-auth` in your main file:
 
 ```typescript
-import { createCoreVue3AuthApp } from '@amilochau/core-vue3-auth'
-import { coreOptions } from './data/config'
+import { createCoreVue3AuthApp } from '@amilochau/core-vue3-auth';
+import { coreOptionsBuilder, environmentOptionsBuilder } from './data/config';
 
-import 'vuetify/styles'
+import 'vuetify/styles';
 
-export const coreVue3App = await createCoreVue3AuthApp(coreOptions);
+export const coreVue3App = createCoreVue3AuthApp(environmentOptionsBuilder, coreOptionsBuilder);
 ```
 
 ---
@@ -132,7 +140,7 @@ Here are the helpers you can use from your code.
 | `useApi` | Sends authenticated HTTP requests to the API gateway configured via `api.gatewayUri` ; manages HTTP errors *(only if `amilochau/core-vue3-auth is configured`)* |
 | `useClean` | Cleans data from storage, typically on logout, as configured via `clean` |
 | `useCognito` | Interact with AWS Cognito *(only if `amilochau/core-vue3-auth is configured`)* |
-| `useCoreOptions` | Lets you get the core options defined on plugin registration |
+| `useAppOptions` | Lets you get the environment and core options defined on plugin registration |
 | `useHandle` | Handle asynchronous requests to manage errors, with loader bar and snackbar messages |
 | `useNavigation` | Helps you use router with back navigation |
 | `useNotifications` | Lets you register your application for push notifications |
@@ -153,24 +161,16 @@ Here are the `pinia` stores you can use from your code.
 
 ## Options
 
-Here are the options you should provide in the `MilochauCoreOptions` class.
+Application options must be configured on the application initialization - using the `createCoreVue3App` or the `createCoreVue3AuthApp` method, and can then be injected via the `useAppOptions` composition API.
 
-| Configuration path | Description |
-| ------------------ | ----------- |
-| `application.name` | Name of the application |
-| `application.contact` | Application owner, as used in the policy page |
-| `application.logoUrl` | URL of the application logo |
-| `application.navigation.items` | Navigation links, as `vuetify` list items, used in the navigation drawer |
-| `application.isProduction` | Whether the current application is production |
-| `api.gatewayUri` | Base URI used by the `useApi` composition API |
-| `i18n` | Options used by `vue-i18n` |
-| `identity.cognito` | Cognito settings for authentication |
-| `rootComponent` | A custom component to use as a base parent for all the others |
-| `routes` | List of `vue-router` routes, to register application pages |
-| `clean` | Function called on logout, typically used to delete personal data from `pinia` stores |
-| `pwa.hideInstallBtn` | Hide the PWA install button from the header bar |
-| `notifications.pushKey` | Public VAPID key for push notifications |
-| `notifications.register` | Function called on notifications registration, typically used to call an API to save the registration data |
+Here are the proposed options.
+
+| Property | Usage | Type | Description |
+| -------- | ----- | ---- | ----------- |
+| `coreOptions` | `const { coreOptions } = useAppOptions();` | `CoreOptions` | Core options, containing settings provided on application initialization. |
+| `environmentOptions` | `const { environmentOptions } = useAppOptions();` | `EnvironmentOptions` | Environment options, containing environment variables. |
+| `apiEnabled ` | `const { apiEnabled } = useAppOptions();` | `boolean` | Whether API capabilities are properly configured, and can be used in the application. |
+| `authenticationEnabled` | `const { authenticationEnabled } = useAppOptions();` | `boolean` | Whether identity capabilities are properly configured, and can be used in the application. |
 
 See the full definition of options [here](/packages/core-vue3/src/types/options.ts).
 

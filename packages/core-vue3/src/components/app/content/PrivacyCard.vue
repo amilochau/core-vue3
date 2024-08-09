@@ -29,11 +29,11 @@ import AppSectionHeader from '../section/AppSectionHeader.vue';
 import AppSectionSubHeader from '../section/AppSectionSubHeader.vue';
 import AppSectionText from '../section/AppSectionText.vue';
 import { useI18n } from 'vue-i18n';
-import { useCoreOptions } from '../../../composition';
+import { useAppOptions } from '../../../composition';
 import { computed } from 'vue';
 
 const { t, mergeLocaleMessage } = useI18n();
-const coreOptions = useCoreOptions();
+const { coreOptions } = useAppOptions();
 
 Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
   mergeLocaleMessage(key, {

@@ -1,18 +1,20 @@
 import { inject } from 'vue';
-import type { MilochauCoreOptions } from '../types';
+import type { CoreOptions, EnvironmentOptions } from '../types';
 
-/** Use core options. */
-export const useCoreOptions = () => {
+/** Use app options. */
+export const useAppOptions = () => {
   /** Registration options. */
-  const options = inject('core-options') as MilochauCoreOptions;
+  const coreOptions = inject('core-options') as CoreOptions;
+  const environmentOptions = inject('environment-options') as EnvironmentOptions;
 
   /** Whether authentication is enabled. */
-  const authenticationEnabled = !!options.identity;
+  const authenticationEnabled = !!coreOptions.identity;
   /** Whether API is enabled. */
-  const apiEnabled = !!options.api;
+  const apiEnabled = !!coreOptions.api;
 
   return {
-    ...options,
+    coreOptions,
+    environmentOptions,
     authenticationEnabled,
     apiEnabled,
   };

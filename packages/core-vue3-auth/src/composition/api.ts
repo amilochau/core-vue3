@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router';
 import { useCognito } from './cognito';
 import { useI18n } from 'vue-i18n';
 import { type ApplicationMessage, type IHttpSettings, type IProblemDetails } from '@amilochau/core-vue3/types';
-import { useCoreOptions } from '@amilochau/core-vue3/composition';
+import { useAppOptions } from '@amilochau/core-vue3/composition';
 import { useLanguageStore } from '@amilochau/core-vue3/stores';
 
 /**
@@ -38,9 +38,9 @@ export const useApi = (relativeBaseUri: string) => {
   const languageStore = useLanguageStore();
   const { getJwtToken, signOut } = useCognito();
   const router = useRouter();
-  const coreOptions = useCoreOptions();
+  const { apiEnabled, authenticationEnabled, coreOptions } = useAppOptions();
 
-  const baseUri = `${coreOptions.api?.gatewayUri}${relativeBaseUri}`;
+  const baseUri = coreOptions.api?.buildApiBaseUri({ relativeBaseUri });
 
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
     switch (response.status) {
@@ -135,11 +135,11 @@ export const useApi = (relativeBaseUri: string) => {
 
     let response: Response;
 
-    if (!coreOptions.apiEnabled) {
+    if (!apiEnabled) {
       throw 'API integration is not configured.';
     }
 
-    if (!coreOptions.authenticationEnabled) {
+    if (!authenticationEnabled) {
       throw 'Authentication is not configured.';
     }
 

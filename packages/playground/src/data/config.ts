@@ -1,62 +1,28 @@
-import { type MilochauCoreOptions } from '@amilochau/core-vue3/types';
-import { getConfig, getCurrentEnvironment } from '../utils/config';
+import type { CoreOptions, EnvironmentOptions } from '@amilochau/core-vue3/types';
 import routes from './routes';
 import { useMapsStore } from '../stores';
 import { navigation } from './navigation';
 import logoUrl from '@/assets/logo.png';
 import PageRoot from '@/pages/PageRoot.vue';
 
-export enum Environment {
-  Default = 'default',
-  LocalDevelopment = 'local_development',
-  LocalProduction = 'local_production',
-  Development = 'dev',
-  Production = 'prd',
-}
-
-export type EnvConfigValues = {
-  [key in Environment]: Record<string, string>
+export const environmentOptionsBuilder: (context: { host: string, subdomain: string }) => EnvironmentOptions = ({ host, subdomain }) => {
+  return {
+    variables: {
+      VITE_API_URL: 'http://localhost:4000',
+    },
+    isProduction: !host.includes('localhost') && !subdomain.includes('dev'),
+  };
 };
 
-export const defaultEnv: Environment = Environment.Default;
-
-export const envConfig: EnvConfigValues = {
-  default: {
-  },
-  local_development: {
-    VITE_API_URL: 'http://localhost:4000',
-  },
-  local_production: {
-    VITE_API_URL: 'http://localhost:4000',
-  },
-  dev: {
-    VITE_API_URL: 'http://localhost:4000',
-  },
-  prd: {
-    VITE_API_URL: 'http://localhost:4000',
-  },
-};
-
-export const getCurrentEnv = (host: string, subdomain: string): Environment => {
-  if (host.includes('localhost')) {
-    return Environment.LocalDevelopment;
-  } else if (subdomain.includes('dev')) {
-    return Environment.Development;
-  } else {
-    return Environment.Production;
-  }
-};
-
-export const coreOptions: MilochauCoreOptions = {
+export const coreOptionsBuilder: (context: EnvironmentOptions) => CoreOptions = ({ variables }) => ({
   application: {
-    name: 'Maps',
+    name: 'Test',
     contact: 'Antoine Milochau',
     logoUrl,
     navigation,
-    isProduction: getCurrentEnvironment() === Environment.Production,
   },
   api: {
-    gatewayUri: getConfig('VITE_API_URL'),
+    buildApiBaseUri: ({ relativeBaseUri }) => `${variables['VITE_API_URL']}${relativeBaseUri}`,
   },
   i18n: {
     messages: {
@@ -77,4 +43,4 @@ export const coreOptions: MilochauCoreOptions = {
       mapsStore.clean();
     };
   },
-};
+});
