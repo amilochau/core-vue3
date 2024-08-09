@@ -5,7 +5,7 @@ import { useApiAnonymous } from '@amilochau/core-vue3/composition';
 
 export const useMapsApi = () => {
 
-  const api = useApiAnonymous('/maps');
+  const api = useApiAnonymous('maps', '/maps');
 
   const mapsStore = useMapsStore();
 
