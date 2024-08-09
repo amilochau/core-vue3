@@ -1,10 +1,10 @@
 import { useIdentityStore } from '../stores';
-import { useCoreOptions } from './options';
+import { useAppOptions } from './options';
 
 /** Use clean. */
 export const useClean = () => {
 
-  const coreOptions = useCoreOptions();
+  const { coreOptions } = useAppOptions();
   const identityStore = useIdentityStore();
   const cleanFromCoreOptions = coreOptions.clean();
 

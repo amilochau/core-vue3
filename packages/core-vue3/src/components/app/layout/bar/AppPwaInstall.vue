@@ -20,7 +20,7 @@ import { mdiDownload } from '@mdi/js';
 import { useMediaQuery, useOnline } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
 import { useAppStore, usePwaStore } from '../../../../stores';
-import { useCoreOptions } from '../../../../composition';
+import { useAppOptions } from '../../../../composition';
 import { storeToRefs } from 'pinia';
 
 const { t } = useI18n();
@@ -29,7 +29,7 @@ const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 const pwaStore = usePwaStore();
 const { installDisplay } = storeToRefs(pwaStore);
-const coreOptions = useCoreOptions();
+const { coreOptions } = useAppOptions();
 
 const isInstalled = useMediaQuery('(display-mode: standalone)');
 </script>

@@ -3,7 +3,7 @@
     <template #activator="{ props: tooltip }">
       <v-scroll-y-reverse-transition mode="out-in">
         <v-btn
-          v-if="coreOptions.authenticationEnabled && !isAuthenticated"
+          v-if="authenticationEnabled && !isAuthenticated"
           v-bind="tooltip"
           :icon="mdiPower"
           :to="{ name: 'Login' }"
@@ -17,13 +17,13 @@
 <script setup lang="ts">
 import { mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
-import { useCoreOptions } from '../../../../composition';
+import { useAppOptions } from '../../../../composition';
 import { useIdentityStore } from '../../../../stores';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const identityStore = useIdentityStore();
-const coreOptions = useCoreOptions();
+const { authenticationEnabled } = useAppOptions();
 const { isAuthenticated } = storeToRefs(identityStore);
 </script>
 

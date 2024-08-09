@@ -1,70 +1,48 @@
-import { type MilochauCoreOptions, type NotificationsRegisterRequest } from '@amilochau/core-vue3/types';
-import { getConfig, getCurrentEnvironment } from '../utils/config';
+import type { CoreOptions, EnvironmentOptions, NotificationsRegisterRequest } from '@amilochau/core-vue3/types';
 import routes from './routes';
 import { useMapsStore } from '../stores';
 import { navigation } from './navigation';
 import { useNotificationsApi } from '@/composition/notifications.api';
 
-export enum Environment {
-  Default = 'default',
-  LocalDevelopment = 'local_development',
-  LocalProduction = 'local_production',
-  Development = 'dev',
-  Production = 'prd',
-}
-
-export type EnvConfigValues = {
-  [key in Environment]: Record<string, string>
-};
-
-export const defaultEnv: Environment = Environment.Default;
-
-export const envConfig: EnvConfigValues = {
-  default: {
-    VITE_COGNITO_USERPOOL_ID: '',
-    VITE_COGNITO_CLIENT_ID: '',
-  },
-  local_development: {
-    VITE_API_URL: 'http://localhost:4000',
-    VITE_COGNITO_USERPOOL_ID: 'eu-west-3_Trx7Zxn8M',
-    VITE_COGNITO_CLIENT_ID: 'utanndb0eu3s7gdtuj19rb45e',
-  },
-  local_production: {
-    VITE_API_URL: 'http://localhost:4000',
-    VITE_COGNITO_USERPOOL_ID: 'eu-west-3_UBYZWnUAL',
-    VITE_COGNITO_CLIENT_ID: '3630qvq2muq2fkl2e8lsj5800o',
-  },
-  dev: {
-    VITE_API_URL: 'http://localhost:4000',
-    VITE_COGNITO_USERPOOL_ID: '',
-    VITE_COGNITO_CLIENT_ID: '',
-  },
-  prd: {
-    VITE_API_URL: 'http://localhost:4000',
-    VITE_COGNITO_USERPOOL_ID: '',
-    VITE_COGNITO_CLIENT_ID: '',
-  },
-};
-
-export const getCurrentEnv = (host: string, subdomain: string): Environment => {
+export const environmentOptionsBuilder: (context: { host: string, subdomain: string }) => EnvironmentOptions = ({ host, subdomain }) => {
   if (host.includes('localhost')) {
-    return Environment.LocalDevelopment;
+    return {
+      variables: {
+        VITE_API_URL: 'http://localhost:4000',
+        VITE_COGNITO_USERPOOL_ID: 'eu-west-3_Trx7Zxn8M',
+        VITE_COGNITO_CLIENT_ID: 'utanndb0eu3s7gdtuj19rb45e',
+      },
+      isProduction: false,
+    };
   } else if (subdomain.includes('dev')) {
-    return Environment.Development;
+    return {
+      variables: {
+        VITE_API_URL: 'http://localhost:4000',
+        VITE_COGNITO_USERPOOL_ID: '',
+        VITE_COGNITO_CLIENT_ID: '',
+      },
+      isProduction: false,
+    };
   } else {
-    return Environment.Production;
+    return {
+      variables: {
+        VITE_API_URL: 'http://localhost:4000',
+        VITE_COGNITO_USERPOOL_ID: '',
+        VITE_COGNITO_CLIENT_ID: '',
+      },
+      isProduction: true,
+    };
   }
 };
 
-export const coreOptions: MilochauCoreOptions = {
+export const coreOptionsBuilder: (context: EnvironmentOptions) => CoreOptions = ({ variables }) => ({
   application: {
-    name: 'Maps',
+    name: 'Test',
     contact: 'Antoine Milochau',
     navigation,
-    isProduction: getCurrentEnvironment() === Environment.Production,
   },
   api: {
-    gatewayUri: getConfig('VITE_API_URL'),
+    buildApiBaseUri: ({ relativeBaseUri }) => `${variables['VITE_API_URL']}${relativeBaseUri}`,
   },
   i18n: {
     messages: {
@@ -78,8 +56,8 @@ export const coreOptions: MilochauCoreOptions = {
   },
   identity: {
     cognito: {
-      userPoolId: getConfig('VITE_COGNITO_USERPOOL_ID'),
-      clientId: getConfig('VITE_COGNITO_CLIENT_ID'),
+      userPoolId: variables['VITE_COGNITO_USERPOOL_ID'],
+      clientId: variables['VITE_COGNITO_CLIENT_ID'],
     },
   },
   routes: routes,
@@ -100,4 +78,4 @@ export const coreOptions: MilochauCoreOptions = {
       };
     },
   },
-};
+});

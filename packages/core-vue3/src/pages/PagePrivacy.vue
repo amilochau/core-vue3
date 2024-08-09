@@ -15,7 +15,7 @@
 import { AppResponsive } from '../components';
 import PrivacyCard from '../components/app/content/PrivacyCard.vue';
 import { useI18n } from 'vue-i18n';
-import { useCoreOptions, usePage } from '../composition';
+import { useAppOptions, usePage } from '../composition';
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
@@ -28,7 +28,7 @@ usePage(computed(() => ({
     defaultBackTo: { name: 'Home' },
   },
 })));
-const coreOptions = useCoreOptions();
+const { coreOptions } = useAppOptions();
 const { xs } = useDisplay();
 
 Object.entries(coreOptions.i18n.messages).map(([key, item]) => {

@@ -54,7 +54,7 @@ import AppPwaInstall from './AppPwaInstall.vue';
 import AppPwaUpdate from './AppPwaUpdate.vue';
 import AppProgressBar from '../AppProgressBar.vue';
 import { useAppStore } from '../../../../stores';
-import { useCoreOptions, useNavigation } from '../../../../composition';
+import { useAppOptions, useNavigation } from '../../../../composition';
 import { type RouteLocationRaw, useRouter } from 'vue-router';
 import { computed } from 'vue';
 
@@ -77,7 +77,7 @@ defineSlots<{
 }>();
 
 const appStore = useAppStore();
-const coreOptions = useCoreOptions();
+const { coreOptions } = useAppOptions();
 const router = useRouter();
 const { hasStateHistory } = useNavigation();
 

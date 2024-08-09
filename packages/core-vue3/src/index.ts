@@ -1,7 +1,7 @@
 import { type App, createApp } from 'vue';
 import type { Router } from 'vue-router';
 import type { Pinia } from 'pinia';
-import type { MilochauCoreOptions } from './types/options';
+import type { CoreOptions, EnvironmentOptions } from './types/options';
 
 import { registerI18n } from './plugins/i18n';
 import { registerHead } from './plugins/head';
@@ -17,24 +17,41 @@ import './styles/main.scss';
 
 /**
  * Create a core-vue3 app instance.
- * @param options Registration options.
+ * @param environmentOptionsBuilder Environment options builder.
+ * @param coreOptionsBuilder Core options builder.
  * @param fn Further registration steps to execute after context creation (standard plugins registration).
  */
 export const createCoreVue3App = async (
-  options: MilochauCoreOptions,
-  fn?: (context: { app: App, pinia: Pinia, router: Router }) => Promise<any>,
+  environmentOptionsBuilder: (context: { host: string, subdomain: string }) => EnvironmentOptions,
+  coreOptionsBuilder: (environmentOptions: EnvironmentOptions) => CoreOptions,
+  fn?: (context: { app: App, pinia: Pinia, router: Router, coreOptions: CoreOptions }) => Promise<any>,
 ) => {
+  // Create vue.js app
   const app = createApp(PageApp);
 
-  app.provide('core-options', options);
+  // Build environment
+  const host = window.location.host;
+  const subdomain = host.split('.')[0];
+  const environmentOptions = environmentOptionsBuilder({ host, subdomain });
+  environmentOptions.variables = {
+    ...import.meta.env,
+    ...environmentOptions.variables,
+  };
 
-  const i18n = registerI18n(app, options);
-  const head = registerHead(app, options);
-  const vuetify = registerVuetify(app, options);
-  const pinia = registerPinia(app, options);
-  const router = registerRouter(app, pinia, options);
+  // Build core options
+  const coreOptions = coreOptionsBuilder(environmentOptions);
 
-  await fn?.({ app, pinia, router });
+  // Provide options
+  app.provide('core-options', coreOptions);
+  app.provide('environment-options', environmentOptions);
+
+  const i18n = registerI18n(app, coreOptions);
+  const head = registerHead(app, coreOptions);
+  const vuetify = registerVuetify(app, coreOptions);
+  const pinia = registerPinia(app, coreOptions);
+  const router = registerRouter(app, pinia, coreOptions);
+
+  await fn?.({ app, pinia, router, coreOptions });
 
   app.config.errorHandler = console.error;
   app.config.warnHandler = console.warn;

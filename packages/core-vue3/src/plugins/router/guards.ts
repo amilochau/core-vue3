@@ -1,4 +1,4 @@
-import type { MilochauCoreOptions } from '../..//types';
+import type { CoreOptions } from '../..//types';
 import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-router';
 
 /**
@@ -6,9 +6,9 @@ import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-r
  * @param router Router instance.
  * @param identityStore Identity store.
  * @param appStore App store.
- * @param options Registration options.
+ * @param coreOptions Core options.
  */
-export const registerGuards = (router: Router, identityStore: any, appStore: any, options: MilochauCoreOptions) => {
+export const registerGuards = (router: Router, identityStore: any, appStore: any, coreOptions: CoreOptions) => {
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
 
     // Hide snackbar if lang changes
@@ -18,7 +18,7 @@ export const registerGuards = (router: Router, identityStore: any, appStore: any
 
     // Check if target route is protected
     if (to.meta.requiresAuth && !identityStore.isAuthenticated) {
-      if (options.identity && router.hasRoute('Login')) {
+      if (coreOptions.identity && router.hasRoute('Login')) {
         next({ name: 'Login', params: { lang: to.params.lang }, query: { returnUrl: to.path } });
         return;
       } else {

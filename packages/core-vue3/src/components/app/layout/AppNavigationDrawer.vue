@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import { useCoreOptions } from '../../../composition';
+import { useAppOptions } from '../../../composition';
 import { useAppStore } from '../../../stores';
 
 const appStore = useAppStore();
-const coreOptions = useCoreOptions();
+const { coreOptions } = useAppOptions();
 
 const { items, appendItems } = coreOptions.application.navigation();
 </script>

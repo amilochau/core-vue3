@@ -1,13 +1,13 @@
 import { createHead } from '@unhead/vue';
 import type { App } from 'vue';
-import type { MilochauCoreOptions } from '../types/options';
+import type { CoreOptions } from '../types/options';
 
 /**
  * Register @unhead/vue.
  * @param app App instance.
- * @param options Registration options.
+ * @param coreOptions Core options.
  */
-export const registerHead = (app: App, options: MilochauCoreOptions) => {
+export const registerHead = (app: App, coreOptions: CoreOptions) => {
   const head = createHead();
   app.use(head);
 

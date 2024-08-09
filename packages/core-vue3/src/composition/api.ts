@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router';
 import { useLanguageStore } from '../stores';
 import { type ApplicationMessage } from '../types';
 import type { IHttpSettings, IProblemDetails } from '../types/http';
-import { useCoreOptions } from './options';
+import { useAppOptions } from './options';
 import { useI18n } from 'vue-i18n';
 
 /**
@@ -37,9 +37,9 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
 
   const languageStore = useLanguageStore();
   const router = useRouter();
-  const coreOptions = useCoreOptions();
+  const { apiEnabled, coreOptions } = useAppOptions();
 
-  const baseUri = `${coreOptions.api?.gatewayUri}${relativeBaseUri}`;
+  const baseUri = coreOptions.api?.buildApiBaseUri({ relativeBaseUri });
 
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
     switch (response.status) {
@@ -130,7 +130,7 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
 
     let response: Response;
 
-    if (!coreOptions.apiEnabled) {
+    if (!apiEnabled) {
       throw 'API integration is not configured.';
     }
 

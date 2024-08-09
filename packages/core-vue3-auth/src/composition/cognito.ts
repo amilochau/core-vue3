@@ -17,14 +17,14 @@ import {
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
 import { type ApplicationMessage } from '@amilochau/core-vue3/types';
-import { useClean, useCoreOptions } from '@amilochau/core-vue3/composition';
+import { useAppOptions, useClean } from '@amilochau/core-vue3/composition';
 import { useIdentityStore } from '@amilochau/core-vue3/stores';
 
 /** Use Cognito. */
 export const useCognito = () => {
 
   const identityStore = useIdentityStore();
-  const coreOptions = useCoreOptions();
+  const { authenticationEnabled, coreOptions } = useAppOptions();
   const { t, mergeLocaleMessage } = useI18n();
   const { clean } = useClean();
 
@@ -48,7 +48,7 @@ export const useCognito = () => {
   });
 
   const processRequest = async <TResponse>(request: () => Promise<TResponse>, errorMapping: Record<string, string>) => {
-    if (!coreOptions.authenticationEnabled) {
+    if (!authenticationEnabled) {
       throw 'Authentication is not configured.';
     }
 

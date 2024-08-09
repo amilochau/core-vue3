@@ -2,7 +2,7 @@ import { type RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
 import routes from '../../data/routes';
 import { registerGuards } from './guards';
 import { type App } from 'vue';
-import type { MilochauCoreOptions } from '../../types';
+import type { CoreOptions } from '../../types';
 import { useAppStore, useIdentityStore, useLanguageStore } from '../../stores';
 import type { Pinia } from 'pinia';
 import PageRoot from '../../pages/PageRoot.vue';
@@ -18,9 +18,9 @@ declare module 'vue-router' {
  * Register vue-router.
  * @param app App instance.
  * @param pinia Pinia instance.
- * @param options Registration options.
+ * @param coreOptions Core options.
  */
-export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOptions) => {
+export const registerRouter = (app: App, pinia: Pinia, coreOptions: CoreOptions) => {
   const languageStore = useLanguageStore(pinia);
   const identityStore = useIdentityStore(pinia);
   const appStore = useAppStore(pinia);
@@ -28,13 +28,13 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
   const rootRoute: RouteRecordRaw = {
     path: '/:lang([a-z]{2})',
     component: PageRoot,
-    children: options.rootComponent ? [
+    children: coreOptions.rootComponent ? [
       {
         path: '',
-        component: options.rootComponent,
-        children: options.routes.concat(routes),
+        component: coreOptions.rootComponent,
+        children: coreOptions.routes.concat(routes),
       } as RouteRecordRaw,
-    ] : options.routes.concat(routes),
+    ] : coreOptions.routes.concat(routes),
   };
 
   const redirectionRoute: RouteRecordRaw = {
@@ -86,7 +86,7 @@ export const registerRouter = (app: App, pinia: Pinia, options: MilochauCoreOpti
   });
 
   // Register guards
-  registerGuards(router, identityStore, appStore, options);
+  registerGuards(router, identityStore, appStore, coreOptions);
 
   return router;
 };
