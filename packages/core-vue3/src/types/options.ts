@@ -23,7 +23,7 @@ export type CoreOptions = {
   /** API options. */
   api?: {
     /** Method to create the base URI in API composition. */
-    buildApiBaseUri: (context: { relativeBaseUri: string }) => string,
+    apiBaseUriBuilder: (context: { apiName: string }) => string,
   },
   /** I18n options. */
   i18n: I18nOptions & { messages: CoreOptionsMessages },

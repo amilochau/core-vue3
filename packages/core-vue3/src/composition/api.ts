@@ -8,9 +8,10 @@ import { useI18n } from 'vue-i18n';
 
 /**
  * Use API (anonymous).
+ * @param apiName Name of the API, typically used to build the API URL.
  * @param relativeBaseUri Relative base URI for the API.
  */
-export const useApiAnonymous = (relativeBaseUri: string) => {
+export const useApiAnonymous = (apiName: string, relativeBaseUri: string) => {
 
   const { t, mergeLocaleMessage } = useI18n();
 
@@ -39,7 +40,7 @@ export const useApiAnonymous = (relativeBaseUri: string) => {
   const router = useRouter();
   const { apiEnabled, coreOptions } = useAppOptions();
 
-  const baseUri = coreOptions.api?.buildApiBaseUri({ relativeBaseUri });
+  const baseUri = coreOptions.api?.apiBaseUriBuilder({ apiName });
 
   const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
     switch (response.status) {

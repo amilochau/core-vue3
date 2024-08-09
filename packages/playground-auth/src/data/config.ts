@@ -42,7 +42,7 @@ export const coreOptionsBuilder: (context: EnvironmentOptions) => CoreOptions = 
     navigation,
   },
   api: {
-    buildApiBaseUri: ({ relativeBaseUri }) => `${variables['VITE_API_URL']}${relativeBaseUri}`,
+    apiBaseUriBuilder: () => variables['VITE_API_URL'],
   },
   i18n: {
     messages: {

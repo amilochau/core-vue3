@@ -5,7 +5,7 @@ import { useApi } from '@amilochau/core-vue3-auth/composition';
 
 export const useMapsApi = () => {
 
-  const api = useApi('/maps');
+  const api = useApi('maps', '/maps');
 
   const mapsStore = useMapsStore();
 
