@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3-root",
-  "version": "0.8.10",
+  "version": "0.8.11",
   "private": true,
   "workspaces": [
     "packages/*"
