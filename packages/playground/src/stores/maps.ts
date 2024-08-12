@@ -5,7 +5,7 @@ const getDefaultState = () => {
   return {
     search: '',
     items: new Array<MapsListResponse>(),
-    lastItems: new Array<MapsListResponse>(),
+    lastEntities: new Array<MapsListResponse>(),
     endReached: false,
     lastKey: '' as string | undefined,
   };
