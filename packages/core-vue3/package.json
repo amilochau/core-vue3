@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3",
-  "version": "0.8.11",
+  "version": "0.8.12",
   "description": "Core plugin for vue.js (v3) projects",
   "author": "Antoine Milochau",
   "license": "MIT",
@@ -57,12 +57,12 @@
     "@vueuse/core": "^10.11.1",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
-    "pinia": "^2.2.1",
+    "pinia": "^2.2.2",
     "roboto-fontface": "^0.10.0",
     "sass": "^1.77.8",
     "sass-loader": "^14.2.1",
     "typescript": "^5.5.4",
-    "vite": "^5.4.0",
+    "vite": "^5.4.1",
     "vite-plugin-pwa": "^0.20.1",
     "vite-plugin-vuetify": "^2.0.4",
     "vue": "^3.4.30",
@@ -71,7 +71,7 @@
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.4.3",
     "vue-tsc": "^2.0.29",
-    "vuetify": "^3.6.14"
+    "vuetify": "^3.7.0"
   },
   "devDependencies": {
     "eslint-plugin-jsdoc": "^48.11.0"
