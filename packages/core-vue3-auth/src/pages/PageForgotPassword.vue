@@ -33,7 +33,7 @@ import { type Ref, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { ForgotPassword } from '../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
-import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -49,6 +49,7 @@ const router = useRouter();
 const { handleLoadAndError } = useHandle();
 const { forgotPassword } = useCognito();
 const { required, maxLength, emailAddress } = useValidationRules();
+const { returnUrlQuery } = useNavigation();
 
 const request: Ref<ForgotPassword> = ref({
   email: '',
@@ -57,7 +58,7 @@ const request: Ref<ForgotPassword> = ref({
 const reset = () => handleLoadAndError(async () => {
   await forgotPassword(request.value);
   appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') });
-  await router.push({ name: 'ResetPassword', query: { email: request.value.email } });
+  await router.push({ name: 'ResetPassword', query: { email: request.value.email, ...returnUrlQuery.value } });
 });
 </script>
 

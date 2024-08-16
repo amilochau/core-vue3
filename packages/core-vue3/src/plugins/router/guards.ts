@@ -19,7 +19,7 @@ export const registerGuards = (router: Router, identityStore: any, appStore: any
     // Check if target route is protected
     if (to.meta.requiresAuth && !identityStore.isAuthenticated) {
       if (coreOptions.identity && router.hasRoute('Login')) {
-        next({ name: 'Login', params: { lang: to.params.lang }, query: { returnUrl: to.path } });
+        next({ name: 'Login', params: { lang: to.params.lang }, query: { returnUrl: to.fullPath } });
         return;
       } else {
         next({ name: 'Forbidden', params: { lang: to.params.lang } });

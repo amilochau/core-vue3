@@ -55,9 +55,9 @@ import { mdiAccount, mdiAccountLockOutline, mdiAccountPlus, mdiAccountPlusOutlin
 import { useCognito } from '../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import type { Register } from '../types';
-import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n();
@@ -70,10 +70,12 @@ usePage(computed(() => ({
   },
 })));
 const appStore = useAppStore();
+const route = useRoute();
 const router = useRouter();
 const { handleLoadAndError } = useHandle();
 const { signUp } = useCognito();
 const { required, minLength, maxLength, emailAddress } = useValidationRules();
+const { returnUrlQuery } = useNavigation();
 
 const request: Ref<Register> = ref({
   name: '',
@@ -83,13 +85,13 @@ const request: Ref<Register> = ref({
 });
 
 const links = computed(() => ([
-  { title: t('links.login.title'), subtitle: t('links.login.subtitle'), prependIcon: mdiAccountLockOutline, to: { name: 'Login' } },
+  { title: t('links.login.title'), subtitle: t('links.login.subtitle'), prependIcon: mdiAccountLockOutline, to: { name: 'Login', query: returnUrlQuery.value } },
 ]));
 
 const register = () => handleLoadAndError(async () => {
   await signUp(request.value);
   appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') });
-  await router.push({ name: 'ConfirmEmail', query: { email: request.value.email } });
+  await router.push({ name: 'ConfirmEmail', query: { email: request.value.email, ...returnUrlQuery.value  } });
 });
 </script>
 

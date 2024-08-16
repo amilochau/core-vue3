@@ -55,7 +55,7 @@ import { type Ref, computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { ConfirmEmail } from '../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
-import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -72,6 +72,7 @@ const router = useRouter();
 const { handleLoadAndError } = useHandle();
 const { confirmRegistration } = useCognito();
 const { required, minLength, maxLength, emailAddress } = useValidationRules();
+const { returnUrlQuery } = useNavigation();
 
 const request: Ref<ConfirmEmail> = ref({
   email: route.query.email?.toString() || '',
@@ -81,7 +82,7 @@ const request: Ref<ConfirmEmail> = ref({
 const verifyCode = () => handleLoadAndError(async () => {
   await confirmRegistration(request.value);
   appStore.displayInfoMessage({ title: t('successMessage'), details: t('successDetails') });
-  await router.replace({ name: 'Login', query: { email: request.value.email } });
+  await router.replace({ name: 'Login', query: { email: request.value.email, ...returnUrlQuery.value } });
 });
 </script>
 
