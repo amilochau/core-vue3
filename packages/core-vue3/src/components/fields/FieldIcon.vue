@@ -117,6 +117,7 @@ const itemReadonly = computed(() => props.readonly || !!vuetifyForm?.isReadonly.
   cursor: pointer;
   border-radius: 50%;
   transition-property: none;
+  border-width: 0px !important;
 }
 .icons-grid-cell:hover {
   border: 1px solid #515151;
