@@ -54,7 +54,7 @@ import AppPwaInstall from './AppPwaInstall.vue';
 import AppPwaUpdate from './AppPwaUpdate.vue';
 import AppProgressBar from '../AppProgressBar.vue';
 import { useAppStore } from '../../../../stores';
-import { useAppOptions, useNavigation } from '../../../../composition';
+import { useAppOptions } from '../../../../composition';
 import { type RouteLocationRaw, useRouter } from 'vue-router';
 import { computed } from 'vue';
 
@@ -79,14 +79,13 @@ defineSlots<{
 const appStore = useAppStore();
 const { coreOptions } = useAppOptions();
 const router = useRouter();
-const { hasStateHistory } = useNavigation();
 
 const toggleDrawer = () => {
   appStore.setDrawer(!appStore.drawer);
 };
 
 const buttonType = computed(() => {
-  if (props.buttonMode === 'back' && (hasStateHistory.value || props.defaultBackTo)) {
+  if (props.buttonMode === 'back' && (router.options.history.state.back || props.defaultBackTo)) {
     return 'arrow-left';
   } else if (props.buttonMode === 'default-back' && props.defaultBackTo) {
     return 'arrow-left';
@@ -96,7 +95,7 @@ const buttonType = computed(() => {
 });
 
 const onBackButtonClick = async () => {
-  if (props.buttonMode === 'back' && hasStateHistory.value) {
+  if (props.buttonMode === 'back' && router.options.history.state.back) {
     router.back();
   } else if (props.defaultBackTo) {
     await router.replace(props.defaultBackTo);
