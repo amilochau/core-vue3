@@ -1,8 +1,9 @@
 import { computed } from 'vue';
-import { type RouteLocationRaw, useRouter } from 'vue-router';
+import { type LocationQueryValue, type RouteLocationRaw, useRoute, useRouter } from 'vue-router';
 
 /** Use navigation. */
 export const useNavigation = () => {
+  const route = useRoute();
   const router = useRouter();
 
   /**
@@ -17,7 +18,10 @@ export const useNavigation = () => {
     }
   };
 
+  const returnUrlQuery = computed<Record<string, LocationQueryValue | LocationQueryValue[]>>(() => ({ returnUrl: route.query.returnUrl }));
+
   return {
     goBack,
+    returnUrlQuery,
   };
 };

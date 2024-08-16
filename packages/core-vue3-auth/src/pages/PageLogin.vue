@@ -49,7 +49,7 @@ import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { Login } from '../types';
-import { useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
+import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n();
@@ -67,6 +67,7 @@ const router = useRouter();
 const { handleLoadAndError } = useHandle();
 const { authenticateUser, fetchUserAttributes } = useCognito();
 const { required, minLength, maxLength, emailAddress } = useValidationRules();
+const { returnUrlQuery } = useNavigation();
 
 const request: Ref<Login> = ref({
   email: route.query.email?.toString() || '',
@@ -74,8 +75,8 @@ const request: Ref<Login> = ref({
 });
 
 const links = computed(() => ([
-  { title: t('links.register.title'), subtitle: t('links.register.subtitle'), prependIcon: mdiAccountPlusOutline, to: { name: 'Register' } },
-  { title: t('links.forgotPassword.title'), subtitle: t('links.forgotPassword.subtitle'), prependIcon: mdiLockReset, to: { name: 'ForgotPassword' } },
+  { title: t('links.register.title'), subtitle: t('links.register.subtitle'), prependIcon: mdiAccountPlusOutline, to: { name: 'Register', query: returnUrlQuery.value } },
+  { title: t('links.forgotPassword.title'), subtitle: t('links.forgotPassword.subtitle'), prependIcon: mdiLockReset, to: { name: 'ForgotPassword', query: returnUrlQuery.value } },
 ]));
 
 const login = () => handleLoadAndError(async () => {
@@ -83,10 +84,10 @@ const login = () => handleLoadAndError(async () => {
   if (!authenticationResult.success) {
     switch (authenticationResult.nextStep) {
     case 'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED':
-      await router.push({ name: 'SetPassword', query: { email: request.value.email } });
+      await router.push({ name: 'SetPassword', query: { email: request.value.email, ...returnUrlQuery.value } });
       break;
     case 'RESET_PASSWORD':
-      await router.push({ name: 'ResetPassword', query: { email: request.value.email } });
+      await router.push({ name: 'ResetPassword', query: { email: request.value.email, ...returnUrlQuery.value } });
       break;
     default:
       appStore.displayErrorMessage({ title: t('errorMessage') });
