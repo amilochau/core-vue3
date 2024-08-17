@@ -23,7 +23,13 @@
         <card-title-closable
           :title="dialogTitle"
           :prepend-icon="dialogIcon"
-          @close="closeFromTitle" />
+          @close="closeFromTitle">
+          <template
+            v-if="slots['append:title']"
+            #append>
+            <slot name="append:title" />
+          </template>
+        </card-title-closable>
         <v-card-text
           v-if="slots.default || slots.masked"
           class="py-2">
@@ -147,6 +153,7 @@ const emit = defineEmits<{
 const slots = defineSlots<{
   default?(props: { model: TModel }): any,
   masked?(props: { model: TModel }): any,
+  'append:title'?(): any,
 }>();
 
 const { t } = useI18n();

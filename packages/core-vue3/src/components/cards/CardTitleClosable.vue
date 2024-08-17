@@ -11,6 +11,9 @@
         start />
     </template>
     <template #append>
+      <slot
+        v-if="slots.append"
+        name="append" />
       <v-btn
         :disabled="loading"
         :icon="mdiClose"
@@ -35,6 +38,10 @@ defineProps<{
 const emit = defineEmits<{
   close: [],
 }>();
+const slots = defineSlots<{
+  append?(): any,
+}>();
+
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 </script>

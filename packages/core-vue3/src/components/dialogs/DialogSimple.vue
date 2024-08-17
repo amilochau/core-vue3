@@ -12,7 +12,13 @@
       <card-title-closable
         :title="dialogTitle"
         :prepend-icon="dialogIcon"
-        @close="closeFromTitle" />
+        @close="closeFromTitle">
+        <template
+          v-if="slots['append:title']"
+          #append>
+          <slot name="append:title" />
+        </template>
+      </card-title-closable>
       <v-card-text
         v-if="slots.default"
         class="py-2">
@@ -59,6 +65,7 @@ const emit = defineEmits<{
 const slots = defineSlots<{
   default?(): any,
   actions?(): any,
+  'append:title'?(): any,
 }>();
 
 const { xs } = useDisplay();
