@@ -78,6 +78,13 @@ export const registerVuetify = (app: App, coreOptions: CoreOptions) => {
         hideDetails: 'auto',
         persistentHint: true,
       },
+      VFileInput: {
+        variant: 'underlined',
+        density: 'comfortable',
+        hideDetails: 'auto',
+        persistentHint: true,
+        class: 'mb-3',
+      },
       VTextarea: {
         variant: 'underlined',
         density: 'comfortable',
