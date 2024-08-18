@@ -11,7 +11,7 @@ export const useClean = () => {
   return {
     /** Clean stores and cookies. */
     clean: () => {
-      identityStore.clean();
+      identityStore.$reset();
       cleanFromCoreOptions();
 
       const exceptions = [

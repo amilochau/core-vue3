@@ -1,24 +1,22 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
-/** Language store state. */
-interface LanguageStoreState {
-  language: 'en' | 'fr' | string,
-}
+export const useLanguageStore = defineStore('language', () => {
+  const language = ref<'en' | 'fr' | string>(navigator.language.slice(0, 2) === 'fr' ? 'fr' : 'en'); // @todo make that configurable
 
-export const useLanguageStore = defineStore('language', {
-  /** Store state. */
-  state: (): LanguageStoreState => ({
-    language: navigator.language.slice(0, 2) === 'fr' ? 'fr' : 'en', // @todo make that configurable
-  }),
-  actions: {
-    /**
-     * Set language.
-     * @param lang New lang to use.
-     */
-    setLanguage(lang: string) {
-      this.language = lang;
-    },
-  },
+  /**
+   * Set language.
+   * @param lang New lang to use.
+   */
+  const setLanguage = (lang: string) => {
+    language.value = lang;
+  };
+
+  return {
+    language,
+    setLanguage,
+  };
+}, {
   persist: {
     storage: 'localStorage',
   },
