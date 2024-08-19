@@ -1,15 +1,13 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
-/** Theme store state. */
-interface ThemeStoreState {
-  darkMode: boolean,
-}
+export const useThemeStore = defineStore('theme', () => {
+  const darkMode = ref(false);
 
-export const useThemeStore = defineStore('theme', {
-  /** Store state. */
-  state: (): ThemeStoreState => ({
-    darkMode: false,
-  }),
+  return {
+    darkMode,
+  };
+}, {
   persist: {
     storage: 'localStorage',
   },

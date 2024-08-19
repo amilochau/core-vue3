@@ -64,6 +64,10 @@ export const useCognito = () => {
     }
   };
 
+  const postSignIn = () => {
+    identityStore.isAuthenticated = true;
+  };
+
   const signOut = async () => {
     await awsSignOut();
     clean();
@@ -130,7 +134,7 @@ export const useCognito = () => {
       }
 
       if (response.isSignedIn) {
-        identityStore.isAuthenticated = true;
+        postSignIn();
       }
 
       return {
@@ -151,7 +155,7 @@ export const useCognito = () => {
       });
 
       if (response.isSignedIn) {
-        identityStore.isAuthenticated = true;
+        postSignIn();
       }
 
       return {

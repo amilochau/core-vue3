@@ -1,42 +1,38 @@
 import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
 
-/** Cookies store state. */
-interface CookiesStoreState {
-  accepted: boolean,
-  expiration: number,
-}
+export const useCookiesStore = defineStore('cookies', () => {
+  const accepted = ref(false);
+  const expiration = ref(0);
 
-export const useCookiesStore = defineStore('cookies', {
-  /** Store state. */
-  state: (): CookiesStoreState => ({
-    accepted: false,
-    expiration: 0,
-  }),
-  getters: {
-    /**
-     * Whether to show cookies.
-     * @param state State.
-     */
-    showCookies: (state) => {
-      return state.expiration <= new Date().valueOf();
-    },
-  },
-  actions: {
-    /** Accept cookies. */
-    acceptCookies() {
-      this.accepted = true;
-      const expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 360); // 360 days
-      this.expiration = expirationDate.valueOf();
-    },
-    /** Refuse cookies. */
-    refuseCookies() {
-      this.accepted = false;
-      const expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 180); // 180 days
-      this.expiration = expirationDate.valueOf();
-    },
-  },
+  /** Whether to show cookies. */
+  const showCookies = computed(() => expiration.value <= new Date().valueOf());
+
+  /** Accept cookies. */
+  const acceptCookies = () => {
+    accepted.value = true;
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 360); // 360 days
+    expiration.value = expirationDate.valueOf();
+  };
+
+  /** Refuse cookies. */
+  const refuseCookies = () => {
+    accepted.value = false;
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 180); // 180 days
+    expiration.value = expirationDate.valueOf();
+  };
+
+  return {
+    accepted,
+    expiration,
+
+    showCookies,
+    acceptCookies,
+    refuseCookies,
+  };
+}, {
   persist: {
     storage: 'localStorage',
   },

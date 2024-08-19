@@ -1,30 +1,32 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
-/** PWA store state. */
-interface PwaStoreState {
-  installDisplay: boolean,
-  installPromptEvent?: any,
-  updateDisplay: boolean,
-  updateLoading: boolean,
-  updateSW? : (reload?: boolean) => void,
-}
+export const usePwaStore = defineStore('pwa', () => {
+  const installDisplay = ref(false);
+  const installPromptEvent = ref<any>();
+  const updateDisplay = ref(false);
+  const updateLoading = ref(false);
+  const updateSW = ref<(reload?: boolean) => void>();
 
-export const usePwaStore = defineStore('pwa', {
-  /** Store state. */
-  state: (): PwaStoreState => ({
-    installDisplay: false,
-    updateDisplay: false,
-    updateLoading: false,
-  }),
-  actions: {
-    /** Install PWA application. */
-    install() {
-      this.installPromptEvent?.prompt();
-    },
-    /** Update PWA application. */
-    update() {
-      this.updateLoading = true;
-      this.updateSW?.(true);
-    },
-  },
+  /** Install PWA application. */
+  const install = () => {
+    installPromptEvent.value?.prompt();
+  };
+
+  /** Update PWA application. */
+  const update = () => {
+    updateLoading.value = true;
+    updateSW.value?.(true);
+  };
+
+  return {
+    installDisplay,
+    installPromptEvent,
+    updateDisplay,
+    updateLoading,
+    updateSW,
+
+    install,
+    update,
+  };
 });

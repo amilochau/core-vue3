@@ -1,49 +1,45 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
-/** Get default store state. */
-const getDefaultState = (): IdentityStoreState => {
-  return {
-    isAuthenticated: false,
-    attributes: {
+export const useIdentityStore = defineStore('identity', () => {
+  const isAuthenticated = ref(false);
+  const attributes = ref({
+    sub: '',
+    name: '',
+    email: '',
+    user_id: '',
+  });
+
+  /**
+   * Set identity attributes.
+   * @param attrs Identity attributes.
+   * @param attrs.sub Attribute `sub`.
+   * @param attrs.name Attribute `name`.
+   * @param attrs.email Attribute `email`.
+   * @param attrs.user_id Attribute `user_id`.
+   */
+  const setAttributes = (attrs: { sub: string, name: string, email: string, user_id: string }) => {
+    attributes.value = attrs;
+  };
+
+  /** Clean store. */
+  const $reset = () => {
+    isAuthenticated.value = false;
+    attributes.value = {
       sub: '',
       name: '',
       email: '',
       user_id: '',
-    },
+    };
   };
-};
 
-/** Identity store state. */
-interface IdentityStoreState {
-  isAuthenticated: boolean,
-  attributes: {
-    sub: string,
-    name: string,
-    email: string,
-    user_id: string,
-  },
-}
-
-export const useIdentityStore = defineStore('identity', {
-  state: getDefaultState,
-  actions: {
-    /**
-     * Set identity attributes.
-     * @param attributes Identity attributes.
-     * @param attributes.sub Attribute `sub`.
-     * @param attributes.name Attribute `name`.
-     * @param attributes.email Attribute `email`.
-     * @param attributes.user_id Attribute `user_id`.
-     */
-    setAttributes(attributes: { sub: string, name: string, email: string, user_id: string }) {
-      this.attributes = attributes;
-    },
-
-    /** Clean store. */
-    clean() {
-      this.$patch(getDefaultState());
-    },
-  },
+  return {
+    isAuthenticated,
+    attributes,
+    setAttributes,
+    $reset,
+  };
+}, {
   persist: {
     storage: 'localStorage',
   },
