@@ -6,464 +6,261 @@
         cols="12"
         sm="6">
         <v-card>
-          <v-card-item>
-            <v-card-title>
-              {{ t('sections.inputs.textField') }}
-            </v-card-title>
-          </v-card-item>
           <v-card-text>
-            <v-text-field
-              :label="t('sections.inputs.variants.default')"
-              hint="This is a hint" />
-            <v-text-field
-              :label="t('sections.inputs.variants.outlined')"
-              variant="outlined" />
-            <v-text-field
-              :label="t('sections.inputs.variants.clearable')"
-              clearable />
-            <v-text-field
-              :label="t('sections.inputs.variants.prependAppend')">
-              <template #prepend>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-              <template #append>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-            </v-text-field>
-            <v-text-field
-              :label="t('sections.inputs.variants.color')"
-              color="error" />
-            <v-text-field
-              :label="t('sections.inputs.variants.disabled')"
-              disabled />
-            <v-text-field
-              :label="t('sections.inputs.variants.readonly')"
-              clearable
-              readonly />
-          </v-card-text>
-          <v-card-text>Badly supported: clearable</v-card-text>
-        </v-card>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6">
-        <v-card>
-          <v-card-item>
-            <v-card-title>
-              {{ t('sections.inputs.fieldNumeric') }}
-            </v-card-title>
-            <v-card-subtitle>
-              Value: {{ { value: numericValue } }}
-            </v-card-subtitle>
-          </v-card-item>
-          <v-card-text>
-            <field-numeric
-              v-model="numericValue"
-              :label="t('sections.inputs.variants.default')"
-              hint="This is a hint" />
-            <field-numeric
-              v-model="numericValue"
-              :label="t('sections.inputs.variants.outlined')"
-              variant="outlined" />
-            <field-numeric
-              v-model="numericValue"
-              :label="t('sections.inputs.variants.clearable')"
-              clearable />
-            <field-numeric
-              v-model="numericValue"
-              :label="t('sections.inputs.variants.prependAppend')">
-              <template #prepend>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-              <template #append>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-            </field-numeric>
-            <field-numeric
-              v-model="numericValue"
-              :label="t('sections.inputs.variants.color')"
-              color="error" />
-            <field-numeric
-              v-model="numericValue"
-              :label="t('sections.inputs.variants.disabled')"
-              disabled />
-            <field-numeric
-              v-model="numericValue"
-              :label="t('sections.inputs.variants.readonly')"
-              clearable
-              readonly />
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6">
-        <v-card>
-          <v-card-item>
-            <v-card-title>
-              {{ t('sections.inputs.fieldDate') }}
-            </v-card-title>
-            <v-card-subtitle>
-              Value: {{ { value: fieldDateValue } }}
-            </v-card-subtitle>
-          </v-card-item>
-          <v-card-text>
-            <field-date
-              v-model="fieldDateValue"
-              :label="t('sections.inputs.variants.default')"
-              hint="This is a hint" />
-            <field-date
-              v-model="fieldDateValue"
-              :label="t('sections.inputs.variants.outlined')"
-              variant="outlined" />
-            <field-date
-              v-model="fieldDateValue"
-              :label="t('sections.inputs.variants.clearable')"
-              clearable />
-            <field-date
-              v-model="fieldDateValue"
-              :label="t('sections.inputs.variants.prependAppend')">
-              <template #prepend>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-              <template #append>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-            </field-date>
-            <field-date
-              v-model="fieldDateValue"
-              :label="t('sections.inputs.variants.color')"
-              color="error" />
-            <field-date
-              v-model="fieldDateValue"
-              :label="t('sections.inputs.variants.disabled')"
-              disabled />
-            <field-date
-              v-model="fieldDateValue"
-              :label="t('sections.inputs.variants.readonly')"
-              clearable
-              readonly />
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6">
-        <v-card>
-          <v-card-item>
-            <v-card-title>
-              {{ t('sections.inputs.switch') }}
-            </v-card-title>
-            <v-card-subtitle>
-              Value: {{ { value: switchValue } }}
-            </v-card-subtitle>
-          </v-card-item>
-          <v-card-text>
+            <card-section-title
+              :icon="mdiListBox"
+              title="Form settings" />
             <v-switch
-              v-model="switchValue"
-              :label="t('sections.inputs.variants.default')"
-              hint="This is a hint" />
+              v-model="settings.form.readonly"
+              label="Readonly"
+              density="compact" />
+            <card-section-title
+              :icon="mdiFormTextbox"
+              title="Inputs settings" />
+            <v-text-field
+              v-model="settings.hint"
+              label="Hint"
+              density="compact" />
             <v-switch
-              v-model="switchValue"
-              :label="t('sections.inputs.variants.inset')"
-              inset
-              hint="This is a hint" />
+              v-model="settings.clearable"
+              label="Clearable"
+              density="compact" />
             <v-switch
-              v-model="switchValue"
-              :label="t('sections.inputs.variants.prependAppend')">
-              <template #prepend>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-              <template #append>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-            </v-switch>
+              v-model="settings.disabled"
+              label="Disabled"
+              density="compact" />
             <v-switch
-              v-model="switchValue"
-              :label="t('sections.inputs.variants.color')"
-              color="error" />
+              v-model="settings.readonly"
+              label="Readonly"
+              density="compact" />
+            <field-chip-group
+              v-model="settings.variant"
+              label="Color"
+              :values="[{ value: 'filled', title: 'Filled' }, { value: 'outlined', title: 'Outlined' }, { value: 'plain', title: 'Plain' }, { value: 'underlined', title: 'Underlined' }, { value: 'solo', title: 'Solo' }, { value: 'solo-inverted', title: 'Solo inverted' }, { value: 'solo-filled', title: 'Solo filled' }]"
+              clearable />
+            <field-chip-group
+              v-model="settings.color"
+              label="Color"
+              :values="[{ value: 'success', title: 'Success', color: 'success' }, { value: 'warning', title: 'Warning', color: 'warning' }, { value: 'error', title: 'Error', color: 'error' }]"
+              clearable />
             <v-switch
-              v-model="switchValue"
-              :label="t('sections.inputs.variants.disabled')"
-              disabled />
+              v-model="settings.prepend"
+              label="Prepend icon"
+              density="compact" />
             <v-switch
-              v-model="switchValue"
-              :label="t('sections.inputs.variants.readonly')"
-              clearable
-              readonly />
+              v-model="settings.append"
+              label="Append icon"
+              density="compact" />
+
+            <i>Only for FieldChipGroup:</i>
+            <v-switch
+              v-model="settings.mandatory"
+              label="Mandatory"
+              density="compact" />
+            <i>Only for FieldChipGroup, FieldFile:</i>
+            <v-switch
+              v-model="settings.multiple"
+              label="Multiple"
+              density="compact" />
           </v-card-text>
-          <v-card-text>Not supported: outlined (variant), clearable</v-card-text>
         </v-card>
       </v-col>
       <v-col
         cols="12"
         sm="6">
         <v-card>
-          <v-card-item>
-            <v-card-title>
-              {{ t('sections.inputs.fieldChipGroup') }}
-            </v-card-title>
-            <v-card-subtitle>
-              Value: {{ { value: fieldChipGroupValue } }}
-            </v-card-subtitle>
-          </v-card-item>
           <v-card-text>
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.default')"
-              :values="values"
-              hint="This is a hint" />
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.clearable')"
-              :values="values"
-              clearable />
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.prependAppend')"
-              :values="values">
-              <template #prepend>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-              <template #append>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-            </field-chip-group>
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.color')"
-              :values="values"
-              color="error" />
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.disabled')"
-              :values="values"
-              disabled />
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.readonly')"
-              :values="values"
-              clearable
-              readonly />
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.mandatory')"
-              :values="values"
-              mandatory />
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.multiple')"
-              :values="values"
-              multiple />
-            <field-chip-group
-              v-model="fieldChipGroupValue"
-              :label="t('sections.inputs.variants.filter')"
-              :values="values"
-              filter />
-          </v-card-text>
-          <v-card-text>Not supported: outlined (variant)</v-card-text>
-        </v-card>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6">
-        <v-card>
-          <v-card-item>
-            <v-card-title>
-              {{ t('sections.inputs.fieldColorBullets') }}
-            </v-card-title>
-            <v-card-subtitle>
-              Value: {{ { value: fieldColorBulletsValue } }}
-            </v-card-subtitle>
-          </v-card-item>
-          <v-card-text>
-            <field-color-bullets
-              v-model="fieldColorBulletsValue"
-              :label="t('sections.inputs.variants.default')"
-              :colors="colors"
-              hint="This is a hint" />
-            <field-color-bullets
-              v-model="fieldColorBulletsValue"
-              :label="t('sections.inputs.variants.clearable')"
-              :colors="colors"
-              clearable />
-            <field-color-bullets
-              v-model="fieldColorBulletsValue"
-              :label="t('sections.inputs.variants.prependAppend')"
-              :colors="colors">
-              <template #prepend>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-              <template #append>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-            </field-color-bullets>
-            <field-color-bullets
-              v-model="fieldColorBulletsValue"
-              :label="t('sections.inputs.variants.color')"
-              :colors="colors"
-              color="primary" />
-            <field-color-bullets
-              v-model="fieldColorBulletsValue"
-              :label="t('sections.inputs.variants.disabled')"
-              :colors="colors"
-              disabled />
-            <field-color-bullets
-              v-model="fieldColorBulletsValue"
-              :label="t('sections.inputs.variants.readonly')"
-              :colors="colors"
-              clearable
-              readonly />
-          </v-card-text>
-          <v-card-text>Not supported: outlined (variant)</v-card-text>
-        </v-card>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6">
-        <v-card>
-          <v-card-item>
-            <v-card-title>
-              {{ t('sections.inputs.fieldIcon') }}
-            </v-card-title>
-            <v-card-subtitle>
-              Value: {{ { value: fieldIconValue } }}
-            </v-card-subtitle>
-          </v-card-item>
-          <v-card-text>
-            <field-icon
-              v-model="fieldIconValue"
-              :label="t('sections.inputs.variants.default')"
-              :icons="icons"
-              hint="This is a hint" />
-            <field-icon
-              v-model="fieldIconValue"
-              :label="t('sections.inputs.variants.clearable')"
-              :icons="icons"
-              clearable />
-            <field-icon
-              v-model="fieldIconValue"
-              :label="t('sections.inputs.variants.prependAppend')"
-              :icons="icons">
-              <template #prepend>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-              <template #append>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-            </field-icon>
-            <field-icon
-              v-model="fieldIconValue"
-              :label="t('sections.inputs.variants.color')"
-              :icons="icons"
-              color="primary" />
-            <field-icon
-              v-model="fieldIconValue"
-              :label="t('sections.inputs.variants.disabled')"
-              :icons="icons"
-              disabled />
-            <field-icon
-              v-model="fieldIconValue"
-              :label="t('sections.inputs.variants.readonly')"
-              :icons="icons"
-              clearable
-              readonly />
-          </v-card-text>
-          <v-card-text>Not supported: outlined (variant)</v-card-text>
-        </v-card>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6">
-        <v-card>
-          <v-card-item>
-            <v-card-title>
-              {{ t('sections.inputs.textarea') }}
-            </v-card-title>
-          </v-card-item>
-          <v-card-text>
-            <v-textarea
-              :label="t('sections.inputs.variants.default')"
-              hint="This is a hint" />
-            <v-textarea
-              :label="t('sections.inputs.variants.outlined')"
-              variant="outlined" />
-            <v-textarea
-              :label="t('sections.inputs.variants.clearable')"
-              clearable />
-            <v-textarea
-              :label="t('sections.inputs.variants.prependAppend')">
-              <template #prepend>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-              <template #append>
-                <v-icon :icon="mdiRefresh" />
-              </template>
-            </v-textarea>
-            <v-textarea
-              :label="t('sections.inputs.variants.color')"
-              color="primary" />
-            <v-textarea
-              :label="t('sections.inputs.variants.disabled')"
-              disabled />
-            <v-textarea
-              :label="t('sections.inputs.variants.readonly')"
-              clearable
-              readonly />
-          </v-card-text>
-          <v-card-text>Badly supported: clearable</v-card-text>
-        </v-card>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6">
-        <v-form
-          readonly>
-          <v-card>
-            <v-card-item>
-              <v-card-title>
-                {{ t('sections.forms.readonly') }}
-              </v-card-title>
-            </v-card-item>
-            <v-card-text>
+            <v-form
+              :readonly="settings.form.readonly">
               <v-text-field
-                :label="t('sections.inputs.variants.readonly')"
-                clearable
-                hint="This is a hint" />
+                label="VTextField"
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </v-text-field>
+              <v-textarea
+                label="VTextarea"
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </v-textarea>
               <field-numeric
                 v-model="numericValue"
-                :label="t('sections.inputs.variants.readonly')"
-                clearable />
+                label="FieldNumeric"
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </field-numeric>
               <field-date
                 v-model="fieldDateValue"
-                :label="t('sections.inputs.variants.readonly')"
-                clearable />
+                label="FieldDate"
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </field-date>
               <v-switch
                 v-model="switchValue"
-                :label="t('sections.inputs.variants.readonly')"
-                clearable />
+                label="VSwitch"
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </v-switch>
               <field-chip-group
                 v-model="fieldChipGroupValue"
-                :label="t('sections.inputs.variants.readonly')"
+                label="FieldChipGroup"
                 :values="values"
-                clearable />
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly"
+                :mandatory="settings.mandatory"
+                :multiple="settings.multiple">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </field-chip-group>
               <field-color-bullets
                 v-model="fieldColorBulletsValue"
-                :label="t('sections.inputs.variants.readonly')"
+                label="FieldColorBullets"
                 :colors="colors"
-                clearable />
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </field-color-bullets>
               <field-icon
                 v-model="fieldIconValue"
-                :label="t('sections.inputs.variants.readonly')"
+                label="FieldIcon"
                 :icons="icons"
-                clearable />
-              <v-textarea
-                :label="t('sections.inputs.variants.readonly')"
-                clearable />
-            </v-card-text>
-          </v-card>
-        </v-form>
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </field-icon>
+              <field-file
+                label="FieldFile"
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly"
+                :multiple="settings.multiple">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </field-file>
+            </v-form>
+          </v-card-text>
+        </v-card>
       </v-col>
+    </v-row>
+    <v-row>
       <v-col
         cols="12"
         sm="6">
@@ -503,10 +300,10 @@
 import { useI18n } from 'vue-i18n';
 import { type ComputedRef, computed, ref } from 'vue';
 import { usePage } from '@amilochau/core-vue3/composition';
-import { FieldChipGroup, FieldColorBullets, FieldDate, FieldIcon, FieldNumeric } from '@amilochau/core-vue3/components';
+import { CardSectionTitle, FieldChipGroup, FieldColorBullets, FieldDate, FieldFile, FieldIcon, FieldNumeric } from '@amilochau/core-vue3/components';
 import { TestEnum } from '@/types/test';
 import { type FormattedDataWithValue } from '@amilochau/core-vue3/types';
-import { mdiRefresh, mdiTree } from '@mdi/js';
+import { mdiFormTextbox, mdiListBox, mdiRefresh, mdiTree } from '@mdi/js';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -524,6 +321,24 @@ usePage(computed(() => ({
     ],
   },
 })));
+
+const settings = ref<{
+  form: {
+    readonly?: boolean,
+  },
+  hint?: string,
+  clearable?: boolean,
+  variant?: 'filled' | 'outlined' | 'plain' | 'underlined' | 'solo' | 'solo-inverted' | 'solo-filled',
+  color?: string,
+  disabled?: boolean,
+  readonly?: boolean,
+  prepend?: boolean,
+  append?: boolean,
+  mandatory?: boolean,
+  multiple?: boolean,
+}>({
+  form: {},
+});
 
 const numericValue = ref<number>();
 const fieldDateValue = ref<string>();
@@ -563,35 +378,6 @@ fr:
 
 <i18n lang="yaml">
 en:
-  sections:
-    inputs:
-      title: Inputs
-      textField: Text Field
-      textarea: Textarea
-      switch: Switch
-      fieldChipGroup: Field Chip Group
-      fieldColorBullets: Field Color Bullets
-      fieldIcon: Field Icon
-      fieldNumeric: Field Numeric
-      fieldDate: Field Date
-      variants:
-        default: Default
-        outlined: Outlined
-        clearable: Clearable
-        prependAppend: With append and prepend
-        color: Color
-        disabled: Disabled
-        readonly: Readonly (+ Clearable)
-        mandatory: Mandatory
-        multiple: Multiple
-        inset: Inset
-        filter: Filter
-    forms:
-      readonly: Readonly form
-  longText: |
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-    sed,
-    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   options:
     default: default
     error: error
@@ -601,38 +387,13 @@ en:
     withoutColor: without color
     masked: masked
     hidden: hidden
+  longText: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed,
+    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   text1: Text 1
   text2: Text 2
 fr:
-  sections:
-    inputs:
-      title: Inputs
-      textField: Text Field
-      textarea: Textarea
-      switch: Switch
-      fieldChipGroup: Field Chip Group
-      fieldColorBullets: Field Color Bullets
-      fieldIcon: Field Icon
-      fieldNumeric: Field Numeric
-      fieldDate: Field Date
-      variants:
-        default: Default
-        outlined: Outlined
-        clearable: Clearable
-        prependAppend: With append and prepend
-        color: Color
-        disabled: Disabled
-        readonly: Readonly (+ Clearable)
-        mandatory: Mandatory
-        multiple: Multiple
-        inset: Inset
-        filter: Filter
-    forms:
-      readonly: Readonly form
-  longText: |
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-    sed,
-    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   options:
     default: default
     error: error
@@ -642,6 +403,10 @@ fr:
     withoutColor: without color
     masked: masked
     hidden: hidden
+  longText: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed,
+    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   text1: Text 1
   text2: Text 2
 </i18n>

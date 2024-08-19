@@ -14,6 +14,7 @@ import DialogSimple from './dialogs/DialogSimple.vue';
 import FieldChipGroup from './fields/FieldChipGroup.vue';
 import FieldColorBullets from './fields/FieldColorBullets.vue';
 import FieldDate from './fields/FieldDate.vue';
+import FieldFile from './fields/FieldFile.vue';
 import FieldIcon from './fields/FieldIcon.vue';
 import FieldNumeric from './fields/FieldNumeric.vue';
 
@@ -34,6 +35,7 @@ export {
   FieldChipGroup,
   FieldColorBullets,
   FieldDate,
+  FieldFile,
   FieldIcon,
   FieldNumeric,
 };
