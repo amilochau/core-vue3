@@ -16,11 +16,8 @@
       :focused="focused"
       :disabled="itemDisabled"
       :color="color"
-      :dirty="dirty"
-      :clearable="clearable"
       variant="plain"
-      active
-      @click:clear="reset">
+      active>
       <v-chip-group
         v-model="modelValue"
         :multiple="multiple"
@@ -50,6 +47,16 @@
           </v-chip>
         </v-slide-x-transition>
       </v-chip-group>
+      <template
+        v-if="clearable"
+        #append-inner>
+        <v-fade-transition>
+          <v-icon
+            :icon="dirty ? mdiCloseCircle : undefined"
+            class="ms-1"
+            @click="reset" />
+        </v-fade-transition>
+      </template>
     </v-field>
     <template
       v-if="useMasked || slots.append"
@@ -64,7 +71,7 @@
 </template>
 
 <script setup lang="ts" generic="TData, TDataValue extends TData | TData[]">
-import { mdiUnfoldLessHorizontal, mdiUnfoldMoreHorizontal } from '@mdi/js';
+import { mdiCloseCircle, mdiUnfoldLessHorizontal, mdiUnfoldMoreHorizontal } from '@mdi/js';
 import { computed, inject, ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
