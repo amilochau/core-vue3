@@ -16,11 +16,8 @@
       :focused="focused"
       :disabled="itemDisabled"
       :color="color"
-      :dirty="dirty"
-      :clearable="clearable"
       variant="plain"
-      active
-      @click:clear="reset">
+      active>
       <div class="colors-grid">
         <div
           v-for="(value, i) in colors"
@@ -39,6 +36,16 @@
             size="x-small" />
         </div>
       </div>
+      <template
+        v-if="clearable"
+        #append-inner>
+        <v-fade-transition>
+          <v-icon
+            :icon="dirty ? mdiCloseCircle : undefined"
+            class="ms-1"
+            @click="reset" />
+        </v-fade-transition>
+      </template>
     </v-field>
     <template #append>
       <v-icon
@@ -80,7 +87,7 @@
 
 <script setup lang="ts">
 import { swatches } from '../../data/swatches';
-import { mdiCheck, mdiPalette } from '@mdi/js';
+import { mdiCheck, mdiCloseCircle, mdiPalette } from '@mdi/js';
 import { type Ref, computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 

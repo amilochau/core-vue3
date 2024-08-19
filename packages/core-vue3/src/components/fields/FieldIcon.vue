@@ -16,11 +16,8 @@
       :focused="focused"
       :disabled="itemDisabled"
       :color="color"
-      :dirty="dirty"
-      :clearable="clearable"
       variant="plain"
-      active
-      @click:clear="reset">
+      active>
       <div class="icons-grid">
         <v-avatar
           v-for="(icon, i) in icons"
@@ -37,6 +34,16 @@
             @click="setModelValue(icon.value)" />
         </v-avatar>
       </div>
+      <template
+        v-if="clearable"
+        #append-inner>
+        <v-fade-transition>
+          <v-icon
+            :icon="dirty ? mdiCloseCircle : undefined"
+            class="ms-1"
+            @click="reset" />
+        </v-fade-transition>
+      </template>
     </v-field>
     <template
       v-if="slots.append"
@@ -47,6 +54,7 @@
 </template>
 
 <script setup lang="ts" generic="TData">
+import { mdiCloseCircle } from '@mdi/js';
 import { computed, inject, ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
