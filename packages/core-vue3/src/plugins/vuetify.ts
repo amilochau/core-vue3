@@ -83,6 +83,7 @@ export const registerVuetify = (app: App, coreOptions: CoreOptions) => {
         density: 'comfortable',
         hideDetails: 'auto',
         persistentHint: true,
+        clearable: false,
         class: 'mb-3',
       },
       VTextarea: {

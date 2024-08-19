@@ -32,7 +32,7 @@
             :value="value.value"
             :color="value.color"
             :disabled="itemReadonly || itemDisabled || value.disabled"
-            :filter="!disabledFilter"
+            filter
             @focus="focused = true"
             @blur="focused = false">
             <template
@@ -88,8 +88,6 @@ const props = defineProps<{
   multiple?: boolean
   /** Whether at least one value must be selected. */
   mandatory?: boolean
-  /** Whether chips filter style (using a checkmark icon when selected) should be disabled. */
-  disabledFilter?: boolean
 }>();
 
 const slots = defineSlots<{
