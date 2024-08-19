@@ -8,6 +8,7 @@
     :color="color"
     :variant="variant"
     :readonly="itemReadonly"
+    :clearable="clearable"
     type="text"
     inputmode="decimal"
     @update:model-value="parseInput">
@@ -17,19 +18,14 @@
       <slot name="prepend" />
     </template>
     <template
-      v-if="clearable || slots.append"
+      v-if="slots.append"
       #append>
-      <v-icon
-        v-if="clearable"
-        :icon="mdiClose"
-        @click="reset" />
       <slot name="append" />
     </template>
   </v-text-field>
 </template>
 
 <script setup lang="ts">
-import { mdiClose } from '@mdi/js';
 import { VTextField } from 'vuetify/components';
 import { useValidationRules } from '../../composition';
 import { computed, inject, ref, watch } from 'vue';
@@ -75,14 +71,6 @@ const parseInput = (input: string | undefined) => {
   if (!isNaN(parsedInput)) {
     modelValue.value = parsedInput;
   }
-};
-
-const reset = () => {
-  if (itemDisabled.value || itemReadonly.value) {
-    return;
-  }
-  modelValue.value = undefined;
-  internalValue.value = '';
 };
 
 watch(modelValue, (newValue) => {

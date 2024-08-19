@@ -6,6 +6,7 @@
     :disabled="itemDisabled"
     :color="color"
     :variant="variant"
+    :clearable="clearable"
     type="text"
     class="cursor-pointer"
     readonly
@@ -16,12 +17,8 @@
       <slot name="prepend" />
     </template>
     <template
-      v-if="clearable || slots.append"
+      v-if="slots.append"
       #append>
-      <v-icon
-        v-if="clearable"
-        :icon="mdiClose"
-        @click="reset" />
       <slot name="append" />
     </template>
     <v-dialog
@@ -57,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { mdiCalendarToday, mdiClose } from '@mdi/js';
+import { mdiCalendarToday } from '@mdi/js';
 import { type Ref, computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useDate } from 'vuetify';
@@ -103,15 +100,6 @@ const open = () => {
     return;
   }
   displayDialog.value = true;
-};
-
-const reset = () => {
-  if (itemDisabled.value || itemReadonly.value) {
-    return;
-  }
-  modelValue.value = undefined;
-  internalValue.value = undefined;
-  displayDialog.value = false;
 };
 
 const save = (value: any) => {

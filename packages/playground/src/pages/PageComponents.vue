@@ -110,6 +110,26 @@
                   <v-icon :icon="mdiRefresh" />
                 </template>
               </v-textarea>
+              <v-switch
+                v-model="switchValue"
+                label="VSwitch"
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </v-switch>
               <field-numeric
                 v-model="numericValue"
                 label="FieldNumeric"
@@ -150,15 +170,15 @@
                   <v-icon :icon="mdiRefresh" />
                 </template>
               </field-date>
-              <v-switch
-                v-model="switchValue"
-                label="VSwitch"
+              <field-file
+                label="FieldFile"
                 :hint="settings.hint"
                 :variant="settings.variant"
                 :color="settings.color"
                 :clearable="settings.clearable"
                 :disabled="settings.disabled"
-                :readonly="settings.readonly">
+                :readonly="settings.readonly"
+                :multiple="settings.multiple">
                 <template
                   v-if="settings.prepend"
                   #prepend>
@@ -169,7 +189,7 @@
                   #append>
                   <v-icon :icon="mdiRefresh" />
                 </template>
-              </v-switch>
+              </field-file>
               <field-chip-group
                 v-model="fieldChipGroupValue"
                 label="FieldChipGroup"
@@ -235,26 +255,6 @@
                   <v-icon :icon="mdiRefresh" />
                 </template>
               </field-icon>
-              <field-file
-                label="FieldFile"
-                :hint="settings.hint"
-                :variant="settings.variant"
-                :color="settings.color"
-                :clearable="settings.clearable"
-                :disabled="settings.disabled"
-                :readonly="settings.readonly"
-                :multiple="settings.multiple">
-                <template
-                  v-if="settings.prepend"
-                  #prepend>
-                  <v-icon :icon="mdiRefresh" />
-                </template>
-                <template
-                  v-if="settings.append"
-                  #append>
-                  <v-icon :icon="mdiRefresh" />
-                </template>
-              </field-file>
             </v-form>
           </v-card-text>
         </v-card>
@@ -348,7 +348,7 @@ const fieldColorBulletsValue = ref<string | undefined>();
 const fieldIconValue = ref<TestEnum | undefined>();
 
 const values: ComputedRef<FormattedDataWithValue<number>[]> = computed(() => [
-  { value: 1, title: t('options.error'), icon: mdiRefresh, color: 'error' },
+  { value: 0, title: t('options.error'), icon: mdiRefresh, color: 'error' },
   { value: 2, title: t('options.warning'), icon: mdiRefresh, color: 'warning' },
   { value: 3, title: t('options.info'), icon: mdiRefresh, color: 'info' },
   { value: 4, title: t('options.withoutIcon'), color: 'primary' },
