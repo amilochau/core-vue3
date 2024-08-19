@@ -8,8 +8,10 @@
     :color="color"
     :variant="variant"
     :readonly="itemReadonly"
+    :clearable="clearable"
     :accept="accept"
     :multiple="multiple"
+    :prepend-icon="null"
     type="file">
     <template
       v-if="slots.prepend"
@@ -17,12 +19,8 @@
       <slot name="prepend" />
     </template>
     <template
-      v-if="clearable || slots.append"
+      v-if="slots.append"
       #append>
-      <v-icon
-        v-if="clearable"
-        :icon="mdiClose"
-        @click="reset" />
       <slot name="append" />
     </template>
     <template #selection="{ fileNames }">
@@ -39,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { mdiClose, mdiFileOutline } from '@mdi/js';
+import { mdiFileOutline } from '@mdi/js';
 import { computed, inject } from 'vue';
 
 const props = defineProps<{
@@ -71,13 +69,6 @@ const slots = defineSlots<{
 }>();
 
 const modelValue = defineModel<File | File[] | undefined>();
-
-const reset = () => {
-  if (itemDisabled.value || itemReadonly.value) {
-    return;
-  }
-  modelValue.value = undefined;
-};
 
 // Vuetify only uses 'disabled' and 'readonly' from 'v-form' if no value is defined... In contradiction with vue.js standards
 const vuetifyForm: any = inject(Symbol.for('vuetify:form'), null);

@@ -16,8 +16,11 @@
       :focused="focused"
       :disabled="itemDisabled"
       :color="color"
+      :dirty="dirty"
+      :clearable="clearable"
       variant="plain"
-      active>
+      active
+      @click:clear="reset">
       <div class="icons-grid">
         <v-avatar
           v-for="(icon, i) in icons"
@@ -36,19 +39,14 @@
       </div>
     </v-field>
     <template
-      v-if="clearable || slots.append"
+      v-if="slots.append"
       #append>
-      <v-icon
-        v-if="clearable"
-        :icon="mdiClose"
-        @click="reset" />
       <slot name="append" />
     </template>
   </v-input>
 </template>
 
 <script setup lang="ts" generic="TData">
-import { mdiClose } from '@mdi/js';
 import { computed, inject, ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
@@ -77,6 +75,7 @@ const slots = defineSlots<{
 const modelValue = defineModel<TData | undefined>();
 
 const focused = ref(false);
+const dirty = computed(() => modelValue.value !== undefined && modelValue.value !== null);
 
 const setModelValue = (value: TData) => {
   if (itemDisabled.value || itemReadonly.value) {

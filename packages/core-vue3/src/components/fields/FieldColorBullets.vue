@@ -16,8 +16,11 @@
       :focused="focused"
       :disabled="itemDisabled"
       :color="color"
+      :dirty="dirty"
+      :clearable="clearable"
       variant="plain"
-      active>
+      active
+      @click:clear="reset">
       <div class="colors-grid">
         <div
           v-for="(value, i) in colors"
@@ -43,10 +46,6 @@
         :icon="mdiPalette"
         class="full-opacity"
         @click="open" />
-      <v-icon
-        v-if="clearable"
-        :icon="mdiClose"
-        @click="reset" />
       <slot name="append" />
     </template>
     <v-dialog
@@ -81,7 +80,7 @@
 
 <script setup lang="ts">
 import { swatches } from '../../data/swatches';
-import { mdiCheck, mdiClose, mdiPalette } from '@mdi/js';
+import { mdiCheck, mdiPalette } from '@mdi/js';
 import { type Ref, computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -118,6 +117,7 @@ const { t } = useI18n();
 const displayDialog = ref(false);
 const internalValue: Ref<string | undefined> = ref(undefined);
 const focused = ref(false);
+const dirty = computed(() => modelValue.value !== undefined && modelValue.value !== null);
 
 const select = (value: string) => {
   if (itemDisabled.value || itemReadonly.value) {

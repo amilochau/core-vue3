@@ -16,8 +16,11 @@
       :focused="focused"
       :disabled="itemDisabled"
       :color="color"
+      :dirty="dirty"
+      :clearable="clearable"
       variant="plain"
-      active>
+      active
+      @click:clear="reset">
       <v-chip-group
         v-model="modelValue"
         :multiple="multiple"
@@ -49,23 +52,19 @@
       </v-chip-group>
     </v-field>
     <template
-      v-if="clearable || useMasked || slots.append"
+      v-if="useMasked || slots.append"
       #append>
       <v-icon
         v-if="useMasked"
         :icon="displayMasked ? mdiUnfoldLessHorizontal : mdiUnfoldMoreHorizontal"
         @click="displayMasked = !displayMasked" />
-      <v-icon
-        v-if="clearable"
-        :icon="mdiClose"
-        @click="reset" />
       <slot name="append" />
     </template>
   </v-input>
 </template>
 
 <script setup lang="ts" generic="TData, TDataValue extends TData | TData[]">
-import { mdiClose, mdiUnfoldLessHorizontal, mdiUnfoldMoreHorizontal } from '@mdi/js';
+import { mdiUnfoldLessHorizontal, mdiUnfoldMoreHorizontal } from '@mdi/js';
 import { computed, inject, ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';
 
@@ -98,6 +97,7 @@ const slots = defineSlots<{
 const modelValue = defineModel<TDataValue | undefined>();
 
 const focused = ref(false);
+const dirty = computed(() => modelValue.value !== undefined && modelValue.value !== null);
 
 const reset = () => {
   if (itemDisabled.value || itemReadonly.value) {
