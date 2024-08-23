@@ -17,6 +17,7 @@ import FieldDate from './fields/FieldDate.vue';
 import FieldFile from './fields/FieldFile.vue';
 import FieldIcon from './fields/FieldIcon.vue';
 import FieldNumeric from './fields/FieldNumeric.vue';
+import FieldSlider from './fields/FieldSlider.vue';
 
 export {
   AppFooterBar,
@@ -38,4 +39,5 @@ export {
   FieldFile,
   FieldIcon,
   FieldNumeric,
+  FieldSlider,
 };

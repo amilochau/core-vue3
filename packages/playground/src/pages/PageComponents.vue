@@ -255,6 +255,28 @@
                   <v-icon :icon="mdiRefresh" />
                 </template>
               </field-icon>
+              <field-slider
+                label="FieldSlider"
+                :min="1"
+                :max="20"
+                :step="1"
+                :hint="settings.hint"
+                :variant="settings.variant"
+                :color="settings.color"
+                :clearable="settings.clearable"
+                :disabled="settings.disabled"
+                :readonly="settings.readonly">
+                <template
+                  v-if="settings.prepend"
+                  #prepend>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+                <template
+                  v-if="settings.append"
+                  #append>
+                  <v-icon :icon="mdiRefresh" />
+                </template>
+              </field-slider>
             </v-form>
           </v-card-text>
         </v-card>
@@ -300,7 +322,7 @@
 import { useI18n } from 'vue-i18n';
 import { type ComputedRef, computed, ref } from 'vue';
 import { usePage } from '@amilochau/core-vue3/composition';
-import { CardSectionTitle, FieldChipGroup, FieldColorBullets, FieldDate, FieldFile, FieldIcon, FieldNumeric } from '@amilochau/core-vue3/components';
+import { CardSectionTitle, FieldChipGroup, FieldColorBullets, FieldDate, FieldFile, FieldIcon, FieldNumeric, FieldSlider } from '@amilochau/core-vue3/components';
 import { TestEnum } from '@/types/test';
 import { type FormattedDataWithValue } from '@amilochau/core-vue3/types';
 import { mdiFormTextbox, mdiListBox, mdiRefresh, mdiTree } from '@mdi/js';

@@ -34,20 +34,16 @@
             @click="setModelValue(icon.value)" />
         </v-avatar>
       </div>
-      <template
-        v-if="clearable"
-        #append-inner>
-        <v-fade-transition>
-          <v-icon
-            :icon="dirty ? mdiCloseCircle : undefined"
-            class="ms-1"
-            @click="reset" />
-        </v-fade-transition>
-      </template>
     </v-field>
     <template
-      v-if="slots.append"
+      v-if="clearable || slots.append"
       #append>
+      <v-fade-transition v-if="clearable">
+        <v-icon
+          :icon="dirty ? mdiCloseCircle : undefined"
+          class="mr-1"
+          @click="reset" />
+      </v-fade-transition>
       <slot name="append" />
     </template>
   </v-input>
