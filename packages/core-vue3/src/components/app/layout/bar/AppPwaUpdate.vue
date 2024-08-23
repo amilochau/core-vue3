@@ -57,8 +57,8 @@ watch(updateDisplay, (newValue) => {
 <i18n lang="yaml">
 en:
   title: You can update this application!
-  install: Install the update
+  install: Update the application
 fr:
   title: Vous pouvez mettre à jour cette application !
-  install: Installer la mise à jour
+  install: Mettre à jour l'application
 </i18n>
