@@ -36,22 +36,18 @@
             size="x-small" />
         </div>
       </div>
-      <template
-        v-if="clearable"
-        #append-inner>
-        <v-fade-transition>
-          <v-icon
-            :icon="dirty ? mdiCloseCircle : undefined"
-            class="ms-1"
-            @click="reset" />
-        </v-fade-transition>
-      </template>
     </v-field>
     <template #append>
+      <v-fade-transition v-if="clearable">
+        <v-icon
+          :icon="dirty ? mdiCloseCircle : undefined"
+          class="mr-1"
+          @click="reset" />
+      </v-fade-transition>
       <v-icon
         :color="modelValue"
         :icon="mdiPalette"
-        class="full-opacity"
+        class="full-opacity mr-1"
         @click="open" />
       <slot name="append" />
     </template>

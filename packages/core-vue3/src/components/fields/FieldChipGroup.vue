@@ -47,23 +47,20 @@
           </v-chip>
         </v-slide-x-transition>
       </v-chip-group>
-      <template
-        v-if="clearable"
-        #append-inner>
-        <v-fade-transition>
-          <v-icon
-            :icon="dirty ? mdiCloseCircle : undefined"
-            class="ms-1"
-            @click="reset" />
-        </v-fade-transition>
-      </template>
     </v-field>
     <template
-      v-if="useMasked || slots.append"
+      v-if="clearable || useMasked || slots.append"
       #append>
+      <v-fade-transition v-if="clearable">
+        <v-icon
+          :icon="dirty ? mdiCloseCircle : undefined"
+          class="mr-1"
+          @click="reset" />
+      </v-fade-transition>
       <v-icon
         v-if="useMasked"
         :icon="displayMasked ? mdiUnfoldLessHorizontal : mdiUnfoldMoreHorizontal"
+        class="mr-1"
         @click="displayMasked = !displayMasked" />
       <slot name="append" />
     </template>
