@@ -11,7 +11,7 @@
     :clearable="clearable"
     :accept="accept"
     :multiple="multiple"
-    :prepend-icon="null"
+    prepend-icon=""
     type="file">
     <template
       v-if="slots.prepend"
