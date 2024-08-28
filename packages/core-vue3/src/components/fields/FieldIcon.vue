@@ -120,7 +120,6 @@ const itemReadonly = computed(() => props.readonly || !!vuetifyForm?.isReadonly.
   cursor: pointer;
   border-radius: 50%;
   transition-property: none;
-  border-width: 0px !important; /* Remove when solved: https://github.com/vuetifyjs/vuetify/issues/20345 */
 }
 .icons-grid-cell:hover {
   border: 1px solid #515151;
@@ -131,7 +130,6 @@ const itemReadonly = computed(() => props.readonly || !!vuetifyForm?.isReadonly.
   width: 32px !important;
   margin: -4px !important;
   border: 1px solid #515151;
-  border-width: 1px !important; /* Remove when solved: https://github.com/vuetifyjs/vuetify/issues/20345 */
   z-index: 1;
 }
 .icons-grid-cell__selected:hover {
