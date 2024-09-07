@@ -86,6 +86,13 @@ export const registerVuetify = (app: App, coreOptions: CoreOptions) => {
         clearable: false,
         class: 'mb-3',
       },
+      VAutocomplete: {
+        variant: 'underlined',
+        density: 'comfortable',
+        hideDetails: 'auto',
+        persistentHint: true,
+        class: 'mb-3',
+      },
       VTextarea: {
         variant: 'underlined',
         density: 'comfortable',
