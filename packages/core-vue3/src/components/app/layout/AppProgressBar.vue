@@ -33,7 +33,7 @@ watch(loading, () => {
   } else {
     display.value = false;
   }
-});
+}, { immediate: true });
 </script>
 
 <i18n lang="yaml">
