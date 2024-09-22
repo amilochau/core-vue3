@@ -26,8 +26,6 @@ export default defineConfig({
     vuetify(),
     VueI18n({
       fullInstall: false,
-      compositionOnly: true,
-      runtimeOnly: false,
     }),
     VitePWA({
       srcDir: 'src',

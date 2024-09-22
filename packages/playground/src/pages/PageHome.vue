@@ -16,7 +16,7 @@
       <p class="my-3">
         <v-btn-action
           :to="{ name: 'Dialogs' }"
-          color="primary">
+          class="fancy-style">
           {{ t('seeDialogs') }}
         </v-btn-action>
       </p>
