@@ -45,7 +45,7 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "@intlify/unplugin-vue-i18n": "^4.0.0",
+    "@intlify/unplugin-vue-i18n": "^5.2.0",
     "@mdi/js": "^7.4.47",
     "@stylistic/eslint-plugin": "^1.8.1",
     "@tsconfig/node20": "^20.1.4",
