@@ -35,10 +35,6 @@
         </v-btn-action>
       </p>
 
-      <btn-card
-        :icon="mdiGithub"
-        tooltip-text="OK" />
-
       <suspense>
         <div>{{ true }}</div>
         <template #fallback>
@@ -51,10 +47,8 @@
 
 <script setup lang="ts">
 import { AppResponsive } from '@amilochau/core-vue3/components';
-import { mdiGithub } from '@mdi/js';
 import HomeWelcome from '../components/home/HomeWelcome.vue';
 import HomeMessages from '../components/home/HomeMessages.vue';
-import BtnCard from '../components/buttons/BtnCard.vue';
 import { usePage } from '@amilochau/core-vue3/composition';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
