@@ -6,18 +6,12 @@
     :save-icon="mdiPlus"
     :save="save">
     <template #append:title>
-      <v-tooltip
-        location="start">
-        <template #activator="{ props: tooltip }">
-          <v-btn
-            v-bind="tooltip"
-            :disabled="loading"
-            :icon="mdiUpload"
-            variant="text"
-            density="comfortable" />
-        </template>
-        <span>{{ t('upload') }}</span>
-      </v-tooltip>
+      <v-btn
+        v-tooltip:start="t('upload')"
+        :disabled="loading"
+        :icon="mdiUpload"
+        variant="text"
+        density="comfortable" />
     </template>
     <template #default="{ model }">
       <v-text-field

@@ -1,18 +1,13 @@
 <template>
-  <v-tooltip location="bottom">
-    <template #activator="{ props: tooltip }">
-      <v-scroll-y-reverse-transition mode="out-in">
-        <v-btn
-          v-if="!coreOptions.pwa?.hideInstallBtn && installDisplay && !isInstalled"
-          v-bind="tooltip"
-          :disabled="loading || !online"
-          :icon="mdiDownload"
-          color="primary"
-          @click="pwaStore.install" />
-      </v-scroll-y-reverse-transition>
-    </template>
-    <span>{{ t('title') }}</span>
-  </v-tooltip>
+  <v-scroll-y-reverse-transition mode="out-in">
+    <v-btn
+      v-if="!coreOptions.pwa?.hideInstallBtn && installDisplay && !isInstalled"
+      v-tooltip:bottom="t('title')"
+      :disabled="loading || !online"
+      :icon="mdiDownload"
+      color="primary"
+      @click="pwaStore.install" />
+  </v-scroll-y-reverse-transition>
 </template>
 
 <script setup lang="ts">

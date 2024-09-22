@@ -1,17 +1,12 @@
 <template>
-  <v-tooltip location="start">
-    <template #activator="{ props: tooltip }">
-      <v-scroll-y-reverse-transition mode="out-in">
-        <v-btn
-          v-if="authenticationEnabled && !isAuthenticated"
-          v-bind="tooltip"
-          :icon="mdiPower"
-          :to="{ name: 'Login' }"
-          :active="false" />
-      </v-scroll-y-reverse-transition>
-    </template>
-    <span>{{ t('title') }}</span>
-  </v-tooltip>
+  <v-scroll-y-reverse-transition mode="out-in">
+    <v-btn
+      v-if="authenticationEnabled && !isAuthenticated"
+      v-tooltip:start="t('title')"
+      :icon="mdiPower"
+      :to="{ name: 'Login' }"
+      :active="false" />
+  </v-scroll-y-reverse-transition>
 </template>
 
 <script setup lang="ts">

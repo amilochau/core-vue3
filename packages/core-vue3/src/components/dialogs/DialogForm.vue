@@ -60,19 +60,14 @@
         <v-card-actions
           v-if="!hideActions"
           class="bg-primary py-1">
-          <v-tooltip location="start">
-            <template #activator="{ props: tooltip }">
-              <v-avatar
-                v-if="!online"
-                v-bind="tooltip"
-                density="comfortable">
-                <v-icon
-                  :icon="mdiWifiStrengthAlertOutline"
-                  color="warning" />
-              </v-avatar>
-            </template>
-            <span>{{ t('offlineTitle') }}</span>
-          </v-tooltip>
+          <v-avatar
+            v-if="!online"
+            v-tooltip:start="t('offlineTitle')"
+            density="comfortable">
+            <v-icon
+              :icon="mdiWifiStrengthAlertOutline"
+              color="warning" />
+          </v-avatar>
           <v-spacer />
           <v-btn
             v-if="!cancelHide"
