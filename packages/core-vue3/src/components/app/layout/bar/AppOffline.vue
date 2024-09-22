@@ -1,16 +1,11 @@
 <template>
-  <v-tooltip location="bottom">
-    <template #activator="{ props: tooltip }">
-      <v-scroll-y-reverse-transition mode="out-in">
-        <v-btn
-          v-if="!online"
-          v-bind="tooltip"
-          :icon="mdiWifiStrengthAlertOutline"
-          color="warning" />
-      </v-scroll-y-reverse-transition>
-    </template>
-    <span>{{ t('title') }}</span>
-  </v-tooltip>
+  <v-scroll-y-reverse-transition mode="out-in">
+    <v-btn
+      v-if="!online"
+      v-tooltip:bottom="t('title')"
+      :icon="mdiWifiStrengthAlertOutline"
+      color="warning" />
+  </v-scroll-y-reverse-transition>
 </template>
 
 <script setup lang="ts">
