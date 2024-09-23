@@ -70,15 +70,11 @@ export class MapLayerSettings {
 }
 
 export class MapMarkersSettings {
-  defaultColor?: string;
-  defaultSize?: number;
   defaultTags: Record<string, Tag> = {};
   defaultFields: Record<string, Field> = {};
 }
 
 export class MapLinesSettings {
-  defaultColor?: string;
-  defaultSize?: number;
   defaultTags: Record<string, Tag> = {};
   defaultFields: Record<string, Field> = {};
 }
