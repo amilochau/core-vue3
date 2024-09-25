@@ -244,12 +244,12 @@ const links = computed(() => ([
 </script>
 
 <i18n lang="yaml">
-  en:
-    pageTitle: Settings
-    pageDescription: Settings page
-  fr:
-    pageTitle: Paramètres
-    pageDescription: Page de paramètres
+en:
+  pageTitle: Settings
+  pageDescription: Settings page
+fr:
+  pageTitle: Paramètres
+  pageDescription: Page de paramètres
 </i18n>
 
 <i18n lang="yaml">
