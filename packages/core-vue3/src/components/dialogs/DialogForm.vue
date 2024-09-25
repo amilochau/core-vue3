@@ -136,7 +136,7 @@ const props = defineProps<{
   /** Whether to remain the dialog open on save. */
   remainOpenOnSave?: boolean
   /** Function to modify model on save. */
-  save: (proxyModel: TModel) => Promise<any> | any
+  save: (proxyModel: TModel, originalModel: TModel) => Promise<any> | any
 }>();
 
 const emit = defineEmits<{
@@ -179,7 +179,7 @@ const save = async () => {
     return;
   }
   await handleLoadAndError(async () => {
-    await props.save(clone(internalModel.value!));
+    await props.save(clone(internalModel.value!), clone(originalModel.value!));
     if (!props.remainOpenOnSave) {
       close();
     }
