@@ -45,7 +45,6 @@ export class MapsMarkersDetailsResponse {
 export class MapsLinesDetailsResponse {
   name: string = '';
   desc?: string;
-  points: Array<string> = [];
   color?: string;
   size?: number;
   tags?: Array<string>;
@@ -64,7 +63,6 @@ export class MapSettings {
 }
 
 export class MapLayerSettings {
-  layerType: LayerType = LayerType.Roadmap;
   disablePois?: boolean;
   disableRoads?: boolean;
 }
@@ -105,13 +103,6 @@ export enum AccessLevel {
   Read = 1,
   Change = 3,
   Manage = 7,
-}
-
-export enum LayerType {
-  Roadmap = 0,
-  Satellite = 1,
-  Hybrid = 2,
-  Terrain = 3,
 }
 
 export enum FieldType {
