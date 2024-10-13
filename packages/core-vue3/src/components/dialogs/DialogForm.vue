@@ -4,7 +4,7 @@
     :fullscreen="fullscreen || xs"
     :persistent="persistent"
     :attach="attach"
-    :max-width="dialogMaxWidth ?? '600px'"
+    :max-width="fullscreen || xs ? undefined : dialogMaxWidth ?? '600px'"
     :class="dialogClass"
     scrollable
     @update:model-value="updateDialog">
