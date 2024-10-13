@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@amilochau/core-vue3": "0.8.18",
-    "aws-amplify": "^6.6.3"
+    "aws-amplify": "^6.6.4"
   },
   "peerDependencies": {
     "@amilochau/core-vue3": "0.8.18"
