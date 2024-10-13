@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     v-model="dialog"
-    :fullscreen="xs"
+    :fullscreen="fullscreen || xs"
     :persistent="!notPersistent"
     :attach="attach"
     :max-width="dialogMaxWidth ?? '600px'"
@@ -56,6 +56,8 @@ defineProps<{
   hideActions?: boolean
   /** Whether to attach the dialog, or the reference of the element to attach. */
   attach?: string | boolean | Element
+  /** Whether to display the dialog in fullscreen - note that fullscreen is enforced on small screens. */
+  fullscreen?: boolean
 }>();
 
 const emit = defineEmits<{
