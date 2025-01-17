@@ -1,6 +1,6 @@
 {
   "name": "@amilochau/core-vue3-playground-auth",
-  "version": "0.8.20",
+  "version": "0.8.21",
   "author": "Antoine Milochau",
   "license": "MIT",
   "private": true,
@@ -23,6 +23,6 @@
     "@amilochau/core-vue3-auth": "file:packages/core-vue3-auth"
   },
   "devDependencies": {
-    "rollup-plugin-visualizer": "^5.12.0"
+    "rollup-plugin-visualizer": "^5.14.0"
   }
 }
