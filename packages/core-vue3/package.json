@@ -49,7 +49,7 @@
     "@mdi/js": "^7.4.47",
     "@stylistic/eslint-plugin": "^1.8.1",
     "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^20.17.14",
+    "@types/node": "^20.17.16",
     "@typescript-eslint/parser": "^7.18.0",
     "@unhead/vue": "^1.11.18",
     "@vitejs/plugin-vue": "^5.2.1",
@@ -57,11 +57,11 @@
     "@vueuse/core": "^11.3.0",
     "eslint": "^8.57.1",
     "eslint-plugin-vue": "^9.32.0",
-    "pinia": "^2.3.0",
+    "pinia": "^2.3.1",
     "roboto-fontface": "^0.10.0",
     "sass": "^1.83.4",
     "typescript": "^5.7.3",
-    "vite": "^5.4.11",
+    "vite": "^5.4.14",
     "vite-plugin-pwa": "^0.20.5",
     "vite-plugin-vuetify": "^2.0.4",
     "vue": "^3.5.12",
@@ -70,7 +70,7 @@
     "vue-i18n": "^10.0.5",
     "vue-router": "^4.5.0",
     "vue-tsc": "^2.2.0",
-    "vuetify": "^3.7.6"
+    "vuetify": "^3.7.9"
   },
   "devDependencies": {
     "eslint-plugin-jsdoc": "^48.11.0"
