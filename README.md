@@ -16,7 +16,7 @@
   @amilochau/core-vue3
 </h1>
 
-`@amilochau/core-vue3` is a opinionated package used to create vue.js v3 applications.
+`@amilochau/core-vue3` is an opinionated package used to create vue.js v3 applications.
 
 ## Main features
 
