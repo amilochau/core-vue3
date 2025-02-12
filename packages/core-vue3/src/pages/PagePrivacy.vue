@@ -15,11 +15,11 @@
 import { AppResponsive } from '../components';
 import PrivacyCard from '../components/app/content/PrivacyCard.vue';
 import { useI18n } from 'vue-i18n';
-import { useAppOptions, usePage } from '../composition';
+import { usePage } from '../composition';
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
-const { t, mergeLocaleMessage } = useI18n();
+const { t } = useI18n();
 usePage(computed(() => ({
   title: t('pageTitle'),
   description: t('pageDescription'),
@@ -28,14 +28,7 @@ usePage(computed(() => ({
     defaultBackTo: { name: 'Home' },
   },
 })));
-const { coreOptions } = useAppOptions();
 const { xs } = useDisplay();
-
-Object.entries(coreOptions.i18n.messages).map(([key, item]) => {
-  mergeLocaleMessage(key, {
-    appTitle: item.appTitle,
-  });
-});
 </script>
 
 <i18n lang="yaml">

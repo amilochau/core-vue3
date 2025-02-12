@@ -43,7 +43,7 @@ export const registerPwa = (router: Router) => {
       pwaStore.updateLoading = true;
       pwaStore.updateDisplay = true;
       const promise = new Promise<void>(resolve => {
-        registration!.waiting?.addEventListener('statechange', e => {
+        registration.waiting?.addEventListener('statechange', e => {
           const sw = e.target as ServiceWorker;
           if (sw.state === 'activated') {
             window.location.pathname = to.fullPath;
