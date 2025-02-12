@@ -27,6 +27,7 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
+  noindex: true,
 })));
 const { xs } = useDisplay();
 </script>
