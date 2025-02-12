@@ -36,6 +36,7 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
+  noindex: true,
 })));
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);

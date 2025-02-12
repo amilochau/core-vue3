@@ -170,6 +170,7 @@ usePage(computed(() => ({
     buttonMode: buttonMode.value,
     defaultBackTo: { name: 'Home' },
   },
+  noindex: true,
 })));
 const router = useRouter();
 const route = useRoute();
