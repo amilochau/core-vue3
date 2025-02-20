@@ -19,7 +19,7 @@
         {{ t('settings') }}
       </v-btn-action>
       <v-btn-action
-        :href="`https://contact.milochau.com/${route.params.lang}`"
+        :href="contactUrl"
         size="small"
         variant="text"
         target="_blank"
@@ -69,9 +69,10 @@
 </template>
 
 <script setup lang="ts">
+import type { CoreVue3ApplicationOptions } from '../../../../types';
 import { useThemeStore } from '../../../../stores';
 import { mdiBrightness6, mdiEarth } from '@mdi/js';
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useTheme } from 'vuetify';
@@ -89,6 +90,7 @@ const themeStore = useThemeStore();
 const router = useRouter();
 const route = useRoute();
 const theme = useTheme();
+const appOptions = inject('app-options') as CoreVue3ApplicationOptions;
 
 const barItems = computed(() => props.items ?? []);
 const language = computed(() => route.params.lang?.toString());
@@ -102,6 +104,8 @@ const languagesItems = computed(() => ([
   { title: t('languages.english'), lang: 'en' },
   { title: t('languages.french'), lang: 'fr' },
 ]));
+
+const contactUrl = computed(() => appOptions.contactUrlBuilder(route.params.lang?.toString()));
 </script>
 
 <i18n lang="yaml">

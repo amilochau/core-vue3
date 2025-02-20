@@ -27,11 +27,14 @@
 </template>
 
 <script setup lang="ts">
-import { useAppOptions } from '../../../composition';
 import { useAppStore } from '../../../stores';
 
-const appStore = useAppStore();
-const { coreOptions } = useAppOptions();
+defineProps<{
+  /** Main navigation items. */
+  items: any[],
+  /** Navigation items appended at the bottom of the drawer. */
+  appendItems?: any[],
+}>();
 
-const { items, appendItems } = coreOptions.application.navigation();
+const appStore = useAppStore();
 </script>

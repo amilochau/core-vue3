@@ -1,69 +1,53 @@
-import { type RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
-import routes from '../../data/routes';
-import { registerGuards } from './guards';
+import { type RouteLocationGeneric, type RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 import { type App } from 'vue';
-import type { CoreOptions } from '../../types';
-import { useAppStore, useIdentityStore, useLanguageStore } from '../../stores';
-import type { Pinia } from 'pinia';
-import PageRoot from '../../pages/PageRoot.vue';
+import type { CoreVue3Options } from '../../types';
 
 declare module 'vue-router' {
   /** Extended interface for routes. */
   interface RouteMeta {
-    requiresAuth?: boolean
+    // @todo Move that to @amilochau/core-vue3-auth
+    // requiresAuth?: boolean
+
+    generateSsg?: boolean
+    noindex?: boolean
+    metadata?: {
+      en: {
+        title: string | undefined
+        description: string | undefined
+      },
+      fr: {
+        title: string | undefined
+        description: string | undefined
+      }
+    }
   }
 }
 
 /**
  * Register vue-router.
  * @param app App instance.
- * @param pinia Pinia instance.
- * @param coreOptions Core options.
+ * @param options Core Options.
  */
-export const registerRouter = (app: App, pinia: Pinia, coreOptions: CoreOptions) => {
-  const languageStore = useLanguageStore(pinia);
-  const identityStore = useIdentityStore(pinia);
-  const appStore = useAppStore(pinia);
-
-  const rootRoute: RouteRecordRaw = {
-    path: '/:lang([a-z]{2})',
-    component: PageRoot,
-    children: coreOptions.rootComponent ? [
-      {
-        path: '',
-        component: coreOptions.rootComponent,
-        children: coreOptions.routes.concat(routes),
-      } as RouteRecordRaw,
-    ] : coreOptions.routes.concat(routes),
-  };
-
-  const redirectionRoute: RouteRecordRaw = {
-    path: '/:pathMatch(.*)*',
-    /**
-     * Redirection using the language.
-     * @param to Target route.
-     */
-    redirect: to => {
-      return {
-        path: `/${languageStore.language}${to.fullPath}`,
-      };
-    },
-  };
-
-  const routesWithRedirection: Array<RouteRecordRaw> = [
-    rootRoute,
-    redirectionRoute,
+export const registerRouter = (app: App, options: CoreVue3Options) => {
+  const routes: RouteRecordRaw[] = [
+    ...options.router.routes,
   ];
+
+  routes[0].children?.push(...[
+    { name: 'Settings', path: 'settings', component: () => import('../../pages/PageSettings.vue') },
+    { name: 'Forbidden', path: 'forbidden', component: () => import('../../pages/PageForbidden.vue') },
+    { name: 'NotFound', path: ':path(.*)*', component: () => import('../../pages/PageNotFound.vue') },
+  ]);
+
+  routes.push({
+    path: '/:path(.*)*',
+    redirect: (to: RouteLocationGeneric) => `/en${to.fullPath}`.replace(/\/$/, ''),
+  });
+
+  console.log(routes)
 
   const router = createRouter({
     history: createWebHistory(),
-    routes: routesWithRedirection,
-    /**
-     * Scroll behavior.
-     * @param to Target route.
-     * @param from Origin route.
-     * @param savedPosition Saved position.
-     */
     scrollBehavior: async (to, from, savedPosition) => {
       // Wait for initial page load, or for cross page navigation
       if (!document.querySelector('main') || to.path !== from.path && to.hash) {
@@ -71,22 +55,21 @@ export const registerRouter = (app: App, pinia: Pinia, coreOptions: CoreOptions)
       }
 
       if (to.hash) {
-        return {
-          el: to.hash,
-          behavior: 'smooth',
-          top: 48,
-        };
+        return { el: to.hash, behavior: 'smooth', top: 48 };
       } else {
-        return {
-          top: 0,
-        };
+        return { top: 0 };
       }
       // Note: no saved position here, as it works badly with transitions
     },
+    ...options.router,
+    routes,
   });
 
   // Register guards
-  registerGuards(router, identityStore, appStore, coreOptions);
+  // @todo Move that to @amilochau/core-vue3-auth
+  // const identityStore = useIdentityStore(pinia);
+  // const appStore = useAppStore(pinia);
+  // registerGuards(router, identityStore, appStore, coreOptions);
 
   return router;
 };

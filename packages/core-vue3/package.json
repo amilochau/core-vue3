@@ -45,33 +45,33 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "@intlify/unplugin-vue-i18n": "^5.3.1",
+    "@fontsource/roboto": "^5.1.1",
+    "@intlify/unplugin-vue-i18n": "^6.0.3",
     "@mdi/js": "^7.4.47",
-    "@stylistic/eslint-plugin": "^1.8.1",
-    "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^20.17.16",
-    "@typescript-eslint/parser": "^7.18.0",
-    "@unhead/vue": "^1.11.18",
+    "@stylistic/eslint-plugin": "^4.0.1",
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^22.13.4",
+    "@unhead/vue": "^1.11.19",
     "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/tsconfig": "^0.5.1",
+    "@vue/eslint-config-typescript": "^14.4.0",
+    "@vue/tsconfig": "^0.7.0",
     "@vueuse/core": "^11.3.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.20.1",
     "eslint-plugin-vue": "^9.32.0",
-    "pinia": "^2.3.1",
-    "sass": "^1.83.4",
+    "pinia": "^3.0.1",
+    "sass": "^1.85.0",
     "typescript": "^5.7.3",
-    "vite": "^5.4.14",
-    "vite-plugin-pwa": "^0.20.5",
-    "vite-plugin-vuetify": "^2.0.4",
+    "unplugin-vue-router": "^0.11.2",
+    "vite": "^6.1.1",
+    "vite-plugin-vue-devtools": "^7.7.2",
+    "vite-plugin-vuetify": "^2.1.0",
     "vue": "^3.5.12",
-    "vue-cli-plugin-vuetify": "^2.5.8",
-    "vue-component-type-helpers": "^2.2.0",
-    "vue-i18n": "^10.0.5",
+    "vue-i18n": "^11.1.1",
     "vue-router": "^4.5.0",
-    "vue-tsc": "^2.2.0",
-    "vuetify": "^3.7.9"
+    "vue-tsc": "^2.2.2",
+    "vuetify": "^3.7.13"
   },
   "devDependencies": {
-    "eslint-plugin-jsdoc": "^48.11.0"
+    "eslint-plugin-jsdoc": "^50.6.3"
   }
 }

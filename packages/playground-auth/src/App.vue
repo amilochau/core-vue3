@@ -21,14 +21,14 @@
 </template>
 
 <script setup lang="ts">
-import { AppFooterBar, AppHeaderBar } from '../components';
+import { AppFooterBar, AppHeaderBar } from '@amilochau/core-vue3/components';
 import AppNavigationDrawer from '../components/app/layout/AppNavigationDrawer.vue';
 import AppCookies from '../components/app/layout/AppCookies.vue';
 import AppSnackbar from '../components/app/layout/AppSnackbar.vue';
 import { useTheme } from 'vuetify';
-import { useAppStore, useThemeStore } from '../stores';
+import { useAppStore, useThemeStore } from '@amilochau/core-vue3/stores';
 import { storeToRefs } from 'pinia';
-import { useNotifications } from '../composition';
+import { useNotifications } from '@amilochau/core-vue3/composition';
 
 const appStore = useAppStore();
 const { pageData } = storeToRefs(appStore);

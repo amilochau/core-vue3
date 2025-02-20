@@ -1,3 +1,16 @@
+<route lang="yaml">
+name: Components
+meta:
+  generateSsg: true
+  metadata:
+    en:
+      title: Components — playground
+      description: Compose.
+    fr:
+      title: Composants — playground
+      description: Composez.
+</route>
+
 <!-- eslint-disable vue/no-bare-strings-in-template -->
 <template>
   <v-container>

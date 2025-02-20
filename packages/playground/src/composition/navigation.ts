@@ -1,12 +1,14 @@
+import { useLanguageStore } from '@amilochau/core-vue3/stores';
 import { mdiChatOutline, mdiCog, mdiCogOutline, mdiHome, mdiOpenInNew } from '@mdi/js';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoute } from 'vue-router';
+import { storeToRefs } from 'pinia';
 
-export const navigation = () => {
+export const useNavigation = () => {
 
   const { t, mergeLocaleMessage } = useI18n();
-  const route = useRoute();
+  const languageStore = useLanguageStore();
+  const { language } = storeToRefs(languageStore);
 
   mergeLocaleMessage('en', {
     home: 'Home',
@@ -21,8 +23,6 @@ export const navigation = () => {
     contact: 'Contact',
   });
 
-  const contactUrl = `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`;
-
   return {
     items: computed(() => [
       { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
@@ -31,7 +31,7 @@ export const navigation = () => {
     appendItems: computed(() => [
       { type: 'subheader', title: t('settingsAndSupport') },
       { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
-      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: contactUrl, target: '_blank', rel: 'noopener noreferrer' },
+      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: `https://contact.milochau.com/${language.value}?returnUrl=${encodeURIComponent(window.location.href)}`, target: '_blank', rel: 'noopener noreferrer' },
     ]),
   };
 };

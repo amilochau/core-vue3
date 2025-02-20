@@ -21,7 +21,7 @@ export const registerGuards = (router: Router, identityStore: any, appStore: any
       if (coreOptions.identity && router.hasRoute('Login')) {
         next({ name: 'Login', params: { lang: to.params.lang }, query: { returnUrl: to.fullPath } });
         return;
-      } else {
+      } else if (router.hasRoute('Forbidden')) {
         next({ name: 'Forbidden', params: { lang: to.params.lang } });
         return;
       }

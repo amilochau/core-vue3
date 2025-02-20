@@ -1,6 +1,6 @@
 import { type PiniaPluginContext, createPinia } from 'pinia';
 import type { App } from 'vue';
-import type { CoreOptions } from '../types/options';
+import type { CoreVue3Options } from '../types/options';
 
 /** Additional options for data persistence. */
 export interface PersistOptions {
@@ -37,9 +37,9 @@ const piniaPersist = ({ options, store }: PiniaPluginContext) => {
 /**
  * Register pinia.
  * @param app App instance.
- * @param coreOptions Core options.
+ * @param options Options.
  */
-export const registerPinia = (app: App, coreOptions: CoreOptions) => {
+export const registerPinia = (app: App, options: CoreVue3Options) => {
   const pinia = createPinia()
     .use(piniaPersist);
 

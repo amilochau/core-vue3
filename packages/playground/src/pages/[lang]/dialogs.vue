@@ -1,3 +1,16 @@
+<route lang="yaml">
+name: Dialogs
+meta:
+  generateSsg: true
+  metadata:
+    en:
+      title: Dialogs — playground
+      description: Dialog.
+    fr:
+      title: Dialogs — playground
+      description: Dialoguez.
+</route>
+
 <template>
   <v-container>
     <v-row>
@@ -85,12 +98,12 @@
 import { useI18n } from 'vue-i18n';
 import { computed, ref } from 'vue';
 import { usePage } from '@amilochau/core-vue3/composition';
-import DialogListItemCreate from '../components/dialogs/DialogListItemCreate.vue';
-import DialogListItemEdit from '../components/dialogs/DialogListItemEdit.vue';
-import DialogListItemDelete from '../components/dialogs/DialogListItemDelete.vue';
-import DialogRecordCreate from '../components/dialogs/DialogRecordCreate.vue';
-import DialogRecordEdit from '../components/dialogs/DialogRecordEdit.vue';
-import DialogRecordDelete from '../components/dialogs/DialogRecordDelete.vue';
+import DialogListItemCreate from '../../components/dialogs/DialogListItemCreate.vue';
+import DialogListItemEdit from '../../components/dialogs/DialogListItemEdit.vue';
+import DialogListItemDelete from '../../components/dialogs/DialogListItemDelete.vue';
+import DialogRecordCreate from '../../components/dialogs/DialogRecordCreate.vue';
+import DialogRecordEdit from '../../components/dialogs/DialogRecordEdit.vue';
+import DialogRecordDelete from '../../components/dialogs/DialogRecordDelete.vue';
 import type { Item } from '@/types/test';
 
 const { t } = useI18n();

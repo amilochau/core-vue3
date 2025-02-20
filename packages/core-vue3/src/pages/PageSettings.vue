@@ -44,6 +44,8 @@
         {{ t('privacy.expiration', { expirationDate: d(cookiesStore.expiration, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }) }) }}
       </v-alert>
       <v-divider class="my-4" />
+      <!--
+      @todo Manage notifications settings somehow/somewhere
       <template v-if="notifications.isSupported.value">
         <card-section-title
           :icon="mdiBellOutline"
@@ -89,6 +91,7 @@
         </div>
         <v-divider class="my-4" />
       </template>
+      -->
       <card-section-title
         :icon="mdiDatabaseOutline"
         :title="t('storage.title')" />
@@ -144,10 +147,10 @@ import { useNotifications, usePage } from '../composition';
 import { useRoute, useRouter } from 'vue-router';
 import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../stores';
 import { useTheme } from 'vuetify';
-import { computed, ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
-import type { BuildData } from '../types';
+import type { BuildData, CoreVue3ApplicationOptions } from '../types';
 
 declare global {
   interface Window {
@@ -183,6 +186,7 @@ const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 const pwaStore = usePwaStore();
 const { updateDisplay, updateLoading } = storeToRefs(pwaStore);
+const appOptions = inject('app-options') as CoreVue3ApplicationOptions;
 
 // Theme
 const toggleTheme = () => {
@@ -240,7 +244,7 @@ const versionItems = computed(() => ([
 ]));
 
 const links = computed(() => ([
-  { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
+  { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, href: appOptions.privacyUrlBuilder(language) },
 ]));
 </script>
 

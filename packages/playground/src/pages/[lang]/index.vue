@@ -1,3 +1,16 @@
+<route lang="yaml">
+name: Home
+meta:
+  generateSsg: true
+  metadata:
+    en:
+      title: playground
+      description: Play.
+    fr:
+      title: playground
+      description: Jouez.
+</route>
+
 <template>
   <app-responsive>
     <div class="text-center">
@@ -47,8 +60,8 @@
 
 <script setup lang="ts">
 import { AppResponsive } from '@amilochau/core-vue3/components';
-import HomeWelcome from '../components/home/HomeWelcome.vue';
-import HomeMessages from '../components/home/HomeMessages.vue';
+import HomeWelcome from '../../components/home/HomeWelcome.vue';
+import HomeMessages from '../../components/home/HomeMessages.vue';
 import { usePage } from '@amilochau/core-vue3/composition';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -67,8 +80,6 @@ declare global {
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {},
   footer: {
     items: [
@@ -82,15 +93,6 @@ usePage(computed(() => ({
 
 const buildData = window.buildData as BuildData;
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Home
-  pageDescription: Playground page
-fr:
-  pageTitle: Accueil
-  pageDescription: Page de test
-</i18n>
 
 <i18n lang="yaml">
 en:

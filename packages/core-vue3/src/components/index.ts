@@ -1,10 +1,14 @@
+import AppCookies from './app/layout/AppCookies.vue';
 import AppFooterBar from './app/layout/bar/AppFooterBar.vue';
 import AppForm from './pages-layout/AppForm.vue';
 import AppHeaderBar from './app/layout/bar/AppHeaderBar.vue';
 import AppLayoutLoader from './pages-layout/AppLayoutLoader.vue';
 import AppLinks from './pages-layout/AppLinks.vue';
+import AppNavigationDrawer from './app/layout/AppNavigationDrawer.vue';
+import AppProgressBar from './app/layout/AppProgressBar.vue';
 import AppResponsive from './pages-layout/AppResponsive.vue';
 import AppResponsiveForm from './pages-layout/AppResponsiveForm.vue';
+import AppSnackbar from './app/layout/AppSnackbar.vue';
 import CardDivider from './cards/CardDivider.vue';
 import CardMessages from './cards/CardMessages.vue';
 import CardSectionTitle from './cards/CardSectionTitle.vue';
@@ -20,13 +24,17 @@ import FieldNumeric from './fields/FieldNumeric.vue';
 import FieldSlider from './fields/FieldSlider.vue';
 
 export {
+  AppCookies,
   AppFooterBar,
   AppForm,
   AppHeaderBar,
   AppLayoutLoader,
   AppLinks,
+  AppNavigationDrawer,
+  AppProgressBar,
   AppResponsive,
   AppResponsiveForm,
+  AppSnackbar,
   CardDivider,
   CardMessages,
   CardSectionTitle,

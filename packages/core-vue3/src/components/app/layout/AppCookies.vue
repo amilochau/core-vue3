@@ -15,7 +15,9 @@
           color="info"
           class="mb-2 mx-2"
           variant="text"
-          @click="seePolicy">
+          :href="privacyUrl"
+          target="_blank"
+          rel="noopener noreferrer">
           {{ t('seePolicy') }}
         </v-btn-action>
         <div>
@@ -35,59 +37,34 @@
       </v-card-actions>
     </v-card>
   </v-bottom-sheet>
-  <dialog-simple
-    ref="dialogFormRef"
-    :dialog-title="t('title')"
-    :dialog-icon="mdiGavel"
-    not-persistent>
-    <privacy-card />
-    <template #actions>
-      <v-spacer />
-      <v-btn
-        variant="text"
-        color="grey-lighten-2"
-        @click="refuse">
-        {{ t('refuse') }}
-      </v-btn>
-      <v-btn
-        :prepend-icon="mdiCheck"
-        variant="text"
-        @click="accept">
-        {{ t('accept') }}
-      </v-btn>
-    </template>
-  </dialog-simple>
 </template>
 
 <script setup lang="ts">
-import { mdiCheck, mdiCookie, mdiGavel } from '@mdi/js';
+import { mdiCookie } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
-import { useCookiesStore } from '../../../stores';
-import { ref } from 'vue';
-import PrivacyCard from '../content/PrivacyCard.vue';
-import DialogSimple from '../../dialogs/DialogSimple.vue';
+import { useCookiesStore, useLanguageStore } from '../../../stores';
+import { computed, inject, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import type { CoreVue3ApplicationOptions } from 'src/types';
 
 const { t } = useI18n();
 const cookiesStore = useCookiesStore();
+const languageStore = useLanguageStore();
+const { language } = storeToRefs(languageStore);
+const appOptions = inject('app-options') as CoreVue3ApplicationOptions;
 
 const displayed = ref(cookiesStore.showCookies);
 
-const seePolicy = () => {
-  displayed.value = false;
-  dialogFormRef.value?.open();
-};
+const privacyUrl = computed(() => appOptions.privacyUrlBuilder(language));
+
 const accept = () => {
   displayed.value = false;
   cookiesStore.acceptCookies();
-  dialogFormRef.value?.close();
 };
 const refuse = () => {
   displayed.value = false;
   cookiesStore.refuseCookies();
-  dialogFormRef.value?.close();
 };
-
-const dialogFormRef = ref<InstanceType<typeof DialogSimple>>();
 </script>
 
 <i18n lang="yaml">

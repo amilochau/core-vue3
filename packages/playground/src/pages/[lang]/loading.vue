@@ -1,3 +1,16 @@
+<route lang="yaml">
+name: Loading
+meta:
+  generateSsg: true
+  metadata:
+    en:
+      title: Loading — playground
+      description: Load.
+    fr:
+      title: Chargement — playground
+      description: Chargez.
+</route>
+
 <template>
   <div
     id="page-map"
@@ -14,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import PageLayout from './loading/PageLayout.vue';
+import PageLayout from '@/components/PageLayout.vue';
 import { AppLayoutLoader } from '@amilochau/core-vue3/components';
 import { computed } from 'vue';
 import { usePage } from '@amilochau/core-vue3/composition';

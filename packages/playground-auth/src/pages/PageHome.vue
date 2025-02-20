@@ -6,7 +6,7 @@
       icon: mdiRefresh,
     }"
     :links="[
-      { title: 'Privacy', to: { name: 'Privacy' } }
+      { title: 'Home', to: { name: 'Home' } }
     ]">
     <template #prepend>
       <v-row

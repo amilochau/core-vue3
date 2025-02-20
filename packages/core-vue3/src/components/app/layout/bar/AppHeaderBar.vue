@@ -14,20 +14,9 @@
           v-else
           @click="toggleDrawer" />
       </v-scroll-y-reverse-transition>
-      <v-img
-        v-if="contentMode === 'img'"
-        :alt="title"
-        :src="coreOptions.application.logoUrl"
-        :width="40"
-        class="ml-2"
-        :class="{
-          'clickable': !!contentTo
-        }"
-        :to="contentTo" />
       <slot name="prepend" />
     </template>
     <v-app-bar-title
-      v-if="!contentMode || contentMode === 'title'"
       class="ml-4"
       :class="{
         'clickable': !!contentTo
@@ -54,13 +43,10 @@ import AppPwaInstall from './AppPwaInstall.vue';
 import AppPwaUpdate from './AppPwaUpdate.vue';
 import AppProgressBar from '../AppProgressBar.vue';
 import { useAppStore } from '../../../../stores';
-import { useAppOptions } from '../../../../composition';
 import { type RouteLocationRaw, useRouter } from 'vue-router';
 import { computed } from 'vue';
 
 const props = defineProps<{
-  /** Content mode, to display a text title or an image. */
-  contentMode?: 'title' | 'img'
   /** Title text.  */
   title?: string
   /** Link to add to the content. */
@@ -77,7 +63,6 @@ defineSlots<{
 }>();
 
 const appStore = useAppStore();
-const { coreOptions } = useAppOptions();
 const router = useRouter();
 
 const toggleDrawer = () => {
