@@ -59,11 +59,5 @@ export const registerRouter = (app: App, options: CoreVue3Options) => {
     routes,
   });
 
-  // Register guards
-  // @todo Move that to @amilochau/core-vue3-auth
-  // const identityStore = useIdentityStore(pinia);
-  // const appStore = useAppStore(pinia);
-  // registerGuards(router, identityStore, appStore, coreOptions);
-
   return router;
 };

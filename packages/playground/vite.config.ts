@@ -9,8 +9,9 @@ import { setDefaultResultOrder } from 'dns';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA } from 'vite-plugin-pwa';
 import path from 'upath';
-import fs from 'fs';
+import fs from 'fs/promises';
 import { execSync } from 'child_process';
+import { generateMetadataInfo } from '@amilochau/core-vue3/utils';
 
 setDefaultResultOrder('verbatim');
 
@@ -93,11 +94,42 @@ export default defineConfig(({ mode }) => {
         },
       },
       {
-        name: 'amilochau:fallback',
+        // lightweight head-only ssg
+        name: 'amilochau:ssg',
         enforce: 'post',
-        transformIndexHtml (html) {
-          fs.mkdirSync('dist', { recursive: true });
-          fs.writeFileSync(path.join('dist/_fallback.html'), html);
+        async transformIndexHtml (html) {
+          if (mode !== 'production') return html;
+
+          const routes = locales.flatMap(locale => allRoutes
+            .filter(route => route.meta?.generateSsg)
+            .map(route => {
+              const meta = generateMetadataInfo(route.fullPath.replace(':lang(fr|en)', locale), route.meta, locale);
+              const metaContent = [
+                `<title>${meta.title}</title>`,
+                ...meta.meta.map(x => {
+                  const attrs = Object.keys(x).map(k => `${k}="${x[k]}"`).join(' ');
+                  return `<meta ${attrs}>`;
+                }),
+              ].join('\n    ');
+
+              return {
+                path: `/${locale}/${route.path}`,
+                content: html
+                  .replace('<!-- @inject-meta -->', metaContent)
+                  .replace('<html', `<html lang="${locale}"`),
+              };
+            }),
+          );
+
+          for (const route of routes) {
+            const filename = route.path.endsWith('/')
+              ? path.join('dist', route.path, 'index.html')
+              : path.join('dist', `${route.path}.html`);
+            await fs.mkdir(path.dirname(filename), { recursive: true });
+            await fs.writeFile(filename, route.content);
+          }
+
+          return routes.find(r => r.path === '/en/')?.content;
         },
       },
       VueDevTools(),

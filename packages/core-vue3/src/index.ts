@@ -62,7 +62,7 @@ export const createCoreVue3App = (
     const i18n = registerI18n(app, options);
     const head = registerHead(app);
     const vuetify = registerVuetify(app, options);
-    const pinia = registerPinia(app, options);
+    const pinia = registerPinia(app);
 
     const context: CoreVue3Context = {
       app,
