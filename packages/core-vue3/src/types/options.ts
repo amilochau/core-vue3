@@ -1,5 +1,5 @@
 import type { App, MaybeRef, Ref } from 'vue';
-import type { I18n, VueI18nOptions } from 'vue-i18n';
+import type { I18n, I18nOptions } from 'vue-i18n';
 import type { RouteComponent, RouteRecordRaw, Router, RouterOptions } from 'vue-router';
 import type { VuetifyOptions } from 'vuetify';
 import type { NotificationsRegisterRequest } from './application/notifications';
@@ -19,7 +19,7 @@ export interface CoreVue3Options {
   /** `vue-router` options. */
   router: Omit<RouterOptions, 'history'> & Partial<Pick<RouterOptions, 'history'>>
   /** `vue-i18n` options. */
-  i18n?: VueI18nOptions,
+  i18n?: I18nOptions,
   /** `vuetify` options. */
   vuetify?: VuetifyOptions,
 

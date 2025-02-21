@@ -36,20 +36,10 @@ usePage(computed(() => ({
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
-  noindex: true,
 })));
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Forbidden
-  pageDescription: Page for access to forbidden resources
-fr:
-  pageTitle: Accès non autorisé
-  pageDescription: Page pour accès à des ressources interdites
-</i18n>
 
 <i18n lang="yaml">
 en:

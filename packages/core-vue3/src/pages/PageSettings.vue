@@ -167,13 +167,10 @@ declare global {
 const { d, n, t } = useI18n();
 const buttonMode = ref<'back' | 'default-back'>('back');
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: buttonMode.value,
     defaultBackTo: { name: 'Home' },
   },
-  noindex: true,
 })));
 const router = useRouter();
 const route = useRoute();
@@ -247,15 +244,6 @@ const links = computed(() => ([
   { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, href: appOptions.privacyUrlBuilder(language) },
 ]));
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Settings
-  pageDescription: Settings page
-fr:
-  pageTitle: Paramètres
-  pageDescription: Page de paramètres
-</i18n>
 
 <i18n lang="yaml">
 en:

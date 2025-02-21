@@ -29,18 +29,12 @@ import { useAppStore, useThemeStore } from '@amilochau/core-vue3/stores';
 import { storeToRefs } from 'pinia';
 import { useNotifications } from '@amilochau/core-vue3/composition';
 import { useNavigation } from '@/composition/navigation';
-import { watch } from 'vue';
 
 const appStore = useAppStore();
 const { pageData } = storeToRefs(appStore);
 const themeStore = useThemeStore();
 const theme = useTheme();
 const { items, appendItems } = useNavigation();
-
-watch(appendItems, (n,o) => {
-  console.log('no', n, o)
-})
-
 
 const setTheme = (darkMode: boolean) => {
   theme.global.name.value = darkMode ? 'dark' : 'light';

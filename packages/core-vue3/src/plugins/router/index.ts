@@ -10,7 +10,7 @@ declare module 'vue-router' {
 
     generateSsg?: boolean
     noindex?: boolean
-    metadata?: {
+    metadata: {
       en: {
         title: string | undefined
         description: string | undefined
@@ -34,17 +34,51 @@ export const registerRouter = (app: App, options: CoreVue3Options) => {
   ];
 
   routes[0].children?.push(...[
-    { name: 'Settings', path: 'settings', component: () => import('../../pages/PageSettings.vue') },
-    { name: 'Forbidden', path: 'forbidden', component: () => import('../../pages/PageForbidden.vue') },
-    { name: 'NotFound', path: ':path(.*)*', component: () => import('../../pages/PageNotFound.vue') },
+    {
+      name: 'Settings',
+      path: 'settings',
+      component: () => import('../../pages/PageSettings.vue'),
+      meta: {
+        generateSsr: true,
+        noindex: true,
+        metadata: {
+          en: { title: 'Settings', description: 'Settings' },
+          fr: { title: 'Paramètres', description: 'Paramètres' },
+        },
+      },
+    },
+    {
+      name: 'Forbidden',
+      path: 'forbidden',
+      component: () => import('../../pages/PageForbidden.vue'),
+      meta: {
+        generateSsr: false,
+        noindex: true,
+        metadata: {
+          en: { title: 'Forbidden', description: 'Forbidden' },
+          fr: { title: 'Accès non autorisé', description: 'Accès non autorisé' },
+        },
+      },
+    },
+    {
+      name: 'NotFound',
+      path: ':path(.*)*',
+      component: () => import('../../pages/PageNotFound.vue'),
+      meta: {
+        generateSsr: false,
+        noindex: true,
+        metadata: {
+          en: { title: 'Page Not Found', description: 'Page Not Found' },
+          fr: { title: 'Page introuvable', description: 'Page introuvable' },
+        },
+      },
+    },
   ]);
 
   routes.push({
     path: '/:path(.*)*',
     redirect: (to: RouteLocationGeneric) => `/en${to.fullPath}`.replace(/\/$/, ''),
   });
-
-  console.log(routes)
 
   const router = createRouter({
     history: createWebHistory(),

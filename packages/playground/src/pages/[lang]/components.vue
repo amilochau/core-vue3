@@ -342,8 +342,6 @@ import { mdiFormTextbox, mdiListBox, mdiRefresh, mdiTree } from '@mdi/js';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
   },
@@ -401,15 +399,6 @@ const icons: ComputedRef<(FormattedDataWithValue<TestEnum> & { icon: string })[]
   { value: TestEnum.Second, icon: mdiTree },
 ]);
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Components
-  pageDescription: Components test page
-fr:
-  pageTitle: Composants
-  pageDescription: Page de test de composants
-</i18n>
 
 <i18n lang="yaml">
 en:

@@ -35,20 +35,9 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {},
 })));
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: "Loading"
-  pageDescription: "Loading page"
-fr:
-  pageTitle: "Chargement"
-  pageDescription: "Page de chargement"
-</i18n>
 
 <i18n lang="yaml">
 en:

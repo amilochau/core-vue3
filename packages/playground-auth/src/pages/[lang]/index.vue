@@ -1,3 +1,16 @@
+<route lang="yaml">
+name: Home
+meta:
+  generateSsg: true
+  metadata:
+    en:
+      title: playground-auth
+      description: Play.
+    fr:
+      title: playground-auth
+      description: Jouez.
+</route>
+
 <template>
   <app-responsive
     :button="{
@@ -43,9 +56,9 @@
 <script setup lang="ts">
 import { AppResponsive } from '@amilochau/core-vue3/components';
 import { mdiRefresh } from '@mdi/js';
-import HomeLogin from '../components/home/HomeLogin.vue';
-import HomeMessages from '../components/home/HomeMessages.vue';
-import { useMapsStore } from '../stores';
+import HomeLogin from '../../components/home/HomeLogin.vue';
+import HomeMessages from '../../components/home/HomeMessages.vue';
+import { useMapsStore } from '../../stores';
 import { useIdentityStore } from '@amilochau/core-vue3/stores';
 import { usePage } from '@amilochau/core-vue3/composition';
 import { computed } from 'vue';
@@ -55,8 +68,6 @@ import logoUrl from '@/assets/logo.png';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {},
   footer: {
     items: [
@@ -71,15 +82,6 @@ const mapsStore = useMapsStore();
 const identityStore = useIdentityStore();
 const { attributes, isAuthenticated } = storeToRefs(identityStore);
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Home
-  pageDescription: Playground page
-fr:
-  pageTitle: Accueil
-  pageDescription: Page de test
-</i18n>
 
 <i18n lang="yaml">
 en:

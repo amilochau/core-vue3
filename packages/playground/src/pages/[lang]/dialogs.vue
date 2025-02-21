@@ -108,8 +108,6 @@ import type { Item } from '@/types/test';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
   },
@@ -132,15 +130,6 @@ const dialogListItemDelete = ref<InstanceType<typeof DialogListItemDelete>>();
 const item = ref<Item>({ name: 'zzd', desc: '', records: {} });
 const items = ref<Item[]>([]);
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Dialogs
-  pageDescription: Dialogs test page
-fr:
-  pageTitle: Dialogs
-  pageDescription: Page de test de dialogs
-</i18n>
 
 <i18n lang="yaml">
 en:

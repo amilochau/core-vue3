@@ -30,26 +30,14 @@ import { mdiAlertOctagonOutline } from '@mdi/js';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
-  noindex: true,
 })));
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Not Found
-  pageDescription: Page for access to not found resources
-fr:
-  pageTitle: Inconnu
-  pageDescription: Page pour accès à des ressources non trouvées
-</i18n>
 
 <i18n lang="yaml">
 en:

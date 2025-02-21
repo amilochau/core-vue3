@@ -1,21 +1,19 @@
 <template>
   <v-footer
     class="d-print-none d-flex flex-column text-center border-t">
-    <div>
+    <div class="d-flex ga-2">
       <v-btn-action
         :to="{ name: 'Home' }"
         exact
         size="small"
-        variant="text"
-        class="mb-1 mr-2">
+        variant="text">
         {{ t('home') }}
       </v-btn-action>
       <v-btn-action
         :to="{ name: 'Settings' }"
         exact
         size="small"
-        variant="text"
-        class="mb-1 mr-2">
+        variant="text">
         {{ t('settings') }}
       </v-btn-action>
       <v-btn-action
@@ -23,8 +21,7 @@
         size="small"
         variant="text"
         target="_blank"
-        rel="noopener noreferrer"
-        class="mb-1">
+        rel="noopener noreferrer">
         {{ t('contact') }}
       </v-btn-action>
       <v-btn-action
@@ -34,16 +31,14 @@
         size="small"
         variant="text"
         target="_blank"
-        rel="noopener noreferrer"
-        class="mb-1">
+        rel="noopener noreferrer">
         {{ item.title }}
       </v-btn-action>
     </div>
-    <div>
+    <div class="d-flex ga-2">
       <v-btn
         :icon="mdiBrightness6"
         variant="text"
-        class="mr-2"
         @click="toggleTheme" />
       <v-menu location="top end">
         <template #activator="{ props: menuProps }">
