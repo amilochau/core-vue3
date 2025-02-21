@@ -2,6 +2,7 @@ import { createCoreVue3App } from '@amilochau/core-vue3';
 import { coreOptionsBuilder, environmentOptionsBuilder } from './data/config';
 import { handleHotUpdate, routes } from 'vue-router/auto-routes';
 import { toValue } from 'vue';
+import { registerPwa } from '@amilochau/core-vue3/utils';
 import App from './App.vue';
 
 import 'vuetify/styles';
@@ -23,5 +24,7 @@ export const coreVue3App = createCoreVue3App(App,
     if (import.meta.hot) {
       handleHotUpdate(context.router);
     }
+
+    registerPwa(context.router);
   },
 );

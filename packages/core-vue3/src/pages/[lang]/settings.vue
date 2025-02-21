@@ -61,6 +61,7 @@ meta:
       <v-divider class="my-4" />
       <!--
       @todo Manage notifications settings somehow/somewhere
+      -->
       <template v-if="notifications.isSupported.value">
         <card-section-title
           :icon="mdiBellOutline"
@@ -106,7 +107,6 @@ meta:
         </div>
         <v-divider class="my-4" />
       </template>
-      -->
       <card-section-title
         :icon="mdiDatabaseOutline"
         :title="t('storage.title')" />
@@ -229,7 +229,7 @@ const toggleCookies = (event: any) => {
 
 // Storage data
 const storageEstimate = ref<StorageEstimate | undefined>(undefined);
-navigator.storage.estimate().then(value => storageEstimate.value = value);
+void navigator.storage.estimate().then(value => storageEstimate.value = value);
 const memoryUsage = computed(() => storageEstimate.value?.usage ?? 0);
 const memoryUsageDetails = computed(() => Object.entries(storageEstimate.value?.usageDetails ? storageEstimate.value.usageDetails : {}));
 const quotaUsage = computed(() => (storageEstimate.value?.usage ?? 0) / (storageEstimate.value?.quota ?? 1));

@@ -160,7 +160,7 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
       const requestInit = getRequestInit(jwtToken);
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
-    } catch (_error) {
+    } catch {
       throw new ApplicationError({ title: i18n.t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff });
     }
 

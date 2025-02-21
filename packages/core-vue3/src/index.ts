@@ -94,7 +94,4 @@ export const createCoreVue3App = (
   })();
 
   return createApp;
-
-  // @todo Move that to @amilochau/core-vue3-pwa
-  // registerPwa(router); // After app.use(router)?
 };

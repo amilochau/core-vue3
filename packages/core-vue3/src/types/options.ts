@@ -1,6 +1,6 @@
-import type { App, MaybeRef, Ref } from 'vue';
+import type { App, MaybeRef } from 'vue';
 import type { I18n, I18nOptions } from 'vue-i18n';
-import type { RouteComponent, RouteRecordRaw, Router, RouterOptions } from 'vue-router';
+import type { RouteRecordRaw, Router, RouterOptions } from 'vue-router';
 import type { VuetifyOptions } from 'vuetify';
 import type { NotificationsRegisterRequest } from './application/notifications';
 import type { MergeHead, VueHeadClient } from '@unhead/vue';
@@ -48,19 +48,19 @@ export type CoreOptions = {
   /** Clean method, typically called on logout. */
   clean: () => () => void,
   // @todo Move that to @amilochau/core-vue3-pwa
-  ///** PWA options. */
-  //pwa?: {
-  //  /** Whether to hide the PWA installation button. */
-  //  hideInstallBtn: boolean,
-  //},
+  /** PWA options. */
+  pwa?: {
+    /** Whether to hide the PWA installation button. */
+    hideInstallBtn: boolean,
+  },
   // @todo Move that to @amilochau/core-vue3-notifications ?
-  ///** Notification options. */
-  //notifications?: {
-  //  /** Push key, used by Web Push. */
-  //  pushKey: string,
-  //  /** Notifications register method, typically called when the user registers to notifications. */
-  //  register: () => (request: NotificationsRegisterRequest) => Promise<void>,
-  //},
+  /** Notification options. */
+  notifications?: {
+    /** Push key, used by Web Push. */
+    pushKey: string,
+    /** Notifications register method, typically called when the user registers to notifications. */
+    register: () => (request: NotificationsRegisterRequest) => Promise<void>,
+  },
 };
 
 /** Environment options. */

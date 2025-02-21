@@ -2,6 +2,7 @@ import { registerAuth } from '@amilochau/core-vue3-auth';
 import { coreOptionsBuilder, environmentOptionsBuilder } from './data/config';
 import { handleHotUpdate, routes } from 'vue-router/auto-routes';
 import { toValue } from 'vue';
+import { registerPwa } from '@amilochau/core-vue3/utils';
 import App from './App.vue';
 
 import 'vuetify/styles';
@@ -30,5 +31,7 @@ export const coreVue3App = createCoreVue3App(App,
         clientIdBuilder: () => 'utanndb0eu3s7gdtuj19rb45e',
       },
     });
+
+    registerPwa(context.router);
   },
 );

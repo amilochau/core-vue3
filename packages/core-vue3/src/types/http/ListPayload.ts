@@ -50,7 +50,7 @@ export class ListRequest<TKey> implements IListRequest<TKey> {
       args.search = this.search;
     }
     if (this.lastKey) {
-      args.lastKey = `${this.lastKey ?? ''}`;
+      args.lastKey = this.lastKey.toString();
     }
     return args;
   }
