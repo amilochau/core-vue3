@@ -57,7 +57,7 @@ import type { Login } from '../../types';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { useClean, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { storeToRefs } from 'pinia';
-import type { ApplicationMessage } from '@amilochau/core-vue3/types';
+import { ApplicationError } from '@amilochau/core-vue3/types';
 
 const { t } = useI18n();
 usePage(computed(() => ({
@@ -82,7 +82,7 @@ const request: Ref<Login> = ref({
 
 const deleteAccount = () => handleLoadAndError(async () => {
   if (request.value.email !== attributes.value.email) {
-    throw { title: t('incorrectEmailAddress'), color: 'error', icon: mdiAlert, details: '' } as ApplicationMessage;
+    throw new ApplicationError({ title: t('incorrectEmailAddress'), color: 'error', icon: mdiAlert, details: '' });
   }
 
   await deleteUser();

@@ -67,7 +67,7 @@
   </v-input>
 </template>
 
-<script setup lang="ts" generic="TData, TDataValue extends TData | TData[]">
+<script setup lang="ts" generic="TData extends string | number, TDataValue extends TData | TData[]">
 import { mdiCloseCircle, mdiUnfoldLessHorizontal, mdiUnfoldMoreHorizontal } from '@mdi/js';
 import { computed, inject, ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';

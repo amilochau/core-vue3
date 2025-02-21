@@ -3,17 +3,17 @@ import { type FormattedData, type FormattedDataWithValue } from '@amilochau/core
 import { ref } from 'vue';
 
 export const useFormat2 = () => {
-  const { t, mergeLocaleMessage } = useI18n();
+  const i18n = useI18n();
 
-  mergeLocaleMessage('en', {
+  i18n.mergeLocaleMessage('en', {
     test: 'testfrom2',
   });
-  mergeLocaleMessage('fr', {
+  i18n.mergeLocaleMessage('fr', {
     test: 'testfrom2',
   });
 
   const tests2 = ref<Record<string, FormattedData>>({
-    ['test']: { title: t('test') },
+    ['test']: { title: i18n.t('test') },
   });
 
   return {

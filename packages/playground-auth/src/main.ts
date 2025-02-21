@@ -29,6 +29,6 @@ export const coreVue3App = createCoreVue3App(App,
         userPoolIdBuilder: () => 'eu-west-3_Trx7Zxn8M',
         clientIdBuilder: () => 'utanndb0eu3s7gdtuj19rb45e',
       },
-    })
-  }
+    });
+  },
 );

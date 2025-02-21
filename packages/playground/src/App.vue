@@ -44,5 +44,5 @@ setTheme(themeStore.darkMode);
 
 // Update subscription
 const { updateSubscription } = useNotifications();
-updateSubscription();
+void updateSubscription();
 </script>

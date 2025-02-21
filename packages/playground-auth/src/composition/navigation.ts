@@ -6,13 +6,13 @@ import { storeToRefs } from 'pinia';
 
 export const useNavigation = () => {
 
-  const { t, mergeLocaleMessage } = useI18n();
+  const i18n = useI18n();
   const languageStore = useLanguageStore();
   const { language } = storeToRefs(languageStore);
   const identityStore = useIdentityStore();
   const { isAuthenticated } = storeToRefs(identityStore);
 
-  mergeLocaleMessage('en', {
+  i18n.mergeLocaleMessage('en', {
     home: 'Home',
     settingsAndSupport: 'Settings and support',
     profile: 'Profile',
@@ -20,7 +20,7 @@ export const useNavigation = () => {
     settings: 'Settings',
     contact: 'Contact',
   });
-  mergeLocaleMessage('fr', {
+  i18n.mergeLocaleMessage('fr', {
     home: 'Accueil',
     settingsAndSupport: 'Paramètres et support',
     profile: 'Profil',
@@ -31,15 +31,15 @@ export const useNavigation = () => {
 
   return {
     items: computed(() => [
-      { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
+      { title: i18n.t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
     ]),
     appendItems: computed(() => [
-      { type: 'subheader', title: t('settingsAndSupport') },
+      { type: 'subheader', title: i18n.t('settingsAndSupport') },
       ...isAuthenticated.value
-        ? [{ title: t('profile'), prependIcon: mdiCardAccountDetailsOutline, to: { name: 'Profile' } }]
-        : [{ title: t('login'), prependIcon: mdiPower, to: { name: 'Login' } }],
-      { title: t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
-      { title: t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: `https://contact.milochau.com/${language.value}?returnUrl=${encodeURIComponent(window.location.href)}`, target: '_blank', rel: 'noopener noreferrer' },
+        ? [{ title: i18n.t('profile'), prependIcon: mdiCardAccountDetailsOutline, to: { name: 'Profile' } }]
+        : [{ title: i18n.t('login'), prependIcon: mdiPower, to: { name: 'Login' } }],
+      { title: i18n.t('settings'), prependIcon: mdiCogOutline, to: { name: 'Settings' } },
+      { title: i18n.t('contact'), prependIcon: mdiChatOutline, appendIcon: mdiOpenInNew, href: `https://contact.milochau.com/${language.value}?returnUrl=${encodeURIComponent(window.location.href)}`, target: '_blank', rel: 'noopener noreferrer' },
     ]),
   };
 };

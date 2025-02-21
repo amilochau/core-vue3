@@ -24,7 +24,7 @@ const urlB64ToUint8Array = (base64String: string) => {
 /** Use notifications. */
 export const useNotifications = () => {
 
-  const { t, mergeLocaleMessage } = useI18n();
+  const i18n = useI18n();
   const { coreOptions } = useAppOptions();
   const identityStore = useIdentityStore();
   const { isAuthenticated } = storeToRefs(identityStore);
@@ -34,14 +34,14 @@ export const useNotifications = () => {
   const register = coreOptions.notifications?.register();
   const route = useRoute();
 
-  mergeLocaleMessage('en', {
+  i18n.mergeLocaleMessage('en', {
     permissionsNotGranted: 'You must allow notifications on your device to display them.',
     permissionsRemoved: 'Notifications are not allowed.',
     permissionsRemovedDesc: 'You must allow the notifications, in your web browser settings, to get alerts on your lists.',
     unregistredSubscription: 'Notifications have been disabled.',
     unregistredSubscriptionDesc: 'Your web browser disabled the notifications. You can re-activate them, from the settings page.',
   });
-  mergeLocaleMessage('fr', {
+  i18n.mergeLocaleMessage('fr', {
     permissionsNotGranted: 'Vous devez autoriser les notifications sur votre appareil pour pouvoir les afficher.',
     permissionsRemoved: 'Les notifications ne sont pas autorisées.',
     permissionsRemovedDesc: 'Vous devez autoriser les notifications, dans les paramètres de votre navigateur web, pour recevoir des alertes sur vos listes.',
@@ -71,7 +71,7 @@ export const useNotifications = () => {
       const permissionResult = await Notification.requestPermission();
       if (permissionResult !== 'granted') {
         // Permission not granted
-        appStore.displayErrorMessage({ title: t('permissionsNotGranted') });
+        appStore.displayErrorMessage({ title: i18n.t('permissionsNotGranted') });
         return;
       }
 
@@ -119,7 +119,7 @@ export const useNotifications = () => {
 
       await subscription.unsubscribe();
       } catch (error2) {
-        console.error('Error when unsubscribing to push notifications', error);
+        console.error('Error when unsubscribing to push notifications', error2);
       }
     } finally {
       appStore.loading = false;
@@ -189,18 +189,18 @@ export const useNotifications = () => {
       if (Notification.permission !== 'granted') {
         await unsubscribe();
         // Permission not granted
-        appStore.displayErrorMessage({ title: t('permissionsRemoved'), details: t('permissionsRemovedDesc'), timeout_ms: 30000 });
+        appStore.displayErrorMessage({ title: i18n.t('permissionsRemoved'), details: i18n.t('permissionsRemovedDesc'), timeout_ms: 30000 });
         return;
       }
 
       const currentSubscription = await registration.pushManager.getSubscription();
       if (!currentSubscription) {
         // Previously registred, but the subscription has been disabled
-        subscribe();
+        await subscribe();
       }
     } catch (error) {
       console.error('Error on subscription update', error);
-      appStore.displayErrorMessage({ title: t('unregistredSubscription'), details: t('unregistredSubscriptionDesc'), timeout_ms: 30000 });
+      appStore.displayErrorMessage({ title: i18n.t('unregistredSubscription'), details: i18n.t('unregistredSubscriptionDesc'), timeout_ms: 30000 });
     }
   };
 

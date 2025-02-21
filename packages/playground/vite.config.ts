@@ -20,7 +20,6 @@ export default defineConfig(({ mode }) => {
   const commitSha = execSync('git rev-parse --short HEAD').toString().split('\n')[0];
   const commitDate = execSync('git log -1 --format=%cI').toString().split('\n')[0];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const allRoutes: any[] = [];
   const locales = ['en', 'fr'];
 
@@ -117,5 +116,5 @@ export default defineConfig(({ mode }) => {
         'virtual:pwa-register',
       ],
     },
-  }
+  };
 });

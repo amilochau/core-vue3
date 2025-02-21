@@ -16,8 +16,8 @@ import {
 } from 'aws-amplify/auth';
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
-import { type ApplicationMessage } from '@amilochau/core-vue3/types';
-import { useAppOptions, useClean } from '@amilochau/core-vue3/composition';
+import { ApplicationError } from '@amilochau/core-vue3/types';
+import { useClean } from '@amilochau/core-vue3/composition';
 import { useIdentityStore } from '@amilochau/core-vue3/stores';
 import { inject } from 'vue';
 
@@ -25,12 +25,11 @@ import { inject } from 'vue';
 export const useCognito = () => {
 
   const identityStore = useIdentityStore();
-  const { coreOptions } = useAppOptions();
-  const { t, mergeLocaleMessage } = useI18n();
+  const i18n = useI18n();
   const { clean } = useClean();
   const authOptions = inject('options-auth') as CoreVue3AuthOptions;
 
-  mergeLocaleMessage('en', {
+  i18n.mergeLocaleMessage('en', {
     defaultError: 'An error occured.',
     incorrectUsernamePassword: 'Incorrect email address or password.',
     incorrectPassword: 'Incorrect password.',
@@ -39,7 +38,7 @@ export const useCognito = () => {
     userAlreadyAuthenticated: 'You are already authenticated. If this does not seem to be the case, try to clean your browser data.',
     usernameExists: 'A user account already exists with this email address. You can try to login!',
   });
-  mergeLocaleMessage('fr', {
+  i18n.mergeLocaleMessage('fr', {
     defaultError: 'Une erreur est survenue.',
     incorrectUsernamePassword: 'Adresse email ou mot de passe incorrect.',
     incorrectPassword: 'Mot de passe incorrect.',
@@ -56,9 +55,9 @@ export const useCognito = () => {
       let errorMessage = errorMapping[error?.name];
       if (!errorMessage) {
         console.warn('Unexpected error from Cognito', error?.name, error);
-        errorMessage = t('defaultError');
+        errorMessage = i18n.t('defaultError');
       }
-      throw { title: errorMessage, color: 'error', icon: mdiAlert, details: error as string } as ApplicationMessage;
+      throw new ApplicationError({ title: errorMessage, color: 'error', icon: mdiAlert, details: error as string });
     }
   };
 
@@ -86,7 +85,7 @@ export const useCognito = () => {
         },
       },
     }), {
-      ['UsernameExistsException']: t('usernameExists'),
+      ['UsernameExistsException']: i18n.t('usernameExists'),
     }),
 
     /**
@@ -97,8 +96,8 @@ export const useCognito = () => {
       username: model.email,
       confirmationCode: model.code,
     }), {
-      ['CodeMismatchException']: t('incorrectCode'),
-      ['ExpiredCodeException']: t('expiredCode'),
+      ['CodeMismatchException']: i18n.t('incorrectCode'),
+      ['ExpiredCodeException']: i18n.t('expiredCode'),
     }),
 
     /**
@@ -140,7 +139,7 @@ export const useCognito = () => {
         nextStep: response.nextStep.signInStep,
       };
     }, {
-      ['NotAuthorizedException']: t('incorrectUsernamePassword'),
+      ['NotAuthorizedException']: i18n.t('incorrectUsernamePassword'),
     }),
 
     /**
@@ -179,7 +178,7 @@ export const useCognito = () => {
       confirmationCode: model.code,
       newPassword: model.password,
     }), {
-      ['CodeMismatchException']: t('incorrectCode'),
+      ['CodeMismatchException']: i18n.t('incorrectCode'),
     }),
 
     /**
@@ -190,7 +189,7 @@ export const useCognito = () => {
       oldPassword: model.oldPassword,
       newPassword: model.password,
     }), {
-      ['NotAuthorizedException']: t('incorrectPassword'),
+      ['NotAuthorizedException']: i18n.t('incorrectPassword'),
     }),
 
     /**

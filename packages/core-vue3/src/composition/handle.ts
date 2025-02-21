@@ -4,23 +4,23 @@ import type { Ref } from 'vue';
 import { useAppStore } from '../stores';
 import { mdiAlert } from '@mdi/js';
 import { useI18n } from 'vue-i18n';
-import type { ApplicationMessage } from '../types';
+import { ApplicationError, type ApplicationMessage } from '../types';
 
 /** Use handle. */
 export const useHandle = () => {
 
-  const { t, mergeLocaleMessage } = useI18n();
+  const i18n = useI18n();
   const appStore = useAppStore();
   const online = useOnline();
   const { loading } = storeToRefs(appStore);
 
-  mergeLocaleMessage('en', {
+  i18n.mergeLocaleMessage('en', {
     internalError: {
       title: 'Internal error',
       desc: 'You can\'t do anything, it\'s a bug...',
     },
   });
-  mergeLocaleMessage('fr', {
+  i18n.mergeLocaleMessage('fr', {
     internalError: {
       title: 'Erreur interne',
       desc: 'Vous ne pouvez rien faire, il s\'agit d\'un bug...',
@@ -81,14 +81,30 @@ export const useHandle = () => {
   const handleError = async <TResponse>(request: () => Promise<TResponse>, callback?: (message: ApplicationMessage) => any) => {
     try {
       return await request();
-    } catch (error: any) {
-      const message: ApplicationMessage = {
-        title: error.title ?? t('internalError.title'),
-        color: error.color ?? 'error',
-        icon: error.icon ?? mdiAlert,
-        details: error.details ?? (error.title ? undefined : t('internalError.desc')),
-        timeout_ms: error.timeout_ms,
-      };
+    } catch (error) {
+      let message: ApplicationMessage;
+      if (error instanceof ApplicationError) {
+        message = {
+          title: error.messageData.title,
+          color: error.messageData.color ?? 'error',
+          icon: error.messageData.icon ?? mdiAlert,
+          details: error.messageData.details,
+          timeout_ms: error.messageData.timeout_ms,
+        };
+      } else if (error instanceof Error) {
+        message = {
+          title: error.message,
+          color: 'error',
+          icon: mdiAlert,
+        };
+      } else {
+        message = {
+          title: i18n.t('internalError.title'),
+          color: 'error',
+          icon: mdiAlert,
+          details: i18n.t('internalError.desc'),
+        };
+      }
 
       if (callback) {
         callback(message);

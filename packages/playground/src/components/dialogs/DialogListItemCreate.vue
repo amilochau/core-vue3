@@ -34,7 +34,7 @@ import { ref } from 'vue';
 import { DialogForm } from '@amilochau/core-vue3/components';
 import { useValidationRules } from '@amilochau/core-vue3/composition';
 import { useI18n } from 'vue-i18n';
-import type { ApplicationMessage } from '@amilochau/core-vue3/types';
+import { ApplicationError } from '@amilochau/core-vue3/types';
 import { type ComponentExposed } from 'vue-component-type-helpers';
 import { Item } from '@/types/test';
 import { useAppStore } from '@amilochau/core-vue3/stores';
@@ -52,8 +52,8 @@ const dialogFormRef = ref<ComponentExposed<typeof DialogForm<Item>>>();
 const save = async (model: Item) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
   if (model.desc?.length) {
-    throw { title: t('errorMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
-New line here` } as ApplicationMessage;
+    throw new ApplicationError({ title: t('errorMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
+New line here` });
   }
 
   items.value.push(model);

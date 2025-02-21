@@ -104,6 +104,8 @@ export default defineConfigWithVueTs(
       '@stylistic/no-trailing-spaces': 'error',
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/semi': 'error',
+
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 );

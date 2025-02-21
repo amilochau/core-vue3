@@ -23,5 +23,5 @@ export const coreVue3App = createCoreVue3App(App,
     if (import.meta.hot) {
       handleHotUpdate(context.router);
     }
-  }
+  },
 );

@@ -248,7 +248,7 @@ const storageItems = computed(() => ([
 ]));
 
 // Build data
-const buildData = window.buildData as BuildData;
+const buildData = window.buildData;
 const versionItems = computed(() => ([
   ...buildData.commitDate ? [{ title: d(buildData.commitDate, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
   ...buildData.buildDate ? [{ title: d(buildData.buildDate, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],

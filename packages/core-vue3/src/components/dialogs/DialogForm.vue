@@ -138,7 +138,7 @@ const props = defineProps<{
   /** Whether to remain the dialog open on save. */
   remainOpenOnSave?: boolean
   /** Function to modify model on save. */
-  save: (proxyModel: TModel, originalModel: TModel) => Promise<any> | any
+  save: (proxyModel: TModel, originalModel: TModel) => unknown
 }>();
 
 const emit = defineEmits<{

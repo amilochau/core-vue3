@@ -2,9 +2,9 @@ import { useI18n } from 'vue-i18n';
 
 /** Use validation rules. */
 export const useValidationRules = () => {
-  const { t, mergeLocaleMessage } = useI18n();
+  const i18n = useI18n();
 
-  mergeLocaleMessage('en', {
+  i18n.mergeLocaleMessage('en', {
     required: 'This field is required.',
     minLength: 'This field must be more than {min} characters.',
     maxLength: 'This field must be less than {max} characters.',
@@ -16,7 +16,7 @@ export const useValidationRules = () => {
     number: 'This field must be a number.',
     integer: 'This field must be an integer.',
   });
-  mergeLocaleMessage('fr', {
+  i18n.mergeLocaleMessage('fr', {
     required: 'Ce champ est requis.',
     minLength: 'Ce champ doit faire plus de {min} caractères.',
     maxLength: 'Ce champ doit faire moins de {max} caractères.',
@@ -33,25 +33,25 @@ export const useValidationRules = () => {
     /** Validates that a required value exists. */
     required: () => (v: any) => {
       if (typeof v === 'string') {
-        return (v !== null && v !== undefined && v.trim() !== '') || t('required');
+        return (v !== null && v !== undefined && v.trim() !== '') || i18n.t('required');
       } else {
-        return (v !== null && v !== undefined) || t('required');
+        return (v !== null && v !== undefined) || i18n.t('required');
       }
     },
     /**
      * Validates that a value is longer that @param min.
      * @param min Minimal length.
      */
-    minLength: (min: number) => (v: any) => !v || v.length >= min || t('minLength', { min }),
+    minLength: (min: number) => (v: any) => !v || v.length >= min || i18n.t('minLength', { min }),
     /**
      * Validates that a value is shorted that @param max.
      * @param max Maximal length.
      */
-    maxLength: (max: number) => (v: any) => !v || v.length <= max || t('maxLength', { max }),
+    maxLength: (max: number) => (v: any) => !v || v.length <= max || i18n.t('maxLength', { max }),
     /** Validates that a value is an email address. */
-    emailAddress: () => (v: any) => !v || /.+@.+\..+/.test(v) || t('emailAddress'),
+    emailAddress: () => (v: any) => !v || /.+@.+\..+/.test(v) || i18n.t('emailAddress'),
     /** Validates that a value is a date. */
-    date: () => (v: any) => !v || (!isNaN(Date.parse(v)) && /^\d{4}-\d{2}-\d{2}$/.test(v)) || t('date'),
+    date: () => (v: any) => !v || (!isNaN(Date.parse(v)) && /^\d{4}-\d{2}-\d{2}$/.test(v)) || i18n.t('date'),
     /** Validates that a value is an URL. */
     url: () => (v: any) => {
       if (!v) {
@@ -60,10 +60,10 @@ export const useValidationRules = () => {
       let url;
       try {
         url = new URL(v);
-      } catch (_) {
-        return t('url');
+      } catch {
+        return i18n.t('url');
       }
-      return url.protocol === 'http:' || url.protocol === 'https:' || t('url');
+      return url.protocol === 'http:' || url.protocol === 'https:' || i18n.t('url');
     },
     /**
      * Validates that a value is higher that @param min.
@@ -74,7 +74,7 @@ export const useValidationRules = () => {
         return true;
       }
       const floatValue = parseFloat(v);
-      return floatValue >= min || t('minValue', { min });
+      return floatValue >= min || i18n.t('minValue', { min });
     },
     /**
      * Validates that a value is lower that @param max.
@@ -85,17 +85,17 @@ export const useValidationRules = () => {
         return true;
       }
       const floatValue = parseFloat(v);
-      return floatValue <= max || t('maxValue', { max });
+      return floatValue <= max || i18n.t('maxValue', { max });
     },
     /** Validates that a value is a number. */
-    number: () => (v: string) => !v || !isNaN(Number(v.replace(',', '.'))) || t('number'),
+    number: () => (v: string) => !v || !isNaN(Number(v.replace(',', '.'))) || i18n.t('number'),
     /** Validates that a value is an integer. */
     integer: () => (v: string) => {
       if (!v) {
         return true;
       }
       const parsedValue = Number(v.replace(',', '.'));
-      return isNaN(parsedValue) || parsedValue % 1 === 0 || t('integer');
+      return isNaN(parsedValue) || parsedValue % 1 === 0 || i18n.t('integer');
     },
   };
 };

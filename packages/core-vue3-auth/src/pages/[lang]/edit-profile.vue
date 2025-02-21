@@ -72,7 +72,7 @@ const editProfile = () => handleLoadAndError(async () => {
   await updateAttributes(request.value);
   appStore.displayInfoMessage({ title: t('successMessage') });
   await goBack({ name: 'Profile' });
-  fetchUserAttributes();
+  void fetchUserAttributes();
 });
 </script>
 

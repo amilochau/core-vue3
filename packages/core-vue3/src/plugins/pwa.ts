@@ -17,7 +17,7 @@ export const registerPwa = (router: Router) => {
 
   pwaStore.updateSW = registerSW({
     /** On need refresh actions. */
-    async onNeedRefresh() {
+    onNeedRefresh() {
       pwaStore.updateDisplay = true;
     },
     immediate: true, // Automatic page reload
@@ -36,7 +36,7 @@ export const registerPwa = (router: Router) => {
   const postUpdate = async (to: RouteLocationNormalized) => {
     // Update registration (get latest data to know if we have to update)
     const registration = await navigator.serviceWorker?.getRegistration();
-    registration?.update();
+    await registration?.update();
 
     // If we have to update: update on page change
     if (registration?.active && registration?.waiting) {

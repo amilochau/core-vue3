@@ -91,7 +91,7 @@ usePage(computed(() => ({
   },
 })));
 
-const buildData = window.buildData as BuildData;
+const buildData = window.buildData;
 </script>
 
 <i18n lang="yaml">

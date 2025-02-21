@@ -42,7 +42,7 @@ export const registerRouter = (app: App, options: CoreVue3Options) => {
 
   const router = createRouter({
     history: createWebHistory(),
-    scrollBehavior: async (to, from, savedPosition) => {
+    scrollBehavior: async (to, from) => {
       // Wait for initial page load, or for cross page navigation
       if (!document.querySelector('main') || to.path !== from.path && to.hash) {
         await (new Promise(resolve => setTimeout(resolve, 500)));

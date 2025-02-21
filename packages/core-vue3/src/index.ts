@@ -60,7 +60,7 @@ export const createCoreVue3App = (
 
     const router = registerRouter(app, options);
     const i18n = registerI18n(app, options);
-    const head = registerHead(app, options);
+    const head = registerHead(app);
     const vuetify = registerVuetify(app, options);
     const pinia = registerPinia(app, options);
 
@@ -86,6 +86,7 @@ export const createCoreVue3App = (
     return context;
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   (async () => {
     const { app, router } = await createApp();
     await router.isReady();
