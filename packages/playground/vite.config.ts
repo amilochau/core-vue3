@@ -27,6 +27,10 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       VueRouter({
+        routesFolder: [
+          'src/pages',
+          '../../node_modules/@amilochau/core-vue3/src/pages',
+        ],
         extendRoute: (route) => {
           allRoutes.push(route);
         },

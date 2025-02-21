@@ -1,3 +1,18 @@
+<route lang="yaml">
+name: Forbidden
+meta:
+  allowAnonymous: true
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Forbidden
+      description: Forbidden
+    fr:
+      title: Accès non autorisé
+      description: Accès non autorisé
+</route>
+
 <template>
   <app-responsive
     fill-height>
@@ -20,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsive } from '../components';
+import { AppResponsive } from '../../components';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { usePage } from '../composition';
-import { useAppStore } from '../stores';
+import { usePage } from '../../composition';
+import { useAppStore } from '../../stores';
 import { computed } from 'vue';
 import { mdiLockOutline } from '@mdi/js';
 

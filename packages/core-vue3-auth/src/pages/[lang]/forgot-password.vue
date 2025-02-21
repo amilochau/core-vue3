@@ -1,3 +1,18 @@
+<route lang="yaml">
+name: ForgotPassword
+meta:
+  allowAnonymous: true
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Forgot password
+      description: Forgot password
+    fr:
+      title: Mot de passe oublié
+      description: Mot de passe oublié
+</route>
+
 <template>
   <app-responsive-form
     :title="t('title')"
@@ -27,18 +42,16 @@
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAt, mdiLockOutline, mdiLockReset } from '@mdi/js';
-import { useCognito } from '../composition';
+import { useCognito } from '../../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { ForgotPassword } from '../types';
+import type { ForgotPassword } from '../../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Login' },
@@ -61,15 +74,6 @@ const reset = () => handleLoadAndError(async () => {
   await router.push({ name: 'ResetPassword', query: { email: request.value.email, ...returnUrlQuery.value } });
 });
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Forgot password
-  pageDescription: Password forgotten page
-fr:
-  pageTitle: Mot de passe oublié
-  pageDescription: Page de mot de passe oublié
-</i18n>
 
 <i18n lang="yaml">
 en:

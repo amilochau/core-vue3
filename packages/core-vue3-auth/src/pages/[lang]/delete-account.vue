@@ -1,3 +1,17 @@
+<route lang="yaml">
+name: DeleteAccount
+meta:
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Account deletion
+      description: Account deletion
+    fr:
+      title: Suppression de compte
+      description: Suppression de compte
+</route>
+
 <template>
   <app-responsive-form
     :title="t('title')"
@@ -35,11 +49,11 @@
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAccountOff, mdiAlert, mdiAt, mdiCardAccountDetailsOutline, mdiLock } from '@mdi/js';
-import { useCognito } from '../composition';
+import { useCognito } from '../../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { Login } from '../types';
+import type { Login } from '../../types';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { useClean, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { storeToRefs } from 'pinia';
@@ -47,8 +61,6 @@ import type { ApplicationMessage } from '@amilochau/core-vue3/types';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Profile' },
@@ -80,15 +92,6 @@ const deleteAccount = () => handleLoadAndError(async () => {
   await router.push({ name: 'Home' });
 });
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Account deletion
-  pageDescription: Account deletion page
-fr:
-  pageTitle: Suppression de compte
-  pageDescription: Page de suppression de compte
-</i18n>
 
 <i18n lang="yaml">
 en:

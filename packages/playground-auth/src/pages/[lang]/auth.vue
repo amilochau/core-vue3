@@ -1,7 +1,6 @@
 <route lang="yaml">
-name: Home
+name: HomeWithAuth
 meta:
-  allowAnonymous: true
   generateSsg: true
   metadata:
     en:

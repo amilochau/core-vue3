@@ -1,3 +1,17 @@
+<route lang="yaml">
+name: Profile
+meta:
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Profile
+      description: Profile
+    fr:
+      title: Profil
+      description: Profil
+</route>
+
 <template>
   <app-responsive
     :title="t('title')"
@@ -24,12 +38,10 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { usePage } from '@amilochau/core-vue3/composition';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
-import { useCognito } from '../composition';
+import { useCognito } from '../../composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
@@ -71,15 +83,6 @@ const logout = async () => {
   }
 };
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Profile
-  pageDescription: Profile page
-fr:
-  pageTitle: Profil
-  pageDescription: Page de profil
-</i18n>
 
 <i18n lang="yaml">
 en:

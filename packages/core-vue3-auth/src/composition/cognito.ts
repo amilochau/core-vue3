@@ -1,4 +1,4 @@
-import { type ConfirmEmail, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword, type SetPassword } from '../types';
+import { type ConfirmEmail, type CoreVue3AuthOptions, type EditPassword, type EditProfile, type ForgotPassword, type Login, type Register, type ResetPassword, type SetPassword } from '../types';
 import {
   type SignInOutput,
   confirmResetPassword as awsConfirmResetPassword,
@@ -19,14 +19,16 @@ import { mdiAlert } from '@mdi/js';
 import { type ApplicationMessage } from '@amilochau/core-vue3/types';
 import { useAppOptions, useClean } from '@amilochau/core-vue3/composition';
 import { useIdentityStore } from '@amilochau/core-vue3/stores';
+import { inject } from 'vue';
 
 /** Use Cognito. */
 export const useCognito = () => {
 
   const identityStore = useIdentityStore();
-  const { authenticationEnabled, coreOptions } = useAppOptions();
+  const { coreOptions } = useAppOptions();
   const { t, mergeLocaleMessage } = useI18n();
   const { clean } = useClean();
+  const authOptions = inject('options-auth') as CoreVue3AuthOptions;
 
   mergeLocaleMessage('en', {
     defaultError: 'An error occured.',
@@ -48,10 +50,6 @@ export const useCognito = () => {
   });
 
   const processRequest = async <TResponse>(request: () => Promise<TResponse>, errorMapping: Record<string, string>) => {
-    if (!authenticationEnabled) {
-      throw 'Authentication is not configured.';
-    }
-
     try {
       return await request();
     } catch (error: any) {
@@ -114,7 +112,7 @@ export const useCognito = () => {
           username: model.email,
           password: model.password,
           options: {
-            authFlowType: coreOptions.identity?.usersMigrationDisabled ? 'USER_SRP_AUTH' : 'USER_PASSWORD_AUTH',
+            authFlowType: authOptions.usersMigrationDisabled ? 'USER_SRP_AUTH' : 'USER_PASSWORD_AUTH',
           },
         });
       } catch (error: any) {
@@ -125,7 +123,7 @@ export const useCognito = () => {
             username: model.email,
             password: model.password,
             options: {
-              authFlowType: coreOptions.identity?.usersMigrationDisabled ? 'USER_SRP_AUTH' : 'USER_PASSWORD_AUTH',
+              authFlowType: authOptions.usersMigrationDisabled ? 'USER_SRP_AUTH' : 'USER_PASSWORD_AUTH',
             },
           });
         } else {

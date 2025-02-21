@@ -14,26 +14,27 @@
           v-bind="pageData.footer" />
       </v-expand-transition>
       <app-cookies />
-      <app-navigation-drawer />
+      <app-navigation-drawer
+        :items="items"
+        :append-items="appendItems" />
       <app-snackbar />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import { AppFooterBar, AppHeaderBar } from '@amilochau/core-vue3/components';
-import AppNavigationDrawer from '../components/app/layout/AppNavigationDrawer.vue';
-import AppCookies from '../components/app/layout/AppCookies.vue';
-import AppSnackbar from '../components/app/layout/AppSnackbar.vue';
+import { AppCookies, AppFooterBar, AppHeaderBar, AppNavigationDrawer, AppSnackbar } from '@amilochau/core-vue3/components';
 import { useTheme } from 'vuetify';
 import { useAppStore, useThemeStore } from '@amilochau/core-vue3/stores';
 import { storeToRefs } from 'pinia';
 import { useNotifications } from '@amilochau/core-vue3/composition';
+import { useNavigation } from '@/composition/navigation';
 
 const appStore = useAppStore();
 const { pageData } = storeToRefs(appStore);
 const themeStore = useThemeStore();
 const theme = useTheme();
+const { items, appendItems } = useNavigation();
 
 const setTheme = (darkMode: boolean) => {
   theme.global.name.value = darkMode ? 'dark' : 'light';

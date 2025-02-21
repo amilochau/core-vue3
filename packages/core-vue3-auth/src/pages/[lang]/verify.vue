@@ -1,3 +1,18 @@
+<route lang="yaml">
+name: ConfirmEmail
+meta:
+  allowAnonymous: true
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Email confirmation
+      description: Email confirmation
+    fr:
+      title: Confirmation d'email
+      description: Confirmation d'email
+</route>
+
 <template>
   <app-responsive-form
     :title="t('title')"
@@ -49,18 +64,16 @@
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAccountCheck, mdiAccountCheckOutline, mdiAt, mdiNumeric } from '@mdi/js';
-import { useCognito } from '../composition';
+import { useCognito } from '../../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import type { ConfirmEmail } from '../types';
+import type { ConfirmEmail } from '../../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
@@ -85,15 +98,6 @@ const verifyCode = () => handleLoadAndError(async () => {
   await router.replace({ name: 'Login', query: { email: request.value.email, ...returnUrlQuery.value } });
 });
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Email confirmation
-  pageDescription: Email confirmation page
-fr:
-  pageTitle: Confirmation d'email
-  pageDescription: Page de confirmation d'email
-</i18n>
 
 <i18n lang="yaml">
 en:

@@ -1,3 +1,18 @@
+<route lang="yaml">
+name: Settings
+meta:
+  allowAnonymous: true
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Settings
+      description: Settings
+    fr:
+      title: Paramètres
+      description: Paramètres
+</route>
+
 <template>
   <app-responsive-form
     :title="t('title')"
@@ -141,16 +156,16 @@
 
 <script setup lang="ts">
 import { mdiApplicationBracesOutline, mdiBellAlertOutline, mdiBellCheckOutline, mdiBellMinus, mdiBellOutline, mdiBellPlus, mdiBrightness6, mdiCalendarEdit, mdiCalendarImport, mdiDatabase, mdiDatabaseOutline, mdiEarth, mdiGaugeLow, mdiGavel, mdiPoundBox, mdiUpdate } from '@mdi/js';
-import { AppResponsiveForm, CardSectionTitle } from '../components';
+import { AppResponsiveForm, CardSectionTitle } from '../../components';
 import { useI18n } from 'vue-i18n';
-import { useNotifications, usePage } from '../composition';
+import { useNotifications, usePage } from '../../composition';
 import { useRoute, useRouter } from 'vue-router';
-import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../stores';
+import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../../stores';
 import { useTheme } from 'vuetify';
 import { computed, inject, ref } from 'vue';
 import { useOnline } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
-import type { BuildData, CoreVue3ApplicationOptions } from '../types';
+import type { BuildData, CoreVue3AppOptions } from '../../types';
 
 declare global {
   interface Window {
@@ -183,7 +198,7 @@ const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 const pwaStore = usePwaStore();
 const { updateDisplay, updateLoading } = storeToRefs(pwaStore);
-const appOptions = inject('app-options') as CoreVue3ApplicationOptions;
+const appOptions = inject('options-app') as CoreVue3AppOptions;
 
 // Theme
 const toggleTheme = () => {
@@ -241,7 +256,7 @@ const versionItems = computed(() => ([
 ]));
 
 const links = computed(() => ([
-  { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, href: appOptions.privacyUrlBuilder(language) },
+  { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, href: appOptions.privacyUrlBuilder(language), target: '_blank', rel: 'noopener noreferrer' },
 ]));
 </script>
 

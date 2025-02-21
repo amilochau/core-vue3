@@ -1,11 +1,11 @@
 import { createCoreVue3App } from '@amilochau/core-vue3';
 import { coreOptionsBuilder, environmentOptionsBuilder } from './data/config';
 import { handleHotUpdate, routes } from 'vue-router/auto-routes';
+import { toValue } from 'vue';
+import App from './App.vue';
 
 import 'vuetify/styles';
 import './styles/main.scss';
-import App from './App.vue';
-import { toValue } from 'vue';
 
 export const coreVue3App = createCoreVue3App(App,
   {

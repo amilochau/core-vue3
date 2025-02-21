@@ -1,3 +1,17 @@
+<route lang="yaml">
+name: EditPassword
+meta:
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Password change
+      description: Password change
+    fr:
+      title: Modification de mot de passe
+      description: Modification de mot de passe
+</route>
+
 <template>
   <app-responsive-form
     :title="t('title')"
@@ -42,17 +56,15 @@
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiLock, mdiLockClock, mdiLockOutline, mdiLockReset } from '@mdi/js';
-import { useCognito } from '../composition';
+import { useCognito } from '../../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
-import type { EditPassword } from '../types';
+import type { EditPassword } from '../../types';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Profile' },
@@ -76,15 +88,6 @@ const editPassword = () => handleLoadAndError(async () => {
   await goBack({ name: 'Profile' });
 });
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Password change
-  pageDescription: Password change page
-fr:
-  pageTitle: Modification de mot de passe
-  pageDescription: Page de modification de mot de passe
-</i18n>
 
 <i18n lang="yaml">
 en:

@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CoreVue3ApplicationOptions } from '../../../../types';
+import type { CoreVue3AppOptions } from '../../../../types';
 import { useThemeStore } from '../../../../stores';
 import { mdiBrightness6, mdiEarth } from '@mdi/js';
 import { computed, inject } from 'vue';
@@ -85,7 +85,7 @@ const themeStore = useThemeStore();
 const router = useRouter();
 const route = useRoute();
 const theme = useTheme();
-const appOptions = inject('app-options') as CoreVue3ApplicationOptions;
+const appOptions = inject('options-app') as CoreVue3AppOptions;
 
 const barItems = computed(() => props.items ?? []);
 const language = computed(() => route.params.lang?.toString());

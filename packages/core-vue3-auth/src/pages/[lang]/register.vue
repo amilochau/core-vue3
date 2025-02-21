@@ -1,3 +1,18 @@
+<route lang="yaml">
+name: Register
+meta:
+  allowAnonymous: true
+  rateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Register
+      description: Register
+    fr:
+      title: Création de compte
+      description: Création de compte
+</route>
+
 <template>
   <app-responsive-form
     :title="t('title')"
@@ -52,25 +67,22 @@
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAccount, mdiAccountLockOutline, mdiAccountPlus, mdiAccountPlusOutline, mdiAt, mdiLock } from '@mdi/js';
-import { useCognito } from '../composition';
+import { useCognito } from '../../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import type { Register } from '../types';
+import { useRouter } from 'vue-router';
+import type { Register } from '../../types';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
   },
 })));
 const appStore = useAppStore();
-const route = useRoute();
 const router = useRouter();
 const { handleLoadAndError } = useHandle();
 const { signUp } = useCognito();
@@ -94,15 +106,6 @@ const register = () => handleLoadAndError(async () => {
   await router.push({ name: 'ConfirmEmail', query: { email: request.value.email, ...returnUrlQuery.value  } });
 });
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Register
-  pageDescription: Register page
-fr:
-  pageTitle: Création de compte
-  pageDescription: Page de création de compte
-</i18n>
 
 <i18n lang="yaml">
 en:

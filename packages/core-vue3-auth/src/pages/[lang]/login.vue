@@ -1,3 +1,18 @@
+<route lang="yaml">
+name: Login
+meta:
+  allowAnonymous: true
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Login
+      description: Login
+    fr:
+      title: Connexion
+      description: Connexion
+</route>
+
 <template>
   <app-responsive-form
     :title="t('title')"
@@ -44,18 +59,16 @@
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAccountLockOpen, mdiAccountLockOutline, mdiAccountPlusOutline, mdiAt, mdiLock, mdiLockReset } from '@mdi/js';
-import { useCognito } from '../composition';
+import { useCognito } from '../../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import type { Login } from '../types';
+import type { Login } from '../../types';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Home' },
@@ -103,15 +116,6 @@ const login = () => handleLoadAndError(async () => {
   }
 });
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Login
-  pageDescription: Login page
-fr:
-  pageTitle: Connexion
-  pageDescription: Page de connexion
-</i18n>
 
 <i18n lang="yaml">
 en:

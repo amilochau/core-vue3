@@ -7,7 +7,7 @@ import type { MergeHead, VueHeadClient } from '@unhead/vue';
 import type { Pinia } from 'pinia';
 
 /** Application options. */
-export interface CoreVue3ApplicationOptions {
+export interface CoreVue3AppOptions {
   /** Function to build a Contact URL. */
   contactUrlBuilder: (lang: MaybeRef<string>) => string,
   /** Function to build a Privacy URL. */
@@ -24,7 +24,7 @@ export interface CoreVue3Options {
   vuetify?: VuetifyOptions,
 
   /** Application options. */
-  application: CoreVue3ApplicationOptions,
+  application: CoreVue3AppOptions,
 }
 
 /** Options, to configure `@amilochau/core-vue3` plugin. */
@@ -45,19 +45,6 @@ export type CoreOptions = {
     /** Method to create the base URI in API composition. */
     apiBaseUriBuilder: (context: { apiName: string }) => string,
   },
-  // @todo Move that to @amilochau/core-vue3-auth
-  ///** Identity options. */
-  //identity?: {
-  //  /** Cognito settings. */
-  //  cognito: {
-  //    /** Cognito user pool id. */
-  //    userPoolId: string,
-  //    /** Application client id. */
-  //    clientId: string,
-  //  },
-  //  /** Whether the users migration is disabled. */
-  //  usersMigrationDisabled?: boolean,
-  //},
   /** Clean method, typically called on logout. */
   clean: () => () => void,
   // @todo Move that to @amilochau/core-vue3-pwa

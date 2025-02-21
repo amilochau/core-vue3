@@ -42,13 +42,13 @@ import { useI18n } from 'vue-i18n';
 import { useCookiesStore, useLanguageStore } from '../../../stores';
 import { computed, inject, ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import type { CoreVue3ApplicationOptions } from '../../../types';
+import type { CoreVue3AppOptions } from '../../../types';
 
 const { t } = useI18n();
 const cookiesStore = useCookiesStore();
 const languageStore = useLanguageStore();
 const { language } = storeToRefs(languageStore);
-const appOptions = inject('app-options') as CoreVue3ApplicationOptions;
+const appOptions = inject('options-app') as CoreVue3AppOptions;
 
 const displayed = ref(cookiesStore.showCookies);
 

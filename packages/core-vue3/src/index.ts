@@ -56,7 +56,7 @@ export const createCoreVue3App = (
     // Provide options
     app.provide('core-options', coreOptions);
 
-    app.provide('app-options', options.application);
+    app.provide('options-app', options.application);
 
     const router = registerRouter(app, options);
     const i18n = registerI18n(app, options);

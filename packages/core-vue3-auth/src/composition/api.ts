@@ -39,7 +39,7 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
   const languageStore = useLanguageStore();
   const { getJwtToken, signOut } = useCognito();
   const router = useRouter();
-  const { apiEnabled, authenticationEnabled, coreOptions } = useAppOptions();
+  const { apiEnabled, coreOptions } = useAppOptions();
 
   const baseUri = `${coreOptions.api?.apiBaseUriBuilder({ apiName })}${relativeBaseUri}`;
 
@@ -138,10 +138,6 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
 
     if (!apiEnabled) {
       throw 'API integration is not configured.';
-    }
-
-    if (!authenticationEnabled) {
-      throw 'Authentication is not configured.';
     }
 
     // Get bearer token for API

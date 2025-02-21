@@ -1,3 +1,18 @@
+<route lang="yaml">
+name: NotFound
+meta:
+  allowAnonymous: true
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Page Not Found
+      description: Page Not Found
+    fr:
+      title: Page introuvable
+      description: Page introuvable
+</route>
+
 <template>
   <app-responsive
     fill-height>
@@ -20,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import { AppResponsive } from '../components';
+import { AppResponsive } from '../../components';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { usePage } from '../composition';
-import { useAppStore } from '../stores';
+import { usePage } from '../../composition';
+import { useAppStore } from '../../stores';
 import { computed } from 'vue';
 import { mdiAlertOctagonOutline } from '@mdi/js';
 

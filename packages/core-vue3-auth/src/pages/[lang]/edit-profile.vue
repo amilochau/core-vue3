@@ -1,3 +1,17 @@
+<route lang="yaml">
+name: EditProfile
+meta:
+  generateSsg: true
+  noindex: true
+  metadata:
+    en:
+      title: Profile change
+      description: Profile change
+    fr:
+      title: Modification de profil
+      description: Modification de profil
+</route>
+
 <template>
   <app-responsive-form
     :title="t('title')"
@@ -26,18 +40,16 @@
 <script setup lang="ts">
 import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAccount, mdiAccountEdit, mdiCardAccountDetailsOutline } from '@mdi/js';
-import { useCognito } from '../composition';
+import { useCognito } from '../../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
-import type { EditProfile } from '../types';
+import type { EditProfile } from '../../types';
 import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({
-  title: t('pageTitle'),
-  description: t('pageDescription'),
   header: {
     buttonMode: 'back',
     defaultBackTo: { name: 'Profile' },
@@ -63,15 +75,6 @@ const editProfile = () => handleLoadAndError(async () => {
   fetchUserAttributes();
 });
 </script>
-
-<i18n lang="yaml">
-en:
-  pageTitle: Profile change
-  pageDescription: Profile change page
-fr:
-  pageTitle: Modification de profil
-  pageDescription: Page de modification de profil
-</i18n>
 
 <i18n lang="yaml">
 en:

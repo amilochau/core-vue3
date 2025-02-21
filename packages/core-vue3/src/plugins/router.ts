@@ -1,15 +1,17 @@
 import { type RouteLocationGeneric, type RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 import { type App } from 'vue';
-import type { CoreVue3Options } from '../../types';
+import type { CoreVue3Options } from '../types';
 
 declare module 'vue-router' {
   /** Extended interface for routes. */
   interface RouteMeta {
-    // @todo Move that to @amilochau/core-vue3-auth
-    // requiresAuth?: boolean
-
+    /** Whether to generate head-only SSG file for the route. */
     generateSsg?: boolean
+
+    /** Whether to exclude the route from SEO index. */
     noindex?: boolean
+
+    /** Route metadata. */
     metadata: {
       en: {
         title: string | undefined
@@ -32,48 +34,6 @@ export const registerRouter = (app: App, options: CoreVue3Options) => {
   const routes: RouteRecordRaw[] = [
     ...options.router.routes,
   ];
-
-  routes[0].children?.push(...[
-    {
-      name: 'Settings',
-      path: 'settings',
-      component: () => import('../../pages/PageSettings.vue'),
-      meta: {
-        generateSsr: true,
-        noindex: true,
-        metadata: {
-          en: { title: 'Settings', description: 'Settings' },
-          fr: { title: 'Paramètres', description: 'Paramètres' },
-        },
-      },
-    },
-    {
-      name: 'Forbidden',
-      path: 'forbidden',
-      component: () => import('../../pages/PageForbidden.vue'),
-      meta: {
-        generateSsr: false,
-        noindex: true,
-        metadata: {
-          en: { title: 'Forbidden', description: 'Forbidden' },
-          fr: { title: 'Accès non autorisé', description: 'Accès non autorisé' },
-        },
-      },
-    },
-    {
-      name: 'NotFound',
-      path: ':path(.*)*',
-      component: () => import('../../pages/PageNotFound.vue'),
-      meta: {
-        generateSsr: false,
-        noindex: true,
-        metadata: {
-          en: { title: 'Page Not Found', description: 'Page Not Found' },
-          fr: { title: 'Page introuvable', description: 'Page introuvable' },
-        },
-      },
-    },
-  ]);
 
   routes.push({
     path: '/:path(.*)*',
