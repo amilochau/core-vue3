@@ -42,7 +42,7 @@
     "./utils": "./src/utils/index.ts"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.1.1",

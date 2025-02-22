@@ -2,7 +2,7 @@
 name: NotFound
 meta:
   allowAnonymous: true
-  generateSsg: true
+  generateSsg: false
   noindex: true
   metadata:
     en:

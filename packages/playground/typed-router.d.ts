@@ -20,9 +20,12 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/[lang]': RouteRecordInfo<'/[lang]', '/:lang(fr|en)', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Home': RouteRecordInfo<'Home', '/:lang(fr|en)', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
+    'NotFound': RouteRecordInfo<'NotFound', '/:lang(fr|en)/:path(.*)*', { lang: ParamValue<true>, path?: ParamValueZeroOrMore<true> }, { lang: ParamValue<false>, path?: ParamValueZeroOrMore<false> }>,
     'Components': RouteRecordInfo<'Components', '/:lang(fr|en)/components', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Dialogs': RouteRecordInfo<'Dialogs', '/:lang(fr|en)/dialogs', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
+    'Forbidden': RouteRecordInfo<'Forbidden', '/:lang(fr|en)/forbidden', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Loading': RouteRecordInfo<'Loading', '/:lang(fr|en)/loading', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
+    'Settings': RouteRecordInfo<'Settings', '/:lang(fr|en)/settings', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Validations': RouteRecordInfo<'Validations', '/:lang(fr|en)/validations', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
   }
 }

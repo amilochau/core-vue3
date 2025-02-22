@@ -2,7 +2,7 @@
 name: Forbidden
 meta:
   allowAnonymous: true
-  generateSsg: true
+  generateSsg: false
   noindex: true
   metadata:
     en:

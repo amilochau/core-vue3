@@ -39,7 +39,7 @@
     "./types": "./src/types/index.ts"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "dependencies": {
     "@amilochau/core-vue3": "0.8.21",
