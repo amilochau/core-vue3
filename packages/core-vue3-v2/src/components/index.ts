@@ -8,6 +8,9 @@ import AppNavigationDrawer from './app/layout/AppNavigationDrawer.vue';
 import AppProgressBar from './app/layout/AppProgressBar.vue';
 import AppResponsive from './pages-layout/AppResponsive.vue';
 import AppResponsiveForm from './pages-layout/AppResponsiveForm.vue';
+import AppSectionHeader from './app/section/AppSectionHeader.vue';
+import AppSectionSubHeader from './app/section/AppSectionSubHeader.vue';
+import AppSectionText from './app/section/AppSectionText.vue';
 import AppSnackbar from './app/layout/AppSnackbar.vue';
 import CardDivider from './cards/CardDivider.vue';
 import CardMessages from './cards/CardMessages.vue';
@@ -34,6 +37,9 @@ export {
   AppProgressBar,
   AppResponsive,
   AppResponsiveForm,
+  AppSectionHeader,
+  AppSectionSubHeader,
+  AppSectionText,
   AppSnackbar,
   CardDivider,
   CardMessages,
@@ -49,3 +55,4 @@ export {
   FieldNumeric,
   FieldSlider,
 };
+

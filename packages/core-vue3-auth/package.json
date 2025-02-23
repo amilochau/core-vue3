@@ -1,7 +1,7 @@
 {
   "name": "@amilochau/core-vue3-auth",
   "version": "0.8.21",
-  "description": "Core plugin for vue.js (v3) projects, for authentication",
+  "description": "Core plugin for vue.js (v3) projects, for authentication support",
   "author": "Antoine Milochau",
   "license": "MIT",
   "publishConfig": {

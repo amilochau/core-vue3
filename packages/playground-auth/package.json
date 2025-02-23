@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@amilochau/core-vue3": "file:packages/core-vue3",
+    "@amilochau/core-vue3-pwa": "file:packages/core-vue3-pwa",
     "@amilochau/core-vue3-auth": "file:packages/core-vue3-auth",
     "vite-plugin-pwa": "^0.21.1"
   },

@@ -74,6 +74,7 @@
     "vuetify": "^3.7.13"
   },
   "devDependencies": {
+    "@amilochau/core-vue3-v2": "file:packages/core-vue3-v2",
     "eslint-plugin-jsdoc": "^50.6.3"
   }
 }

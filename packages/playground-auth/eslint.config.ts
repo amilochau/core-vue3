@@ -1,11 +1,6 @@
 import pluginVue from 'eslint-plugin-vue';
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript';
-import stylistic from '@stylistic/eslint-plugin';  // Import the plugin
-
-// To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
-// import { configureVueProject } from '@vue/eslint-config-typescript'
-// configureVueProject({ scriptLangs: ['ts', 'tsx'] })
-// More info at https://github.com/vuejs/eslint-config-typescript/#advanced-setup
+import stylistic from '@stylistic/eslint-plugin';
 
 export default defineConfigWithVueTs(
   {

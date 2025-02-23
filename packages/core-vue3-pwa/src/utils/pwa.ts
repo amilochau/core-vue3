@@ -1,4 +1,4 @@
-import { usePwaStore } from '../../../core-vue3/src/stores';
+import { usePwaStore } from '../stores';
 import { registerSW } from 'virtual:pwa-register';
 import { type RouteLocationNormalized, type Router } from 'vue-router';
 
