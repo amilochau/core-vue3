@@ -7,7 +7,7 @@ import type { RouteMeta } from 'vue-router';
  * @param locale Locale.
  */
 export const generateMetadataInfo = (routePath: string, routeMeta: RouteMeta, locale: string) => {
-  const metadata = routeMeta.metadata ?? { en: { title: undefined, description: undefined }, fr: { title: undefined, description: undefined } };
+  const metadata: any = routeMeta.metadata ?? { en: { title: undefined, description: undefined }, fr: { title: undefined, description: undefined } };
   const localeMetadata = metadata[locale as 'en' | 'fr'] ?? {};
 
   return {

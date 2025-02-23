@@ -11,7 +11,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import path from 'upath';
 import fs from 'fs/promises';
 import { execSync } from 'child_process';
-import { generateMetadataInfo } from '@amilochau/core-vue3/utils';
+import { generateMetadataInfo } from '@amilochau/core-vue3-v2/utils';
 
 setDefaultResultOrder('verbatim');
 
