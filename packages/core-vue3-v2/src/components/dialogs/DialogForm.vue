@@ -224,7 +224,11 @@ defineExpose({
   close,
   displayMessage,
   save,
-  form,
+  form: {
+    reset: () => form.value?.reset(),
+    resetValidation: () => form.value?.resetValidation(),
+    validate: () => form.value?.validate(),
+  },
   isModelChanged,
 });
 </script>

@@ -5,7 +5,12 @@
         <app-header-bar
           v-if="pageData.header"
           v-bind="pageData.header"
-          :title="pageData.header?.title" />
+          :title="pageData.header?.title">
+          <template #append>
+            <app-pwa-install />
+            <app-pwa-update />
+          </template>
+        </app-header-bar>
       </v-expand-transition>
       <router-view />
       <v-expand-transition mode="out-in">
@@ -23,11 +28,11 @@
 </template>
 
 <script setup lang="ts">
-import { AppCookies, AppFooterBar, AppHeaderBar, AppNavigationDrawer, AppSnackbar } from '@amilochau/core-vue3/components';
+import { AppCookies, AppFooterBar, AppHeaderBar, AppNavigationDrawer, AppSnackbar, AppPwaInstall, AppPwaUpdate } from '@amilochau/core-vue3-v2/components';
 import { useTheme } from 'vuetify';
-import { useAppStore, useThemeStore } from '@amilochau/core-vue3/stores';
+import { useAppStore, useThemeStore } from '@amilochau/core-vue3-v2/stores';
 import { storeToRefs } from 'pinia';
-import { useNotifications } from '@amilochau/core-vue3/composition';
+import { useNotifications } from '@amilochau/core-vue3-v2/composition';
 import { useNavigation } from '@/composition/navigation';
 
 const appStore = useAppStore();

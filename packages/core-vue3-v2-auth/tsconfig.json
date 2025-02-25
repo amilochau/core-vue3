@@ -14,7 +14,8 @@
     "resolveJsonModule": true,
     "types": [
       "unplugin-vue-router/client",
-      "vite/client"
+      "vite/client",
+      "vite-plugin-pwa/client"
     ]
   },
   "include": [

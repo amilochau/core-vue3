@@ -5,7 +5,12 @@
         <app-header-bar
           v-if="pageData.header"
           v-bind="pageData.header"
-          :title="pageData.header?.title" />
+          :title="pageData.header?.title">
+          <template #append>
+            <app-pwa-install />
+            <app-pwa-update />
+          </template>
+        </app-header-bar>
       </v-expand-transition>
       <router-view />
       <v-expand-transition mode="out-in">

@@ -1,0 +1,220 @@
+import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from '@mdi/js';
+import { useRouter } from 'vue-router';
+import { useCognito } from './cognito';
+import { useI18n } from 'vue-i18n';
+import { ApplicationError, type ApplicationMessage, type IHttpSettings, type IProblemDetails } from '@amilochau/core-vue3-v2/types';
+import { useAppOptions } from '@amilochau/core-vue3-v2/composition';
+import { useLanguageStore } from '@amilochau/core-vue3-v2/stores';
+
+/**
+ * Use API.
+ * @param apiName Name of the API, typically used to build the API URL.
+ * @param relativeBaseUri Relative base URI for the API.
+ */
+export const useApi = (apiName: string, relativeBaseUri: string) => {
+
+  const i18n = useI18n();
+
+  i18n.mergeLocaleMessage('en', {
+    errors: {
+      validation: 'Validation error',
+      notAuthorized: 'Not authorized',
+      notFound: 'Not found',
+      serverError: 'Server error',
+      networkError: 'Network error: check your connection',
+      sessionExpired: 'Session expired: please login again',
+    },
+  });
+  i18n.mergeLocaleMessage('fr', {
+    errors: {
+      validation: 'Erreur de validation',
+      notAuthorized: 'Non autorisé',
+      notFound: 'Inconnu',
+      serverError: 'Erreur interne',
+      networkError: 'Erreur réseau : vérifiez votre connexion',
+      sessionExpired: 'Session expirée : veuillez vous reconnecter',
+    },
+  });
+
+  const languageStore = useLanguageStore();
+  const { getJwtToken, signOut } = useCognito();
+  const router = useRouter();
+  const { apiEnabled, coreOptions } = useAppOptions();
+
+  const baseUri = `${coreOptions.api?.apiBaseUriBuilder({ apiName })}${relativeBaseUri}`;
+
+  const analyzeResponse = async (response: Response, settings: IHttpSettings) => {
+    switch (response.status) {
+      case 401:
+        return buildApplicationMessage401();
+      case 403:
+        return buildApplicationMessage403();
+      case 404:
+        return buildApplicationMessage404(settings);
+      case 400:
+        const responseBody = await response.json() as IProblemDetails;
+        if (responseBody) {
+          switch (responseBody.status) {
+            case 401:
+              return buildApplicationMessage401();
+            case 403:
+              return buildApplicationMessage403();
+            case 404:
+              return buildApplicationMessage404(settings);
+          }
+
+          return buildApplicationMessage400(responseBody);
+        }
+    }
+
+    return buildApplicationMessage500();
+  };
+
+  const buildApplicationMessage400 = (problemDetails: IProblemDetails) => {
+    const errorMessage = { title: '', color: 'error', icon: mdiAlert } as ApplicationMessage;
+    if (problemDetails.title) {
+      errorMessage.title = problemDetails.title;
+    }
+    if (problemDetails.errors) {
+      errorMessage.details = '';
+      for (const [key, values] of Object.entries(problemDetails.errors)) {
+        for (const value of values) {
+          if (value) {
+            if (key) {
+              errorMessage.details += `${key} - ${value}\n`;
+            } else {
+              errorMessage.details += `${value}\n`;
+            }
+          }
+        }
+      }
+    }
+    // Format
+    if (!errorMessage.title.length) {
+      errorMessage.title = i18n.t('errors.validation');
+    }
+    return errorMessage;
+  };
+  const buildApplicationMessage401 = async () => {
+    await router.push({ name: 'Login' });
+    return { title: i18n.t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage;
+  };
+  const buildApplicationMessage403 = async () => {
+    await router.push({ name: 'Forbidden' });
+    return { title: i18n.t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage;
+  };
+  const buildApplicationMessage404 = async (settings: IHttpSettings) => {
+    if (settings.redirect404) {
+      await router.push({ name: 'NotFound' });
+    }
+    return { title: i18n.t('errors.notFound'), color: 'error', icon: mdiAlert } as ApplicationMessage;
+  };
+  const buildApplicationMessage500 = () => {
+    return { title: i18n.t('errors.serverError'), color: 'error', icon: mdiAlert } as ApplicationMessage;
+  };
+
+  const getAbsoluteUrl = (url: string) => {
+    return `${baseUri}${url}`;
+  };
+
+  const getRequestInit = (accessToken?: string): RequestInit => {
+    const headers: HeadersInit = {
+      'Accept-Language': languageStore.language,
+      'Content-Type': 'application/json;charset=utf-8',
+    };
+
+    if (accessToken) {
+      headers.Authorization = `Bearer ${accessToken}`;
+    }
+
+    return { headers };
+  };
+
+  const processRequest = async (url: string,
+    settings: IHttpSettings,
+    request: (absoluteUrl: string, requestInit: RequestInit) => Promise<Response>) => {
+
+    let response: Response;
+
+    if (!apiEnabled) {
+      throw new Error('API integration is not configured.');
+    }
+
+    // Get bearer token for API
+    let jwtToken: string | undefined;
+
+    try {
+      jwtToken = await getJwtToken();
+    } catch (error: any) {
+      console.error('Authentication token can\'t be used', error);
+      if (error && error.name === 'Unknown') {
+        throw new ApplicationError({ title: i18n.t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff });
+      } else {
+        await signOut();
+        await router.push({ name: 'Login' });
+        throw new ApplicationError({ title: i18n.t('errors.sessionExpired'), color: 'warning', icon: mdiTimerRefreshOutline });
+      }
+    }
+
+    try {
+      const requestInit = getRequestInit(jwtToken);
+      const absoluteUrl = getAbsoluteUrl(url);
+      response = await request(absoluteUrl, requestInit);
+    } catch {
+      throw new ApplicationError({ title: i18n.t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff });
+    }
+
+    if (!response.ok) {
+      const responseError = await analyzeResponse(response, settings);
+      throw new ApplicationError(responseError);
+    }
+
+    return response;
+  };
+
+  const getHttp = async (url: string, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'GET',
+    }));
+  };
+
+  const postHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'POST',
+      body: JSON.stringify(data),
+    }));
+  };
+
+  const putHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }));
+  };
+
+  const patchHttp = async <TRequest>(url: string, data: TRequest, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }));
+  };
+
+  const deleteHttp = async (url: string, settings: IHttpSettings) => {
+    return processRequest(url, settings, (absoluteUrl, requestInit) => fetch(absoluteUrl, {
+      ...requestInit,
+      method: 'DELETE',
+    }));
+  };
+
+  return {
+    getHttp,
+    postHttp,
+    putHttp,
+    patchHttp,
+    deleteHttp,
+  };
+};

@@ -1,7 +1,7 @@
 {
-  "name": "@amilochau/core-vue3-v2",
+  "name": "@amilochau/core-vue3-v2-auth",
   "version": "0.9.0",
-  "description": "Core plugin for vue.js (v3) projects",
+  "description": "Core plugin for vue.js (v3) projects, for auth support",
   "author": "Antoine Milochau",
   "license": "MIT",
   "publishConfig": {
@@ -42,11 +42,15 @@
       "types": "./dist/components/index.d.ts"
     },
     "./composition": "./dist/composition.mjs",
-    "./stores": "./dist/stores.mjs",
-    "./types": "./dist/types.mjs",
-    "./utils": "./dist/utils.mjs"
+    "./pages": {
+      "default": "./dist/pages/index.mjs",
+      "types": "./dist/pages/index.d.ts"
+    },
+    "./types": "./dist/types.mjs"
   },
   "peerDependencies": {
+    "@amilochau/core-vue3-v2": "file:packages/core-vue3-v2",
+    "aws-amplify": "^6.13.1",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
     "vue-i18n": "^11.1.1",
@@ -54,15 +58,16 @@
     "vuetify": "^3.7.13"
   },
   "devDependencies": {
+    "@amilochau/core-vue3-v2": "file:packages/core-vue3-v2",
+    "aws-amplify": "^6.13.1",
     "eslint-plugin-jsdoc": "^48.11.0",
     "pinia": "^3.0.1",
-    "sass": "^1.85.0",
     "typescript": "^5.7.3",
     "unbuild": "^3.3.1",
     "vue": "^3.5.13",
     "vue-i18n": "^11.1.1",
     "vue-router": "^4.5.0",
-    "vue-tsc": "^2.2.4",
+    "vue-tsc": "^2.2.2",
     "vuetify": "^3.7.13"
   }
 }
