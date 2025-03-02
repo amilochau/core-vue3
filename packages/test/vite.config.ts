@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
-import path from 'path'
+import path from 'path';
 import vue from '@vitejs/plugin-vue';
-import dts from 'vite-plugin-dts'
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   plugins: [
@@ -24,7 +24,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'vue',
-      ]
-    }
+      ],
+    },
   },
 });

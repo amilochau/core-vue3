@@ -4,12 +4,12 @@ import stylistic from '@stylistic/eslint-plugin';
 
 export default defineConfigWithVueTs(
   {
-    name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    name: 'files-to-lint',
+    files: ['**/*.{ts,mts,tsx,vue}', 'vite.config.ts', 'eslint.config.ts'],
   },
 
   {
-    name: 'app/files-to-ignore',
+    name: 'files-to-ignore',
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
 
