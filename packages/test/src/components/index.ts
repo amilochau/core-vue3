@@ -1,4 +1,4 @@
-import AppSectionHeader from './AppSectionHeader.vue';
+import AppSectionHeader from './app/AppSectionHeader.vue';
 
 export {
   AppSectionHeader,

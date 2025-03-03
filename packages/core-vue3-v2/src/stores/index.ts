@@ -1,4 +1,3 @@
-import { PersistOptions } from '../plugins/pinia';
 import { useAppStore } from './app';
 import { useCookiesStore } from './cookies';
 import { useIdentityStore } from './identity';

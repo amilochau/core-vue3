@@ -24,28 +24,43 @@
   "company": "Milochau",
   "copyright": "Copyright © Milochau",
   "type": "module",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "styles": "./dist/styles.css",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "build": "unbuild",
-    "build:vite": "vite build"
+    "build": "tsc --noEmit && vite build"
   },
   "files": [
     "dist"
   ],
   "exports": {
-    ".": "./dist/index.mjs",
-    "./components": {
-      "default": "./dist/components/index.mjs",
-      "types": "./dist/components/index.d.ts"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     },
-    "./composition": "./dist/composition.mjs",
-    "./stores": "./dist/stores.mjs",
-    "./types": "./dist/types.mjs",
-    "./utils": "./dist/utils.mjs"
+    "./components": {
+      "import": "./dist/components.js",
+      "types": "./dist/components.d.ts"
+    },
+    "./composition": {
+      "import": "./dist/composition.js",
+      "types": "./dist/composition.d.ts"
+    },
+    "./stores": {
+      "import": "./dist/stores.js",
+      "types": "./dist/stores.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types.js",
+      "types": "./dist/types.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils.js",
+      "types": "./dist/utils.d.ts"
+    }
   },
   "peerDependencies": {
     "pinia": "^3.0.1",
@@ -55,13 +70,23 @@
     "vuetify": "^3.7.13"
   },
   "devDependencies": {
+    "@fontsource/roboto": "^5.2.5",
+    "@intlify/unplugin-vue-i18n": "^6.0.3",
+    "@mdi/js": "^7.4.47",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@unhead/vue": "^1.11.20",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/eslint-config-typescript": "^14.4.0",
+    "@vueuse/core": "^12.7.0",
+    "deepmerge": "^4.3.1",
+    "eslint": "^9.21.0",
     "eslint-plugin-jsdoc": "^48.11.0",
+    "eslint-plugin-vue": "^9.32.0",
     "pinia": "^3.0.1",
-    "rollup-plugin-dts": "^6.1.1",
     "sass": "^1.85.0",
     "typescript": "^5.7.3",
-    "unbuild": "^3.3.1",
     "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.3",
     "vue": "^3.5.13",
     "vue-i18n": "^11.1.1",
     "vue-router": "^4.5.0",
