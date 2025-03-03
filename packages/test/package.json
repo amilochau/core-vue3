@@ -61,7 +61,7 @@
     "@fontsource/roboto": "^5.2.5",
     "@intlify/unplugin-vue-i18n": "^6.0.3",
     "@mdi/js": "^7.4.47",
-    "@stylistic/eslint-plugin": "^4.1.0",
+    "@stylistic/eslint-plugin": "^4.2.0",
     "@unhead/vue": "^1.11.20",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/eslint-config-typescript": "^14.4.0",
@@ -71,14 +71,14 @@
     "eslint-plugin-jsdoc": "^48.11.0",
     "eslint-plugin-vue": "^9.32.0",
     "pinia": "^3.0.1",
-    "sass": "^1.85.0",
-    "typescript": "^5.7.3",
+    "sass": "^1.85.1",
+    "typescript": "^5.8.2",
     "vite": "^6.2.0",
-    "vite-plugin-dts": "^4.5.0",
+    "vite-plugin-dts": "^4.5.3",
     "vue": "^3.5.13",
     "vue-i18n": "^11.1.1",
     "vue-router": "^4.5.0",
-    "vue-tsc": "^2.2.4",
-    "vuetify": "^3.7.13"
+    "vue-tsc": "^2.2.8",
+    "vuetify": "^3.7.14"
   }
 }

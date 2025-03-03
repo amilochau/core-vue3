@@ -58,13 +58,13 @@
     "@amilochau/core-vue3-v2": "file:packages/core-vue3-v2",
     "eslint-plugin-jsdoc": "^48.11.0",
     "pinia": "^3.0.1",
-    "typescript": "^5.7.3",
-    "unbuild": "^3.3.1",
+    "typescript": "^5.8.2",
+    "unbuild": "^3.5.0",
     "vite-plugin-pwa": "^0.21.1",
     "vue": "^3.5.13",
     "vue-i18n": "^11.1.1",
     "vue-router": "^4.5.0",
-    "vue-tsc": "^2.2.2",
-    "vuetify": "^3.7.13"
+    "vue-tsc": "^2.2.8",
+    "vuetify": "^3.7.14"
   }
 }
