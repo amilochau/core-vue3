@@ -7,20 +7,24 @@
     "declarationDir": "dist",
     "outDir": "dist",
     "strict": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "jsx": "preserve",
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
     "types": [
       "vite/client",
       "vite-plugin-pwa/client"
     ]
   },
   "include": [
-    "env.d.ts",
-    "src/**/*",
-    "eslint.config.ts"
+    "src",
+    "eslint.config.ts",
+    "vite.config.ts"
   ],
   "exclude": [
     "node_modules",
