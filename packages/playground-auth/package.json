@@ -22,7 +22,7 @@
     "@amilochau/core-vue3": "file:packages/core-vue3",
     "@amilochau/core-vue3-auth": "file:packages/core-vue3-auth",
     "@amilochau/core-vue3-pwa": "file:packages/core-vue3-pwa",
-    "vite-plugin-pwa": "^0.21.1"
+    "vite-plugin-pwa": "^0.21.2"
   },
   "devDependencies": {
     "rollup-plugin-visualizer": "^5.14.0"
