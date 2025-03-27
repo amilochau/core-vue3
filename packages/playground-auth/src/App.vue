@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { AppCookies, AppFooterBar, AppHeaderBar, AppNavigationDrawer, AppSnackbar } from '@amilochau/core-vue3/components';
+import { AppCookies, AppFooterBar, AppHeaderBar, AppNavigationDrawer, AppPwaInstall, AppPwaUpdate, AppSnackbar } from '@amilochau/core-vue3/components';
 import { useTheme } from 'vuetify';
 import { useAppStore, useThemeStore } from '@amilochau/core-vue3/stores';
 import { storeToRefs } from 'pinia';

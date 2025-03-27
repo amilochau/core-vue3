@@ -1,5 +1,5 @@
 {
-  "name": "@amilochau/core-vue3-v2",
+  "name": "@amilochau/core-vue3",
   "version": "0.9.0",
   "description": "Core plugin for vue.js (v3) projects",
   "author": "Antoine Milochau",
@@ -82,6 +82,8 @@
     "eslint": "^9.23.0",
     "eslint-plugin-jsdoc": "^48.11.0",
     "eslint-plugin-vue": "^9.33.0",
+    "jiti": "^2.4.2",
+    "path": "^0.12.7",
     "pinia": "^3.0.1",
     "sass": "^1.86.0",
     "typescript": "^5.8.2",

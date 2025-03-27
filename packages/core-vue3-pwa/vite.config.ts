@@ -26,19 +26,19 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
-        "@mdi/js",
-        "@unhead/vue",
-        "@vueuse/core",
-        "deepmerge",
+        '@mdi/js',
+        '@unhead/vue',
+        '@vueuse/core',
+        'deepmerge',
         'pinia',
         'vue',
         'vue-i18n',
         'vue-router',
         'vuetify',
-        "vuetify/locale",
-        "vuetify/iconsets/mdi-svg",
-        "vuetify/components",
-      ]
-    }
-  }
+        'vuetify/locale',
+        'vuetify/iconsets/mdi-svg',
+        'vuetify/components',
+      ],
+    },
+  },
 });

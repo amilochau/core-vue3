@@ -40,7 +40,7 @@ import { useI18n } from 'vue-i18n';
 import { ApplicationError } from '@amilochau/core-vue3/types';
 import { type ComponentExposed } from 'vue-component-type-helpers';
 import { type Item, ItemRecord } from '@/types/test';
-import { getNewKey } from '@amilochau/core-vue3-v2/utils';
+import { getNewKey } from '@amilochau/core-vue3/utils';
 
 const item = defineModel<Item>('item', { required: true });
 

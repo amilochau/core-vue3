@@ -18,7 +18,7 @@ import { useI18n } from 'vue-i18n';
 import { useLocale } from 'vuetify';
 import { useLanguageStore } from '@amilochau/core-vue3/stores';
 import { useHead, useSeoMeta } from '@unhead/vue';
-import { generateMetadataInfo } from '@amilochau/core-vue3-v2/utils';
+import { generateMetadataInfo } from '@amilochau/core-vue3/utils';
 
 const { locale } = useI18n({ useScope: 'global' });
 const route = useRoute();

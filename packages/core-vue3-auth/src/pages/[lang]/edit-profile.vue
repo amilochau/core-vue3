@@ -38,15 +38,15 @@ meta:
 </template>
 
 <script setup lang="ts">
-import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3-v2/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAccount, mdiAccountEdit, mdiCardAccountDetailsOutline } from '@mdi/js';
 import { useCognito } from '../../composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import type { EditProfile } from '../../types';
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3-v2/stores';
-import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3-v2/composition';
+import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({

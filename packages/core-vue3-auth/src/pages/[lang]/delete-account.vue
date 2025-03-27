@@ -47,17 +47,17 @@ meta:
 </template>
 
 <script setup lang="ts">
-import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3-v2/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAccountOff, mdiAlert, mdiAt, mdiCardAccountDetailsOutline, mdiLock } from '@mdi/js';
 import { useCognito } from '../../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { Login } from '../../types';
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3-v2/stores';
-import { useClean, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3-v2/composition';
+import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useClean, useHandle, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 import { storeToRefs } from 'pinia';
-import { ApplicationError } from '@amilochau/core-vue3-v2/types';
+import { ApplicationError } from '@amilochau/core-vue3/types';
 
 const { t } = useI18n();
 usePage(computed(() => ({

@@ -8,7 +8,7 @@
   "scripts": {
     "serve": "npm run serve --workspace=packages/playground",
     "build": "npm run build --workspace=packages/playground",
-    "build:libs": "npm run build --workspace=packages/core-vue3-v2 && npm run build --workspace=packages/core-vue3-v2-auth && npm run build --workspace=packages/core-vue3-v2-pwa",
+    "build:libs": "npm run build --workspace=packages/core-vue3 && npm run build --workspace=packages/core-vue3-auth && npm run build --workspace=packages/core-vue3-pwa",
     "preview": "npm run preview --workspace=packages/playground",
     "serve:auth": "npm run serve --workspace=packages/playground-auth",
     "build:auth": "npm run build --workspace=packages/playground-auth",

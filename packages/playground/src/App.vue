@@ -28,11 +28,11 @@
 </template>
 
 <script setup lang="ts">
-import { AppCookies, AppFooterBar, AppHeaderBar, AppNavigationDrawer, AppSnackbar, AppPwaInstall, AppPwaUpdate } from '@amilochau/core-vue3-v2/components';
+import { AppCookies, AppFooterBar, AppHeaderBar, AppNavigationDrawer, AppPwaInstall, AppPwaUpdate, AppSnackbar } from '@amilochau/core-vue3/components';
 import { useTheme } from 'vuetify';
-import { useAppStore, useThemeStore } from '@amilochau/core-vue3-v2/stores';
+import { useAppStore, useThemeStore } from '@amilochau/core-vue3/stores';
 import { storeToRefs } from 'pinia';
-import { useNotifications } from '@amilochau/core-vue3-v2/composition';
+import { useNotifications } from '@amilochau/core-vue3/composition';
 import { useNavigation } from '@/composition/navigation';
 
 const appStore = useAppStore();

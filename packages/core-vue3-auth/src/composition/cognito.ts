@@ -16,9 +16,9 @@ import {
 } from 'aws-amplify/auth';
 import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
-import { ApplicationError } from '@amilochau/core-vue3-v2/types';
-import { useClean } from '@amilochau/core-vue3-v2/composition';
-import { useIdentityStore } from '@amilochau/core-vue3-v2/stores';
+import { ApplicationError } from '@amilochau/core-vue3/types';
+import { useClean } from '@amilochau/core-vue3/composition';
+import { useIdentityStore } from '@amilochau/core-vue3/stores';
 import { inject } from 'vue';
 
 /** Use Cognito. */

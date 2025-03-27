@@ -35,7 +35,7 @@
 import { mdiUpdate } from '@mdi/js';
 import { useOnline } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '@amilochau/core-vue3-v2/stores';
+import { useAppStore } from '@amilochau/core-vue3/stores';
 import { usePwaStore } from '../stores';
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';

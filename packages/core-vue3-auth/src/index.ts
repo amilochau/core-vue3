@@ -1,4 +1,4 @@
-import type { CoreVue3Context } from '@amilochau/core-vue3-v2/types';
+import type { CoreVue3Context } from '@amilochau/core-vue3/types';
 import { registerCognito } from './plugins/cognito';
 import type { CoreVue3AuthOptions } from './types/index';
 import { registerRouterGuards } from './plugins/router';

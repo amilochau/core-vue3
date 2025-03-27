@@ -54,14 +54,14 @@ meta:
 </template>
 
 <script setup lang="ts">
-import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3-v2/components';
+import { AppResponsiveForm, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiLock, mdiLockClock, mdiLockOutline, mdiLockReset } from '@mdi/js';
 import { useCognito } from '../../composition';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import type { EditPassword } from '../../types';
-import { useAppStore } from '@amilochau/core-vue3-v2/stores';
-import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3-v2/composition';
+import { useAppStore } from '@amilochau/core-vue3/stores';
+import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
 usePage(computed(() => ({

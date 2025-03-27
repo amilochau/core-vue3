@@ -4,4 +4,4 @@ import { usePwaStore } from './pwa';
 export {
   useNotificationsStore,
   usePwaStore,
-}
+};

@@ -30,14 +30,14 @@ meta:
 </template>
 
 <script setup lang="ts">
-import { AppResponsive, CardSectionTitle } from '@amilochau/core-vue3-v2/components';
+import { AppResponsive, CardSectionTitle } from '@amilochau/core-vue3/components';
 import { mdiAccount, mdiAccountEdit, mdiAccountOff, mdiAt, mdiCardAccountDetailsOutline, mdiLockReset, mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { usePage } from '@amilochau/core-vue3-v2/composition';
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3-v2/stores';
+import { usePage } from '@amilochau/core-vue3/composition';
+import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
 import { useCognito } from '../../composition';
 
 const { t } = useI18n();

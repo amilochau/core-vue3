@@ -6,7 +6,7 @@ export const usePwaStore = defineStore('pwa', () => {
   const installPromptEvent = ref<any>();
   const updateDisplay = ref(false);
   const updateLoading = ref(false);
-  const updateSW = ref<(reload?: boolean) => void>();
+  const updateSW = ref<(reload?: boolean) => Promise<void>>();
 
   /** Install PWA application. */
   const install = () => {

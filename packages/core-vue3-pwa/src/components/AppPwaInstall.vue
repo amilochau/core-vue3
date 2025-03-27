@@ -14,9 +14,9 @@
 import { mdiDownload } from '@mdi/js';
 import { useMediaQuery, useOnline } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
-import { useAppStore } from '@amilochau/core-vue3-v2/stores';
+import { useAppStore } from '@amilochau/core-vue3/stores';
 import { usePwaStore } from '../stores';
-import { useAppOptions } from '@amilochau/core-vue3-v2/composition';
+import { useAppOptions } from '@amilochau/core-vue3/composition';
 import { storeToRefs } from 'pinia';
 
 const { t } = useI18n();

@@ -2,9 +2,9 @@ import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from '@mdi
 import { useRouter } from 'vue-router';
 import { useCognito } from './cognito';
 import { useI18n } from 'vue-i18n';
-import { ApplicationError, type ApplicationMessage, type IHttpSettings, type IProblemDetails } from '@amilochau/core-vue3-v2/types';
-import { useAppOptions } from '@amilochau/core-vue3-v2/composition';
-import { useLanguageStore } from '@amilochau/core-vue3-v2/stores';
+import { ApplicationError, type ApplicationMessage, type IHttpSettings, type IProblemDetails } from '@amilochau/core-vue3/types';
+import { useAppOptions } from '@amilochau/core-vue3/composition';
+import { useLanguageStore } from '@amilochau/core-vue3/stores';
 
 /**
  * Use API.
