@@ -58,113 +58,19 @@ meta:
         class="mb-3">
         {{ t('privacy.expiration', { expirationDate: d(cookiesStore.expiration, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }) }) }}
       </v-alert>
-      <v-divider class="my-4" />
-      <!--
-      @todo Manage notifications settings somehow/somewhere
-      -->
-      <template v-if="notifications.isSupported.value">
-        <card-section-title
-          :icon="mdiBellOutline"
-          :title="t('notifications.title')" />
-        <p class="mb-2">
-          {{ t('notifications.summary') }}
-        </p>
-        <p v-if="notifications.isRegistred.value">
-          <v-icon
-            :icon="mdiBellCheckOutline"
-            class="mr-2"
-            color="success" />
-          {{ t('notifications.enabled') }}
-        </p>
-        <p v-else>
-          <v-icon
-            :icon="mdiBellAlertOutline"
-            class="mr-2"
-            color="error" />
-          {{ t('notifications.disabled') }}
-        </p>
-        <div class="text-center">
-          <v-btn-action
-            v-if="notifications.isRegistred.value"
-            :disabled="loading || !online"
-            :loading="loading"
-            :prepend-icon="mdiBellMinus"
-            class="my-2"
-            color="warning"
-            @click="notifications.unsubscribe">
-            {{ t('notifications.unsubscribe') }}
-          </v-btn-action>
-          <v-btn-action
-            v-else
-            :disabled="loading || !online"
-            :loading="loading"
-            :prepend-icon="mdiBellPlus"
-            class="my-2"
-            color="primary"
-            @click="notifications.subscribe">
-            {{ t('notifications.subscribe') }}
-          </v-btn-action>
-        </div>
-        <v-divider class="my-4" />
-      </template>
-      <card-section-title
-        :icon="mdiDatabaseOutline"
-        :title="t('storage.title')" />
-      <v-list
-        :items="storageItems"
-        item-props
-        :lines="false" />
-      <v-divider class="my-4" />
-      <card-section-title
-        :icon="mdiApplicationBracesOutline"
-        :title="t('version.title')" />
-      <v-list
-        :items="versionItems"
-        item-props
-        :lines="false" />
-      <v-alert
-        v-if="updateDisplay"
-        :icon="mdiUpdate"
-        border="start"
-        color="primary"
-        variant="tonal"
-        class="mb-3 text-center">
-        <p class="text-left">
-          {{ t('version.update.desc') }}
-        </p>
-        <v-btn-action
-          :disabled="updateLoading || loading || !online"
-          :prepend-icon="mdiUpdate"
-          :loading="loading"
-          color="primary"
-          class="mt-2"
-          @click="pwaStore.update">
-          {{ t('version.update.action') }}
-        </v-btn-action>
-      </v-alert>
-      <v-alert
-        v-else
-        border="start"
-        type="success"
-        variant="tonal"
-        class="mb-3">
-        {{ t('version.update.success') }}
-      </v-alert>
     </v-card-text>
   </app-responsive-form>
 </template>
 
 <script setup lang="ts">
-import { mdiApplicationBracesOutline, mdiBellAlertOutline, mdiBellCheckOutline, mdiBellMinus, mdiBellOutline, mdiBellPlus, mdiBrightness6, mdiCalendarEdit, mdiCalendarImport, mdiDatabase, mdiDatabaseOutline, mdiEarth, mdiGaugeLow, mdiGavel, mdiPoundBox, mdiUpdate } from '@mdi/js';
+import { mdiBrightness6, mdiEarth, mdiGavel } from '@mdi/js';
 import { AppResponsiveForm, CardSectionTitle } from '../../components';
 import { useI18n } from 'vue-i18n';
-import { useNotifications, usePage } from '../../composition';
+import { usePage } from '../../composition';
 import { useRoute, useRouter } from 'vue-router';
-import { useAppStore, useCookiesStore, usePwaStore, useThemeStore } from '../../stores';
+import { useCookiesStore, useThemeStore } from '../../stores';
 import { useTheme } from 'vuetify';
 import { computed, inject, ref } from 'vue';
-import { useOnline } from '@vueuse/core';
-import { storeToRefs } from 'pinia';
 import type { BuildData, CoreVue3AppOptions } from '../../types';
 
 declare global {
@@ -179,7 +85,7 @@ declare global {
   }
 }
 
-const { d, n, t } = useI18n();
+const { d, t } = useI18n();
 const buttonMode = ref<'back' | 'default-back'>('back');
 usePage(computed(() => ({
   header: {
@@ -192,12 +98,6 @@ const route = useRoute();
 const themeStore = useThemeStore();
 const theme = useTheme();
 const cookiesStore = useCookiesStore();
-const notifications = useNotifications();
-const online = useOnline();
-const appStore = useAppStore();
-const { loading } = storeToRefs(appStore);
-const pwaStore = usePwaStore();
-const { updateDisplay, updateLoading } = storeToRefs(pwaStore);
 const appOptions = inject('options-app') as CoreVue3AppOptions;
 
 // Theme
@@ -227,34 +127,6 @@ const toggleCookies = (event: any) => {
   }
 };
 
-// Storage data
-const storageEstimate = ref<StorageEstimate | undefined>(undefined);
-void navigator.storage.estimate().then(value => storageEstimate.value = value);
-const memoryUsage = computed(() => storageEstimate.value?.usage ?? 0);
-const memoryUsageDetails = computed(() => Object.entries(storageEstimate.value?.usageDetails ? storageEstimate.value.usageDetails : {}));
-const quotaUsage = computed(() => (storageEstimate.value?.usage ?? 0) / (storageEstimate.value?.quota ?? 1));
-const storageItems = computed(() => ([
-  {
-    title: n(memoryUsage.value / 1024 / 1024, { style: 'unit', maximumSignificantDigits: 3, minimumSignificantDigits: 2, unit: 'megabyte', unitDisplay: 'short' }),
-    subtitle: t('storage.memory'),
-    prependIcon: mdiDatabase,
-    children: memoryUsageDetails.value.length ? memoryUsageDetails.value.map(([k, v]) => ({ title: n(v / 1024 / 1024, { style: 'unit', maximumSignificantDigits: 3, minimumSignificantDigits: 2, unit: 'megabyte', unitDisplay: 'short' }), subtitle: k })) : undefined,
-  },
-  {
-    title: n(quotaUsage.value, { style: 'percent', maximumFractionDigits: 1 }),
-    subtitle: t('storage.quota'),
-    prependIcon: mdiGaugeLow,
-  },
-]));
-
-// Build data
-const buildData = window.buildData;
-const versionItems = computed(() => ([
-  ...buildData.commitDate ? [{ title: d(buildData.commitDate, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }), subtitle: t('version.commitDate'), prependIcon: mdiCalendarEdit }] : [],
-  ...buildData.buildDate ? [{ title: d(buildData.buildDate, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }), subtitle: t('version.buildDate'), prependIcon: mdiCalendarImport }] : [],
-  ...buildData.commitSha ? [{ title: buildData.commitSha, subtitle: t('version.commitSha'), prependIcon: mdiPoundBox }] : [],
-]));
-
 const links = computed(() => ([
   { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, href: appOptions.privacyUrlBuilder(language), target: '_blank', rel: 'noopener noreferrer' },
 ]));
@@ -274,26 +146,6 @@ en:
     title: Privacy
     cookies: Accept cookies
     expiration: Your answer expires on {expirationDate}. You'll then be asked again.
-  notifications:
-    title: Notifications
-    summary: Notifications make it easy to stay informed, right on your device.
-    enabled: Notifications are enabled on this device!
-    disabled: Notifications are not enabled on this device!
-    subscribe: Enable notifications
-    unsubscribe: Disable notifications
-  storage:
-    title: Storage and memory
-    memory: Memory used by the application to store offline data
-    quota: Memory quota used on the device
-  version:
-    title: Application version
-    buildDate: Application deployment date
-    commitDate: Last modification date
-    commitSha: Version unique reference
-    update:
-      desc: A new version is available. You can get the latest content by updating this application!
-      action: Update
-      success: You have the latest version of the application!
   links:
     privacy:
       title: Privacy policy
@@ -311,26 +163,6 @@ fr:
     title: Confidentialité
     cookies: Accepter les cookies
     expiration: Votre réponse expirera le {expirationDate}. Vous serez alors interrogé de nouveau.
-  notifications:
-    title: Notifications
-    summary: Les notifications vous permettent d'être informé facilement, directement sur votre appareil.
-    enabled: Les notifications sont activées sur cet appareil !
-    disabled: Les notifications ne sont pas activées sur cet appareil !
-    subscribe: Activer les notifications
-    unsubscribe: Désactiver les notifications
-  storage:
-    title: Stockage et mémoire
-    memory: Mémoire utilisée par l'application pour les données hors-ligne
-    quota: Quota de mémoire de l'appareil utilisé
-  version:
-    title: Version de l'application
-    buildDate: Date de déploiement de l'application
-    commitDate: Date de dernière modification
-    commitSha: Référence unique de la version
-    update:
-      desc: Une nouvelle version est disponible. Vous pouvez obtenir le dernier contenu en mettant à jour cette application !
-      action: Mettre à jour
-      success: Vous avez la dernière version de l'application !
   links:
     privacy:
       title: Politique de confidentialité

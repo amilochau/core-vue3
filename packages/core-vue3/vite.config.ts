@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import dts from 'vite-plugin-dts';
@@ -16,13 +15,13 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       entry: {
-        index: path.resolve(__dirname, 'src/index.ts'),
-        components: path.resolve(__dirname, 'src/components/index.ts'),
-        composition: path.resolve(__dirname, 'src/composition/index.ts'),
-        stores: path.resolve(__dirname, 'src/stores/index.ts'),
-        styles: path.resolve(__dirname, 'src/styles/main.scss'),
-        types: path.resolve(__dirname, 'src/types/index.ts'),
-        utils: path.resolve(__dirname, 'src/utils/index.ts'),
+        index: 'src/index.ts',
+        components: 'src/components/index.ts',
+        composition: 'src/composition/index.ts',
+        stores: 'src/stores/index.ts',
+        styles: 'src/styles/main.scss',
+        types: 'src/types/index.ts',
+        utils: 'src/utils/index.ts',
       },
       formats: ['es'],
     },

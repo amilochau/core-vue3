@@ -1,7 +1,8 @@
-import { useAppStore, useIdentityStore, useNotificationsStore } from '../stores';
-import { NotificationRegisterType, type NotificationsRegisterRequest } from '../types/application/notifications';
+import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useNotificationsStore } from '../stores';
+import { NotificationRegisterType, type NotificationsRegisterRequest } from '../types/notifications';
 import { computed } from 'vue';
-import { useAppOptions } from './options';
+import { useAppOptions } from '@amilochau/core-vue3/composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
