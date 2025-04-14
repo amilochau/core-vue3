@@ -5,4 +5,3 @@ export {
   AppPwaInstall,
   AppPwaUpdate,
 };
-

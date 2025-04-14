@@ -16,9 +16,7 @@ export default defineConfig({
     lib: {
       entry: {
         index: 'src/index.ts',
-        components: 'src/components/index.ts',
         composition: 'src/composition/index.ts',
-        types: 'src/types/index.ts',
       },
       formats: ['es'],
     },

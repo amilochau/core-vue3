@@ -6,6 +6,7 @@ import { useAppOptions } from '@amilochau/core-vue3/composition';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
+import type { CorePwaOptions } from '../types/options';
 
 const urlB64ToUint8Array = (base64String: string) => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
@@ -27,12 +28,14 @@ export const useNotifications = () => {
 
   const i18n = useI18n();
   const { coreOptions } = useAppOptions();
+  // Use type assertion with the extended interface
+  const pwaOptions = coreOptions as CorePwaOptions;
   const identityStore = useIdentityStore();
   const { isAuthenticated } = storeToRefs(identityStore);
   const appStore = useAppStore();
   const notificationsStore = useNotificationsStore();
   const { registred } = storeToRefs(notificationsStore);
-  const register = coreOptions.notifications?.register();
+  const register = pwaOptions.notifications?.register();
   const route = useRoute();
 
   i18n.mergeLocaleMessage('en', {
@@ -52,7 +55,7 @@ export const useNotifications = () => {
 
   /** Whether notifications are supported. */
   const isSupported = computed(() => registred.value || navigator.serviceWorker && 'PushManager' in window
-      && !!coreOptions.notifications
+      && !!pwaOptions.notifications
       && isAuthenticated.value);
 
   /** Subscribe to notifications. */
@@ -87,7 +90,7 @@ export const useNotifications = () => {
 
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlB64ToUint8Array(coreOptions.notifications!.pushKey),
+        applicationServerKey: urlB64ToUint8Array(pwaOptions.notifications!.pushKey),
       });
 
       const subscriptionJson = subscription.toJSON();

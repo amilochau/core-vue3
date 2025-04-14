@@ -1,7 +1,7 @@
 <template>
   <v-scroll-y-reverse-transition mode="out-in">
     <v-btn
-      v-if="!coreOptions.pwa?.hideInstallBtn && installDisplay && !isInstalled"
+      v-if="!pwaOptions.pwa?.hideInstallBtn && installDisplay && !isInstalled"
       v-tooltip:bottom="t('title')"
       :disabled="loading || !online"
       :icon="mdiDownload"
@@ -18,6 +18,7 @@ import { useAppStore } from '@amilochau/core-vue3/stores';
 import { usePwaStore } from '../stores';
 import { useAppOptions } from '@amilochau/core-vue3/composition';
 import { storeToRefs } from 'pinia';
+import type { CorePwaOptions } from '../types/options';
 
 const { t } = useI18n();
 const online = useOnline();
@@ -26,6 +27,8 @@ const { loading } = storeToRefs(appStore);
 const pwaStore = usePwaStore();
 const { installDisplay } = storeToRefs(pwaStore);
 const { coreOptions } = useAppOptions();
+// Use type assertion with the extended interface
+const pwaOptions = coreOptions as CorePwaOptions;
 
 const isInstalled = useMediaQuery('(display-mode: standalone)');
 </script>
