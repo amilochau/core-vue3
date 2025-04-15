@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "pnpm --filter @amilochau/core-vue3-playground serve",
-    "build": "pnpm --filter @amilochau/core-vue3-playground build",
-    "build:libs": "pnpm --filter @amilochau/core-vue3 build && pnpm --filter @amilochau/core-vue3-auth build && pnpm --filter @amilochau/core-vue3-pwa build",
-    "preview": "pnpm --filter @amilochau/core-vue3-playground preview",
     "serve:auth": "pnpm --filter @amilochau/core-vue3-playground-auth serve",
-    "build:auth": "pnpm --filter @amilochau/core-vue3-playground-auth build",
+    "preview": "pnpm --filter @amilochau/core-vue3-playground preview",
     "preview:auth": "pnpm --filter @amilochau/core-vue3-playground-auth preview",
+    "build": "pnpm run build:libs && pnpm run build:playgrounds",
+    "build:libs": "pnpm --filter @amilochau/core-vue3 build && pnpm --filter @amilochau/core-vue3-auth build && pnpm --filter @amilochau/core-vue3-pwa build",
+    "build:playgrounds": "pnpm --filter @amilochau/core-vue3-playground build && pnpm --filter @amilochau/core-vue3-playground-auth build",
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix"
   },

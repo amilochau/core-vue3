@@ -25,7 +25,9 @@ declare module 'vue-router/auto-routes' {
     'Dialogs': RouteRecordInfo<'Dialogs', '/:lang(fr|en)/dialogs', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Forbidden': RouteRecordInfo<'Forbidden', '/:lang(fr|en)/forbidden', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Loading': RouteRecordInfo<'Loading', '/:lang(fr|en)/loading', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
+    'Notifications': RouteRecordInfo<'Notifications', '/:lang(fr|en)/notifications', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Settings': RouteRecordInfo<'Settings', '/:lang(fr|en)/settings', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Validations': RouteRecordInfo<'Validations', '/:lang(fr|en)/validations', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
+    'Version': RouteRecordInfo<'Version', '/:lang(fr|en)/version', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
   }
 }
