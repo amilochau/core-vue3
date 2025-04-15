@@ -59,7 +59,7 @@
     }
   },
   "peerDependencies": {
-    "@amilochau/core-vue3": "file:packages/core-vue3",
+    "@amilochau/core-vue3": "workspace:*",
     "pinia": "^3.0.1",
     "vite-plugin-pwa": "^0.21.1",
     "vue": "^3.5.13",
@@ -68,7 +68,7 @@
     "vuetify": "^3.7.13"
   },
   "devDependencies": {
-    "@amilochau/core-vue3": "file:packages/core-vue3",
+    "@amilochau/core-vue3": "workspace:*",
     "@intlify/unplugin-vue-i18n": "^6.0.5",
     "@mdi/js": "^7.4.47",
     "@stylistic/eslint-plugin": "^4.2.0",
