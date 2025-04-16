@@ -1,4 +1,5 @@
-import { useIdentityStore, useLanguageStore } from '@amilochau/core-vue3/stores';
+import { useLanguageStore } from '@amilochau/core-vue3/stores';
+import { useIdentityStore } from '@amilochau/core-vue3-auth/stores';
 import { mdiCardAccountDetailsOutline, mdiChatOutline, mdiCogOutline, mdiHome, mdiOpenInNew, mdiPower } from '@mdi/js';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';

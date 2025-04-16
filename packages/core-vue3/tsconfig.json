@@ -24,7 +24,7 @@
     "src",
     "eslint.config.ts",
     "vite.config.ts"
-  ],
+, "../core-vue3-auth/src/stores/identity.ts"  ],
   "exclude": [
     "node_modules",
     "dist"

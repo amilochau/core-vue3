@@ -49,9 +49,17 @@
       "import": "./dist/composition.js",
       "types": "./dist/composition.d.ts"
     },
+    "./pages": {
+      "import": "./dist/pages.js",
+      "types": "./dist/pages.d.ts"
+    },
     "./stores": {
       "import": "./dist/stores.js",
       "types": "./dist/stores.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types.js",
+      "types": "./dist/types.d.ts"
     },
     "./utils": {
       "import": "./dist/utils.js",

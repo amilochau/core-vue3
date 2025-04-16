@@ -1,4 +1,4 @@
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useNotificationsStore } from '../stores';
 import { NotificationRegisterType, type NotificationsRegisterRequest } from '../types/notifications';
 import { computed } from 'vue';
@@ -30,8 +30,6 @@ export const useNotifications = () => {
   const { coreOptions } = useAppOptions();
   // Use type assertion with the extended interface
   const pwaOptions = coreOptions as CorePwaOptions;
-  const identityStore = useIdentityStore();
-  const { isAuthenticated } = storeToRefs(identityStore);
   const appStore = useAppStore();
   const notificationsStore = useNotificationsStore();
   const { registred } = storeToRefs(notificationsStore);
@@ -55,8 +53,7 @@ export const useNotifications = () => {
 
   /** Whether notifications are supported. */
   const isSupported = computed(() => registred.value || navigator.serviceWorker && 'PushManager' in window
-      && !!pwaOptions.notifications
-      && isAuthenticated.value);
+      && !!pwaOptions.notifications);
 
   /** Subscribe to notifications. */
   const subscribe = async () => {

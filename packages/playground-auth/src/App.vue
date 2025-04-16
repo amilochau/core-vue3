@@ -9,6 +9,7 @@
           <template #append>
             <app-pwa-install />
             <app-pwa-update />
+            <app-login-btn />
           </template>
         </app-header-bar>
       </v-expand-transition>
@@ -29,6 +30,7 @@
 
 <script setup lang="ts">
 import { AppCookies, AppFooterBar, AppHeaderBar, AppNavigationDrawer, AppSnackbar } from '@amilochau/core-vue3/components';
+import { AppLoginBtn } from '@amilochau/core-vue3-auth/components';
 import { AppPwaInstall, AppPwaUpdate } from '@amilochau/core-vue3-pwa/components';
 import { useTheme } from 'vuetify';
 import { useAppStore, useThemeStore } from '@amilochau/core-vue3/stores';

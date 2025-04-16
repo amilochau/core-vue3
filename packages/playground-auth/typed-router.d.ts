@@ -28,11 +28,13 @@ declare module 'vue-router/auto-routes' {
     'Forbidden': RouteRecordInfo<'Forbidden', '/:lang(fr|en)/forbidden', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'ForgotPassword': RouteRecordInfo<'ForgotPassword', '/:lang(fr|en)/forgot-password', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Login': RouteRecordInfo<'Login', '/:lang(fr|en)/login', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
+    'Notifications': RouteRecordInfo<'Notifications', '/:lang(fr|en)/notifications', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Profile': RouteRecordInfo<'Profile', '/:lang(fr|en)/profile', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Register': RouteRecordInfo<'Register', '/:lang(fr|en)/register', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'ResetPassword': RouteRecordInfo<'ResetPassword', '/:lang(fr|en)/reset-password', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'SetPassword': RouteRecordInfo<'SetPassword', '/:lang(fr|en)/set-password', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'Settings': RouteRecordInfo<'Settings', '/:lang(fr|en)/settings', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
     'ConfirmEmail': RouteRecordInfo<'ConfirmEmail', '/:lang(fr|en)/verify', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
+    'Version': RouteRecordInfo<'Version', '/:lang(fr|en)/version', { lang: ParamValue<true> }, { lang: ParamValue<false> }>,
   }
 }

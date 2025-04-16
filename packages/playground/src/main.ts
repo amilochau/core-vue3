@@ -5,6 +5,7 @@ import { toValue } from 'vue';
 import { registerPwa } from '@amilochau/core-vue3-pwa/utils';
 import App from './App.vue';
 
+// Import Vuetify styles - ensure they're loaded before any component styles
 import 'vuetify/styles';
 import './styles/main.scss';
 

@@ -29,8 +29,9 @@ export default defineConfig(({ mode }) => {
       VueRouter({
         routesFolder: [
           'src/pages',
-          '../../node_modules/@amilochau/core-vue3/src/pages',
-          '../../node_modules/@amilochau/core-vue3-auth/src/pages',
+          '../core-vue3/src/pages',
+          '../core-vue3-auth/src/pages',
+          '../core-vue3-pwa/src/pages',
         ],
         extendRoute: (route) => {
           allRoutes.push(route);
@@ -144,6 +145,10 @@ export default defineConfig(({ mode }) => {
     optimizeDeps: {
       include: [
         'vue-router',
+        'vuetify', // Explicitly include Vuetify in dependencies optimization
+        'vuetify/components', // Include Vuetify components
+        'vuetify/locale', // Include Vuetify locales
+        'vuetify/iconsets/mdi-svg', // Include Vuetify MDI icons
       ],
       exclude: [
         'virtual:pwa-register',

@@ -60,7 +60,7 @@ import { mdiRefresh } from '@mdi/js';
 import HomeLogin from '../../components/home/HomeLogin.vue';
 import HomeMessages from '../../components/home/HomeMessages.vue';
 import { useMapsStore } from '../../stores';
-import { useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useIdentityStore } from '@amilochau/core-vue3-auth/stores';
 import { usePage } from '@amilochau/core-vue3/composition';
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';

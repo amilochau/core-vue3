@@ -1,4 +1,5 @@
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useAppStore } from '@amilochau/core-vue3/stores';
+import { useIdentityStore } from '../stores';
 import type { CoreVue3Context } from '@amilochau/core-vue3/types';
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
 
