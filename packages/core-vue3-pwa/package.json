@@ -60,10 +60,6 @@
     "./types": {
       "import": "./dist/types.js",
       "types": "./dist/types.d.ts"
-    },
-    "./utils": {
-      "import": "./dist/utils.js",
-      "types": "./dist/utils.d.ts"
     }
   },
   "peerDependencies": {

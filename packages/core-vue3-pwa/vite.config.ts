@@ -22,7 +22,6 @@ export default defineConfig({
         composition: 'src/composition/index.ts',
         stores: 'src/stores/index.ts',
         types: 'src/types/index.ts',
-        utils: 'src/utils/index.ts',
       },
       formats: ['es'],
     },
