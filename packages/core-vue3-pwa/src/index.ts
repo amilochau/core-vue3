@@ -1,13 +1,49 @@
 import { usePwaStore } from './stores';
 import { registerSW } from 'virtual:pwa-register';
-import { type RouteLocationNormalized, type Router } from 'vue-router';
+import { type RouteLocationNormalized } from 'vue-router';
+import { mdiInformationOutline, mdiBellOutline } from '@mdi/js';
+import { useSettingsStore } from '@amilochau/core-vue3/stores';
+import { CoreVue3Context } from '@amilochau/core-vue3/types';
+import { computed } from 'vue';
 
 /**
  * Register vue-pwa.
  * @param router Router instance.
  */
-export const registerPwa = (router: Router) => {
-  const pwaStore = usePwaStore();
+export const registerPwa = (context: CoreVue3Context) => {
+  const pwaStore = usePwaStore(context.pinia);
+  const settingsStore = useSettingsStore(context.pinia);
+  const { mergeLocaleMessage, t } = context.i18n.global;
+
+  mergeLocaleMessage('en', {
+    linksVersionTitle: 'Application version',
+    linksVersionDesc: 'Update the application, see memory usage.',
+    linksNotificationsTitle: 'Notifications',
+    linksNotificationsDesc: 'Configure notifications.',
+  });
+  mergeLocaleMessage('fr', {
+    linksVersionTitle: 'Version de l\'application',
+    linksVersionDesc: 'Mettez à jour l\'application, consultez l\'utilisation de la mémoire.',
+    linksNotificationsTitle: 'Notifications',
+    linksNotificationsDesc: 'Configurez les notifications.',
+  });
+
+  // Register settings links
+  const settingsLinks = computed(() => ([
+    {
+      title: t('linksVersionTitle'),
+      subtitle: t('linksVersionDesc'),
+      prependIcon: mdiInformationOutline,
+      to: { name: 'Version' }
+    },
+    {
+      title: t('linksNotificationsTitle'),
+      subtitle: t('linksNotificationsDesc'),
+      prependIcon: mdiBellOutline,
+      to: { name: 'Notifications' }
+    }
+  ]));
+  settingsStore.registerLinks(settingsLinks);
 
   window.addEventListener('beforeinstallprompt', (e: any /*BeforeInstallPromptEvent */) => {
     e.preventDefault(); // Don't let the default prompt go
@@ -23,14 +59,14 @@ export const registerPwa = (router: Router) => {
     immediate: true, // Automatic page reload
   });
 
-  router.beforeEach(async (to, from) => {
+  context.router.beforeEach(async (to, from) => {
     if (to.path !== from.path) {
       await postUpdate(to);
     }
   });
 
   /**
-   * Post udpate actions.
+   * Post update actions.
    * @param to Target route.
    */
   const postUpdate = async (to: RouteLocationNormalized) => {

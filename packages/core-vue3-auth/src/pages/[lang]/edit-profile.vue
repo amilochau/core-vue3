@@ -45,7 +45,8 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { type Ref, computed, ref } from 'vue';
 import type { EditProfile } from '../../types';
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useAppStore } from '@amilochau/core-vue3/stores';
+import { useIdentityStore } from '../../stores';
 import { useHandle, useNavigation, usePage, useValidationRules } from '@amilochau/core-vue3/composition';
 
 const { t } = useI18n();
