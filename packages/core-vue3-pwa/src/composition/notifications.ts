@@ -1,11 +1,11 @@
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useNotificationsStore } from '../stores';
 import { NotificationRegisterType, type NotificationsRegisterRequest } from '../types/notifications';
-import { computed } from 'vue';
-import { useAppOptions } from '@amilochau/core-vue3/composition';
+import { computed, inject } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
+import type { CorePwaOptions } from '../types/options';
 
 const urlB64ToUint8Array = (base64String: string) => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
@@ -26,13 +26,11 @@ const urlB64ToUint8Array = (base64String: string) => {
 export const useNotifications = () => {
 
   const i18n = useI18n();
-  const { coreOptions } = useAppOptions();
-  const identityStore = useIdentityStore();
-  const { isAuthenticated } = storeToRefs(identityStore);
+  const pwaOptions = inject('core-options-pwa') as CorePwaOptions;
   const appStore = useAppStore();
   const notificationsStore = useNotificationsStore();
   const { registred } = storeToRefs(notificationsStore);
-  const register = coreOptions.notifications?.register();
+  const register = pwaOptions.notifications?.register();
   const route = useRoute();
 
   i18n.mergeLocaleMessage('en', {
@@ -52,8 +50,7 @@ export const useNotifications = () => {
 
   /** Whether notifications are supported. */
   const isSupported = computed(() => registred.value || navigator.serviceWorker && 'PushManager' in window
-      && !!coreOptions.notifications
-      && isAuthenticated.value);
+      && !!pwaOptions.notifications);
 
   /** Subscribe to notifications. */
   const subscribe = async () => {
@@ -87,7 +84,7 @@ export const useNotifications = () => {
 
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlB64ToUint8Array(coreOptions.notifications!.pushKey),
+        applicationServerKey: urlB64ToUint8Array(pwaOptions.notifications!.pushKey),
       });
 
       const subscriptionJson = subscription.toJSON();

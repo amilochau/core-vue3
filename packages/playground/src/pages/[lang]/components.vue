@@ -4,10 +4,10 @@ meta:
   generateSsg: true
   metadata:
     en:
-      title: Components — playground
+      title: Components
       description: Compose.
     fr:
-      title: Composants — playground
+      title: Composants
       description: Composez.
 </route>
 
@@ -362,7 +362,7 @@ const settings = ref<{
   hint?: string,
   clearable?: boolean,
   variant?: 'filled' | 'outlined' | 'plain' | 'underlined' | 'solo' | 'solo-inverted' | 'solo-filled',
-  color?: string,
+  color?: 'error' | 'warning' | 'success',
   disabled?: boolean,
   readonly?: boolean,
   prepend?: boolean,

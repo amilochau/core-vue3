@@ -26,16 +26,14 @@
     </v-app-bar-title>
     <app-progress-bar :lazy-delay="200" />
     <template #append>
-      <slot name="append" />
       <app-offline />
-      <app-login-btn />
+      <slot name="append" />
     </template>
   </v-app-bar>
 </template>
 
 <script setup lang="ts">
 import { mdiArrowLeft } from '@mdi/js';
-import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
 import AppProgressBar from '../AppProgressBar.vue';
 import { useAppStore } from '../../../../stores';

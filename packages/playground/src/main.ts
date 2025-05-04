@@ -2,9 +2,10 @@ import { createCoreVue3App } from '@amilochau/core-vue3';
 import { coreOptionsBuilder, environmentOptionsBuilder } from './data/config';
 import { handleHotUpdate, routes } from 'vue-router/auto-routes';
 import { toValue } from 'vue';
-import { registerPwa } from '@amilochau/core-vue3-pwa/utils';
+import { registerPwa } from '@amilochau/core-vue3-pwa';
 import App from './App.vue';
 
+// Import Vuetify styles - ensure they're loaded before any component styles
 import 'vuetify/styles';
 import './styles/main.scss';
 
@@ -25,6 +26,6 @@ export const coreVue3App = createCoreVue3App(App,
       handleHotUpdate(context.router);
     }
 
-    registerPwa(context.router);
+    registerPwa(context, {});
   },
 );

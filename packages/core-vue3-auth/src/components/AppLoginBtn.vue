@@ -1,7 +1,7 @@
 <template>
   <v-scroll-y-reverse-transition mode="out-in">
     <v-btn
-      v-if="!!authOptions && !isAuthenticated"
+      v-if="!isAuthenticated"
       v-tooltip:start="t('title')"
       :icon="mdiPower"
       :to="{ name: 'Login' }"
@@ -12,13 +12,11 @@
 <script setup lang="ts">
 import { mdiPower } from '@mdi/js';
 import { storeToRefs } from 'pinia';
-import { useIdentityStore } from '../../../../stores';
+import { useIdentityStore } from '../stores';
 import { useI18n } from 'vue-i18n';
-import { inject } from 'vue';
 
 const { t } = useI18n();
 const identityStore = useIdentityStore();
-const authOptions = inject('options-auth');
 const { isAuthenticated } = storeToRefs(identityStore);
 </script>
 

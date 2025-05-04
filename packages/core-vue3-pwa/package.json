@@ -49,17 +49,21 @@
       "import": "./dist/composition.js",
       "types": "./dist/composition.d.ts"
     },
+    "./pages": {
+      "import": "./dist/pages.js",
+      "types": "./dist/pages.d.ts"
+    },
     "./stores": {
       "import": "./dist/stores.js",
       "types": "./dist/stores.d.ts"
     },
-    "./utils": {
-      "import": "./dist/utils.js",
-      "types": "./dist/utils.d.ts"
+    "./types": {
+      "import": "./dist/types.js",
+      "types": "./dist/types.d.ts"
     }
   },
   "peerDependencies": {
-    "@amilochau/core-vue3": "file:packages/core-vue3",
+    "@amilochau/core-vue3": "workspace:*",
     "pinia": "^3.0.1",
     "vite-plugin-pwa": "^0.21.1",
     "vue": "^3.5.13",
@@ -68,7 +72,7 @@
     "vuetify": "^3.7.13"
   },
   "devDependencies": {
-    "@amilochau/core-vue3": "file:packages/core-vue3",
+    "@amilochau/core-vue3": "workspace:*",
     "@intlify/unplugin-vue-i18n": "^6.0.5",
     "@mdi/js": "^7.4.47",
     "@stylistic/eslint-plugin": "^4.2.0",

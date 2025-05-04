@@ -20,6 +20,7 @@ import { useLanguageStore } from '@amilochau/core-vue3/stores';
 import { useHead, useSeoMeta } from '@unhead/vue';
 import { generateMetadataInfo } from '@amilochau/core-vue3/utils';
 
+const { t } = useI18n();
 const { locale } = useI18n({ useScope: 'global' });
 const route = useRoute();
 const languageStore = useLanguageStore();
@@ -45,7 +46,7 @@ useHead(() => {
   const metadataInfo = generateMetadataInfo(route.path, route.meta, locale.value);
 
   return {
-    title: metadataInfo.title,
+    title: `${metadataInfo.title} – ${t('siteTitle')}`,
     meta: metadataInfo.meta,
     htmlAttrs: {
       lang: locale,
@@ -58,3 +59,10 @@ onBeforeRouteUpdate(to => {
   setLanguage(lang);
 });
 </script>
+
+<i18n lang="yaml">
+en:
+  siteTitle: playground
+fr:
+  siteTitle: playground
+</i18n>

@@ -68,22 +68,10 @@ import { AppResponsiveForm, CardSectionTitle } from '../../components';
 import { useI18n } from 'vue-i18n';
 import { usePage } from '../../composition';
 import { useRoute, useRouter } from 'vue-router';
-import { useCookiesStore, useThemeStore } from '../../stores';
+import { useCookiesStore, useSettingsStore, useThemeStore } from '../../stores';
 import { useTheme } from 'vuetify';
 import { computed, inject, ref } from 'vue';
-import type { BuildData, CoreVue3AppOptions } from '../../types';
-
-declare global {
-  interface Window {
-    buildData: BuildData;
-  }
-
-  interface StorageEstimate {
-    usageDetails?: {
-      [key: string]: number;
-    };
-  }
-}
+import type { CoreVue3AppOptions } from '../../types/options';
 
 const { d, t } = useI18n();
 const buttonMode = ref<'back' | 'default-back'>('back');
@@ -98,6 +86,7 @@ const route = useRoute();
 const themeStore = useThemeStore();
 const theme = useTheme();
 const cookiesStore = useCookiesStore();
+const settingsStore = useSettingsStore();
 const appOptions = inject('options-app') as CoreVue3AppOptions;
 
 // Theme
@@ -129,6 +118,7 @@ const toggleCookies = (event: any) => {
 
 const links = computed(() => ([
   { title: t('links.privacy.title'), subtitle: t('links.privacy.subtitle'), prependIcon: mdiGavel, href: appOptions.privacyUrlBuilder(language), target: '_blank', rel: 'noopener noreferrer' },
+  ...settingsStore.additionalLinks,
 ]));
 </script>
 

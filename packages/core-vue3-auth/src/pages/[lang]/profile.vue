@@ -37,7 +37,8 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { usePage } from '@amilochau/core-vue3/composition';
-import { useAppStore, useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useAppStore } from '@amilochau/core-vue3/stores';
+import { useIdentityStore } from '../../stores';
 import { useCognito } from '../../composition';
 
 const { t } = useI18n();

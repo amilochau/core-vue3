@@ -13,3 +13,6 @@ export const registerAuth = (context: CoreVue3Context, options: CoreVue3AuthOpti
   registerCognito(context.app, options);
   registerRouterGuards(context);
 };
+
+// Export types
+export * from './types';

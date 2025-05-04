@@ -4,10 +4,10 @@ meta:
   generateSsg: true
   metadata:
     en:
-      title: playground
+      title: Home
       description: Play.
     fr:
-      title: playground
+      title: Accueil
       description: Jouez.
 </route>
 

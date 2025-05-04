@@ -18,7 +18,7 @@ import { useI18n } from 'vue-i18n';
 import { mdiAlert } from '@mdi/js';
 import { ApplicationError } from '@amilochau/core-vue3/types';
 import { useClean } from '@amilochau/core-vue3/composition';
-import { useIdentityStore } from '@amilochau/core-vue3/stores';
+import { useIdentityStore } from '../stores';
 import { inject } from 'vue';
 
 /** Use Cognito. */

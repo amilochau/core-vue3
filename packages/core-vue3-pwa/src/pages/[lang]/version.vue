@@ -6,10 +6,10 @@
     noindex: true
     metadata:
       en:
-        title: Settings - Version
+        title: Settings – Version
         description: Version settings
       fr:
-        title: Paramètres - Version
+        title: Paramètres – Version
         description: Paramètres de version
   </route>
 
@@ -136,7 +136,7 @@
 
   <i18n lang="yaml">
   en:
-    title: Settings - Version
+    title: Settings – Version
     storage:
       title: Storage and memory
       memory: Memory used by the application to store offline data
@@ -151,7 +151,7 @@
         action: Update
         success: You have the latest version of the application!
   fr:
-    title: Paramètres - Version
+    title: Paramètres – Version
     storage:
       title: Stockage et mémoire
       memory: Mémoire utilisée par l'application pour les données hors-ligne

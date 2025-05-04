@@ -1,15 +1,15 @@
 import { useAppStore } from './app';
 import { useCookiesStore } from './cookies';
-import { useIdentityStore } from './identity';
 import { useLanguageStore } from './language';
 import { useNotificationsStore } from './notifications';
+import { useSettingsStore } from './settings';
 import { useThemeStore } from './theme';
 
 export {
   useAppStore,
   useCookiesStore,
-  useIdentityStore,
   useLanguageStore,
   useNotificationsStore,
+  useSettingsStore,
   useThemeStore,
 };

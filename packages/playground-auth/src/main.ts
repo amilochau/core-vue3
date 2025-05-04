@@ -1,12 +1,13 @@
+import { createCoreVue3App } from '@amilochau/core-vue3';
 import { registerAuth } from '@amilochau/core-vue3-auth';
 import { coreOptionsBuilder, environmentOptionsBuilder } from './data/config';
 import { handleHotUpdate, routes } from 'vue-router/auto-routes';
 import { toValue } from 'vue';
-import { registerPwa } from '@amilochau/core-vue3/utils';
+import { registerPwa } from '@amilochau/core-vue3-pwa';
 import App from './App.vue';
 
+// Import Vuetify styles - ensure they're loaded before any component styles
 import 'vuetify/styles';
-import { createCoreVue3App } from '@amilochau/core-vue3';
 
 export const coreVue3App = createCoreVue3App(App,
   {
@@ -32,6 +33,6 @@ export const coreVue3App = createCoreVue3App(App,
       },
     });
 
-    registerPwa(context.router);
+    registerPwa(context);
   },
 );

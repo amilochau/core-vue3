@@ -4,7 +4,6 @@ import AppForm from './pages-layout/AppForm.vue';
 import AppHeaderBar from './app/layout/bar/AppHeaderBar.vue';
 import AppLayoutLoader from './pages-layout/AppLayoutLoader.vue';
 import AppLinks from './pages-layout/AppLinks.vue';
-import AppLoginBtn from './app/layout/bar/AppLoginBtn.vue';
 import AppNavigationDrawer from './app/layout/AppNavigationDrawer.vue';
 import AppProgressBar from './app/layout/AppProgressBar.vue';
 import AppResponsive from './pages-layout/AppResponsive.vue';
@@ -34,7 +33,6 @@ export {
   AppHeaderBar,
   AppLayoutLoader,
   AppLinks,
-  AppLoginBtn,
   AppNavigationDrawer,
   AppProgressBar,
   AppResponsive,
