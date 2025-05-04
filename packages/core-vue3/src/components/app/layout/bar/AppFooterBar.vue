@@ -1,30 +1,29 @@
 <template>
   <v-footer
-    class="d-print-none d-flex flex-column text-center border-t">
-    <div>
+    class="d-print-none d-flex flex-column text-center border-t"
+    app
+    absolute>
+    <div class="d-flex ga-2">
       <v-btn-action
         :to="{ name: 'Home' }"
         exact
         size="small"
-        variant="text"
-        class="mb-1 mr-2">
+        variant="text">
         {{ t('home') }}
       </v-btn-action>
       <v-btn-action
         :to="{ name: 'Settings' }"
         exact
         size="small"
-        variant="text"
-        class="mb-1 mr-2">
+        variant="text">
         {{ t('settings') }}
       </v-btn-action>
       <v-btn-action
-        :href="`https://contact.milochau.com/${route.params.lang}`"
+        :href="contactUrl"
         size="small"
         variant="text"
         target="_blank"
-        rel="noopener noreferrer"
-        class="mb-1">
+        rel="noopener noreferrer">
         {{ t('contact') }}
       </v-btn-action>
       <v-btn-action
@@ -34,16 +33,14 @@
         size="small"
         variant="text"
         target="_blank"
-        rel="noopener noreferrer"
-        class="mb-1">
+        rel="noopener noreferrer">
         {{ item.title }}
       </v-btn-action>
     </div>
-    <div>
+    <div class="d-flex ga-2">
       <v-btn
         :icon="mdiBrightness6"
         variant="text"
-        class="mr-2"
         @click="toggleTheme" />
       <v-menu location="top end">
         <template #activator="{ props: menuProps }">
@@ -69,9 +66,10 @@
 </template>
 
 <script setup lang="ts">
+import type { CoreVue3AppOptions } from '../../../../types';
 import { useThemeStore } from '../../../../stores';
 import { mdiBrightness6, mdiEarth } from '@mdi/js';
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useTheme } from 'vuetify';
@@ -89,6 +87,7 @@ const themeStore = useThemeStore();
 const router = useRouter();
 const route = useRoute();
 const theme = useTheme();
+const appOptions = inject('options-app') as CoreVue3AppOptions;
 
 const barItems = computed(() => props.items ?? []);
 const language = computed(() => route.params.lang?.toString());
@@ -102,6 +101,8 @@ const languagesItems = computed(() => ([
   { title: t('languages.english'), lang: 'en' },
   { title: t('languages.french'), lang: 'fr' },
 ]));
+
+const contactUrl = computed(() => appOptions.contactUrlBuilder(route.params.lang?.toString()));
 </script>
 
 <i18n lang="yaml">

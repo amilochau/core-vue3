@@ -18,3 +18,13 @@ export type ApplicationMessage = {
   timeout_ms?: number;
   creation?: number; // Used to toggle the same message multiple times
 };
+
+export class ApplicationError extends Error {
+  messageData: ApplicationMessage;
+
+  constructor(messageData: ApplicationMessage) {
+    super(messageData.title);
+    this.name = 'ApplicationError';
+    this.messageData = messageData;
+  }
+}

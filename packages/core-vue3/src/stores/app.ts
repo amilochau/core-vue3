@@ -8,7 +8,7 @@ export const useAppStore = defineStore('app', () => {
   const loading = ref(false);
   const snackbarMessage = ref<ApplicationMessage>({ title: '' });
   const homeMessages = ref<IHomeMessage[]>([]);
-  const pageData = ref<PageData>({ title: '', description: '' });
+  const pageData = ref<PageData>({});
 
   /**
    * Display a message.

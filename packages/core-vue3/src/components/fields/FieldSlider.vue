@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { mdiCloseCircle } from '@mdi/js';
-import { useValidationRules } from '@amilochau/core-vue3/composition';
+import { useValidationRules } from '../../composition';
 import { computed, inject, ref } from 'vue';
 
 const props = defineProps<{

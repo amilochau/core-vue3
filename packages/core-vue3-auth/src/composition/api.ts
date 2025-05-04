@@ -2,7 +2,7 @@ import { mdiAccessPointNetworkOff, mdiAlert, mdiTimerRefreshOutline } from '@mdi
 import { useRouter } from 'vue-router';
 import { useCognito } from './cognito';
 import { useI18n } from 'vue-i18n';
-import { type ApplicationMessage, type IHttpSettings, type IProblemDetails } from '@amilochau/core-vue3/types';
+import { ApplicationError, type ApplicationMessage, type IHttpSettings, type IProblemDetails } from '@amilochau/core-vue3/types';
 import { useAppOptions } from '@amilochau/core-vue3/composition';
 import { useLanguageStore } from '@amilochau/core-vue3/stores';
 
@@ -13,9 +13,9 @@ import { useLanguageStore } from '@amilochau/core-vue3/stores';
  */
 export const useApi = (apiName: string, relativeBaseUri: string) => {
 
-  const { t, mergeLocaleMessage } = useI18n();
+  const i18n = useI18n();
 
-  mergeLocaleMessage('en', {
+  i18n.mergeLocaleMessage('en', {
     errors: {
       validation: 'Validation error',
       notAuthorized: 'Not authorized',
@@ -25,7 +25,7 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
       sessionExpired: 'Session expired: please login again',
     },
   });
-  mergeLocaleMessage('fr', {
+  i18n.mergeLocaleMessage('fr', {
     errors: {
       validation: 'Erreur de validation',
       notAuthorized: 'Non autorisé',
@@ -39,7 +39,7 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
   const languageStore = useLanguageStore();
   const { getJwtToken, signOut } = useCognito();
   const router = useRouter();
-  const { apiEnabled, authenticationEnabled, coreOptions } = useAppOptions();
+  const { apiEnabled, coreOptions } = useAppOptions();
 
   const baseUri = `${coreOptions.api?.apiBaseUriBuilder({ apiName })}${relativeBaseUri}`;
 
@@ -91,26 +91,26 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
     }
     // Format
     if (!errorMessage.title.length) {
-      errorMessage.title = t('errors.validation');
+      errorMessage.title = i18n.t('errors.validation');
     }
     return errorMessage;
   };
   const buildApplicationMessage401 = async () => {
     await router.push({ name: 'Login' });
-    return { title: t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage;
+    return { title: i18n.t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage;
   };
   const buildApplicationMessage403 = async () => {
     await router.push({ name: 'Forbidden' });
-    return { title: t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage;
+    return { title: i18n.t('errors.notAuthorized'), color: 'error', icon: mdiAlert } as ApplicationMessage;
   };
   const buildApplicationMessage404 = async (settings: IHttpSettings) => {
     if (settings.redirect404) {
       await router.push({ name: 'NotFound' });
     }
-    return { title: t('errors.notFound'), color: 'error', icon: mdiAlert } as ApplicationMessage;
+    return { title: i18n.t('errors.notFound'), color: 'error', icon: mdiAlert } as ApplicationMessage;
   };
   const buildApplicationMessage500 = () => {
-    return { title: t('errors.serverError'), color: 'error', icon: mdiAlert } as ApplicationMessage;
+    return { title: i18n.t('errors.serverError'), color: 'error', icon: mdiAlert } as ApplicationMessage;
   };
 
   const getAbsoluteUrl = (url: string) => {
@@ -137,11 +137,7 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
     let response: Response;
 
     if (!apiEnabled) {
-      throw 'API integration is not configured.';
-    }
-
-    if (!authenticationEnabled) {
-      throw 'Authentication is not configured.';
+      throw new Error('API integration is not configured.');
     }
 
     // Get bearer token for API
@@ -152,11 +148,11 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
     } catch (error: any) {
       console.error('Authentication token can\'t be used', error);
       if (error && error.name === 'Unknown') {
-        throw { title: t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff } as ApplicationMessage;
+        throw new ApplicationError({ title: i18n.t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff });
       } else {
         await signOut();
         await router.push({ name: 'Login' });
-        throw { title: t('errors.sessionExpired'), color: 'warning', icon: mdiTimerRefreshOutline } as ApplicationMessage;
+        throw new ApplicationError({ title: i18n.t('errors.sessionExpired'), color: 'warning', icon: mdiTimerRefreshOutline });
       }
     }
 
@@ -164,12 +160,13 @@ export const useApi = (apiName: string, relativeBaseUri: string) => {
       const requestInit = getRequestInit(jwtToken);
       const absoluteUrl = getAbsoluteUrl(url);
       response = await request(absoluteUrl, requestInit);
-    } catch (error) {
-      throw { title: t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff } as ApplicationMessage;
+    } catch {
+      throw new ApplicationError({ title: i18n.t('errors.networkError'), color: 'warning', icon: mdiAccessPointNetworkOff });
     }
 
     if (!response.ok) {
-      throw await analyzeResponse(response, settings);
+      const responseError = await analyzeResponse(response, settings);
+      throw new ApplicationError(responseError);
     }
 
     return response;

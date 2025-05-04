@@ -49,7 +49,7 @@
   </v-input>
 </template>
 
-<script setup lang="ts" generic="TData">
+<script setup lang="ts" generic="TData extends string | number">
 import { mdiCloseCircle } from '@mdi/js';
 import { computed, inject, ref } from 'vue';
 import { type FormattedDataWithValue } from '../../types';

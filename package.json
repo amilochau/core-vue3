@@ -2,20 +2,25 @@
   "name": "@amilochau/core-vue3-root",
   "version": "0.8.21",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "serve": "npm run serve --workspace=packages/playground",
-    "build": "npm run build --workspace=packages/playground",
-    "preview": "npm run preview --workspace=packages/playground",
-    "serve:auth": "npm run serve --workspace=packages/playground-auth",
-    "build:auth": "npm run build --workspace=packages/playground-auth",
-    "preview:auth": "npm run preview --workspace=packages/playground-auth",
-    "lint": "npm run lint --workspaces --if-present",
-    "lint:fix": "npm run lint:fix --workspaces --if-present"
+    "serve": "pnpm --filter @amilochau/core-vue3-playground serve",
+    "serve:auth": "pnpm --filter @amilochau/core-vue3-playground-auth serve",
+    "preview": "pnpm --filter @amilochau/core-vue3-playground preview",
+    "preview:auth": "pnpm --filter @amilochau/core-vue3-playground-auth preview",
+    "build": "pnpm run build:libs && pnpm run build:playgrounds",
+    "build:libs": "pnpm --filter @amilochau/core-vue3 build && pnpm --filter @amilochau/core-vue3-auth build && pnpm --filter @amilochau/core-vue3-pwa build",
+    "build:playgrounds": "pnpm --filter @amilochau/core-vue3-playground build && pnpm --filter @amilochau/core-vue3-playground-auth build",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "@tsconfig/node22": "^22.0.1",
+    "@vue/tsconfig": "^0.7.0",
+    "minimatch": "^10.0.1",
+    "vue-component-type-helpers": "^2.2.10"
   }
 }

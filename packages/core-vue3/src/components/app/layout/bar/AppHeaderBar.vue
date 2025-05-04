@@ -14,20 +14,9 @@
           v-else
           @click="toggleDrawer" />
       </v-scroll-y-reverse-transition>
-      <v-img
-        v-if="contentMode === 'img'"
-        :alt="title"
-        :src="coreOptions.application.logoUrl"
-        :width="40"
-        class="ml-2"
-        :class="{
-          'clickable': !!contentTo
-        }"
-        :to="contentTo" />
       <slot name="prepend" />
     </template>
     <v-app-bar-title
-      v-if="!contentMode || contentMode === 'title'"
       class="ml-4"
       :class="{
         'clickable': !!contentTo
@@ -37,30 +26,21 @@
     </v-app-bar-title>
     <app-progress-bar :lazy-delay="200" />
     <template #append>
-      <slot name="append" />
-      <app-pwa-install />
-      <app-pwa-update />
       <app-offline />
-      <app-login-btn />
+      <slot name="append" />
     </template>
   </v-app-bar>
 </template>
 
 <script setup lang="ts">
 import { mdiArrowLeft } from '@mdi/js';
-import AppLoginBtn from './AppLoginBtn.vue';
 import AppOffline from './AppOffline.vue';
-import AppPwaInstall from './AppPwaInstall.vue';
-import AppPwaUpdate from './AppPwaUpdate.vue';
 import AppProgressBar from '../AppProgressBar.vue';
 import { useAppStore } from '../../../../stores';
-import { useAppOptions } from '../../../../composition';
 import { type RouteLocationRaw, useRouter } from 'vue-router';
 import { computed } from 'vue';
 
 const props = defineProps<{
-  /** Content mode, to display a text title or an image. */
-  contentMode?: 'title' | 'img'
   /** Title text.  */
   title?: string
   /** Link to add to the content. */
@@ -77,7 +57,6 @@ defineSlots<{
 }>();
 
 const appStore = useAppStore();
-const { coreOptions } = useAppOptions();
 const router = useRouter();
 
 const toggleDrawer = () => {

@@ -168,9 +168,7 @@ Here are the proposed options.
 | Property | Usage | Type | Description |
 | -------- | ----- | ---- | ----------- |
 | `coreOptions` | `const { coreOptions } = useAppOptions();` | `CoreOptions` | Core options, containing settings provided on application initialization. |
-| `environmentOptions` | `const { environmentOptions } = useAppOptions();` | `EnvironmentOptions` | Environment options, containing environment variables. |
 | `apiEnabled ` | `const { apiEnabled } = useAppOptions();` | `boolean` | Whether API capabilities are properly configured, and can be used in the application. |
-| `authenticationEnabled` | `const { authenticationEnabled } = useAppOptions();` | `boolean` | Whether identity capabilities are properly configured, and can be used in the application. |
 
 See the full definition of options [here](/packages/core-vue3/src/types/options.ts).
 

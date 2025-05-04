@@ -1,6 +1,5 @@
 import { type PiniaPluginContext, createPinia } from 'pinia';
 import type { App } from 'vue';
-import type { CoreOptions } from '../types/options';
 
 /** Additional options for data persistence. */
 export interface PersistOptions {
@@ -9,6 +8,7 @@ export interface PersistOptions {
 
 declare module 'pinia' {
   /** Extended options for pinia stores, including options for data persistence. */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   export interface DefineStoreOptionsBase<S extends StateTree, Store> {
     persist?: PersistOptions;
   }
@@ -37,9 +37,9 @@ const piniaPersist = ({ options, store }: PiniaPluginContext) => {
 /**
  * Register pinia.
  * @param app App instance.
- * @param coreOptions Core options.
+ * @param options Options.
  */
-export const registerPinia = (app: App, coreOptions: CoreOptions) => {
+export const registerPinia = (app: App) => {
   const pinia = createPinia()
     .use(piniaPersist);
 

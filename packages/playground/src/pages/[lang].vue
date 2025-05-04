@@ -1,0 +1,68 @@
+<route lang="yaml">
+path: /:lang(fr|en)
+</route>
+
+<template>
+  <div class="fill-height">
+    <router-view v-slot="{ Component }">
+      <v-fade-transition mode="out-in">
+        <component :is="Component" />
+      </v-fade-transition>
+    </router-view>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { useLocale } from 'vuetify';
+import { useLanguageStore } from '@amilochau/core-vue3/stores';
+import { useHead, useSeoMeta } from '@unhead/vue';
+import { generateMetadataInfo } from '@amilochau/core-vue3/utils';
+
+const { t } = useI18n();
+const { locale } = useI18n({ useScope: 'global' });
+const route = useRoute();
+const languageStore = useLanguageStore();
+const { current } = useLocale();
+
+const setLanguage = (lang: string) => {
+  if (lang) {
+    languageStore.setLanguage(lang);
+    locale.value = lang;
+    current.value = lang;
+  }
+};
+
+setLanguage(route.params.lang?.toString());
+
+if (document.location.host.startsWith('dev.') || document.location.host.startsWith('localhost')) {
+  useSeoMeta({
+    robots: 'noindex',
+  });
+}
+
+useHead(() => {
+  const metadataInfo = generateMetadataInfo(route.path, route.meta, locale.value);
+
+  return {
+    title: `${metadataInfo.title} – ${t('siteTitle')}`,
+    meta: metadataInfo.meta,
+    htmlAttrs: {
+      lang: locale,
+    },
+  };
+});
+
+onBeforeRouteUpdate(to => {
+  const lang = to.params.lang?.toString();
+  setLanguage(lang);
+});
+</script>
+
+<i18n lang="yaml">
+en:
+  siteTitle: playground
+fr:
+  siteTitle: playground
+</i18n>

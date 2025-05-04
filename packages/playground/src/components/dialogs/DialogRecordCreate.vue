@@ -37,7 +37,7 @@ import { ref } from 'vue';
 import { DialogForm, FieldColorBullets, FieldNumeric } from '@amilochau/core-vue3/components';
 import { useValidationRules } from '@amilochau/core-vue3/composition';
 import { useI18n } from 'vue-i18n';
-import type { ApplicationMessage } from '@amilochau/core-vue3/types';
+import { ApplicationError } from '@amilochau/core-vue3/types';
 import { type ComponentExposed } from 'vue-component-type-helpers';
 import { type Item, ItemRecord } from '@/types/test';
 import { getNewKey } from '@amilochau/core-vue3/utils';
@@ -53,8 +53,8 @@ const colors = ref(['#000', '#111', '#222', '#333', '#444', '#555', '#666', '#77
 const save = async (model: { key: string, record: ItemRecord }) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
   if (model.record.desc?.length) {
-    throw { title: t('errorMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
-New line here` } as ApplicationMessage;
+    throw new ApplicationError({ title: t('errorMessage'), color: 'error', icon: mdiAlert, details: `Important details to display in the snackbar
+New line here` });
   }
 
   item.value.records[model.key] = model.record;
