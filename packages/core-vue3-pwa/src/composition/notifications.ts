@@ -1,8 +1,7 @@
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { useNotificationsStore } from '../stores';
 import { NotificationRegisterType, type NotificationsRegisterRequest } from '../types/notifications';
-import { computed } from 'vue';
-import { useAppOptions } from '@amilochau/core-vue3/composition';
+import { computed, inject } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
@@ -27,9 +26,7 @@ const urlB64ToUint8Array = (base64String: string) => {
 export const useNotifications = () => {
 
   const i18n = useI18n();
-  const { coreOptions } = useAppOptions();
-  // Use type assertion with the extended interface
-  const pwaOptions = coreOptions as CorePwaOptions;
+  const pwaOptions = inject('core-options-pwa') as CorePwaOptions;
   const appStore = useAppStore();
   const notificationsStore = useNotificationsStore();
   const { registred } = storeToRefs(notificationsStore);

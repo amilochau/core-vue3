@@ -3,7 +3,9 @@
     :active="display"
     indeterminate
     :aria-label="t('label')"
-    class="progress-bar mt-0 mb-0 d-print-none" />
+    class="progress-bar mt-0 mb-0 d-print-none"
+    location="bottom"
+    absolute />
 </template>
 
 <script setup lang="ts">

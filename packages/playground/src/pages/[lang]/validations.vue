@@ -3,10 +3,10 @@ name: Validations
 meta:
   metadata:
     en:
-      title: Validations — playground
+      title: Validations
       description: Validate.
     fr:
-      title: Validations — playground
+      title: Validations
       description: Validez.
 </route>
 

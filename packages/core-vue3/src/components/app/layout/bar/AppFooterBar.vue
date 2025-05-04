@@ -1,6 +1,8 @@
 <template>
   <v-footer
-    class="d-print-none d-flex flex-column text-center border-t">
+    class="d-print-none d-flex flex-column text-center border-t"
+    app
+    absolute>
     <div class="d-flex ga-2">
       <v-btn-action
         :to="{ name: 'Home' }"

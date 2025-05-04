@@ -2,7 +2,7 @@
   <v-navigation-drawer
     v-if="items"
     v-model="appStore.drawer"
-    app
+    absolute
     temporary
     touchless>
     <v-list

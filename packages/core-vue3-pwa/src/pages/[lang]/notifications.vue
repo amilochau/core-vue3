@@ -6,10 +6,10 @@
     noindex: true
     metadata:
       en:
-        title: Settings - Notifications
+        title: Settings – Notifications
         description: Notifications settings
       fr:
-        title: Paramètres - Notifications
+        title: Paramètres – Notifications
         description: Paramètres des notifications
   </route>
 
@@ -96,7 +96,7 @@
 
   <i18n lang="yaml">
   en:
-    title: Settings - Notifications
+    title: Settings – Notifications
     notifications:
       title: Notifications
       summary: Notifications make it easy to stay informed, right on your device.
@@ -105,7 +105,7 @@
       subscribe: Enable notifications
       unsubscribe: Disable notifications
   fr:
-    title: Paramètres - Notifications
+    title: Paramètres – Notifications
     notifications:
       title: Notifications
       summary: Les notifications vous permettent d'être informé facilement, directement sur votre appareil.

@@ -1,18 +1,26 @@
-import { usePwaStore } from './stores';
+import { useNotificationsStore, usePwaStore } from './stores';
 import { registerSW } from 'virtual:pwa-register';
 import { type RouteLocationNormalized } from 'vue-router';
 import { mdiInformationOutline, mdiBellOutline } from '@mdi/js';
 import { useSettingsStore } from '@amilochau/core-vue3/stores';
 import { CoreVue3Context } from '@amilochau/core-vue3/types';
 import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
+import { CorePwaOptions } from './types';
 
 /**
  * Register vue-pwa.
  * @param router Router instance.
  */
-export const registerPwa = (context: CoreVue3Context) => {
+export const registerPwa = (context: CoreVue3Context, pwaOptions: CorePwaOptions) => {
+  context.app.provide('core-options-pwa', pwaOptions);
+
   const pwaStore = usePwaStore(context.pinia);
   const settingsStore = useSettingsStore(context.pinia);
+  const notificationsStore = useNotificationsStore(context.pinia);
+  const { registred } = storeToRefs(notificationsStore);
+  const isNotificationsSupported = computed(() => registred.value || navigator.serviceWorker && 'PushManager' in window
+    && !!pwaOptions.notifications);
   const { mergeLocaleMessage, t } = context.i18n.global;
 
   mergeLocaleMessage('en', {
@@ -36,12 +44,12 @@ export const registerPwa = (context: CoreVue3Context) => {
       prependIcon: mdiInformationOutline,
       to: { name: 'Version' }
     },
-    {
+    ...isNotificationsSupported.value ? [{
       title: t('linksNotificationsTitle'),
       subtitle: t('linksNotificationsDesc'),
       prependIcon: mdiBellOutline,
       to: { name: 'Notifications' }
-    }
+    }] : [],
   ]));
   settingsStore.registerLinks(settingsLinks);
 

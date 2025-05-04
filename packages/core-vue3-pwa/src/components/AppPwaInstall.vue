@@ -16,9 +16,9 @@ import { useMediaQuery, useOnline } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
 import { useAppStore } from '@amilochau/core-vue3/stores';
 import { usePwaStore } from '../stores';
-import { useAppOptions } from '@amilochau/core-vue3/composition';
 import { storeToRefs } from 'pinia';
 import type { CorePwaOptions } from '../types/options';
+import { inject } from 'vue';
 
 const { t } = useI18n();
 const online = useOnline();
@@ -26,9 +26,8 @@ const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
 const pwaStore = usePwaStore();
 const { installDisplay } = storeToRefs(pwaStore);
-const { coreOptions } = useAppOptions();
 // Use type assertion with the extended interface
-const pwaOptions = coreOptions as CorePwaOptions;
+const pwaOptions = inject('core-options-pwa') as CorePwaOptions;
 
 const isInstalled = useMediaQuery('(display-mode: standalone)');
 </script>

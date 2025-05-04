@@ -26,6 +26,6 @@ export const coreVue3App = createCoreVue3App(App,
       handleHotUpdate(context.router);
     }
 
-    registerPwa(context);
+    registerPwa(context, {});
   },
 );

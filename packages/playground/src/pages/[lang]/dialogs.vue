@@ -4,10 +4,10 @@ meta:
   generateSsg: true
   metadata:
     en:
-      title: Dialogs — playground
+      title: Dialogs
       description: Dialog.
     fr:
-      title: Dialogs — playground
+      title: Dialogs
       description: Dialoguez.
 </route>
 

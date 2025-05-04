@@ -1,4 +1,3 @@
-import type { CoreOptions } from '@amilochau/core-vue3/types';
 import type { NotificationsRegisterRequest } from './notifications';
 
 /** Notifications options. */
@@ -15,8 +14,8 @@ export interface PwaOptions {
   hideInstallBtn?: boolean;
 }
 
-/** Core PWA options - extends the CoreOptions with PWA specific properties */
-export interface CorePwaOptions extends CoreOptions {
+/** Core PWA options */
+export interface CorePwaOptions {
   /** Notifications options. */
   notifications?: CorePwaNotificationsOptions;
   /** PWA options. */

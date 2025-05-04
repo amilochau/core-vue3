@@ -4,10 +4,10 @@ meta:
   generateSsg: true
   metadata:
     en:
-      title: Loading — playground
+      title: Loading
       description: Load.
     fr:
-      title: Chargement — playground
+      title: Chargement
       description: Chargez.
 </route>
 
